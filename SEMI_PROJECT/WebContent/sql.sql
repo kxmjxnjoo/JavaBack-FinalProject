@@ -29,7 +29,7 @@ insert into member (userid, password, name, email, phone, introduce)
 values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.');
 
 select * from MEMBER
-
+dfsdfsdf
 
 /*follow*/
 create table follow(
@@ -131,6 +131,9 @@ create table admin(
 	phone varchar2(20) not null
 )
 
+insert into admin values('admin', 'admin', '관리자', 'admin@abc.com', '010-1111-1111');
+insert into admin values('scott', 'tiger', '관리자', 'scott@abc.com', '010-2222-3333');
+
 select * from admin
 
 
@@ -143,6 +146,8 @@ create table faq (
 create sequence faq_seq start with 1;
 select * from faq;
 
+insert into faq values(faq_seq.nextVal, '회원 가입은 어떻게 하나요?', '회원 가입 링크를 클릭하고, 약관을 읽어보신 뒤 [동의]에 체크합니다.
+기본정보와 추가정보를 정확하게 입력하신 뒤 [회원가입] 버튼을 클릭하면 회원가입이 완료됩니다.');
 
 /*QnA*/
 create table qna (
