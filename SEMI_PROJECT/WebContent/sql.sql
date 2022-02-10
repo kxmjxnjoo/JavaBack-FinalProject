@@ -5,12 +5,14 @@ create table member(
 	name varchar2(20) not null, 
 	email varchar2(20) not null,
 	phone varchar2(20) not null,
+	img varchar2(100),
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
 	introduce varchar2(1000),
 	indate date default sysdate,
+	profile_img varchar2(100);
 )
 
-alter table member add (img varchar2(20));
+alter table member modify (img varchar2(100));
 
 insert into member (userid, password, name, email, phone, introduce)
 values('hong','1234', '홍길동','hong@abc.com','010-1234-3456','안녕하세요');
@@ -60,13 +62,14 @@ select * from follow
 create table post (
 	post_num number(5) primary key, 
 	img varchar2(100) not null,
-	content varchar2(1000),
+	content varchar2(200),
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
 )
 
 create sequence post_seq start with 1;	
+alter table post modify (content varchar2(280)) 
 
 select * from post
 
@@ -85,16 +88,28 @@ select * from img_upload
 /*reply*/
 create table reply (
 	userid varchar2(20) references member(userid),
-	content varchar2(500) not null,
+	content varchar2(200) not null,
 	post_num number(5) references post(post_num),
-	reply_num number(5) primary key 
+	reply_num number(5) primary key,
+	reply_date date default sysdate
 )
+
+insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
+insert into reply(userid, content, reply_num, post_num) 
+values('love','testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest', reply_seq.nextval, 19);
+insert into reply(userid, content, reply_num, post_num) values('hong','test', reply_seq.nextval, 19);
+insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
 
 create sequence reply_seq start with 1;
 select * from reply
 
-/*post_like*/
+create or replace view reply_view 
+as select m.userid, r.content, p.post_num, reply_num, reply_date, m.img from member m, reply r, post p 
+where m.userid=r.userid and p.post_num=r.post_num;
 
+select * from reply_view
+
+/*post_like*/
 create table post_like (
 	post_num number(5) references post(post_num),
 	userid varchar2(20) references member(userid),
@@ -180,3 +195,5 @@ select * from post;
 
 select max(post_num) from post where userid='hong' group by userid
 select max(post_num) from post group by userid having userid='hong';
+
+
