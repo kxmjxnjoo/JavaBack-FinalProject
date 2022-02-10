@@ -24,6 +24,4 @@ public class FollowDto {
 	public void setFollower(String follower) {
 		this.follower = follower;
 	}
-	
-	
 }

@@ -8,7 +8,7 @@ public class PostDto {
 	private String content;
 	private String address;
 	private String userid;
-	private Date create_date;
+	private Date createDate;
 	
 	
 	public int getPostNum() {
@@ -42,9 +42,9 @@ public class PostDto {
 		this.userid = userid;
 	}
 	public Date getCreate_date() {
-		return create_date;
+		return createDate;
 	}
 	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+		this.createDate = create_date;
 	}
 }

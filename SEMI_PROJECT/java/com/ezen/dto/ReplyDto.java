@@ -3,9 +3,16 @@ package com.ezen.dto;
 public class ReplyDto {
 	private String userid;
 	private String content;
+	private int postNum;
 	private int replyNum;
 	
 	
+	public int getPostNum() {
+		return postNum;
+	}
+	public void setPostNum(int postNum) {
+		this.postNum = postNum;
+	}
 	public String getUserid() {
 		return userid;
 	}

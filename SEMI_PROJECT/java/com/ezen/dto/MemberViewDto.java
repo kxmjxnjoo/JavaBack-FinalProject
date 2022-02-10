@@ -2,7 +2,7 @@ package com.ezen.dto;
 
 import java.sql.Date;
 
-public class MemberDto {
+public class MemberViewDto {
 	private String userid;
 	private String password;
 	private String name;
@@ -12,14 +12,10 @@ public class MemberDto {
 	private String introduce;
 	private Date indate;
 	private String img;
+	private int postNum;
+	private int followerNum;
+	private int followingNum;
 	
-	
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
 	public String getUserid() {
 		return userid;
 	}
@@ -67,5 +63,29 @@ public class MemberDto {
 	}
 	public void setIndate(Date indate) {
 		this.indate = indate;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getPostNum() {
+		return postNum;
+	}
+	public void setPostNum(int postNum) {
+		this.postNum = postNum;
+	}
+	public int getFollowerNum() {
+		return followerNum;
+	}
+	public void setFollowerNum(int followNum) {
+		this.followerNum = followNum;
+	}
+	public int getFollowingNum() {
+		return followingNum;
+	}
+	public void setFollowingNum(int followingNum) {
+		this.followingNum = followingNum;
 	}
 }
