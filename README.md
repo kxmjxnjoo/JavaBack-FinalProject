@@ -17,3 +17,5 @@
 - [ ] loginForm.jsp 재진
 - [ ] joinForm.jsp 재진
 - [ ] admin.jsp 진주
+
+# 시연모습
