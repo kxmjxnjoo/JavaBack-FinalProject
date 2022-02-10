@@ -12,6 +12,8 @@ body {
     background-color: rgb(230, 153, 153);
 
     position: fixed;
+    top: 0%;
+    left: 0%;
 
     z-index: 100;
 }
@@ -30,6 +32,10 @@ body {
     top: 5px;
 }
 
+#logo img:hover {
+    opacity: 0.5;
+}
+
 #searchBar {
     display: inline-block;
 
@@ -43,6 +49,10 @@ body {
     color: white;
     position: relative;
     bottom: 20px;
+}
+
+i:hover {
+    opacity: 0.5;
 }
 
 #searchBar input {
@@ -79,6 +89,12 @@ body {
 #userIcon {
     width: 50px;
 
+    border-radius: 50%;
+
     position: relative;
     top: 5px;
+}
+
+#userIcon:hover {
+	opacity: 0.5;
 }
