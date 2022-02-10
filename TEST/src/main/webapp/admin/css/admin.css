@@ -1,0 +1,113 @@
+@charset "UTF-8";
+body{ 
+	background:#fae9e2; 
+	margin:0; padding:0;
+	}
+
+input:focus{outline:none;}
+
+input[type=text]{
+	width:90%; 
+	height:90%; 
+	font-size:100%; 
+	 border:none; 
+	 text-align:left;}
+	 
+input[type=id_text]{
+	width:75%; 
+	height:90%; 
+	font-size:100%; 
+	 border:none;
+	 text-align:left;}	
+
+.logo_line{
+	position:relative; 
+	width:100%; 
+	height:120px;}
+	
+#img{
+	vertical-align:middle;}
+
+#id_pwd{
+	position:relative; 
+	width:150px; 
+	height:50px;
+	margin:0 auto; 
+	margin-top:150px;}
+
+.title{position:relative; 
+	width:180px; height:25px;
+	auto; font-weight:bold; 
+	line-height:50%;}
+	
+.text_box{position:relative; 
+	width:180px; 
+	height:40px; 
+	border:1px solid#DADADA; 
+	background:#FFFFFF; 
+	margin:0 auto;
+	margin-bottom:12px;}
+	
+.text_box:focus-within{
+	border:1px solid #e59999;}
+
+
+a { color: #6F0C78;	
+	text-decoration: none; } 
+	
+a:hover {	
+	color: #F90;	 
+	text-decoration: underline; }
+
+
+#sub_menu{
+	position:relative; 
+	width:100%; 
+	height:60px; 
+	margin:0 auto;
+	line-height:80px; 
+	text-align:center;
+	margin-top:30px;}
+	
+#sub_menu ul { 
+	list-style:none;  
+	display:inline-block; 
+	line-height:45px;}
+	
+#sub_menu ul li{
+	float:left; 
+	color:white; 
+	font-size:120%;}
+
+#sub_menu a {	
+	text-decoration: 
+	none; color: 
+	black;  
+	font-size: 14px;	
+	display: block; 
+	height: 15px; 
+	width: 160px; 
+	padding: 7px; }
+	
+#sub_menu a:hover {
+	background-repeat: 
+	no-repeat; font-size: 16px;
+	background-position: right center; 
+	color: #F90; 
+	font-weight: bold;}
+
+#login{position:relative; 
+	width:180px; 
+	height:40px; 
+	border:1px solid #e59999; 
+	margin:5px auto;	
+	background: white; 
+	font-weight:bold; 
+	font-size:105%;}
+	
+/* -------------------------여기까지 adminSubcss----------------------------------*/
+
+table{
+	
+}	
+
