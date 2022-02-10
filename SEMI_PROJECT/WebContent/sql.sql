@@ -8,8 +8,9 @@ create table member(
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
 	introduce varchar2(1000),
 	indate date default sysdate,
-	primary key (userid)
 )
+
+alter table member add (img varchar2(20));
 
 insert into member (userid, password, name, email, phone, introduce)
 values('hong','1234', '홍길동','hong@abc.com','010-1234-3456','안녕하세요');
@@ -28,7 +29,8 @@ values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입�
 insert into member (userid, password, name, email, phone, introduce)
 values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.');
 
-select * from MEMBER
+
+select * from member
 
 /*follow*/
 create table follow(
@@ -57,14 +59,14 @@ select * from follow
 /*post*/
 create table post (
 	post_num number(5) primary key, 
-	img varchar2(20) not null,
+	img varchar2(100) not null,
 	content varchar2(1000),
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
 )
 
-create sequence post_seq start with 1;
+create sequence post_seq start with 1;	
 
 select * from post
 
@@ -81,10 +83,10 @@ create table img_upload (
 select * from img_upload
 
 /*reply*/
-
 create table reply (
 	userid varchar2(20) references member(userid),
 	content varchar2(500) not null,
+	post_num number(5) references post(post_num),
 	reply_num number(5) primary key 
 )
 
@@ -113,7 +115,7 @@ select * from reply_like
 /*story*/
 create table story(
 	story_num number(5) primary key,
-	img varchar2(50) not null,
+	img varchar2(100) not null,
 	userid references member(userid),
 	create_date date default sysdate
 )
@@ -173,5 +175,8 @@ create table report(
 	report_num varchar2(5) primary key
 )
 create sequence report_seq start with 1;
-select * from report;
+select * from post;
+/*테스트*/
 
+select max(post_num) from post where userid='hong' group by userid
+select max(post_num) from post group by userid having userid='hong';
