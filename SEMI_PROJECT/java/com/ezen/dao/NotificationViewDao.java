@@ -19,7 +19,7 @@ public class NotificationViewDao {
 	
 	public ArrayList<NotificationViewDto> getNotification(String userid) {
 		ArrayList<NotificationViewDto> list = null;
-		String sql = "select * from notification_view where user_to=? order by create_date";
+		String sql = "select * from notification where user_to=? order by create_date";
 		
 		con = Dbman.getConnection();
 		try {
@@ -35,9 +35,13 @@ public class NotificationViewDao {
 				}
 				NotificationViewDto ndto = new NotificationViewDto();
 				ndto.setCreateDate(rs.getDate("create_date"));
-				ndto.setMemberImg(rs.getString("member_img"));
 				ndto.setUserFrom(rs.getString("user_from"));
 				ndto.setUserTo(rs.getString("user_to"));
+				
+				// Get member_img
+				String memberid = rs.getString("user_from");
+				String memberImg = MemberDao.getInstance().getMember(memberid).getImg();
+				ndto.setMemberImg(memberImg);
 				
 				int notiType = rs.getInt("noti_type");
 				ndto.setNotiType(notiType);
@@ -62,5 +66,41 @@ public class NotificationViewDao {
 		}
 		
 		return list;
+	}
+
+	public int addNotification(String userTo, String userFrom, int notiType, int num) {
+		int result = 0;
+		String followSql = "insert into notification (user_to, user_from, noti_type) values(?, ?, 1)";
+		String postSql = "insert into notification (user_to, user_from, noti_type, post_num) values(?, ?, 2, ?)";
+		String replySql = "insert into notification (user_to, user_from, noti_type, reply_num) values(?, ?, 3, ?)";
+		
+		con = Dbman.getConnection();
+		try {
+			if(notiType == 1) {
+				// FOLLOW
+				pstmt = con.prepareStatement(followSql);
+			} else if(notiType == 2) {
+				// LIKE
+				pstmt = con.prepareStatement(postSql);
+				pstmt.setInt(3, num);
+			} else if(notiType == 3) {
+				// COMMENT
+				pstmt = con.prepareStatement(replySql);
+				pstmt.setInt(3, num);
+			} else if(notiType == 4) {
+				// COMMENT LIKE
+			}
+			
+			pstmt.setString(1, userTo);
+			pstmt.setString(2, userFrom);
+			
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
 	}
 }

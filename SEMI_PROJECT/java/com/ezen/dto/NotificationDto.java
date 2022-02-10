@@ -8,6 +8,16 @@ public class NotificationDto {
 	private String content;
 	private int postNum;
 	private Date createDate;
+	private int notiType;
+	
+	
+	
+	public int getNotiType() {
+		return notiType;
+	}
+	public void setNotiType(int notiType) {
+		this.notiType = notiType;
+	}
 	public String getUserTo() {
 		return userTo;
 	}

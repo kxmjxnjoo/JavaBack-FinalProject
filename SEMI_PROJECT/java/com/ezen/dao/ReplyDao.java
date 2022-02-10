@@ -36,6 +36,23 @@ public class ReplyDao {
 		return result;
 	}
 	
+	public int getReplyNum() {
+		String sql = "SELECT LAST_INSERT_ID()";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
 	public ReplyDto getReply(int replyNum) {
 		ReplyDto rdto = null;
 		String sql = "select * from reply where reply_num=?";
