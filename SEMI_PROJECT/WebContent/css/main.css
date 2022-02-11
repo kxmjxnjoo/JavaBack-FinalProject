@@ -17,7 +17,9 @@ html, body  {
     height: 130px;
 
     overflow-x: auto;
-
+    overflow-y: hidden;
+    white-space: nowrap;
+    
     position: relative;
     top: 80px;
 }
@@ -70,6 +72,12 @@ html, body  {
     position: relative;
     left: 2.5%;
     top: 10px;
+}
+
+.post form {
+    width: 100%;
+    position: relative;
+    left: 0%;
 }
 
 .postBar button {
