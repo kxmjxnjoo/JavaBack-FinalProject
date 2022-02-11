@@ -6,6 +6,7 @@ create table notification(
 	-- 1 : follow
 	-- 2 : like post
 	-- 3 : comment
+	-- 4 : comment like
 		
 	post_num int(5),
 	reply_num int(5),
@@ -19,11 +20,6 @@ create table notification(
 	foreign key(reply_num) references reply(reply_num)
 );
 
-create view notification_view as
-select n.user_to, n.user_from, n.noti_type, n.content, n.create_date, m.img as member_img
-from notification as n, member as m
-where n.user_from = m.userid;
-
 drop table notification;
 drop view notification_view;
 
@@ -33,4 +29,6 @@ select * from reply;
 
 select * from notification_view where user_to='hong' order by create_date;
 
-select * from notification where user_to='hong' order by create_date;
+SELECT LAST_INSERT_ID();
+
+select * from notification;

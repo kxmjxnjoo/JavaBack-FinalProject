@@ -12,8 +12,16 @@ public class MemberDto {
 	private String introduce;
 	private Date indate;
 	private String img;
+	private int isFollowing;
 	
 	
+	
+	public int getIsFollowing() {
+		return isFollowing;
+	}
+	public void setIsFollowing(int isFollowing) {
+		this.isFollowing = isFollowing;
+	}
 	public String getImg() {
 		return img;
 	}

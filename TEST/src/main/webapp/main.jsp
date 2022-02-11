@@ -82,11 +82,12 @@
 						<form>
 							<input type="hidden" name="command" value="addreply">
 							<input type="hidden" name="postnum" value="${ post.postNum }">
-							<div class="addComment">
-								<input type="text" placeholder="Add a comment..." name="content">
-								<input type="submit" value="Post">
+							<div class="addComment" id="comment${ post.postNum }">
+								<input type="text" placeholder="댓글을 추가해 주세요..." name="content">
+								<input type="submit" value="추가" onclick="return addReply(${ post.postNum })">
 							</div>
 						</form>
+						
 					</div>
 				</div> 		
 			
@@ -158,6 +159,17 @@
 		function unfollowPopup() {
 			if(confirm(tmpUserid + "님을 언팔로우 할까요?")) {
 				location.href = "spring.do?command=unfollow&userid=" + tmpUserid
+			}
+		}
+		
+		function addReply(postNum) {
+			let reply = document.querySelector("#comment" + postNum + " input:nth-child(1)")
+			
+			if(reply.value == "") {
+				alert("댓글에 내용이 없어요")
+				return false
+			} else {
+				return true
 			}
 		}
 		

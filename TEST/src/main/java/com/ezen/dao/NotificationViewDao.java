@@ -19,7 +19,7 @@ public class NotificationViewDao {
 	
 	public ArrayList<NotificationViewDto> getNotification(String userid) {
 		ArrayList<NotificationViewDto> list = null;
-		String sql = "select * from notification where user_to=? order by create_date";
+		String sql = "select * from notification where user_to=? order by create_date desc";
 		
 		con = Dbman.getConnection();
 		try {

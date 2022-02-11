@@ -1,11 +1,13 @@
-package com.ezen.controller;
+package com.ezen;
 
 import com.ezen.action.Action;
 import com.ezen.action.AddReplyAction;
 import com.ezen.action.FollowAction;
 import com.ezen.action.LikePostAction;
 import com.ezen.action.MainAction;
+import com.ezen.action.MessageAction;
 import com.ezen.action.NotificationAction;
+import com.ezen.action.SearchAction;
 import com.ezen.action.UnfollowAction;
 import com.ezen.action.UnlikePostAction;
 import com.ezen.action.UserPageAction;
@@ -29,6 +31,10 @@ public class ActionFactory {
 		else if(command.equals("addreply"))		ac = new AddReplyAction();
 		
 		else if(command.equals("notification"))	ac = new NotificationAction();
+		
+		else if(command.equals("message"))		ac = new MessageAction();
+		
+		else if(command.equals("search"))		ac = new SearchAction();
 		
 		return ac;
 	}

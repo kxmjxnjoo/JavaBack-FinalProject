@@ -9,8 +9,16 @@ public class NotificationViewDto {
 	private String memberImg;
 	private int notiType;
 	
+	private String datePassed;
+	
 	// 1 : follow
 	
+	public String getDatePassed() {
+		return datePassed;
+	}
+	public void setDatePassed(String datePassed) {
+		this.datePassed = datePassed;
+	}
 	// 2 : like
 	private String postImg;
 	// 3 : reply

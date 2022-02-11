@@ -1,6 +1,10 @@
 package com.ezen.action;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -28,6 +32,24 @@ public class NotificationAction implements Action {
 		
 			// Get noti
 			ArrayList<NotificationViewDto> notiList = NotificationViewDao.getInstance().getNotification(userid);
+			
+			for(NotificationViewDto ndto : notiList) {
+				LocalDate now = LocalDate.now();
+				LocalDate notiDate = ndto.getCreateDate().toLocalDate();
+				Period period = Period.between(now, notiDate);
+				long diff = Math.abs(period.getDays());
+				
+				if(diff == 0) {
+					ndto.setDatePassed("오늘");
+				} else if(diff < 30) {
+					ndto.setDatePassed(diff + "일전");
+				} else if(diff < 365) {
+					ndto.setDatePassed(Math.abs(diff / 30) + "달전");
+				} else {
+					ndto.setDatePassed("오래전");
+				}
+				
+			}
 			
 			// Send list
 			request.setAttribute("notiList", notiList);
