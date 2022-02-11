@@ -40,12 +40,11 @@ public class AddReplyAction implements Action {
 			if(result == 1) {
 				request.setAttribute("message", "댓글을 추가했어요");
 				String postUserid = PostDao.getInstance().getPost(postNum).getUserid();
-//				NotificationViewDao.getInstance().addNotification(userid, postUserid, 3);
+				NotificationViewDao.getInstance().addNotification(userid, postUserid, 3, 1);
 			} else {
 				request.setAttribute("message", "댓글을 추가하지 못 했어요. 다시 시도해 주세요");
 			}
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-
 }
