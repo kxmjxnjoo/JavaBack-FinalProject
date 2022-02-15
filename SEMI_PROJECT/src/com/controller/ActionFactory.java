@@ -64,6 +64,7 @@ public class ActionFactory {
 		 if(command.equals("editStoryForm")) ac = new EditStoryFormAction();
 		 if(command.equals("editStory")) ac = new EditStoryAction();
 		 if(command.equals("deleteReply")) ac = new DeleteReplyAction();
+		 if(command.equals("selectPost")) ac = new SelectPostAction();
 		 
 		if(command.equals("main"))				ac = new MainAction();
 		else if(command.equals("userpage"))		ac = new UserPageAction();
