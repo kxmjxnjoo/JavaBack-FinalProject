@@ -1,4 +1,4 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

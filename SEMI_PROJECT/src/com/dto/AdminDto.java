@@ -1,4 +1,4 @@
-package ezen.spring.dto;
+package com.dto;
 
 public class AdminDto {
 

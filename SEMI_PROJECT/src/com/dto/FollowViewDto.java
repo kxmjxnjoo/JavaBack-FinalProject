@@ -1,4 +1,4 @@
-package com.ezen.dto;
+package com.dto;
 
 public class FollowViewDto {
 	private String following;

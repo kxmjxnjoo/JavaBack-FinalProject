@@ -1,12 +1,12 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.ezen.dto.FollowViewDto;
-import com.ezen.util.Dbman;
+import com.dto.FollowViewDto;
+import com.util.Dbman;
 
 public class FollowViewDao {
 	// Singleton

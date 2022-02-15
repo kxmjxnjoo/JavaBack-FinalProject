@@ -1,11 +1,11 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.ezen.dto.MemberDto;
-import com.ezen.util.Dbman;
+import com.dto.MemberDto;
+import com.util.Dbman;
 
 public class MemberDao {
 	private MemberDao() {}

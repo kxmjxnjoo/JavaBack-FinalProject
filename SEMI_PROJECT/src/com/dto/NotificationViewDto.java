@@ -1,4 +1,4 @@
-package com.ezen.dto;
+package com.dto;
 
 import java.sql.Date;
 

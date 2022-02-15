@@ -1,10 +1,10 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.ezen.util.Dbman;
+import com.util.Dbman;
 
 public class PostLikeDao {
 	private PostLikeDao() {}

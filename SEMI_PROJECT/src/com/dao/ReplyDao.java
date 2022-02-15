@@ -1,11 +1,11 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.ezen.dto.ReplyDto;
-import com.ezen.util.Dbman;
+import com.dto.ReplyDto;
+import com.util.Dbman;
 
 public class ReplyDao {
 	private ReplyDao() {}
@@ -25,7 +25,7 @@ public class ReplyDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, rdto.getUserid());
 			pstmt.setString(2, rdto.getContent());
-			pstmt.setInt(3, rdto.getPostNum());
+			pstmt.setInt(3, rdto.getPost_num());
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -66,8 +66,8 @@ public class ReplyDao {
 			while(rs.next()) {
 				rdto = new ReplyDto();
 				rdto.setContent(rs.getString("content"));
-				rdto.setPostNum(rs.getInt("post_num"));
-				rdto.setReplyNum(rs.getInt("reply_num"));
+				rdto.setPost_num(rs.getInt("post_num"));
+				rdto.setReply_num(rs.getInt("reply_num"));
 				rdto.setUserid(rs.getString("userid"));
 			}
 		} catch(Exception e) {

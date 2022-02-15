@@ -1,12 +1,12 @@
-package com.ezen.dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.ezen.dto.NotificationViewDto;
-import com.ezen.util.Dbman;
+import com.dto.NotificationViewDto;
+import com.util.Dbman;
 
 public class NotificationViewDao {
 	private NotificationViewDao() {}
@@ -48,7 +48,7 @@ public class NotificationViewDao {
 				// 1 : follow, 2 : post like, 3 : reply, 4 : reply like
 				if(notiType == 2) {
 					int postNum = rs.getInt("post_num");
-					String postImg = PostDao.getInstance().getPost(postNum).getImg();
+					String postImg = PostDao.getInstance().getPost(postNum).getPost_img();
 					ndto.setPostImg(postImg);
 				} else if(notiType == 3) {
 					int replyNum = rs.getInt("reply_num");
