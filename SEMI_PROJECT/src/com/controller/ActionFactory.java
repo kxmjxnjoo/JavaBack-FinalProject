@@ -13,14 +13,22 @@ import com.controller.action.EditPostFormAction;
 import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
 import com.controller.action.FollowArrowsAction;
+import com.controller.action.LikePostAction;
+import com.controller.action.MainAction;
+import com.controller.action.MessageAction;
+import com.controller.action.NotificationAction;
 import com.controller.action.PostDetailAction;
 import com.controller.action.PostReportAction;
 import com.controller.action.PostUploadAction;
 import com.controller.action.PostUploadFormAction;
 import com.controller.action.ReportFormAction;
+import com.controller.action.SearchAction;
 import com.controller.action.StoryDetailAction;
 import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;
+import com.controller.action.UnfollowAction;
+import com.controller.action.UnlikePostAction;
+import com.controller.action.UserPageAction;
 
 public class ActionFactory {
 
@@ -52,6 +60,23 @@ public class ActionFactory {
 		 if(command.equals("deleteStory")) ac = new DeleteStoryAction();
 		 if(command.equals("editStoryForm")) ac = new EditStoryFormAction();
 		 if(command.equals("editStory")) ac = new EditStoryAction();
+		 
+		if(command.equals("main"))				ac = new MainAction();
+		else if(command.equals("userpage"))		ac = new UserPageAction();
+		//else if(command.equals("follow"))		ac = new FollowAction();
+		else if(command.equals("unfollow"))		ac = new UnfollowAction();
+		
+		else if(command.equals("likepost"))		ac = new LikePostAction();
+		else if(command.equals("unlikepost"))	ac = new UnlikePostAction();
+		
+		else if(command.equals("addreply"))		ac = new AddReplyAction();
+		
+		else if(command.equals("notification"))	ac = new NotificationAction();
+		
+		else if(command.equals("message"))		ac = new MessageAction();
+		
+		else if(command.equals("search"))		ac = new SearchAction();
+		 
 		 return ac;
 	}
 }
