@@ -13,7 +13,7 @@ import com.controller.action.Action;
 /**
  * Servlet implementation class SpringServlet
  */
-@WebServlet("/spring.do")
+@WebServlet({ "/SpringServlet", "/post/spring.do" })
 public class SpringServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
