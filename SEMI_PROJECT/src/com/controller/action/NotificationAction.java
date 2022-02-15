@@ -1,9 +1,7 @@
-package com.ezen.action;
+package com.controller.action;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 
@@ -12,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ezen.dao.NotificationViewDao;
-import com.ezen.dto.MemberDto;
-import com.ezen.dto.NotificationViewDto;
+import com.dao.NotificationViewDao;
+import com.dto.MemberDto;
+import com.dto.NotificationViewDto;
 
 public class NotificationAction implements Action {
 

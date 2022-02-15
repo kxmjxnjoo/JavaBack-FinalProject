@@ -3,9 +3,8 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import com.ezen.dto.MemberViewDto;
-import com.ezen.util.Dbman;
+import com.dto.MemberViewDto;
+import com.util.Dbman; 
 
 public class MemberViewDao {
 	private MemberViewDao() {}

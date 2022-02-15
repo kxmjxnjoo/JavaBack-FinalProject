@@ -1,4 +1,4 @@
-package com.ezen.action;
+package com.controller.action;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ezen.dao.FollowDao;
-import com.ezen.dto.MemberDto;
+import com.dao.FollowDao;
+import com.dto.MemberDto;
 
 public class UnfollowAction implements Action {
 

@@ -1,4 +1,4 @@
-package com.ezen.action;
+package com.controller.action;
 
 import java.io.IOException;
 
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ezen.dao.NotificationViewDao;
-import com.ezen.dao.PostDao;
-import com.ezen.dao.PostLikeDao;
-import com.ezen.dto.MemberDto;
+import com.dao.NotificationViewDao;
+import com.dao.PostDao;
+import com.dao.PostLikeDao;
+import com.dto.MemberDto;
 
 public class LikePostAction implements Action {
 

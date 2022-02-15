@@ -1,4 +1,4 @@
-package com.ezen.action;
+package com.controller.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ezen.dao.FollowDao;
-import com.ezen.dao.MemberViewDao;
-import com.ezen.dao.PostViewDao;
-import com.ezen.dto.MemberDto;
-import com.ezen.dto.MemberViewDto;
-import com.ezen.dto.PostViewDto;
+import com.dao.FollowDao;
+import com.dao.PostViewDao;
+import com.dto.MemberDto;
+import com.dto.MemberViewDto;
+import com.dto.PostViewDto;
+import com.dao.MemberViewDao;
 
 public class UserPageAction implements Action {
 

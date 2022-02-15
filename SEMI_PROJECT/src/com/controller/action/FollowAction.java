@@ -1,4 +1,4 @@
-package com.ezen.action;
+package com.controller.action;
 
 import java.io.IOException;
 
@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ezen.dao.FollowDao;
-import com.ezen.dao.NotificationViewDao;
-import com.ezen.dto.MemberDto;
+import com.dao.FollowDao;
+import com.dao.NotificationViewDao;
+import com.dto.MemberDto;
 
-public class FollowAction implements Action {
+class FollowAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
