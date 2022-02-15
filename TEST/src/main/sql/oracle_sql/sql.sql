@@ -8,8 +8,10 @@ create table member(
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
 	introduce varchar2(1000),
 	indate date default sysdate,
-	primary key (userid)
-)
+	img varchar2(30),
+	primary key (userid),
+	
+);
 
 select * from MEMBER
 
@@ -18,7 +20,7 @@ create table follow(
 	follow_num number(5) primary key,
 	following varchar2(20) REFERENCES member(userid),
 	follower varchar2(20) REFERENCES member(userid)
-)
+);
 CREATE SEQUENCE follow_seq START WITH 1;
 
 select * from follow
@@ -32,7 +34,7 @@ create table post (
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
-)
+);
 
 create sequence post_seq start with 1;
 
@@ -46,7 +48,7 @@ create table img_upload (
 	img3 varchar2(100),
 	img4 varchar2(100),
 	primary key (post_num)
-)
+);
 
 select * from img_upload
 
@@ -56,7 +58,7 @@ create table reply (
 	userid varchar2(20) references member(userid),
 	content varchar2(500) not null,
 	reply_num number(5) primary key 
-)
+);
 
 create sequence reply_seq start with 1;
 select * from reply
@@ -67,8 +69,8 @@ create table post_like (
 	post_num number(5) references post(post_num),
 	userid varchar2(20) references member(userid),
 	primary key (userid, post_num)
-)
-select * from post_like
+);
+select * from post_like;
 
 
 /*reply_like*/
@@ -76,7 +78,7 @@ create table reply_like (
 	reply_num number(5) references reply(reply_num),
 	userid varchar2(20) references member(userid),
 	primary key (userid, reply_num)
-)
+);
 select * from reply_like
 
 
@@ -86,7 +88,7 @@ create table story(
 	img varchar2(50) not null,
 	userid references member(userid),
 	create_date date default sysdate
-)
+);
 create sequence story_seq start with 1;
 select * from story
 
@@ -146,10 +148,10 @@ create sequence report_seq start with 1;
 select * from report;
 
 create table notification(
-	num number(5) auto_increment,
-	user_to varchar2(30) not null,
-	user_from varchar2(30) not null,
-	noti_type number(2) not null,
+	num number(5) primary key,
+	user_to varchar2(30) references member(userid),
+	user_from varchar2(30) references member(userid),
+	noti_type number(2)  references reply(reply_num),
 	-- 1 : follow
 	-- 2 : like post
 	-- 3 : comment
@@ -157,19 +159,15 @@ create table notification(
 	post_num number(5),
 	reply_num number(5),
 	
-	create_date datetime default now(),
-	
-	primary key(num),
-	foreign key(user_to) references member(userid),
-	foreign key(user_from) references member(userid),
-	foreign key(post_num) references post(post_num),
-	foreign key(reply_num) references reply(reply_num)
+	create_date date default sysdate
 );
+
+create sequence noti_seq start with 1;
 
 create view follow_view as
 select f.following, f.follower, m.name as followingName, m.img as followingImg
 from follow as f, member as m
-where m.userid = following;
+where m.userid = f.following;
 
 create view post_view as
 select p.post_num, p.img as post_img, p.content, p.address, m.userid, p.create_date, m.img as user_img
