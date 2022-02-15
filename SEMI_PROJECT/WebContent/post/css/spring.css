@@ -10,6 +10,10 @@ body{
 	height: 33px; width: 100%;
 }
 
+#goBack{
+	cursor:pointer;
+}
+
 #posting{
 	width: 800px;
 	margin:0 auto; text-align:center;
@@ -200,6 +204,10 @@ body{
 #reaction{
 	position: relative; top: 4%;
 	width: 100%; height: 5%;
+}
+
+#deleteReply{
+	cursor: pointer;
 }
 
 .detail_wrap b {

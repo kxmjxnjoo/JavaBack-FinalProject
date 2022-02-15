@@ -231,4 +231,14 @@ public class PostDao {
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
 	}
+
+	public void deleteReply(int reply_num) {
+		String sql = "delete reply where reply_num=" + reply_num;
+		con = Dbman.getConnection();
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+	}
 }

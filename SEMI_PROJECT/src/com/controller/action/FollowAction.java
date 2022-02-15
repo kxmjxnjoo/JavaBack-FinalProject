@@ -11,11 +11,11 @@ import com.dao.FollowDao;
 import com.dao.NotificationViewDao;
 import com.dto.MemberDto;
 
-class FollowAction implements Action {
+public class FollowAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Check if user is logged in
+		// TODO Auto-generated method stub
 		String url = "spring.do?command=main";
 		HttpSession session = request.getSession();
 		
@@ -41,6 +41,6 @@ class FollowAction implements Action {
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
+
 }

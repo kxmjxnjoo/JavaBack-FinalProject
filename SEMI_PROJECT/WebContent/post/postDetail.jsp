@@ -71,7 +71,12 @@ function goReport(post_num){
 	window.open(url, "reportPost", opt);
 }
 
-
+function deleteReplyCheck(reply_num, post_num){
+	var answer = confirm("덧글을 삭제할까요?")
+	if(answer){
+		location.href="spring.do?command=deleteReply&reply_num="+reply_num+"&post_num="+post_num;
+	}
+}
 
 </script>
 </head>
@@ -173,30 +178,45 @@ function goReport(post_num){
 								${reply.content}
 								<div id="date"><fmt:formatDate value="${reply.reply_date}"/></div>
 							</div>
-							<div id="icon_like">
-							<img src="${reply.replyFileName}" id="replyLike${reply.reply_num}" width="23px" 
-							onclick="reply_like(${reply.reply_num}, ${post_num});">
-							<%-- onClick="reply_like(${reply.reply_num});" --%>
-							</div>
+							
+							<c:choose>	
+								<c:when test="${PostDto.userid == loginUser.userid}">
+									<div id="icon_like">
+									<img src="${reply.replyFileName}" id="replyLike${reply.reply_num}" width="23px" 
+									onclick="reply_like(${reply.reply_num}, ${post_num});">
+									</div>
+									<span id="deleteReply" class="material-icons" 
+									onclick="deleteReplyCheck(${reply.reply_num}, ${post_num});">
+										clear</span>
+								</c:when>
+								<c:when test="${reply.userid == loginUser.userid}">
+									<span id="deleteReply" class="material-icons"
+									onclick="deleteReplyCheck(${reply.reply_num}, ${post_num});">clear</span>	
+								</c:when>
+								<c:otherwise>
+									<div id="icon_like">
+									<img src="${reply.replyFileName}" id="replyLike${reply.reply_num}" width="23px" 
+									onclick="reply_like(${reply.reply_num}, ${post_num});">
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
-					</c:forEach>
-				</div>
-				
-				<div id="reaction">
-					<img src="${fileName}" id="postLike" width="30px" onClick="post_like(${post_num});">
-					<img src="../images/comment.png" width="30px" onClick="focus_reply();">
-				</div>
-				<div id="write_reply_wrap">
-					<div id="write_reply"> 
-						<textarea name="reply_content" id="reply_content" cols=30 rows=1
-						onKeyDown="textCounter(this.form.reply_content,this.form.remLen,125);" 
-						onKeyUp="textCounter(this.form.reply_content,this.form.remLen,125);"
-						placeholder="댓글 달기..."></textarea>
-						<span><img id="replyLikeImg"src="../images/send.png" width="30px" onclick="add_reply(${post_num});"></span>
+						</c:forEach>
 					</div>
-				</div>
-				
-			</div>  <!-- contents end -->
+					<div id="reaction">
+						<img src="${fileName}" id="postLike" width="30px" onClick="post_like(${post_num});">
+						<img src="../images/comment.png" width="30px" onClick="focus_reply();">
+					</div>
+					<div id="write_reply_wrap">
+						<div id="write_reply"> 
+							<textarea name="reply_content" id="reply_content" cols=30 rows=1
+							onKeyDown="textCounter(this.form.reply_content,this.form.remLen,125);" 
+							onKeyUp="textCounter(this.form.reply_content,this.form.remLen,125);"
+							placeholder="댓글 달기..."></textarea>
+							<span><img id="replyLikeImg"src="../images/send.png" width="30px" onclick="add_reply(${post_num});"></span>
+						</div>
+					</div>
+				</div><!-- contents end -->
 			</div>
 	</div>
 </form>

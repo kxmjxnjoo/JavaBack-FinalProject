@@ -2,16 +2,19 @@ package com.controller;
 
 
 import com.controller.action.Action;
+
 import com.controller.action.AddReplyAction;
 import com.controller.action.CheckLikeAction;
 import com.controller.action.CheckReplyLikeAction;
 import com.controller.action.CheckStoryLikeAction;
 import com.controller.action.DeletePostAction;
+import com.controller.action.DeleteReplyAction;
 import com.controller.action.DeleteStoryAction;
 import com.controller.action.EditPostAction;
 import com.controller.action.EditPostFormAction;
 import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
+import com.controller.action.FollowAction;
 import com.controller.action.FollowArrowsAction;
 import com.controller.action.LikePostAction;
 import com.controller.action.MainAction;
@@ -60,10 +63,11 @@ public class ActionFactory {
 		 if(command.equals("deleteStory")) ac = new DeleteStoryAction();
 		 if(command.equals("editStoryForm")) ac = new EditStoryFormAction();
 		 if(command.equals("editStory")) ac = new EditStoryAction();
+		 if(command.equals("deleteReply")) ac = new DeleteReplyAction();
 		 
 		if(command.equals("main"))				ac = new MainAction();
 		else if(command.equals("userpage"))		ac = new UserPageAction();
-		//else if(command.equals("follow"))		ac = new FollowAction();
+		else if(command.equals("follow"))		ac = new FollowAction();
 		else if(command.equals("unfollow"))		ac = new UnfollowAction();
 		
 		else if(command.equals("likepost"))		ac = new LikePostAction();

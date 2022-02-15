@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>새 게시물</title>
 <link href="css/spring.css" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" language="javascript" defer="defer">
 function setThumbnail(event){
 	var reader = new FileReader();
@@ -30,6 +31,11 @@ function uploadCheck(){
 		theForm.submit();
 	}
 }
+
+function goBack(){
+	window.history.back();
+}
+
 </script>
 </head>
 <body>
@@ -37,7 +43,7 @@ function uploadCheck(){
 	<table id="posting">
 		<tr><td><div id="clear"></div></td></tr>
 		<tr style='background-color:#f2f2f2;'>
-			<th><a href="#"> 뒤로 </a>  </th>
+			<th> <span class="material-icons" id="goBack" onclick="goBack();">west</span>  </th>
 			<th>새 게시물</th>
 			<th> <input type="submit" value="등록하기" onclick="uploadCheck();"> </th>
 		</tr>
