@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.dto.MemberDto;
 import com.util.Dbman;
@@ -45,5 +46,81 @@ public class MemberDao {
 		}
 		
 		return mdto;
+	}
+	
+	public ArrayList<MemberDto> getAllMembers() {
+		ArrayList<MemberDto> list = null;
+		String sql = "select * from member";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while(rs.next()) {
+				if(count == 0) {
+					list = new ArrayList<MemberDto>();
+					count++;
+				}
+				MemberDto mdto = new MemberDto();
+				mdto.setEmail(rs.getString("email"));
+				mdto.setImg(rs.getString("img"));
+				mdto.setIndate(rs.getDate("indate"));
+				mdto.setIntroduce(rs.getString("introduce"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPassword(rs.getString("password"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setUseyn(rs.getString("useyn"));
+				list.add(mdto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<MemberDto> getMembers(String searchWord) {
+		ArrayList<MemberDto> list = null;
+		String sql = "select * from member where userid like ? or name like ? or email like ? or phone like ?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchWord + "%");
+			pstmt.setString(2, "%" + searchWord + "%");
+			pstmt.setString(3, "%" + searchWord + "%");
+			pstmt.setString(4, "%" + searchWord + "%");
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while(rs.next()) {
+				if(count == 0) {
+					list = new ArrayList<MemberDto>();
+					count++;
+				}
+				MemberDto mdto = new MemberDto();
+				mdto.setEmail(rs.getString("email"));
+				mdto.setImg(rs.getString("img"));
+				mdto.setIndate(rs.getDate("indate"));
+				mdto.setIntroduce(rs.getString("introduce"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPassword(rs.getString("password"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setUseyn(rs.getString("useyn"));
+				list.add(mdto);
+			} 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
 	}
 }

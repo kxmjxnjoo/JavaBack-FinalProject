@@ -12,7 +12,14 @@ public class MemberDto {
 	private String introduce;
 	private String img;
 	private Date indate;
+	private int isFollowing;
 	
+	public int getIsFollowing() {
+		return isFollowing;
+	}
+	public void setIsFollowing(int isFollowing) {
+		this.isFollowing = isFollowing;
+	}
 	public String getUserid() {
 		return userid;
 	}
