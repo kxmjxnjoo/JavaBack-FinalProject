@@ -17,7 +17,7 @@ public class PostDetailAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "postDetail.jsp";
+		String url = "/post/postDetail.jsp";
 		HttpSession session = request.getSession();
 		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
 		//if(mdto==null) url = "spring.do?command=login";
