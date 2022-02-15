@@ -34,8 +34,8 @@
 					</c:when>
 					
 				</c:choose>
-				
-				<h2 class="notiDate notiText">5일</h2>
+								
+				<h2 class="notiDate notiText">${ noti.datePassed }</h2>
 			</div>
 			
 			<c:if test="${ noti.notiType != 1 }">

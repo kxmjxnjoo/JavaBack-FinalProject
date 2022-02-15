@@ -47,3 +47,5 @@ insert into post_like (post_num, userid) values(4, 'hong');
 insert into notification (user_to, user_from, noti_type) values('hong', 'nari', 1);
 insert into notification (user_to, user_from, noti_type, post_num) values('hong', 'nari', 2, 5);
 insert into notification (user_to, user_from, noti_type, reply_num) values('hong', 'nari', 3, 1);
+
+SELECT LAST_INSERT_ID();

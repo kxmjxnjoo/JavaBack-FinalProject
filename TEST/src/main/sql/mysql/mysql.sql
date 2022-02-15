@@ -69,6 +69,8 @@ create table reply (
 
 select * from reply
 
+SELECT LAST_INSERT_ID();
+
 /*post_like*/
 
 create table post_like (

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#topnav input[type=submit] {
+    display: none;
+}
+
 body {
     margin: 0px;
 }
@@ -42,6 +46,12 @@ body {
     position: relative;
     left: 30%;
     top: 20px;
+}
+
+form {
+    display: inline-block;
+    position: relative;
+    left: 25%;
 }
 
 #searchBar i {

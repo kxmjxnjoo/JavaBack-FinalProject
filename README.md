@@ -11,7 +11,7 @@
 - [ ] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
 - [x] notification.jsp 진겸
-- [ ] search.jsp 진겸
+- [x] search.jsp 진겸
 - [ ] addPostForm.jsp 세인
 - [ ] editPostForm.jsp 세인
 - [ ] loginForm.jsp 재진
