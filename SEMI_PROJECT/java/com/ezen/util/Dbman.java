@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Dbman {
-	static String driver = "com.mysql.cj.jdbc.Driver";
-	static String url = "jdbc:mysql://localhost:3306/jinkparkDB";
+	static String driver = "oracle.jdbc.OracleDriver";
+	static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	
 	public static Connection getConnection() {
 		Connection con = null;
