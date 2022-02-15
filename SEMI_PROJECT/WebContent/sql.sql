@@ -9,11 +9,11 @@ create table member(
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
 	introduce varchar2(1000),
 	indate date default sysdate,
-	profile_img varchar2(100);
 )
 
 alter table member modify (img varchar2(100));
 
+update member set img = '1.png' where userid='hong';
 insert into member (userid, password, name, email, phone, introduce)
 values('hong','1234', '홍길동','hong@abc.com','010-1234-3456','안녕하세요');
 insert into member (userid, password, name, email, phone, introduce)
@@ -30,7 +30,6 @@ insert into member (userid, password, name, email, phone, introduce)
 values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입니다.');
 insert into member (userid, password, name, email, phone, introduce)
 values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.');
-
 
 select * from member
 
@@ -73,6 +72,16 @@ alter table post modify (content varchar2(280))
 
 select * from post
 
+/* post의 img와 member img를 함께 출력하기 위한 view 입니다.*/
+create view post_view as
+select p.post_num, p.img as post_img, p.content, p.address, m.userid, p.create_date, m.img as user_img
+from member m, post p
+where m.userid = p.userid
+order by p.create_date desc;
+
+select * from post_view;
+
+
 /*img_upload*/
 create table img_upload (
 	post_num number(5) references post(post_num),
@@ -82,7 +91,6 @@ create table img_upload (
 	img4 varchar2(100),
 	primary key (post_num)
 )
-
 select * from img_upload
 
 /*reply*/
@@ -117,6 +125,11 @@ create table post_like (
 )
 select * from post_like
 
+insert into post_like values(19, 'hong');
+insert into post_like values(20, 'hong');
+insert into post_like values(21, 'hong');
+insert into post_like values(27, 'hong');
+
 
 /*reply_like*/
 create table reply_like (
@@ -127,16 +140,33 @@ create table reply_like (
 select * from reply_like
 
 
+/*story_like*/
+create table story_like(
+	story_num number(5) references story,
+	userid varchar2(20) references member(userid),
+	primary key(story_num, userid)
+)
+
+select * from story_like;
+
+
 /*story*/
 create table story(
 	story_num number(5) primary key,
 	img varchar2(100) not null,
+	story_content varchar2(240),
 	userid references member(userid),
 	create_date date default sysdate
 )
-create sequence story_seq start with 1;
-select * from story
 
+create sequence story_seq start with 1;
+select * from story_view
+
+create view story_view as
+select s.story_num, s.img as story_img, s.story_content, m.userid, s.create_date, m.img as user_img
+from member m, story s
+where m.userid = s.userid
+order by s.create_date desc;
 
 /*admin*/
 create table admin(
@@ -185,15 +215,27 @@ select * from qna;
 create table report(	
 	reporter_id varchar2(20) references member(userid),
 	reported_id varchar2(20) references member(userid),
+	post_num number(5) references post(post_num);
 	indate date default sysdate,
 	reason varchar2(100) not null,
 	report_num varchar2(5) primary key
 )
+
+alter table report add(post_num number(5) references post(post_num));
 create sequence report_seq start with 1;
-select * from post;
+select * from report;
 /*테스트*/
 
 select max(post_num) from post where userid='hong' group by userid
 select max(post_num) from post group by userid having userid='hong';
 
 
+select * from post;
+update post set address='11', img='1.png', content='222' where post_num=3
+
+select * from post_like;
+delete post_like where post_num = 21 and userid = 'hong';
+
+select * from story_view
+select min(story_num) as next from story_view where story_num > 1 group by userid having userid='hong';
+delete story where story_num=4;
