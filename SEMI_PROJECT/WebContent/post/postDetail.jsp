@@ -86,7 +86,7 @@ function goReport(post_num){
 				<div id="setting_menu">
 					<div class="setting_btn"><a href='spring.do?command=editPostForm&post_num=${post_num}'> 수정 </a></div>
 					<div class="setting_btn" onClick="deleteCheck(${post_num});"> <a href="#"> 삭제 </a></div>
-					<div class="setting_btn" onClick="setting_close();">닫기</div>
+					<div class="setting_btn" onClick="setting_close();">닫test기</div>
 					<div class="setting_layer"></div>
 				</div>
 		</c:when>
