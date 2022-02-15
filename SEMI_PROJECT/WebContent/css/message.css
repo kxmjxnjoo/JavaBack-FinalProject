@@ -13,15 +13,19 @@ body {
 
     position: relative;
     left: 10%;
+
+    overflow: hidden;
 }
 
 #userSelectBox {
     width: 30%;
+
+    overflow: auto;
 }
 
 #userBox {
     width: 100%;
-    overflow: auto;
+    overflow: scroll;
 }
 
 #loginUserInfo h1 {

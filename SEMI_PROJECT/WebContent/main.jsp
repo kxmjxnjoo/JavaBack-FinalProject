@@ -17,12 +17,19 @@
 		<div id="story">
 		
 		<c:forEach items="${ followingList }" var="follow">
-			<div class="storyBubble">
-				<div class="storyBubbleContent">
-					<img src="${ follow.followingImg }">
-					<h3>${ follow.following }</h3>
-				</div>
-			</div>
+			<c:choose>
+				<c:when test="${ follow.following == loginUser.userid }">
+				
+				</c:when>
+				<c:otherwise>
+					<div class="storyBubble">
+						<div class="storyBubbleContent">
+							<img src="${ follow.followingImg }">
+							<h3>${ follow.following }</h3>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 			
 		</div>
@@ -82,11 +89,12 @@
 						<form>
 							<input type="hidden" name="command" value="addreply">
 							<input type="hidden" name="postnum" value="${ post.postNum }">
-							<div class="addComment">
-								<input type="text" placeholder="Add a comment..." name="content">
-								<input type="submit" value="Post">
+							<div class="addComment" id="comment${ post.postNum }">
+								<input type="text" placeholder="댓글을 추가해 주세요..." name="content">
+								<input type="submit" value="추가" onclick="return addReply(${ post.postNum })">
 							</div>
 						</form>
+						
 					</div>
 				</div> 		
 			
@@ -109,18 +117,26 @@
 			<h3 id="followMessage">내가 팔로우 한 사람</h3>
 			
 			<c:forEach var="follow" items="${ followingList }">
-			<div class="follower">
-				<div class="followerInfoWrapper" onclick="location.href='spring.do?command=userpage&userid=${ follow.following }'">
-					<img class="followerImg" src="${ follow.followingImg }">
+				<c:choose>
+					<c:when test="${ follow.following == loginUser.userid }">
 					
-					<div class="followerInfo">
-						<h3>${ follow.following }</h3>
-						<h4>${ follow.followingName }</h4>
-					</div>
-				</div>
-				
-				<input type="button" value="언팔로우" onclick="unfollow('${ follow.following }')">
-			</div>
+					</c:when>
+					<c:otherwise>
+						<div class="follower">
+							<div class="followerInfoWrapper" onclick="location.href='spring.do?command=userpage&userid=${ follow.following }'">
+								<img class="followerImg" src="${ follow.followingImg }">
+								
+								<div class="followerInfo">
+									<h3>${ follow.following }</h3>
+									<h4>${ follow.followingName }</h4>
+								</div>
+							</div>
+							
+							<input type="button" value="언팔로우" onclick="unfollow('${ follow.following }')">
+						</div>
+					</c:otherwise>	
+				</c:choose>			
+			
 			</c:forEach>
 			
 		</div>
@@ -158,6 +174,17 @@
 		function unfollowPopup() {
 			if(confirm(tmpUserid + "님을 언팔로우 할까요?")) {
 				location.href = "spring.do?command=unfollow&userid=" + tmpUserid
+			}
+		}
+		
+		function addReply(postNum) {
+			let reply = document.querySelector("#comment" + postNum + " input:nth-child(1)")
+			
+			if(reply.value == "") {
+				alert("댓글에 내용이 없어요")
+				return false
+			} else {
+				return true
 			}
 		}
 		
