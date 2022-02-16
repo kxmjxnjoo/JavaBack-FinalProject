@@ -14,8 +14,13 @@
 - [x] search.jsp 진겸
 - [ ] addPostForm.jsp 세인
 - [ ] editPostForm.jsp 세인
-- [ ] loginForm.jsp 재진
-- [ ] joinForm.jsp 재진
-- [ ] admin.jsp 진주
-
+- [x] loginForm.jsp 진주
+- [x] joinForm.jsp 진주
+- [ ] adminLogin.jsp 진주
+- [x] faqList.jsp 진주
+- [ ] faq_Detail.jsp 진주
+- [ ] qnaView.jsp 진주
+- [ ] qnaWriteForm.jsp 진주
+- [ ] adminReportList.jsp 진주
+- [ ] adminMemberList.jsp 진주
 # 시연모습
