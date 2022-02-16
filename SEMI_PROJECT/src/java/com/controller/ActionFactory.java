@@ -68,6 +68,7 @@ public class ActionFactory {
 		 
 		else if(command.equals("main"))					ac = new MainAction();
 		else if(command.equals("userpage"))				ac = new UserPageAction();
+
 		else if(command.equals("follow"))				ac = new FollowAction();
 		else if(command.equals("unfollow"))				ac = new UnfollowAction();
 		
@@ -81,6 +82,12 @@ public class ActionFactory {
 		else if(command.equals("message"))				ac = new MessageAction();
 		
 		else if(command.equals("search"))				ac = new SearchAction();
+
+		// Related to member
+		else if(command.equals("loginform"))			ac = new LoginFormAction();
+		else if(command.equals("login"))				ac = new LoginAction();
+		else if(command.equals("joinform"))				ac = new JoinFormAction();
+		else if(command.equals("join"))					ac = new JoinAction();
 		 
 		return ac;
 	}
