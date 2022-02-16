@@ -21,6 +21,23 @@ public class Dbman {
 		return con;
 	}
 	
+	public static Connection getMySQLConnection() {
+		Connection con = null;
+		
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/jinkparkDB";
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, "scott", "tiger");
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return con;
+	}
+	
 	public static void close (Connection con, PreparedStatement pstmt, ResultSet rs) {
 		try {
 			if(rs!=null) rs.close();

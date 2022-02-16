@@ -35,6 +35,6 @@
     <img src="images/Google.jpg" width="150"></a></span>
     <br><br>
 </form>
-<%@ include file="footer.jsp" %>
-</body>
+<%-- <%@ include file="footer.jsp" %>
+ --%></body>
 </html>

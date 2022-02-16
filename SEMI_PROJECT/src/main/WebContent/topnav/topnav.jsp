@@ -28,10 +28,7 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
 		<i class="material-icons">explore</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
-		<img id="userIcon" src="<c:choose>
-			<c:when test="${ loginUser.img != null }">${ loginUser.img }</c:when>
-			<c:otherwise>/images/tempUserIcon.png</c:otherwise>
-		</c:choose>" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid}'">
+		<img id="userIcon" src="/images/tmpUserIcon.png" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid}'">
 	</div>
 
 </div>

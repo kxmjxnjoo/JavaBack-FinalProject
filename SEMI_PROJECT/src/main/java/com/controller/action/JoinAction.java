@@ -14,7 +14,7 @@ public class JoinAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "join/join.jsp";
+		String url = "member/joinForm.jsp";
 
 		// Get parameter
 		String userid = request.getParameter("userid");
@@ -39,7 +39,7 @@ public class JoinAction implements Action {
 			// Follow myself
 			FollowDao.getInstance().insertFollow(userid, userid);
 			request.setAttribute("message", "회원가입에 성공했어요. 로그인해 주세요");
-			url = "login/login.jsp";
+			url = "member/loginForm.jsp";
 		} else {
 			request.setAttribute("message", "회원가입에 실패했어요. 다시 시도해 주세요");
 		}

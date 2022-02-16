@@ -2,7 +2,7 @@
 
 #userInfo {
     position: relative;
-    top: 100px;
+    top: 50px;
 
     width: 80%;
     left: 10%;
@@ -72,12 +72,12 @@
 
 hr {
     position: relative;
-    top: 150px;
+    top: 100px;
 }
 
 #postList {
     position: relative;
-    top: 200px;
+    top: 150px;
 
     width: 80%;
     left: 10%;

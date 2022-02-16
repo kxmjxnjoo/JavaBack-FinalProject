@@ -13,7 +13,7 @@ import com.dto.MemberDto;
 public class LoginAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "login/userLogin.jsp";
+		String url = "member/loginForm.jsp";
 
 		// Get Parameter
 		String userid = request.getParameter("userid");
@@ -30,6 +30,7 @@ public class LoginAction implements Action {
 			request.setAttribute("message", "비밀번호가 틀렸어요");
 		} else if(mdto.getPassword().equals(pwd)) {
 			request.setAttribute("message", "환영해요 " + mdto.getName() + "님!");
+			request.setAttribute("loginUser", mdto);
 			url = "main.jsp";
 		} else {
 			request.setAttribute("message", "알 수 없는 이유로 로그인 할 수 없었어요. 다시 시도해 주세요");
