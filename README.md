@@ -16,11 +16,9 @@
 - [ ] editPostForm.jsp 세인
 - [x] login.jsp 진주
 - [x] joinForm.jsp 진주
-- [ ] adminLogin.jsp 진주
+- [x?] adminLogin.jsp 진주
 - [x] faqList.jsp 진주
-- [ ] faq_Detail.jsp 진주
-- [ ] qnaView.jsp 진주
-- [ ] qnaWriteForm.jsp 진주
+- [ ] qnaForm.jsp 진주
 - [ ] adminReportList.jsp 진주
 - [ ] adminMemberList.jsp 진주
 # 시연모습
