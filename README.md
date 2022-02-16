@@ -14,7 +14,7 @@
 - [x] search.jsp 진겸
 - [ ] addPostForm.jsp 세인
 - [ ] editPostForm.jsp 세인
-- [x] loginForm.jsp 진주
+- [x] login.jsp 진주
 - [x] joinForm.jsp 진주
 - [ ] adminLogin.jsp 진주
 - [x] faqList.jsp 진주
