@@ -1,4 +1,14 @@
+package com.controller.action;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dao.FollowDao;
+import com.dao.MemberDao;
+import com.dto.MemberDto;
 
 public class JoinAction implements Action {
 

@@ -2,7 +2,6 @@ package com.controller;
 
 
 import com.controller.action.Action;
-
 import com.controller.action.AddReplyAction;
 import com.controller.action.CheckLikeAction;
 import com.controller.action.CheckReplyLikeAction;
@@ -16,7 +15,11 @@ import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
 import com.controller.action.FollowAction;
 import com.controller.action.FollowArrowsAction;
+import com.controller.action.JoinAction;
+import com.controller.action.JoinFormAction;
 import com.controller.action.LikePostAction;
+import com.controller.action.LoginAction;
+import com.controller.action.LoginFormAction;
 import com.controller.action.MainAction;
 import com.controller.action.MessageAction;
 import com.controller.action.NotificationAction;
@@ -26,6 +29,7 @@ import com.controller.action.PostUploadAction;
 import com.controller.action.PostUploadFormAction;
 import com.controller.action.ReportFormAction;
 import com.controller.action.SearchAction;
+import com.controller.action.SelectPostAction;
 import com.controller.action.StoryDetailAction;
 import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;

@@ -131,12 +131,12 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(mdto.getUserid());
-			pstmt.setString(mdto.getPassword());
-			pstmt.setString(mdto.getName());
-			pstmt.setString(mdto.getPhone());
-			pdtmt.setString(mdto.getEmail());
-			result = pstmt.executeQuery();
+			pstmt.setString(1, mdto.getUserid());
+			pstmt.setString(2, mdto.getPassword());
+			pstmt.setString(3, mdto.getName());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getEmail());
+			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
