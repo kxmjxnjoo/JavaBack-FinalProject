@@ -22,14 +22,19 @@
 		<div id="userName">
 			<h1>${ user.name }</h1>
 			<c:choose>	
+				<c:when test="${ loginUser.userid == user.userid }">
+					<input type="button" value="프로필 수정"> 
+					<input type="button" value="로그아웃"onclick="location.href='spring.do?command=logout'">
+				</c:when>
 				<c:when test="${ isFollowing == 1 }">
 					<input type="button" value="언팔로우" onclick="unfollow('${ user.userid }')">
+					<input type="button" value="신고">
 				</c:when>
 				<c:otherwise>
 					<input type="button" value="팔로우" onclick="follow('${ user.userid }')">
+					<input type="button" value="신고">
 				</c:otherwise>
 			</c:choose>
-			<input type="button" value="신고">
 		</div>
 		
 		<div id="userStat">
@@ -48,6 +53,7 @@
 
 <div id="postList">
 	<c:forEach var="post" items="${ posts }">
+	
 		<div class="userPost">
 			<img src="${ post.postImg }">
 			

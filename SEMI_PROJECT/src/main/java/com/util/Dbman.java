@@ -21,7 +21,7 @@ public class Dbman {
 		return con;
 	}
 	
-	public static Connection getMySQLConnection() {
+	public static Connection getMySqlConnection() {
 		Connection con = null;
 		
 		String driver = "com.mysql.cj.jdbc.Driver";

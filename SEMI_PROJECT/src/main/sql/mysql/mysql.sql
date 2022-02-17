@@ -15,7 +15,7 @@ create table member(
 	primary key (userid)
 );
 
-select * from MEMBER
+select * from MEMBER;
 
 /*follow*/
 create table follow(

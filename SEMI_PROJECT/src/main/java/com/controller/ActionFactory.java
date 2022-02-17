@@ -20,6 +20,7 @@ import com.controller.action.JoinFormAction;
 import com.controller.action.LikePostAction;
 import com.controller.action.LoginAction;
 import com.controller.action.LoginFormAction;
+import com.controller.action.LogoutAction;
 import com.controller.action.MainAction;
 import com.controller.action.MessageAction;
 import com.controller.action.NotificationAction;
@@ -90,6 +91,7 @@ public class ActionFactory {
 		// Related to member
 		else if(command.equals("loginform"))			ac = new LoginFormAction();
 		else if(command.equals("login"))				ac = new LoginAction();
+		else if(command.equals("logout"))				ac = new LogoutAction();
 		else if(command.equals("joinform"))				ac = new JoinFormAction();
 		else if(command.equals("join"))					ac = new JoinAction();
 		 
