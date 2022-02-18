@@ -13,6 +13,7 @@ import com.controller.action.EditPostAction;
 import com.controller.action.EditPostFormAction;
 import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
+import com.controller.action.ExploreAction;
 import com.controller.action.FollowAction;
 import com.controller.action.FollowArrowsAction;
 import com.controller.action.JoinAction;
@@ -87,6 +88,8 @@ public class ActionFactory {
 		else if(command.equals("message"))				ac = new MessageAction();
 		
 		else if(command.equals("search"))				ac = new SearchAction();
+		
+		else if(command.equals("explore"))				ac = new ExploreAction();
 
 		// Related to member
 		else if(command.equals("loginform"))			ac = new LoginFormAction();
