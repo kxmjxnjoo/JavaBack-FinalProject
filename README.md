@@ -3,16 +3,16 @@
 
 # View 역할 분배
 - [x] userPage.jsp 진겸
-- [ ] feedDetail.jsp 세인
+- [x] feedDetail.jsp 세인
 - [x] main.jsp 진겸
-- [ ] story.jsp 세인
+- [x] story.jsp 세인
 - [ ] accountManage.jsp 진겸
 - [x] message.jsp 진겸
 - [ ] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
 - [x] notification.jsp 진겸
 - [x] search.jsp 진겸
-- [ ] addPostForm.jsp 세인
+- [x] addPostForm.jsp 세인
 - [ ] editPostForm.jsp 세인
 - [x] login.jsp 진주
 - [x] joinForm.jsp 진주
