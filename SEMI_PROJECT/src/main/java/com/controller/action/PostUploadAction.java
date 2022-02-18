@@ -22,16 +22,13 @@ public class PostUploadAction implements Action {
 		
 		String url ="";
 		HttpSession session = request.getSession();
-		//MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
 		
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images");
-		/* MemberDto mdto = (MemberDto) session.getAttribute("loginUser")*/
-		MemberDto mdto = new MemberDto();
-		mdto.setUserid("hong");
-		String userId = mdto.getUserid(); /*mdto.getUserid();*/
+		String userId = mdto.getUserid();
 		
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 		
@@ -41,16 +38,16 @@ public class PostUploadAction implements Action {
 		pdto.setPost_img(multi.getFilesystemName("post_img"));
 		pdto.setUserid(userId); //추후 수정 
 		
-		System.out.println(userId);////////////////////////////////////////////////
-		System.out.println(pdto.getUserid());//////////////////////////////////////////////
+		System.out.println("로그인 유저 " +userId);////////////////////////////////////////////////
+		System.out.println("포스트 작성자 " + pdto.getUserid());//////////////////////////////////////////////
 		
 		PostDao pdao = PostDao.getInstance();
 		pdao.uploadPost(pdto);
 		
-		int post_num = pdao.get_post_num(mdto.getUserid()); //추후 session에 저장된 유저아이디 사용
+		int post_num = pdao.get_post_num(userId);
 		url = "spring.do?command=postDetail&post_num=" + post_num;
 		
-		//}
+		}
 		response.sendRedirect(url);
 	}
 }
