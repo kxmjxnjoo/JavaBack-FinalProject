@@ -13,6 +13,8 @@ function goBack(){
 </script>
 </head>
 <body>
+<%@ include file="/topnav/topnav.jsp" %>
+
 <form name="frm">
 	<div class="button_wrap">
 		<div class="icon_wrap">
