@@ -22,10 +22,20 @@ public class StoryDetailAction implements Action {
 		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 		if(mdto==null) url = "spring.do?command=loginform";
 		else {
-				String userid = request.getParameter("userid");
 				StoryDao sdao = StoryDao.getInstance();
-				int story_num = sdao.get_story_num(userid);
-				StoryDto sdto = sdao.getStory(story_num);
+				String userid = request.getParameter("userid");
+				int story_num = 0;
+				StoryDto sdto = null;
+				if(userid == null) {
+					story_num = Integer.parseInt(request.getParameter("story_num"));
+					sdto = sdao.getStory(story_num);
+					userid = sdto.getUserid();
+
+				} else {
+					story_num = sdao.get_story_num(userid);
+					sdto = sdao.getStory(story_num);
+				}
+				
 				
 				String loginUser = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUser);
@@ -34,8 +44,9 @@ public class StoryDetailAction implements Action {
 					fileName = "../images/beforeLike.png";
 				} else {
 					fileName = "../images/Like.png";
+				
 				}
-
+				
 				int prev = sdao.searchPrevStory(story_num, userid);
 				int next = sdao.searchNextStory(story_num, userid);
 				
@@ -44,6 +55,7 @@ public class StoryDetailAction implements Action {
 				loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				System.out.println("loginUser : " + loginUser);
 				System.out.println("스토리 좋아요? : " + result);
+				System.out.println("prev : " +prev + ", next : " + next);
 				System.out.println("스토리작성자 : " + sdto.getUserid());
 				System.out.println("스토리이미지 : " + sdto.getStory_img());
 				System.out.println("fontColor:" + sdto.getFontColor());
@@ -56,7 +68,7 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("prev", prev);
 				request.setAttribute("next", next);
 				
-				
+			
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

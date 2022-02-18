@@ -278,3 +278,5 @@ insert into follow (follower, following, follow_num) values('hong', 'nari', foll
 
 select count(post_num) as likes from post_like group by post_num having post_num=57
 select * from post_view order by create_date desc
+
+select max(story_num) as max from story group by userid having userid='hong'

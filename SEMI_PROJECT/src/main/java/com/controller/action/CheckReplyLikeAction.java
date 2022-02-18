@@ -18,10 +18,10 @@ public class CheckReplyLikeAction implements Action {
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
 		String url = "spring.do?command=postDetail&post_num=" + post_num;
 		HttpSession session = request.getSession();
-		MemberDto mdto = (MemberDto) session.getAttribute("loginAdmin");
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 		if(mdto==null) url = "spring.do?command=login";
 		else {
-			String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+			String userid = mdto.getUserid();
 			PostDao pdao = PostDao.getInstance();
 			int result = pdao.replyLikeCheck(reply_num, userid);
 			String fileName = "";

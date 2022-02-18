@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.StoryDao;
+import com.dto.MemberDto;
 
 public class CheckStoryLikeAction implements Action {
 
@@ -16,10 +17,10 @@ public class CheckStoryLikeAction implements Action {
 		int story_num = Integer.parseInt(request.getParameter("story_num"));
 		String url = "spring.do?command=storyDetail&story_num=" + story_num;
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
-			String userid = "jojo";//((MemberDto) session.getAttribute("loginUser")).getUserid();
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
+			String userid = mdto.getUserid();
 			StoryDao sdao = StoryDao.getInstance();
 			int result = sdao.storyLikeCheck(story_num, userid);
 			String fileName = "";
@@ -33,7 +34,7 @@ public class CheckStoryLikeAction implements Action {
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);
-		//}
+		}
 			
 		response.sendRedirect(url);
 	}
