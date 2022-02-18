@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.FollowViewDao;
-import com.dao.MemberDao;
 import com.dao.PostViewDao;
 import com.dao.StoryDao;
 import com.dto.FollowViewDto;
@@ -25,9 +24,6 @@ public class MainAction implements Action {
 		String url = "main.jsp";
 		HttpSession session = request.getSession();
 		
-		// Force login to hong while testing
-		MemberDto tmplogin = MemberDao.getInstance().getMember("hong");
-		session.setAttribute("loginUser", tmplogin);
 		
 		// Check if user is logged in
 		if(session.getAttribute("loginUser") == null) {

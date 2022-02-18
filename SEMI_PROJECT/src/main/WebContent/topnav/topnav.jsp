@@ -26,7 +26,7 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=main'">home</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=message'">send</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
-		<i class="material-icons">explore</i>
+		<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		<img id="userIcon" src="/images/tmpUserIcon.png" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid}'">
 	</div>
