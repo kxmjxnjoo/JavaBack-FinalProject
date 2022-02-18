@@ -246,6 +246,10 @@ select n.user_to, n.user_from, n.noti_type, n.content, n.create_date, m.img as m
 from notification n, member m
 where n.user_from = m.userid;
 
+create view follow_view as
+select f.following, f.follower, m.name as followingName, m.img as followingImg
+from follow f, member m
+where m.userid = following;
 
 
 
