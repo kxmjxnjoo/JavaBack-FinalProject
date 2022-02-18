@@ -17,6 +17,20 @@
 		<div id="story">
 		
 		<c:forEach items="${ followingList }" var="follow">
+			<c:if test="${ follow.following == loginUser.userid }">
+				<div class="storyBubble">
+					<div class="storyBubbleContent">
+						<div id="myStory">
+							<img src="${ follow.followingImg }">
+						</div>
+						<h3>${ follow.following }</h3>
+					</div>
+				</div>
+			</c:if>
+		</c:forEach>
+		
+		
+		<c:forEach items="${ followingList }" var="follow">
 			<c:choose>
 				<c:when test="${ follow.following == loginUser.userid }">
 				
