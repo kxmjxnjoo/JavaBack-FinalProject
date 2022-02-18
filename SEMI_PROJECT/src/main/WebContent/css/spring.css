@@ -253,9 +253,6 @@ body{
 	float:left;
 }
 
-#reaction img{
-	margin-left:10px;	
-}
 
 #write_reply_wrap{
 	border-top: 1px solid black; height: 16%;
@@ -353,17 +350,20 @@ body{
 }
 
 #storyArea #reaction{
-	position: absolute; top:10%; right: 35%;
-	width: 100%; height: 30px;
+	position: relative;
+    top: -12%;
+    width: 30px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #f7dad4;
+    padding: 5px;
+    opacity: 80%;
 }
 
 #write_reply_wrap #write_reply{
 	position: absolute; bottom:29%; left: 7%;
 }
 
-#storyArea #reaction{
-	position: absolute; top:93%; left: 40%;
-}
 #write_reply_wrap #reply_content {
 	position: relative; top:7%; 
 	margin-top: 0; outline: none;
