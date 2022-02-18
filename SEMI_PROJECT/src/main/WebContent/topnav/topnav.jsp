@@ -28,8 +28,22 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
-		<img id="userIcon" src="/images/tmpUserIcon.png" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid}'">
+		
+		<img id="userIcon" src="/images/${ loginUser != null ? loginUser.img : "tmpUserIcon.png" }" onclick="userIcon()">
+		
 	</div>
+	
+	<script type="text/javascript">
+		function userIcon() {
+			if("${ loginUser == null }") {
+				if(confirm("로그인 하시겠어요?")) {
+					location.href = "spring.do?command=loginform"
+				}
+			} else {
+				location.href= "spring.do?command=userpage&userid=${ loginUser.userid}"
+			}
+		}
+	</script>	
 
 </div>
 

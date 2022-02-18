@@ -29,7 +29,7 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 없으신가요?<a href="location.href='spring.do?command=joinform'"> 가입하기 </a>
+			<br>계정이 없으신가요?<a href="spring.do?command=joinform"> 가입하기 </a>
 		</div>
 		앱을 다운로드하세요.<br><br>
 	    <span><a href=https://apps.apple.com/app/instagram/id389801252?vt=lo><img src="images/App.jpg" width="150"></a>
