@@ -29,7 +29,7 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		
-		<img id="userIcon" src="/images/${ loginUser != null ? loginUser.img : "tmpUserIcon.png" }" onclick="userIcon()">
+		<img id="userIcon" src="/images/${ loginUser != null ? loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img : "tmpUserIcon.png" }" onclick="userIcon()">
 		
 	</div>
 	
