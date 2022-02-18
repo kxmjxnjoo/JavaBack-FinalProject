@@ -36,38 +36,43 @@ public class MainAction implements Action {
 			
 			// Get following list
 			ArrayList<FollowViewDto> followingList = FollowViewDao.getInstance().getFollowing(userid);
-			request.setAttribute("followingList", followingList);
 			
-			// Get follower's story
-			List<List<StoryDto>> memberStoryList = new ArrayList<List<StoryDto>>();
-			if(followingList != null) {
-				for(FollowViewDto fdto : followingList) {
-						if(fdto.getFollowing() != null) {
-						String followingId = fdto.getFollowing();
-						
-						ArrayList<StoryDto> storyList = StoryDao.getInstance().getAllStory(followingId);
-						memberStoryList.add(storyList);
+			if(followingList == null ) {
+				url = "info/noFollower.jsp";
+			} else {
+				request.setAttribute("followingList", followingList);
+				
+				// Get follower's story
+				List<List<StoryDto>> memberStoryList = new ArrayList<List<StoryDto>>();
+				if(followingList != null) {
+					for(FollowViewDto fdto : followingList) {
+							if(fdto.getFollowing() != null) {
+							String followingId = fdto.getFollowing();
+							
+							ArrayList<StoryDto> storyList = StoryDao.getInstance().getAllStory(followingId);
+							memberStoryList.add(storyList);
+						}
 					}
 				}
-			}
-			request.setAttribute("memberStoryList", memberStoryList);
-			
-			// Get follower's post
-			ArrayList<PostViewDto> postList = new ArrayList<PostViewDto>();
-			if(followingList != null) {
-				ArrayList<PostViewDto> tmpPostList = PostViewDao.getInstance().getAllPost(userid);
-				if(tmpPostList != null) {
-					for(PostViewDto pdto : tmpPostList) {
-						for(FollowViewDto fdto : followingList) {
-							if(fdto.getFollowing().equals(pdto.getUserid()) || fdto.getFollowing().equals(userid)) {
-								postList.add(pdto);
-								break;
+				request.setAttribute("memberStoryList", memberStoryList);
+				
+				// Get follower's post
+				ArrayList<PostViewDto> postList = new ArrayList<PostViewDto>();
+				if(followingList != null) {
+					ArrayList<PostViewDto> tmpPostList = PostViewDao.getInstance().getAllPost(userid);
+					if(tmpPostList != null) {
+						for(PostViewDto pdto : tmpPostList) {
+							for(FollowViewDto fdto : followingList) {
+								if(fdto.getFollowing().equals(pdto.getUserid()) || fdto.getFollowing().equals(userid)) {
+									postList.add(pdto);
+									break;
+								}
 							}
 						}
 					}
 				}
+				request.setAttribute("postList", postList);
 			}
-			request.setAttribute("postList", postList);
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);
