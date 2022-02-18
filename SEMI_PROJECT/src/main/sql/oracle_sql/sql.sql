@@ -79,7 +79,7 @@ from member m, post p
 where m.userid = p.userid
 order by p.create_date desc;
 
-select * from post_view;
+select * from member;
 
 
 /*img_upload*/
@@ -285,4 +285,4 @@ select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
 
-"../images/${img}"
+select * from post_veiw

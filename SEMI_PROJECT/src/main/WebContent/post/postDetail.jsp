@@ -140,14 +140,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
-						<c:choose>
-							<c:when test="${empty PostDto.user_img}">
-								<img src="../images/noProfile.png" width="50px" height="50px">
-							</c:when>
-							<c:otherwise>
-								<img src="../images/${PostDto.user_img}" width="50px" height="50px">
-							</c:otherwise>
-						</c:choose>
+						<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" onclick="userIcon();">
 					</div>
 					<b>${PostDto.userid}</b>  <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 					<div id="buttons" onClick="setting();">

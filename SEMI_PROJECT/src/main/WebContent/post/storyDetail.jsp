@@ -89,14 +89,7 @@ function deleteCheck(story_num){
 			
 <!-- 클릭시 유저 프로필로 이동 -->
 			<div id="goUserprofile" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-				<c:choose>
-					<c:when test="${empty StoryDto.user_img}">
-						<img src="../images/noProfile.png" width="50px" height="50px">
-					</c:when>
-					<c:otherwise>
-						<img src="../images/${StoryDto.user_img}" width="50px" height="50px">
-					</c:otherwise>
-				</c:choose>
+				<img id="userprofile" src="/images/${ StoryDto.user_img == null || StoryDto.user_img.equals("") ? "tmpUserIcon.png" : StoryDto.user_img }">
 			</div> 
 			
 			

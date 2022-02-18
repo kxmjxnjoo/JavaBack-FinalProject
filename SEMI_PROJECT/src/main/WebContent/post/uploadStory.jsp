@@ -71,7 +71,7 @@ function uploadCheck(){
 					<label class="input-file-button" for="input-file" >
 					  업로드
 					</label>
-					<div id ="image_container"></div>
+					<!-- <div id ="image_container"></div> -->
 					<input type="file" name="post_img" id="input-file"  onchange="setThumbnail(event);"/>
 				</div>
 				<div id="clear"></div>
