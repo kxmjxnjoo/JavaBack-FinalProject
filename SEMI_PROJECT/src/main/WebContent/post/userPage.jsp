@@ -14,7 +14,7 @@
 
 <div id="userInfo">
 	<div id="userImg">
-		<img src="${ user.img }">
+		<img src="images/${ user.img }">
 	</div>
 	
 	

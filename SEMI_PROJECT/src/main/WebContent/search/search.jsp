@@ -15,7 +15,7 @@
 		<c:forEach var="result" items="${ results }">
 			<div class="resultBox">
 				<div class="resultBoxInfo" onclick="location.href='spring.do?command=userpage&userid=${ result.userid }'">
-					<img src="${ result.img }">
+					<img src="images/${ result.img }">
 					
 					<div class="userText">
 						<h1>${ result.userid }</h1>
