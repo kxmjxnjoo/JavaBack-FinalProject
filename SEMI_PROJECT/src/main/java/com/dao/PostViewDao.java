@@ -19,8 +19,8 @@ public class PostViewDao {
 	
 	public ArrayList<PostViewDto> getAllPost(String userid) {
 		ArrayList<PostViewDto> list = null;
-		String sql = "select * from post_view order by create_date desc;";
-		String likeSql = "select count(post_num) as likes from post_like group by post_num having post_num=?;";
+		String sql = "select * from post_view order by create_date desc";
+		String likeSql = "select count(post_num) as likes from post_like group by post_num having post_num=?";
 		
 		con = Dbman.getConnection();
 		try {
@@ -54,7 +54,7 @@ public class PostViewDao {
 			}
 			
 			for(PostViewDto pdto : list) {
-				sql = "select * from post_like where post_num=? and userid=?;";
+				sql = "select * from post_like where post_num=? and userid=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, pdto.getPostNum());
 				pstmt.setString(2, userid);

@@ -77,7 +77,7 @@ public class FollowDao {
 	
 	public int insertFollow(String follower, String following) {
 		int result = 0;
-		String sql = "insert into follow (follower, following) values(?, ?)";
+		String sql = "insert into follow (follower, following, follow_num) values(?, ?, follow_seq.nextVal)";
 		
 		con = Dbman.getConnection();
 		try {

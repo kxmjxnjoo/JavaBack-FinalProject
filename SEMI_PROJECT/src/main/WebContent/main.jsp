@@ -88,9 +88,9 @@
 						
 						<form>
 							<input type="hidden" name="command" value="addreply">
-							<input type="hidden" name="postnum" value="${ post.postNum }">
+							<input type="hidden" name="post_num" value="${ post.postNum }">
 							<div class="addComment" id="comment${ post.postNum }">
-								<input type="text" placeholder="댓글을 추가해 주세요..." name="content">
+								<input type="text" placeholder="댓글을 추가해 주세요..." name="reply_content">
 								<input type="submit" value="추가" onclick="return addReply(${ post.postNum })">
 							</div>
 						</form>

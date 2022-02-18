@@ -224,6 +224,31 @@ create table report(
 alter table report add(post_num number(5) references post(post_num));
 create sequence report_seq start with 1;
 select * from report;
+
+
+/*notification*/
+
+create table notification(
+	num number(5) primary key,
+	user_to varchar2(30) not null references member(userid) on delete cascade,
+	user_from varchar2(30) not null references member(userid) on delete cascade,
+	noti_type number(2) not null ,
+	post_num number(5) references post(post_num) on delete cascade,
+	reply_num number(5)  references reply(reply_num),
+	create_date date default sysdate
+);
+
+alter table notification add(content varchar2(100))
+create sequence notification_seq start with 1;
+
+create view notification_view as
+select n.user_to, n.user_from, n.noti_type, n.content, n.create_date, m.img as member_img
+from notification n, member m
+where n.user_from = m.userid;
+
+
+
+
 /*테스트*/
 
 select max(post_num) from post where userid='hong' group by userid
@@ -233,9 +258,23 @@ select max(post_num) from post group by userid having userid='hong';
 select * from post;
 update post set address='11', img='1.png', content='222' where post_num=3
 
-select * from post_like;
+select * from post;
 delete post_like where post_num = 21 and userid = 'hong';
 
 select * from story_view
 select min(story_num) as next from story_view where story_num > 1 group by userid having userid='hong';
 delete story where story_num=4;
+
+select max(post_num) as max from post group by userid having userid='hong'
+
+create view follow_view as
+select f.following, f.follower, m.name as followingName, m.img as followingImg
+from follow f, member m
+where m.userid = f.following;
+
+select * from follow
+
+insert into follow (follower, following, follow_num) values('hong', 'nari', follow_seq.nextVal)
+
+select count(post_num) as likes from post_like group by post_num having post_num=57
+select * from post_view order by create_date desc
