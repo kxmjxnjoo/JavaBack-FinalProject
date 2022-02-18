@@ -178,8 +178,9 @@ public class PostDao {
 		} finally { Dbman.close(con, pstmt, rs); }
 	}
 
-	public void insertReport(String loginUser, String reported, int post_num, String reason) {
+	public int insertReport(String loginUser, String reported, int post_num, String reason) {
 		String sql = "insert into report(reporter_id, reported_id,reason, report_num, post_num) values(?,?,?,report_seq.nextVal,?)";
+		int result = 0;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -187,9 +188,10 @@ public class PostDao {
 			pstmt.setString(2, reported);
 			pstmt.setString(3, reason);
 			pstmt.setInt(4, post_num);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
+		return result;
 	}
 
 	public int replyLikeCheck(int reply_num, String userid) {
@@ -240,5 +242,47 @@ public class PostDao {
 			pstmt.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
+	}
+
+	public ArrayList<PostDto> getBestPost() {
+		ArrayList<PostDto> postList =  new ArrayList<>();
+		String sql = "select p.*, b.rn, b.count as likeCount  from post_view p inner join " + 
+				"(select a.post_num, a.count, row_number() over (order by count desc) rn " + 
+				"from (select post_num, count(post_num) as count from post_like group by post_num order by count(post_num) desc) a) b on " + 
+				"(p.post_num = b.post_num) where rn < 100 order by rn desc" ; 
+		con = Dbman.getConnection();
+		try {
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PostDto pdto = new PostDto();
+				pdto.setPostNum(rs.getInt("post_num"));
+				pdto.setPost_img(rs.getString("post_img"));
+				pdto.setContent(rs.getString("content"));
+				pdto.setAddress(rs.getString("address"));
+				pdto.setUserid(rs.getString("userid"));
+				pdto.setUser_img(rs.getString("user_img"));
+				pdto.setLikeCount(rs.getInt("likeCount"));
+				postList.add(pdto);
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return postList;
+	}
+
+	public int insertReport(String loginUser, String reported, String reason) {
+		String sql = "insert into report(reporter_id, reported_id,reason, report_num) values(?,?,?,report_seq.nextVal)";
+		int result = 0;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, loginUser);
+			pstmt.setString(2, reported);
+			pstmt.setString(3, reason);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return result;
+		
 	}
 }

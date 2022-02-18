@@ -4,21 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시물 생성</title>
 <link href="css/spring.css" rel="stylesheet"> 
-<script src="script/spring.js"></script>
+<script type="text/javascript" language="javascript" defer="defer">
+function goBack(){
+	window.history.back();
+}
+</script>
 </head>
 <body>
 <form name="frm">
 	<div class="button_wrap">
 		<div class="icon_wrap">
-			<div class="button">
+			<div id="button">
 				<a href='spring.do?command=postuploadForm'><img src="../images/postupload.png" height=300px width=230px></a>	
 			</div>
-			<div class="button" onclick="go_storyupload();">
+			<div id="button" onclick="go_storyupload();">
 				<a href='spring.do?command=storyUploadForm'><img src="../images/storyupload.png" height=300px width=230px></a>
 			</div>
 		</div>	
+		<div id="clear"></div>
+		<div id="temp"  onclick="goBack();"> 
+			<label id="input-goBack-button" for="input-reset"> 뒤로가기 </label>
+			<input type="button" id="input-reset"> 
+		</div>
+		
 	</div>
 </form>
 </body>

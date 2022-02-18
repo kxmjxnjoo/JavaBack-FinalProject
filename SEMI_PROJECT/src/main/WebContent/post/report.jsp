@@ -7,19 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 신고하기</title>
-<link href="css/spring.css" rel="stylesheet"> 
+<link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript">
-function do_report(){
-	document.reportFrm.action="spring.do?command=postReport&post_num=" + ${post_num};
+function do_report(post_num){
+	document.reportFrm.action="spring.do?command=postReport&post_num=" + post_num;
 	document.reportFrm.submit();
+	/* opener.location.href='spring.do?command=postDetail&post_num=' + post_num; */
+	
 }
 </script>
 </head>
 <body>
 <form name="reportFrm" method="post">
 	<div id="wrap">
-		<div class="report_wrap"> 
+		<div class="userReport_wrap"> 
 			<div class="reportTitle"> <h3>신고</h3> </div>
 			<div class="reportContentTitle"> <b>이 게시물을 신고하는 이유</b> </div>
 			<div class="reportContent">
@@ -33,7 +35,10 @@ function do_report(){
 				<label><input type="radio" name="reportReson" class="checkbox-style" value="8"/> 혐오 발언 또는 상징</label>
 				<label><input type="radio" name="reportReson" class="checkbox-style" value="9"/> 지식재산권 침해</label>
 			</div>
-			<input type="button" value="신고하기" class="submit" onclick="do_report();">
+			<div id="clear"></div>
+			<label id="input-reset-button" for="input-submit" > 신고하기 </label>
+			<input type="button" value="신고하기" id="input-submit" onclick="do_report(${post_num});">
+			<div id="clear"></div>
 	</div>
 	</div>
 </form>

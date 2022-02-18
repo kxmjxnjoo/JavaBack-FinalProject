@@ -7,22 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dao.PostDao;
+import com.dto.MemberDto;
 
-public class DeletePostAction implements Action {
+public class UserReportFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "main.jsp";
+		String url = "/post/userReport.jsp";
 		HttpSession session = request.getSession();
+		
+		////////////테스트를 위한 코드입니다.	
+		MemberDto mdto = new MemberDto();
+		mdto.setUserid("jojo");
+		session.setAttribute("loginUser", mdto);
+		///////////여기까지///////////////////////////
+		
 		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
-			int post_num = Integer.parseInt(request.getParameter("post_num"));
-			PostDao.getInstance().deletePost(post_num);
-			
-			request.setAttribute("deletedPost", 1); //모달 추가용 어트리부트
+				//if(mdto==null) url = "spring.do?command=login";
+				//else{
+					
+			String reportedUserid = request.getParameter("userid");
+			request.setAttribute("reportedUserid", reportedUserid);
 		//}
 		request.getRequestDispatcher(url).forward(request, response);
+		
 	}
 }

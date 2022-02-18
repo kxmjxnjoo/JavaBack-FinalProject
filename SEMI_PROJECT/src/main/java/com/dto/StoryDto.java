@@ -9,7 +9,14 @@ public class StoryDto {
 	private String user_img;
 	private Timestamp create_date;
 	private String content;
+	private String fontColor;
 	
+	public String getFontColor() {
+		return fontColor;
+	}
+	public void setFontColor(String fontColor) {
+		this.fontColor = fontColor;
+	}
 	public int getStory_num() {
 		return story_num;
 	}

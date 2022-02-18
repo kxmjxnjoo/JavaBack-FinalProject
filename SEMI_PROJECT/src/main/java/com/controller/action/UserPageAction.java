@@ -34,7 +34,7 @@ public class UserPageAction implements Action {
 		
 		// Get whether loginUser is following user
 		HttpSession session = request.getSession();
-		String loginUserid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+		String loginUserid = "jojo";/*((MemberDto) session.getAttribute("loginUser")).getUserid();*/
 		int isFollowing = FollowDao.getInstance().isFollowing(loginUserid, userid);
 		request.setAttribute("isFollowing", isFollowing);
 		

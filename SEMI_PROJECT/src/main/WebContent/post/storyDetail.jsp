@@ -44,9 +44,10 @@ function deleteCheck(story_num){
 <body>
 <form name="frm" method="post">
 	
+		
 <!-- setting popup -->
 	<div id="setting">
-		<c:choose>
+		<c:choose> 
 			<c:when test="${StoryDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 				<div id="setting_menu">
 					<div class="setting_btn"><a href='spring.do?command=editStoryForm&story_num=${story_num}'> 수정 </a></div>
@@ -58,7 +59,7 @@ function deleteCheck(story_num){
 			<c:otherwise>
 					<div id="setting_menu">
 						<div class="setting_btn"><a href='#'>팔로우</a></div> <!-- 팔로우/언팔로우 c:choose 처리 -->
-						<div class="setting_btn"><a href='#' onClick="goReport(${post_num});">신고</a></div>
+						<div class="setting_btn"><a href='#' onClick="goReport(${story_num});">신고</a></div>
 						<div class="setting_btn" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>
 					</div>
@@ -71,7 +72,7 @@ function deleteCheck(story_num){
 		
 		<div id=storyArea>
 <!-- 로고 -->
-			<div id="logo"> <img src="../images/logo.png" width="50px"> </div>
+			<div id="logo" onclick="location.href='spring.do?command=main'"> <img src="../images/logo.png" width="50px"> </div>
 			
 <!-- 화살표 -->
 			<c:if test="${prev != 0}">
@@ -86,7 +87,21 @@ function deleteCheck(story_num){
 				</div>
 			</c:if>
 			
+<!-- 클릭시 유저 프로필로 이동 -->
+			<div id="goUserprofile" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
+				<c:choose>
+					<c:when test="${empty StoryDto.user_img}">
+						<img src="../images/noProfile.png" width="50px" height="50px">
+					</c:when>
+					<c:otherwise>
+						<img src="../images/${StoryDto.user_img}" width="50px" height="50px">
+					</c:otherwise>
+				</c:choose>
+			</div> 
+			
+			
 			<div class=story_content>
+<!-- 스토리 이미지 -->
 				<img id="story_img" src="../images/${StoryDto.story_img}" > 
 <!-- 글 작성자 프로필 -->
 				<div id="story_user">
@@ -108,19 +123,15 @@ function deleteCheck(story_num){
 					<span class="material-icons" onClick="openSetting();"> more_vert </span>
 				</div>
 				
-				<%-- <c:choose>
-					<c:when test="${empty PostDto.address}"> </c:when>
-					<c:otherwise>
-					<div id="post_address">
-						<span class="material-icons"> location_on </span>
-						<span> ${PostDto.address} </span>
-					</div>
-					</c:otherwise>
-				</c:choose> --%>
-				
 <!-- 작성한 글 내용 -->
-			<div id="story_content">  <h2>  ${StoryDto.content}  </h2>  </div>
-
+			<c:choose>
+				<c:when test="empty ${fontColor}">
+					<div id="story_content">  <h2>  ${StoryDto.content}  </h2>  </div>
+				</c:when>
+				<c:otherwise>
+					<div id="story_content" style="color:${StoryDto.fontColor}"> <h2>  ${StoryDto.content}  </h2>  </div> 
+				</c:otherwise>
+			</c:choose>
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
 					<img src="${fileName}" width="30px" height="30px" onclick="story_like(${story_num});" style="cursor:pointer">

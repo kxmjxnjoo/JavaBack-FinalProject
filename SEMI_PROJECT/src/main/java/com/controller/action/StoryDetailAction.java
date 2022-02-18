@@ -40,12 +40,12 @@ public class StoryDetailAction implements Action {
 				////////////테스트용 코드 
 				System.out.println("///");
 				MemberDto mdto = new MemberDto();
-				mdto.setUserid("hong");
+				mdto.setUserid("jojo");
 				session.setAttribute("loginUser", mdto);
 				String loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				System.out.println(loginUser);
 				System.out.println(sdto.getUserid());
-				System.out.println("prev : " + prev + ", next=" + next);
+				System.out.println("fontColor:" + sdto.getFontColor());
 				////////////테스트용 코드 여기까지 /////////////////////////
 				
 				request.setAttribute("likeResult", result);
@@ -54,6 +54,8 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("StoryDto", sdto);
 				request.setAttribute("prev", prev);
 				request.setAttribute("next", next);
+				
+				
 		//}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

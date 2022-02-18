@@ -14,7 +14,8 @@ public class PostReportAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "reportDone.jsp";
+		int post_num = Integer.parseInt(request.getParameter("post_num"));
+		String url = "/post/postReportDone.jsp";
 		HttpSession session = request.getSession();
 		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginUser");
 		//if(mdto==null) url = "spring.do?command=login";
@@ -23,7 +24,7 @@ public class PostReportAction implements Action {
 			String loginUser = "jojo"; //mdto.getUserid() 로 수정
 			//여기까지 /////////////////////////////////////////////////////////
 					
-			int post_num = Integer.parseInt(request.getParameter("post_num"));
+			
 			String reason = request.getParameter("reportReson");
 			if(reason.equals("1")) reason = "스팸";
 			else if(reason.equals("2")) reason = "민감한 콘텐츠";
@@ -37,12 +38,20 @@ public class PostReportAction implements Action {
 			PostDao pdao = PostDao.getInstance();
 			PostDto pdto = pdao.getPost(post_num);
 			String reported = pdto.getUserid();
-			pdao.insertReport(loginUser, reported, post_num, reason);
 			
+			int result = pdao.insertReport(loginUser, reported, post_num, reason);
+			String message = "";
+			if (result==1) message = "포스트를 신고했어요";
+			else message = "포스트를 신고하지 못했어요. 다시 시도해주세요.";
+			
+			System.out.println("message="+ message);
+			System.out.println("post_num="+post_num);
+			System.out.println("post_num="+pdto.getUserid());
+			request.setAttribute("post_num", post_num);
 			request.setAttribute("PostDto", pdto);
 			request.setAttribute("reason", reason);
-			
-		//}
-		response.sendRedirect(url);
+			request.setAttribute("message", message);
+
+			response.sendRedirect(url);
 	}
 }

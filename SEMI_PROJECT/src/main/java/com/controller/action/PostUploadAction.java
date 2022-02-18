@@ -2,6 +2,7 @@ package com.controller.action;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +28,10 @@ public class PostUploadAction implements Action {
 		
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images");
-		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
-		String userId = mdto.getUserid();
+		/* MemberDto mdto = (MemberDto) session.getAttribute("loginUser")*/
+		MemberDto mdto = new MemberDto();
+		mdto.setUserid("hong");
+		String userId = mdto.getUserid(); /*mdto.getUserid();*/
 		
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 		
@@ -38,12 +41,14 @@ public class PostUploadAction implements Action {
 		pdto.setPost_img(multi.getFilesystemName("post_img"));
 		pdto.setUserid(userId); //추후 수정 
 		
+		System.out.println(userId);////////////////////////////////////////////////
+		System.out.println(pdto.getUserid());//////////////////////////////////////////////
+		
 		PostDao pdao = PostDao.getInstance();
 		pdao.uploadPost(pdto);
 		
 		int post_num = pdao.get_post_num(mdto.getUserid()); //추후 session에 저장된 유저아이디 사용
 		url = "spring.do?command=postDetail&post_num=" + post_num;
-		
 		
 		//}
 		response.sendRedirect(url);

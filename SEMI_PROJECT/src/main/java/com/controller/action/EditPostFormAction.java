@@ -15,7 +15,7 @@ public class EditPostFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "editPost.jsp";
+		String url = "/post/editPost.jsp";
 		HttpSession session = request.getSession();
 		////////////테스트를 위한 코드입니다.	
 		MemberDto mdto = new MemberDto();

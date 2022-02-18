@@ -19,14 +19,15 @@ public class StoryDao {
 	ResultSet rs = null;
 	
 	public void uploadStory(StoryDto sdto) {
-		String sql = "insert into story(story_num, img, story_content, userid) "
-				+ " values(story_seq.nextval, ?, ?, ?)";
+		String sql = "insert into story(story_num, img, story_content, userid, fontColor) "
+				+ " values(story_seq.nextval, ?, ?, ?, ?)";
 	    con = Dbman.getConnection();
 	        try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, sdto.getStory_img());
 				pstmt.setString(2, sdto.getContent());
 				pstmt.setString(3, sdto.getUserid());
+				pstmt.setString(4, sdto.getFontColor());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -64,6 +65,7 @@ public class StoryDao {
 					sdto.setContent(rs.getString("story_content"));
 					sdto.setStory_img(rs.getString("story_img"));
 					sdto.setCreate_date(rs.getTimestamp("create_date"));
+					sdto.setFontColor(rs.getString("fontColor"));
 				}
 			} catch (SQLException e) { e.printStackTrace();
 			} finally { Dbman.close(con, pstmt, rs); }

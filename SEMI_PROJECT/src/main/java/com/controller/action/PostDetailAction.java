@@ -23,7 +23,9 @@ public class PostDetailAction implements Action {
 		//if(mdto==null) url = "spring.do?command=login";
 		//else {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
-				String userid = "hong"; //((MemberDto) session.getAttribute("loginUser")).getUserid();
+				String message = request.getParameter("message");
+				System.out.println(message);
+				String userid = "nari"; //((MemberDto) session.getAttribute("loginUser")).getUserid();
 				PostDao pdao = PostDao.getInstance();
 				PostDto pdto = pdao.getPost(post_num);
 				ArrayList<ReplyDto> rdto = pdao.getReply(post_num);
@@ -37,18 +39,19 @@ public class PostDetailAction implements Action {
 				
 				for(int i=0; i<rdto.size(); i++) {
 					int replyLikeResult = pdao.replyLikeCheck(rdto.get(i).getReply_num(), userid);
-					if(replyLikeResult==0) rdto.get(i).setReplyFileName("../images/beforeLike.png");
-					else rdto.get(i).setReplyFileName("../images/Like.png");
+					if(replyLikeResult==0) rdto.get(i).setReplyFileName("favorite_border");
+					else rdto.get(i).setReplyFileName("favorite");
 				}
 				
 				////////////테스트용 코드 
 				System.out.println("///");
 				MemberDto mdto = new MemberDto();
-				mdto.setUserid("hong");
+				mdto.setUserid("jojo");
 				session.setAttribute("loginUser", mdto);
 				String loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-				System.out.println(loginUser);
-				System.out.println(pdto.getUserid());
+				//System.out.println(loginUser);
+				//System.out.println(pdto.getUserid());
+				System.out.println(message);
 				////////////테스트용 코드 여기까지 /////////////////////////
 				
 				request.setAttribute("likeResult", result);
@@ -56,6 +59,7 @@ public class PostDetailAction implements Action {
 				request.setAttribute("post_num", post_num);
 				request.setAttribute("PostDto", pdto);
 				request.setAttribute("ReplyDto", rdto);
+				request.setAttribute("message", message);
 		//}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

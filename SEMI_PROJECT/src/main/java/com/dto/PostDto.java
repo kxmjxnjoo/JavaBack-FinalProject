@@ -10,6 +10,14 @@ public class PostDto {
 	private String userid;
 	private Timestamp create_date;
 	private String user_img;
+	private int likeCount;
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public String getPost_img() {
 		return post_img;
 	}

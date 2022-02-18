@@ -13,7 +13,7 @@ public class PostUploadFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/post/addPost.jsp";
+		String url = "/post/uploadPost.jsp";
 		HttpSession session = request.getSession();
 		////////////테스트를 위한 코드입니다.	
 		MemberDto mdto = new MemberDto();

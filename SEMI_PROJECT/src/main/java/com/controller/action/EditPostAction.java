@@ -1,7 +1,6 @@
 package com.controller.action;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

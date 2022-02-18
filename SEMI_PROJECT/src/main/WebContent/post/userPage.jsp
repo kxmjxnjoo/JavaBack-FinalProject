@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 <title>${ user.name }(${ user.userid })</title>
 <link rel="stylesheet" href="css/userPage.css">
+
+<script type="text/javascript">
+function goReport(userid){
+	var url="spring.do?command=userReportForm&userid=" + userid;
+	var _width = '400';
+	var _height = '300';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
+}
+</script>
 </head>
 <body>
 
@@ -22,19 +35,14 @@
 		<div id="userName">
 			<h1>${ user.name }</h1>
 			<c:choose>	
-				<c:when test="${ loginUser.userid == user.userid }">
-					<input type="button" value="프로필 수정"> 
-					<input type="button" value="로그아웃"onclick="location.href='spring.do?command=logout'">
-				</c:when>
 				<c:when test="${ isFollowing == 1 }">
 					<input type="button" value="언팔로우" onclick="unfollow('${ user.userid }')">
-					<input type="button" value="신고">
 				</c:when>
 				<c:otherwise>
 					<input type="button" value="팔로우" onclick="follow('${ user.userid }')">
-					<input type="button" value="신고">
 				</c:otherwise>
 			</c:choose>
+			<input type="button" value="신고" onclick="goReport('${user.userid}');">
 		</div>
 		
 		<div id="userStat">
@@ -53,7 +61,6 @@
 
 <div id="postList">
 	<c:forEach var="post" items="${ posts }">
-	
 		<div class="userPost">
 			<img src="${ post.postImg }">
 			
