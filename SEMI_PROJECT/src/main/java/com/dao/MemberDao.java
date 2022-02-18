@@ -19,7 +19,7 @@ public class MemberDao {
 	
 	public MemberDto getMember(String userid) {
 		MemberDto mdto = null;
-		String sql = "select * from member where userid=?;";
+		String sql = "select * from member where userid=?";
 		
 		con = Dbman.getConnection();
 		try {
@@ -50,7 +50,7 @@ public class MemberDao {
 	
 	public ArrayList<MemberDto> getAllMembers() {
 		ArrayList<MemberDto> list = null;
-		String sql = "select * from member;";
+		String sql = "select * from member";
 		
 		con = Dbman.getConnection();
 		try {
@@ -125,7 +125,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(MemberDto mdto) {
-		String sql = "insert into member (userid, password, name, phone, email) values(?,?,?,?,?);";
+		String sql = "insert into member (userid, password, name, phone, email) values(?,?,?,?,?)";
 		con = Dbman.getConnection();
 		int result = 0;
 

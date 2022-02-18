@@ -20,6 +20,9 @@ public class LoginAction implements Action {
 		String userid = request.getParameter("userid");
 		String pwd = request.getParameter("pwd");
 
+		System.out.println("userid");
+		System.out.println("pwd");
+		
 		// Get MemberDto
 		MemberDto mdto = MemberDao.getInstance().getMember(userid);
 
