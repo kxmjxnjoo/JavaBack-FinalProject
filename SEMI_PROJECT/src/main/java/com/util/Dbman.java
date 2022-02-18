@@ -5,7 +5,7 @@ import javax.naming.*;
 import javax.sql.*;
 
 public class Dbman {
-	public static Connection getConnection() {
+	public static Connection getOracleConnection() {
 		Connection con = null;
 		
 		Context initContext;
@@ -21,7 +21,7 @@ public class Dbman {
 		return con;
 	}
 	
-	public static Connection getMySqlConnection() {
+	public static Connection getConnection() {
 		Connection con = null;
 		
 		String driver = "com.mysql.cj.jdbc.Driver";
