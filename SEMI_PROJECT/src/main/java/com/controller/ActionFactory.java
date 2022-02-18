@@ -33,6 +33,7 @@ import com.controller.action.ReportFormAction;
 import com.controller.action.SearchAction;
 import com.controller.action.SelectPostAction;
 import com.controller.action.StoryDetailAction;
+import com.controller.action.StoryDetailfromMainAction;
 import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;
 import com.controller.action.UnfollowAction;
@@ -61,9 +62,12 @@ public class ActionFactory {
 		else if(command.equals("deletePost")) 			ac = new DeletePostAction();
 		else if(command.equals("reportForm")) 			ac = new ReportFormAction();
 		else if(command.equals("postReport")) 			ac = new PostReportAction();
+		
 		else if(command.equals("storyUploadForm")) 		ac = new StoryUploadFormAction();
 		else if(command.equals("storyUpload")) 			ac = new StoryUploadAction();
+		
 		else if(command.equals("storyDetail")) 			ac = new StoryDetailAction();
+		
 		else if(command.equals("checkStoryLike")) 		ac = new CheckStoryLikeAction();
 		else if(command.equals("followArrows")) 		ac = new FollowArrowsAction();
 		else if(command.equals("deleteStory")) 			ac = new DeleteStoryAction();

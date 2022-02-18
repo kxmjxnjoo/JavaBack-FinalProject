@@ -19,14 +19,16 @@ public class StoryDetailAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/storyDetail.jsp";
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
-				int story_num = Integer.parseInt(request.getParameter("story_num"));
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=loginform";
+		else {
+				String userid = request.getParameter("userid");
 				StoryDao sdao = StoryDao.getInstance();
+				int story_num = sdao.get_story_num(userid);
 				StoryDto sdto = sdao.getStory(story_num);
-				String userid = sdto.getUserid();
-				int result = sdao.storyLikeCheck(story_num, userid);
+				
+				String loginUser = mdto.getUserid();
+				int result = sdao.storyLikeCheck(story_num, loginUser);
 				String fileName = "";
 				if(result == 0) {
 					fileName = "../images/beforeLike.png";
@@ -39,12 +41,11 @@ public class StoryDetailAction implements Action {
 				
 				////////////테스트용 코드 
 				System.out.println("///");
-				MemberDto mdto = new MemberDto();
-				mdto.setUserid("jojo");
-				session.setAttribute("loginUser", mdto);
-				String loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-				System.out.println(loginUser);
-				System.out.println(sdto.getUserid());
+				loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+				System.out.println("loginUser : " + loginUser);
+				System.out.println("스토리 좋아요? : " + result);
+				System.out.println("스토리작성자 : " + sdto.getUserid());
+				System.out.println("스토리이미지 : " + sdto.getStory_img());
 				System.out.println("fontColor:" + sdto.getFontColor());
 				////////////테스트용 코드 여기까지 /////////////////////////
 				
@@ -56,7 +57,7 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("next", next);
 				
 				
-		//}
+		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

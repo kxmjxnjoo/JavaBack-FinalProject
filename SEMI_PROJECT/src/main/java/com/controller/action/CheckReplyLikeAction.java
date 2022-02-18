@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.PostDao;
+import com.dto.MemberDto;
 
 public class CheckReplyLikeAction implements Action {
 
@@ -17,10 +18,10 @@ public class CheckReplyLikeAction implements Action {
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
 		String url = "spring.do?command=postDetail&post_num=" + post_num;
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
-			String userid = "jojo";//((MemberDto) session.getAttribute("loginUser")).getUserid();
+		MemberDto mdto = (MemberDto) session.getAttribute("loginAdmin");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
+			String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 			PostDao pdao = PostDao.getInstance();
 			int result = pdao.replyLikeCheck(reply_num, userid);
 			String fileName = "";
@@ -34,9 +35,7 @@ public class CheckReplyLikeAction implements Action {
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);
-		//}
-			
+		}
 		response.sendRedirect(url);
-		
 	}
 }

@@ -36,7 +36,7 @@
 				
 				</c:when>
 				<c:otherwise>
-					<div class="storyBubble">
+					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">
 							<img src="${ follow.followingImg }">
 							<h3>${ follow.following }</h3>
