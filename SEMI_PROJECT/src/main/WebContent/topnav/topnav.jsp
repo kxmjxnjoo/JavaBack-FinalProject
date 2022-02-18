@@ -35,7 +35,7 @@
 	
 	<script type="text/javascript">
 		function userIcon() {
-			if("${ loginUser == null }") {
+			if("${ loginUser == null }" === true) {
 				if(confirm("로그인 하시겠어요?")) {
 					location.href = "spring.do?command=loginform"
 				}
