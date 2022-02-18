@@ -25,7 +25,7 @@ public class PostDetailAction implements Action {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
 				String message = request.getParameter("message");
 				System.out.println(message);
-				String userid = "nari"; //((MemberDto) session.getAttribute("loginUser")).getUserid();
+				String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				PostDao pdao = PostDao.getInstance();
 				PostDto pdto = pdao.getPost(post_num);
 				ArrayList<ReplyDto> rdto = pdao.getReply(post_num);
@@ -46,11 +46,6 @@ public class PostDetailAction implements Action {
 				////////////테스트용 코드 
 				System.out.println("///");
 				MemberDto mdto = new MemberDto();
-				mdto.setUserid("jojo");
-				session.setAttribute("loginUser", mdto);
-				String loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-				//System.out.println(loginUser);
-				//System.out.println(pdto.getUserid());
 				System.out.println(message);
 				////////////테스트용 코드 여기까지 /////////////////////////
 				

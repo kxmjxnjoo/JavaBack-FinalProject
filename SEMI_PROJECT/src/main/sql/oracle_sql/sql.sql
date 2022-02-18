@@ -276,7 +276,7 @@ select f.following, f.follower, m.name as followingName, m.img as followingImg
 from follow f, member m
 where m.userid = f.following;
 
-select * from follow
+select * from story
 
 insert into follow (follower, following, follow_num) values('hong', 'nari', follow_seq.nextVal)
 
@@ -284,3 +284,5 @@ select count(post_num) as likes from post_like group by post_num having post_num
 select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
+
+"../images/${img}"
