@@ -21,7 +21,7 @@
 				<div class="storyBubble">
 					<div class="storyBubbleContent">
 						<div id="myStory">
-							<img src="${ follow.followingImg }">
+							<img src="../images/${ follow.followingImg }">
 						</div>
 						<h3>${ follow.following }</h3>
 					</div>
@@ -38,7 +38,7 @@
 				<c:otherwise>
 					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">
-							<img src="${ follow.followingImg }">
+							<img src="../images/${ follow.followingImg }">
 							<h3>${ follow.following }</h3>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 				
 					<div class="postBar">
 						<div class="postBarUserInfo" onclick="location.href='spring.do?command=userpage&userid=${ post.userid }'">
-							<img src="${ post.userImg }">
+							<img src="../images/${ post.userImg }">
 							<div class="postBarInfo">
 								<h3>${ post.userid }</h3>
 								<h4>${ post.address }</h4>
@@ -66,7 +66,7 @@
 					</div>
 					
 					<div class="postImg">
-						<img src="${ post.postImg }">
+						<img src="../images/${ post.postImg }">
 						<div class="postImgNavigationBar">
 						
 						</div>
@@ -119,7 +119,7 @@
 	
 	<div id="subBar">
 		<div id="myProfile" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid }'">
-			<img src="${ loginUser.img }">
+			<img src="../images/${ loginUser.img }">
 			
 			<div id="myProfileInfo">
 				<h3>${ loginUser.userid }</h3>
@@ -138,7 +138,7 @@
 					<c:otherwise>
 						<div class="follower">
 							<div class="followerInfoWrapper" onclick="location.href='spring.do?command=userpage&userid=${ follow.following }'">
-								<img class="followerImg" src="${ follow.followingImg }">
+								<img class="followerImg" src="../images/${ follow.followingImg }">
 								
 								<div class="followerInfo">
 									<h3>${ follow.following }</h3>
