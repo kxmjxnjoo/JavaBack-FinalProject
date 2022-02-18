@@ -24,7 +24,7 @@
 			<c:choose>	
 				<c:when test="${ loginUser.userid == user.userid }">
 					<input type="button" value="프로필 수정"> 
-					<input type="button" value="로그아웃">
+					<input type="button" value="로그아웃" onclick="location.href='spring.do?command=logout'">
 				</c:when>
 				<c:when test="${ isFollowing == 1 }">
 					<input type="button" value="언팔로우" onclick="unfollow('${ user.userid }')">

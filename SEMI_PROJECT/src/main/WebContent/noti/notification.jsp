@@ -12,38 +12,46 @@
 
 	<%@ include file="/topnav/topnav.jsp" %>
 	
-	<c:forEach var="noti" items="${ notiList }">
-	<div class="notiBox">
-		<div class="notiBoxContent">
-			<img class="userImg" src="${ noti.memberImg }">
-			
-			<div class="notiTextBox">
-				<h2 class="userName notiText">${ noti.userFrom }</h2>
-				
-				<c:choose>
-					<c:when test="${ noti.notiType == 1 }">
-						<p class="notiContent notiText">님이 ${ loginUser.name }님을 팔로우하셨습니다</p>
-					</c:when>
+	<c:choose>
+		<c:when test="${ notiList == null }">
+			<h1 id="notiNullMessage">${ loginUser.name }님, 알림이 없어요</h1>
+		</c:when>
+		<c:otherwise>
+			<c:forEach var="noti" items="${ notiList }">
+			<div class="notiBox">
+				<div class="notiBoxContent">
+					<img class="userImg" src="${ noti.memberImg }">
 					
-					<c:when test="${ noti.notiType == 2 }">
-						<p class="notiContent notiText">님이 포스트를 좋아요 했어요</p>
-					</c:when>
+					<div class="notiTextBox">
+						<h2 class="userName notiText">${ noti.userFrom }</h2>
+						
+						<c:choose>
+							<c:when test="${ noti.notiType == 1 }">
+								<p class="notiContent notiText">님이 ${ loginUser.name }님을 팔로우하셨습니다</p>
+							</c:when>
+							
+							<c:when test="${ noti.notiType == 2 }">
+								<p class="notiContent notiText">님이 포스트를 좋아요 했어요</p>
+							</c:when>
+							
+							<c:when test="${ noti.notiType == 3 }">
+								<p class="notiContent notiText">님이 댓글을 다셨어요 : ${ noti.replyContent }</p>
+							</c:when>
+							
+						</c:choose>
+						
+						<h2 class="notiDate notiText">5일</h2>
+					</div>
 					
-					<c:when test="${ noti.notiType == 3 }">
-						<p class="notiContent notiText">님이 댓글을 다셨어요 : ${ noti.replyContent }</p>
-					</c:when>
-					
-				</c:choose>
-				
-				<h2 class="notiDate notiText">5일</h2>
+					<c:if test="${ noti.notiType != 1 }">
+						<img class="postImg" src="${ noti.postImg }">
+					</c:if>
+				</div>
 			</div>
-			
-			<c:if test="${ noti.notiType != 1 }">
-				<img class="postImg" src="${ noti.postImg }">
-			</c:if>
-		</div>
-	</div>
-	</c:forEach>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+	
 	
 </body>
 </html>

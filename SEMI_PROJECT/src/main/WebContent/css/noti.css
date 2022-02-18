@@ -52,3 +52,10 @@ body {
 
     height: 100%;
 }
+
+#notiNullMessage {
+    text-align: center;
+
+    position: relative;
+    top: 30px;
+}
