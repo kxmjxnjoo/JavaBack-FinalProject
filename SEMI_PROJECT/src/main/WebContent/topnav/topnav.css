@@ -48,7 +48,7 @@ body {
     top: 20px;
 }
 
-form {
+#topnav form {
     display: inline-block;
     position: relative;
     left: 25%;
