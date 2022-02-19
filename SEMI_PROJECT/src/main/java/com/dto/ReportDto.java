@@ -8,6 +8,14 @@ public class ReportDto {
 	private int post_num;
 	private Timestamp indate;
 	private String reason;
+	private String type;
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getPost_num() {
 		return post_num;
 	}

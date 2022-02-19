@@ -37,7 +37,12 @@ function do_report(post_num){
 			</div>
 			<div id="clear"></div>
 			<label id="input-reset-button" for="input-submit" > 신고하기 </label>
-			<input type="button" value="신고하기" id="input-submit" onclick="do_report(${post_num});">
+			<c:if test="${empty story_num}">
+				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${post_num});">
+			</c:if>
+			<c:if test="${empty post_num}">
+				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${story_num});">
+			</c:if>
 			<div id="clear"></div>
 	</div>
 	</div>

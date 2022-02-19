@@ -23,7 +23,8 @@ public class AddReplyAction implements Action {
 		if(mdto==null) url = "spring.do?command=login";
 		else {
 			ReplyDto rdto = new ReplyDto();
-			//String userid = ((MemberDto) session.getAttribute("userid")).getUserid();
+			String userid = mdto.getUserid();
+			rdto.setUserid(userid);
 			rdto.setContent(request.getParameter("reply_content"));
 			rdto.setPost_num(post_num);
 

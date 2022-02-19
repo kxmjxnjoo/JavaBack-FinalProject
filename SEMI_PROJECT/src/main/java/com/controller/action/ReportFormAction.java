@@ -17,20 +17,17 @@ public class ReportFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/report.jsp";
 		HttpSession session = request.getSession();
-		////////////테스트를 위한 코드입니다.	
-		MemberDto mdto = new MemberDto();
-		mdto.setUserid("jojo");
-		mdto.setImg("1.png");
-		session.setAttribute("loginUser", mdto);
-		///////////여기까지///////////////////////////
-	
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else{
-			
-			int post_num = Integer.parseInt(request.getParameter("post_num"));
-			request.setAttribute("post_num", post_num);
-		//}
+		MemberDto mdto = (MemberDto) session.getAttribute("loginAdmin");
+		if(mdto==null) url = "spring.do?command=login";
+		else{
+			if(request.getParameter("story_num") == null) {
+				int post_num = Integer.parseInt(request.getParameter("post_num"));
+				request.setAttribute("post_num", post_num);
+			} else {
+				int story_num = Integer.parseInt(request.getParameter("story_num"));
+				request.setAttribute("story_num", story_num);
+			}
+		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

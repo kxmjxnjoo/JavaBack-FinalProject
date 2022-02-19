@@ -158,7 +158,7 @@
 	
 	<div id="popupWindow" style="display: none;">
 		<div id="popupBox">
-			<button>신고</button>
+			<button onclick="goReport(${post_num});">신고</button>
 			<hr>
 			<button onclick="unfollowPopup()">팔로우 취소</button>
 			<hr>
@@ -201,6 +201,7 @@
 				return true
 			}
 		}
+		
 		
 	</script>
 	<script src="/js/follow.js"></script>
