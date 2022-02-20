@@ -290,18 +290,22 @@ public class PostDao {
 		return postList;
 	}
 
-	/*
-	 * public int insertReport(String loginUser, String reported, String reason) {
-	 * String sql =
-	 * "insert into report(reporter_id, reported_id,reason, report_num) values(?,?,?,report_seq.nextVal)"
-	 * ; int result = 0; con = Dbman.getConnection(); try { pstmt =
-	 * con.prepareStatement(sql); pstmt.setString(1, loginUser); pstmt.setString(2,
-	 * reported); pstmt.setString(3, reason); result = pstmt.executeUpdate(); }
-	 * catch (SQLException e) { e.printStackTrace(); } finally { Dbman.close(con,
-	 * pstmt, rs); } return result;
-	 * 
-	 * }
-	 */
+	
+	 public int insertReport(String loginUser, String reported, String reason) {
+		 String sql = "insert into report(reporter_id, reported_id,reason, report_num) values(?,?,?,report_seq.nextVal)";
+		 int result = 0; 
+		 con = Dbman.getConnection(); 
+		 try { 
+			 pstmt = con.prepareStatement(sql); 
+			 pstmt.setString(1, loginUser); 
+			 pstmt.setString(2, reported);
+			 pstmt.setString(3, reason); 
+			 result = pstmt.executeUpdate(); 
+			 } catch (SQLException e) { e.printStackTrace(); 
+			 } finally { Dbman.close(con, pstmt, rs); } 
+		 return result;
+	  }
+	 
 	
 	
 

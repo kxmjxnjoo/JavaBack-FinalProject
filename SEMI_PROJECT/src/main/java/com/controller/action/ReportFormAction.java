@@ -29,7 +29,7 @@ public class ReportFormAction implements Action {
 				int story_num = Integer.parseInt(request.getParameter("story_num"));
 				request.setAttribute("story_num", story_num);
 				System.out.println("story_num : " + request.getAttribute("story_num"));////////////////////////////////////
-			}
+			} 
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

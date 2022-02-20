@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.PostDao;
-import com.dto.PostDto;
+import com.dto.MemberDto;
 
 public class UserReportAction implements Action {
 
@@ -16,13 +16,11 @@ public class UserReportAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/postReportDone.jsp";
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginUser");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
-			//테스트용 코드 ///////////////////////////////////////////////////////
-			String loginUser = "jojo"; //mdto.getUserid() 로 수정
-			//여기까지 /////////////////////////////////////////////////////////
-					
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
+		
+			String loginUser = mdto.getUserid();
 			String reportedUserid = request.getParameter("reportedUserid");
 			String reason = request.getParameter("reportReson");
 			if(reason.equals("1")) reason = "적합하지 않은 콘텐츠 게시";
@@ -38,7 +36,7 @@ public class UserReportAction implements Action {
 			System.out.println("message="+ message);
 			request.setAttribute("reason", reason);
 			request.setAttribute("message", message);
-
+		}
 			response.sendRedirect(url);
 	}
 }

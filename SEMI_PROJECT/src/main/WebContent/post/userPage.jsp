@@ -28,11 +28,11 @@
 				</c:when>
 				<c:when test="${ isFollowing == 1 }">
 					<input type="button" value="언팔로우" onclick="unfollow('${ user.userid }')">
-					<input type="button" value="신고">
+					<input type="button" onclick="userReport('${user.userid}');" value="신고">
 				</c:when>
 				<c:otherwise>
 					<input type="button" value="팔로우" onclick="follow('${ user.userid }')">
-					<input type="button" value="신고">
+					<input type="button" onclick="userReport('${user.userid}');" value="신고">
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -69,6 +69,17 @@
 </div>
 
 <script src="/js/follow.js"></script>
-
+<script type="text/javascript">
+	function userReport(userid){
+	var url="spring.do?command=userReportForm&userid=" + userid;
+	var _width = '400';
+	var _height = '500';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
+}
+</script>
 </body>
 </html>
