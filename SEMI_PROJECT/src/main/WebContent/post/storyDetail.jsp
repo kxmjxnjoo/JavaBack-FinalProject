@@ -39,6 +39,17 @@ function deleteCheck(story_num){
 	}
 }
 
+function goReport(story_num) {
+	var url="spring.do?command=reportForm&post_num=" + post_num;
+	var _width = '400';
+	var _height = '500';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
+}
+
 </script>
 </head>
 <body>
@@ -67,7 +78,7 @@ function deleteCheck(story_num){
 		</c:choose>
 	</div>
 	
-	<div class="wrap" style="background:#e59999">
+	<div class="wrap" >
 	
 		
 		<div id=storyArea>

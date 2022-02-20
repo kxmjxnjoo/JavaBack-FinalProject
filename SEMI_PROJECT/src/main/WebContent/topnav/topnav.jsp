@@ -3,7 +3,6 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 <link rel="stylesheet" href="/topnav/topnav.css">
 <link rel="stylesheet" href="/css/common.css">
 

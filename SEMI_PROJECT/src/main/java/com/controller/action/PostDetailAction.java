@@ -19,9 +19,9 @@ public class PostDetailAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/postDetail.jsp";
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
 				String message = request.getParameter("message");
 				System.out.println(message);
@@ -43,19 +43,13 @@ public class PostDetailAction implements Action {
 					else rdto.get(i).setReplyFileName("favorite");
 				}
 				
-				////////////테스트용 코드 
-				System.out.println("///");
-				MemberDto mdto = new MemberDto();
-				System.out.println(message);
-				////////////테스트용 코드 여기까지 /////////////////////////
-				
 				request.setAttribute("likeResult", result);
 				request.setAttribute("fileName", fileName);
 				request.setAttribute("post_num", post_num);
 				request.setAttribute("PostDto", pdto);
 				request.setAttribute("ReplyDto", rdto);
 				request.setAttribute("message", message);
-		//}
+		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

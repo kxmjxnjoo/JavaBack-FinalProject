@@ -82,13 +82,12 @@ function deleteReplyCheck(reply_num, post_num){
 </script>
 </head>
 <body>
+
 <form name="frm" method="post">
-<%@ include file="/topnav/topnav.jsp" %>
 <!-- report modal -->
 	<div id="setting">
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
-			
 				<div id="setting_menu">
 					<div class="setting_btn"><a href='spring.do?command=editPostForm&post_num=${post_num}'> 수정 </a></div>
 					<div class="setting_btn" onClick="deleteCheck(${post_num});"> <a href="#"> 삭제 </a></div>
@@ -224,10 +223,11 @@ function deleteReplyCheck(reply_num, post_num){
 					</div>
 					<div id="write_reply_wrap">
 						<div id="write_reply"> 
-							<textarea name="reply_content" id="reply_content" cols=30 rows=1 
+							<!-- <textarea name="reply_content" id="reply_content" cols=30 rows=1 
 							onKeyDown="textCounter(this.form.reply_content,this.form.remLen,100);" 
 							onKeyUp="textCounter(this.form.reply_content,this.form.remLen,100);"
-							placeholder="댓글 달기..."></textarea>
+							placeholder="댓글 달기..."></textarea> -->
+							<input id="reply_content" name="reply_content" type="text" placeholder="댓글 달기..." maxlength='100'>
 							<span><img id="replySending" src="../images/send.png" width="30px" onclick="add_reply(${post_num});"></span>
 						</div>
 					</div>

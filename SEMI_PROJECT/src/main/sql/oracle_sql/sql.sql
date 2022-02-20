@@ -222,6 +222,8 @@ create table report(
 )
 
 alter table report add(post_num number(5) references post(post_num));
+alter table report add(post_type varchar(20));
+
 create sequence report_seq start with 1;
 select * from report;
 
@@ -285,4 +287,4 @@ select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
 
-select * from post_veiw
+select * from reply
