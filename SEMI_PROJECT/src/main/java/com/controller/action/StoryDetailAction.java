@@ -39,13 +39,7 @@ public class StoryDetailAction implements Action {
 				
 				String loginUser = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUser);
-				String fileName = "";
-				if(result == 0) {
-					fileName = "../images/beforeLike.png";
-				} else {
-					fileName = "../images/Like.png";
 				
-				}
 				
 				int prev = sdao.searchPrevStory(story_num, userid);
 				int next = sdao.searchNextStory(story_num, userid);
@@ -59,10 +53,11 @@ public class StoryDetailAction implements Action {
 				System.out.println("스토리작성자 : " + sdto.getUserid());
 				System.out.println("스토리이미지 : " + sdto.getStory_img());
 				System.out.println("fontColor:" + sdto.getFontColor());
+				System.out.println("likeResult : " + result);
 				////////////테스트용 코드 여기까지 /////////////////////////
 				
 				request.setAttribute("likeResult", result);
-				request.setAttribute("fileName", fileName);
+				request.setAttribute("likeResult", result);
 				request.setAttribute("story_num", story_num);
 				request.setAttribute("StoryDto", sdto);
 				request.setAttribute("prev", prev);

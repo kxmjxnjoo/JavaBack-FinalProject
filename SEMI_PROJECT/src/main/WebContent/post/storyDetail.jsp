@@ -32,15 +32,9 @@ function setting_close(){
 	document.getElementById("setting").style.display="none";
 }
 
-function deleteCheck(story_num){
-	var answer = confirm("스토리를 삭제할까요?")
-	if(answer){
-		location.href="spring.do?command=deleteStory&story_num="+story_num;
-	}
-}
 
 function goReport(story_num) {
-	var url="spring.do?command=reportForm&post_num=" + post_num;
+	var url="spring.do?command=reportForm&story_num=" + story_num;
 	var _width = '400';
 	var _height = '500';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
@@ -108,7 +102,7 @@ function goReport(story_num) {
 <!-- 스토리 이미지 -->
 				<img id="story_img" src="../images/${StoryDto.story_img}" > 
 <!-- 글 작성자 프로필 -->
-				<div id="story_user">
+				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 						<c:choose>
 							<c:when test="${empty StoryDto.user_img}">
@@ -138,7 +132,17 @@ function goReport(story_num) {
 			</c:choose>
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
-					<img src="${fileName}" width="30px" height="30px" onclick="story_like(${story_num});" style="cursor:pointer">
+					<c:choose>
+						<c:when test="${likeResult == 1}">
+							<span class="material-icons" style="color:red" onclick="story_like(${story_num});"> favorite </span>
+						</c:when>
+						<c:otherwise>
+							<span class="material-icons" onclick="story_like(${story_num});"> favorite_border </span>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					<%-- <img src="${fileName}" width="30px" height="30px" onclick="story_like(${story_num});" style="cursor:pointer"> --%>
 				</div>
 			</div>
 			</div>  

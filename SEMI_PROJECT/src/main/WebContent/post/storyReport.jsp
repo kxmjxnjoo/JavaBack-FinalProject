@@ -10,15 +10,11 @@
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript">
-function doPostReport(post_num){
-	document.reportFrm.action="spring.do?command=postReport&post_num=" + post_num;
+function do_report(post_num){
+	document.reportFrm.action="spring.do?command=postReport&story_num =" + post_num;
 	document.reportFrm.submit();
 	/* opener.location.href='spring.do?command=postDetail&post_num=' + post_num; */
-}
-
-function doStoryReport(story_num){
-	document.reportFrm.action="spring.do?command=postReport&story_num=" + story_num;
-	document.reportFrm.submit();
+	
 }
 </script>
 </head>
@@ -41,21 +37,12 @@ function doStoryReport(story_num){
 			</div>
 			<div id="clear"></div>
 			<label id="input-reset-button" for="input-submit" > 신고하기 </label>
-			
-			<c:choose>
-				<c:when test="${empty post_num}">
-					<input type="button" value="신고하기" id="input-submit" onclick="doStoryReport(${story_num});">
-				</c:when>
-				<c:otherwise>
-					<input type="button" value="신고하기" id="input-submit" onclick="doPostReport(${post_num});">
-				</c:otherwise>
-			</c:choose>
-			<%-- <c:if test="${empty story_num}">
+			<c:if test="${empty story_num}">
 				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${post_num});">
 			</c:if>
 			<c:if test="${empty post_num}">
 				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${story_num});">
-			</c:if> --%>
+			</c:if>
 			<div id="clear"></div>
 	</div>
 	</div>

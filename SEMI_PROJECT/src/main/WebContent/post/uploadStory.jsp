@@ -9,50 +9,6 @@
 <title>스토리 작성</title>
 <link href="../css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script type="text/javascript" language="javascript" defer="defer"> 
-function setThumbnail(event) { 
-	var reader = new FileReader(); 
-	reader.onload = function(event) { 
-		var img = document.createElement("img"); 
-		img.setAttribute("src", event.target.result); 
-		document.querySelector("div#image_container").appendChild(img); 
-	}; 
-	
-	reader.readAsDataURL(event.target.files[0]); 
-}
-
-
-function goBack(){
-	window.history.back();
-}
-
-function reset(){
-	document.getElementById("input-file").select();
-	document.selection.clear();
-	document.getElementById("image_container").select();
-	document.selection 
-}
-
-
-function textCounter(field, countfield, maxlimit) {
-	if (field.value.length > maxlimit) 
-	field.value = field.value.substring(0, maxlimit);
-	else 
-	countfield.value = maxlimit - field.value.length;
-}
-
-function uploadCheck(){
-	var theForm = document.frm;
-	if( theForm.post_img.value=="") {
-		alert('사진을 첨부해주세요'); 
-		return;
-	} else {
-		theForm.action="spring.do?command=storyUpload";
-		theForm.submit();
-	}
-}
-
-</script>
 
 </head>
 <body>
@@ -71,7 +27,7 @@ function uploadCheck(){
 					<label class="input-file-button" for="input-file" >
 					  업로드
 					</label>
-					<!-- <div id ="image_container"></div> -->
+					<div id ="image_container"></div>
 					<input type="file" name="post_img" id="input-file"  onchange="setThumbnail(event);"/>
 				</div>
 				<div id="clear"></div>
@@ -109,5 +65,53 @@ function uploadCheck(){
 		</div>
 	</div>
 </form>
+
+<script type="text/javascript" language="javascript" defer="defer"> 
+function setThumbnail(event) { 
+	var reader = new FileReader(); 
+	reader.onload = function(event) { 
+		var img = document.createElement("img"); 
+		img.setAttribute("src", event.target.result); 
+		document.querySelector("div#image_container").appendChild(img); 
+	}; 
+	
+	reader.readAsDataURL(event.target.files[0]); 
+}
+
+
+function goBack(){
+	window.history.back();
+}
+
+function reset(){
+	document.querySelector("div#image_container").innerHTML = '';
+	document.querySelector("div#image_container").appendChild(img);
+	
+	document.getElementById("input-file").select();
+	document.selection.clear();
+	/* var remove = document.getElementById("image_container");
+	remove.removeChild(remove.childNodes[0]); */
+}
+
+
+function textCounter(field, countfield, maxlimit) {
+	if (field.value.length > maxlimit) 
+	field.value = field.value.substring(0, maxlimit);
+	else 
+	countfield.value = maxlimit - field.value.length;
+}
+
+function uploadCheck(){
+	var theForm = document.frm;
+	if( theForm.post_img.value=="") {
+		alert('사진을 첨부해주세요'); 
+		return;
+	} else {
+		theForm.action="spring.do?command=storyUpload";
+		theForm.submit();
+	}
+}
+
+</script>
 </body>
 </html>

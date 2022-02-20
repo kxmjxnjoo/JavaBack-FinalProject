@@ -213,9 +213,10 @@ select * from qna;
 
 /*report*/
 create table report(	
-	reporter_id varchar2(20) references member(userid),
-	reported_id varchar2(20) references member(userid),
-	post_num number(5) references post(post_num);
+	reporter_id varchar2(20) references member(userid) on delete cascade,
+	reported_id varchar2(20) references member(userid) on delete cascade,
+	post_num number(5) references post(post_num) on delete cascade, 
+	story_num number(5) references story(story_num) on delete cascade,
 	indate date default sysdate,
 	reason varchar2(100) not null,
 	report_num varchar2(5) primary key
@@ -223,9 +224,12 @@ create table report(
 
 alter table report add(post_num number(5) references post(post_num));
 alter table report add(post_type varchar(20));
+alter table report add(story_num number(5) );
 
 create sequence report_seq start with 1;
 select * from report;
+
+drop table report
 
 
 /*notification*/
@@ -287,7 +291,7 @@ select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
 
-select * from reply
+select * from report
 
 select count(*) as count from post_like where post_num = 48
 select count(*) as count from reply where post_num = 48
