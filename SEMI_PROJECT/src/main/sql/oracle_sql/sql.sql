@@ -288,3 +288,6 @@ select * from post_view order by create_date desc
 select max(story_num) as max from story group by userid having userid='hong'
 
 select * from reply
+
+select count(*) as count from post_like where post_num = 48
+select count(*) as count from reply where post_num = 48

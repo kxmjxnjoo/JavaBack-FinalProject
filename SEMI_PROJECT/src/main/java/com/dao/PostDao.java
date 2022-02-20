@@ -287,4 +287,34 @@ public class PostDao {
 		return result;
 		
 	}
+
+	public int likeCount(int post_num) {
+		int likes = 0;
+		String sql = "select count(*) as count from post_like where post_num="+post_num;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				likes = rs.getInt("count");
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return likes;
+	}
+
+	public int replyCount(int post_num) {
+		int replies = 0;
+		String sql = "select count(*) as count from reply where post_num="+post_num;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				replies = rs.getInt("count");
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return replies;
+	}
 }

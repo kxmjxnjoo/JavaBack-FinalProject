@@ -22,6 +22,14 @@ public class ExploreAction implements Action {
 		if(mdto==null) url = "spring.do?command=login";
 		else {
 			ArrayList<PostDto> postList = PostDao.getInstance().getBestPost();
+			
+			for(int i=0; i<postList.size(); i++) {
+				int post_num = postList.get(i).getPostNum();
+				PostDao pdao = PostDao.getInstance();
+				postList.get(i).setLikeCount(pdao.likeCount(post_num));
+				postList.get(i).setReplyCount(pdao.replyCount(post_num));
+			}
+			
 			request.setAttribute("posts", postList);
 		}
 		request.getRequestDispatcher(url).forward(request, response);	
