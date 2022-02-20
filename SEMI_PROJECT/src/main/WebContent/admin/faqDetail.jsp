@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- <%@ include file="/topnav/topnav.jsp" %> --%>
 <%--  <c:if test="${empty loginUser}">
-	<jsp:forward page='spring.do?command=loginUser'/> loginUser? 로그인하는 페이지 이름 아직 모름
+	<jsp:forward page='spring.do?command=loginUser'/> loginUser? 로그인하는 페이지 이름 아직 몰라서..
 </c:if> --%>
 <!DOCTYPE html>
 <html>
