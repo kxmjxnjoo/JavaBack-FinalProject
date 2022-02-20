@@ -33,12 +33,27 @@ import com.controller.action.ReportFormAction;
 import com.controller.action.SearchAction;
 import com.controller.action.SelectPostAction;
 import com.controller.action.StoryDetailAction;
-import com.controller.action.StoryDetailfromMainAction;
 import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;
 import com.controller.action.UnfollowAction;
 import com.controller.action.UnlikePostAction;
 import com.controller.action.UserPageAction;
+import com.controller.adminAction.AdminAction;
+import com.controller.adminAction.AdminFaqFormAction;
+import com.controller.adminAction.AdminFaqListAction;
+import com.controller.adminAction.AdminLoginAction;
+import com.controller.adminAction.AdminLogouAction;
+import com.controller.adminAction.AdminMainAction;
+import com.controller.adminAction.FaqDetailAction;
+import com.controller.adminAction.FaqListAction;
+import com.controller.adminAction.MemberListAction;
+import com.controller.adminAction.MemberSearchAction;
+import com.controller.adminAction.QnaListAction;
+import com.controller.adminAction.QnaViewAction;
+import com.controller.adminAction.QnaWriteFormAction;
+import com.controller.adminAction.ReportListAction;
+import com.controller.adminAction.UploadQnaAction;
+import com.controller.adminAction.commentQnaAction;
 
 public class ActionFactory {
 
@@ -102,6 +117,33 @@ public class ActionFactory {
 		else if(command.equals("joinform"))				ac = new JoinFormAction();
 		else if(command.equals("join"))					ac = new JoinAction();
 		 
+		
+		
+		
+		else if( command.equals("admin")) ac = new AdminAction();
+		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
+		else if( command.equals("adminLogout")) ac = new AdminLogouAction();
+		else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
+		
+		else if( command.equals("memberList")) ac = new MemberListAction();
+		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
+		
+		else if( command.equals("faqList")) ac = new FaqListAction();
+		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
+		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
+		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();
+		
+		else if( command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
+		else if( command.equals("uploadQna")) ac = new UploadQnaAction();
+		//else if( command.equals("deleteQna")) ac = new DeleteQnaAction();
+		else if( command.equals("qnaList")) ac = new QnaListAction();
+		else if( command.equals("qnaView")) ac = new QnaViewAction();
+		else if( command.equals("commentQna")) ac = new commentQnaAction();
+		
+		else if( command.equals("reportList")) ac = new ReportListAction();
+		//else if( command.equals("reportUser")) ac = new ReportUserAction();
+		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
+		
 		return ac;
 	}
 }

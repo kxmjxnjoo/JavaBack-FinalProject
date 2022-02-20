@@ -1,29 +1,35 @@
 @charset "UTF-8";
+
 body{ 
 	background:#fae9e2; 
-	margin:0; padding:0;
+	width:100%;
+	height:100%;
+	margin-top:0;
 	}
 
 input:focus{outline:none;}
 
-input[type=text]{
+#logout{
+	background: white;
+	font-size:100%;
+	font-weight:bold;
+	width:100px;
+	height: 30px;
+	border: 1px solid #e59999;
+}
+
+#logout:hover{
+	background:#f7c4c0;
+}
+
+.input{
+	border:0; 
+	outline:none;	
 	width:90%; 
 	height:90%; 
 	font-size:100%; 
-	 border:none; 
-	 text-align:left;}
-	 
-input[type=id_text]{
-	width:75%; 
-	height:90%; 
-	font-size:100%; 
-	 border:none;
-	 text-align:left;}	
-
-.logo_line{
-	position:relative; 
-	width:100%; 
-	height:120px;}
+	 text-align:left;
+	}
 	
 #img{
 	vertical-align:middle;}
@@ -51,20 +57,19 @@ input[type=id_text]{
 .text_box:focus-within{
 	border:1px solid #e59999;}
 
-
-a { color: #6F0C78;	
+a { color: #4c4c4c;	
 	text-decoration: none; } 
 	
 a:hover {	
-	color: #F90;	 
+	color: #4c4c4c;	 
 	text-decoration: underline; }
-
 
 #sub_menu{
 	position:relative; 
 	width:100%; 
 	height:60px; 
 	margin:0 auto;
+	margin-top:0px;
 	line-height:80px; 
 	text-align:center;
 	margin-top:30px;}
@@ -80,10 +85,9 @@ a:hover {
 	font-size:120%;}
 
 #sub_menu a {	
-	text-decoration: 
-	none; color: 
-	black;  
-	font-size: 14px;	
+	text-decoration: ; 
+	color: black;  
+	font-size: 16px;	
 	display: block; 
 	height: 15px; 
 	width: 160px; 
@@ -91,9 +95,9 @@ a:hover {
 	
 #sub_menu a:hover {
 	background-repeat: 
-	no-repeat; font-size: 16px;
+	no-repeat; font-size: 19px;
 	background-position: right center; 
-	color: #F90; 
+	color: #e59999; 
 	font-weight: bold;}
 
 #login{position:relative; 
@@ -105,9 +109,68 @@ a:hover {
 	font-weight:bold; 
 	font-size:105%;}
 	
+#login:hover{
+	background:#f7c4c0;
+}
 /* -------------------------여기까지 adminSubcss----------------------------------*/
+h1{
+	text-align:center;
+	padding-top:40px;
+	color:#4c4c4c;
+}
+#content{padding-top:0}
+
+#info{
+	float:right;
+	padding-right: 150px;
+	padding-top: 0px;
+}
 
 table{
-	
-}	
+	border-collapse: collapse; 
+	border-top: 2px solid #4c4c4c;
+ 	border-bottom: 1px solid #4c4c4c;
+ 	width: 75%; 
+ 	margin-left: 180px;
+	margin-bottom: 20px;
+}
 
+table td, th{
+	border: solid 1px 4c4c4c;
+}
+	
+#ban {
+	background: white;
+	font-size:100%;
+	font-weight:bold;
+	width:100px;
+	height: 30px;
+	border: 1px solid #e59999;
+	}
+	
+
+#ban:hover{
+	background:#f7c4c0;
+}
+
+#member_search{
+	width:230px;
+	height:28px;
+	margin-bottom:40px;
+	margin-left:40%;
+	border-radius: 3px 3x 3px 3px;
+}
+
+#member_search:focus-within{
+	border:1px solid #e59999;
+
+#search_btn{
+	background:white;
+	font-size:100%;
+	font-weight:bold;
+	width:100px;
+	height: 30px;
+	border: 1px solid #e59999;
+}
+/*------------------------------------footer--------------------------*/
+#copy{font-size:90%; text-align:center;}

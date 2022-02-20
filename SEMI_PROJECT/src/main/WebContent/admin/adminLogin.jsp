@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/admin.css">
-<!-- <script type="text/javascript">
+<script type="text/javascript">
  function workerCheck(){
 	  if(document.frm.adminid.value==""){
 	      	alert("아이디를 입력하세요.");
@@ -16,8 +16,8 @@
 	      	return false;
 	  }
 	  return true;  
-} 
-</script> -->
+}
+</script>
 </head>
 <body>
 <article>
@@ -26,13 +26,13 @@
 		<div class="title">아이디</div>
 			<input type="hidden" name="command" value="adminLogin">
 			<div class="text_box">
-			<input type ="text" name="adminid"></div>
+			<input type ="text" name="adminid" class="input"></div>
 		<div class="title">비밀번호</div>
 			<div class="text_box">
-			<input type ="text" name="password"></div>
+			<input type="password" name="password" class="input"></div>
 		</div>
-		<input type="submit" id="login" value="로그인" onClick="location.href='spring.do?command=adminMain'">
-		 <div style="color:red">${message}</div>
+		<div style="color:red;">${message}</div>
+		<input type="submit" id="login" value="로그인" onClick="return workerCheck();">
 	</form>
 </article>
 </body>

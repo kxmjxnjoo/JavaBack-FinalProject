@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+input:focus{outline:none;}
+
+.text_box:focus-within{
+	border:none;}
+
+body{ background:#fae9e2; 
+	margin:0; 
+	padding:0;}
+
+.table{
+	padding-top:60px;
+	margin:0 auto;
+}
+
+table {	
+	width: 50%;	
+	border-collapse: collapse;	
+	font-size: 14px; 
+	line-height: 24px; 
+	margin: 0 auto;}
+	
+table td, th {
+	border: #4c4c4c solid 1px;
+	padding: 5px;
+	text-size: 120%
+	}
+	
+th {	
+	background: #e59999}
+
+.btn{
+	width:120px;
+	height:40px;
+	background:white;
+	border: #e59999 solid 1px;
+	margin: 0 auto;
+	text-size: bold;
+}
+
+.btn:hover{
+	background:#f7c4c0
+}
+
+.btns{
+	margin:0 auto;
+	padding-left:37%;
+	font-size:110%;
+	font-weight:bold;
+	margin-bottom: 80px;
+}
+
+/*------------------------------------footer--------------------------*/
+#copy{
+	font-size:90%; 
+	text-align:center;
+	}
