@@ -45,15 +45,15 @@ public class StoryDetailAction implements Action {
 				int next = sdao.searchNextStory(story_num, userid);
 				
 				////////////테스트용 코드 
-				System.out.println("///");
-				loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-				System.out.println("loginUser : " + loginUser);
-				System.out.println("스토리 좋아요? : " + result);
-				System.out.println("prev : " +prev + ", next : " + next);
-				System.out.println("스토리작성자 : " + sdto.getUserid());
-				System.out.println("스토리이미지 : " + sdto.getStory_img());
-				System.out.println("fontColor:" + sdto.getFontColor());
-				System.out.println("likeResult : " + result);
+//				System.out.println("///");
+//				loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+//				System.out.println("loginUser : " + loginUser);
+//				System.out.println("스토리 좋아요? : " + result);
+//				System.out.println("prev : " +prev + ", next : " + next);
+//				System.out.println("스토리작성자 : " + sdto.getUserid());
+//				System.out.println("스토리이미지 : " + sdto.getStory_img());
+//				System.out.println("fontColor:" + sdto.getFontColor());
+//				System.out.println("likeResult : " + result);
 				////////////테스트용 코드 여기까지 /////////////////////////
 				
 				request.setAttribute("likeResult", result);

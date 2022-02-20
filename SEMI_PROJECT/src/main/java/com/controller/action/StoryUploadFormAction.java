@@ -15,17 +15,10 @@ public class StoryUploadFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/uploadStory.jsp";
 		HttpSession session = request.getSession();
-		////////////테스트를 위한 코드입니다.	
-		MemberDto mdto = new MemberDto();
-		mdto.setUserid("hong");
-		mdto.setImg("1.png");
-		session.setAttribute("loginUser", mdto);
-		///////////여기까지///////////////////////////
 	
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
 		
-		System.out.println("///////////////////////");
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

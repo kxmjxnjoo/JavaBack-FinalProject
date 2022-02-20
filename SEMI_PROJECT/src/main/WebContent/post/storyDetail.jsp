@@ -134,7 +134,7 @@ function goReport(story_num) {
 				<div id="reaction">
 					<c:choose>
 						<c:when test="${likeResult == 1}">
-							<span class="material-icons" style="color:red" onclick="story_like(${story_num});"> favorite </span>
+							<span class="material-icons" style="color:red" onclick="story_like(${story_num});"> favorite_border </span>
 						</c:when>
 						<c:otherwise>
 							<span class="material-icons" onclick="story_like(${story_num});"> favorite_border </span>

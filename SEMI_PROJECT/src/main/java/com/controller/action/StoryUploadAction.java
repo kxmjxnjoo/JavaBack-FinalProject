@@ -20,32 +20,29 @@ public class StoryUploadAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url ="";
 		HttpSession session = request.getSession();
-		//MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
 		
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images");
 
-		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 		String userId = mdto.getUserid();
-		
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
-		
 
 		StoryDto sdto = new StoryDto();
 		sdto.setContent(multi.getParameter("post_content"));
 		sdto.setStory_img(multi.getFilesystemName("post_img"));
 		sdto.setFontColor(multi.getParameter("fontColor"));
-		sdto.setUserid(userId); //추후 수정 
+		sdto.setUserid(userId); 
 		
 		StoryDao sdao = StoryDao.getInstance();
 		sdao.uploadStory(sdto);
 		
-		int story_num = sdao.get_story_num(mdto.getUserid()); //추후 session에 저장된 유저아이디 사용
+		int story_num = sdao.get_story_num(mdto.getUserid());
 		url = "spring.do?command=storyDetail&story_num=" + story_num;
 		
-		//}
+		}
 		response.sendRedirect(url);
 	}
 }
