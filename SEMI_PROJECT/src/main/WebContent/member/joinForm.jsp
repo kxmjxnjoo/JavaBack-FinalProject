@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>스프링 피드 회원가입</title>
-<link rel="stylesheet" href="/join/join.css">
+<link rel="stylesheet" href="/css/join.css">
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>

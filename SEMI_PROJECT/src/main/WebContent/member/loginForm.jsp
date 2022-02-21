@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>스프링 피드 로그인</title>
-<link rel="stylesheet" href="/login/login.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
