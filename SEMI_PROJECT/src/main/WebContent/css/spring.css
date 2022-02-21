@@ -62,7 +62,7 @@ body{
 }
 
 .icon_wrap {
-	height : 300px; width: 500px; margin-top: 15%; 
+	height : 300px; width: 500px; margin-top: 10%; 
 }
 
 #temp{
@@ -210,6 +210,7 @@ body{
 	font-size:90%; word-break: break-all;
 	width: 65%; height : 50px; margin-left:22px;
 	float:left;  line-height: 19px;
+	overflow:scroll;
 }
 
 #post_address {
@@ -565,7 +566,7 @@ body{
 #image_container {
 	position: relative;
 	top: 45.3%; left: 50%;
-	overflow:hidden;
+	overflow:hidden; display:none;
 }
 
 #image_container img {

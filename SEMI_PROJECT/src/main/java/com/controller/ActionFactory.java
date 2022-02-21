@@ -11,6 +11,8 @@ import com.controller.action.DeleteReplyAction;
 import com.controller.action.DeleteStoryAction;
 import com.controller.action.EditPostAction;
 import com.controller.action.EditPostFormAction;
+import com.controller.action.EditProfileAction;
+import com.controller.action.EditProfileFormAction;
 import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
 import com.controller.action.ExploreAction;
@@ -38,6 +40,7 @@ import com.controller.action.StoryUploadFormAction;
 import com.controller.action.UnfollowAction;
 import com.controller.action.UnlikePostAction;
 import com.controller.action.UserPageAction;
+import com.controller.action.WithdrawAction;
 import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
@@ -116,7 +119,9 @@ public class ActionFactory {
 		else if(command.equals("logout"))				ac = new LogoutAction();
 		else if(command.equals("joinform"))				ac = new JoinFormAction();
 		else if(command.equals("join"))					ac = new JoinAction();
-		 
+		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
+		else if(command.equals("editprofile"))			ac = new EditProfileAction();
+		else if(command.equals("withdraw"))				ac = new WithdrawAction();
 		
 		
 		

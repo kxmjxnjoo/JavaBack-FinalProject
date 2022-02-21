@@ -145,4 +145,45 @@ public class MemberDao {
 
 		return result;
 	}
+	
+	public int updateMember(MemberDto mdto, String userid) {
+		String sql = "update member set password=?, name=?, email=?, phone=?, introduce=? where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getPassword());
+			pstmt.setString(2, mdto.getName());
+			pstmt.setString(3, mdto.getEmail());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getIntroduce());
+			pstmt.setString(6, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+
+	public int deleteMember(String userid) {
+		String sql = "delete member where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+		 	result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
 }
