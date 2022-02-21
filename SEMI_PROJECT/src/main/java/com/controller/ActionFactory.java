@@ -48,7 +48,6 @@ import com.controller.adminAction.AdminLoginAction;
 import com.controller.adminAction.AdminLogouAction;
 import com.controller.adminAction.AdminMainAction;
 import com.controller.adminAction.FaqDetailAction;
-import com.controller.adminAction.FaqListAction;
 import com.controller.adminAction.MemberListAction;
 import com.controller.adminAction.MemberSearchAction;
 import com.controller.adminAction.QnaListAction;
