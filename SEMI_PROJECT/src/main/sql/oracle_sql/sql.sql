@@ -14,22 +14,6 @@ create table member(
 alter table member modify (img varchar2(100));
 
 update member set img = '1.png' where userid='hong';
-insert into member (userid, password, name, email, phone, introduce)
-values('hong','1234', '홍길동','hong@abc.com','010-1234-3456','안녕하세요');
-insert into member (userid, password, name, email, phone, introduce)
-values('kim','1234', '김길동','kim@abc.com','010-2345-8765','반갑습니다');
-insert into member (userid, password, name, email, phone, introduce)
-values('user12','1234', '이유저','user12@abc.com','010-4342-5555','이유저입니다.');
-insert into member (userid, password, name, email, phone, introduce)
-values('nari','1234', '박나리','nari@abc.com','010-5555-2347','좋은하루 되세요.');
-insert into member (userid, password, name, email, phone, introduce)
-values('yoon','1234', '윤성모','yoon@abc.com','010-2525-4745','안녕하세요');
-insert into member (userid, password, name, email, phone, introduce)
-values('jojo','1234', '조장혁','jojo@abc.com','010-1534-7577','반갑습니다');
-insert into member (userid, password, name, email, phone, introduce)
-values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입니다.');
-insert into member (userid, password, name, email, phone, introduce)
-values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.');
 
 select * from member
 
@@ -40,19 +24,6 @@ create table follow(
 	follower varchar2(20) REFERENCES member(userid)
 )
 CREATE SEQUENCE follow_seq START WITH 1;
-
-insert into follow values(follow_seq.nextval, 'jojo', 'choi');
-insert into follow values(follow_seq.nextval, 'choi', 'jojo');
-insert into follow values(follow_seq.nextval, 'hong', 'user12');
-insert into follow values(follow_seq.nextval, 'hong', 'nari');
-insert into follow values(follow_seq.nextval, 'hong', 'choi');
-insert into follow values(follow_seq.nextval, 'hong', 'jojo');
-insert into follow values(follow_seq.nextval, 'hong', 'love');
-insert into follow values(follow_seq.nextval, 'choi', 'yoon',);
-insert into follow values(follow_seq.nextval, 'nari', 'hong');
-insert into follow values(follow_seq.nextval, 'choi', 'hong');
-insert into follow values(follow_seq.nextval, 'jojo', 'hong');
-insert into follow values(follow_seq.nextval, 'love', 'hong');
 
 select * from follow
 
@@ -102,11 +73,6 @@ create table reply (
 	reply_date date default sysdate
 )
 
-insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) 
-values('love','testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) values('hong','test', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
 
 create sequence reply_seq start with 1;
 select * from reply
@@ -124,11 +90,6 @@ create table post_like (
 	primary key (userid, post_num)
 )
 select * from post_like
-
-insert into post_like values(19, 'hong');
-insert into post_like values(20, 'hong');
-insert into post_like values(21, 'hong');
-insert into post_like values(27, 'hong');
 
 
 /*reply_like*/
@@ -177,9 +138,6 @@ create table admin(
 	phone varchar2(20) not null
 )
 
-insert into admin values('admin', 'admin', '관리자', 'admin@abc.com', '010-1111-1111');
-insert into admin values('scott', 'tiger', '관리자', 'scott@abc.com', '010-2222-3333');
-
 select * from admin
 
 
@@ -191,9 +149,6 @@ create table faq (
 )
 create sequence faq_seq start with 1;
 select * from faq;
-
-insert into faq values(faq_seq.nextVal, '회원 가입은 어떻게 하나요?', '회원 가입 링크를 클릭하고, 약관을 읽어보신 뒤 [동의]에 체크합니다.
-기본정보와 추가정보를 정확하게 입력하신 뒤 [회원가입] 버튼을 클릭하면 회원가입이 완료됩니다.');
 
 
 /*QnA*/
