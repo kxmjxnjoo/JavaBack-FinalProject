@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="/topnav/topnav.css">
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/spring.css">
 
 <div id="topnav">
 	<div id="logo" onclick="location.href='spring.do?command=main'">

@@ -22,7 +22,7 @@ public class PostDao {
 	ResultSet rs = null;
 	
 	public void uploadPost(PostDto pdto) {
-		String sql = "insert into post(post_num, img, content, Address, userid) "
+		String sql = "insert into post(post_num, img, content, Address, userid)"
 				+ " values(post_seq.nextval, ?, ?, ?, ?)";
 	    con = Dbman.getConnection();
 	        try {

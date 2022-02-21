@@ -15,15 +15,7 @@ values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입�
 insert into member (userid, password, name, email, phone, introduce, img)
 values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.', '/images/profile8.png');
 
-update from member set img='profile1.png' where userid='hong';
-update from member set img='profile2.png' where userid='kim';
-update from member set img='profile3.png' where userid='user12';
-update from member set img='profile4.png' where userid='nari';
-update from member set img='profile5.png' where userid='yoon';
-update from member set img='profile6.png' where userid='jojo';
-update from member set img='profile7.png' where userid='choi';
-update from member set img='profile8.png' where userid='love';
-
+select * from member
 
 insert into follow (following, follower) values('jojo', 'choi');
 insert into follow (following, follower) values('choi', 'jojo');
@@ -38,15 +30,6 @@ insert into follow (following, follower) values('choi', 'hong');
 insert into follow (following, follower) values('jojo', 'hong');
 insert into follow (following, follower) values('love', 'hong');
 
-insert into post (img, content, address, userid) values('/images/post1.png', '바다 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'nari');
-insert into post (img, content, address, userid) values('/images/post2.png', '산 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'choi');
-insert into post (img, content, address, userid) values('/images/post3.png', '천국 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'jojo');
-insert into post (img, content, address, userid) values('/images/post4.png', '지옥 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'love');
-insert into post (img, content, address, userid) values('/images/post5.png', '머리카락 좀 내려주삼', '아리넬 왕국 숲 속', 'hong');
-insert into post (img, content, address, userid) values('/images/post6.png', '아아 몰라', '뉴욕 맨헤튼', 'nari');
-insert into post (img, content, address, userid) values('/images/post7.png', 'LET IT GO PLEASE', '중국 상하이', 'nari');
-insert into post (img, content, address, userid) values('/images/post8.png', '영국은 피시앤 칩스지', '영국 런던', 'nari');
-insert into post (img, content, address, userid) values('/images/post9.png', '일본 벗꽃 보고 싶당', '일본 도쿄', 'nari');
 
 insert into post_like (post_num, userid) values(1, 'choi');
 insert into post_like (post_num, userid) values(1, 'jojo');

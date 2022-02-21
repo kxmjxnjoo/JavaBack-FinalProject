@@ -22,6 +22,12 @@ public class JoinAction implements Action {
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		
+		System.out.println("userid : " + userid);
+		System.out.println("pwd : " + pwd);
+		System.out.println("name : " + name);
+		System.out.println("phone : " + phone);
+		System.out.println("email : " + email);
 
 		// Create MemberDto
 		MemberDto mdto = new MemberDto();
