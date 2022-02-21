@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>포스트 자세히 보기</title>
-<link href="css/spring.css" rel="stylesheet"> 
+<link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" defer="defer">
 
@@ -84,6 +84,7 @@ function deleteReplyCheck(reply_num, post_num){
 <body>
 
 <form name="frm" method="post">
+<%-- <%@ include file="/topnav/topnav.jsp" %> --%>
 <!-- report modal -->
 	<div id="setting">
 	<c:choose>

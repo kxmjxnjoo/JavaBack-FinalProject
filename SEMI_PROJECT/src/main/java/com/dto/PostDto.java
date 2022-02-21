@@ -11,7 +11,14 @@ public class PostDto {
 	private Timestamp create_date;
 	private String user_img;
 	private int likeCount;
+	private int replyCount;
 	
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	public int getLikeCount() {
 		return likeCount;
 	}

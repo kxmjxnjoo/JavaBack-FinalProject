@@ -2,8 +2,8 @@
 create table member(
 	userid varchar2(20) not null,
 	password varchar2(20) not null,
-	name varchar2(20) not null, 
-	email varchar2(20) not null,
+	name varchar2(100) not null, 
+	email varchar2(100) not null,
 	phone varchar2(20) not null,
 	img varchar2(100),
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
@@ -11,25 +11,8 @@ create table member(
 	indate date default sysdate,
 )
 
+alter table member modify (email varchar2(100));
 alter table member modify (img varchar2(100));
-
-update member set img = '1.png' where userid='hong';
-insert into member (userid, password, name, email, phone, introduce)
-values('hong','1234', '홍길동','hong@abc.com','010-1234-3456','안녕하세요');
-insert into member (userid, password, name, email, phone, introduce)
-values('kim','1234', '김길동','kim@abc.com','010-2345-8765','반갑습니다');
-insert into member (userid, password, name, email, phone, introduce)
-values('user12','1234', '이유저','user12@abc.com','010-4342-5555','이유저입니다.');
-insert into member (userid, password, name, email, phone, introduce)
-values('nari','1234', '박나리','nari@abc.com','010-5555-2347','좋은하루 되세요.');
-insert into member (userid, password, name, email, phone, introduce)
-values('yoon','1234', '윤성모','yoon@abc.com','010-2525-4745','안녕하세요');
-insert into member (userid, password, name, email, phone, introduce)
-values('jojo','1234', '조장혁','jojo@abc.com','010-1534-7577','반갑습니다');
-insert into member (userid, password, name, email, phone, introduce)
-values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입니다.');
-insert into member (userid, password, name, email, phone, introduce)
-values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.');
 
 select * from member
 
@@ -41,35 +24,20 @@ create table follow(
 )
 CREATE SEQUENCE follow_seq START WITH 1;
 
-insert into follow values(follow_seq.nextval, 'jojo', 'choi');
-insert into follow values(follow_seq.nextval, 'choi', 'jojo');
-insert into follow values(follow_seq.nextval, 'hong', 'user12');
-insert into follow values(follow_seq.nextval, 'hong', 'nari');
-insert into follow values(follow_seq.nextval, 'hong', 'choi');
-insert into follow values(follow_seq.nextval, 'hong', 'jojo');
-insert into follow values(follow_seq.nextval, 'hong', 'love');
-insert into follow values(follow_seq.nextval, 'choi', 'yoon',);
-insert into follow values(follow_seq.nextval, 'nari', 'hong');
-insert into follow values(follow_seq.nextval, 'choi', 'hong');
-insert into follow values(follow_seq.nextval, 'jojo', 'hong');
-insert into follow values(follow_seq.nextval, 'love', 'hong');
-
 select * from follow
-
 
 /*post*/
 create table post (
 	post_num number(5) primary key, 
 	img varchar2(100) not null,
-	content varchar2(200),
+	content varchar2(300),
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
 )
-
 create sequence post_seq start with 1;	
-alter table post modify (content varchar2(280)) 
 
+alter table post modify (content varchar2(280)) 
 select * from post
 
 /* post의 img와 member img를 함께 출력하기 위한 view 입니다.*/
@@ -78,9 +46,6 @@ select p.post_num, p.img as post_img, p.content, p.address, m.userid, p.create_d
 from member m, post p
 where m.userid = p.userid
 order by p.create_date desc;
-
-select * from member;
-
 
 /*img_upload*/
 create table img_upload (
@@ -101,14 +66,8 @@ create table reply (
 	reply_num number(5) primary key,
 	reply_date date default sysdate
 )
-
-insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) 
-values('love','testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) values('hong','test', reply_seq.nextval, 19);
-insert into reply(userid, content, reply_num, post_num) values('jojo','test', reply_seq.nextval, 19);
-
 create sequence reply_seq start with 1;
+
 select * from reply
 
 create or replace view reply_view 
@@ -124,11 +83,6 @@ create table post_like (
 	primary key (userid, post_num)
 )
 select * from post_like
-
-insert into post_like values(19, 'hong');
-insert into post_like values(20, 'hong');
-insert into post_like values(21, 'hong');
-insert into post_like values(27, 'hong');
 
 
 /*reply_like*/
@@ -177,9 +131,6 @@ create table admin(
 	phone varchar2(20) not null
 )
 
-insert into admin values('admin', 'admin', '관리자', 'admin@abc.com', '010-1111-1111');
-insert into admin values('scott', 'tiger', '관리자', 'scott@abc.com', '010-2222-3333');
-
 select * from admin
 
 
@@ -191,9 +142,6 @@ create table faq (
 )
 create sequence faq_seq start with 1;
 select * from faq;
-
-insert into faq values(faq_seq.nextVal, '회원 가입은 어떻게 하나요?', '회원 가입 링크를 클릭하고, 약관을 읽어보신 뒤 [동의]에 체크합니다.
-기본정보와 추가정보를 정확하게 입력하신 뒤 [회원가입] 버튼을 클릭하면 회원가입이 완료됩니다.');
 
 
 /*QnA*/
@@ -213,9 +161,10 @@ select * from qna;
 
 /*report*/
 create table report(	
-	reporter_id varchar2(20) references member(userid),
-	reported_id varchar2(20) references member(userid),
-	post_num number(5) references post(post_num);
+	reporter_id varchar2(20) references member(userid) on delete cascade,
+	reported_id varchar2(20) references member(userid) on delete cascade,
+	post_num number(5) references post(post_num) on delete cascade, 
+	story_num number(5) references story(story_num) on delete cascade,
 	indate date default sysdate,
 	reason varchar2(100) not null,
 	report_num varchar2(5) primary key
@@ -223,9 +172,12 @@ create table report(
 
 alter table report add(post_num number(5) references post(post_num));
 alter table report add(post_type varchar(20));
+alter table report add(story_num number(5) );
 
 create sequence report_seq start with 1;
 select * from report;
+
+drop table report
 
 
 /*notification*/
@@ -287,4 +239,7 @@ select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
 
-select * from reply
+select * from report
+
+select count(*) as count from post_like where post_num = 48
+select count(*) as count from reply where post_num = 48

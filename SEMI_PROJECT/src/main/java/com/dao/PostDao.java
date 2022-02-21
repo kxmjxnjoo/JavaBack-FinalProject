@@ -22,7 +22,7 @@ public class PostDao {
 	ResultSet rs = null;
 	
 	public void uploadPost(PostDto pdto) {
-		String sql = "insert into post(post_num, img, content, Address, userid) "
+		String sql = "insert into post(post_num, img, content, Address, userid)"
 				+ " values(post_seq.nextval, ?, ?, ?, ?)";
 	    con = Dbman.getConnection();
 	        try {
@@ -179,7 +179,7 @@ public class PostDao {
 	}
 
 	public int insertReport(String loginUser, String reported, int post_num, String reason, String type) {
-		String sql = "insert into report(reporter_id, reported_id,reason, report_num, post_num, type) "
+		String sql = "insert into report(reporter_id, reported_id,reason, report_num, post_num, post_type) "
 				+ " values(?,?,?,report_seq.nextVal,?,?)";
 		int result = 0;
 		con = Dbman.getConnection();
@@ -189,6 +189,24 @@ public class PostDao {
 			pstmt.setString(2, reported);
 			pstmt.setString(3, reason);
 			pstmt.setInt(4, post_num);
+			pstmt.setString(5, type);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return result;
+	}
+	
+	public int insertStoryReport(String loginUser, String reported, int reported_post, String reason, String type) {
+		String sql = "insert into report(reporter_id, reported_id,reason, report_num, story_num, post_type) "
+				+ " values(?,?,?,report_seq.nextVal,?,?)";
+		int result = 0;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, loginUser);
+			pstmt.setString(2, reported);
+			pstmt.setString(3, reason);
+			pstmt.setInt(4, reported_post);
 			pstmt.setString(5, type);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace();
@@ -251,7 +269,7 @@ public class PostDao {
 		String sql = "select p.*, b.rn, b.count as likeCount  from post_view p inner join " + 
 				"(select a.post_num, a.count, row_number() over (order by count desc) rn " + 
 				"from (select post_num, count(post_num) as count from post_like group by post_num order by count(post_num) desc) a) b on " + 
-				"(p.post_num = b.post_num) where rn < 100 order by rn desc" ; 
+				"(p.post_num = b.post_num) where rn < 100 order by rn" ; 
 		con = Dbman.getConnection();
 		try {
 			pstmt=con.prepareStatement(sql);
@@ -272,19 +290,54 @@ public class PostDao {
 		return postList;
 	}
 
-	public int insertReport(String loginUser, String reported, String reason) {
-		String sql = "insert into report(reporter_id, reported_id,reason, report_num) values(?,?,?,report_seq.nextVal)";
-		int result = 0;
+	
+	 public int insertReport(String loginUser, String reported, String reason) {
+		 String sql = "insert into report(reporter_id, reported_id,reason, report_num) values(?,?,?,report_seq.nextVal)";
+		 int result = 0; 
+		 con = Dbman.getConnection(); 
+		 try { 
+			 pstmt = con.prepareStatement(sql); 
+			 pstmt.setString(1, loginUser); 
+			 pstmt.setString(2, reported);
+			 pstmt.setString(3, reason); 
+			 result = pstmt.executeUpdate(); 
+			 } catch (SQLException e) { e.printStackTrace(); 
+			 } finally { Dbman.close(con, pstmt, rs); } 
+		 return result;
+	  }
+	 
+	
+	
+
+	public int likeCount(int post_num) {
+		int likes = 0;
+		String sql = "select count(*) as count from post_like where post_num="+post_num;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, loginUser);
-			pstmt.setString(2, reported);
-			pstmt.setString(3, reason);
-			result = pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				likes = rs.getInt("count");
+			}
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
-		return result;
-		
+		return likes;
 	}
+
+	public int replyCount(int post_num) {
+		int replies = 0;
+		String sql = "select count(*) as count from reply where post_num="+post_num;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				replies = rs.getInt("count");
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return replies;
+	}
+
+
 }

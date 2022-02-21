@@ -125,7 +125,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(MemberDto mdto) {
-		String sql = "insert into member (userid, password, name, phone, email) values(?,?,?,?,?)";
+		String sql = "insert into member (userid, password, name, phone, email, img) values(?,?,?,?,?, 'tmpUserIcon.png')";
 		con = Dbman.getConnection();
 		int result = 0;
 
@@ -136,7 +136,7 @@ public class MemberDao {
 			pstmt.setString(3, mdto.getName());
 			pstmt.setString(4, mdto.getPhone());
 			pstmt.setString(5, mdto.getEmail());
-			result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate(); 
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -17,7 +17,7 @@ public class PostLikeDao {
 	
 	public int insertPostLike(int postNum, String userid) {
 		int result = 0;
-		String sql = "insert into post_like (post_num, userid) values(?, ?);";
+		String sql = "insert into post_like (post_num, userid) values(?, ?)";
 		
 		con = Dbman.getConnection();
 		try {

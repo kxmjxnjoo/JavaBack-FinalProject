@@ -21,12 +21,12 @@ public class EditPostAction implements Action {
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
 		String url = "spring.do?command=postDetail&post_num=" + post_num;
 		HttpSession session = request.getSession();
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		//else {
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images");
-		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		
 		String userId = mdto.getUserid();
 		
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
@@ -41,7 +41,7 @@ public class EditPostAction implements Action {
 		pdao.editPost(pdto);
 		
 		request.setAttribute("PostDto", pdto);
-		//}
+		}
 		response.sendRedirect(url);
 	}
 }
