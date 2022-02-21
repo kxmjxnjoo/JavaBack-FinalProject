@@ -46,7 +46,7 @@ public class MemberListAction implements Action {
 			 * bdto.setReplycnt(cnt); }
 			 */
 			
-			request.setAttribute("MemberList" , list);
+			request.setAttribute("memberList" , list);
 			request.setAttribute("paging", paging);	
 		}
 		request.getRequestDispatcher(url).forward(request, response);
