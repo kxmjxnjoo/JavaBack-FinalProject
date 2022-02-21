@@ -38,7 +38,7 @@ public class MemberListAction implements Action {
 			
 			ArrayList<MemberDto> list = adao.MemberList( paging, "key");
 			
-			int count = 0;
+			int count = 1;
 			paging.setTotalCount(count);
 			
 			/*

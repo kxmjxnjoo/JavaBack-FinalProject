@@ -128,7 +128,6 @@ public class ActionFactory {
 		else if( command.equals("memberList")) ac = new MemberListAction();
 		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
 		
-		else if( command.equals("faqList")) ac = new FaqListAction();
 		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
 		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
 		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();

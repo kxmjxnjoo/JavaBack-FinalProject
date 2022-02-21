@@ -24,7 +24,7 @@ public class UploadQnaAction implements Action {
 		HttpSession session = request.getSession();
 	    MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 	    if (mdto == null) {
-	        url = "shop.do?command=loginForm";
+	        url = "spring.do?command=loginForm";
 	    } else {	
 	    	QnaDao qdao = QnaDao.getInstance();
 	    	QnaDto qna_id = null;

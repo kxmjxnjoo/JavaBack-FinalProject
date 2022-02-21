@@ -75,7 +75,9 @@ public class FaqDao {
 			pstmt.setString(2, fdto.getFaq_content());
 		} catch (SQLException e) { 	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);		}
-		
 	}
+	
+	
+	
 
 }

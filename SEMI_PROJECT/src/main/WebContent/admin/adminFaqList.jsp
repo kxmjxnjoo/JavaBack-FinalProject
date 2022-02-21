@@ -2,36 +2,25 @@
 <%@ include file="admin_submenu.jsp" %>
 <link rel="stylesheet" href="css/admin.css">
 
-<h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
+<h1>FAQ 목록 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
 	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 		
 <form name="frm" method="post">		
-	<%--<%-- c:when test="${Report.useyn.size()==0}">
-		<h4 style ="color: red; text-align:center;">처리할 사항이 없습니다</h4>
-	</c:when> --%>
 		<table>
-			<tr><th>번호</th><th>아이디</th><th>사유</th><th>신고자</th><th>신고날짜</th><th>처리</th></tr>
+			<tr><th>번호</th><th>제목</th><th>내용</th></tr>
 			<c:forEach items="${reportList}" var="rdto">
 				<tr align="left">
 					<td  align="left">&nbsp;&nbsp;
-						<a href="spring.do?command=reportList=${reportList.num}">
 						</a>
 					</td>
-					<td  width="50">${rdto.repote_num}</td>
-					<td  width="100">${rdto.repoted_id}</td>
-					<td  width="200">${rdto.reason}</td>
-					<td  width="100">${rdto.repoter_id}</td>
-					<td  width="100">${rdto.indate}</td>
-					<td  width="100">${rdto.useyn}
-					<td><input type="checkbox" name="banCheck" value="${member.useyn}"></td>
+					<td  width="50">${fdto.faq_num}</td>
+					<td  width="80">${fdto.faq_subject}</td>
+					<td  width="100">${fdto.faq_content}</td>
 				</tr>
 			</c:forEach>
 	</table>
-</form>
-<form>
-	<input type="submit" id="ban" value="정지 처리"  onClick="location.href='spring.do?command=reportUserCheck'">
 </form>
 <!-- <input type="submit" id="ban" value="정지 처리" onClick="location.href='spring.do?command=adminMain'"> -->
 `

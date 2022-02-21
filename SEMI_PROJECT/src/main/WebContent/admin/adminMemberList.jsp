@@ -23,7 +23,7 @@ function go_search( ){
 <input type="text" id="member_search" name="key" value="${key}">
 				<input id="search_btn" type="button" name="search" value="회원 검색" onClick="go_search();">
 	<table>
-		<tr><th>이름</th><td width="50">${mdto.name}</td>
+		<tr><th>이름</th><td width="50">${memberdto.name}</td>
 				<th>아이디</th><td width="50">${mdto.userid}</td>
 				<th>이메일</th><td width="50">${mdto.email}</td>
 				<th>핸드폰</th><td width="50">${mdto.phone}</td>
@@ -44,7 +44,7 @@ function go_search( ){
 							</c:choose></td></tr>
 				</c:forEach>
 			 -->	
-	
+
 	<!-- 페이지 수 -->
 	<br /><br />
 		<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
