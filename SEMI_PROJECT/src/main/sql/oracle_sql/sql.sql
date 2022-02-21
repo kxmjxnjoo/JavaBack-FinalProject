@@ -223,13 +223,11 @@ create table report(
 )
 
 alter table report add(post_num number(5) references post(post_num));
-alter table report add(post_type varchar(20));
+alter table report RENAME COLUMN post_type TO report_type;
 alter table report add(story_num number(5) );
 
 create sequence report_seq start with 1;
 select * from report;
-
-drop table report
 
 
 /*notification*/

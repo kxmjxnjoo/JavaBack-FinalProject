@@ -71,7 +71,7 @@
 <script src="/js/follow.js"></script>
 <script type="text/javascript">
 	function userReport(userid){
-	var url="spring.do?command=userReportForm&userid=" + userid;
+	var url="spring.do?command=reportForm&userid=" + userid;
 	var _width = '400';
 	var _height = '500';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
