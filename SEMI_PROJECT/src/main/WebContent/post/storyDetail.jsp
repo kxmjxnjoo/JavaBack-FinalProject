@@ -113,7 +113,7 @@ function goReport(story_num) {
 							</c:otherwise>
 						</c:choose>
 					</div> 
-					<div id="userid"><b>hong</b></div> <!-- ${storydto.userid} -->
+					<div id="userid"><b> ${StoryDto.userid}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>
 				</div>
 				

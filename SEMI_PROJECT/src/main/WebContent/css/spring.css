@@ -96,16 +96,6 @@ body{
 	margin:0 auto;
 }
 
-.slot{
-	position: relative;
-	width: 150px; height: 200px;
-	background: skyblue;
-	margin : 0 auto;
-	text-align: center;
-	float: left;
-	margin-right: 20px;
-}
-
 .story_img {
 	position: relative;
 	width: 100px; height: 100px;
@@ -198,9 +188,16 @@ body{
 	font-size:90%;
 	margin-top: 20px; border-top: 1px solid #909090;
 	position: relative;
-	width: 100%; height: 33%;
-	border: 1px solie balck;
+	width: 100%; height: 33%; 
+	border: 1px solie balck; 
+	overflow:scroll; 
+	overflow-x: hidden;
 }
+
+#content::-webkit-scrollbar {
+   width: 10px;
+   background-color: #efebe8;
+ }
 
 #posting_wrap {
 	margin-top: 20px;
@@ -210,7 +207,7 @@ body{
 	font-size:90%; word-break: break-all;
 	width: 65%; height : 50px; margin-left:22px;
 	float:left;  line-height: 19px;
-	overflow:scroll;
+	
 }
 
 #post_address {
@@ -327,7 +324,7 @@ body{
 #setting .setting_btn{
 	width: 300px; height: 70px; border-radius: 3%
 	text-align:center; line-height: 70px; font-size:90%; font-weight:700; 
-	border-bottom:1px solid #909090;
+	border-bottom:1px solid #909090; color: black;
 	
 }
 
@@ -335,9 +332,14 @@ body{
 	text-decoration:none; 
 }
 
-#setting .setting_btn:nth-child(3) {
-	color:red; border:0;
+#setting .setting_btn:nth-child(2){
+	color: red;
 }
+
+#setting .setting_btn:nth-child(3) {
+	color: red; border:0;
+}
+
 
 
 /* ---------------------------story---------------------------------- */
