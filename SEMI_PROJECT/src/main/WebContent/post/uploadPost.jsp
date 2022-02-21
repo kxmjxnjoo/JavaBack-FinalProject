@@ -16,6 +16,7 @@ function setThumbnail(event) {
 		var img = document.createElement("img"); 
 		img.setAttribute("src", event.target.result); 
 		document.querySelector("div#image_container").appendChild(img); 
+		document.querySelector("div#image_container").style.display = 'block';
 	}; 
 	
 	reader.readAsDataURL(event.target.files[0]); 
@@ -27,10 +28,11 @@ function goBack(){
 }
 
 function reset(){
+	document.querySelector("div#image_container").style.display = 'none';
+	document.getElementById("image_container").style.display='none'
 	document.getElementById("input-file").select();
 	document.selection.clear();
-	document.getElementById("image_container").select();
-	document.selection 
+
 }
 
 
@@ -102,5 +104,52 @@ function uploadCheck(){
 		</div>
 	</div>
 </form>
+
+<script type="text/javascript" language="javascript" defer="defer"> 
+function setThumbnail(event) { 
+	var reader = new FileReader(); 
+	reader.onload = function(event) { 
+		var img = document.createElement("img"); 
+		img.setAttribute("src", event.target.result); 
+		document.querySelector("div#image_container").appendChild(img); 
+		document.querySelector("div#image_container").style.display = 'block';
+	}; 
+	
+	reader.readAsDataURL(event.target.files[0]); 
+}
+
+
+function goBack(){
+	window.history.back();
+}
+
+function reset(){
+	document.querySelector("div#image_container").style.display = 'none';
+	document.getElementById("image_container").style.display='none';
+	document.getElementById("input-file").select();
+	document.selection.clear();
+
+}
+
+
+function textCounter(field, countfield, maxlimit) {
+	if (field.value.length > maxlimit) 
+	field.value = field.value.substring(0, maxlimit);
+	else 
+	countfield.value = maxlimit - field.value.length;
+}
+
+function uploadCheck(){
+	var theForm = document.frm;
+	if( theForm.post_img.value=="") {
+		alert('사진을 첨부해주세요'); 
+		return;
+	} else {
+		theForm.action="spring.do?command=postUpload";
+		theForm.submit();
+	}
+}
+
+</script>
 </body>
 </html>

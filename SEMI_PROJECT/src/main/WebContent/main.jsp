@@ -162,7 +162,7 @@
 			<hr>
 			<button onclick="unfollowPopup()">팔로우 취소</button>
 			<hr>
-			<button>게시물로 이동</button>
+			<button onclick="goPost();">게시물로 이동</button>
 			<hr>
 			<button onclick="openPopup()">취소</button>
 		</div>
@@ -211,6 +211,10 @@
 			var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
 				"width="+_width+", height="+_height+", left="+_left;
 			window.open(url, "reportPost", opt);
+		}
+		
+		function goPost(){
+			location.href = "spring.do?command=postDetail&post_num=" + tmpPostnum;
 		}
 		
 		

@@ -140,7 +140,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
-						<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" onclick="userIcon();">
+						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
 					<b>${PostDto.userid}</b>  <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 					<div id="buttons" onClick="setting();">
@@ -154,14 +154,15 @@ function deleteReplyCheck(reply_num, post_num){
 				<div id="content"> 
 					<div id="posting_wrap">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'">
-						<c:choose>
+						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<%-- <c:choose>
 							<c:when test="${empty PostDto.user_img}"> 
 								<img src="../images/noProfile.png" width="50px" height="50px">
 							</c:when>
 							<c:otherwise>
 								<img src="../images/${PostDto.user_img}" width="50px" height="50px">
 							</c:otherwise>
-						</c:choose>
+						</c:choose> --%>
 						<label>${PostDto.userid}</label>
 					</div>
 					<div id="text_content"> <label>${PostDto.userid} </label> 
@@ -185,14 +186,15 @@ function deleteReplyCheck(reply_num, post_num){
 				<div class="reply">
 					<c:forEach items="${ReplyDto}" var="reply">
 						<div id="reply_each">
-							<c:choose>
+							<img class="replyImg" src="../images/${ reply.img == null ? "tmpUserIcon.png" : reply.img }">
+							<%-- <c:choose>
 								<c:when test="${empty reply.img}">
 									<img src="../images/2.jpg" width="50px" height="50px" onclick="location.href='spring.do?command=userpage&userid=${reply.userid}'">
 								</c:when>
 								<c:otherwise>
 									<img src="../images/${reply.img}" width="50px" height="50px" onclick="location.href='spring.do?command=userpage&userid=${reply.userid}'">
 								</c:otherwise>
-							</c:choose>
+							</c:choose> --%>
 							<div id="text_content"><label>${reply.userid}</label> 
 								${reply.content}
 								<div id="date"><fmt:formatDate value="${reply.reply_date}"/></div>
