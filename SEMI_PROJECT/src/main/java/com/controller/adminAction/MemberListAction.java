@@ -16,58 +16,39 @@ import com.util.Paging;
 
 public class MemberListAction implements Action {
 
-	private int page;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		String url = "admin/adminMemberList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
 		else {
+
+			AdminDao adao = AdminDao.getInstance();
 			
-			url = "spring.do?command=memberList";
-			Paging paging = null;
-			String key = null;
-			ArrayList<MemberDto> mdto = AdminDao.getInstance().MemberList(paging, key); 
+			Paging paging = new Paging();
+			int page=1;  // 처음 게시판을 열었을때
 			
-			//page 
-		int page = 1;
-		if( request.getParameter("page") != null ) {
-			page = Integer.parseInt(request.getParameter("page"));
-			session.setAttribute("page", page);
-		} else if(session.getAttribute("page") != null ) {
-			page = (int)session.getAttribute("page");
-		} page = 1;
-			session.removeAttribute("page");
+			if( request.getParameter("page") != null)
+				page = Integer.parseInt( request.getParameter("page") );
+			paging.setPage(page);
+			
+			ArrayList<MemberDto> list = adao.MemberList( paging, "key");
+			int count = 0;
+			// setTotalCount 메서드 안에는 pagein() 메서드 호출명령이 같이 들어있음
+			paging.setTotalCount(count);  // 레코드 총갯수 세팅 + 각 멤버변수 값 계산
+			
+			/*
+			 * for( MemberDto mdto : list) { int cnt = mdao.getReplycnt( bdto.getNum() );
+			 * bdto.setReplycnt(cnt); }
+			 */
+			
+			request.setAttribute("MemberList" , list);
+			request.setAttribute("paging", paging);	
 		}
-		
-		Paging paging = new Paging();
-		paging.setPage(page);	
-		
-		AdminDao adao = AdminDao.getInstance();
-		
-		String key = "";
-		if(request.getParameter("key") != null) {
-			key = request.getParameter("key");
-			session.setAttribute("key", key);
-		} else if(session.getAttribute("key") != null) {
-			key = (String)session.getAttribute("key");
-		} else {
-			session.removeAttribute("key");
-			key = "";
-		}
-		
-		int count = adao.searchAllMember("Member", "name", key);
-		
-		paging.setTotalCount(count);
-		request.setAttribute("paging", paging);
-		
-		ArrayList<MemberDto> memberList = adao.MemberList(paging, key);
-		request.setAttribute("memberList", memberList);
-		request.setAttribute("key", key);
-		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }
