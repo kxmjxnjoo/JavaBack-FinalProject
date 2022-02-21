@@ -55,16 +55,16 @@ function goReport(story_num) {
 		<c:choose> 
 			<c:when test="${StoryDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='spring.do?command=editStoryForm&story_num=${story_num}'> 수정 </a></div>
-					<div class="setting_btn" onClick="deleteCheck(${story_num});"> <a href="#"> 삭제 </a></div>
+					<div class="setting_btn" onclick="location.href='spring.do?command=editStoryForm&story_num=${story_num}'"> 수정</div>
+					<div class="setting_btn" onclick="deleteCheck(${story_num});"> 삭제 </div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
 			</c:when>
 			<c:otherwise>
 					<div id="setting_menu">
-						<div class="setting_btn"><a href='#'>팔로우</a></div> <!-- 팔로우/언팔로우 c:choose 처리 -->
-						<div class="setting_btn"><a href='#' onClick="goReport(${story_num});">신고</a></div>
+						<div class="setting_btn">팔로우</div> <!-- 팔로우/언팔로우 c:choose 처리 -->
+						<div class="setting_btn" onclick="goReport(${story_num});">신고</div>
 						<div class="setting_btn" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>
 					</div>

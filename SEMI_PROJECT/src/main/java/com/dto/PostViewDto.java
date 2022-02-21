@@ -12,10 +12,25 @@ public class PostViewDto {
 	private int likes;
 	private Date createDate;
 	private int isLikedByUser;
+	private int likeCount;
+	private int replyCount;
 	
-	
+	public int getLikeCount() {
+		return likeCount;
+	}
 
-	
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
 	public int getIsLikedByUser() {
 		return isLikedByUser;
 	}
