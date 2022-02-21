@@ -17,7 +17,7 @@
 				<form action="spring.do" method="post">
 					<h1>아이디 찾기</h1>
 				
-					<input type="hidden" value="findid">
+					<input type="hidden" name="command" value="findid">
 					
 					<input type="text" name="name" placeholder="이름">
 					<input type="text" name="phone" placeholder="전화번호">
@@ -37,7 +37,7 @@
 					<input type="text" name="userid" placeholder="아이디">
 					<input type="text" name="name" placeholder="이름">
 					<input type="text" name="phone" placeholder="전화번호">
-					<input type="button" onclick="" value="인증번호 받기">
+					<input type="button" onclick="getCertNum()" value="인증번호">
 					<input type="text" name="certnum" placeholder="인증번호">
 					
 					<input type="submit"> 
@@ -46,6 +46,18 @@
 		</div>
 		
 	</div>
+	
+	<script type="text/javascript">
+		function getCertNum() {
+			let certButton = document.querySelector("#findpwdBox:nth-child(5)")
+			
+			if(certButton.value != "") {
+				alert("인증번호는 1111에요")
+			} else {
+				alert("전화번호를 입력해 주세요")
+			}
+		}
+	</script>
 	
 </body>
 </html>
