@@ -135,9 +135,12 @@ public class ActionFactory {
 		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
 		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
 		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();
+		//else if( command.equals("adminUpdateFaq")) ac = new AdminUpdateFaqAction();
+		//else if( command.equals("adminDeleteFaq")) ac = new AdminDeleteFaqAction();
 		
 		else if( command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
 		else if( command.equals("uploadQna")) ac = new UploadQnaAction();
+		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
 		//else if( command.equals("deleteQna")) ac = new DeleteQnaAction();
 		else if( command.equals("qnaList")) ac = new QnaListAction();
 		else if( command.equals("qnaView")) ac = new QnaViewAction();
