@@ -46,9 +46,9 @@ public class ActionFactory {
 		
 		else if(command.equals("deletePost")) 			ac = new DeletePostAction();
 		
-		else if( command.equals("userReportForm")) 		ac = new UserReportFormAction();
 		else if(command.equals("reportForm")) 			ac = new ReportFormAction();
 		else if(command.equals("postReport")) 			ac = new PostReportAction();
+		else if(command.equals("userReport")) 			ac = new UserReportAction();
 		
 		else if(command.equals("storyUploadForm")) 		ac = new StoryUploadFormAction();
 		else if(command.equals("storyUpload")) 			ac = new StoryUploadAction();

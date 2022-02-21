@@ -20,16 +20,17 @@ public class ReportFormAction implements Action {
 		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 		if(mdto==null) url = "spring.do?command=login";
 		else{
-			System.out.println("story_num is null? : " +request.getParameter("story_num"));//////////////////////////////
-			if(request.getParameter("story_num") == null) {
+			if(request.getParameter("story_num") == null && request.getParameter("userid") == null) {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
 				request.setAttribute("post_num", post_num);
-				System.out.println("post_num : " + request.getAttribute("post_num"));//////////////////////
-			} else {
+			} else if(request.getParameter("post_num") == null && request.getParameter("userid") == null){
 				int story_num = Integer.parseInt(request.getParameter("story_num"));
 				request.setAttribute("story_num", story_num);
-				System.out.println("story_num : " + request.getAttribute("story_num"));////////////////////////////////////
-			} 
+			} else {
+				String userid = request.getParameter("userid");
+				request.setAttribute("userid", userid);
+				url = "/post/userReport.jsp";
+			}
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

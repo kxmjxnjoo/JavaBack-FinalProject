@@ -13,7 +13,6 @@ public class Paging {
     private int startNum;    //화면에 표시되는 게시물의 시작 번호(num , pseq  같은 번호아닌 rownum)
     private int endNum;    //화면에 표시된는 게시물의 끝번호(num , pseq  같은 번호아닌 rownum)
     
-    
     private void paging() {
     	endPage = ( (int)Math.ceil( page/(double)displayPage ) ) * displayPage;
     	beginPage = endPage - (displayPage - 1);
@@ -30,7 +29,6 @@ public class Paging {
 		
 		System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum + " " + totalCount);
     }
-    
     
 	public int getPage() {
 		return page;
@@ -93,5 +91,4 @@ public class Paging {
 	public void setEndNum(int endNum) {
 		this.endNum = endNum;
 	}
-    
 }

@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript">
 function do_report(reportedUserid){
-	document.reportFrm.action="spring.do?command=userReport&reportedUserid=" + reportedUserid;
+	document.reportFrm.action="spring.do?command=postReport&reportedUserid=" + reportedUserid;
 	document.reportFrm.submit();
 }
 </script>
@@ -27,7 +27,8 @@ function do_report(reportedUserid){
 				<label><input type="radio" name="reportReson" class="checkbox-style" value="2"/> 타인을 사칭하는 계정 </label>
 				<label><input type="radio" name="reportReson" class="checkbox-style" value="3"/> 만 14세 미만 계정 </label>
 			</div>
-			<input type="button" value="신고하기" class="submit" onclick="do_report('${reportedUserid}');">
+			<input type="button" id="input-submit" onclick="do_report('${userid}');">
+			<label id="input-reset-button" class="inputButton" for="input-submit" > 신고하기 </label>
 	</div>
 	</div>
 </form>

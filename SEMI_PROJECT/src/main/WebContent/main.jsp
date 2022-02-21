@@ -158,7 +158,7 @@
 	
 	<div id="popupWindow" style="display: none;">
 		<div id="popupBox">
-			<button onclick="goReport(${post_num});">신고</button>
+			<button onclick="goReport();">신고</button>
 			<hr>
 			<button onclick="unfollowPopup()">팔로우 취소</button>
 			<hr>
@@ -169,14 +169,14 @@
 	</div>
 	
 	<script type="text/javascript">
-		let postnum = 0
+		let tmpPostnum = 0
 		let tmpUserid = ""
 	
 		function openPopup(postnum, userid) {
 			let popup = document.getElementById("popupWindow")
 			if(popup.style.display == "none") {
 				popup.style.display = ""
-				postnum = this.postnum
+				tmpPostnum = postnum;
 				tmpUserid = userid
 			} else {
 				popup.style.display = "none"
@@ -200,6 +200,17 @@
 			} else {
 				return true
 			}
+		}
+		
+		function goReport(){
+			var url="spring.do?command=reportForm&post_num=" + tmpPostnum;
+			var _width = '400';
+			var _height = '500';
+			var _left = Math.ceil((window.screen.width - _width)/2); 
+			var _top = Math.ceil((window.screen.width - _height)/2); 
+			var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+				"width="+_width+", height="+_height+", left="+_left;
+			window.open(url, "reportPost", opt);
 		}
 		
 		
