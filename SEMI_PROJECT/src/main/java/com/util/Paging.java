@@ -16,6 +16,7 @@ public class Paging {
     private void paging() {
     	endPage = ( (int)Math.ceil( page/(double)displayPage ) ) * displayPage;
     	beginPage = endPage - (displayPage - 1);
+    	
     	int totalPage = (int)Math.ceil( totalCount/(double)displayRow );
     	if(totalPage<endPage){
 			endPage = totalPage;
@@ -35,6 +36,7 @@ public class Paging {
 	}
 	public void setPage(int page) {
 		this.page = page;
+		paging();
 	}
 	public int getTotalCount() {
 		return totalCount;

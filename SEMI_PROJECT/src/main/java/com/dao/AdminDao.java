@@ -69,32 +69,35 @@ public class AdminDao {
 
 	public ArrayList<MemberDto> MemberList(Paging paging, String key) {
 		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
-		String sql = "select * from ( "
-				+ " select * from ("
-				+ " select rownum as rn, m.* from "
+		String sql = "select * from (select * from (select rownum as rn, m.* from "
 				+ " ((select * from member where userid like '%'||?||'%' or name like '%'||?||'%' order by indate desc) m) "
-				+ " ) where rn>=?"
-				+ " ) where rn<=?";
-		con=Dbman.getConnection();
+				+ " ) where rn>=?) where rn<=?";
+			
+		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, key);
 			pstmt.setString(2, key);
+			
 			pstmt.setInt(3, paging.getStartNum());
 			pstmt.setInt(4, paging.getEndNum());
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				MemberDto mdto = new MemberDto();
-			mdto.setUserid(rs.getString("userid"));
-			mdto.setPassword(rs.getString("password"));
-			mdto.setName(rs.getString("name"));
-			mdto.setEmail(rs.getString("email"));
-			mdto.setPhone(rs.getString("phone"));
-			mdto.setUseyn(rs.getString("useyn"));
-			mdto.setIntroduce(rs.getString("introduce"));
-			mdto.setIndate(rs.getDate("indate"));
-			list.add(mdto);
+				
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setPassword(rs.getString("password"));
+				mdto.setName(rs.getString("name"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setUseyn(rs.getString("useyn"));
+				mdto.setIntroduce(rs.getString("introduce"));
+				mdto.setIndate(rs.getDate("indate"));
+				
+				list.add(mdto);
 			}
+			
 		} catch (SQLException e) {	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);		}
 		return list;
@@ -102,12 +105,5 @@ public class AdminDao {
 
 
 	//신고 차단 체크
-	
-
-
-	
-	
-
-	
 	
 }

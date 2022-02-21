@@ -2,12 +2,12 @@
 <%@ include file="admin_submenu.jsp" %>
 <link rel="stylesheet" href="css/admin.css">
 <script  type="text/javascript">
-function go_search( ){
+function go_search(){
 	if( document.frm.key.value == "" ){
 		alert("검색어를 입력하세요");
 	 	return;
 	 }
-	var url = "spring.do?command=key&page=1";
+	var url = "spring.do?command=memberList";
 	document.frm.action = url;
 	document.frm.submit();
 }
@@ -26,27 +26,15 @@ function go_search( ){
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
 				<th>가입일</th>
 		<c:forEach items="${memberList}" var="mdto">
-		<td width="50">${mdto.name}</td>
-		<td width="50">${mdto.userid}</td>
-		<td width="50">${mdto.email}</td>
-		<td width="50">${mdto.phone}</td>
-		<td width="50">${mdto.useyn}</td>
-		<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
+			<td width="50">${mdto.name}</td>
+			<td width="50">${mdto.userid}</td>
+			<td width="50">${mdto.email}</td>
+			<td width="50">${mdto.phone}</td>
+			<td width="50">${mdto.useyn}</td>
+			<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
 		</c:forEach>
 	</table>
 </form>
-			<!-- 
-				<c:forEach items="${memberList}" var="MemberDto">
-					<tr><td height="23" align="center" >${memberList.adminid}</td>
-						<td style="text-align:left; padding-left:50px;">
-							<a href="#" onClick="go_detail('${memberList.adminid}')"></a></td>
-						<td><fmt:formatDate value="${memberList.indate}"/></td>
-						<td><c:choose>
-			      				<c:when test='${memberList.useyn=="n"}'>미사용</c:when>
-			   	 				<c:otherwise>사용</c:otherwise> 
-							</c:choose></td></tr>
-				</c:forEach>
-			 -->	
 
 	<!-- 페이지 수 -->
 	<br /><br />

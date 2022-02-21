@@ -20,12 +20,13 @@ public class MemberListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		String url = "admin/adminMemberList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
 		else {
+			
+			String searchKey = request.getParameter("key") == null ? "" : request.getParameter("key");
 
 			AdminDao adao = AdminDao.getInstance();
 			
@@ -36,7 +37,7 @@ public class MemberListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
-			ArrayList<MemberDto> list = adao.MemberList( paging, "key");
+			ArrayList<MemberDto> list = adao.MemberList( paging, searchKey);
 			
 			int count = 1;
 			paging.setTotalCount(count);
