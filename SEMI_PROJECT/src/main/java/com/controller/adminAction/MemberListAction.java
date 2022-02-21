@@ -37,9 +37,9 @@ public class MemberListAction implements Action {
 			paging.setPage(page);
 			
 			ArrayList<MemberDto> list = adao.MemberList( paging, "key");
+			
 			int count = 0;
-			// setTotalCount 메서드 안에는 pagein() 메서드 호출명령이 같이 들어있음
-			paging.setTotalCount(count);  // 레코드 총갯수 세팅 + 각 멤버변수 값 계산
+			paging.setTotalCount(count);
 			
 			/*
 			 * for( MemberDto mdto : list) { int cnt = mdao.getReplycnt( bdto.getNum() );
