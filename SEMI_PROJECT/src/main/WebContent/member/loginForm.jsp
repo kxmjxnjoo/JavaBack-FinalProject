@@ -24,8 +24,8 @@
 		<input type="submit" id="login" value="로그인" onClick="location.href='spring.do?command=login">
 		<br><br>
 	        ----------------- 또는 -----------------<br><br>
-	    <div color="red">&nbsp;&nbsp;&nbsp;${message}</div>
-			<a href="location.href='spring.do?command=findIdPw'">비밀번호를 잊으셨나요?</a>
+	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
+			<a href="spring.do?command=findidpwdform">아이디 혹은 비밀번호를 잊으셨나요?</a>
 		</div>
 		<br>
 		<div id="box2">

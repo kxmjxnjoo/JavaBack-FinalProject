@@ -45,7 +45,7 @@ body {
 
     position: relative;
     left: 30%;
-    top: 20px;
+    bottom: 15px;
 }
 
 #topnav form {
@@ -58,16 +58,15 @@ body {
     font-size: 250%;
     color: white;
     position: relative;
-    bottom: 20px;
+    top: 15px;
 }
 
-i:hover {
+#topnav i:hover {
     opacity: 0.5;
 }
 
 #searchBar input {
     position: relative;
-    bottom: 35px;
 
     height: 40px;
     width: 250px;
