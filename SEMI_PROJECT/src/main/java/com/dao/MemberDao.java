@@ -186,4 +186,28 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public MemberDto getUserid(String name, String phone) {
+		String sql = "select * from member where (name=? and phone=?)";
+		MemberDto mdto = null;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				mdto = new MemberDto();
+				mdto.setUserid(rs.getString("userid"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return mdto;
+	}
 }
