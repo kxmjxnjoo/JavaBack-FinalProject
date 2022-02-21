@@ -204,8 +204,6 @@
 		
 		function goReport(){
 			var url="spring.do?command=reportForm&post_num=" + tmpPostnum;
-			console.log(tmpPostnum);
-			console.log(tmpUserid);
 			var _width = '400';
 			var _height = '500';
 			var _left = Math.ceil((window.screen.width - _width)/2); 

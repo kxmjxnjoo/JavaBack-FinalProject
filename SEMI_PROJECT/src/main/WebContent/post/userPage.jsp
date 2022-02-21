@@ -73,7 +73,7 @@
 	function userReport(userid){
 	var url="spring.do?command=reportForm&userid=" + userid;
 	var _width = '400';
-	var _height = '500';
+	var _height = '300';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
 	var _top = Math.ceil((window.screen.width - _height)/2); 
 	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +

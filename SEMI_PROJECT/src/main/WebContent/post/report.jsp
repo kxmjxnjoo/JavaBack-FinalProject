@@ -13,7 +13,6 @@
 function doPostReport(post_num){
 	document.reportFrm.action="spring.do?command=postReport&post_num=" + post_num;
 	document.reportFrm.submit();
-	/* opener.location.href='spring.do?command=postDetail&post_num=' + post_num; */
 }
 
 function doStoryReport(story_num){
@@ -25,7 +24,7 @@ function doStoryReport(story_num){
 <body>
 <form name="reportFrm" method="post">
 	<div id="wrap">
-		<div class="userReport_wrap"> 
+		<div class="report_wrap"> 
 			<div class="reportTitle"> <h3>신고</h3> </div>
 			<div class="reportContentTitle"> <b>이 게시물을 신고하는 이유</b> </div>
 			<div class="reportContent">
@@ -40,7 +39,7 @@ function doStoryReport(story_num){
 				<label><input type="radio" name="reportReson" class="checkbox-style" value="9"/> 지식재산권 침해</label>
 			</div>
 			<div id="clear"></div>
-			<label id="input-reset-button" for="input-submit" > 신고하기 </label>
+			<label id="input-reset-button" class="inputButton" for="input-submit" > 신고하기 </label>
 			
 			<c:choose>
 				<c:when test="${empty post_num}">
@@ -50,12 +49,6 @@ function doStoryReport(story_num){
 					<input type="button" value="신고하기" id="input-submit" onclick="doPostReport(${post_num});">
 				</c:otherwise>
 			</c:choose>
-			<%-- <c:if test="${empty story_num}">
-				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${post_num});">
-			</c:if>
-			<c:if test="${empty post_num}">
-				<input type="button" value="신고하기" id="input-submit" onclick="do_report(${story_num});">
-			</c:if> --%>
 			<div id="clear"></div>
 	</div>
 	</div>

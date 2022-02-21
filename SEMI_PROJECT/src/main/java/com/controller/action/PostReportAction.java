@@ -43,13 +43,11 @@ public class PostReportAction implements Action {
 				if(request.getParameter("story_num") == null) {
 					
 					reported_post =Integer.parseInt(request.getParameter("post_num"));
-					System.out.println(reported_post);////////////////////////////////////////
 					PostDto pdto = PostDao.getInstance().getPost(reported_post);
 					reported = pdto.getUserid();
 					type = "post";
 
 					result = PostDao.getInstance().insertReport(loginUser, reported, reported_post, reason, type);
-					request.setAttribute("post_num", reported_post);
 				} else if(request.getParameter("post_num") == null){
 					reported_post = Integer.parseInt(request.getParameter("story_num"));
 					StoryDto sdto = StoryDao.getInstance().getStory(reported_post);
@@ -57,14 +55,13 @@ public class PostReportAction implements Action {
 					type = "story";
 					
 					result = PostDao.getInstance().insertStoryReport(loginUser, reported, reported_post, reason, type);
-					request.setAttribute("story_num", reported_post);
+					
 				}
 			} else {
 				if(reason.equals("1")) reason = "적합하지 않은 콘텐츠 게시";
 				else if(reason.equals("2")) reason = "타인을 사칭하는 계정";
 				else if(reason.equals("3")) reason = "만 14세 미만 계정";
 				reported = request.getParameter("reportedUserid");
-				request.setAttribute("reported", reported);
 				type = "user";
 				result = PostDao.getInstance().insertUserReport(loginUser, reported, reason, type);
 			}
@@ -76,10 +73,11 @@ public class PostReportAction implements Action {
 			request.setAttribute("reason", reason);
 			request.setAttribute("message", message);
 			
-			System.out.println("message : " + message);
-			System.out.println("reported : " + reported);
-			System.out.println("reported_post : " + reported_post);
-			System.out.println("reason : " + reason);
+
+			request.setAttribute("reported", reported);/*
+														 * request.setAttribute("post_num", reported_post);
+														 * request.setAttribute("story_num", reported_post);
+														 */
 		}
 			response.sendRedirect(url);
 	}
