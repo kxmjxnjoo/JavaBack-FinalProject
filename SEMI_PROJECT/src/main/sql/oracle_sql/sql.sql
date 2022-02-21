@@ -2,8 +2,8 @@
 create table member(
 	userid varchar2(20) not null,
 	password varchar2(20) not null,
-	name varchar2(20) not null, 
-	email varchar2(20) not null,
+	name varchar2(100) not null, 
+	email varchar2(100) not null,
 	phone varchar2(20) not null,
 	img varchar2(100),
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
@@ -11,9 +11,8 @@ create table member(
 	indate date default sysdate,
 )
 
+alter table member modify (email varchar2(100));
 alter table member modify (img varchar2(100));
-
-update member set img = '1.png' where userid='hong';
 
 select * from member
 
@@ -27,20 +26,18 @@ CREATE SEQUENCE follow_seq START WITH 1;
 
 select * from follow
 
-
 /*post*/
 create table post (
 	post_num number(5) primary key, 
 	img varchar2(100) not null,
-	content varchar2(200),
+	content varchar2(300),
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
 )
-
 create sequence post_seq start with 1;	
-alter table post modify (content varchar2(280)) 
 
+alter table post modify (content varchar2(280)) 
 select * from post
 
 /* post의 img와 member img를 함께 출력하기 위한 view 입니다.*/
@@ -49,9 +46,6 @@ select p.post_num, p.img as post_img, p.content, p.address, m.userid, p.create_d
 from member m, post p
 where m.userid = p.userid
 order by p.create_date desc;
-
-select * from member;
-
 
 /*img_upload*/
 create table img_upload (
@@ -72,9 +66,8 @@ create table reply (
 	reply_num number(5) primary key,
 	reply_date date default sysdate
 )
-
-
 create sequence reply_seq start with 1;
+
 select * from reply
 
 create or replace view reply_view 

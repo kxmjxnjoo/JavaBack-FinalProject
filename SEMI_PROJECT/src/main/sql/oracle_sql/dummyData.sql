@@ -56,3 +56,5 @@ insert into post (img, content, address, userid, post_num) values('/images/post7
 insert into post (img, content, address, userid, post_num) values('/images/post8.png', '영국은 피시앤 칩스지', '영국 런던', 'nari', post_seq.nextVal);
 insert into post (img, content, address, userid, post_num) values('/images/post9.png', '일본 벗꽃 보고 싶당', '일본 도쿄', 'nari', post_seq.nextVal);
 
+select * from post;
+
