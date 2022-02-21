@@ -32,7 +32,7 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 있으신가요?<a href="location.href='spring.do?command=login'"> 로그인 </a>
+			<br>계정이 있으신가요?<a href="spring.do?command=login"> 로그인 </a>
 		</div>
 		앱을 다운로드하세요.<br><br>
 	    <span><a href="https://apps.apple.com/app/instagram/id389801252?vt=lo"><img src="images/App.jpg" width="150"></a>

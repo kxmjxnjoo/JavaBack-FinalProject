@@ -16,6 +16,8 @@ alter table member modify (img varchar2(100));
 
 select * from member
 
+select * from member where (userid like '%'||'hong'||'%' or name like '%'||'hong'||'%') order by indate desc;
+
 /*follow*/
 create table follow(
 	follow_num number(5) primary key,
