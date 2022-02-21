@@ -9,6 +9,7 @@
 <title>포스트 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="/js/follow.js"></script>
 <script type="text/javascript" defer="defer">
 
 function add_reply(post_num){
@@ -98,7 +99,14 @@ function deleteReplyCheck(reply_num, post_num){
 		</c:when>
 		<c:otherwise>
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='#'>팔로우</a></div> <!-- 팔로우/언팔로우 c:choose 처리 -->
+					<c:choose>
+						<c:when test="${ isFollowing == 1 }">
+							<div class="setting_btn" onclick="unfollow('${ PostDto.userid }')"> 언팔로우</div>
+						</c:when>
+						<c:otherwise>
+							<div class="setting_btn" onclick="follow('${ PostDto.userid }')">팔로우</div>
+						</c:otherwise>
+					</c:choose>
 					<div class="setting_btn"><a href='#' onClick="goReport(${post_num});">신고</a></div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>

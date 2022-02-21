@@ -9,6 +9,7 @@
 <title>스토리 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="/js/follow.js"></script>
 <script type="text/javascript">
 
 function story_like(story_num){
@@ -43,7 +44,6 @@ function goReport(story_num) {
 		"width="+_width+", height="+_height+", left="+_left;
 	window.open(url, "reportPost", opt);
 }
-
 </script>
 </head>
 <body>
@@ -63,7 +63,14 @@ function goReport(story_num) {
 			</c:when>
 			<c:otherwise>
 					<div id="setting_menu">
-						<div class="setting_btn">팔로우</div> <!-- 팔로우/언팔로우 c:choose 처리 -->
+						<c:choose>
+							<c:when test="${ isFollowing == 1 }">
+								<div class="setting_btn" onclick="unfollow('${ StoryDto.userid }')"> 언팔로우</div>
+							</c:when>
+							<c:otherwise>
+								<div class="setting_btn" onclick="follow('${ StoryDto.userid }')">팔로우</div>
+							</c:otherwise>
+						</c:choose>
 						<div class="setting_btn" onclick="goReport(${story_num});">신고</div>
 						<div class="setting_btn" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>

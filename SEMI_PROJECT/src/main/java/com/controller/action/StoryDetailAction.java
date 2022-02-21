@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.FollowDao;
 import com.dao.StoryDao;
 import com.dto.MemberDto;
 import com.dto.ReplyDto;
@@ -24,8 +25,10 @@ public class StoryDetailAction implements Action {
 		else {
 				StoryDao sdao = StoryDao.getInstance();
 				String userid = request.getParameter("userid");
+				int isFollowing = 0;
 				int story_num = 0;
 				StoryDto sdto = null;
+				
 				if(userid == null) {
 					story_num = Integer.parseInt(request.getParameter("story_num"));
 					sdto = sdao.getStory(story_num);
@@ -37,25 +40,15 @@ public class StoryDetailAction implements Action {
 				}
 				
 				
-				String loginUser = mdto.getUserid();
-				int result = sdao.storyLikeCheck(story_num, loginUser);
-				
+				String loginUserid = mdto.getUserid();
+				int result = sdao.storyLikeCheck(story_num, loginUserid);
 				
 				int prev = sdao.searchPrevStory(story_num, userid);
 				int next = sdao.searchNextStory(story_num, userid);
 				
-				////////////테스트용 코드 
-//				System.out.println("///");
-//				loginUser = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-//				System.out.println("loginUser : " + loginUser);
-//				System.out.println("스토리 좋아요? : " + result);
-//				System.out.println("prev : " +prev + ", next : " + next);
-//				System.out.println("스토리작성자 : " + sdto.getUserid());
-//				System.out.println("스토리이미지 : " + sdto.getStory_img());
-//				System.out.println("fontColor:" + sdto.getFontColor());
-//				System.out.println("likeResult : " + result);
-				////////////테스트용 코드 여기까지 /////////////////////////
+				isFollowing = FollowDao.getInstance().isFollowing(loginUserid, userid);
 				
+				request.setAttribute("isFollowing", isFollowing);
 				request.setAttribute("likeResult", result);
 				request.setAttribute("likeResult", result);
 				request.setAttribute("story_num", story_num);
