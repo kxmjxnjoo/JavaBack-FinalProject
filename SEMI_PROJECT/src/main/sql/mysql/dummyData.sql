@@ -15,15 +15,7 @@ values('choi','1234', '최유리','choi@abc.com','010-3545-1588','최유리입�
 insert into member (userid, password, name, email, phone, introduce, img)
 values('love','1234', '김사랑','love@abc.com','010-5555-2347','좋은하루 되세요.', '/images/profile8.png');
 
-update from member set img='profile1.png' where userid='hong';
-update from member set img='profile2.png' where userid='kim';
-update from member set img='profile3.png' where userid='user12';
-update from member set img='profile4.png' where userid='nari';
-update from member set img='profile5.png' where userid='yoon';
-update from member set img='profile6.png' where userid='jojo';
-update from member set img='profile7.png' where userid='choi';
-update from member set img='profile8.png' where userid='love';
-
+select * from member
 
 insert into follow (following, follower) values('jojo', 'choi');
 insert into follow (following, follower) values('choi', 'jojo');
