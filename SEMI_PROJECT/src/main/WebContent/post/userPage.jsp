@@ -53,7 +53,7 @@
 
 <div id="postList">
 	<c:forEach var="post" items="${ posts }">
-		<div class="userPost">
+		<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
 			<img src="../images/${ post.postImg }">
 			
 			<div class="userPostInfo">
