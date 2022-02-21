@@ -112,11 +112,12 @@ create table story(
 	img varchar2(100) not null,
 	story_content varchar2(240),
 	userid references member(userid),
+	fontcolor varchar2(20), 
 	create_date date default sysdate
 )
 
 create sequence story_seq start with 1;
-select * from story_view
+select * from story
 
 create view story_view as
 select s.story_num, s.img as story_img, s.story_content, m.userid, s.create_date, m.img as user_img

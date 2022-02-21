@@ -53,7 +53,7 @@ function goReport(story_num) {
 <!-- setting popup -->
 	<div id="setting">
 		<c:choose> 
-			<c:when test="${StoryDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
+			<c:when test="${StoryDto.userid == loginUser.userid}">
 				<div id="setting_menu">
 					<div class="setting_btn" onclick="location.href='spring.do?command=editStoryForm&story_num=${story_num}'"> 수정</div>
 					<div class="setting_btn" onclick="deleteCheck(${story_num});"> 삭제 </div>
@@ -136,7 +136,7 @@ function goReport(story_num) {
 				<c:otherwise>
 					<div id="story_content" style="color:${StoryDto.fontColor}"> <h2>  ${StoryDto.content}  </h2>  </div> 
 				</c:otherwise>
-			</c:choose>
+			</c:choose> 
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
 					<c:choose>

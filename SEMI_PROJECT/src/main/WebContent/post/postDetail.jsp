@@ -91,8 +91,8 @@ function deleteReplyCheck(reply_num, post_num){
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='spring.do?command=editPostForm&post_num=${post_num}'> 수정 </a></div>
-					<div class="setting_btn" onClick="deleteCheck(${post_num});"> <a href="#"> 삭제 </a></div>
+					<div class="setting_btn" onlick="location.href='spring.do?command=editPostForm&post_num=${post_num}'">수정</div>
+					<div class="setting_btn" onClick="deleteCheck(${post_num});">삭제</div>
 					<div class="setting_btn" onClick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
@@ -107,7 +107,7 @@ function deleteReplyCheck(reply_num, post_num){
 							<div class="setting_btn" onclick="follow('${ PostDto.userid }')">팔로우</div>
 						</c:otherwise>
 					</c:choose>
-					<div class="setting_btn"><a href='#' onClick="goReport(${post_num});">신고</a></div>
+					<div class="setting_btn" onClick="goReport(${post_num});">신고</div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
@@ -116,7 +116,7 @@ function deleteReplyCheck(reply_num, post_num){
 	</div>
 
 <!-- setting modal -->
-	<div id="setting">
+	<%-- <div id="setting">
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 			
@@ -136,7 +136,7 @@ function deleteReplyCheck(reply_num, post_num){
 				</div>
 		</c:otherwise>
 	</c:choose>
-	</div>
+	</div> --%>
 	
 	<div class="wrap">
 		<div class="detail_wrap">

@@ -31,7 +31,7 @@ function reset(){
 	document.getElementById("input-file").select();
 	document.selection.clear();
 	document.getElementById("image_container").select();
-	document.selection 
+	document.selection.img.src = "";
 }
 
 
@@ -42,17 +42,11 @@ function textCounter(field, countfield, maxlimit) {
 	countfield.value = maxlimit - field.value.length;
 }
 
-function uploadCheck(){
+function editCheck(postNum){
 	var theForm = document.frm;
-/* 	if( theForm.post_img.value=="") {
-		alert('사진을 첨부해주세요'); 
-		return;
-	} else { */
-		theForm.action="spring.do?command=postUpload";
-		theForm.submit();
-	//}
+	theForm.action="spring.do?command=editPost&post_num="+postNum;
+	theForm.submit();
 }
-
 </script>
 
 </head>
@@ -94,7 +88,7 @@ function uploadCheck(){
 					<label id="input-submit-button" for="input-submit">
 					등록
 					</label>
-					<input type="button" name="input-submit" id="input-submit" onclick="uploadCheck();">
+					<input type="button" name="input-submit" id="input-submit" onclick="editCheck(${post_num});">
 					<label id="input-reset-button" for="input-reset" >
 					다시 작성 
 					</label>
