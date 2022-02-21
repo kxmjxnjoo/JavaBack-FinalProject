@@ -111,14 +111,7 @@ function goReport(story_num) {
 <!-- 글 작성자 프로필 -->
 				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<c:choose>
-							<c:when test="${empty StoryDto.user_img}">
-								<img src="../images/noProfile.png" width="50px" height="50px">
-							</c:when>
-							<c:otherwise>
-								<img src="../images/${StoryDto.user_img}" width="50px" height="50px">
-							</c:otherwise>
-						</c:choose>
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div> 
 					<div id="userid"><b> ${StoryDto.userid}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>

@@ -148,7 +148,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
-						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
 					<b>${PostDto.userid}</b>  <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 					<div id="buttons" onClick="setting();">
@@ -162,7 +162,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<div id="content"> 
 					<div id="posting_wrap">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'">
-						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 						<%-- <c:choose>
 							<c:when test="${empty PostDto.user_img}"> 
 								<img src="../images/noProfile.png" width="50px" height="50px">
