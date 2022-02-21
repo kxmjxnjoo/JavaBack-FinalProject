@@ -23,7 +23,7 @@
 			<h1>${ user.name }</h1>
 			<c:choose>	
 				<c:when test="${ loginUser.userid == user.userid }">
-					<input type="button" value="프로필 수정"> 
+					<input type="button" value="프로필 수정" onclick="location.href='spring.do?command=editprofileform'"> 
 					<input type="button" value="로그아웃" onclick="location.href='spring.do?command=logout'">
 				</c:when>
 				<c:when test="${ isFollowing == 1 }">
