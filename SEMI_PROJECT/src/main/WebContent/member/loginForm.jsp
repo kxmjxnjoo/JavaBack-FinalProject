@@ -31,10 +31,13 @@
 		<div id="box2">
 			<br>계정이 없으신가요?<a href="spring.do?command=joinform"> 가입하기 </a>
 		</div>
+		<div id="box2">
+			<br>관리자이신가요?<a href="spring.do?command=admin"> 관리자 페이지 </a>
+		</div>
 		앱을 다운로드하세요.<br><br>
-	    <span><a href=https://apps.apple.com/app/instagram/id389801252?vt=lo><img src="images/App.jpg" width="150"></a>
+	    <span><a href=https://apps.apple.com/app/instagram/id389801252?vt=lo><img src="images/appleIcon.png" width="100"></a>
 	    &nbsp;<a href=https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb&utm_campaign=loginPage&ig_mid=1E9D160D-331E-4217-9569-05DF4FE4FEA7&utm_content=lo&utm_medium=badge>
-	    <img src="images/Google.jpg" width="150"></a></span>
+	    <img src="images/playstoreIcon.png" width="100"></a></span>
 	    <br><br>
 	</form>
 	
