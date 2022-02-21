@@ -46,13 +46,13 @@ insert into admin values('scott', 'tiger', '관리자', 'scott@abc.com', '010-22
 insert into faq values(faq_seq.nextVal, '회원 가입은 어떻게 하나요?', '회원 가입 링크를 클릭하고, 약관을 읽어보신 뒤 [동의]에 체크합니다.
 기본정보와 추가정보를 정확하게 입력하신 뒤 [회원가입] 버튼을 클릭하면 회원가입이 완료됩니다.');
 
-insert into post (img, content, address, userid) values('/images/post1.png', '바다 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'nari');
-insert into post (img, content, address, userid) values('/images/post2.png', '산 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'choi');
-insert into post (img, content, address, userid) values('/images/post3.png', '천국 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'jojo');
-insert into post (img, content, address, userid) values('/images/post4.png', '지옥 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'love');
-insert into post (img, content, address, userid) values('/images/post5.png', '머리카락 좀 내려주삼', '아리넬 왕국 숲 속', 'hong');
-insert into post (img, content, address, userid) values('/images/post6.png', '아아 몰라', '뉴욕 맨헤튼', 'nari');
-insert into post (img, content, address, userid) values('/images/post7.png', 'LET IT GO PLEASE', '중국 상하이', 'nari');
-insert into post (img, content, address, userid) values('/images/post8.png', '영국은 피시앤 칩스지', '영국 런던', 'nari');
-insert into post (img, content, address, userid) values('/images/post9.png', '일본 벗꽃 보고 싶당', '일본 도쿄', 'nari');
+insert into post (img, content, address, userid, post_num) values('/images/post1.png', '바다 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'nari', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post2.png', '산 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'choi', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post3.png', '천국 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'jojo', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post4.png', '지옥 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'love', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post5.png', '머리카락 좀 내려주삼', '아리넬 왕국 숲 속', 'hong', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post6.png', '아아 몰라', '뉴욕 맨헤튼', 'nari', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post7.png', 'LET IT GO PLEASE', '중국 상하이', 'nari', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post8.png', '영국은 피시앤 칩스지', '영국 런던', 'nari', post_seq.nextVal);
+insert into post (img, content, address, userid, post_num) values('/images/post9.png', '일본 벗꽃 보고 싶당', '일본 도쿄', 'nari', post_seq.nextVal);
 
