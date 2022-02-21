@@ -40,6 +40,7 @@ import com.controller.action.StoryUploadFormAction;
 import com.controller.action.UnfollowAction;
 import com.controller.action.UnlikePostAction;
 import com.controller.action.UserPageAction;
+import com.controller.action.WithdrawAction;
 import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
@@ -120,6 +121,7 @@ public class ActionFactory {
 		else if(command.equals("join"))					ac = new JoinAction();
 		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
 		else if(command.equals("editprofile"))			ac = new EditProfileAction();
+		else if(command.equals("withdraw"))				ac = new WithdrawAction();
 		
 		
 		

@@ -168,4 +168,22 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int deleteMember(String userid) {
+		String sql = "delete member where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+		 	result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
 }

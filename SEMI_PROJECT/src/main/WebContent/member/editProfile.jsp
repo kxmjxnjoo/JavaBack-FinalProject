@@ -33,7 +33,7 @@
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
 				<h3>Springfeed가 마음에 안 드시나요?</h3>
-				<input type="button" value="회원탈퇴" onclick="withdraw(${ loginUser.userid })">
+				<input type="button" value="회원탈퇴" onclick="withdraw()">
 			</div>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 	<script type="text/javascript">
 		function withdraw(userid) {
 			if(confirm("정말로 회원탈퇴할까요?")) {
-				location.href = "spring.do?command=withdraw&userid=" + userid
+				location.href = "spring.do?command=withdraw"
 			}
 		}
 	</script>
