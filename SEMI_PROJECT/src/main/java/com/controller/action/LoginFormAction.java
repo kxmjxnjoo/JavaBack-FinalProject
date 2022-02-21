@@ -11,10 +11,10 @@ public class LoginFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String url = "login/login.jsp";
+		String url = "member/loginForm.jsp";
 		
 		// Check if user is logged in
-		if(session.getAttribute("loginUser") == null) {
+		if(session.getAttribute("loginUser") != null) {
 			url = "main.jsp";
 		}
 
