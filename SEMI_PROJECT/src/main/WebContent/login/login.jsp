@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="login.css">
+<title>관리자 로그인</title>
+<link rel="stylesheet" href="/login/login.css">
 </head>
 <body>
 <form  method="post" action="spring.do" name="loginFrm">

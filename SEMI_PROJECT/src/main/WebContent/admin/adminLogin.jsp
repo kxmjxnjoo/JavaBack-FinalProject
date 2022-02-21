@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/admin.css">
+<title>관리자 로그인</title>
+<link rel="stylesheet" href="/admin/css/admin.css">
 <script type="text/javascript">
  function workerCheck(){
 	  if(document.frm.adminid.value==""){

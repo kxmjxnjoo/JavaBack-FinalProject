@@ -139,7 +139,7 @@ create table faq (
 	faq_num number(5) primary key, 
 	faq_subject varchar2(300) not null,
 	faq_content varchar2(4000) not null
-)
+);
 create sequence faq_seq start with 1;
 select * from faq;
 
@@ -154,7 +154,7 @@ create table qna (
 	rep varchar2(5) default 'n',
 	indate date default sysdate,
 	qna_password varchar2(20)
-)
+);
 create sequence qna_seq start with 1;
 select * from qna;
 
