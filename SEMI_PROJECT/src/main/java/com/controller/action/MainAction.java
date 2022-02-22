@@ -48,7 +48,6 @@ public class MainAction implements Action {
 					for(FollowViewDto fdto : followingList) {
 							if(fdto.getFollowing() != null) {
 							String followingId = fdto.getFollowing();
-							
 							ArrayList<StoryDto> storyList = StoryDao.getInstance().getAllStory(followingId);
 							memberStoryList.add(storyList);
 						}

@@ -18,6 +18,8 @@ public class FollowDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
+	
+	
 	public ArrayList<FollowDto> getFollowing(String userid) {
 		ArrayList<FollowDto> list = null;
 		String sql = "select * from follow where follower=?";

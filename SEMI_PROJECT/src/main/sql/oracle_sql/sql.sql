@@ -246,3 +246,17 @@ select count(*) as count from post_like where post_num = 48
 select count(*) as count from reply where post_num = 48
 
 delete post_like where userid='jojo';
+
+select s.* from story s left outer join (select count(*) as count, userid  from story group by userid) a on s.userid = a.userid ;
+
+select * from follow where following = 'user12';
+
+select * from story where userid='hong';
+
+select * from 
+((select distinct userid from story) a, follow f where a.userid = f.following) where follower 
+
+select f.* from (select distinct userid from story) a, follow f where a.userid = f.following and follower='nari'
+
+select * from story_like;
+

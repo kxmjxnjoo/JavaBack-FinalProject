@@ -133,14 +133,7 @@ function goReport(story_num) {
 			</c:choose> 
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
-					<c:choose>
-						<c:when test="${likeResult == 1}">
-							<span class="material-icons" style="color:red" onclick="story_like(${story_num});"> favorite_border </span>
-						</c:when>
-						<c:otherwise>
-							<span class="material-icons" onclick="story_like(${story_num});"> favorite_border </span>
-						</c:otherwise>
-					</c:choose>
+					<span class="material-icons" style="color:${likeColor}" onclick="story_like(${story_num});"> favorite_border </span>
 				</div>
 			</div>
 			</div>  

@@ -16,6 +16,7 @@ public class CheckStoryLikeAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int story_num = Integer.parseInt(request.getParameter("story_num"));
 		String url = "spring.do?command=storyDetail&story_num=" + story_num;
+		String likeColor = "";
 		HttpSession session = request.getSession();
 		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 		if(mdto==null) url = "spring.do?command=login";
@@ -23,16 +24,15 @@ public class CheckStoryLikeAction implements Action {
 			String userid = mdto.getUserid();
 			StoryDao sdao = StoryDao.getInstance();
 			int result = sdao.storyLikeCheck(story_num, userid);
+			System.out.println("result : " + result);
 			if(result == 0) {
 				sdao.addStoryLike(story_num, userid);
-				result = 1;
+				likeColor = "red";
 			} else {
 				sdao.deleteStoryLike(story_num, userid);
-				result = 0;
 			}
-			request.setAttribute("likeResult", result);
-			System.out.println("likeResult : " + result);
-			
+			request.setAttribute("likeColor", likeColor);
+			System.out.println("likeColor : " + likeColor);
 		}
 			
 		response.sendRedirect(url);

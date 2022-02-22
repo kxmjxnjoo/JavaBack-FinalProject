@@ -25,6 +25,7 @@ public class StoryDetailAction implements Action {
 		else {
 				StoryDao sdao = StoryDao.getInstance();
 				String userid = request.getParameter("userid");
+				String likeColor = "";
 				int isFollowing = 0;
 				int story_num = 0;
 				StoryDto sdto = null;
@@ -42,6 +43,7 @@ public class StoryDetailAction implements Action {
 				
 				String loginUserid = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUserid);
+				if (result==1) likeColor = "red";
 				
 				int prev = sdao.searchPrevStory(story_num, userid);
 				int next = sdao.searchNextStory(story_num, userid);
@@ -49,8 +51,7 @@ public class StoryDetailAction implements Action {
 				isFollowing = FollowDao.getInstance().isFollowing(loginUserid, userid);
 				
 				request.setAttribute("isFollowing", isFollowing);
-				request.setAttribute("likeResult", result);
-				request.setAttribute("likeResult", result);
+				request.setAttribute("likeColor", likeColor);
 				request.setAttribute("story_num", story_num);
 				request.setAttribute("StoryDto", sdto);
 				request.setAttribute("prev", prev);

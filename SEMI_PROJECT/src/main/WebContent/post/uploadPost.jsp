@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>포스트 작성</title>
 <link href="../css/spring.css" rel="stylesheet"> 
+<link href="../css/posting.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" language="javascript" defer="defer"> 
 function setThumbnail(event) { 

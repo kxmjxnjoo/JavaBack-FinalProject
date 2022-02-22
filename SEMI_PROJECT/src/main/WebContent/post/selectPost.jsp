@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>게시물 생성</title>
 <link href="css/spring.css" rel="stylesheet"> 
+<link href="css/posting.css" rel="stylesheet"> 
 <script type="text/javascript" language="javascript" defer="defer">
 function goBack(){
 	window.history.back();
