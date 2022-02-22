@@ -28,7 +28,7 @@ public class FindIdAction implements Action {
 			request.setAttribute("message", "주신 정보로는 아이디를 찾지 못 했어요");
 		}
 		
-		request.getRequestDispatcher("member/findidpwd.jsp").forward(request, response);
+		request.getRequestDispatcher("member/findidpwdForm.jsp").forward(request, response);
 	}
 
 }
