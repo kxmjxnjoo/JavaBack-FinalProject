@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.dto.FaqDto;
+import com.dto.QnaDto;
 import com.util.Dbman;
 
 public class FaqDao {
@@ -78,6 +79,21 @@ public class FaqDao {
 	}
 	
 	
+	
+	public void updateFaq(FaqDto fdto) {
+		String sql = "Update faq set faq_subject=?, faq_content"
+				+ " where faq_num = ?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, fdto.getFaq_subject());
+			pstmt.setString(2, fdto.getFaq_content());
+			pstmt.setInt(3, fdto.getFaq_num());
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs);		}
+	}
+
 	
 
 }
