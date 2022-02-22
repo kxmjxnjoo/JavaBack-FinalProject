@@ -6,22 +6,25 @@ body {
 
 #findidpwdBox {
     width: 50%;
+    height: 600px;
+
+    overflow: hidden;
 
     position: relative;
     left: 25%;
-    top: 50px;
+    top: 50px
 }
 
 #findidBox, #findpwdBox {
     width: 40%;
     height: 600px;
-    display: inline-block;
+
+    display: inline-flex;
 
     background-color: white;
 
     position: relative;
-    left: 10%;
-
+    left: 5%;
     text-align: center;
 }
 
@@ -33,7 +36,6 @@ body {
     margin-left: 20px;
 
     position: relative;
-    top: 65px;
 }
 
 #findidBox input[type=text] {

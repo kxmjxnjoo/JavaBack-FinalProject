@@ -15,7 +15,6 @@ public class FollowAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String url = "spring.do?command=main";
 		HttpSession session = request.getSession();
 		
@@ -25,8 +24,6 @@ public class FollowAction implements Action {
 			// Get follower(loginUser), following(param)
 				String follower = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				String following = request.getParameter("userid");
-				System.out.println("follower="+follower); //////////////////////////////////////////////////////////////////// 
-				System.out.println(following); //////////////////////////////////////////////////////////////////// 
 				
 			// Insert follow into db
 				int result = FollowDao.getInstance().insertFollow(follower, following);

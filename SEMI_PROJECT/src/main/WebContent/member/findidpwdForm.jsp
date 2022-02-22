@@ -22,7 +22,7 @@
 					<input type="text" name="name" placeholder="이름">
 					<input type="text" name="phone" placeholder="전화번호">
 					
-					<input type="submit">
+					<input type="submit" value="아이디 찾기">
 				</form>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 					<input type="button" onclick="getCertNum()" value="인증번호">
 					<input type="text" name="certnum" placeholder="인증번호">
 					
-					<input type="submit"> 
+					<input type="submit" value="비밀번호 찾기"> 
 				</form>
 			</div>
 		</div>
