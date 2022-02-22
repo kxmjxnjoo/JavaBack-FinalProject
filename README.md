@@ -20,7 +20,7 @@
 - [x] faqList.jsp 진주
 - [ ] qnaForm.jsp 진주
 - [ ] adminReportList.jsp 진주
-- [ ] adminMemberList.jsp 진주
+- [x] adminMemberList.jsp 진주
 
 # TODO
 - [x] 아이디 비밀번호 찾기
