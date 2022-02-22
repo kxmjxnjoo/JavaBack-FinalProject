@@ -18,7 +18,7 @@
 - [x] joinForm.jsp 진주
 - [x] adminLogin.jsp 진주
 - [x] faqList.jsp 진주
-- [ ] qnaForm.jsp 진주
+- [ ] qnaForm.jsp 진주 -> css 오류로 수정 중
 - [ ] adminReportList.jsp 진주
 - [x] adminMemberList.jsp 진주
 
