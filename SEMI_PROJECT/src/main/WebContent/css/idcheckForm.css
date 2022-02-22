@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body {
+    background-color: #efebe8;
+}
+
+#idCheckBox {
+    background-color: white;
+    
+    width: 40%;
+    height: 300px;
+
+    position: relative;
+    left: 30%;
+    top: 150px;
+
+    text-align: center;
+}
+
+#idCheckBox form {
+    position: relative;
+    top: 50px;
+}
+
+#idCheckBox input {
+    margin-bottom: 25px;
+}
+
+#idCheckBox input[type=text] {
+    width: 80%;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 30px;
+}
+ 
+#idCheckBox input[type=submit] {
+    width: 80%;
+    height: 40px;
+
+    border: none;
+    background-color: #e59999;
+
+    font-size: 20px;
+}
+
+#idCheckBox input[type=submit]:hover {
+    background-color: #e59999;
+}
+
+
+
+#idCheckBox input[type=button] {
+    width: 80%;
+    height: 40px;
+    display: block;
+
+    position: relative;
+    left: 10%;
+
+    border: none;
+    background-color: #e59999;
+
+    font-size: 20px;
+}
+
+#idCheckBox input[type=button]:hover {
+    background-color: #e59999;
+}
