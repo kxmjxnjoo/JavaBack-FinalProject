@@ -8,7 +8,7 @@
 <nav id="sub_menu">
 <!-- <h1>Admin Setting</h1>  -->
 <ul>
-	<li><img src ="admin/images/Logo.png" width="65px" class="img"></li>
+	<li><img src ="admin/images/Logo.png" width="65px" class="img" onclick="location.href='spring.do?command=loginform'"></li>
 	<li><a href="spring.do?command=memberList">회원리스트</a></li>
 	<li><a href="spring.do?command=adminFaqList">FAQ리스트</a></li>
 	<li><a href="spring.do?command=qnaList">Q&amp;A리스트</a></li>
