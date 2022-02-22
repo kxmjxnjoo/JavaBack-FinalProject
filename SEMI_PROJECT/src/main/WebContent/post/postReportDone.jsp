@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>신고 완료</title>
 <link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/report.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>

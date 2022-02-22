@@ -244,3 +244,5 @@ select * from report
 
 select count(*) as count from post_like where post_num = 48
 select count(*) as count from reply where post_num = 48
+
+delete post_like where userid='jojo';

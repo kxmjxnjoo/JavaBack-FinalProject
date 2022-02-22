@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+
+
+/* ---------------------------story---------------------------------- */
+
+#logo {
+	position: absolute; top: 0; left: 1%; 
+	height: 50px; widht: 100%;
+}
+
+#storyArea{
+	position: relative; margin:0 auto; margin-top: 10px; text-align: center;
+	width:100%; height:95%; overflow: hidden;
+	display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1ch; 
+}
+
+.story_content{
+	position:relative; text-align: center; margin: 0 auto;
+	width: 25%; height: 95%; border: 1px solid black; border-radius: 10px;
+	float:left; overflow: hidden;
+	background: pink;
+}
+
+#story_img{
+	width: 100%; height: 100%;
+	object-fit:cover;
+}
+
+#story_user{
+	position: absolute; top:3%; left:4%; float:left;
+	width: 60%; height: 50px; text-align: center; line-height: 50px; color:white; 
+}
+
+#story_user #userid{
+	float:left; margin-left: 10px;
+}
+
+#storyArea #buttons{
+	position: absolute; top:4%; right:4%;
+	width:20px;height: 20px; color:white;
+	
+}
+
+#storyArea #post_address{
+	position: absolute; top:10%; right: 35%; display: inline-block; 
+}
+
+#storyArea #reaction{
+	width: 35px; height: 35px; opacity: 80%;
+    background: white; border-radius: 50%;
+    display: flex; flex-direction: column; justify-content: center;
+}
+
+
+#story_date{
+	float: right; color: white; font-size: 80%; opacity: 70%
+}
+
+#story_content{
+	position: absolute; top:80%; left:50%;  transform: translate(-50%, -80%);
+	color: white;
+}
+
+#goBefore{
+	position: absolute; top: 50%; left: 2%;
+	cursor: pointer;
+}
+
+#goNext{
+	position: absolute; top: 50%; right: 2%;
+	cursor: pointer;
+}
+
+
+
+#story_wrap{
+	position: relative;
+	width: 70%; height: 200px;
+	background: yellow;
+	margin:0 auto;
+}
+
+.story_img {
+	position: relative;
+	width: 100px; height: 100px;
+	border-radius:50px;
+	margin: auto;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	background: pink;
+	overflow:hidden;
+}
+
+
+.icon_like {
+	float:left;
+}

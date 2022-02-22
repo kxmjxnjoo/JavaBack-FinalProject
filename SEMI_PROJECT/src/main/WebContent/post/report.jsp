@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>게시물 신고하기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/report.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript">
 function doPostReport(post_num){

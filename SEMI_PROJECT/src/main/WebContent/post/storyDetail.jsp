@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>스토리 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/story.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="/js/follow.js"></script>
 <script type="text/javascript">

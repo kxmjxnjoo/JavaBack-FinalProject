@@ -13,8 +13,13 @@ html, body  {
 
 #myStory {
     background-color:#e59999;
+    
     width: 85px;
     height: 85px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     border-radius: 50%;
 }
