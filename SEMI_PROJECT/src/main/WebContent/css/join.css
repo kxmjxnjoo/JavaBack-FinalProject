@@ -7,7 +7,7 @@ body{
 h3{
 	color: gray;
 }
-form{
+#joinform {
 	margin: 0 auto;
 	width:350px;
 	text-align:center;
@@ -88,6 +88,26 @@ a { color: #4c4c4c;
 span{
 	margin: 10px 10px 10px 10px;
 }
+
+#idcheckbutton {
+	position:relative; 
+	width:270px; 
+	height:38px; 
+	border:1px solid #e59999; 
+	margin:5px auto;	
+	background: white; 
+	font-size:80%;
+	margin-bottom:5px;
+
+	background-color: rgb(220, 53, 69);
+	color: white;
+}
+
+#idcheckbutton:hover {
+	background:#f7c4c0;
+	color: black;
+}
+
 /*------------------------------------footer--------------------------*/
 #copy{
 	font-size:90%; 

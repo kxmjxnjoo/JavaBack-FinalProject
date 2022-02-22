@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
 	
-	<form method="post" action="spring.do" name="loginFrm">
+	<form method="post" action="spring.do" name="loginFrm" id="joinform">
 		<input type="hidden" name="command" value="join">
 		<div id="box1">
 			<h1>Springfeed</h1>
