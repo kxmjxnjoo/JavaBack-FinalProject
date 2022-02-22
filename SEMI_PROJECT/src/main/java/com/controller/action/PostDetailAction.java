@@ -25,31 +25,27 @@ public class PostDetailAction implements Action {
 		else {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
 				int isFollowing = 0;
+				String likeColor = "";
 				String message = request.getParameter("message");
-				System.out.println(message);
 				String loginUserid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				PostDao pdao = PostDao.getInstance();
 				PostDto pdto = pdao.getPost(post_num);
 				ArrayList<ReplyDto> rdto = pdao.getReply(post_num);
 				int result = pdao.postLikeCheck(post_num, loginUserid);
-				String fileName = "";
-				if(result == 0) {
-					fileName = "../images/beforeLike.png";
-				} else {
-					fileName = "../images/Like.png";
-				}
-				
+				System.out.println("before likeResult : " + result);
+				if (result==1) likeColor = "red"; 
 				for(int i=0; i<rdto.size(); i++) {
 					int replyLikeResult = pdao.replyLikeCheck(rdto.get(i).getReply_num(), loginUserid);
-					if(replyLikeResult==0) rdto.get(i).setReplyFileName("favorite_border");
-					else rdto.get(i).setReplyFileName("favorite");
+					if(replyLikeResult==0) rdto.get(i).setReplyFileName("");
+					else rdto.get(i).setReplyFileName("red");
 				}
 				
 				isFollowing = FollowDao.getInstance().isFollowing(loginUserid, loginUserid);
 				
+				
+				request.setAttribute("likeColor", likeColor);
 				request.setAttribute("isFollowing", isFollowing);
 				request.setAttribute("likeResult", result);
-				request.setAttribute("fileName", fileName);
 				request.setAttribute("post_num", post_num);
 				request.setAttribute("PostDto", pdto);
 				request.setAttribute("ReplyDto", rdto);

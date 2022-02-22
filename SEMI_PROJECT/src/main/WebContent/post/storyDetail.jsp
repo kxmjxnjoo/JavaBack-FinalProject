@@ -79,7 +79,7 @@ function goReport(story_num) {
 		</c:choose>
 	</div>
 	
-	<div class="wrap" >
+	<div class="wrap" style="position:absolute">
 	
 		
 		<div id=storyArea>
@@ -140,9 +140,6 @@ function goReport(story_num) {
 							<span class="material-icons" onclick="story_like(${story_num});"> favorite_border </span>
 						</c:otherwise>
 					</c:choose>
-					
-					
-					<%-- <img src="${fileName}" width="30px" height="30px" onclick="story_like(${story_num});" style="cursor:pointer"> --%>
 				</div>
 			</div>
 			</div>  

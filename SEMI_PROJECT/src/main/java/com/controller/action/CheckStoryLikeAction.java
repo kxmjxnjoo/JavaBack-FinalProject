@@ -23,17 +23,16 @@ public class CheckStoryLikeAction implements Action {
 			String userid = mdto.getUserid();
 			StoryDao sdao = StoryDao.getInstance();
 			int result = sdao.storyLikeCheck(story_num, userid);
-			String fileName = "";
 			if(result == 0) {
 				sdao.addStoryLike(story_num, userid);
-				fileName = "../images/Like.png";
 				result = 1;
 			} else {
 				sdao.deleteStoryLike(story_num, userid);
-				fileName = "../images/beforeLike.png";
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);
+			System.out.println("likeResult : " + result);
+			
 		}
 			
 		response.sendRedirect(url);

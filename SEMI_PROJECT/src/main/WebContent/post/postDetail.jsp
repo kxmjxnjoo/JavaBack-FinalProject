@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>포스트 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/posting.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="/js/follow.js"></script>
 <script type="text/javascript" defer="defer">
@@ -83,15 +84,15 @@ function deleteReplyCheck(reply_num, post_num){
 </script>
 </head>
 <body>
+<%@ include file="/topnav/topnav.jsp" %>
 
 <form name="frm" method="post">
-<%-- <%@ include file="/topnav/topnav.jsp" %> --%>
 <!-- report modal -->
 	<div id="setting">
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 				<div id="setting_menu">
-					<div class="setting_btn" onlick="location.href='spring.do?command=editPostForm&post_num=${post_num}'">수정</div>
+					<div class="setting_btn" onclick="location.href='spring.do?command=editPostForm&post_num=${post_num}'">수정</div>
 					<div class="setting_btn" onClick="deleteCheck(${post_num});">삭제</div>
 					<div class="setting_btn" onClick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
@@ -163,14 +164,7 @@ function deleteReplyCheck(reply_num, post_num){
 					<div id="posting_wrap">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'">
 						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
-						<%-- <c:choose>
-							<c:when test="${empty PostDto.user_img}"> 
-								<img src="../images/noProfile.png" width="50px" height="50px">
-							</c:when>
-							<c:otherwise>
-								<img src="../images/${PostDto.user_img}" width="50px" height="50px">
-							</c:otherwise>
-						</c:choose> --%>
+						
 						<label>${PostDto.userid}</label>
 					</div>
 					<div id="text_content"> <label>${PostDto.userid} </label> 
@@ -195,14 +189,6 @@ function deleteReplyCheck(reply_num, post_num){
 					<c:forEach items="${ReplyDto}" var="reply">
 						<div id="reply_each">
 							<img class="replyImg" src="../images/${ reply.img == null ? "tmpUserIcon.png" : reply.img }">
-							<%-- <c:choose>
-								<c:when test="${empty reply.img}">
-									<img src="../images/2.jpg" width="50px" height="50px" onclick="location.href='spring.do?command=userpage&userid=${reply.userid}'">
-								</c:when>
-								<c:otherwise>
-									<img src="../images/${reply.img}" width="50px" height="50px" onclick="location.href='spring.do?command=userpage&userid=${reply.userid}'">
-								</c:otherwise>
-							</c:choose> --%>
 							<div id="text_content"><label>${reply.userid}</label> 
 								${reply.content}
 								<div id="date"><fmt:formatDate value="${reply.reply_date}"/></div>
@@ -210,8 +196,8 @@ function deleteReplyCheck(reply_num, post_num){
 							
 							<c:choose>	
 								<c:when test="${PostDto.userid == loginUser.userid}">
-									<span id="replyLike${reply.reply_num}" class="material-icons" 
-									onclick="reply_like(${reply.reply_num}, ${post_num});">${reply.replyFileName}</span>
+									<span id="replyLike${reply.reply_num}" class="material-icons" style="color:${reply.replyFileName}"
+									onclick="reply_like(${reply.reply_num}, ${post_num});">favorite_border</span>
 									<span id="deleteReply" class="material-icons" 
 									onclick="deleteReplyCheck(${reply.reply_num}, ${post_num});">
 										clear</span>
@@ -228,16 +214,15 @@ function deleteReplyCheck(reply_num, post_num){
 						</div>
 						</c:forEach>
 					</div>
+<!-- 좋아요 덧글 아이콘 -->
 					<div id="reaction">
-						<img src="${fileName}" id="postLike" width="30px" onClick="post_like(${post_num});">
+						<span class="material-icons" style="color:${likeColor}" onclick="post_like(${post_num});"> favorite_border </span>
 						<img src="../images/comment.png" width="30px" onClick="focus_reply();">
 					</div>
+					
+<!-- 덧글 작성 -->
 					<div id="write_reply_wrap">
 						<div id="write_reply"> 
-							<!-- <textarea name="reply_content" id="reply_content" cols=30 rows=1 
-							onKeyDown="textCounter(this.form.reply_content,this.form.remLen,100);" 
-							onKeyUp="textCounter(this.form.reply_content,this.form.remLen,100);"
-							placeholder="댓글 달기..."></textarea> -->
 							<input id="reply_content" name="reply_content" type="text" placeholder="댓글 달기..." maxlength='100'>
 							<span><img id="replySending" src="../images/send.png" width="30px" onclick="add_reply(${post_num});"></span>
 						</div>
