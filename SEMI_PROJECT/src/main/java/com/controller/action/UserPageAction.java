@@ -14,6 +14,7 @@ import com.dto.MemberDto;
 import com.dto.MemberViewDto;
 import com.dto.PostViewDto;
 import com.dao.MemberViewDao;
+import com.dao.PostDao;
 
 public class UserPageAction implements Action {
 
@@ -30,11 +31,20 @@ public class UserPageAction implements Action {
 		
 		// Get user's post
 		ArrayList<PostViewDto> postList = PostViewDao.getInstance().getAllPostById(userid);
+		
+		
+		// Get count reply & likes
+		for(int i=0; i<postList.size(); i++) {
+			int post_num = postList.get(i).getPostNum();
+			PostDao pdao = PostDao.getInstance();
+			postList.get(i).setLikeCount(pdao.likeCount(post_num));
+			postList.get(i).setReplyCount(pdao.replyCount(post_num));
+		}
 		request.setAttribute("posts", postList);
 		
 		// Get whether loginUser is following user
 		HttpSession session = request.getSession();
-		String loginUserid = "jojo";/*((MemberDto) session.getAttribute("loginUser")).getUserid();*/
+		String loginUserid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 		int isFollowing = FollowDao.getInstance().isFollowing(loginUserid, userid);
 		request.setAttribute("isFollowing", isFollowing);
 		

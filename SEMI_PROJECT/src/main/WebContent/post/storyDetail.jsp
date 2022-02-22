@@ -9,6 +9,7 @@
 <title>스토리 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="/js/follow.js"></script>
 <script type="text/javascript">
 
 function story_like(story_num){
@@ -43,7 +44,6 @@ function goReport(story_num) {
 		"width="+_width+", height="+_height+", left="+_left;
 	window.open(url, "reportPost", opt);
 }
-
 </script>
 </head>
 <body>
@@ -53,18 +53,25 @@ function goReport(story_num) {
 <!-- setting popup -->
 	<div id="setting">
 		<c:choose> 
-			<c:when test="${StoryDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
+			<c:when test="${StoryDto.userid == loginUser.userid}">
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='spring.do?command=editStoryForm&story_num=${story_num}'> 수정 </a></div>
-					<div class="setting_btn" onClick="deleteCheck(${story_num});"> <a href="#"> 삭제 </a></div>
+					<div class="setting_btn" onclick="location.href='spring.do?command=editStoryForm&story_num=${story_num}'"> 수정</div>
+					<div class="setting_btn" onclick="deleteCheck(${story_num});"> 삭제 </div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
 			</c:when>
 			<c:otherwise>
 					<div id="setting_menu">
-						<div class="setting_btn"><a href='#'>팔로우</a></div> <!-- 팔로우/언팔로우 c:choose 처리 -->
-						<div class="setting_btn"><a href='#' onClick="goReport(${story_num});">신고</a></div>
+						<c:choose>
+							<c:when test="${ isFollowing == 1 }">
+								<div class="setting_btn" onclick="unfollow('${ StoryDto.userid }')"> 언팔로우</div>
+							</c:when>
+							<c:otherwise>
+								<div class="setting_btn" onclick="follow('${ StoryDto.userid }')">팔로우</div>
+							</c:otherwise>
+						</c:choose>
+						<div class="setting_btn" onclick="goReport(${story_num});">신고</div>
 						<div class="setting_btn" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>
 					</div>
@@ -104,16 +111,9 @@ function goReport(story_num) {
 <!-- 글 작성자 프로필 -->
 				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<c:choose>
-							<c:when test="${empty StoryDto.user_img}">
-								<img src="../images/noProfile.png" width="50px" height="50px">
-							</c:when>
-							<c:otherwise>
-								<img src="../images/${StoryDto.user_img}" width="50px" height="50px">
-							</c:otherwise>
-						</c:choose>
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div> 
-					<div id="userid"><b>hong</b></div> <!-- ${storydto.userid} -->
+					<div id="userid"><b> ${StoryDto.userid}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>
 				</div>
 				
@@ -129,7 +129,7 @@ function goReport(story_num) {
 				<c:otherwise>
 					<div id="story_content" style="color:${StoryDto.fontColor}"> <h2>  ${StoryDto.content}  </h2>  </div> 
 				</c:otherwise>
-			</c:choose>
+			</c:choose> 
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
 					<c:choose>

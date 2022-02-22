@@ -53,15 +53,15 @@
 
 <div id="postList">
 	<c:forEach var="post" items="${ posts }">
-		<div class="userPost">
-			<img src="${ post.postImg }">
+		<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
+			<img src="../images/${ post.postImg }">
 			
 			<div class="userPostInfo">
 				<i class="material-icons">favorite</i>
-				<h3>${ post.likes }</h3>
+				<h3>${ post.likeCount }</h3>
 				
 				<i class="material-icons">chat_bubble</i>
-				<h3>0</h3>
+				<h3>${ post.replyCount }</h3>
 			</div>
 		</div>
 

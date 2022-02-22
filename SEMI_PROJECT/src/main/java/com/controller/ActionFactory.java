@@ -16,6 +16,9 @@ import com.controller.action.EditProfileFormAction;
 import com.controller.action.EditStoryAction;
 import com.controller.action.EditStoryFormAction;
 import com.controller.action.ExploreAction;
+import com.controller.action.FindIdAction;
+import com.controller.action.FindIdpwdForm;
+import com.controller.action.FindPwdAction;
 import com.controller.action.FollowAction;
 import com.controller.action.FollowArrowsAction;
 import com.controller.action.JoinAction;
@@ -115,6 +118,9 @@ public class ActionFactory {
 		// Related to member
 		else if(command.equals("loginform"))			ac = new LoginFormAction();
 		else if(command.equals("login"))				ac = new LoginAction();
+		else if(command.equals("findidpwdform"))		ac = new FindIdpwdForm();
+		else if(command.equals("findid"))				ac = new FindIdAction();
+		else if(command.equals("findpwd"))				ac = new FindPwdAction();
 		else if(command.equals("logout"))				ac = new LogoutAction();
 		else if(command.equals("joinform"))				ac = new JoinFormAction();
 		else if(command.equals("join"))					ac = new JoinAction();

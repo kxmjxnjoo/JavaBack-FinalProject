@@ -9,6 +9,7 @@
 <title>포스트 자세히 보기</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="/js/follow.js"></script>
 <script type="text/javascript" defer="defer">
 
 function add_reply(post_num){
@@ -90,16 +91,23 @@ function deleteReplyCheck(reply_num, post_num){
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='spring.do?command=editPostForm&post_num=${post_num}'> 수정 </a></div>
-					<div class="setting_btn" onClick="deleteCheck(${post_num});"> <a href="#"> 삭제 </a></div>
+					<div class="setting_btn" onlick="location.href='spring.do?command=editPostForm&post_num=${post_num}'">수정</div>
+					<div class="setting_btn" onClick="deleteCheck(${post_num});">삭제</div>
 					<div class="setting_btn" onClick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
 		</c:when>
 		<c:otherwise>
 				<div id="setting_menu">
-					<div class="setting_btn"><a href='#'>팔로우</a></div> <!-- 팔로우/언팔로우 c:choose 처리 -->
-					<div class="setting_btn"><a href='#' onClick="goReport(${post_num});">신고</a></div>
+					<c:choose>
+						<c:when test="${ isFollowing == 1 }">
+							<div class="setting_btn" onclick="unfollow('${ PostDto.userid }')"> 언팔로우</div>
+						</c:when>
+						<c:otherwise>
+							<div class="setting_btn" onclick="follow('${ PostDto.userid }')">팔로우</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="setting_btn" onClick="goReport(${post_num});">신고</div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
@@ -108,7 +116,7 @@ function deleteReplyCheck(reply_num, post_num){
 	</div>
 
 <!-- setting modal -->
-	<div id="setting">
+	<%-- <div id="setting">
 	<c:choose>
 		<c:when test="${PostDto.userid == loginUser.userid}">  <!-- ==으로 바꾸기 -->
 			
@@ -128,7 +136,7 @@ function deleteReplyCheck(reply_num, post_num){
 				</div>
 		</c:otherwise>
 	</c:choose>
-	</div>
+	</div> --%>
 	
 	<div class="wrap">
 		<div class="detail_wrap">
@@ -140,7 +148,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
-						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
 					<b>${PostDto.userid}</b>  <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 					<div id="buttons" onClick="setting();">
@@ -154,7 +162,7 @@ function deleteReplyCheck(reply_num, post_num){
 				<div id="content"> 
 					<div id="posting_wrap">
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'">
-						<img class="userImg" src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 						<%-- <c:choose>
 							<c:when test="${empty PostDto.user_img}"> 
 								<img src="../images/noProfile.png" width="50px" height="50px">

@@ -18,21 +18,14 @@ public class EditStoryFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/post/editStory.jsp";
 		HttpSession session = request.getSession();
-		////////////테스트를 위한 코드입니다.	
-		MemberDto mdto = new MemberDto();
-		mdto.setUserid("hong");
-		mdto.setImg("1.png");
-		session.setAttribute("loginUser", mdto);
-		///////////여기까지///////////////////////////
-	
-		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
-		//if(mdto==null) url = "spring.do?command=login";
-		
-		int story_num = Integer.parseInt(request.getParameter("story_num"));
-		request.setAttribute("story_num", story_num);
-		StoryDto sdto = StoryDao.getInstance().getStory(story_num);
-		request.setAttribute("StoryDto", sdto);
-		
+		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
+		if(mdto==null) url = "spring.do?command=login";
+		else {
+			int story_num = Integer.parseInt(request.getParameter("story_num"));
+			request.setAttribute("story_num", story_num);
+			StoryDto sdto = StoryDao.getInstance().getStory(story_num);
+			request.setAttribute("StoryDto", sdto);
+		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

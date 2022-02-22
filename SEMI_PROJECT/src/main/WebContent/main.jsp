@@ -20,8 +20,8 @@
 			<c:if test="${ follow.following == loginUser.userid }">
 				<div class="storyBubble">
 					<div class="storyBubbleContent">
-						<div id="myStory">
-							<img src="/images/${ follow.followingImg }">
+						<div id="myStory" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
+							<img src="/images/${ follow.followingImg == null ? "tmpUserIcon.png" : follow.followingImg }">
 						</div>
 						<h3>${ follow.following }</h3>
 					</div>
@@ -38,7 +38,7 @@
 				<c:otherwise>
 					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">
-							<img src="/images/${ follow.followingImg }">
+							<img src="../images/${ follow.followingImg }">
 							<h3>${ follow.following }</h3>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 				
 					<div class="postBar">
 						<div class="postBarUserInfo" onclick="location.href='spring.do?command=userpage&userid=${ post.userid }'">
-							<img src="/images/${ post.userImg }">
+							<img src="../images/${ post.userImg == null ? "tmpUserIcon.png" : post.userImg }">
 							<div class="postBarInfo">
 								<h3>${ post.userid }</h3>
 								<h4>${ post.address }</h4>
@@ -119,7 +119,7 @@
 	
 	<div id="subBar">
 		<div id="myProfile" onclick="location.href='spring.do?command=userpage&userid=${ loginUser.userid }'">
-			<img src="/images/${ loginUser.img }">
+			<img src="../images/${ loginUser.img == null ? "tmpUserIcon.png" : loginUser.img }">
 			
 			<div id="myProfileInfo">
 				<h3>${ loginUser.userid }</h3>

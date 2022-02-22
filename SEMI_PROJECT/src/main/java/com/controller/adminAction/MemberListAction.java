@@ -37,7 +37,7 @@ public class MemberListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
-			ArrayList<MemberDto> list = adao.MemberList( paging, searchKey);
+			ArrayList<MemberDto> list = adao.MemberList(paging, searchKey);
 			
 			int count = 1;
 			paging.setTotalCount(count);

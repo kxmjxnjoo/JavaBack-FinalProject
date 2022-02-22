@@ -158,12 +158,13 @@ public class StoryDao {
 	}
 
 	public void editPost(StoryDto sdto) {
-		String sql = "update story set img=?, story_content=? where story_num=" + sdto.getStory_num();
+		String sql = "update story set img=?, story_content=?, fontcolor=? where story_num=" + sdto.getStory_num();
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sdto.getStory_img());
 			pstmt.setString(2, sdto.getContent());
+			pstmt.setString(3, sdto.getFontColor());
 			pstmt.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
