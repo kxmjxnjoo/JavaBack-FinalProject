@@ -44,6 +44,9 @@ public class WithdrawAction implements Action {
 			// Delete user from db
 			int result = MemberDao.getInstance().deleteMember(userid);
 			
+			// logout
+			session.invalidate();
+			
 			// Get result
 			if(result == 1) {
 				request.setAttribute("message", "회원탈퇴에 성공했어요. Springfeed가 그리워 지면 언제든지 다시 찾아주세요...");
