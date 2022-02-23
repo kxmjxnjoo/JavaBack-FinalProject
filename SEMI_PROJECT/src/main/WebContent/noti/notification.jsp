@@ -20,7 +20,7 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-					<img class="userImg" src="/images/${ noti.memberImg }">
+					<img class="userImg" src="/images/${ noti.memberImg == null ? "tmpUserIcon.png" : noti.memberImg }">
 					
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.userFrom }</h2>
@@ -48,7 +48,7 @@
 							</c:when>
 						</c:choose>
 						
-						<h2 class="notiDate notiText">5일</h2>
+						<h2 class="notiDate notiText">${ noti.datePassed }</h2>
 					</div>
 					
 					<c:if test="${ noti.notiType != 1 }">
