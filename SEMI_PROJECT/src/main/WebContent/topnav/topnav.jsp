@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -29,7 +30,7 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		
 	  	<c:choose>
-			<c:when test = "${ loginUser != null }">
+			<c:when test="${ loginUser != null }">
 				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
 				onclick="userIcon('${loginUser.userid}');">
 			</c:when>

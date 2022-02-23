@@ -40,6 +40,9 @@
 		</c:forEach>
 	</div>
 	
+		<%@ include file="/footer.jsp" %>
+	
+	
 	<script src="/js/follow.js"></script>
 </body>
 </html>

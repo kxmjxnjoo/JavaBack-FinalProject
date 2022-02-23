@@ -45,5 +45,8 @@
 	    </span>
 	    <br><br>
 	</form>
+	
+		<%@ include file="/footer.jsp" %>
+	
 </body>
 </html>

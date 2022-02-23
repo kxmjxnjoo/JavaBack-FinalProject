@@ -61,5 +61,9 @@
 	</c:choose>
 	
 	
+	
 </body>
+		<%@ include file="/footer.jsp" %>
+
+
 </html>

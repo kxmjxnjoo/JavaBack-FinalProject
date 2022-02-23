@@ -38,7 +38,9 @@ public class MainAction implements Action {
 			ArrayList<FollowViewDto> followingList = FollowViewDao.getInstance().getFollowing(userid);
 			
 			
-			if(followingList == null ) {
+			if(followingList == null) {
+				url = "info/noFollower.jsp";
+			} else if(followingList.size() == 1) {
 				url = "info/noFollower.jsp";
 			} else {
 				request.setAttribute("followingList", followingList);

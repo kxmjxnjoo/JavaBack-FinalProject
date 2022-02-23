@@ -18,8 +18,6 @@ public class FollowDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	
-	
 	public ArrayList<FollowDto> getFollowing(String userid) {
 		ArrayList<FollowDto> list = null;
 		String sql = "select * from follow where follower=?";
@@ -115,4 +113,23 @@ public class FollowDao {
 		return result;
 	}
 	
+	
+	public int deleteAllFollow(String userid) {
+		String sql = "delete from follow where follower=? or following=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
 }

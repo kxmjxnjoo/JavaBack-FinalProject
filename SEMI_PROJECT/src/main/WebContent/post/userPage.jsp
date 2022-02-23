@@ -51,22 +51,40 @@
 
 <hr>
 
-<div id="postList">
-	<c:forEach var="post" items="${ posts }">
-		<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
-			<img src="../images/${ post.postImg }">
-			
-			<div class="userPostInfo">
-				<i class="material-icons">favorite</i>
-				<h3>${ post.likeCount }</h3>
-				
-				<i class="material-icons">chat_bubble</i>
-				<h3>${ post.replyCount }</h3>
-			</div>
+<c:choose>
+	<c:when test="${ posts != null }">
+		<div id="postList">
+			<c:forEach var="post" items="${ posts }">
+				<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
+					<img src="../images/${ post.postImg }">
+					
+					<div class="userPostInfo">
+						<i class="material-icons">favorite</i>
+						<h3>${ post.likeCount }</h3>
+						
+						<i class="material-icons">chat_bubble</i>
+						<h3>${ post.replyCount }</h3>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
+	</c:when>
+	
+	<c:when test="${ loginUser.userid == user.userid }">
+		<div id="postList">
+			<h1>${ loginUser.name }님! 아직 포스트를 올리지 않으셨어요. 어서 올려보세요!</h1>
+		</div>
+	</c:when>
+	
+	<c:otherwise>
+		<div id="postList">
+			<h1>${ user.userid }님은 아직 포스트를 올리지 않으셨어요.</h1>
+		</div>
+	</c:otherwise>
+</c:choose>
 
-	</c:forEach>
-</div>
+	<%@ include file="/footer.jsp" %>
+
 
 <script src="/js/follow.js"></script>
 <script type="text/javascript">

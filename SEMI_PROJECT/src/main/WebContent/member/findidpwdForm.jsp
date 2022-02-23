@@ -47,6 +47,8 @@
 		
 	</div>
 	
+		<%@ include file="/footer.jsp" %>
+	
 	<script type="text/javascript">
 		function getCertNum() {
 			let certButton = document.querySelector("#findpwdBox:nth-child(5)")

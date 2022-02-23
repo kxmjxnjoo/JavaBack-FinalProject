@@ -219,5 +219,23 @@ public class StoryDao {
 		} finally { Dbman.close(con, pstmt, rs); }
 		return result;
 	}
+	
+	public int deleteAllStory(String userid) {
+		String sql = "delete from story where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
 
 }
