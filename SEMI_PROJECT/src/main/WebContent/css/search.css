@@ -66,3 +66,7 @@ body {
 .resultBoxInfo:hover {
     opacity: 0.5;
 }
+
+.resultBoxInfo img {
+	width: 100px; height: 100px;
+}
