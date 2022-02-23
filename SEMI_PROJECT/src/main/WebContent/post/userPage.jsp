@@ -52,42 +52,82 @@
 <hr>
 
 <div id="userpageSelection">
-	<button id="userpagePostButton">${ user.userid }님의 포스트</button>
+	<button id='userpagePostButton' onclick="location.href='spring.do?command=userpage&userid=${ user.userid }'" 
+	class="<c:if test="${ bookmark == null }">userpageSelected</c:if>">
 	
-	<button id="userpageBookmarkButton">저장된 포스트</button>
+		<i class="material-icons">dashboard_customize</i>
+		${ user.userid }님의 포스트
+	
+	</button>
+	
+	<button id='userpageBookmarkButton' onclick="location.href='spring.do?command=userpage&userid=${ user.userid }&bookmark=y'"
+	class="<c:if test="${ bookmark != null }">userpageSelected</c:if>">
+	
+		<i class="material-icons">bookmark_border</i>
+		저장된 포스트
+	
+	</button>
 </div>
 
 <c:choose>
-	<c:when test="${ posts != null }">
-		<div id="postList">
-			<c:forEach var="post" items="${ posts }">
-				<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
-					<img src="../images/${ post.postImg }">
+	<c:when test='${ bookmark != null }'>
+		<c:choose>
+			<c:when test="${ bookmarkList == null }">
+				<h1 id="savepostMessage">${ user.userid }님은 저장한 포스트가 없어요</h1>
+			</c:when>
+			
+			<c:otherwise>
+				<div id="bookmarkBox">
+			
+					<c:forEach var="bdto" items="${ bookmarkList }">
+						<div class="bookmark">
+							<img src="/images/${ bdto.postImg }">
+						</div>
+					</c:forEach>
 					
-					<div class="userPostInfo">
-						<i class="material-icons">favorite</i>
-						<h3>${ post.likeCount }</h3>
-						
-						<i class="material-icons">chat_bubble</i>
-						<h3>${ post.replyCount }</h3>
-					</div>
 				</div>
-			</c:forEach>
-		</div>
-	</c:when>
-	
-	<c:when test="${ loginUser.userid == user.userid }">
-		<div id="postList">
-			<h1>${ loginUser.name }님! 아직 포스트를 올리지 않으셨어요. 어서 올려보세요!</h1>
-		</div>
+				
+			</c:otherwise>
+			
+		</c:choose>
 	</c:when>
 	
 	<c:otherwise>
-		<div id="postList">
-			<h1>${ user.userid }님은 아직 포스트를 올리지 않으셨어요.</h1>
-		</div>
+		<c:choose>
+			<c:when test="${ posts != null }">
+				<div id="postList">
+					<c:forEach var="post" items="${ posts }">
+						<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
+							<img src="../images/${ post.postImg }">
+							
+							<div class="userPostInfo">
+								<i class="material-icons">favorite</i>
+								<h3>${ post.likeCount }</h3>
+								
+								<i class="material-icons">chat_bubble</i>
+								<h3>${ post.replyCount }</h3>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:when>
+			
+			<c:when test="${ loginUser.userid == user.userid }">
+				<div id="postList">
+					<h1>${ loginUser.name }님! 아직 포스트를 올리지 않으셨어요. 어서 올려보세요!</h1>
+				</div>
+			</c:when>
+			
+			<c:otherwise>
+				<div id="postList">
+					<h1>${ user.userid }님은 아직 포스트를 올리지 않으셨어요.</h1>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</c:otherwise>
+
 </c:choose>
+
 
 
 <%@ include file="/footer.jsp" %>

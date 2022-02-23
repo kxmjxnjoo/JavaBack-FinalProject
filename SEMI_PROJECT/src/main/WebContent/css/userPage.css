@@ -140,16 +140,25 @@ hr {
     top: 100px;
 }
 
+.userpageSelected {
+    opacity: 0.5;
+}
+
 #userpageSelection button {
     height: 100%;
     width: 200px;
 
-    border: none;
+    background-color: white;
 
-    background-color: rgb(247, 218, 212);
+    border: none;
 
     font-size: 20px;
 }
+
+#userpageSelection button:hover {
+    opacity: 0.3;
+}
+
 
 #userPageSelection button:hover {
     opacity: 0.7;
@@ -161,4 +170,24 @@ hr {
 
 #userpageBookmarkButton {
     margin-left: 30px;
+}
+
+#savepostMessage {
+    text-align: center;
+
+    margin-top: 200px;
+}
+
+#bookmarkBox {
+    width: 80%;
+    position: relative;
+    left: 10%;
+    top: 150px;
+
+    margin-bottom: 300px;
+}
+
+.bookmark img {
+    width: 500px;
+    height: 500px;
 }

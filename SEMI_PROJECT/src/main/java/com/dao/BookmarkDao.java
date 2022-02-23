@@ -39,6 +39,9 @@ public class BookmarkDao {
 				bdto.setPostNum(rs.getInt("post_num"));
 				bdto.setSaveDate(rs.getDate("save_date"));
 				bdto.setUserid(rs.getString("userid"));
+				
+				bdto.setPostImg(PostDao.getInstance().getPost(bdto.getPostNum()).getPost_img());
+				
 				list.add(bdto);
 			}
 		} catch(Exception  e) {
@@ -77,15 +80,14 @@ public class BookmarkDao {
 	}
 	
 	public int insertBookmark(BookmarkDto bdto) {
-		String sql = "insert into bookmark (num, post_num, userid) values(bookmark_seq.nextVal,?,?,?)";
+		String sql = "insert into bookmark (num, post_num, userid) values(bookmark_seq.nextVal,?,?)";
 		int result = 0;
 		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bdto.getNum());
-			pstmt.setInt(2, bdto.getPostNum());
-			pstmt.setString(3, bdto.getUserid());
+			pstmt.setInt(1, bdto.getPostNum());
+			pstmt.setString(2, bdto.getUserid());
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -123,6 +125,28 @@ public class BookmarkDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+
+	public int getBookmark(String userid, int postNum) {
+		int result = 0;
+		String sql = "select * from bookmark where userid=? and post_num=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setInt(2, postNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

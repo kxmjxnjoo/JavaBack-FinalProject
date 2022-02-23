@@ -15,6 +15,16 @@ public class PostViewDto {
 	private int likeCount;
 	private int replyCount;
 	
+	private int isSaved;
+	
+	public int getIsSaved() {
+		return isSaved;
+	}
+	public void setIsSaved(int isSaved) {
+		this.isSaved = isSaved;
+	}
+
+	
 	public int getLikeCount() {
 		return likeCount;
 	}

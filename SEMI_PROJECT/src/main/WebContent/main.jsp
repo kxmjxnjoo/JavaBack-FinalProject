@@ -21,7 +21,18 @@
 				<div class="storyBubble">
 					<div class="storyBubbleContent">
 						<div id="myStory" onclick="location.href='spring.do?command=storyCheck&userid=${follow.following}'">
-							<img src="/images/${ follow.followingImg == null ? "tmpUserIcon.png" : follow.followingImg }">
+							<img src="/images/
+								<c:choose>
+									<c:when test="${ follow.followingImg == null }">
+										tmpUserIcon.png
+									</c:when>
+									<c:otherwise>
+										${ follow.followingImg }
+									</c:otherwise>
+									
+	
+								</c:choose>
+							">
 						</div>
 						<h3>${ follow.following }</h3>
 					</div>
@@ -38,7 +49,17 @@
 				<c:otherwise>
 					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">
-							<img src="/images/${ follow.followingImg == null ? "tmpUserIcon.png" : follow.followingImg }">
+							<img src="/images/
+								<c:choose>
+									<c:when test="${ follow.followingImg == null }">
+										tmpUserIcon.png
+									</c:when>
+									<c:otherwise>
+										${ follow.followingImg }
+									</c:otherwise>
+								</c:choose>
+							">
+							
 							<h3>${ follow.following }</h3>
 						</div>
 					</div>
@@ -55,7 +76,16 @@
 				
 					<div class="postBar">
 						<div class="postBarUserInfo" onclick="location.href='spring.do?command=userpage&userid=${ post.userid }'">
-							<img src="../images/${ post.userImg == null ? "tmpUserIcon.png" : post.userImg }">
+							<img src="../images/
+								<c:choose>
+									<c:when test="${ post.userImg == null }">
+										tmpUserIcon.png
+									</c:when>
+									<c:otherwise>
+										${ post.userImg }
+									</c:otherwise>
+								</c:choose>
+							">
 							<div class="postBarInfo">
 								<h3>${ post.userid }</h3>
 								<h4>${ post.address }</h4>
@@ -86,7 +116,16 @@
 						>favorite_border</i>
 						<i class="material-icons">chat_bubble_outline</i>
 						<i class="material-icons">send</i>
-						<i class="material-icons">bookmark_border</i>
+						
+						<c:choose>
+							<c:when test="${ post.isSaved == 1 }">
+								<i class="material-icons" onclick="location.href='spring.do?command=deletebookmark&postnum=${ post.postNum }'">bookmark</i>
+							</c:when>
+							<c:otherwise>
+								<i class="material-icons" onclick="location.href='spring.do?command=addbookmark&postnum=${ post.postNum }'">bookmark_border</i>
+							</c:otherwise>
+						</c:choose>
+						
 					</div>
 					
 					<div class="postInfo">

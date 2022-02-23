@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.BookmarkDao;
 import com.dao.FollowViewDao;
 import com.dao.PostViewDao;
 import com.dao.StoryDao;
@@ -71,6 +72,11 @@ public class MainAction implements Action {
 								}
 							}
 						}
+					}
+					
+					// Get if loginUser saved the post
+					for(PostViewDto pdto : tmpPostList) {
+						pdto.setIsSaved(BookmarkDao.getInstance().getBookmark(userid, pdto.getPostNum()));
 					}
 				}
 				request.setAttribute("postList", postList);
