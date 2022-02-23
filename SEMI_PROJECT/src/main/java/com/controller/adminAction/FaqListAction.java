@@ -20,7 +20,7 @@ public class FaqListAction implements Action {
 		HttpSession session = request.getSession();
 	    MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
 	    if (mdto == null) {
-	    	url = "??? main"; //로그인 하는 메인 페이지 주소 아직 모름
+	    	url = "spring.do?command=main";
 	    } else {
 	    	url = "spring.do?command='faqList";
 	    }

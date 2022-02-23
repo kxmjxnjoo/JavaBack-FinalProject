@@ -6,9 +6,17 @@ public class ReportDto {
 	private String reporter_id;
 	private String reported_id;
 	private int post_num;
+	private int story_num;
 	private Timestamp indate;
 	private String reason;
 	private String type;
+	
+	public int getStory_num() {
+		return story_num;
+	}
+	public void setStory_num(int story_num) {
+		this.story_num = story_num;
+	}
 	
 	public String getType() {
 		return type;

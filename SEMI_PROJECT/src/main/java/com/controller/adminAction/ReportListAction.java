@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
-import com.dao.AdminDao;
+import com.dao.ReportDao;
 import com.dto.AdminDto;
-import com.dto.MemberDto;
+import com.dto.ReportDto;
 import com.util.Paging;
 
 public class ReportListAction implements Action {
@@ -19,15 +19,14 @@ public class ReportListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
-		
 		String url = "admin/adminReportList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
 		else {
+			url = "admin/adminReportList.jsp";
 
-			AdminDao adao = AdminDao.getInstance();
+			ReportDao rdao = ReportDao.getInstance();
 			
 			Paging paging = new Paging();
 			int page=1;  // 처음 게시판을 열었을때
@@ -36,17 +35,13 @@ public class ReportListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
-			//ArrayList<ReportDto> list = adao.MemberList( paging, "key");
-			
 			int count = 1;
 			paging.setTotalCount(count);
 			
-			/*
-			 * for( MemberDto mdto : list) { int cnt = mdao.getReplycnt( bdto.getNum() );
-			 * bdto.setReplycnt(cnt); }
-			 */
+			String report_num = "";
+			ArrayList<ReportDto> list = rdao.reportList(Integer.parseInt(report_num));
 			
-			//request.setAttribute("reportList" , list);
+			request.setAttribute("reportList", list);	
 			request.setAttribute("paging", paging);	
 		}
 		request.getRequestDispatcher(url).forward(request, response);

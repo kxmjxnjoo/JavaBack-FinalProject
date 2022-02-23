@@ -25,10 +25,6 @@ public class MemberSearchAction implements Action {
 		int page = 1;
 		if(adto == null) url = "spring.do?command=admin";
 		else {
-			Paging paging = null;
-			String key = null;
-			ArrayList<MemberDto> mdto = AdminDao.getInstance().MemberList(paging, key); 
-			
 			//page 
 			if(request.getParameter("page") != null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -54,12 +50,13 @@ public class MemberSearchAction implements Action {
 			session.removeAttribute("key");
 			key = "";
 		}
-		int count = adao.searchAllMember("member", "name", key);
 		
+		int count = 0;
 		paging.setTotalCount(count);
 		request.setAttribute("paging", paging);
 		
-		ArrayList<MemberDto> memberList = adao.MemberList(paging, key);
+		MemberDto memberList = adao.searchAllMember("member", "name", key);
+		
 		request.setAttribute("memberList", memberList);
 		request.setAttribute("key", key);
 		

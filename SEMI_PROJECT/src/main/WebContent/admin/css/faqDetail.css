@@ -9,13 +9,17 @@ body{ background:#fae9e2;
 	margin:0; 
 	padding:0;}
 
+#info{
+	margin-top:60px;
+}
+
 .table{
-	padding-top:60px;
+	width:200px;
+	padding-top:80px;
 	margin:0 auto;
 }
 
 table {	
-	width: 50%;	
 	border-collapse: collapse;	
 	font-size: 14px; 
 	line-height: 24px; 
@@ -43,7 +47,7 @@ th {
 	background:#f7c4c0
 }
 
-.btns{
+.btn{
 	margin:0 auto;
 	padding-left:37%;
 	font-size:110%;

@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="admin_submenu.jsp" %>
-<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="admin/css/admin.css">
 
-<h1>FAQ 목록 리스트<!-- <img src="images/Report.png"> --></h1>
-<span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
+<h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
+<span id="info">
+<input type="button" id="button1" value="작성" onClick="location.href='spring.do?command=uploadFaq'">
+${adminLogin.adminid}님 로그인
+<input type="button" id="button2" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 		
 <form name="frm" method="post">		
 		<table>
 			<tr><th>번호</th><th>제목</th><th>내용</th></tr>
-			<c:forEach items="${reportList}" var="rdto">
-				<tr align="left">
-					<td  align="left">&nbsp;&nbsp;
-						</a>
-					</td>
+			<c:forEach items="${faqList}" var="fdto">
+				<tr align="left"><td  align="left">&nbsp;&nbsp;
 					<td  width="50">${fdto.faq_num}</td>
 					<td  width="80">${fdto.faq_subject}</td>
 					<td  width="100">${fdto.faq_content}</td>
@@ -23,7 +22,7 @@
 	</table>
 </form>
 <!-- <input type="submit" id="ban" value="정지 처리" onClick="location.href='spring.do?command=adminMain'"> -->
-`
+
 	<!-- 페이지 수 -->
 <br /><br />
 	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">

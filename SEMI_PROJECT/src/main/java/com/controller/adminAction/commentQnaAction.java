@@ -18,7 +18,7 @@ public class commentQnaAction implements Action {
 		QnaDto qdto = new QnaDto();
 		
 		int qna_num = Integer.parseInt( request.getParameter("qna_num") );
-		// 아이디, 내용, 게시물 번호를 rdto 에 저장
+
 		qdto.setQna_id(request.getParameter("qna_id"));
 		qdto.setQna_content(request.getParameter("comment"));
 		qdto.setQna_num( qna_num );

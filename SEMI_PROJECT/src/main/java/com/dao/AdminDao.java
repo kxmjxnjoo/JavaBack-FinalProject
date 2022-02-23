@@ -50,8 +50,8 @@ public class AdminDao {
 	
 	
 
-	public int searchAllMember(String tablename, String fieldname, String key) {
-		int count = 0;
+	public MemberDto searchAllMember(String tablename, String fieldname, String key) {
+		MemberDto mdto = new MemberDto();
 		String sql = "select count(*) as cnt from " + tablename + " where " + fieldname + " like '%'||?||'%' ";
 		con = Dbman.getConnection();
 		try {
@@ -59,10 +59,12 @@ public class AdminDao {
 			pstmt.setString(1, key);
 			rs = pstmt.executeQuery();
 			if(rs.next())
-				 count = rs.getInt("cnt");
+				mdto = new MemberDto();
+				mdto.setName(rs.getString("name"));
+				mdto.setUserid(rs.getString("userid"));
 		} catch (SQLException e) {	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);		}
-		return count;
+		return mdto;
 	}
 
 
@@ -78,14 +80,12 @@ public class AdminDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, key);
 			pstmt.setString(2, key);
-			
 			pstmt.setInt(3, paging.getStartNum());
 			pstmt.setInt(4, paging.getEndNum());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				MemberDto mdto = new MemberDto();
-				
 				mdto.setUserid(rs.getString("userid"));
 				mdto.setPassword(rs.getString("password"));
 				mdto.setName(rs.getString("name"));
@@ -94,10 +94,8 @@ public class AdminDao {
 				mdto.setUseyn(rs.getString("useyn"));
 				mdto.setIntroduce(rs.getString("introduce"));
 				mdto.setIndate(rs.getDate("indate"));
-				
 				list.add(mdto);
 			}
-			
 		} catch (SQLException e) {	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);		}
 		return list;

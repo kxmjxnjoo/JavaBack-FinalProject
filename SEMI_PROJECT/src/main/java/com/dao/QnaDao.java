@@ -25,7 +25,7 @@ public class QnaDao {
 	
 	public ArrayList<QnaDto> listQna(String userid) {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from qna where id=? order by qna_num desc";
+		String sql = "select * from qna where uesrid=? order by qna_num desc";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -107,7 +107,20 @@ public class QnaDao {
 	}
 
 
+	
+	public void deleteQna(int qna_num) {
+		String sql = "delete from qna where qna_num=?";
+		con = Dbman.getConnection();
+		try {
+		      pstmt = con.prepareStatement(sql); 
+		      pstmt.setInt(1, qna_num);
+		      pstmt.executeUpdate();
+		} catch (Exception e) { e.printStackTrace();
+	    } finally { Dbman.close(con, pstmt, rs); }   	
+	}
 
+	
+	
 	public void addComment(QnaDto qdto) {
 		
 	}
