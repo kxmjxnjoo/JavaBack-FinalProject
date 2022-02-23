@@ -30,5 +30,8 @@
 	</div>
 <div id ="highClear"></div>
 </div>
+
+	<%@ include file="/footer.jsp" %>
+
 </body>
 </html>

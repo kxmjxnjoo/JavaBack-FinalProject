@@ -38,6 +38,9 @@
 		</div>
 	</div>
 	
+		<%@ include file="/footer.jsp" %>
+	
+	
 	<script type="text/javascript">
 		function withdraw(userid) {
 			if(confirm("정말로 회원탈퇴할까요?")) {

@@ -60,6 +60,8 @@
 		</c:otherwise>
 	</c:choose>
 	
+		<%@ include file="/footer.jsp" %>
+	
 	
 </body>
 </html>

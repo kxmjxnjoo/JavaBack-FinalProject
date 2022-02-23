@@ -83,6 +83,9 @@
 	</c:otherwise>
 </c:choose>
 
+	<%@ include file="/footer.jsp" %>
+
+
 <script src="/js/follow.js"></script>
 <script type="text/javascript">
 	function userReport(userid){

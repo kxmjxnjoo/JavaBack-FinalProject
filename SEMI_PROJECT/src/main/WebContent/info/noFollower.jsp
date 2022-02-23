@@ -16,5 +16,7 @@
 		<input type="button" value="지금 팔로우 하러 가기" id="followSuggestButton" onclick="location.href='spring.do?command=search'">
 	</div>
 	
+	<%@ include file="/footer.jsp" %>
+	
 </body>
 </html>

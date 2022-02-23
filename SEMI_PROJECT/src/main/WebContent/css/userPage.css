@@ -81,10 +81,14 @@ hr {
 
     width: 80%;
     left: 10%;
+
+    margin-bottom: 500px;
 }
 
 #postList h1 {
     text-align: center;
+
+    margin-bottom: 500px;
 }
 
 .userPost {
