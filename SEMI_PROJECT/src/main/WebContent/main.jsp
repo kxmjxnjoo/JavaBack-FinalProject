@@ -119,7 +119,8 @@
 							</c:otherwise>
 						</c:choose>
 						>favorite_border</i>
-						<i class="material-icons">chat_bubble_outline</i>
+						<i class="material-icons" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">chat_bubble_outline</i>
+						
 						<i class="material-icons">send</i>
 						
 						<c:choose>
