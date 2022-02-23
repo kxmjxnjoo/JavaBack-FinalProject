@@ -83,6 +83,10 @@ hr {
     left: 10%;
 }
 
+#postList h1 {
+    text-align: center;
+}
+
 .userPost {
     width: 30%;
     margin-right: 3%;
