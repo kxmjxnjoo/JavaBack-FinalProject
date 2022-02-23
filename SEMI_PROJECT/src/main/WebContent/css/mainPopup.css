@@ -9,7 +9,6 @@
     height: 100%;
 
     background-color: rgba(0, 0, 0, 0.5);
-
 }
 
 #popupBox {
@@ -19,17 +18,25 @@
 
     position: relative;
     left: 30%;
-    top: 30%;;
-    }
+    top: 30%;    
+
+    border-radius: 10px;
+}
 
 #popupBox button {
-    width: 100%;
+    width: 90%;
     height: 50px;
 
     border: none;
+
     background-color: white;
 
     font-size: 15px;
+
+    font-weight: bold;
+
+    position: relative;
+    left: 5%;
 }
 
 #popupBox button:nth-child(1), #popupBox button:nth-child(3) {
