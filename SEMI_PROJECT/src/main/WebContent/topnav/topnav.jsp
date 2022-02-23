@@ -28,21 +28,34 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		
-		<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" onclick="userIcon();">
+	  	<c:choose>
+			<c:when test = "${ not empty loginUser }">
+				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
+				onclick="userIcon('${loginUser.userid}');">
+			</c:when>
+			
+			<c:otherwise>
+				<img id="userIcon" src="/images/tmpUserIcon.png" 
+				onclick="goLogin();">
+			</c:otherwise>
+		</c:choose> 
+		 
 		
+		 
 	</div>
 	
-	<script type="text/javascript">
-		function userIcon() {
-			if("${ loginUser == null }" === true) {
-				if(confirm("로그인 하시겠어요?")) {
-					location.href = "spring.do?command=loginform"
-				}
-			} else {
-				location.href= "spring.do?command=userpage&userid=${ loginUser.userid}"
-			}
-		}
-	</script>	
+<script type="text/javascript">
+	function goLogin() {
+		alert("로그인해주세요.");
+		/* let result = confirm("로그인 하시겠습니까?");
+		if (result==1) location.href= "spring.do?command=loginform"  */
+	}
+
+
+	function userIcon(userid) {
+		location.href= "spring.do?command=userpage&userid=" + userid;
+	}
+</script>	
 
 </div>
 
