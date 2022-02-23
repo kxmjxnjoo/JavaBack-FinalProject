@@ -6,7 +6,7 @@
 - [x] feedDetail.jsp 세인
 - [x] main.jsp 진겸
 - [x] story.jsp 세인
-- [ ] accountManage.jsp 진겸
+- [x] accountManage.jsp 진겸
 - [x] message.jsp 진겸
 - [ ] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
