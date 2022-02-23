@@ -4,12 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/FaqList.css">
+<link rel="stylesheet" href="../css/faqList.css">
 </head>
 <body>
 
 <div>
-<%-- <%@ include file="../topnav/topnav.jsp" %> --%>
 	<form id="content" action="post" name="adminLogin">
 	<img src="images/Logo.png" width="80" id="Logo">
 	<h1>안녕하세요! 무슨 문제가 생기셨나요?</h1>
@@ -60,7 +59,7 @@
 <%@ include file="footer.jsp"%>
 </body>
 </html>
-   
+  
   <!-- <article>
     <h3 id=subject>도움말 주제 찾아보기</h3>
     <section class="selected">

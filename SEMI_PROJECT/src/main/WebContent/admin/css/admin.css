@@ -9,7 +9,17 @@ body{
 
 input:focus{outline:none;}
 
-#logout{
+#button1{
+	background: white;
+	font-size:100%;
+	font-weight:bold;
+	width:100px;
+	height: 30px;
+	border: 1px solid #e59999;
+	margin: 0 auto;
+}
+
+#button2{
 	background: white;
 	font-size:100%;
 	font-weight:bold;
@@ -130,13 +140,20 @@ table{
 	border-collapse: collapse; 
 	border-top: 2px solid #4c4c4c;
  	border-bottom: 1px solid #4c4c4c;
- 	width: 75%; 
+ 	width: 60%; 
  	margin-left: 180px;
 	margin-bottom: 20px;
+	margin: 0 auto;
 }
 
-table td, th{
+table, th, td{
 	border: solid 1px 4c4c4c;
+	text-align: center;
+}
+
+table, th{
+	border-bottom: solid 1px 4c4c4c;
+	line-height:220%;
 }
 	
 #ban {

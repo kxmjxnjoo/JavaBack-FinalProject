@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="admin_submenu.jsp" %>
-<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>Q&amp;A리스트</h1>
 <span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
@@ -8,13 +8,12 @@
 	<br><br><br>
 		 
 <form name="frm" action="spring.do">		
-	<table>
+	<table><c:forEach items="${qnaList}" var="memberDto">
 		<tr><th>이름</th><td width="50">${qdto.name}</td>
 				<th>아이디</th><td width="50">${qdto.id}</td>
 				<th>제목</th><td width="50">${qdto.subject}</td>
-				<th>내용</th><td width="50">${qdto.content}</td>
 				<th>작성일</th><td width="50"><fmt:formatDate value="${qdto.indate}"/></td>
-		<c:forEach items="${qnaList}" var="memberDto"></c:forEach>
+		</c:forEach>
 	</table>
 </form>
 			<!-- 

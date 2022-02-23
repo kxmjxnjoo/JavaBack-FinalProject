@@ -8,21 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
+import com.dao.FaqDao;
 import com.dto.AdminDto;
 
-public class AdminMainAction implements Action {
+public class FaqDeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = "admin/adminMain.jsp";
+		String url = "admin/adminFaqList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
-		int page = 1;
 		if(adto == null) url = "spring.do?command=admin";
 		else {
+		
+		String[] fseqArr = request.getParameterValues("fseq");
 			
+		FaqDao fdao = FaqDao.getInstance();
+		
+		for(String fseq : fseqArr)
+			fdao.deleteFaq(Integer.parseInt(fseq));
+
 		}
-		request.getRequestDispatcher(url).forward(request, response);
+		response.sendRedirect("spring.do?command=adminFaqList");
 	}
 }

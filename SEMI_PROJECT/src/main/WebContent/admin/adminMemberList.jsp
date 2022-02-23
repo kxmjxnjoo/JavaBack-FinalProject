@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="admin_submenu.jsp" %>
-<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="admin/css/admin.css">
 <script  type="text/javascript">
 function go_search(){
 	if( document.frm.key.value == "" ){
@@ -24,14 +24,11 @@ function go_search(){
 				<input id="search_btn" type="button" name="search" value="회원 검색" onClick="go_search();">
 	<table>
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
-				<th>가입일</th>
+				<th>가입일</th></tr>
 		<c:forEach items="${memberList}" var="mdto">
-			<td width="50">${mdto.name}</td>
-			<td width="50">${mdto.userid}</td>
-			<td width="50">${mdto.email}</td>
-			<td width="50">${mdto.phone}</td>
-			<td width="50">${mdto.useyn}</td>
-			<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
+			<tr><td width="50">${mdto.name}</td> <td width="50">${mdto.userid}</td> <td width="50">${mdto.email}</td>
+					<td width="50">${mdto.phone}</td> <td width="50">${mdto.useyn}</td> 
+					<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
 		</c:forEach>
 	</table>
 </form>

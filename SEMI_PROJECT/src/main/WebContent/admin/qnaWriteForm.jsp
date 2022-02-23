@@ -4,8 +4,9 @@
 <script src="script/script.js"></script>
 </head>
 <body>
-<h1 style="text-align:center;">궁금하신게 있다면 질문해주세요</h1>
 	<form class="table" name="frm" method="post" action="spring.do?command=qnaWrite">
+<h1 id="info" style="text-align:center;">궁금하신게 있다면 질문해주세요</h1>
+	<br><br>
 	<table>
 		<tr><th width="80">작성자</th><td>${loginUser.userid}<input type="hidden"
 			name="userid" value="${loginUser.userid}"></td></tr>

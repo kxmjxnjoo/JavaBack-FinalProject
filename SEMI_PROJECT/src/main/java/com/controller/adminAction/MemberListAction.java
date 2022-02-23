@@ -42,11 +42,6 @@ public class MemberListAction implements Action {
 			int count = 1;
 			paging.setTotalCount(count);
 			
-			/*
-			 * for( MemberDto mdto : list) { int cnt = mdao.getReplycnt( bdto.getNum() );
-			 * bdto.setReplycnt(cnt); }
-			 */
-			
 			request.setAttribute("memberList" , list);
 			request.setAttribute("paging", paging);	
 		}

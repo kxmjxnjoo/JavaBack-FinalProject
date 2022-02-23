@@ -94,6 +94,35 @@ public class FaqDao {
 		} finally { Dbman.close(con, pstmt, rs);		}
 	}
 
+
+	/*
+	 * public ArrayList<CartVO> selectCart(String id) { ArrayList<CartVO> list = new
+	 * ArrayList<CartVO>(); String sql =
+	 * "select * from cart_view where id=? and result='1'"; con =
+	 * Dbman.getConnection(); try { pstmt = con.prepareStatement(sql);
+	 * pstmt.setString(1, id); rs = pstmt.executeQuery(); while( rs.next() ) {
+	 * CartVO cvo = new CartVO(); cvo.setCseq(rs.getInt("cseq"));
+	 * cvo.setId(rs.getString("id")); cvo.setMname(rs.getString("mname"));
+	 * cvo.setPseq(rs.getInt("pseq")); cvo.setPname(rs.getString("pname"));
+	 * cvo.setQuantity(rs.getInt("quantity")); cvo.setPrice2(rs.getInt("price2"));
+	 * cvo.setIndate(rs.getTimestamp("indate")); list.add(cvo); } } catch
+	 * (SQLException e) { e.printStackTrace(); } finally { Dbman.close(con, pstmt,
+	 * rs); } return list; }
+	 */
+	
+	
+	public void deleteFaq(int faq_num) {
+		String sql = "delete from faq where faq_num=?";
+		con = Dbman.getConnection();
+		try {
+		      pstmt = con.prepareStatement(sql); 
+		      pstmt.setInt(1, faq_num);
+		      pstmt.executeUpdate();
+		} catch (Exception e) { e.printStackTrace();
+	    } finally { Dbman.close(con, pstmt, rs); }   	
+}
+
+
 	
 
 }
