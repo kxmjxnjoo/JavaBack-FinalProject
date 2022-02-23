@@ -28,10 +28,8 @@ function goBack(){
 }
 
 function reset(){
-	document.getElementById("input-file").select();
-	document.selection.clear();
-	document.getElementById("image_container").select();
-	document.selection.img.src = "";
+	document.querySelector("div#image_container img").src = "";
+	console.log(11);
 }
 
 
@@ -46,6 +44,10 @@ function editCheck(postNum){
 	var theForm = document.frm;
 	theForm.action="spring.do?command=editPost&post_num="+postNum;
 	theForm.submit();
+}
+
+function resetImg(){
+	document.querySelector("div#image_container img").src = "";
 }
 </script>
 
@@ -62,10 +64,10 @@ function editCheck(postNum){
 			<div id="clear"></div>
 			<div id="postingContent">
 				<div id="thumbnail">
-					<label class="input-file-button" for="input-file" style="z-index:1">
+					<label class="input-file-button" for="input-file" style="z-index:1" onclick="resetImg();">
 					  사진 수정
 					</label>
-					<div id ="image_container"><img src="../images/${PostDto.post_img}"></div>
+					<div id ="image_container"><img width="400px" src="../images/${PostDto.post_img}"></div>
 					<input type="hidden" name="oldPicture" value="${PostDto.post_img}"/>
 					<input type="file" name="post_img" id="input-file"  onchange="setThumbnail(event);"/>
 				</div>
@@ -89,10 +91,10 @@ function editCheck(postNum){
 					등록
 					</label>
 					<input type="button" name="input-submit" id="input-submit" onclick="editCheck(${post_num});">
-					<label id="input-reset-button" for="input-reset" >
+					<label id="input-reset-button" for="input-reset" onclick="reset();">
 					다시 작성 
 					</label>
-					<input type="button" id="input-reset"  onclick="reset();">
+					<input type="reset" id="input-reset" >
 				</div>
 			</div>
 		</div>

@@ -17,23 +17,23 @@
 		<div id="postingStory" >
 			<div id="postingTitle">
 				<span class="material-icons" id="goBack" onclick="goBack();">west</span>
-				<label id="newPost"> 새 게시물 </label>
+				<label id="newPost"> 스토리 수정 </label>
 				
 			</div>
 			
 			<div id="clear"></div>
 			<div id="postingContent">
 				<div id="thumbnail">
-					<label class="input-file-button" for="input-file" >
-					  업로드
+					<label class="input-file-button" for="input-file" onclick="resetImg();">
+					  사진 수정
 					</label>
-					<div id ="image_container"></div>
+					<div id ="image_container"><img width="400px" src="../images/${StoryDto.story_img}"></div>
 					<input type="hidden" name="oldPicture" value="${StoryDto.story_img}"/>
 					<input type="file" name="story_img" id="input-file"  onchange="setThumbnail(event);"/>
 				</div>
 				<div id="clear"></div>
 				<select name="fontColor" id="fontColor" class="select-css">
-					<option> 폰트색을 수정하려면 선택해주세요 </option>
+					<option value = "" > 폰트색을 수정하려면 선택해주세요 </option>
 					<option value = "white"> 흰색 </option>
 					<option value = "black"> 검정 </option>
 					<option value = "purple"> 보라 </option>
@@ -58,10 +58,10 @@
 					등록
 					</label>
 					<input type="button" name="input-submit" id="input-submit"  onclick="editCheck(${story_num});">
-					<label id="input-reset-button" for="input-reset" >
+					<label id="input-reset-button" for="input-reset"  onclick="reset();">
 					다시 작성 
 					</label>
-					<input type="button" id="input-reset"  onclick="reset();">
+					<input type="reset" id="input-reset" >
 				</div>
 			</div>
 		</div>
@@ -86,13 +86,8 @@ function goBack(){
 }
 
 function reset(){
-	document.querySelector("div#image_container").innerHTML = '';
-	document.querySelector("div#image_container").appendChild(img);
-	
-	document.getElementById("input-file").select();
-	document.selection.clear();
-	/* var remove = document.getElementById("image_container");
-	remove.removeChild(remove.childNodes[0]); */
+	document.querySelector("div#image_container img").src = "";
+	console.log(11);
 }
 
 
@@ -112,6 +107,10 @@ function editCheck(story_num){
 		 */theForm.action="spring.do?command=editStory&story_num="+story_num;
 		theForm.submit();
 	/* } */
+}
+
+function resetImg(){
+	document.querySelector("div#image_container img").src = "";
 }
 
 </script>

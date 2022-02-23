@@ -127,13 +127,13 @@ public class PostDao {
 	}
 
 	public int postLikeCheck(int post_num, String userid) {
-		String sql = "select ? from post_like where post_num = ?";
+		String sql = "select * from post_like where post_num = ? and userid = ?";
 		int result = 0;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userid);
-			pstmt.setInt(2, post_num);
+			pstmt.setInt(1, post_num);
+			pstmt.setString(2, userid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = 1;

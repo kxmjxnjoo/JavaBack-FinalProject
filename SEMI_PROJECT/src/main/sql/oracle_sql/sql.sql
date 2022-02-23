@@ -278,3 +278,7 @@ insert into follow values (follow_seq.nextVal, 'hong', 'hong');
 select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='hong'
 
 select * from notification
+
+select * from POST_LIKE
+
+select * from post_like where post_num = 111 and userid='nari'

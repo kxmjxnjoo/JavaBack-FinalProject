@@ -194,26 +194,9 @@ body{
 #input-reset { display : none; }
 
 #thumbnail{
-	margin: 0 auto;
+	margin: 0 auto; position: relative;
 	width: 400px; height: 400px; background: white;
 	overflow: hidden;  border: 1px solid black; 
-}
-
-#image_container {
-	position: relative;
-	top: 45.3%; left: 50%;
-	overflow:hidden; display:none;
-}
-
-#image_container img {
-	width: 400px;
-}
-
-#postingDiv textarea{
-	resize:none;
-	background : #efebe8;
-	width: 400px; font-size: 90%;
-	margin-bottom: 15px; margin-top: 15px; 
 }
 
 #goBack{
