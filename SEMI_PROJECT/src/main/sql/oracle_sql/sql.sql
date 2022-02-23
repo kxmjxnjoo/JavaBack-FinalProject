@@ -23,7 +23,7 @@ create table follow(
 	follow_num number(5) primary key,
 	following varchar2(20) REFERENCES member(userid),
 	follower varchar2(20) REFERENCES member(userid)
-)
+);
 CREATE SEQUENCE follow_seq START WITH 1;
 
 select * from follow

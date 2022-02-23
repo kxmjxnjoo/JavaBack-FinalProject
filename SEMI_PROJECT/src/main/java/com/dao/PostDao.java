@@ -290,8 +290,7 @@ public class PostDao {
 		return postList;
 	}
 
-	
-	 public int insertUserReport(String loginUser, String reported, String reason, String type) {
+	public int insertUserReport(String loginUser, String reported, String reason, String type) {
 		 String sql = "insert into report(reporter_id, reported_id,reason, report_num, report_type) "
 		 		+ " values(?,?,?,report_seq.nextVal,?)";
 		 int result = 0; 
@@ -308,9 +307,6 @@ public class PostDao {
 		 return result;
 	  }
 	 
-	
-	
-
 	public int likeCount(int post_num) {
 		int likes = 0;
 		String sql = "select count(*) as count from post_like where post_num="+post_num;
@@ -341,5 +337,69 @@ public class PostDao {
 		return replies;
 	}
 
-
+	public int deleteAllPost(String userid) {
+		String sql = "delete from post where userid=?";
+		int result = 0; 
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
+	public int delteAllLike(String userid) {
+		String postLike = "delete from post_like where userid=?";
+		String replyLike = "delete from reply_like where userid=?";
+		String storyLike = "delete from story_like where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(postLike);
+			pstmt.setString(1, userid);
+			result += pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(replyLike);
+			pstmt.setString(1, userid);
+			result += pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(storyLike);
+			pstmt.setString(1, userid);
+			result += pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result == 3 ? 1 : 0;
+		
+	}
+	
+	public int deleteAllReply(String userid) {
+		String sql = "delete from reply where userid=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	} 
 }

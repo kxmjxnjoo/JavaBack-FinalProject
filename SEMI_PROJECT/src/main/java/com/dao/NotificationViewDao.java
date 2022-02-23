@@ -116,4 +116,23 @@ public class NotificationViewDao {
 		
 		return result;
 	}
+
+	public int deleteNotification(String userid) {
+		String sql = "delete from notification where user_to=? or user_from=?";
+		int result = 0;
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
+	}
 }

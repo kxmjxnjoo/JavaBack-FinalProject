@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.FollowDao;
 import com.dao.MemberDao;
+import com.dao.NotificationViewDao;
+import com.dao.PostDao;
+import com.dao.StoryDao;
 import com.dto.MemberDto;
 
 public class WithdrawAction implements Action {
@@ -24,6 +28,19 @@ public class WithdrawAction implements Action {
 			// Get userid
 			String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 			
+			// Delete user's data
+				// Delete noti
+					NotificationViewDao.getInstance().deleteNotification(userid);
+				// Delete post
+					PostDao.getInstance().deleteAllPost(userid);
+				// Delete comment
+					PostDao.getInstance().deleteAllReply(userid);
+				// Delete like(post, reply, story)
+					PostDao.getInstance().delteAllLike(userid);
+				// Delete follow
+					FollowDao.getInstance().deleteAllFollow(userid);
+				// Delete story
+					StoryDao.getInstance().deleteAllStory(userid);
 			// Delete user from db
 			int result = MemberDao.getInstance().deleteMember(userid);
 			
