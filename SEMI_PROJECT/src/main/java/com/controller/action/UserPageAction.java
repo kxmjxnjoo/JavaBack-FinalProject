@@ -34,13 +34,15 @@ public class UserPageAction implements Action {
 		
 		
 		// Get count reply & likes
-		for(int i=0; i<postList.size(); i++) {
-			int post_num = postList.get(i).getPostNum();
-			PostDao pdao = PostDao.getInstance();
-			postList.get(i).setLikeCount(pdao.likeCount(post_num));
-			postList.get(i).setReplyCount(pdao.replyCount(post_num));
+		if(postList != null) {
+			for(int i=0; i<postList.size(); i++) {
+				int post_num = postList.get(i).getPostNum();
+				PostDao pdao = PostDao.getInstance();
+				postList.get(i).setLikeCount(pdao.likeCount(post_num));
+				postList.get(i).setReplyCount(pdao.replyCount(post_num));
+			}
+			request.setAttribute("posts", postList);
 		}
-		request.setAttribute("posts", postList);
 		
 		// Get whether loginUser is following user
 		HttpSession session = request.getSession();
