@@ -38,7 +38,7 @@
 				<c:otherwise>
 					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">
-							<img src="../images/${ follow.followingImg }">
+							<img src="/images/${ follow.followingImg == null ? "tmpUserIcon.png" : follow.followingImg }">
 							<h3>${ follow.following }</h3>
 						</div>
 					</div>
