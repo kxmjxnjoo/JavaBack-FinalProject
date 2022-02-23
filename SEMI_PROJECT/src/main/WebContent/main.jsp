@@ -46,6 +46,11 @@
 				<c:when test="${ follow.following == loginUser.userid }">
 				
 				</c:when>
+				
+				<c:when test="${ follow.isStoryPresent == 0 }">
+					
+				</c:when>
+				
 				<c:otherwise>
 					<div class="storyBubble" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
 						<div class="storyBubbleContent">

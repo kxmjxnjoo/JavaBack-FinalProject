@@ -38,25 +38,31 @@ public class MainAction implements Action {
 			// Get following list
 			ArrayList<FollowViewDto> followingList = FollowViewDao.getInstance().getFollowing(userid);
 			
-			
 			if(followingList == null) {
 				url = "info/noFollower.jsp";
 			} else if(followingList.size() == 1) {
 				url = "info/noFollower.jsp";
 			} else {
-				request.setAttribute("followingList", followingList);
-				
+							
 				// Get follower's story
 				List<List<StoryDto>> memberStoryList = new ArrayList<List<StoryDto>>();
 				if(followingList != null) {
 					for(FollowViewDto fdto : followingList) {
-							if(fdto.getFollowing() != null) {
+						if(fdto.getFollowing() != null) {
 							String followingId = fdto.getFollowing();
 							ArrayList<StoryDto> storyList = StoryDao.getInstance().getAllStory(followingId);
+							// Get if following has any story
+							if(storyList != null) {
+								fdto.setIsStoryPresent(1);
+							} else {
+								fdto.setIsStoryPresent(0);
+							}
+							
 							memberStoryList.add(storyList);
 						}
 					}
 				}
+				request.setAttribute("followingList", followingList);
 				request.setAttribute("memberStoryList", memberStoryList);
 				
 				// Get follower's post
