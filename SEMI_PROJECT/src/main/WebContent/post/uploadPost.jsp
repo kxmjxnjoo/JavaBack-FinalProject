@@ -86,8 +86,9 @@ function goBack(){
 }
 
 function reset(){
-	document.querySelector("div#image_container img").src = "";
-
+	let elem = document.querySelector("div#image_container img");
+	elem.parentNode.removeChild(elem);
+	return;
 }
 
 

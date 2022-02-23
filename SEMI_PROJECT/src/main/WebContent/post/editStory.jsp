@@ -54,14 +54,14 @@
 <!-- 등록/다시작성 -->
 				
 				<div id="submit-buttons">
-					<label id="input-submit-button" for="input-submit">
+					<label id="input-reset-button" for="input-submit">
 					등록
 					</label>
 					<input type="button" name="input-submit" id="input-submit"  onclick="editCheck(${story_num});">
-					<label id="input-reset-button" for="input-reset"  onclick="reset();">
+					<!-- <label id="input-reset-button" for="input-reset"  onclick="reset();">
 					다시 작성 
 					</label>
-					<input type="reset" id="input-reset" >
+					<input type="reset" id="input-reset" > -->
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>포스트 작성</title>
+<title>게시물 수정</title>
 <link href="../css/spring.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" language="javascript" defer="defer"> 
@@ -28,8 +28,7 @@ function goBack(){
 }
 
 function reset(){
-	document.querySelector("div#image_container img").src = "";
-	console.log(11);
+
 }
 
 
@@ -47,7 +46,8 @@ function editCheck(postNum){
 }
 
 function resetImg(){
-	document.querySelector("div#image_container img").src = "";
+	let elem = document.querySelector("div#image_container img");
+	elem.parentNode.removeChild(elem);
 }
 </script>
 
@@ -88,14 +88,14 @@ function resetImg(){
 <!-- 등록/다시작성 -->
 				
 				<div id="submit-buttons">
-					<label id="input-submit-button" for="input-submit">
+					<label id="input-reset-button" for="input-submit">
 					등록
 					</label>
 					<input type="button" name="input-submit" id="input-submit" onclick="editCheck(${post_num});">
-					<label id="input-reset-button" for="input-reset" onclick="reset();">
+					<!-- <label id="input-reset-button" for="input-reset" onclick="reset();">
 					다시 작성 
 					</label>
-					<input type="reset" id="input-reset" >
+					<input type="reset" id="input-reset" > -->
 				</div>
 			</div>
 		</div>
