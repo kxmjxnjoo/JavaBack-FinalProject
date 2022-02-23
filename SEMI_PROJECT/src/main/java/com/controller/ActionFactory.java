@@ -49,8 +49,6 @@ import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
 import com.controller.adminAction.AdminLoginAction;
-import com.controller.adminAction.AdminLogouAction;
-import com.controller.adminAction.AdminMainAction;
 import com.controller.adminAction.FaqDetailAction;
 import com.controller.adminAction.MemberListAction;
 import com.controller.adminAction.MemberSearchAction;
@@ -134,8 +132,8 @@ public class ActionFactory {
 		
 		else if( command.equals("admin")) ac = new AdminAction();
 		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
-		else if( command.equals("adminLogout")) ac = new AdminLogouAction();
-		else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
+		//else if( command.equals("adminLogout")) ac = new AdminLogouAction();
+		//else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
 		
 		else if( command.equals("memberList")) ac = new MemberListAction();
 		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
