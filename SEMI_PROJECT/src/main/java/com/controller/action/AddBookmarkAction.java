@@ -15,7 +15,7 @@ public class AddBookmarkAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "main.jsp";
+		String url = "spring.do?command=main";
 		HttpSession session = request.getSession();
 		
 		// Check if user is logged in
