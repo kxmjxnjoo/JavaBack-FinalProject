@@ -20,7 +20,7 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-					<img class="userImg" src="${ noti.memberImg }">
+					<img class="userImg" src="/images/${ noti.memberImg }">
 					
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.userFrom }</h2>
@@ -44,7 +44,7 @@
 					</div>
 					
 					<c:if test="${ noti.notiType != 1 }">
-						<img class="postImg" src="${ noti.postImg }">
+						<img class="postImg" src="/images/${ noti.postImg }">
 					</c:if>
 				</div>
 			</div>
