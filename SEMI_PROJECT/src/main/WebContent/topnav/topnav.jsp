@@ -29,7 +29,7 @@
 		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		
 	  	<c:choose>
-			<c:when test = "${ not empty loginUser }">
+			<c:when test = "${ loginUser != null }">
 				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
 				onclick="userIcon('${loginUser.userid}');">
 			</c:when>

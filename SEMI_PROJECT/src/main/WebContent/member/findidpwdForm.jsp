@@ -32,7 +32,7 @@
 				<form action="spring.do" method="post">
 					<h1>비밀번호 찾기</h1>
 					
-					<input type="hidden" value="findpwd">
+					<input type="hidden" name="command" value="findpwd">
 					
 					<input type="text" name="userid" placeholder="아이디" id="findpwdUserid">
 					<input type="text" name="name" placeholder="이름" id="findpwdName">
