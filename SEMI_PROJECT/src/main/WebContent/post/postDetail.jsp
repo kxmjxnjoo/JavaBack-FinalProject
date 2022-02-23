@@ -194,8 +194,9 @@ function deleteReplyCheck(reply_num, post_num){
 								<div id="date"><fmt:formatDate value="${reply.reply_date}"/></div>
 							</div>
 							
+				<!-- 안되는데 왜 안되는지 몰겠다 -->
 							<c:choose>	
-								<c:when test="${PostDto.userid == loginUser.userid}">
+								<c:when test="${PostDto.userid == loginUser.userid && loginUser.userid != reply.userid} ">
 									<span id="replyLike${reply.reply_num}" class="material-icons" style="color:${reply.replyFileName}"
 									onclick="reply_like(${reply.reply_num}, ${post_num});">favorite_border</span>
 									<span id="deleteReply" class="material-icons" 
@@ -207,8 +208,8 @@ function deleteReplyCheck(reply_num, post_num){
 									onclick="deleteReplyCheck(${reply.reply_num}, ${post_num});">clear</span>	
 								</c:when>
 								<c:otherwise>
-									<span id="replyLike${reply.reply_num}" class="material-icons"  style="margin-left:20px" 
-									onclick="reply_like(${reply.reply_num}, ${post_num});">${reply.replyFileName}</span>
+									<span id="replyLike${reply.reply_num}" class="material-icons"  style="margin-left: 20px; color:${reply.replyFileName};" 
+									 onclick="reply_like(${reply.reply_num}, ${post_num});">favorite_border</span>
 								</c:otherwise>
 							</c:choose>
 						</div>

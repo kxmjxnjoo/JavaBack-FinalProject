@@ -27,7 +27,6 @@ public class CheckLikeAction implements Action {
 			int result = pdao.postLikeCheck(post_num, userid);
 			PostDto pdto = pdao.getPost(post_num);
 
-			System.out.println("likeResult : " + result);
 			if(result == 0) {
 				pdao.addPostLike(post_num, userid);
 				NotificationViewDao.getInstance().addNotification(pdto.getUserid(), userid, 2, post_num);
@@ -37,7 +36,7 @@ public class CheckLikeAction implements Action {
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);
-			System.out.println("likeResult : " + result);
+			System.out.println("checklikeResult : " + result);
 		}
 			
 		response.sendRedirect(url);

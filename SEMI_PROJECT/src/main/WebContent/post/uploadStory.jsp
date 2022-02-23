@@ -60,10 +60,10 @@
 					등록
 					</label>
 					<input type="button" name="input-submit" id="input-submit"  onclick="uploadCheck();">
-					<label id="input-reset-button" for="input-reset" >
+					<label id="input-reset-button" for="input-reset" onclick="reset();">
 					다시 작성 
 					</label>
-					<input type="button" id="input-reset"  onclick="reset();">
+					<input type="reset" id="input-reset"  >
 				</div>
 			</div>
 		</div>
@@ -88,14 +88,10 @@ function goBack(){
 }
 
 function reset(){
-	document.querySelector("div#image_container").innerHTML = '';
-	document.querySelector("div#image_container").appendChild(img);
-	
-	document.getElementById("input-file").select();
-	document.selection.clear();
-	/* var remove = document.getElementById("image_container");
-	remove.removeChild(remove.childNodes[0]); */
+	document.querySelector("div#image_container img").src = "";
+	console.log(11);
 }
+
 
 
 function textCounter(field, countfield, maxlimit) {

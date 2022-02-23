@@ -31,9 +31,11 @@ public class PostDetailAction implements Action {
 				PostDao pdao = PostDao.getInstance();
 				PostDto pdto = pdao.getPost(post_num);
 				ArrayList<ReplyDto> rdto = pdao.getReply(post_num);
+				
 				int result = pdao.postLikeCheck(post_num, loginUserid);
 				System.out.println("before likeResult : " + result);
 				if (result==1) likeColor = "red"; 
+				
 				for(int i=0; i<rdto.size(); i++) {
 					int replyLikeResult = pdao.replyLikeCheck(rdto.get(i).getReply_num(), loginUserid);
 					if(replyLikeResult==0) rdto.get(i).setReplyFileName("");
