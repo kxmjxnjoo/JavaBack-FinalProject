@@ -20,7 +20,7 @@
 			<c:if test="${ follow.following == loginUser.userid }">
 				<div class="storyBubble">
 					<div class="storyBubbleContent">
-						<div id="myStory" onclick="location.href='spring.do?command=storyDetail&userid=${follow.following}'">
+						<div id="myStory" onclick="location.href='spring.do?command=storyCheck&userid=${follow.following}'">
 							<img src="/images/${ follow.followingImg == null ? "tmpUserIcon.png" : follow.followingImg }">
 						</div>
 						<h3>${ follow.following }</h3>

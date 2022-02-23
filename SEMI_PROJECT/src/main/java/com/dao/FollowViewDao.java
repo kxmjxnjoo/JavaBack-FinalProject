@@ -50,4 +50,37 @@ public class FollowViewDao {
 		
 		return list;
 	}
+
+	public ArrayList<FollowViewDto> getFollowingwithStory(String userid) {
+		ArrayList<FollowViewDto> list = null;
+		String sql = "select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='?'";
+		con = Dbman.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while(rs.next()) {
+				if(count == 0) {
+					list = new ArrayList<FollowViewDto>();
+					count++;
+				}
+				FollowViewDto fdto = new FollowViewDto();
+				fdto.setFollowing(rs.getString("following"));
+				fdto.setFollower(rs.getString("follower"));
+				fdto.setFollowingName(rs.getString("followingName"));
+				fdto.setFollowingImg(rs.getString("followingImg"));
+				list.add(fdto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
 }

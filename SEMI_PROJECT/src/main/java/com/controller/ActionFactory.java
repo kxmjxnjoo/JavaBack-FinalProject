@@ -37,6 +37,7 @@ import com.controller.action.PostUploadFormAction;
 import com.controller.action.ReportFormAction;
 import com.controller.action.SearchAction;
 import com.controller.action.SelectPostAction;
+import com.controller.action.StoryCheckAction;
 import com.controller.action.StoryDetailAction;
 import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;
@@ -86,6 +87,7 @@ public class ActionFactory {
 		else if(command.equals("storyUploadForm")) 		ac = new StoryUploadFormAction();
 		else if(command.equals("storyUpload")) 			ac = new StoryUploadAction();
 		
+		else if(command.equals("storyCheck")) 			ac = new StoryCheckAction();
 		else if(command.equals("storyDetail")) 			ac = new StoryDetailAction();
 		
 		else if(command.equals("checkStoryLike")) 		ac = new CheckStoryLikeAction();

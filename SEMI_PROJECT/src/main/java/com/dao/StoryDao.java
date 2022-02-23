@@ -204,4 +204,20 @@ public class StoryDao {
 		return list;
 	}
 
+	public int checkStory(String userid) {
+		String sql = "select distinct userid from story where userid=?";
+		int result = 0;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return result;
+	}
+
 }

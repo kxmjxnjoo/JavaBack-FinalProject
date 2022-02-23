@@ -40,7 +40,6 @@ public class StoryDetailAction implements Action {
 					sdto = sdao.getStory(story_num);
 				}
 				
-				
 				String loginUserid = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUserid);
 				if (result==1) likeColor = "red";
@@ -56,8 +55,6 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("StoryDto", sdto);
 				request.setAttribute("prev", prev);
 				request.setAttribute("next", next);
-				
-			
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

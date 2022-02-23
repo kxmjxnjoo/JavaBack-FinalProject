@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>탐색하기</title>
-
+<link href="../css/spring.css" rel="stylesheet"> 
 </head>
 <body>
 

@@ -251,12 +251,12 @@ select s.* from story s left outer join (select count(*) as count, userid  from 
 
 select * from follow where following = 'user12';
 
-select * from story where userid='hong';
+select distinct userid from story where userid='user12';
 
 select * from 
 ((select distinct userid from story) a, follow f where a.userid = f.following) where follower 
 
-select f.* from (select distinct userid from story) a, follow f where a.userid = f.following and follower='nari'
+select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='nari'
 
 select * from story_like;
 
