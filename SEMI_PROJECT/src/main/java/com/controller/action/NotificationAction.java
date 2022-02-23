@@ -30,6 +30,8 @@ public class NotificationAction implements Action {
 		
 			// Get noti
 			ArrayList<NotificationViewDto> notiList = NotificationViewDao.getInstance().getNotification(userid);
+			System.out.println("list.size : " +  notiList.size());
+			System.out.println(notiList.get(0).getUserFrom());
 			
 			if(notiList != null) {
 				

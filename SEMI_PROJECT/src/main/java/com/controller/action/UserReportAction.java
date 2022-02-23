@@ -28,7 +28,7 @@ public class UserReportAction implements Action {
 			else if(reason.equals("3")) reason = "만 14세 미만 계정";
 			PostDao pdao = PostDao.getInstance();
 			String type = "user";
-			int result = pdao.insertReport(loginUser, reportedUserid, reason, type);
+			int result = pdao.insertUserReport(loginUser, reportedUserid, reason, type);
 			String message = "";
 			if (result==1) message = "유저를 신고했어요";
 			else message = "유저를 신고하지 못했어요. 다시 시도해주세요.";

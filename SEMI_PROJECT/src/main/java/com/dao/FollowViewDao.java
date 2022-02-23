@@ -53,7 +53,7 @@ public class FollowViewDao {
 
 	public ArrayList<FollowViewDto> getFollowingwithStory(String userid) {
 		ArrayList<FollowViewDto> list = null;
-		String sql = "select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='?'";
+		String sql = "select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower=?";
 		con = Dbman.getConnection();
 		
 		try {

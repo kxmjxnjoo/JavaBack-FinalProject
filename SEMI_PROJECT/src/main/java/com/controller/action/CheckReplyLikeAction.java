@@ -27,11 +27,11 @@ public class CheckReplyLikeAction implements Action {
 			String fileName = "";
 			if(result == 0) {
 				pdao.addReplyLike(reply_num, userid);
-				fileName = "../images/Like.png";
+				/* fileName = "../images/Like.png"; */
 				result = 1;
 			} else {
 				pdao.deleteReplyLike(reply_num, userid);
-				fileName = "../images/beforeLike.png";
+				/* fileName = "../images/beforeLike.png"; */
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);

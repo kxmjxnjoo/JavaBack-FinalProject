@@ -190,10 +190,12 @@ create table notification(
 	noti_type number(2) not null ,
 	post_num number(5) references post(post_num) on delete cascade,
 	reply_num number(5)  references reply(reply_num),
+	story_num number(5) references story(story_num) on delete cascade,
 	create_date date default sysdate
 );
 
 alter table notification add(content varchar2(100))
+alter table notification add(story_num number(5) references story(story_num) on delete cascade)
 create sequence notification_seq start with 1;
 
 create view notification_view as
@@ -265,3 +267,7 @@ delete from follow where follower = 'nari'
 
 insert into follow values (follow_seq.nextVal, 'nari', 'nari');
 insert into follow values (follow_seq.nextVal, 'hong', 'hong');
+
+select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='hong'
+
+select * from notification

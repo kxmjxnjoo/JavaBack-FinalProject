@@ -70,18 +70,30 @@ public class NotificationViewDao {
 
 	public int addNotification(String userTo, String userFrom, int notiType, int num) {
 		int result = 0;
+<<<<<<< HEAD
 		String followSql = "insert into notification (num, user_to, user_from, noti_type) values(notification_seq.nextVal, ?, ?, 1)";
 		String postSql = "insert into notification (num, user_to, user_from, noti_type, post_num) values(notification_seq.nextVal, ?, ?, 2, ?)";
 		String replySql = "insert into notification (num, user_to, user_from, noti_type, reply_num) values(notification_seq.nextVal, ?, ?, 3, ?)";
 		
+=======
+		String followSql = "insert into notification (num, user_to, user_from, noti_type) values(notification_seq.nextval, ?, ?, 1)";
+		String postSql = "insert into notification (num, user_to, user_from, noti_type, post_num) values(notification_seq.nextval, ?, ?, 2, ?)";
+		String replySql = "insert into notification (num, user_to, user_from, noti_type, reply_num) values(notification_seq.nextval, ?, ?, 3, ?)";
+		String replyLikeSql = "insert into notification (num, user_to, user_from, noti_type, reply_num) values(notification_seq.nextval, ?, ?, 4, ?)";
+		String storySql = "insert into notification (num, user_to, user_from, noti_type, story_num) values(notification_seq.nextval, ?, ?, 5, ?)";
+>>>>>>> c5a3ac29d83e626a2a8658cbb39ffcd7c83ce8e7
 		con = Dbman.getConnection();
 		try {
 			if(notiType == 1) {
 				// FOLLOW
 				pstmt = con.prepareStatement(followSql);
+				pstmt.setString(1, userTo);
+				pstmt.setString(2, userFrom);
 			} else if(notiType == 2) {
 				// LIKE
 				pstmt = con.prepareStatement(postSql);
+				pstmt.setString(1, userTo);
+				pstmt.setString(2, userFrom);
 				pstmt.setInt(3, num);
 			} else if(notiType == 3) {
 				// COMMENT
@@ -89,6 +101,12 @@ public class NotificationViewDao {
 				pstmt.setInt(3, num);
 			} else if(notiType == 4) {
 				// COMMENT LIKE
+			} else if(notiType == 5) {
+				// STORY 
+				pstmt = con.prepareStatement(storySql);
+				pstmt.setString(1, userTo);
+				pstmt.setString(2, userFrom);
+				pstmt.setInt(3, num);
 			}
 			
 			pstmt.setString(1, userTo);
