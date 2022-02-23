@@ -30,7 +30,7 @@ public class FollowAction implements Action {
 				
 			// Insert follow into db
 				int result = FollowDao.getInstance().insertFollow(follower, following);
-			
+				
 			// Get result
 				if(result == 1) {
 					// SUCESS

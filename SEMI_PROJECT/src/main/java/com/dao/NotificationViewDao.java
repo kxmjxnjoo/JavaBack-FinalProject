@@ -70,11 +70,13 @@ public class NotificationViewDao {
 
 	public int addNotification(String userTo, String userFrom, int notiType, int num) {
 		int result = 0;
+		
 		String followSql = "insert into notification (num, user_to, user_from, noti_type) values(notification_seq.nextval, ?, ?, 1)";
 		String postSql = "insert into notification (num, user_to, user_from, noti_type, post_num) values(notification_seq.nextval, ?, ?, 2, ?)";
 		String replySql = "insert into notification (num, user_to, user_from, noti_type, reply_num) values(notification_seq.nextval, ?, ?, 3, ?)";
 		String replyLikeSql = "insert into notification (num, user_to, user_from, noti_type, reply_num) values(notification_seq.nextval, ?, ?, 4, ?)";
 		String storySql = "insert into notification (num, user_to, user_from, noti_type, story_num) values(notification_seq.nextval, ?, ?, 5, ?)";
+
 		con = Dbman.getConnection();
 		try {
 			if(notiType == 1) {
