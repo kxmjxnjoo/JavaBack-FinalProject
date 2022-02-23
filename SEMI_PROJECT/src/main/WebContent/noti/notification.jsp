@@ -20,13 +20,8 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-<<<<<<< HEAD
 					<img class="userImg" src="/images/${ noti.memberImg }">
 					
-=======
-					<%-- <img class="userImg" src="../images/${ noti.memberImg }"> --%>
-					<img class="userImg" src="/images/${ noti.memberImg == null ? "tmpUserIcon.png" : noti.memberImg }">
->>>>>>> c5a3ac29d83e626a2a8658cbb39ffcd7c83ce8e7
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.userFrom }</h2>
 						
