@@ -2,10 +2,12 @@ package com.controller;
 
 
 import com.controller.action.Action;
+import com.controller.action.AddBookmarkAction;
 import com.controller.action.AddReplyAction;
 import com.controller.action.CheckLikeAction;
 import com.controller.action.CheckReplyLikeAction;
 import com.controller.action.CheckStoryLikeAction;
+import com.controller.action.DeleteBookmarkAction;
 import com.controller.action.DeletePostAction;
 import com.controller.action.DeleteReplyAction;
 import com.controller.action.DeleteStoryAction;
@@ -127,6 +129,11 @@ public class ActionFactory {
 		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
 		else if(command.equals("editprofile"))			ac = new EditProfileAction();
 		else if(command.equals("withdraw"))				ac = new WithdrawAction();
+		
+		// Related to bookmark
+		else if(command.equals("addbookmark"))			ac = new AddBookmarkAction();
+		else if(command.equals("deletebookmark"))		ac = new DeleteBookmarkAction();
+		
 		
 		
 		
