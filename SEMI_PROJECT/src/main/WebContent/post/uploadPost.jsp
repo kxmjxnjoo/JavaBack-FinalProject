@@ -62,6 +62,11 @@
 	</div>
 </form>
 
+<footer style="margin-top: -110px; padding: 0px;">
+<%@ include file="/footer.jsp" %>
+</footer>
+
+
 <script type="text/javascript" language="javascript" defer="defer"> 
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
@@ -105,5 +110,6 @@ function uploadCheck(){
 }
 
 </script>
+
 </body>
 </html>

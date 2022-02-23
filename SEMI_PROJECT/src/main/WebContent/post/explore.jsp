@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>탐색하기</title>
 <link href="../css/spring.css" rel="stylesheet"> 
+<link href="../css/explore.css" rel="stylesheet"> 
 </head>
 <body>
 
