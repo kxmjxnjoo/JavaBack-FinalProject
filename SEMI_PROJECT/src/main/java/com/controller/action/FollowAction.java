@@ -25,6 +25,9 @@ public class FollowAction implements Action {
 				String follower = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 				String following = request.getParameter("userid");
 				
+				System.out.println(following);
+				System.out.println(follower);
+				
 			// Insert follow into db
 				int result = FollowDao.getInstance().insertFollow(follower, following);
 			

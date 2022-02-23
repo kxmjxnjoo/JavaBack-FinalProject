@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.NotificationViewDao;
 import com.dao.PostDao;
 import com.dto.MemberDto;
+import com.dto.PostDto;
 
 public class CheckLikeAction implements Action {
 
@@ -23,10 +25,12 @@ public class CheckLikeAction implements Action {
 			String userid = mdto.getUserid();
 			PostDao pdao = PostDao.getInstance();
 			int result = pdao.postLikeCheck(post_num, userid);
+			PostDto pdto = pdao.getPost(post_num);
 
 			System.out.println("likeResult : " + result);
 			if(result == 0) {
 				pdao.addPostLike(post_num, userid);
+				NotificationViewDao.getInstance().addNotification(pdto.getUserid(), userid, 2, post_num);
 				result = 1;
 			} else {
 				pdao.deleteLike(post_num, userid);

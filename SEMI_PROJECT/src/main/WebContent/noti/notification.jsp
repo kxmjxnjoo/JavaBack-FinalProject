@@ -20,8 +20,8 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-					<img class="userImg" src="${ noti.memberImg }">
-					
+					<%-- <img class="userImg" src="../images/${ noti.memberImg }"> --%>
+					<img class="userImg" src="/images/${ noti.memberImg == null ? "tmpUserIcon.png" : noti.memberImg }">
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.userFrom }</h2>
 						
@@ -30,14 +30,22 @@
 								<p class="notiContent notiText">님이 ${ loginUser.name }님을 팔로우하셨습니다</p>
 							</c:when>
 							
-							<c:when test="${ noti.notiType == 2 }">
+							<c:when test="${ noti.notiType == 2 && loginUser.userid != noti.userFrom}">
 								<p class="notiContent notiText">님이 포스트를 좋아요 했어요</p>
 							</c:when>
-							
-							<c:when test="${ noti.notiType == 3 }">
+						
+							<c:when test="${ noti.notiType == 3 &&  loginUser.userid != noti.userFrom}">
 								<p class="notiContent notiText">님이 댓글을 다셨어요 : ${ noti.replyContent }</p>
 							</c:when>
 							
+							<c:when test="${ noti.notiType == 4 &&  loginUser.userid != noti.userFrom}">
+								<p class="notiContent notiText">님이 내 댓글을 좋아요 했어요</p>
+							</c:when>
+							
+							<c:when test="${ noti.notiType == 5 &&  loginUser.userid != noti.userFrom}">
+								<p class="notiContent notiText">님이 
+								<%-- <a href="spring.do?command=story_detail&story_num=${noti.story_num}">스토리</a> --%> 스토리 를 좋아요 했어요</p>
+							</c:when>
 						</c:choose>
 						
 						<h2 class="notiDate notiText">5일</h2>
