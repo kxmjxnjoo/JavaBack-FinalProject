@@ -190,4 +190,12 @@ hr {
 .bookmark img {
     width: 500px;
     height: 500px;
+
+}
+
+.bookmark {
+    width: 30%;
+    display: inline-block;
+
+    margin-right: 100px;
 }
