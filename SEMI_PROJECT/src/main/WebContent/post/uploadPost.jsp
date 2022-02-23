@@ -81,10 +81,7 @@ function goBack(){
 }
 
 function reset(){
-/* 	document.getElementById("input-file").select();
-	document.selection.clear();  */
 	document.querySelector("div#image_container img").src = "";
-	console.log(11);
 
 }
 

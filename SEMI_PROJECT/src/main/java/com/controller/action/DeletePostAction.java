@@ -13,7 +13,7 @@ public class DeletePostAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "main.jsp";
+		String url = "spring.do?command=main";
 		HttpSession session = request.getSession();
 		//MeberDto mdto = (MemberDto) sessio.getAttribute("loginAdmin");
 		//if(mdto==null) url = "spring.do?command=login";

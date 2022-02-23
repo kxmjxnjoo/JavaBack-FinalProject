@@ -260,7 +260,7 @@ select s.* from story s left outer join (select count(*) as count, userid  from 
 
 select * from follow where following = 'user12';
 
-select distinct userid from story where userid='user12';
+insert into follow values(follow_seq.nextval, 'love', 'love');
 
 select * from 
 ((select distinct userid from story) a, follow f where a.userid = f.following) where follower 

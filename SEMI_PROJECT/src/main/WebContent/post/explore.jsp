@@ -12,26 +12,27 @@
 <body>
 
 <%@ include file="/topnav/topnav.jsp" %>
-
-<div id = "wrap">
-<div id ="highClear"></div>
-	<div id="postList">
-		<c:forEach var="post" items="${posts}">
-			<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${post.postNum}'">
-				<img src="../images/${post.post_img}" height= "300px">
-<!-- hover -->
-				<div class="userPostInfo">
-					<i class="material-icons">favorite</i> <h3>${post.likeCount}</h3>
-					<i class="material-icons">chat_bubble</i> <h3>${post.replyCount}</h3>
+	<div id="exploreWrap">
+		<div id ="highClear"></div>
+		<div id="postList">
+			<c:forEach var="post" items="${posts}">
+				<div class="userPost" onclick="location.href='spring.do?command=postDetail&post_num=${post.postNum}'">
+					<img src="../images/${post.post_img}" height= "300px">
+	<!-- hover -->
+					<div class="userPostInfo">
+						<i class="material-icons">favorite</i> <h3>${post.likeCount}</h3>
+						<i class="material-icons">chat_bubble</i> <h3>${post.replyCount}</h3>
+					</div>
+					<div class ="userPostInfoLayer"></div>
 				</div>
-				<div class ="userPostInfoLayer"></div>
-			</div>
-		</c:forEach>
+			</c:forEach>
+		</div>
+		<div id ="highClear"></div>
 	</div>
-<div id ="highClear"></div>
-</div>
-
-	<%@ include file="/footer.jsp" %>
+	<footer>
+		<%@ include file="/footer.jsp" %>
+	</footer>
+	
 
 </body>
 </html>
