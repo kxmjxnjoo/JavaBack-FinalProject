@@ -51,6 +51,12 @@
 
 <hr>
 
+<div id="userpageSelection">
+	<button id="userpagePostButton">${ user.userid }님의 포스트</button>
+	
+	<button id="userpageBookmarkButton">저장된 포스트</button>
+</div>
+
 <c:choose>
 	<c:when test="${ posts != null }">
 		<div id="postList">
@@ -83,7 +89,8 @@
 	</c:otherwise>
 </c:choose>
 
-	<%@ include file="/footer.jsp" %>
+
+<%@ include file="/footer.jsp" %>
 
 
 <script src="/js/follow.js"></script>
