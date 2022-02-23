@@ -208,6 +208,13 @@ select f.following, f.follower, m.name as followingName, m.img as followingImg
 from follow f, member m
 where m.userid = following;
 
+create table bookmark(
+	num number(5) primary key,
+	userid not null references member(userid),
+	post_num not null references post(post_num),
+	save_date date default sysdate
+);
+create sequence bookmark_seq start with 1;
 
 
 /*테스트*/
