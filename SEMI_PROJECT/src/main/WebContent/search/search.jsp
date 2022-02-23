@@ -23,17 +23,18 @@
 					</div>
 				</div>
 				
-				<c:choose>
-					<c:when test="${ result.isFollowing == 1 }">
-						<input type="button" value="언팔로우" onclick="unfollow('${ result.userid }')">
-					</c:when>
+				<c:if test="${not empty loginUser}">
+					<c:choose>
+						<c:when test="${ result.isFollowing == 1 }">
+							<input type="button" value="언팔로우" onclick="unfollow('${ result.userid }')">
+						</c:when>
+						
+						<c:otherwise>
+							<input type="button" value="팔로우" onclick="follow('${ result.userid }')">
+						</c:otherwise>
 					
-					<c:otherwise>
-						<input type="button" value="팔로우" onclick="follow('${ result.userid }')">
-					</c:otherwise>
-				
-				</c:choose>
-			
+					</c:choose>
+				</c:if>
 			</div>
 		</c:forEach>
 	</div>

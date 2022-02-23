@@ -260,3 +260,8 @@ select f.* from (select distinct userid from story) a, follow_view f where a.use
 
 select * from story_like;
 
+select * from follow 
+delete from follow where follower = 'nari'
+
+insert into follow values (follow_seq.nextVal, 'nari', 'nari');
+insert into follow values (follow_seq.nextVal, 'hong', 'hong');

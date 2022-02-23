@@ -20,12 +20,28 @@ public class SearchAction implements Action {
 		HttpSession session = request.getSession();
 		
 		// Check if user is logged in
+		ArrayList<MemberDto> results = null;
 		if(session.getAttribute("loginUser") == null) {
-			url = "member/loginForm.jsp";
+			//url = "member/loginForm.jsp";
+			if(request.getParameter("searchfor") == null) {
+				results = MemberDao.getInstance().getAllMembers();
+				
+			} else if(request.getParameter("searchfor").equals("")) {
+				results = MemberDao.getInstance().getAllMembers();
+			} else {
+				// Get Param
+				String searchWord = request.getParameter("searchfor");
+				
+				// Get result
+				results = MemberDao.getInstance().getMembers(searchWord);
+			}
+			
+			request.setAttribute("results", results);
+			
 		} else {
 			String userid = ((MemberDto)session.getAttribute("loginUser")).getUserid();
 					
-			ArrayList<MemberDto> results;
+			//ArrayList<MemberDto> results;
 			
 			if(request.getParameter("searchfor") == null) {
 				results = MemberDao.getInstance().getAllMembers();
