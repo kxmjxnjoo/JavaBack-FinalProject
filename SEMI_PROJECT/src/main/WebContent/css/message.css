@@ -9,23 +9,25 @@ body {
     width: 80%;
     height: 650px;
 
-    border: 1px solid black;
+    border: 2px solid black;
 
     position: relative;
     left: 10%;
-
-    overflow: hidden;
+    top: 50px;
 }
 
 #userSelectBox {
     width: 30%;
 
-    overflow: auto;
+    display: inline-block;
 }
 
 #userBox {
     width: 100%;
-    overflow: scroll;
+    height: 500px;
+    overflow-y: scroll;
+
+    display: inline-block;
 }
 
 #loginUserInfo h1 {
@@ -41,6 +43,12 @@ body {
 
     position: relative;
     bottom: 65px;
+
+    color: rgb(230, 153, 153);
+}
+
+#loginUserInfo i:hover {
+    opacity: 0.5;
 }
 
 
@@ -53,8 +61,53 @@ body {
 .userImg {
     display: inline-block;
     width: 75px;
+
+    margin-right: 30px;
+
+    position: relative;
+    top: 10px;
+    left: 10px;
 }
 
 .userText {
     display: inline-block;
+}
+
+
+#userMessageBox {
+    width: 65%;
+
+    position: relative;
+    left: 2.5%;
+    bottom: 200px;
+    
+    display: inline-block;
+
+    text-align: center;
+}
+
+#messageNoSelectionMessage i {
+    font-size: 100px;
+
+    color: rgb(230, 153, 153);
+}
+
+
+
+#messageNoSelectionMessage button {
+    width: 300px;
+    height: 50px;
+
+    border: none;
+
+    background-color: rgb(230, 153, 153);
+    color: white;
+
+    margin-top: 20px;
+    
+    font-size: 25px;
+}
+
+#messageNoSelectionMessage button:hover {
+    opacity: 0.5;
 }

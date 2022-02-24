@@ -12,7 +12,9 @@
 	<%@ include file="/topnav/topnav.jsp" %>
 	
 	<div id="messageBox">
+	
 		<div id="userSelectBox">
+		
 			<div id="loginUserInfo">
 				<h1>${ loginUser.userid }</h1>
 				
@@ -36,13 +38,19 @@
 		
 		<div id="userMessageBox">
 		
+			<div id="messageNoSelectionMessage">
+				<i class="material-icons">sms</i>
+				<h1>팔로우한 친구들에게 메세지를 보내 보세요!</h1>
+				<button>메세지 보내기</button>
+			</div>
+			
 		</div>
+	
 	
 	</div>
 	
 	
-		<%@ include file="/footer.jsp" %>
 	
-
+	<%@ include file="/footer.jsp" %>
 </body>
 </html>

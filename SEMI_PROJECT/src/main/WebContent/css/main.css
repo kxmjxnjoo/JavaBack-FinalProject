@@ -11,6 +11,10 @@ html, body  {
     left: 10%;
 }
 
+#mainContent i:hover {
+    opacity: 0.5;
+}
+
 #myStory {
     background-color:#e59999;
     

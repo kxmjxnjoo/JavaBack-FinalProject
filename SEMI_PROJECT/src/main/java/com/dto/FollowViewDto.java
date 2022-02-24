@@ -7,7 +7,14 @@ public class FollowViewDto {
 	private String followingImg;
 	private String followingName;
 	
+	private int isStoryPresent;
 	
+	public int getIsStoryPresent() {
+		return isStoryPresent;
+	}
+	public void setIsStoryPresent(int isStoryPresent) {
+		this.isStoryPresent = isStoryPresent;
+	}
 	public String getFollowing() {
 		return following;
 	}

@@ -15,7 +15,7 @@ public class AddBookmarkAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "main.jsp";
+		String url = "spring.do?command=main";
 		HttpSession session = request.getSession();
 		
 		// Check if user is logged in
@@ -37,9 +37,9 @@ public class AddBookmarkAction implements Action {
 			
 			// Get result
 			if(result == 1) {
-				request.setAttribute("message", "포스트를 추가했어요");
+				request.setAttribute("message", "포스트를 저장했어요");
 			} else {
-				request.setAttribute("message", "포스트 추가에 실패했어요. 다시 시도해 주세요");
+				request.setAttribute("message", "포스트 저장에 실패했어요. 다시 시도해 주세요");
 			}
 		}
 		

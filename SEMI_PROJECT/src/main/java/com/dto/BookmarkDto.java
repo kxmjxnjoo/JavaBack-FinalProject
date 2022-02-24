@@ -8,7 +8,15 @@ public class BookmarkDto {
 	int postNum;
 	Date saveDate;
 	
+	// BookmarkView
+	String postImg;
 	
+	public String getPostImg() {
+		return postImg;
+	}
+	public void setPostImg(String postImg) {
+		this.postImg = postImg;
+	}
 	public int getNum() {
 		return num;
 	}
