@@ -61,4 +61,16 @@
 
 - [x] 메세지 - 2월 24일 1시, dto, dao, action, jsp, css, js 추가
 
+# Admin To do list
+
+- [ ] memberList User 검색
+- [ ] QnaView, QnaList Comment 작성
+- [ ] ReportList 데이터 미출력
+- [ ] ReportList Detail -> 해당 게시물, 스토리 내역?  
+- [ ] ReportList jsp 유저 CheckBox 출력  
+- [ ] Faq View
+- [ ] Faq Upload
+- [ ] Faq Delete
+ Dao나 Action 작성된 것도 있고 작성되었으나 수정 필요한 것도 있음
+
 # 시연모습
