@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>메세지</title>
 <link rel="stylesheet" href="/css/message.css">
+<link rel="stylesheet" href="/css/mainPopup.css">
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
@@ -23,12 +24,12 @@
 			
 			<div id="userBox">
 				<c:forEach var="user" items="${ userList }">
-					<div class="userSelect">
-						<img class="userImg" src="/images/${ user.fromImg }">
+					<div class="userSelect" onclick="location.href='spring.do?command=message&messagewith=${user.following}'">
+						<img class="userImg" src="/images/${ user.followingImg }">
 						
 						<div class="userText">
-							<h3>${ user.messageFrom }</h3>
-							<h3>${ user.content }</h3>
+							<h3>${ user.following }</h3>
+							<h3>${ user.following }님과 대화해 보세요</h3>
 						</div>
 					</div>
 				</c:forEach>
@@ -50,11 +51,13 @@
 				<c:otherwise>
 					<div id="messageHistoryBox">
 						<div id="messageTitle">
-							<img src="/images/${ messageWith.img }">
+							<div id="messageTitleProfile" onclick="location.href='spring.do?command=userpage&userid=${ messageWith.userid }'">
+								<img src="/images/${ messageWith.img }">
+								
+								<h1>${ messageWith.userid }</h1>
+							</div>
 							
-							<h1>${ messageWith.userid }</h1>
-							
-							<i class="material-icons">more_horiz</i>
+							<i class="material-icons" onclick="openPopup('${ messageWith.userid }')">more_horiz</i>
 						</div>
 					
 						<div id="messageHistory">
@@ -97,6 +100,49 @@
 		</div>
 	</div>
 	
+	
+	
+	<div id="popupWindow" style="display: none;">
+		<div id="popupBox">
+			<button onclick="goReport();">신고</button>
+			<hr>
+			<button onclick="unfollowPopup()">팔로우 취소</button>
+			<hr>
+			<button onclick="openPopup()">취소</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		let tmpUserid = ""
+		
+		function openPopup(userid) {
+			let popup = document.getElementById("popupWindow")
+			if(popup.style.display == "none") {
+				popup.style.display = ""
+				tmpUserid = userid
+			} else {
+				popup.style.display = "none"
+				tmpUserid = ""
+			}
+		}
+		
+		function unfollowPopup() {
+			if(confirm(tmpUserid + "님을 언팔로우 할까요?")) {
+				location.href = "spring.do?command=unfollow&userid=" + tmpUserid
+			}
+		}
+		
+		function goReport(){
+			var url="spring.do?command=reportForm&post_num=" + tmpPostnum;
+			var _width = '400';
+			var _height = '500';
+			var _left = Math.ceil((window.screen.width - _width)/2); 
+			var _top = Math.ceil((window.screen.width - _height)/2); 
+			var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+				"width="+_width+", height="+_height+", left="+_left;
+			window.open(url, "reportPost", opt);
+		}
+	</script>
 	
 	
 	<%@ include file="/footer.jsp" %>

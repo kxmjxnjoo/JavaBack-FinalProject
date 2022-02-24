@@ -67,6 +67,8 @@ body {
     position: relative;
     top: 10px;
     left: 10px;
+
+    border-radius: 50%;
 }
 
 .userText {
@@ -191,7 +193,7 @@ body {
 
 #messageHistory {
     height: 475px;
-    width: 90%;
+    width: 95%;
 
     position: relative;
     left: 5%;
@@ -228,4 +230,16 @@ body {
     display: inline-block;
 
     border-radius: 50%;
+}
+
+.userSelect:hover {
+    opacity: 0.5;
+}
+
+#messageTitle i:hover {
+    opacity: 0.5;
+}
+
+#messageTitleProfile:hover {
+    opacity: 0.5;
 }

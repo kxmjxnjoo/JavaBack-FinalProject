@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.FollowViewDao;
 import com.dao.MemberDao;
 import com.dao.MessageDao;
+import com.dto.FollowViewDto;
 import com.dto.MemberDto;
 import com.dto.MessageDto;
 
@@ -29,8 +31,10 @@ public class MessageAction implements Action {
 			String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 			
 			// Get user history
-			ArrayList<MessageDto> messageUserHistory = MessageDao.getInstance().getAllMessageMember(userid);
-			request.setAttribute("userList", messageUserHistory);
+			//ArrayList<MessageDto> messageUserHistory = MessageDao.getInstance().getAllMessageMember(userid);
+			//request.setAttribute("userList", messageUserHistory);
+			ArrayList<FollowViewDto> userList = FollowViewDao.getInstance().getFollowing(userid);
+			request.setAttribute("userList", userList);
 			
 			// Check if messagewith is null
 			if(request.getParameter("messagewith") != null) {

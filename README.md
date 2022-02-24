@@ -1,5 +1,9 @@
 # 이젠 백엔드 과정 조별 프로젝트
+## 기간
+2월 14일 ~ 2월 25일 (12일)
 
+## 공지사항
+*진주 깃 허브 문제 생길까봐 커밋 안 하고 있습니다
 
 # View 역할 분배
 - [x] userPage.jsp 진겸
@@ -8,7 +12,7 @@
 - [x] story.jsp 세인
 - [x] accountManage.jsp 진겸
 - [x] message.jsp 진겸
-- [ ] messageDetail.jsp 진겸
+- [x] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
 - [x] notification.jsp 진겸
 - [x] search.jsp 진겸
@@ -55,6 +59,22 @@
 - [ ] 메인 페이지에 페이징
 - [x] 모든 페이지에 footer - 2월 23일 3시, footer가 있어야 할 자리에 footer 추가, 아직 css 조금 수정해야 함
 
-- [ ] 메세지
+- [x] 메세지 - 2월 24일 1시, dto, dao, action, jsp, css, js 추가
+
+# Admin To do list
+
+- [ ] memberList User 검색
+- [ ] QnaView, QnaList Comment 작성
+- [ ] ReportList 데이터 미출력
+- [ ] ReportList Detail -> 해당 게시물, 스토리 내역?  
+- [ ] ReportList jsp 유저 CheckBox 출력
+- [ ] FaqList 작성 button CSS 위치 가운데로 수정  
+- [ ] Faq View
+- [ ] Faq Upload
+- [ ] Faq Delete
+- [ ] List.jsp button들 css미적용 되는 부분들 수정 필요함
+- [ ] ()님 로그인 하셨습니다 문구 조금 더 가운데로 위치하게 수정
+
+위 파일들 Dao, Action 작성된 것도 있고 작성되었으나 수정 필요한 것도 있음
 
 # 시연모습
