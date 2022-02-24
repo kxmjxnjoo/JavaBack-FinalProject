@@ -56,6 +56,6 @@
 - [ ] 메인 페이지에 페이징
 - [x] 모든 페이지에 footer - 2월 23일 3시, footer가 있어야 할 자리에 footer 추가, 아직 css 조금 수정해야 함
 
-- [ ] 메세지
+- [x] 메세지 - 2월 24일 1시, dto, dao, action, jsp, css, js 추가
 
 # 시연모습
