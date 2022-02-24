@@ -10,7 +10,14 @@ public class ReportDto {
 	private Timestamp indate;
 	private String reason;
 	private String type;
+	private String handled;
 	
+	public String getHandled() {
+		return handled;
+	}
+	public void setHandled(String handled) {
+		this.handled = handled;
+	}
 	public int getStory_num() {
 		return story_num;
 	}

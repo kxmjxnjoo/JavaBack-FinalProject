@@ -53,8 +53,10 @@ import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
 import com.controller.adminAction.AdminLoginAction;
 import com.controller.adminAction.FaqDetailAction;
+import com.controller.adminAction.HandleReportAction;
 import com.controller.adminAction.MemberListAction;
 import com.controller.adminAction.MemberSearchAction;
+import com.controller.adminAction.PostReportCheckAction;
 import com.controller.adminAction.QnaListAction;
 import com.controller.adminAction.QnaViewAction;
 import com.controller.adminAction.QnaWriteFormAction;
@@ -165,6 +167,8 @@ public class ActionFactory {
 		
 		else if( command.equals("ReportList")) ac = new ReportListAction();
 		else if( command.equals("reportOrder")) ac = new ReportOrderAction();
+		else if( command.equals("postReportCheck")) ac = new PostReportCheckAction();
+		else if( command.equals("handleReport")) ac = new HandleReportAction();
 		
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();

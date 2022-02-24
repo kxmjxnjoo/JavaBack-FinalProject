@@ -168,7 +168,9 @@ create table report(
 	reported_id varchar2(20) references member(userid) on delete cascade,
 	post_num number(5) references post(post_num) on delete cascade, 
 	story_num number(5) references story(story_num) on delete cascade,
+	report_type varcher2(20),
 	indate date default sysdate,
+	handled varchar2(5) default 'n',
 	reason varchar2(100) not null,
 	report_num varchar2(5) primary key
 )
@@ -176,6 +178,8 @@ create table report(
 alter table report add(post_num number(5) references post(post_num));
 alter table report RENAME COLUMN post_type TO report_type;
 alter table report add(story_num number(5) );
+alter table report add(handled varchar2(5) default 'n');
+
 
 create sequence report_seq start with 1;
 select * from report;
