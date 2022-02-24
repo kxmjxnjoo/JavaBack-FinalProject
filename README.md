@@ -73,6 +73,7 @@
 - [ ] Faq Upload
 - [ ] Faq Delete
 - [ ] List.jsp button들 css미적용 되는 부분들 수정 필요함
+- [ ] ()님 로그인 하셨습니다 문구 조금 더 가운데로 위치하게 수정
 
 위 파일들 Dao, Action 작성된 것도 있고 작성되었으나 수정 필요한 것도 있음
 
