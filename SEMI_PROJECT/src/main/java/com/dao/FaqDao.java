@@ -24,13 +24,13 @@ public class FaqDao {
 	
 	
 	
-	public ArrayList<FaqDto> listFaq(int faq_num) {
+	public ArrayList<FaqDto> listFaq() {
 		ArrayList<FaqDto> list = new ArrayList<FaqDto>();
-		String sql = "select * from faq where faq_num=? order by qna_num desc";
+		String sql = "select * from faq order by faq_num desc";
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, faq_num);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				FaqDto fdto = new FaqDto();
@@ -41,6 +41,7 @@ public class FaqDao {
 		    }
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs);  }
+		
 		return list;
 	}
 

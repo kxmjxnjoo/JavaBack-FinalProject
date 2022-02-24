@@ -1,0 +1,36 @@
+#faqBox {
+    width: 70%;
+
+    position: relative;
+    left: 15%;
+    
+}
+
+#faqBox h2 {
+    color: silver;
+
+    margin-bottom: 40px;
+}
+
+#faqBox h3 {
+    display: inline-block;
+}
+
+.faqQ {
+    color: silver;
+    margin-right: 5x;
+}
+
+.faqTitle {
+    border-radius: 20px;
+
+    margin-bottom: 10px;
+
+    width: 90%;
+    position: relative;
+    left: 5%;
+}
+
+.faqTitle:hover {
+    background-color: rgb(243, 244, 245);
+}
