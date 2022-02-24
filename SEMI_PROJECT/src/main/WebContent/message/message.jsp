@@ -23,12 +23,12 @@
 			
 			<div id="userBox">
 				<c:forEach var="user" items="${ userList }">
-					<div class="userSelect">
-						<img class="userImg" src="/images/${ user.fromImg }">
+					<div class="userSelect" onclick="location.href='spring.do?command=message&messagewith=${user.following}'">
+						<img class="userImg" src="/images/${ user.followingImg }">
 						
 						<div class="userText">
-							<h3>${ user.messageFrom }</h3>
-							<h3>${ user.content }</h3>
+							<h3>${ user.following }</h3>
+							<h3>${ user.following }님과 대화해 보세요</h3>
 						</div>
 					</div>
 				</c:forEach>
@@ -50,9 +50,11 @@
 				<c:otherwise>
 					<div id="messageHistoryBox">
 						<div id="messageTitle">
-							<img src="/images/${ messageWith.img }">
-							
-							<h1>${ messageWith.userid }</h1>
+							<div id="messageTitleProfile" onclick="location.href='spring.do?command=userpage&userid=${ messageWith.userid }'">
+								<img src="/images/${ messageWith.img }">
+								
+								<h1>${ messageWith.userid }</h1>
+							</div>
 							
 							<i class="material-icons">more_horiz</i>
 						</div>
