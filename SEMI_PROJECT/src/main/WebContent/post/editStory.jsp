@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>스토리 작성</title>
 <link href="../css/spring.css" rel="stylesheet"> 
+<link href="../css/posting.css" rel="stylesheet"> 
+<link href="../css/story.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
