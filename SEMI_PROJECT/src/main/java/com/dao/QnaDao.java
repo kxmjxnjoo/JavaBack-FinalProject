@@ -21,11 +21,41 @@ public class QnaDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
+	// Get all qna by date
+	public ArrayList<QnaDto> getAllQna() {
+		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
+		String sql = "select * from qna order by indate desc";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				QnaDto qdto = new QnaDto();
+				qdto.setIndate(rs.getTimestamp("in_date"));
+				qdto.setQna_content(rs.getString("qna_content"));
+				qdto.setQna_id(rs.getString("qna_id"));
+				qdto.setQna_num(rs.getInt("qna_num"));
+				qdto.setQna_password(rs.getString("qna_password"));
+				qdto.setQna_reply(rs.getString("qna_reply"));
+				qdto.setQna_subject(rs.getString("qna_subject"));
+				qdto.setRep(rs.getString("rep"));
+				list.add(qdto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
 	
 	
 	public ArrayList<QnaDto> listQna(String userid) {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from qna where uesrid=? order by qna_num desc";
+		String sql = "select * from qna where qna_id=? order by qna_num desc";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
