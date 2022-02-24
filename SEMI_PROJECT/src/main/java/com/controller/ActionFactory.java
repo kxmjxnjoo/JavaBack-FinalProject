@@ -58,6 +58,7 @@ import com.controller.adminAction.QnaListAction;
 import com.controller.adminAction.QnaViewAction;
 import com.controller.adminAction.QnaWriteFormAction;
 import com.controller.adminAction.ReportListAction;
+import com.controller.adminAction.ReportOrderAction;
 import com.controller.adminAction.UploadQnaAction;
 import com.controller.adminAction.commentQnaAction;
 
@@ -160,6 +161,8 @@ public class ActionFactory {
 		else if( command.equals("commentQna")) ac = new commentQnaAction();
 		
 		else if( command.equals("ReportList")) ac = new ReportListAction();
+		else if( command.equals("reportOrder")) ac = new ReportOrderAction();
+		
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
 		
