@@ -12,7 +12,7 @@
 - [x] story.jsp 세인
 - [x] accountManage.jsp 진겸
 - [x] message.jsp 진겸
-- [ㅌ] messageDetail.jsp 진겸
+- [x] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
 - [x] notification.jsp 진겸
 - [x] search.jsp 진겸
