@@ -40,13 +40,13 @@
 					<td  width="70"><fmt:formatDate value="${rdto.indate}"/></td>
 					<c:choose>
 						<c:when test="${rdto.type.equals('post')}">
-							<td  width="50"> <input type="button" name="banCheck" value="처리">
+							<td  width="50"> <input type="button" name="banCheck" value="게시물" onclick="openPost(${rdto.post_num}, ${rdto.report_num});">
 						</c:when>
 						<c:when test="${rdto.type.equals('story')}">
-							<td  width="50"> <input type="button" name="banCheck" value="처리">
+							<td  width="50"> <input type="button" name="banCheck" value="스토리" onclick="openStory(${rdto.story_num});">
 						</c:when>
 						<c:otherwise>
-							<td  width="50"> <input type="button" name="banCheck" value="처리">
+							<td  width="50"> <input type="button" name="banCheck" value="유저" onclick="openUserPage(${rdto.reported_id});">
 						</c:otherwise>
 					</c:choose>
 					
@@ -89,6 +89,17 @@
 function goOrder(){
 	document.frm.action = "spring.do?command=reportOrder";
 	document.frm.submit();
+}
+
+function openPost(post_num, report_num){
+	var url="spring.do?command=postReportCheck&post_num=" + post_num + "&report_num=" + report_num;
+	var _width = '1100';
+	var _height = '700';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
 }
 
 </script>

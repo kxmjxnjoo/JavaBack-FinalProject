@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.dto.AdminDto;
 import com.dto.MemberDto;
+import com.dto.ReportDto;
 import com.util.Dbman;
 import com.util.Paging;
 
@@ -131,7 +132,52 @@ public class AdminDao {
 		} finally { Dbman.close(con, pstmt, rs); }
 		return orderCount;
 	}
+
+
+
+	public ReportDto getReport(int report_num) {
+		ReportDto rdto = null;
+		String sql = "select * from report where report_num="+report_num;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rdto = new ReportDto();
+				rdto.setIndate(rs.getTimestamp("indate"));
+				rdto.setPost_num(rs.getInt("post_num"));
+				rdto.setReason(rs.getString("reason"));
+				rdto.setReport_num(rs.getInt("report_num"));
+				rdto.setReported_id(rs.getString("reported_id"));
+				rdto.setHandled(rs.getString("handled"));
+				rdto.setReporter_id(rs.getString("reporter_id"));
+				rdto.setStory_num(rs.getInt("story_num"));
+				rdto.setType(rs.getString("report_type"));
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return rdto;
+	}
+
+
+
+	public int reportDone(int report_num) {
+		String sql = "update report set handled='y' where report_num=" + report_num;
+		int result = 0;
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return result;
+	}
+
+
+
 	
+
+
 	
 
 	//신고 차단 체크
