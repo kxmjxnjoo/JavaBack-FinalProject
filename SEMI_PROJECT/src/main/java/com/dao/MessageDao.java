@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.dto.MemberDto;
 import com.dto.MessageDto;
 import com.util.Dbman;
 
@@ -23,13 +22,15 @@ public class MessageDao {
 	// Return all messages between certain users
 	public ArrayList<MessageDto> getAllMessage(String userFrom, String userTo) {
 		ArrayList<MessageDto> list = null;
-		String sql = "select * from message where message_from=?, message_to=? order by send_date desc";
+		String sql = "select * from message where (message_from=? and message_to=?) or (message_from=? and message_to=?) order by send_date";
 		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userFrom);
 			pstmt.setString(2, userTo);
+			pstmt.setString(3, userTo);
+			pstmt.setString(4, userFrom);
 			rs = pstmt.executeQuery();
 			
 			int count = 0;
@@ -61,8 +62,8 @@ public class MessageDao {
 	}
 	
 	// Return single instance of all mdto where userid received/send messages
-	public ArrayList<MemberDto> getAllMessageMember(String userid) {
-		ArrayList<MemberDto> list = null;
+	public ArrayList<MessageDto> getAllMessageMember(String userid) {
+		ArrayList<MessageDto> list = null;
 		
 		return list;
 	}

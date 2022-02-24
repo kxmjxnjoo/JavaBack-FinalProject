@@ -121,7 +121,7 @@
 						>favorite_border</i>
 						<i class="material-icons" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">chat_bubble_outline</i>
 						
-						<i class="material-icons">send</i>
+						<i class="material-icons" onclick="location.href='spring.do?command=message&messagewith=${ post.userid }'">send</i>
 						
 						<c:choose>
 							<c:when test="${ post.isSaved == 1 }">

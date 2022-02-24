@@ -111,3 +111,121 @@ body {
 #messageNoSelectionMessage button:hover {
     opacity: 0.5;
 }
+
+#messageTitle {
+    background-color: rgb(230, 153, 153);
+
+    height: 70px;
+
+    position: relative;
+}
+
+#messageTitle img {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    float: left;
+
+    margin-right: 20px;
+
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+
+#messageTitle h1 {
+    float: left;
+
+    font-size: 30px;
+}
+
+#messageTitle i {
+    float: right;
+
+    font-size: 70px;
+
+    position: relative;
+    right: 10px;
+}
+
+#sendMessageBar {
+    background-color: rgb(230, 153, 153);
+
+    height: 70px;
+
+}
+
+#sendMessageBar input[type=text] {
+    width: 80%;
+    height: 40px;
+
+    display: inline-block;
+    
+    float: left;
+
+    position: relative;
+    top: 15px;
+    left: 2.5%;
+}
+
+#sendMessageBar input[type=submit] {
+    display: inline-block;
+
+    float: right;
+
+    width: 10%;
+    height: 40px;
+
+    position: relative;
+    right: 2.5%;
+    top: 17.5px;
+
+    border: none;
+
+    background-color: #f7c4c0;
+
+    font-size: 15px;
+}
+
+#messageHistory {
+    height: 475px;
+    width: 90%;
+
+    position: relative;
+    left: 5%;
+    
+    overflow-y: auto;
+
+    
+}
+
+#messageHistoryBox {
+    position: relative;
+
+    top: 130px;
+}
+
+.messageRight {
+    text-align: right;
+}
+
+.messageLeft {
+    text-align: left;
+}
+
+.messageLeft h3 {
+    width: 90%;
+    display: inline-block;
+
+    position: relative;
+}
+
+.messageLeft img {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+
+    border-radius: 50%;
+}
