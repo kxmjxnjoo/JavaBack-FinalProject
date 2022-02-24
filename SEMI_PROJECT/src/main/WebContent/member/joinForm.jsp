@@ -19,7 +19,7 @@
 				<div class="text_box">
 				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" ></div>
 				<div class="text_box">
-				<input type ="text" name="email" class="input"  placeholder=" 아메일 주소" ></div>
+				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" ></div>
 				<div class="text_box">
 				<input type ="text" name="name" class="input"  placeholder=" 성명" ></div>
 				<div class="text_box">
