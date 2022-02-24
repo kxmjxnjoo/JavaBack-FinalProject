@@ -67,10 +67,13 @@
 - [ ] QnaView, QnaList Comment 작성
 - [ ] ReportList 데이터 미출력
 - [ ] ReportList Detail -> 해당 게시물, 스토리 내역?  
-- [ ] ReportList jsp 유저 CheckBox 출력  
+- [ ] ReportList jsp 유저 CheckBox 출력
+- [ ] FaqList 작성 button CSS 위치 가운데로 수정  
 - [ ] Faq View
 - [ ] Faq Upload
 - [ ] Faq Delete
- Dao나 Action 작성된 것도 있고 작성되었으나 수정 필요한 것도 있음
+- [ ] List.jsp button들 css미적용 되는 부분들 수정 필요함
+
+위 파일들 Dao, Action 작성된 것도 있고 작성되었으나 수정 필요한 것도 있음
 
 # 시연모습
