@@ -15,7 +15,7 @@
 		<h2>자주 묻는 질문을 모아봤어요. 만약 찾으시는 질문이 없으시면 직접 문의해 주세요.</h2>
 		
 		<c:forEach var="fdto" items="${ faqList }">
-			<div class="faqTitle" onclick="showFaq('${faq_subject}', '${ fdto.faq_content }')">
+			<div class="faqTitle" onclick="showFaq( '${fdto.faq_subject}', `${ fdto.faq_content }` );">
 				<h3 class="faqQ">Q</h3>
 				<h3>${ fdto.faq_subject }</h3>
 			</div>
@@ -23,15 +23,29 @@
 		
 	</div>
 	
-	<div id="faqPopup">
+	<div id="faqPopup" style="display: none;">
 		<div id="faqPopupBox">
-			<h1 id="faqPopupTitle"></h1>
-			<p id="faqPopupContent"></p>
+			<div id="faqPopupBoxContent">
+				<h1 id="faqPopupTitle"></h1>
+				<p id="faqPopupContent"></p>
+				<button onclick="showFaq()">돌아가기</button>
+			</div>
 		</div>
 	</div>
 	
 	<script type="text/javascript">
 		function showFaq(title, content) {
+			let popup = document.getElementById("faqPopup")
+			let titleEle = document.getElementById("faqPopupTitle")
+			let contentEle = document.getElementById("faqPopupContent")
+			
+			if(popup.style.display == "none") {
+				popup.style.display = ""
+				titleEle.innerHTML = title
+				contentEle.innerHTML = content
+			} else {
+				popup.style.display = "none"
+			}
 			
 		}
 	</script>
