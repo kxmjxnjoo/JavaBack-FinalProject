@@ -3,6 +3,12 @@
 /*posting.css*/
 
 
+footer{
+	width: 100%;
+	position: absolute;
+	bottom: 7%;
+}
+
 /*  Posting  */
 
 #posting{
@@ -55,10 +61,16 @@
 
 /* selectPost */
 
+#frm{
+	min-height: 68%;
+	display: flex;
+    align-items: center;
+}
+
 .button_wrap {
 	position:relative; margin:0 auto; top: 50%;
 	text-align:center;
-	width: 100%; height: 90%;
+	width: 100%; height: 90%; 
 	display: flex; flex-direction: column; align-items: center; gap: 1ch;
 }
 

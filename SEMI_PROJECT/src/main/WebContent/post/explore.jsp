@@ -13,6 +13,7 @@
 <body>
 
 <%@ include file="/topnav/topnav.jsp" %>
+
 	<div id="exploreWrap">
 		<div id ="highClear"></div>
 		<div id="postList">
@@ -33,7 +34,7 @@
 	<footer>
 		<%@ include file="/footer.jsp" %>
 	</footer>
-	
+
 
 </body>
 </html>

@@ -159,7 +159,7 @@ public class ActionFactory {
 		else if( command.equals("qnaView")) ac = new QnaViewAction();
 		else if( command.equals("commentQna")) ac = new commentQnaAction();
 		
-		else if( command.equals("reportList")) ac = new ReportListAction();
+		else if( command.equals("ReportList")) ac = new ReportListAction();
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
 		
