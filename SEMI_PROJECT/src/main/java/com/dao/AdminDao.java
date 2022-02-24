@@ -102,6 +102,38 @@ public class AdminDao {
 	}
 
 
+
+	public int getAllCount() {
+		int allCount = 0;
+		String sql = "select count(*) as count from report";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) allCount = rs.getInt("count");
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return allCount;
+	}
+
+
+
+	public int getOrderCount(String type) {
+		int orderCount = 0;
+		String sql = "select count(*) as count from report where report_type=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, type);
+			rs = pstmt.executeQuery();
+			if(rs.next()) orderCount = rs.getInt("count");
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return orderCount;
+	}
+	
+	
+
 	//신고 차단 체크
 	
 }

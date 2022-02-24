@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
+import com.dao.AdminDao;
 import com.dao.ReportDao;
 import com.dto.AdminDto;
 import com.dto.ReportDto;
@@ -38,7 +39,7 @@ public class ReportListAction implements Action {
 			
 			ArrayList<ReportDto> list = rdao.reportList(paging, searchKey);
 			
-			int count = 1;
+			int count = AdminDao.getInstance().getAllCount();
 			paging.setTotalCount(count);
 			
 			request.setAttribute("reportList", list);	

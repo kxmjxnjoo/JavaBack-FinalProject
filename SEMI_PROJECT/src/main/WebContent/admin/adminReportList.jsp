@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
-<span id="info">${adminLogin.adminid}님 로그인
+<span id="info">(${adminLogin.adminid})님 로그인
 	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 	
@@ -46,6 +46,7 @@
 							<td  width="50"> <input type="button" name="banCheck" value="처리">
 						</c:when>
 						<c:otherwise>
+							<td  width="50"> <input type="button" name="banCheck" value="처리">
 						</c:otherwise>
 					</c:choose>
 					
@@ -60,7 +61,7 @@
 <!-- <input type="submit" id="ban" value="정지 처리" onClick="location.href='spring.do?command=adminMain'"> -->
 <br /><br />
 	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-	<c:url var="action" value="spring.do?command=report" />
+	<c:url var="action" value="spring.do?command=ReportList" />
 	
 	<c:if test="${paging.prev}">
 		<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;.
@@ -73,7 +74,7 @@
 				<span style="color:red">${index}&nbsp;</span>
 			</c:when>
 			<c:otherwise>
-				<a href="${action}&page=${index}">${index}</a>&nbsp;
+				<a href="${action}&page=${index}">${index}</a>&nbsp; 
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>

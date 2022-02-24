@@ -267,18 +267,9 @@ select * from
 
 select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='nari'
 
-select * from story_like;
+select * from (
+select * from (select * from (select rownum as rn, m.* from 
+((select * from report where reporter_id like '%%' or reported_id like '%%' order by indate desc) m) 
+) where rn>=1) where rn<=10 ) where report_type = 'user'
 
-select * from follow 
-delete from follow where follower = 'nari'
-
-insert into follow values (follow_seq.nextVal, 'nari', 'nari');
-insert into follow values (follow_seq.nextVal, 'hong', 'hong');
-
-select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='hong'
-
-select * from notification
-
-select * from POST_LIKE
-
-select * from post_like where post_num = 111 and userid='nari'
+select count(*) as count from report

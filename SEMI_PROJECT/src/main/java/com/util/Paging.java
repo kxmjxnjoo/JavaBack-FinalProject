@@ -14,17 +14,16 @@ public class Paging {
     private int endNum;    //화면에 표시된는 게시물의 끝번호(num , pseq  같은 번호아닌 rownum)
     
     private void paging() {
-    	endPage = ( (int)Math.ceil( page/(double)displayPage ) ) * displayPage;
-    	beginPage = endPage - (displayPage - 1);
-    	
-    	int totalPage = (int)Math.ceil( totalCount/(double)displayRow );
-    	if(totalPage<endPage){
+    	endPage = ((int)Math.ceil(page/(double)displayPage))* displayPage;
+		beginPage = endPage-(displayPage-1);
+		int totalPage = (int)Math.ceil(totalCount/(double)displayRow);
+		if(totalPage<endPage) {
 			endPage = totalPage;
 			next = false;
-		}else{
+		} else {
 			next = true;
 		}
-		prev = (beginPage==1)?false:true;
+		prev = (beginPage ==1)?false:true;
 		startNum = (page-1)*displayRow+1;
 		endNum = page*displayRow;
 		
