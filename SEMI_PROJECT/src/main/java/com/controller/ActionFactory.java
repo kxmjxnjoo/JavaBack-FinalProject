@@ -46,7 +46,9 @@ import com.controller.action.StoryUploadAction;
 import com.controller.action.StoryUploadFormAction;
 import com.controller.action.UnfollowAction;
 import com.controller.action.UnlikePostAction;
+import com.controller.action.UserFnqAction;
 import com.controller.action.UserPageAction;
+import com.controller.action.UserQnaAction;
 import com.controller.action.WithdrawAction;
 import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
@@ -140,9 +142,11 @@ public class ActionFactory {
 		else if(command.equals("addbookmark"))			ac = new AddBookmarkAction();
 		else if(command.equals("deletebookmark"))		ac = new DeleteBookmarkAction();
 		
+		// Related to useradmin
+		else if(command.equals("userqna"))				ac = new UserQnaAction();
+		else if(command.equals("userfnq"))				ac = new UserFnqAction();
 		
-		
-		
+
 		else if( command.equals("admin")) ac = new AdminAction();
 		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
 		//else if( command.equals("adminLogout")) ac = new AdminLogouAction();
