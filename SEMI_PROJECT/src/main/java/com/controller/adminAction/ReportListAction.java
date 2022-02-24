@@ -24,8 +24,9 @@ public class ReportListAction implements Action {
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
 		else {
-			url = "admin/adminReportList.jsp";
 
+			String searchKey = request.getParameter("key") == null ? "" : request.getParameter("key");
+			
 			ReportDao rdao = ReportDao.getInstance();
 			
 			Paging paging = new Paging();
@@ -35,11 +36,10 @@ public class ReportListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
+			ArrayList<ReportDto> list = rdao.reportList(paging, searchKey);
+			
 			int count = 1;
 			paging.setTotalCount(count);
-			
-			String report_num = "";
-			ArrayList<ReportDto> list = rdao.reportList(Integer.parseInt(report_num));
 			
 			request.setAttribute("reportList", list);	
 			request.setAttribute("paging", paging);	

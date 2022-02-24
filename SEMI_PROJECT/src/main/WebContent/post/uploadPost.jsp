@@ -62,9 +62,9 @@
 	</div>
 </form>
 
-<footer style="margin-top: -110px; padding: 0px;">
+<%-- <footer style="margin-top: -110px; padding: 0px;">
 <%@ include file="/footer.jsp" %>
-</footer>
+</footer> --%>
 
 
 <script type="text/javascript" language="javascript" defer="defer"> 

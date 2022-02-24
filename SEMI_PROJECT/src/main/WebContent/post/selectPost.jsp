@@ -15,8 +15,7 @@ function goBack(){
 </head>
 <body>
 <%@ include file="/topnav/topnav.jsp" %>
-
-<form name="frm">
+<form name="frm" id="frm">
 	<div class="button_wrap">
 		<div class="icon_wrap">
 			<div id="button">
@@ -34,7 +33,8 @@ function goBack(){
 		
 	</div>
 </form>
-
+<footer>
 <%@ include file="/footer.jsp" %>
+</footer>
 </body>
 </html>
