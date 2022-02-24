@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>메세지</title>
 <link rel="stylesheet" href="/css/message.css">
+<link rel="stylesheet" href="/css/mainPopup.css">
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
@@ -56,7 +57,7 @@
 								<h1>${ messageWith.userid }</h1>
 							</div>
 							
-							<i class="material-icons">more_horiz</i>
+							<i class="material-icons" onclick="openPopup('${ messageWith.userid }')">more_horiz</i>
 						</div>
 					
 						<div id="messageHistory">
@@ -99,6 +100,49 @@
 		</div>
 	</div>
 	
+	
+	
+	<div id="popupWindow" style="display: none;">
+		<div id="popupBox">
+			<button onclick="goReport();">신고</button>
+			<hr>
+			<button onclick="unfollowPopup()">팔로우 취소</button>
+			<hr>
+			<button onclick="openPopup()">취소</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		let tmpUserid = ""
+		
+		function openPopup(userid) {
+			let popup = document.getElementById("popupWindow")
+			if(popup.style.display == "none") {
+				popup.style.display = ""
+				tmpUserid = userid
+			} else {
+				popup.style.display = "none"
+				tmpUserid = ""
+			}
+		}
+		
+		function unfollowPopup() {
+			if(confirm(tmpUserid + "님을 언팔로우 할까요?")) {
+				location.href = "spring.do?command=unfollow&userid=" + tmpUserid
+			}
+		}
+		
+		function goReport(){
+			var url="spring.do?command=reportForm&post_num=" + tmpPostnum;
+			var _width = '400';
+			var _height = '500';
+			var _left = Math.ceil((window.screen.width - _width)/2); 
+			var _top = Math.ceil((window.screen.width - _height)/2); 
+			var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+				"width="+_width+", height="+_height+", left="+_left;
+			window.open(url, "reportPost", opt);
+		}
+	</script>
 	
 	
 	<%@ include file="/footer.jsp" %>
