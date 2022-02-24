@@ -3,6 +3,7 @@ package com.controller;
 
 import com.controller.action.Action;
 import com.controller.action.AddBookmarkAction;
+import com.controller.action.AddMessageAction;
 import com.controller.action.AddReplyAction;
 import com.controller.action.CheckLikeAction;
 import com.controller.action.CheckReplyLikeAction;
@@ -111,7 +112,9 @@ public class ActionFactory {
 		
 		else if(command.equals("notification"))			ac = new NotificationAction();
 		
+		// Related to message
 		else if(command.equals("message"))				ac = new MessageAction();
+		else if(command.equals("sendmessage"))			ac = new AddMessageAction();
 		
 		else if(command.equals("search"))				ac = new SearchAction();
 		
