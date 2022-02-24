@@ -1,5 +1,8 @@
 # 이젠 백엔드 과정 조별 프로젝트
+## 기간
+2월 14일 ~ 2월 25일 (12일)
 
+## 공지사항
 *진주 깃 허브 문제 생길까봐 커밋 안 하고 있습니다
 
 # View 역할 분배
@@ -9,7 +12,7 @@
 - [x] story.jsp 세인
 - [x] accountManage.jsp 진겸
 - [x] message.jsp 진겸
-- [ ] messageDetail.jsp 진겸
+- [x] messageDetail.jsp 진겸
 - [ ] explore.jsp 세인
 - [x] notification.jsp 진겸
 - [x] search.jsp 진겸
