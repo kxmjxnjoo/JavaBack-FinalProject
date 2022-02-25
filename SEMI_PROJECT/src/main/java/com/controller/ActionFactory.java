@@ -50,6 +50,8 @@ import com.controller.action.UserFnqAction;
 import com.controller.action.UserPageAction;
 import com.controller.action.UserQnaAction;
 import com.controller.action.WithdrawAction;
+import com.controller.adminAction.AddFaqAction;
+import com.controller.adminAction.AddFaqFormAction;
 import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
@@ -156,9 +158,12 @@ public class ActionFactory {
 		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
 		
 		// Related to faq
-		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
-		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
-		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();
+		else if( command.equals("adminFaqList")) 		ac = new AdminFaqListAction();
+		else if( command.equals("faqDetail")) 			ac = new FaqDetailAction();
+		else if( command.equals("adminFaqForm")) 		ac = new AdminFaqFormAction();
+		else if(command.equals("addfaqform"))			ac = new AddFaqFormAction();
+		else if(command.equals("addfaq"))				ac = new AddFaqAction();
+		
 		//else if( command.equals("adminUpdateFaq")) ac = new AdminUpdateFaqAction();
 		//else if( command.equals("adminDeleteFaq")) ac = new AdminDeleteFaqAction();
 		

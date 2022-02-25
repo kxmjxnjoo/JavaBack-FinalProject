@@ -67,16 +67,23 @@ public class FaqDao {
 
 
 
-	public void uploadFaq(FaqDto fdto) {
+	public int uploadFaq(FaqDto fdto) {
 		String sql = "insert into faq(faq_num, faq_subject, faq_content)"
 				+ "values(faq_seq.nextVal, ?, ?)";
+		int result = 0;
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, fdto.getFaq_subject());
 			pstmt.setString(2, fdto.getFaq_content());
+			
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) { 	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);		}
+		
+		return result;
 	}
 	
 	
