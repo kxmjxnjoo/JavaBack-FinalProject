@@ -33,7 +33,7 @@ public class QnaDao {
 			
 			while(rs.next()) {
 				QnaDto qdto = new QnaDto();
-				qdto.setIndate(rs.getTimestamp("in_date"));
+				qdto.setIndate(rs.getTimestamp("indate"));
 				qdto.setQna_content(rs.getString("qna_content"));
 				qdto.setQna_id(rs.getString("qna_id"));
 				qdto.setQna_num(rs.getInt("qna_num"));

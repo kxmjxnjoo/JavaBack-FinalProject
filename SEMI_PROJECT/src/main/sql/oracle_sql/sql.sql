@@ -161,6 +161,8 @@ create table qna (
 create sequence qna_seq start with 1;
 select * from qna;
 
+drop table qna;
+
 
 /*report*/
 create table report(	
