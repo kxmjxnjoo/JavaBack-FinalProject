@@ -65,9 +65,7 @@ public class ReportOrderAction implements Action {
 			request.setAttribute("reportList", list);	
 			request.setAttribute("reportOrder", reportOrder);	
 			request.setAttribute("paging", paging);	
-			request.setAttribute("order", reportOrder);	
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-
 }

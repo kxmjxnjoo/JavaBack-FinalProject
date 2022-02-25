@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
@@ -12,15 +11,17 @@
 <form name="frm" method="post">		
 	
 <!-- 정렬 선택 -->
-		<select name="reportOrder" id="reportOrder" class="select-css">
-			<option value = "" > 정렬 </option>
-			<option value = "1" > 날짜 내림차순 </option>
-			<option value = "2" > 날짜 오름차순 </option>
-			<option value = "3" > 게시물 신고 </option>
-			<option value = "4" > 스토리 신고 </option>
-			<option value = "5" > 유저 신고 </option>
-		</select>
-		<input type="button" value="검색" onclick ="goOrder();">
+		<div id="orderSelect">
+			<select name="reportOrder" id="reportOrder" class="select-css">
+				<<option value="0" selected="selected">  정렬 </option>
+				<option value = "1" > 날짜 내림차순 </option>
+				<option value = "2" > 날짜 오름차순 </option>
+				<option value = "3" > 게시물 신고 </option>
+				<option value = "4" > 스토리 신고 </option>
+				<option value = "5" > 유저 신고 </option>
+			</select>
+			<input type="button" value="검색" onclick ="goOrder();">
+		</div>
 		<table>
 			<tr>
 				<th>번호</th><th>아이디</th><th>신고 유형</th><th>사유</th><th>신고자</th><th>신고날짜</th><th>처리</th>
@@ -88,8 +89,14 @@
 <script type="text/javascript" language="javascript" defer="defer"> 
 
 function goOrder(){
-	document.frm.action = "spring.do?command=reportOrder";
-	document.frm.submit();
+	let target = document.getElementById("reportOrder");
+	if(target.options[target.selectedIndex].value=="0") {
+		alert('선택해주세요');
+		return;
+	} else {
+		document.frm.action = "spring.do?command=reportOrder";
+		document.frm.submit();	
+	}
 }
 
 function openPost(post_num, report_num){
