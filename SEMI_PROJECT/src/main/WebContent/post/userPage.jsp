@@ -14,7 +14,7 @@
 
 <div id="userInfo">
 	<div id="userImg">
-		<img src="images/${ user.img }">
+		<img id="userprofile" src="/images/${ StoryDto.user_img == null || StoryDto.user_img.equals("") ? "tmpUserIcon.png" : StoryDto.user_img }">
 	</div>
 	
 	

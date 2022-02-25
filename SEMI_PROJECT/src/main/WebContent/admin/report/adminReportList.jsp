@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="admin/css/admin.css">
+<link rel="stylesheet" href="/admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">(${adminLogin.adminid})님 로그인
@@ -13,7 +13,7 @@
 <!-- 정렬 선택 -->
 		<div id="orderSelect">
 			<select name="reportOrder" id="reportOrder" class="select-css">
-				<<option value="0" selected="selected">  정렬 </option>
+				<option value = "0">  정렬 </option>
 				<option value = "1" > 날짜 내림차순 </option>
 				<option value = "2" > 날짜 오름차순 </option>
 				<option value = "3" > 게시물 신고 </option>
@@ -28,10 +28,6 @@
 			</tr>
 			<c:forEach items="${reportList}" var="rdto">
 				<tr align="left">
-					<%-- <td  align="left">&nbsp;&nbsp;
-						<a href="spring.do?command=reportList=${reportList.num}">
-						</a>
-					</td> --%>
 					<td  width="50">${rdto.report_num}</td>
 					<td  width="50">${rdto.reported_id}</td>
 					<td  width="50">${rdto.type}</td>

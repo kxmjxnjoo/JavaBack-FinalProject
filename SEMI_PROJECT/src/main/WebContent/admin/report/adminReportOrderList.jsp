@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="admin/css/admin.css">
+<link rel="stylesheet" href="/admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">(${adminLogin.adminid})님 로그인

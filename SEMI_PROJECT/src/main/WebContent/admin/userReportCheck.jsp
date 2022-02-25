@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>유저 신고 처리</title>
 <link rel="stylesheet" href="../css/userPage.css">
+<link rel="stylesheet" href="admin/css/admin.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>

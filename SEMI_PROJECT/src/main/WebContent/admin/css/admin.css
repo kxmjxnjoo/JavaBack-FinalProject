@@ -180,6 +180,7 @@ table, th{
 
 #member_search:focus-within{
 	border:1px solid #e59999;
+}
 
 #search_btn{
 	background:white;
@@ -191,3 +192,17 @@ table, th{
 }
 /*------------------------------------footer--------------------------*/
 #copy{font-size:90%; text-align:center;}
+
+
+/*------------------------reportList---------------------------------*/
+
+#orderSelect{
+	position: relative;
+    margin-bottom: 20px;
+    left: 70%;
+}
+
+#handleReportCheck{
+	display: flex;
+    justify-content: center;
+}

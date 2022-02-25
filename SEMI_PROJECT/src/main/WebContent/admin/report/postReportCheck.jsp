@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link href="../css/spring.css" rel="stylesheet"> 
 <link href="../css/posting.css" rel="stylesheet"> 
+<link rel="stylesheet" href="admin/css/admin.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -22,13 +23,12 @@
 					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
 						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
-					<b>${PostDto.userid}</b>  <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-					<div id="buttons" onClick="setting();">
+					<b>${PostDto.userid}</b>  
+					<!-- <div id="buttons" onClick="setting();">
 								<span class="material-icons" > more_vert </span>
-					</div>
+					</div> -->
 				</div>
 <!-- message test -->
-				${message}
 				
 				<!-- 작성한 글 내용 -->
 				<div id="content"> 
@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				
-				<!-- 댓글 표시 구역 -->
+			<%-- 	<!-- 댓글 표시 구역 -->
 				<div class="reply">
 					<c:forEach items="${ReplyDto}" var="reply">
 					<div id="reply_each">
@@ -66,14 +66,13 @@
 						</div>
 					</div>
 					</c:forEach>
-				</div>
+				</div> --%>
 				</div><!-- contents end -->
 			</div>
 
 	
-	<div>
+	<div id="handleReportCheck">
 		<input type="button" value="신고 처리하기" onclick="handleReport(${post_num}, ${report_num});"> 
-		
 	</div>
 	
 <script type="text/javascript" language="javascript" defer="defer"> 
