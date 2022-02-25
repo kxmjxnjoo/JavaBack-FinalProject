@@ -53,10 +53,11 @@ import com.controller.action.WithdrawAction;
 import com.controller.adminAction.AddFaqAction;
 import com.controller.adminAction.AddFaqFormAction;
 import com.controller.adminAction.AdminAction;
-import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
 import com.controller.adminAction.AdminLoginAction;
-import com.controller.adminAction.FaqDetailAction;
+import com.controller.adminAction.DeleteFaqAction;
+import com.controller.adminAction.EditFaqAction;
+import com.controller.adminAction.EditFaqFormAction;
 import com.controller.adminAction.HandleReportAction;
 import com.controller.adminAction.MemberListAction;
 import com.controller.adminAction.MemberSearchAction;
@@ -149,38 +150,40 @@ public class ActionFactory {
 
 	// ADMIN
 		// Related to login
-		else if( command.equals("admin")) ac = new AdminAction();
-		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
+		else if( command.equals("admin")) 				ac = new AdminAction();
+		else if( command.equals("adminLogin")) 			ac = new AdminLoginAction();
 		//else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
 		
 		// Related to member list
-		else if( command.equals("memberList")) ac = new MemberListAction();
-		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
+		else if( command.equals("memberList")) 			ac = new MemberListAction();
+		else if( command.equals("memberSearch")) 		ac = new MemberSearchAction();
 		
 		// Related to faq
 		else if( command.equals("adminFaqList")) 		ac = new AdminFaqListAction();
-		else if( command.equals("faqDetail")) 			ac = new FaqDetailAction();
-		else if( command.equals("adminFaqForm")) 		ac = new AdminFaqFormAction();
+		
 		else if(command.equals("addfaqform"))			ac = new AddFaqFormAction();
 		else if(command.equals("addfaq"))				ac = new AddFaqAction();
+		else if(command.equals("editfaqform"))			ac = new EditFaqFormAction();
+		else if(command.equals("editfaq"))				ac = new EditFaqAction();
+		else if(command.equals("deletefaq"))			ac = new DeleteFaqAction();
 		
 		//else if( command.equals("adminUpdateFaq")) ac = new AdminUpdateFaqAction();
 		//else if( command.equals("adminDeleteFaq")) ac = new AdminDeleteFaqAction();
 		
 		// Related to Qna
-		else if( command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
-		else if( command.equals("uploadQna")) ac = new UploadQnaAction();
+		else if( command.equals("qnaWriteForm")) 		ac = new QnaWriteFormAction();
+		else if( command.equals("uploadQna")) 			ac = new UploadQnaAction();
 		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
 		//else if( command.equals("deleteQna")) ac = new DeleteQnaAction();
-		else if( command.equals("qnaList")) ac = new QnaListAction();
-		else if( command.equals("qnaView")) ac = new QnaViewAction();
-		else if( command.equals("commentQna")) ac = new commentQnaAction();
+		else if( command.equals("qnaList")) 			ac = new QnaListAction();
+		else if( command.equals("qnaView")) 			ac = new QnaViewAction();
+		else if( command.equals("commentQna"))			ac = new commentQnaAction();
 		
 		// Related to report
-		else if( command.equals("ReportList")) ac = new ReportListAction();
-		else if( command.equals("reportOrder")) ac = new ReportOrderAction();
-		else if( command.equals("postReportCheck")) ac = new PostReportCheckAction();
-		else if( command.equals("handleReport")) ac = new HandleReportAction();
+		else if( command.equals("ReportList")) 			ac = new ReportListAction();
+		else if( command.equals("reportOrder")) 		ac = new ReportOrderAction();
+		else if( command.equals("postReportCheck")) 	ac = new PostReportCheckAction();
+		else if( command.equals("handleReport")) 		ac = new HandleReportAction();
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
 		

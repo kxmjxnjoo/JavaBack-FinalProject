@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
-import com.dao.AdminDao;
 import com.dao.FaqDao;
 import com.dto.AdminDto;
 import com.dto.FaqDto;
-import com.dto.MemberDto;
 import com.util.Paging;
 
 public class AdminFaqListAction implements Action {

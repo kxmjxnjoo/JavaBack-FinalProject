@@ -119,18 +119,19 @@ public class FaqDao {
 	 */
 	
 	
-	public void deleteFaq(int faq_num) {
+	public int deleteFaq(int faq_num) {
 		String sql = "delete from faq where faq_num=?";
+		int result = 0;
+		
 		con = Dbman.getConnection();
 		try {
 		      pstmt = con.prepareStatement(sql); 
 		      pstmt.setInt(1, faq_num);
-		      pstmt.executeUpdate();
+		      result = pstmt.executeUpdate();
 		} catch (Exception e) { e.printStackTrace();
-	    } finally { Dbman.close(con, pstmt, rs); }   	
-}
-
-
-	
-
+	    } finally { Dbman.close(con, pstmt, rs); }
+	    
+	    return result;
+	}   
+		
 }

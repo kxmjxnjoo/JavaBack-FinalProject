@@ -18,11 +18,9 @@ public class QnaListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-		
 		String url = "admin/qna/adminQnaList.jsp";
 		HttpSession session = request.getSession();
+		
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
 		else {
@@ -36,7 +34,7 @@ public class QnaListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
-			ArrayList<QnaDto> list = qdao.listQna("userid");
+			ArrayList<QnaDto> list = qdao.listQna();
 			
 			int count = 1;
 			paging.setTotalCount(count);

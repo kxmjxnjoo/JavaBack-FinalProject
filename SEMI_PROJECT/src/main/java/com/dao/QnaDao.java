@@ -53,13 +53,13 @@ public class QnaDao {
 	}
 	
 	
-	public ArrayList<QnaDto> listQna(String userid) {
+	public ArrayList<QnaDto> listQna() {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from qna where qna_id=? order by qna_num desc";
+		String sql = "select * from qna order by qna_num desc";
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,  userid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				QnaDto qdto = new QnaDto();

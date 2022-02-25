@@ -14,5 +14,14 @@
 	<li><a href="spring.do?command=adminFaqList">FAQ리스트</a></li>
 	<li><a href="spring.do?command=qnaList">Q&amp;A리스트</a></li>
 	<li><a href="spring.do?command=ReportList">신고리스트</a></li>
+	
+
 </ul>
 </nav>
+
+<script type="text/javascript">
+	if("${ message }" != "") {
+		alert("${ message }")
+		${ message = "" }
+	}
+</script>

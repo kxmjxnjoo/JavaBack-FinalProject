@@ -8,12 +8,23 @@
 	<br><br><br>
 		 
 <form name="frm" action="spring.do">		
-	<table><c:forEach items="${qnaList}" var="memberDto">
-		<tr><th>이름</th><td width="50">${qdto.name}</td>
-				<th>아이디</th><td width="50">${qdto.id}</td>
-				<th>제목</th><td width="50">${qdto.subject}</td>
-				<th>작성일</th><td width="50"><fmt:formatDate value="${qdto.indate}"/></td>
+	<table>
+		<tr>
+			<th>이름</th>
+			<th>아이디</th>
+			<th>제목</th>
+			<th>작성일</th>
+		<tr>
+		
+		<c:forEach items="${qnaList}" var="qdto">
+			<tr>
+				<td width="50">${qdto.qna_id}</td>
+				<td width="50">${qdto.qna_subject}</td>
+				<td width="50">${qdto.qna_subject}</td>
+				<td width="50"><fmt:formatDate value="${qdto.indate}"/></td>
+			</tr>
 		</c:forEach>
+		
 	</table>
 </form>
 			<!-- 
