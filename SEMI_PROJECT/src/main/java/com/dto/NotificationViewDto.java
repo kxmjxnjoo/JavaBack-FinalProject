@@ -11,6 +11,7 @@ public class NotificationViewDto {
 	
 	private String datePassed;
 	
+	
 	// 1 : follow
 	
 	public String getDatePassed() {
@@ -21,10 +22,26 @@ public class NotificationViewDto {
 	}
 	// 2 : like
 	private String postImg;
+	
 	// 3 : reply
 	private String replyContent;
 	
-	
+	// 5 : story
+	private String storyImg;
+	private int storyNum;
+
+	public int getStoryNum() {
+		return storyNum;
+	}
+	public void setStoryNum(int storyNum) {
+		this.storyNum = storyNum;
+	}
+	public String getStoryImg() {
+		return storyImg;
+	}
+	public void setStoryImg(String storyImg) {
+		this.storyImg = storyImg;
+	}
 	public String getUserTo() {
 		return userTo;
 	}
