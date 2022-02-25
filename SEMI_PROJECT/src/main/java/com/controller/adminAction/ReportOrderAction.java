@@ -29,6 +29,7 @@ public class ReportOrderAction implements Action {
 
 			String searchKey = request.getParameter("key") == null ? "" : request.getParameter("key");
 			int reportOrder = Integer.parseInt(request.getParameter("reportOrder"));
+			System.out.println(reportOrder);
 			
 			ReportDao rdao = ReportDao.getInstance();
 			
@@ -62,6 +63,7 @@ public class ReportOrderAction implements Action {
 			paging.setTotalCount(count);
 			
 			request.setAttribute("reportList", list);	
+			request.setAttribute("reportOrder", reportOrder);	
 			request.setAttribute("paging", paging);	
 			request.setAttribute("order", reportOrder);	
 		}
