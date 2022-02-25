@@ -78,6 +78,7 @@ public class ActionFactory {
 	
 		Action ac = null;
 		System.out.println(command);
+	// USER
 		if(command.equals("postuploadForm")) 			ac = new PostUploadFormAction();
 		else if(command.equals("postUpload")) 			ac = new PostUploadAction();
 		else if(command.equals("postDetail")) 			ac = new PostDetailAction();
@@ -124,7 +125,6 @@ public class ActionFactory {
 		else if(command.equals("search"))				ac = new SearchAction();
 		
 		else if(command.equals("explore"))				ac = new ExploreAction();
-
 		// Related to member
 		else if(command.equals("loginform"))			ac = new LoginFormAction();
 		else if(command.equals("login"))				ac = new LoginAction();
@@ -137,16 +137,15 @@ public class ActionFactory {
 		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
 		else if(command.equals("editprofile"))			ac = new EditProfileAction();
 		else if(command.equals("withdraw"))				ac = new WithdrawAction();
-		
 		// Related to bookmark
 		else if(command.equals("addbookmark"))			ac = new AddBookmarkAction();
 		else if(command.equals("deletebookmark"))		ac = new DeleteBookmarkAction();
-		
 		// Related to useradmin
 		else if(command.equals("userqna"))				ac = new UserQnaAction();
 		else if(command.equals("userfnq"))				ac = new UserFnqAction();
 		
 
+	// ADMIN
 		else if( command.equals("admin")) ac = new AdminAction();
 		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
 		//else if( command.equals("adminLogout")) ac = new AdminLogouAction();

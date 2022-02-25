@@ -26,10 +26,7 @@ public class AdminFaqListAction implements Action {
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
-		else {
-
-			AdminDao adao = AdminDao.getInstance();
-			
+		else {			
 			Paging paging = new Paging();
 			int page=1;  // 처음 게시판을 열었을때
 			
@@ -37,7 +34,9 @@ public class AdminFaqListAction implements Action {
 				page = Integer.parseInt( request.getParameter("page") );
 			paging.setPage(page);
 			
-			ArrayList<MemberDto> list = adao.MemberList( paging, "key");
+			ArrayList<FaqDto> list = FaqDao.getInstance().listFaq();
+			
+			
 			
 			int count = 1;
 			paging.setTotalCount(count);

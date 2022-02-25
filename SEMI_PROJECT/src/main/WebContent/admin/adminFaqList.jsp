@@ -12,8 +12,9 @@ ${adminLogin.adminid}님 로그인
 <form name="frm" method="post">		
 		<table>
 			<tr><th>번호</th><th>제목</th><th>내용</th></tr>
-			<c:forEach items="${faqList}" var="fdto">
-				<tr align="left"><td  align="left">&nbsp;&nbsp;
+			
+			<c:forEach items="${listFaq}" var="fdto">
+				<tr align="left">
 					<td  width="50">${fdto.faq_num}</td>
 					<td  width="80">${fdto.faq_subject}</td>
 					<td  width="100">${fdto.faq_content}</td>
