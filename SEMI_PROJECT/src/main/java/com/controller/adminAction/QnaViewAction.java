@@ -17,7 +17,7 @@ public class QnaViewAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = "qnaView.jsp";
+		String url = "/admin/qna/qnaView.jsp";
 		
 		// QnaDao 에 추가될 메서드 이름 getQna
 		HttpSession session = request.getSession();

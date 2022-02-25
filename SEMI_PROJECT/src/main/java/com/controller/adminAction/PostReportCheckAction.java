@@ -16,7 +16,7 @@ public class PostReportCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/postReportCheck.jsp";
+		String url = "/admin/report/postReportCheck.jsp";
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
 		int report_num  = Integer.parseInt(request.getParameter("report_num"));
 		PostDao pdao = PostDao.getInstance();

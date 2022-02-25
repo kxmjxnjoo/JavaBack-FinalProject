@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="admin_submenu.jsp" %>
+<%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
@@ -103,4 +103,4 @@ function openPost(post_num, report_num){
 }
 
 </script>
-<%@ include file="/admin/footer.jsp"%>
+<%@ include file="/admin/common/footer.jsp"%>

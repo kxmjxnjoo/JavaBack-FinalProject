@@ -146,20 +146,23 @@ public class ActionFactory {
 		
 
 	// ADMIN
+		// Related to login
 		else if( command.equals("admin")) ac = new AdminAction();
 		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
-		//else if( command.equals("adminLogout")) ac = new AdminLogouAction();
 		//else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
 		
+		// Related to member list
 		else if( command.equals("memberList")) ac = new MemberListAction();
 		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
 		
-		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
+		// Related to faq
 		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
+		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
 		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();
 		//else if( command.equals("adminUpdateFaq")) ac = new AdminUpdateFaqAction();
 		//else if( command.equals("adminDeleteFaq")) ac = new AdminDeleteFaqAction();
 		
+		// Related to Qna
 		else if( command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
 		else if( command.equals("uploadQna")) ac = new UploadQnaAction();
 		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
@@ -168,11 +171,11 @@ public class ActionFactory {
 		else if( command.equals("qnaView")) ac = new QnaViewAction();
 		else if( command.equals("commentQna")) ac = new commentQnaAction();
 		
+		// Related to report
 		else if( command.equals("ReportList")) ac = new ReportListAction();
 		else if( command.equals("reportOrder")) ac = new ReportOrderAction();
 		else if( command.equals("postReportCheck")) ac = new PostReportCheckAction();
 		else if( command.equals("handleReport")) ac = new HandleReportAction();
-		
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
 		

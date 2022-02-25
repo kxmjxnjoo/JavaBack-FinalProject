@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="admin_submenu.jsp" %>
+<%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
@@ -54,4 +54,4 @@ ${adminLogin.adminid}님 로그인
 		<!-- 맨 왼쪽 페이지(endPage 보다 1페이지 더 큰 페이지로 이동 -->
 	</c:if>
 </div>
-<%@ include file="/admin/footer.jsp"%>
+<%@ include file="/admin/common/footer.jsp"%>

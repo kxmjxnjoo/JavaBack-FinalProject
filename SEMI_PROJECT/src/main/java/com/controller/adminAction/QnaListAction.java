@@ -21,7 +21,7 @@ public class QnaListAction implements Action {
 		
 	
 		
-		String url = "admin/adminQnaList.jsp";
+		String url = "admin/qna/adminQnaList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";

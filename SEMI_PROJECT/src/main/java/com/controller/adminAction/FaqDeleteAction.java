@@ -16,7 +16,7 @@ public class FaqDeleteAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = "admin/adminFaqList.jsp";
+		String url = "admin/faq/adminFaqList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto == null) url = "spring.do?command=admin";
