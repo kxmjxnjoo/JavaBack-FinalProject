@@ -30,7 +30,10 @@ public class CheckStoryLikeAction implements Action {
 			System.out.println("result : " + result);
 			if(result == 0) {
 				sdao.addStoryLike(story_num, userid);
-				NotificationViewDao.getInstance().addNotification(sdto.getUserid(), userid, 5, story_num);
+				sdao.getStory(story_num);
+				if(!sdto.getUserid().equals(userid)) {
+					NotificationViewDao.getInstance().addNotification(sdto.getUserid(), userid, 5, story_num);
+				}
 				likeColor = "red";
 			} else {
 				sdao.deleteStoryLike(story_num, userid);

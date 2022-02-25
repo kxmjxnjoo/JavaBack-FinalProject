@@ -43,16 +43,18 @@
 							</c:when>
 							
 							<c:when test="${ noti.notiType == 5 &&  loginUser.userid != noti.userFrom}">
-								<p class="notiContent notiText">님이 
-								<%-- <a href="spring.do?command=story_detail&story_num=${noti.story_num}">스토리</a> --%> 스토리 를 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 스토리 를 좋아요 했어요</p>
 							</c:when>
 						</c:choose>
 						
 						<h2 class="notiDate notiText">${ noti.datePassed }</h2>
 					</div>
 					
-					<c:if test="${ noti.notiType != 1 }">
+					<c:if test="${ noti.notiType != 1 && noti.notiType != 5 }">
 						<img class="postImg" src="/images/${ noti.postImg }">
+					</c:if>
+					<c:if test="${ noti.notiType == 5}">
+						<img class="postImg" src="/images/${ noti.storyImg }">
 					</c:if>
 				</div>
 			</div>

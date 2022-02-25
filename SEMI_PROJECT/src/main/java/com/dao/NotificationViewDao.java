@@ -54,6 +54,14 @@ public class NotificationViewDao {
 					int replyNum = rs.getInt("reply_num");
 					String replyContent = ReplyDao.getInstance().getReply(replyNum).getContent();
 					ndto.setReplyContent(replyContent);
+				} else if (notiType == 4 ) {
+					int replyNum = rs.getInt("reply_num");
+					String replyContent = ReplyDao.getInstance().getReply(replyNum).getContent();
+					ndto.setReplyContent(replyContent);
+				} else if (notiType == 5) {
+					int storyNum = rs.getInt("story_num");
+					String storyImg = StoryDao.getInstance().getStory(storyNum).getStory_img();
+					ndto.setStoryImg(storyImg);
 				}
 				
 				list.add(ndto);

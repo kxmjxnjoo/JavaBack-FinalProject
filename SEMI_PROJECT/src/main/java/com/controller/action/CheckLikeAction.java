@@ -26,10 +26,15 @@ public class CheckLikeAction implements Action {
 			PostDao pdao = PostDao.getInstance();
 			int result = pdao.postLikeCheck(post_num, userid);
 			PostDto pdto = pdao.getPost(post_num);
-
+			String postingUser = pdto.getUserid();
+			
+			System.out.println("pdto : " + postingUser);
+			System.out.println("mdto : " + userid);
 			if(result == 0) {
 				pdao.addPostLike(post_num, userid);
-				NotificationViewDao.getInstance().addNotification(pdto.getUserid(), userid, 2, post_num);
+				if(!postingUser.equals(userid)) {
+					NotificationViewDao.getInstance().addNotification(pdto.getUserid(), userid, 2, post_num);
+				}
 				result = 1;
 			} else {
 				pdao.deleteLike(post_num, userid);
