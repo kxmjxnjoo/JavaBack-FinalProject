@@ -9,3 +9,5 @@ create table message(
 	content varchar2(300) not null
 );
 create sequence message_seq start with 1;
+
+select * from member;

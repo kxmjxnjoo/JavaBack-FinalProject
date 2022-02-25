@@ -5,11 +5,9 @@
 function go_search(){
 	if( document.frm.key.value == "" ){
 		alert("검색어를 입력하세요");
-	 	return;
+	 	return false;
 	 }
-	var url = "spring.do?command=memberList";
-	document.frm.action = url;
-	document.frm.submit();
+	return true
 }
 
 </script>
@@ -19,9 +17,15 @@ function go_search(){
 	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 		 
-<form name="frm" action="spring.do">		
-<input type="text" id="member_search" name="key" value="${key}">
-				<input id="search_btn" type="button" name="search" value="회원 검색" onClick="go_search();">
+<form name="frm" action="spring.do">	
+	<input type="hidden" name="command" value="memberList">
+	
+	<input type="text" id="member_search" name="key" value="${key}">
+	<input id="search_btn" type="submit" name="search" value="회원 검색" onClick="return go_search();">
+
+</form>
+
+
 	<table>
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
 				<th>가입일</th></tr>
@@ -31,7 +35,6 @@ function go_search(){
 					<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
 		</c:forEach>
 	</table>
-</form>
 
 	<!-- 페이지 수 -->
 	<br /><br />
