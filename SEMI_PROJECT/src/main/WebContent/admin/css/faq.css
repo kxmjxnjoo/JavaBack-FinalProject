@@ -1,0 +1,17 @@
+#faqEditButton {
+    background-color: blue;
+    color: white;
+    
+    border: none;
+}
+
+#faqDeleteButton {
+    background-color: red;
+    color: white;
+
+    border: none;
+}
+
+#faqDeleteButton:hover, #faqEditButton:hover {
+    opacity: 0.5;
+}

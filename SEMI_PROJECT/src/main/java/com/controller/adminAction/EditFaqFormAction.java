@@ -11,38 +11,24 @@ import com.controller.action.Action;
 import com.dao.FaqDao;
 import com.dto.FaqDto;
 
-public class AddFaqAction implements Action {
+public class EditFaqFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "spring.do?command=adminFaqList";
+		String url = "/admin/faq/editFaq.jsp";
 		HttpSession session = request.getSession();
-		
+				
 		// Check if user is logged in
 		if(session.getAttribute("adminLogin") == null) {
 			url = "/admin/adminLogin.jsp";
 		} else {
-			// Get parameter
-			String subject = request.getParameter("subject");
-			String content = request.getParameter("content");
-			
-			// Create Fdto
-			FaqDto fdto = new FaqDto();
-			fdto.setFaq_content(content);
-			fdto.setFaq_subject(subject);
-			
-			// Insert into db
-			int result = FaqDao.getInstance().uploadFaq(fdto);
-			
-			if(result == 1) {
-				request.setAttribute("message", "FAQ를 추가했어요");
-			} else {
-				request.setAttribute("message", "FAQ를 추가하지 못 했어요. 다시 시도해 주세요");
-			}
+			// Get faq num
+			int num = Integer.parseInt(request.getParameter("num"));
+			FaqDto faq = FaqDao.getInstance().getFaqDetail(num);
+			request.setAttribute("faq", faq);
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 
 }

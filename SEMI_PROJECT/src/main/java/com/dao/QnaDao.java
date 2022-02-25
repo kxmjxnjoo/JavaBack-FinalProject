@@ -53,13 +53,39 @@ public class QnaDao {
 	}
 	
 	
-	public ArrayList<QnaDto> listQna(String userid) {
+	public ArrayList<QnaDto> listQna() {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from qna where qna_id=? order by qna_num desc";
+		String sql = "select * from qna order by qna_num desc";
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,  userid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				QnaDto qdto = new QnaDto();
+		    	qdto.setQna_num(rs.getInt("qna_num"));
+		    	qdto.setQna_subject(rs.getString("qna_subject"));
+		    	qdto.setQna_content(rs.getString("qna_content"));
+		    	qdto.setQna_reply(rs.getString("qna_reply"));
+		    	qdto.setQna_id(rs.getString("qna_id"));
+		    	qdto.setRep(rs.getString("rep"));
+		    	qdto.setIndate(rs.getTimestamp("indate"));		    	
+		    	//qdto.setQna_password(rs.getString("qna_password"));		    	
+		    	list.add(qdto);
+		    }
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs);  }
+		return list;
+	}
+	
+	public ArrayList<QnaDto> listQna(String userid) {
+		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
+		String sql = "select * from where qna_id=? qna order by qna_num desc";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				QnaDto qdto = new QnaDto();

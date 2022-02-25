@@ -16,3 +16,10 @@
 	<li><a href="spring.do?command=ReportList&reportOrder=0">신고리스트</a></li>
 </ul>
 </nav>
+
+<script type="text/javascript">
+	if("${ message }" != "") {
+		alert("${ message }")
+		${ message = "" }
+	}
+</script>

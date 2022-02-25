@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
+<link rel="stylesheet" href="/admin/css/faq.css">
 
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">
@@ -11,15 +12,25 @@ ${adminLogin.adminid}님 로그인
 		
 <form name="frm" method="post">		
 		<table>
-			<tr><th>번호</th><th>제목</th><th>내용</th></tr>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>내용</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			
 			
 			<c:forEach items="${listFaq}" var="fdto">
-				<tr align="left">
-					<td  width="50">${fdto.faq_num}</td>
-					<td  width="80">${fdto.faq_subject}</td>
-					<td  width="100">${fdto.faq_content}</td>
+				<tr align="left" class="faqBox" onclick="spring.do?command=faqdetail&num=${ fdto.faq_num }">
+					<td style="width: 10%;">${fdto.faq_num}</td>
+					<td style="width: 30%;">${fdto.faq_subject}</td>
+					<td style="width: 40%;">${fdto.faq_content}</td>
+					<td style="width: 10%;"><button onclick="location.href='spring.do?command=editfaqform&num=${ fdto.faq_num }'" id="faqEditButton">수정</button></td>
+					<td style="width: 10%;"><button onclick="deleteFaq(${ fdto.faq_num })" id="faqDeleteButton">삭제</button></td>
 				</tr>
 			</c:forEach>
+			
 	</table>
 </form>
 <!-- <input type="submit" id="ban" value="정지 처리" onClick="location.href='spring.do?command=adminMain'"> -->
@@ -54,4 +65,13 @@ ${adminLogin.adminid}님 로그인
 		<!-- 맨 왼쪽 페이지(endPage 보다 1페이지 더 큰 페이지로 이동 -->
 	</c:if>
 </div>
+
+<script type="text/javascript">
+	function deleteFaq(num) {
+		if(confirm(num + "번 FAQ를 지울까요?")) {
+			location.href = "spring.do?command=deletefaq&num=" + num
+		}
+	} 
+</script>
+
 <%@ include file="/admin/common/footer.jsp"%>
