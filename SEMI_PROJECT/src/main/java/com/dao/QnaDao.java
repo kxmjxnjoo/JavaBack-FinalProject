@@ -158,18 +158,38 @@ public class QnaDao {
 		} finally { Dbman.close(con, pstmt, rs);		}
 	}
 
-	public void deleteQna(int qna_num) {
+	public int deleteQna(int qna_num) {
 		String sql = "delete from qna where qna_num=?";
+		int result = 0;
+		
 		con = Dbman.getConnection();
 		try {
 		      pstmt = con.prepareStatement(sql); 
 		      pstmt.setInt(1, qna_num);
-		      pstmt.executeUpdate();
+		      result = pstmt.executeUpdate();
 		} catch (Exception e) { e.printStackTrace();
-	    } finally { Dbman.close(con, pstmt, rs); }   	
+	    } finally { Dbman.close(con, pstmt, rs); 
+	    }   	
+	    return result;
+
 	}
 
-	public void addComment(QnaDto qdto) {
+	public int addReply(QnaDto qdto) {
+		int result = 0;
+		String sql = "update qna set qna_reply=?, rep='y' where qna_num=?";
 		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qdto.getQna_reply());
+			pstmt.setInt(2, qdto.getQna_num());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return result;
 	}
 }

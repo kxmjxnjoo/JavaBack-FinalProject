@@ -32,8 +32,8 @@ textarea {
     margin-bottom: 20px;
 }
 
-input[type=submit] {
-    width: 50%;
+input[type=submit], input[type=button] {
+    width: 40%;
     height: 40px;
     font-size: 20px;
     
@@ -44,6 +44,24 @@ input[type=submit] {
     margin-bottom: 20px;
 }
 
+input[type=button] {
+    background-color: red;
+    color: white;
+}
+
+
 p {
     font-size: 20px;
+}
+
+#qnaRepInfo {
+    width: 20%;
+    display: inline-block;
+
+    font-size: 10px;
+
+    position: absolute;
+    left: 85%;
+
+    margin-top: 50px;
 }

@@ -27,7 +27,7 @@ public class QnaViewAction implements Action {
 	    	QnaDao qdao = QnaDao.getInstance();
 	    	int qna_num = Integer.parseInt( request.getParameter("num"));
 	    	
-			QnaDto qdto = qdao.getQna( qna_num );
+			QnaDto qdto = qdao.getQna(qna_num);
 			
 	    	request.setAttribute("qna", qdto);
 		}

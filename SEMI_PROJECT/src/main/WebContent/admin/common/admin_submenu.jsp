@@ -5,6 +5,8 @@
 <html>
 <head>
 <link rel="stylesheet" href="/admin/css/admin.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <meta charset="UTF-8">
 <nav id="sub_menu">
 <!-- <h1>Admin Setting</h1>  -->
