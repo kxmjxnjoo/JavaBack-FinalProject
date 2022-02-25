@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
@@ -62,7 +61,7 @@
 </form>
 
 	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-	<c:url var="action" value="spring.do?command=ReportList" />
+	<c:url var="action" value="spring.do?command=reportOrder&reportOrder=${reportOrder}" />
 	
 	<c:if test="${paging.prev}">
 		<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;.
