@@ -19,7 +19,7 @@ public class MemberSearchAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = "adminMemberList.jsp";
+		String url = "/admin/member/adminMemberList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		int page = 1;

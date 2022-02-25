@@ -50,6 +50,8 @@ import com.controller.action.UserFnqAction;
 import com.controller.action.UserPageAction;
 import com.controller.action.UserQnaAction;
 import com.controller.action.WithdrawAction;
+import com.controller.adminAction.AddFaqAction;
+import com.controller.adminAction.AddFaqFormAction;
 import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqFormAction;
 import com.controller.adminAction.AdminFaqListAction;
@@ -63,7 +65,7 @@ import com.controller.adminAction.QnaListAction;
 import com.controller.adminAction.QnaViewAction;
 import com.controller.adminAction.QnaWriteFormAction;
 import com.controller.adminAction.ReportListAction;
-import com.controller.adminAction.ReportOrderAction;
+import com.controller.adminAction.ReportOrderAction2;
 import com.controller.adminAction.StoryReportCheckAction;
 import com.controller.adminAction.UploadQnaAction;
 import com.controller.adminAction.UserReportCheckAction;
@@ -80,6 +82,7 @@ public class ActionFactory {
 	
 		Action ac = null;
 		System.out.println(command);
+	// USER
 		if(command.equals("postuploadForm")) 			ac = new PostUploadFormAction();
 		else if(command.equals("postUpload")) 			ac = new PostUploadAction();
 		else if(command.equals("postDetail")) 			ac = new PostDetailAction();
@@ -126,7 +129,6 @@ public class ActionFactory {
 		else if(command.equals("search"))				ac = new SearchAction();
 		
 		else if(command.equals("explore"))				ac = new ExploreAction();
-
 		// Related to member
 		else if(command.equals("loginform"))			ac = new LoginFormAction();
 		else if(command.equals("login"))				ac = new LoginAction();
@@ -139,30 +141,35 @@ public class ActionFactory {
 		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
 		else if(command.equals("editprofile"))			ac = new EditProfileAction();
 		else if(command.equals("withdraw"))				ac = new WithdrawAction();
-		
 		// Related to bookmark
 		else if(command.equals("addbookmark"))			ac = new AddBookmarkAction();
 		else if(command.equals("deletebookmark"))		ac = new DeleteBookmarkAction();
-		
 		// Related to useradmin
 		else if(command.equals("userqna"))				ac = new UserQnaAction();
 		else if(command.equals("userfnq"))				ac = new UserFnqAction();
 		
 
+	// ADMIN
+		// Related to login
 		else if( command.equals("admin")) ac = new AdminAction();
 		else if( command.equals("adminLogin")) ac = new AdminLoginAction();
-		//else if( command.equals("adminLogout")) ac = new AdminLogouAction();
 		//else if( command.equals("adminMain")) ac = new AdminMainAction(); //jsp를 생각 못함..............
 		
+		// Related to member list
 		else if( command.equals("memberList")) ac = new MemberListAction();
 		else if( command.equals("memberSearch")) ac = new MemberSearchAction();
 		
-		else if( command.equals("faqDetail")) ac = new FaqDetailAction();
-		else if( command.equals("adminFaqList")) ac = new AdminFaqListAction();
-		else if( command.equals("adminFaqForm")) ac = new AdminFaqFormAction();
+		// Related to faq
+		else if( command.equals("adminFaqList")) 		ac = new AdminFaqListAction();
+		else if( command.equals("faqDetail")) 			ac = new FaqDetailAction();
+		else if( command.equals("adminFaqForm")) 		ac = new AdminFaqFormAction();
+		else if(command.equals("addfaqform"))			ac = new AddFaqFormAction();
+		else if(command.equals("addfaq"))				ac = new AddFaqAction();
+		
 		//else if( command.equals("adminUpdateFaq")) ac = new AdminUpdateFaqAction();
 		//else if( command.equals("adminDeleteFaq")) ac = new AdminDeleteFaqAction();
 		
+		// Related to Qna
 		else if( command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
 		else if( command.equals("uploadQna")) ac = new UploadQnaAction();
 		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
@@ -171,13 +178,13 @@ public class ActionFactory {
 		else if( command.equals("qnaView")) ac = new QnaViewAction();
 		else if( command.equals("commentQna")) ac = new commentQnaAction();
 		
+		// Related to report
 		else if( command.equals("ReportList")) ac = new ReportListAction();
-		else if( command.equals("reportOrder")) ac = new ReportOrderAction();
+		else if( command.equals("reportOrder")) ac = new ReportOrderAction2();
 		else if( command.equals("postReportCheck")) ac = new PostReportCheckAction();
 		else if( command.equals("storyReportCheck")) ac = new StoryReportCheckAction();
 		else if( command.equals("userReportCheck")) ac = new UserReportCheckAction();
 		else if( command.equals("handleReport")) ac = new HandleReportAction();
-		
 		//else if( command.equals("reportUser")) ac = new ReportUserAction();
 		//else if( command.equals("reportUserCheck")) ac = new RedportUserCheckAction();
 		

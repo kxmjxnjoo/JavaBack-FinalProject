@@ -1,41 +1,50 @@
-#faqBox {
+#qnaBox {
     width: 70%;
 
     position: relative;
     left: 15%;
-    
 }
 
-#faqBox h2 {
-    color: silver;
-
-    margin-bottom: 40px;
-}
-
-#faqBox h3 {
-    display: inline-block;
-}
-
-.faqQ {
-    color: silver;
-    margin-right: 5x;
-}
-
-.faqTitle {
-    border-radius: 10px;
-
-    margin-bottom: 10px;
-
+.qnaTitle {
     width: 90%;
     position: relative;
     left: 5%;
+
+    border-radius: 15px;
 }
 
-.faqTitle:hover {
+.qnaTitle h3 {
+    display: inline-block;
+    font-size: 25px;
+}
+
+.qnaTitle h3:first-child {
+    color: silver;
+    margin-right: 20px;
+}
+
+.qnaTitle h3:last-child {
+    float: right;
+    color: silver;
+
+    font-size: 20px;
+}
+
+.qnaTitle:hover {
     background-color: rgb(243, 244, 245);
 }
 
-#faqPopup {
+.qnaTitleContent {
+    width: 95%;
+    position: relative;
+    left: 2.5%;
+}
+
+#allQnaBox {
+    margin-top: 50px;
+}
+
+#popup {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -46,7 +55,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#faqPopupBox {
+#popupBox {
     background-color: white;
     width: 70%;
     height: 500px;
@@ -56,7 +65,7 @@
     top: 200px;
 }
 
-#faqPopupBoxContent {
+#popupBoxContent {
     width: 70%;
     height: 440px;
 
@@ -65,16 +74,16 @@
     top: 30px;
 }
 
-#faqPopupBox h1 {
+#popupBox h1 {
     text-align: center;
     margin-bottom: 40px;
 }
 
-#faqPopupBox p {
+#popupBox p {
     font-size: 130%;
 }
 
-#faqPopupBox button {
+#popupBox button {
     position: absolute;
     width: 50%;
     height: 40px;
@@ -89,6 +98,15 @@
     color: white;
 }
 
-#faqPopupBox button:hover {
+#popupBox button:hover {
     opacity: 0.5;
+}
+
+.mark {
+    color: silver;
+    margin-right: 20px;
+}
+
+#popup h1 {
+    display: inline-block;
 }

@@ -46,6 +46,8 @@ insert into admin values('scott', 'tiger', '관리자', 'scott@abc.com', '010-22
 insert into faq values(faq_seq.nextVal, '회원 가입은 어떻게 하나요?', '회원 가입 링크를 클릭하고, 약관을 읽어보신 뒤 [동의]에 체크합니다.
 기본정보와 추가정보를 정확하게 입력하신 뒤 [회원가입] 버튼을 클릭하면 회원가입이 완료됩니다.');
 
+insert into qna (qna_num, qna_subject, qna_content, qna_reply, qna_id) values(qna_seq.nextVal, '이거 뭐하는 사이트에여?', '검색하다 발견했는데 이거 뭐하는 사이트임?','스프링피드는 서로의 일상을 공유하는 사이트에요.', 'hong');
+
 insert into post (img, content, address, userid, post_num) values('/images/post1.png', '바다 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'nari', post_seq.nextVal);
 insert into post (img, content, address, userid, post_num) values('/images/post2.png', '산 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'choi', post_seq.nextVal);
 insert into post (img, content, address, userid, post_num) values('/images/post3.png', '천국 놀러 갔다 옴', '서울시 송파구 올림픽로 141', 'jojo', post_seq.nextVal);

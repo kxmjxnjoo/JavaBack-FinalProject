@@ -17,7 +17,7 @@ public class HandleReportAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/HandleReportDone.jsp";
+		String url = "/admin/report/HandleReportDone.jsp";
 		
 		int report_num = Integer.parseInt(request.getParameter("report_num"));
 		System.out.println(report_num);

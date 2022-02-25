@@ -15,7 +15,7 @@ public class AdminFaqAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = "admin/faqList.jsp";
+		String url = "/admin/faq/faqList.jsp";
 		HttpSession session = request.getSession();
 		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
 		if(adto==null) {

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="admin_submenu.jsp" %>
+<%@ include file="/admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">
-<input type="button" id="button1" value="작성" onClick="location.href='spring.do?command=uploadFaq'">
+<input type="button" id="button1" value="작성" onClick="location.href='spring.do?command=addfaqform'">
 ${adminLogin.adminid}님 로그인
 <input type="button" id="button2" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
@@ -12,8 +12,9 @@ ${adminLogin.adminid}님 로그인
 <form name="frm" method="post">		
 		<table>
 			<tr><th>번호</th><th>제목</th><th>내용</th></tr>
-			<c:forEach items="${faqList}" var="fdto">
-				<tr align="left"><td  align="left">&nbsp;&nbsp;
+			
+			<c:forEach items="${listFaq}" var="fdto">
+				<tr align="left">
 					<td  width="50">${fdto.faq_num}</td>
 					<td  width="80">${fdto.faq_subject}</td>
 					<td  width="100">${fdto.faq_content}</td>
@@ -53,4 +54,4 @@ ${adminLogin.adminid}님 로그인
 		<!-- 맨 왼쪽 페이지(endPage 보다 1페이지 더 큰 페이지로 이동 -->
 	</c:if>
 </div>
-<%@ include file="/admin/footer.jsp"%>
+<%@ include file="/admin/common/footer.jsp"%>

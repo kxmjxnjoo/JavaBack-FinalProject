@@ -2,7 +2,6 @@ package com.controller.adminAction;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +11,6 @@ import com.controller.action.Action;
 import com.dao.FaqDao;
 import com.dto.AdminDto;
 import com.dto.FaqDto;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class UploadFaqAction implements Action {
 
