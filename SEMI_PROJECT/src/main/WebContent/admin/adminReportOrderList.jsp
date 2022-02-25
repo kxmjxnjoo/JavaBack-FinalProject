@@ -61,7 +61,7 @@
 </form>
 
 	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-	<c:url var="action" value="spring.do?command=ReportList" />
+	<c:url var="action" value="spring.do?command=reportOrder&reportOrder=${reportOrder}" />
 	
 	<c:if test="${paging.prev}">
 		<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;.

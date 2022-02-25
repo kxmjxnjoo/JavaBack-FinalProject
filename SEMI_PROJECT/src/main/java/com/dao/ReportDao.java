@@ -48,6 +48,7 @@ public class ReportDao {
 		    	rdto.setReason(rs.getString("reason"));
 		    	rdto.setReport_num(rs.getInt("report_num"));
 		    	rdto.setType(rs.getString("report_type"));
+		    	rdto.setHandled(rs.getString("handled"));
 		    	list.add(rdto);
 		    }
 		} catch (SQLException e) {e.printStackTrace();

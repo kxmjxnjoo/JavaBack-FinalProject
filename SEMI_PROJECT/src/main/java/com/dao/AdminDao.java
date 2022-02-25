@@ -167,13 +167,41 @@ public class AdminDao {
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { Dbman.close(con, pstmt, rs); }
 		return result;
 	}
 
+	public void reportSameUser(String userid) {
+		String sql = "update report set handled='y' where reported_id=? and report_type='user'";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+	}
 
+
+
+	public int getSort(String type) {
+		int result = 0;
+		String sql = "select count(*) as count from report where report_type=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, type);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("count");
+			}	
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		
+		return result;
+	}
 
 	
 
