@@ -13,17 +13,17 @@
 - [x] accountManage.jsp 진겸
 - [x] message.jsp 진겸
 - [x] messageDetail.jsp 진겸
-- [ ] explore.jsp 세인
+- [x] explore.jsp 세인
 - [x] notification.jsp 진겸
 - [x] search.jsp 진겸
 - [x] addPostForm.jsp 세인
-- [ ] editPostForm.jsp 세인
+- [x] editPostForm.jsp 세인
 - [x] login.jsp 진주
 - [x] joinForm.jsp 진주
 - [x] adminLogin.jsp 진주
 - [x] faqList.jsp 진주
 - [ ] qnaForm.jsp 진주 -> css 오류로 수정 중
-- [ ] adminReportList.jsp 진주
+- [x] adminReportList.jsp 진주
 - [x] adminMemberList.jsp 진주
 
 # TODO
