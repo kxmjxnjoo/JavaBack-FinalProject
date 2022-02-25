@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.dto.MemberDto;
@@ -209,5 +210,27 @@ public class MemberDao {
 		}
 		
 		return mdto;
+	}
+
+	public void blockUser(String userid) {
+		String sql = "Update Member set useyn ='n' where userid=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		}  finally { Dbman.close(con, pstmt, rs); }
+	}
+	
+	public void unBlockUser(String userid) {
+		String sql = "Update Member set useyn ='y' where userid=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		}  finally { Dbman.close(con, pstmt, rs); }
 	}
 }

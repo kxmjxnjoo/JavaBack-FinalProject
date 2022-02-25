@@ -48,6 +48,7 @@ public class ReportDao {
 		    	rdto.setReason(rs.getString("reason"));
 		    	rdto.setReport_num(rs.getInt("report_num"));
 		    	rdto.setType(rs.getString("report_type"));
+		    	rdto.setHandled(rs.getString("handled"));
 		    	list.add(rdto);
 		    }
 		} catch (SQLException e) {e.printStackTrace();
@@ -94,7 +95,7 @@ public class ReportDao {
 		String sql = "select * from ("
 				+ " select * from (select * from (select rownum as rn, m.* from "
 				+ " ((select * from report where reporter_id like '%'||?||'%' or reported_id like '%'||?||'%' order by indate desc) m) "
-				+ " ) where rn>=?) where rn<=? ) where report_type=?"  ;
+				+ " ) where rn>=?) where rn<=? ) where report_type=? order by indate desc"  ;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);

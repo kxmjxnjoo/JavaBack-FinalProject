@@ -13,7 +13,7 @@
 <!-- 정렬 선택 -->
 		<div id="orderSelect">
 			<select name="reportOrder" id="reportOrder" class="select-css">
-				<<option value="0" selected="selected">  정렬 </option>
+				<option value = "0" > 정렬 </option>
 				<option value = "1" > 날짜 내림차순 </option>
 				<option value = "2" > 날짜 오름차순 </option>
 				<option value = "3" > 게시물 신고 </option>
@@ -63,7 +63,7 @@
 </form>
 
 	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-	<c:url var="action" value="spring.do?command=ReportList" />
+	<c:url var="action" value="spring.do?command=reportOrder&reportOrder=${reportOrder}" />
 	
 	<c:if test="${paging.prev}">
 		<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;.

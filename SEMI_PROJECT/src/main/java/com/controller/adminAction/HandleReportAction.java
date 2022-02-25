@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.controller.action.Action;
 import com.dao.AdminDao;
+import com.dao.MemberDao;
 import com.dao.PostDao;
+import com.dao.StoryDao;
 import com.dto.ReportDto;
 
 public class HandleReportAction implements Action {
@@ -33,10 +35,16 @@ public class HandleReportAction implements Action {
 			
 		} else if(request.getParameter("story_num") != null ) {
 			int story_num = Integer.parseInt(request.getParameter("story_num"));
+			ReportDto rdto = AdminDao.getInstance().getReport(report_num);
+			StoryDao.getInstance().deleteStory(story_num);
+			result = adao.reportDone(report_num);
 		} else {
-		
+			String userid = request.getParameter("userid");
+			ReportDto rdto = AdminDao.getInstance().getReport(report_num);
+			MemberDao.getInstance().blockUser(userid);
+			adao.reportSameUser(userid);
+			result = adao.reportDone(report_num);
 		}
-		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }
