@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/admin/css/admin.css">
 <meta charset="UTF-8">
 <nav id="sub_menu">
 <!-- <h1>Admin Setting</h1>  -->

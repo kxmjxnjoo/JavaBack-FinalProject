@@ -15,7 +15,7 @@ public class AddFaqAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/faq/adminFaqList.jsp";
+		String url = "spring.do?command=adminFaqList";
 		HttpSession session = request.getSession();
 		
 		// Check if user is logged in

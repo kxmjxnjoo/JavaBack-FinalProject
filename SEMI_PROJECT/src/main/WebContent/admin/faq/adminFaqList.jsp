@@ -4,7 +4,7 @@
 
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">
-<input type="button" id="button1" value="작성" onClick="location.href='spring.do?command=uploadFaq'">
+<input type="button" id="button1" value="작성" onClick="location.href='spring.do?command=addfaqform'">
 ${adminLogin.adminid}님 로그인
 <input type="button" id="button2" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
