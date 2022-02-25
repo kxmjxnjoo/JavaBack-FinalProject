@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
 import com.dao.QnaDao;
-import com.dto.MemberDto;
 import com.dto.QnaDto;
 
 public class QnaViewAction implements Action {
@@ -19,18 +18,21 @@ public class QnaViewAction implements Action {
 		
 		String url = "/admin/qna/qnaView.jsp";
 		
-		// QnaDao 에 추가될 메서드 이름 getQna
 		HttpSession session = request.getSession();
-	    MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
-	    if (mdto == null) {
-	        url = "spring.do?command=login";
-	    } else {	
+
+		if(session.getAttribute("adminLogin") == null) {
+			request.setAttribute("message", "QNA를 수정하기 위해 관리자로 로그인 해 주세요");
+			url = "/admin/adminLogin.jsp";
+		} else {
 	    	QnaDao qdao = QnaDao.getInstance();
+	    	int qna_num = Integer.parseInt( request.getParameter("num"));
 	    	
-	    	int qna_num = Integer.parseInt( request.getParameter("qna_num"));
-			QnaDto qdto = qdao.getQna( qna_num );
-	    	request.setAttribute("qnaDto", qdto);
-	    }
-		request.getRequestDispatcher(url).forward(request, response);
+			QnaDto qdto = qdao.getQna(qna_num);
+			
+	    	request.setAttribute("qna", qdto);
+		}
+		
+	    	
+	    request.getRequestDispatcher(url).forward(request, response);
 	}
 }

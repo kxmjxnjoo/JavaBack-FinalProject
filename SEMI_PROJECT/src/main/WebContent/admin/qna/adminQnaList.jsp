@@ -7,26 +7,35 @@
 	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 		 
-<form name="frm" action="spring.do">		
 	<table>
 		<tr>
 			<th>이름</th>
 			<th>아이디</th>
 			<th>제목</th>
 			<th>작성일</th>
+			<th>답변여부</th>
 		<tr>
 		
 		<c:forEach items="${qnaList}" var="qdto">
-			<tr>
+			<tr onclick="location.href='spring.do?command=qnaview&num=${ qdto.qna_num }'" class="qnaItems">
+				<td width="50">${qdto.username}</td>
 				<td width="50">${qdto.qna_id}</td>
 				<td width="50">${qdto.qna_subject}</td>
-				<td width="50">${qdto.qna_subject}</td>
 				<td width="50"><fmt:formatDate value="${qdto.indate}"/></td>
+				<td width="20">
+					<c:choose>
+						<c:when test='${ qdto.rep.equals("y") }'>
+							<i class="material-icons" style="color: green;">check_circle</i>
+						</c:when>
+						<c:otherwise>
+							<i class="material-icons" style="color: red;">cancel</i>
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 		</c:forEach>
 		
 	</table>
-</form>
 			<!-- 
 				<c:forEach items="${memberList}" var="MemberDto">
 					<tr><td height="23" align="center" >${memberList.adminid}</td>

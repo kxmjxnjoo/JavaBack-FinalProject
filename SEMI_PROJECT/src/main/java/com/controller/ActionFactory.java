@@ -56,8 +56,10 @@ import com.controller.adminAction.AdminAction;
 import com.controller.adminAction.AdminFaqListAction;
 import com.controller.adminAction.AdminLoginAction;
 import com.controller.adminAction.DeleteFaqAction;
+import com.controller.adminAction.DeleteQnaAction;
 import com.controller.adminAction.EditFaqAction;
 import com.controller.adminAction.EditFaqFormAction;
+import com.controller.adminAction.EditQnaAction;
 import com.controller.adminAction.HandleReportAction;
 import com.controller.adminAction.MemberListAction;
 import com.controller.adminAction.MemberSearchAction;
@@ -70,7 +72,6 @@ import com.controller.adminAction.ReportOrderAction;
 import com.controller.adminAction.StoryReportCheckAction;
 import com.controller.adminAction.UploadQnaAction;
 import com.controller.adminAction.UserReportCheckAction;
-import com.controller.adminAction.commentQnaAction;
 
 public class ActionFactory {
 
@@ -175,11 +176,10 @@ public class ActionFactory {
 		// Related to Qna
 		else if( command.equals("qnaWriteForm")) 		ac = new QnaWriteFormAction();
 		else if( command.equals("uploadQna")) 			ac = new UploadQnaAction();
-		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
-		//else if( command.equals("deleteQna")) ac = new DeleteQnaAction();
 		else if( command.equals("qnaList")) 			ac = new QnaListAction();
-		else if( command.equals("qnaView")) 			ac = new QnaViewAction();
-		else if( command.equals("commentQna"))			ac = new commentQnaAction();
+		else if( command.equals("qnaview")) 			ac = new QnaViewAction();
+		else if(command.equals("editqna"))				ac = new EditQnaAction();
+		else if(command.equals("deleteqna"))			ac = new DeleteQnaAction();
 		
 		// Related to report
 		else if( command.equals("ReportList")) ac = new ReportListAction();
