@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>QNA 답변</title>
 <link rel="stylesheet" href="/admin/css/qnadetail.css">
-
+<link rel="stylesheet" href="/admin/css/admin.css">
 </head>
 <body>
 
