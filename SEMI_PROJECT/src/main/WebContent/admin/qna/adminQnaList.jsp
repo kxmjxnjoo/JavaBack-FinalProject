@@ -7,7 +7,6 @@
 	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
 	<br><br><br>
 		 
-<form name="frm" action="spring.do">		
 	<table>
 		<tr>
 			<th>이름</th>
@@ -17,16 +16,15 @@
 		<tr>
 		
 		<c:forEach items="${qnaList}" var="qdto">
-			<tr>
+			<tr onclick="location.href='spring.do?command=qnaview&num=${ qdto.qna_num }'" class="qnaItem">
+				<td width="50">${qdto.username}</td>
 				<td width="50">${qdto.qna_id}</td>
-				<td width="50">${qdto.qna_subject}</td>
 				<td width="50">${qdto.qna_subject}</td>
 				<td width="50"><fmt:formatDate value="${qdto.indate}"/></td>
 			</tr>
 		</c:forEach>
 		
 	</table>
-</form>
 			<!-- 
 				<c:forEach items="${memberList}" var="MemberDto">
 					<tr><td height="23" align="center" >${memberList.adminid}</td>

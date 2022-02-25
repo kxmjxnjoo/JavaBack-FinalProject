@@ -178,7 +178,7 @@ public class ActionFactory {
 		//else if( command.equals("updateQna")) ac = new UpdateQnaAction();
 		//else if( command.equals("deleteQna")) ac = new DeleteQnaAction();
 		else if( command.equals("qnaList")) 			ac = new QnaListAction();
-		else if( command.equals("qnaView")) 			ac = new QnaViewAction();
+		else if( command.equals("qnaview")) 			ac = new QnaViewAction();
 		else if( command.equals("commentQna"))			ac = new commentQnaAction();
 		
 		// Related to report

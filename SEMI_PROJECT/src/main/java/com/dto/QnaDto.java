@@ -12,7 +12,15 @@ public class QnaDto {
 	private String rep;
 	private Timestamp indate;
 	private String qna_password;
+	private String username;
 	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getQna_num() {
 		return qna_num;
 	}

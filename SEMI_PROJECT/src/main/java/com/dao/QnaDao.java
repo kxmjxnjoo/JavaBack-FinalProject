@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.dto.MemberDto;
 import com.dto.QnaDto;
 import com.util.Dbman;
 
@@ -52,7 +53,6 @@ public class QnaDao {
 		return list;
 	}
 	
-	
 	public ArrayList<QnaDto> listQna() {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
 		String sql = "select * from qna order by qna_num desc";
@@ -69,7 +69,9 @@ public class QnaDao {
 		    	qdto.setQna_reply(rs.getString("qna_reply"));
 		    	qdto.setQna_id(rs.getString("qna_id"));
 		    	qdto.setRep(rs.getString("rep"));
-		    	qdto.setIndate(rs.getTimestamp("indate"));		    	
+		    	qdto.setIndate(rs.getTimestamp("indate"));		 
+		    	MemberDto mdto = MemberDao.getInstance().getMember(qdto.getQna_id());
+		    	qdto.setUsername(mdto.getName());
 		    	//qdto.setQna_password(rs.getString("qna_password"));		    	
 		    	list.add(qdto);
 		    }
@@ -103,12 +105,10 @@ public class QnaDao {
 		} finally { Dbman.close(con, pstmt, rs);  }
 		return list;
 	}
-
-	
 	
 	public QnaDto getQna(int qna_num) {
 		QnaDto qdto = new QnaDto();
-		String sql = "select * from qna where qseq = ?";
+		String sql = "select * from qna where qna_num=?";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -129,8 +129,6 @@ public class QnaDao {
 		return qdto;
 	}
 	
-	
-	
 	public QnaDto uploadQna(QnaDto qdto) {
 		String sql = "insert into qna(qna_num, qna_subject, qna_content, qna_id)"
 				+ "values(qna_seq.nextVal, ?, ?, ?)";
@@ -146,8 +144,6 @@ public class QnaDao {
 		return qdto;
 	}
 	
-	
-	
 	public void updateQna(QnaDto qdto) {
 		String sql = "Update Qna set qna_subject=?, qna_content=?"
 				+ " where qna_id = ?";
@@ -162,8 +158,6 @@ public class QnaDao {
 		} finally { Dbman.close(con, pstmt, rs);		}
 	}
 
-
-	
 	public void deleteQna(int qna_num) {
 		String sql = "delete from qna where qna_num=?";
 		con = Dbman.getConnection();
@@ -175,8 +169,6 @@ public class QnaDao {
 	    } finally { Dbman.close(con, pstmt, rs); }   	
 	}
 
-	
-	
 	public void addComment(QnaDto qdto) {
 		
 	}
