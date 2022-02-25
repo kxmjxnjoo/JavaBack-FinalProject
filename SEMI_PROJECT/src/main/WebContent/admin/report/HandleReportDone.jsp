@@ -7,6 +7,7 @@
 <title>신고 처리 완료</title>
 <link href="../css/spring.css" rel="stylesheet"> 
 <link href="../css/report.css" rel="stylesheet"> 
+<link rel="stylesheet" href="admin/css/admin.css">
 </head>
 <body>
 <div id="reportDoneWrap">

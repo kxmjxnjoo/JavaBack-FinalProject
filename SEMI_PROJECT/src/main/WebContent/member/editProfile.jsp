@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${ loginUser.name }님 프로필 수정</title>
-<link rel="stylesheet" href="css/editProfile.css">
+<link rel="stylesheet" href="/css/editProfile.css">
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
@@ -14,10 +14,24 @@
 		<div id="editProfileBox">
 			<div id="editProfileBoxContent">				
 				<form>
+					
+					<div>
+						<div id="thumbnail">
+							<div id ="image_container" >
+								<img id="userprofile" style="width:250px" src="/images/${ loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img }">
+							</div>
+							<label class="input-file-button" for="input-file" onclick="resetImg();">
+							  사진 수정
+							</label>
+							<input type="hidden" name="oldPicture" value="${ loginUser.img }"/>
+							<input type="file" name="story_img" id="input-file"  onchange="setThumbnail(event);"/>
+						</div>
+					</div>
+					
 					<h1>${ loginUser.name }님 정보 수정</h1>
 				
 					<input type="hidden" name="command" value="editprofile">
-								
+					
 					<input type="text" name="userid" placeholder="${ loginUser.userid } (아이디는 바꿀 수 없어요)" readonly>
 					<input type="text" name="pwd" placeholder="***">
 					<input type="text" name="name" placeholder="${ loginUser.name }">
@@ -46,6 +60,23 @@
 			if(confirm("정말로 회원탈퇴할까요?")) {
 				location.href = "spring.do?command=withdraw"
 			}
+		}
+		
+		function setThumbnail(event) { 
+			var reader = new FileReader(); 
+			reader.onload = function(event) { 
+				var img = document.createElement("img"); 
+				img.setAttribute("src", event.target.result); 
+				document.querySelector("div#image_container").appendChild(img); 
+			}; 
+			
+			reader.readAsDataURL(event.target.files[0]); 
+		}
+		
+
+		function resetImg(){
+			let elem = document.querySelector("div#image_container img");
+			elem.parentNode.removeChild(elem);
 		}
 	</script>
 </body>
