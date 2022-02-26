@@ -86,6 +86,7 @@ body {
 	display: block;
 	width:400px;
 	height: auto;
+	object-fit: cover;
 }
 
 .input-file-button{

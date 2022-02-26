@@ -13,7 +13,7 @@
 	<div id="userInfoBox">
 		<div id="editProfileBox">
 			<div id="editProfileBoxContent">				
-				<form>
+				<form name="frm" method="post" enctype="multipart/form-data">
 					
 					<div>
 						<div id="thumbnail">
@@ -24,7 +24,7 @@
 							  사진 수정
 							</label>
 							<input type="hidden" name="oldPicture" value="${ loginUser.img }"/>
-							<input type="file" name="story_img" id="input-file"  onchange="setThumbnail(event);"/>
+							<input type="file" name="user_img" id="input-file"  onchange="setThumbnail(event);"/>
 						</div>
 					</div>
 					
@@ -39,7 +39,7 @@
 					<input type="text" name="phone" placeholder="${ loginUser.phone }">
 					<textarea name="introduce" placeholder=""></textarea>
 					
-					<input type="submit" value="수정완료">
+					<input type="submit" value="수정완료" onclick="editCheck();">
 				</form>
 			</div>
 		</div>
@@ -78,6 +78,18 @@
 			let elem = document.querySelector("div#image_container img");
 			elem.parentNode.removeChild(elem);
 		}
+		
+		function editCheck(){
+			let theForm = document.frm;
+			let result = confirm('회원 정보를 수정할까요?');
+			if(result) {
+				theForm.action="spring.do?command=editprofile";
+				theForm.submit();
+			} else {
+				return;
+			}
+		}
+
 	</script>
 </body>
 </html>

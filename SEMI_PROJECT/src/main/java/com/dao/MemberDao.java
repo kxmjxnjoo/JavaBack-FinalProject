@@ -148,7 +148,7 @@ public class MemberDao {
 	}
 	
 	public int updateMember(MemberDto mdto, String userid) {
-		String sql = "update member set password=?, name=?, email=?, phone=?, introduce=? where userid=?";
+		String sql = "update member set password=?, name=?, email=?, phone=?, introduce=?, img=? where userid=?";
 		int result = 0;
 		
 		con = Dbman.getConnection();
@@ -159,7 +159,8 @@ public class MemberDao {
 			pstmt.setString(3, mdto.getEmail());
 			pstmt.setString(4, mdto.getPhone());
 			pstmt.setString(5, mdto.getIntroduce());
-			pstmt.setString(6, userid);
+			pstmt.setString(6, mdto.getImg());
+			pstmt.setString(7, userid);
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

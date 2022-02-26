@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>스토리 작성</title>
-<link href="../css/spring.css" rel="stylesheet"> 
-<link href="../css/posting.css" rel="stylesheet"> 
-<link href="../css/story.css" rel="stylesheet"> 
+<link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/posting.css" rel="stylesheet"> 
+<link href="/css/story.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
@@ -102,13 +102,8 @@ function textCounter(field, countfield, maxlimit) {
 
 function editCheck(story_num){
 	var theForm = document.frm;
-	/* if( theForm.post_img.value=="") {
-		alert('사진을 첨부해주세요'); 
-		return;
-	} else {
-		 */theForm.action="spring.do?command=editStory&story_num="+story_num;
+	theForm.action="spring.do?command=editStory&story_num="+story_num;
 		theForm.submit();
-	/* } */
 }
 
 function resetImg(){
