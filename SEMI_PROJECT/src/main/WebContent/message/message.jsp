@@ -52,7 +52,7 @@
 					<div id="messageHistoryBox">
 						<div id="messageTitle">
 							<div id="messageTitleProfile" onclick="location.href='spring.do?command=userpage&userid=${ messageWith.userid }'">
-								<img src="/images/${ messageWith.img }">
+								<img src="/images/${ messageWith.img != null ? messageWith.img : "tmpUserIcon.png" }">
 								
 								<h1>${ messageWith.userid }</h1>
 							</div>
