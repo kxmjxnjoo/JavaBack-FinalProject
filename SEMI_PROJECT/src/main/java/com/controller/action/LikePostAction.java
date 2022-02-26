@@ -33,7 +33,9 @@ public class LikePostAction implements Action {
 			if(result == 1) {
 				request.setAttribute("message", "좋아요!했어요");
 				String postUserid = PostDao.getInstance().getPost(postNum).getUserid();
-				NotificationViewDao.getInstance().addNotification(postUserid, userid, 2, postNum);
+				if(!userid.equals(postUserid)) {
+					NotificationViewDao.getInstance().addNotification(postUserid, userid, 2, postNum);
+				}
 			} else {
 				request.setAttribute("message", "좋아요!하지 못 했어요. 다시 시도해 주세요");
 			}
