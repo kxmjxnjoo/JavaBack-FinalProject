@@ -246,25 +246,14 @@ select f.following, f.follower, m.name as followingName, m.img as followingImg
 from follow f, member m
 where m.userid = f.following;
 
-select * from story
-
-insert into follow (follower, following, follow_num) values('hong', 'nari', follow_seq.nextVal)
-
 select count(post_num) as likes from post_like group by post_num having post_num=57
 select * from post_view order by create_date desc
 
 select max(story_num) as max from story group by userid having userid='hong'
 
-select * from report
-
-select count(*) as count from post_like where post_num = 48
-select count(*) as count from reply where post_num = 48
-
-delete post_like where userid='jojo';
 
 select s.* from story s left outer join (select count(*) as count, userid  from story group by userid) a on s.userid = a.userid ;
 
-select * from follow where following = 'user12';
 
 insert into follow values(follow_seq.nextval, 'love', 'love');
 
@@ -277,7 +266,4 @@ select * from (
 select * from (select * from (select rownum as rn, m.* from 
 ((select * from report where reporter_id like '%%' or reported_id like '%%' order by indate desc) m) 
 ) where rn>=1) where rn<=10 ) where report_type = 'user'
-
-select * from notification;
-
 

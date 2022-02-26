@@ -102,7 +102,7 @@ function goReport(story_num) {
 			
 <!-- 클릭시 유저 프로필로 이동 -->
 			<div id="goUserprofile" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-				<img id="userprofile" src="/images/${ StoryDto.user_img == null || StoryDto.user_img.equals("") ? "tmpUserIcon.png" : StoryDto.user_img }">
+				<img id="userprofile" src="/images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
 			</div> 
 			
 			
@@ -112,7 +112,7 @@ function goReport(story_num) {
 <!-- 글 작성자 프로필 -->
 				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
 					</div> 
 					<div id="userid"><b> ${StoryDto.userid}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>

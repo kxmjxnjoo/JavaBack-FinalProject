@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.FollowDao;
+import com.dao.MemberDao;
 import com.dao.StoryDao;
 import com.dto.MemberDto;
 import com.dto.ReplyDto;
@@ -26,6 +27,7 @@ public class StoryDetailAction implements Action {
 				StoryDao sdao = StoryDao.getInstance();
 				String userid = request.getParameter("userid");
 				String likeColor = "";
+				String userImg = "";
 				int isFollowing = 0;
 				int story_num = 0;
 				StoryDto sdto = null;
@@ -34,11 +36,13 @@ public class StoryDetailAction implements Action {
 					story_num = Integer.parseInt(request.getParameter("story_num"));
 					sdto = sdao.getStory(story_num);
 					userid = sdto.getUserid();
-
+					
 				} else {
 					story_num = sdao.get_story_num(userid);
 					sdto = sdao.getStory(story_num);
 				}
+				
+				userImg = MemberDao.getInstance().getMember(userid).getImg();
 				
 				String loginUserid = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUserid);
@@ -53,8 +57,12 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("likeColor", likeColor);
 				request.setAttribute("story_num", story_num);
 				request.setAttribute("StoryDto", sdto);
+				request.setAttribute("userImg", userImg);
 				request.setAttribute("prev", prev);
 				request.setAttribute("next", next);
+				
+				System.out.println("userid : " + userid);
+				System.out.println("userImg : " + userImg);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
