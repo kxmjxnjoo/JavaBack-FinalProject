@@ -116,8 +116,7 @@ hr {
 
 .userPostInfo {
     position: relative;
-    bottom: 180px;
-    left: 30%;
+    bottom: 150px;
 }
 
 .userPostInfo h3, .userPostInfo i {
