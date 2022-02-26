@@ -73,13 +73,13 @@ public class StoryDao {
 	}
 
 	public int storyLikeCheck(int story_num, String userid) {
-		String sql = "select ? from story_like where story_num = ?";
+		String sql = "select * from story_like where story_num = ? and userid = ?";
 		int result = 0;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userid);
-			pstmt.setInt(2, story_num);
+			pstmt.setInt(1, story_num);
+			pstmt.setString(2, userid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = 1;

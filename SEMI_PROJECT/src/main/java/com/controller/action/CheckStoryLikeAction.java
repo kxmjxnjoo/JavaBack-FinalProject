@@ -27,21 +27,17 @@ public class CheckStoryLikeAction implements Action {
 			StoryDao sdao = StoryDao.getInstance();
 			int result = sdao.storyLikeCheck(story_num, userid);
 			StoryDto sdto = sdao.getStory(story_num);
-			System.out.println("result : " + result);
+			
 			if(result == 0) {
 				sdao.addStoryLike(story_num, userid);
 				sdao.getStory(story_num);
 				if(!sdto.getUserid().equals(userid)) {
 					NotificationViewDao.getInstance().addNotification(sdto.getUserid(), userid, 5, story_num);
 				}
-				likeColor = "red";
-			} else {
+			} else if (result == 1 ) {
 				sdao.deleteStoryLike(story_num, userid);
 			}
-			request.setAttribute("likeColor", likeColor);
-			System.out.println("likeColor : " + likeColor);
 		}
-			
 		response.sendRedirect(url);
 	}
 }

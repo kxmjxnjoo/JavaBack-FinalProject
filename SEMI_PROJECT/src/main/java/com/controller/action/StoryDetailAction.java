@@ -47,6 +47,7 @@ public class StoryDetailAction implements Action {
 				String loginUserid = mdto.getUserid();
 				int result = sdao.storyLikeCheck(story_num, loginUserid);
 				if (result==1) likeColor = "red";
+				System.out.println("result : " + result);
 				
 				int prev = sdao.searchPrevStory(story_num, userid);
 				int next = sdao.searchNextStory(story_num, userid);

@@ -28,8 +28,6 @@ public class CheckLikeAction implements Action {
 			PostDto pdto = pdao.getPost(post_num);
 			String postingUser = pdto.getUserid();
 			
-			System.out.println("pdto : " + postingUser);
-			System.out.println("mdto : " + userid);
 			if(result == 0) {
 				pdao.addPostLike(post_num, userid);
 				if(!postingUser.equals(userid)) {
@@ -41,9 +39,7 @@ public class CheckLikeAction implements Action {
 				result = 0;
 			}
 			request.setAttribute("likeResult", result);
-			System.out.println("checklikeResult : " + result);
 		}
-			
 		response.sendRedirect(url);
 	}
 }
