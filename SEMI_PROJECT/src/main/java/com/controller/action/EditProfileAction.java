@@ -39,8 +39,6 @@ public class EditProfileAction implements Action {
 
 			String name = multi.getParameter("name");
 			if(name.equals(""))			name = loginUser.getName();
-			System.out.println(name);
-			System.out.println(loginUser.getName());
 
 			String email = multi.getParameter("email");
 			if(email.equals(""))		email = loginUser.getEmail();
@@ -64,12 +62,21 @@ public class EditProfileAction implements Action {
 			mdto.setIntroduce(introduce);
 			mdto.setImg(img);
 			
+			// Edit loginUser 
+			loginUser.setPassword(pwd);
+			loginUser.setName(name);
+			loginUser.setEmail(email);
+			loginUser.setPhone(phone);
+			loginUser.setIntroduce(introduce);
+			loginUser.setImg(img);
+			
 			// Insert into db
 			int result = MemberDao.getInstance().updateMember(mdto, loginUser.getUserid());
 			
 			// Get result
 			if(result == 1) {
 				request.setAttribute("message", "수정에 성공했어요");
+				request.setAttribute("userid", loginUser.getUserid());
 			} else {
 				request.setAttribute("message", "수정에 실패했어요. 다시 시도해 주세요");
 			}

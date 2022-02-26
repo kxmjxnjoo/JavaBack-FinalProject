@@ -26,6 +26,7 @@ public class UserPageAction implements Action {
 		
 		// Get parameter
 		String userid = request.getParameter("userid");
+		if(request.getParameter("userid") == null) userid = (String) request.getAttribute("userid");
 		String isBookmark = request.getParameter("bookmark");
 		
 		// Get user's info
