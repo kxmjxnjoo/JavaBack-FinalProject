@@ -14,7 +14,7 @@ public class StoryReportCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/storyReportCheck.jsp";
+		String url = "/admin/report/storyReportCheck.jsp";
 		int story_num = Integer.parseInt(request.getParameter("story_num"));
 		int report_num  = Integer.parseInt(request.getParameter("report_num"));
 		StoryDao sdao = StoryDao.getInstance();

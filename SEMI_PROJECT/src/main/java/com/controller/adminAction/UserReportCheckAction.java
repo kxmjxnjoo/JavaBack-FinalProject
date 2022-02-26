@@ -24,7 +24,7 @@ public class UserReportCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/userReportCheck.jsp";
+		String url = "/admin/report/userReportCheck.jsp";
 		String userid = request.getParameter("userid");
 		int report_num  = Integer.parseInt(request.getParameter("report_num"));
 		

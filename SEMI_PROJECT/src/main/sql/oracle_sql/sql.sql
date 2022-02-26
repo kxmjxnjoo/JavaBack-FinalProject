@@ -267,3 +267,9 @@ select * from (select * from (select rownum as rn, m.* from
 ((select * from report where reporter_id like '%%' or reported_id like '%%' order by indate desc) m) 
 ) where rn>=1) where rn<=10 ) where report_type = 'user'
 
+select * from (
+ select * from (select * from (select rownum as rn, m.* from 
+((select * from report where report_type='user') m) 
+ ) where rn>=1) where rn<=10 ) order by indate desc
+ 
+select * from report where report_type='user' order by indate desc)

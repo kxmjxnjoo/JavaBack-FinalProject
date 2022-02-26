@@ -94,16 +94,15 @@ public class ReportDao {
 		ArrayList<ReportDto> list = new ArrayList<ReportDto>();
 		String sql = "select * from ("
 				+ " select * from (select * from (select rownum as rn, m.* from "
-				+ " ((select * from report where reporter_id like '%'||?||'%' or reported_id like '%'||?||'%' order by indate desc) m) "
+				+ " ((select * from report where report_type=? order by indate desc) m) "
 				+ " ) where rn>=?) where rn<=? ) where report_type=? order by indate desc"  ;
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, key);
-			pstmt.setString(2, key);
-			pstmt.setInt(3, paging.getStartNum());
-			pstmt.setInt(4, paging.getEndNum());
-			pstmt.setString(5, type);
+			pstmt.setString(1, type);
+			pstmt.setInt(2, paging.getStartNum());
+			pstmt.setInt(3, paging.getEndNum());
+			pstmt.setString(4, type);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ReportDto rdto = new ReportDto();
@@ -115,6 +114,7 @@ public class ReportDao {
 		    	rdto.setReason(rs.getString("reason"));
 		    	rdto.setReport_num(rs.getInt("report_num"));
 		    	rdto.setType(rs.getString("report_type"));
+		    	rdto.setHandled(rs.getString("handled"));
 		    	list.add(rdto);
 		    }
 		} catch (SQLException e) {e.printStackTrace();
