@@ -102,6 +102,8 @@ body {
 
     position: relative;
     top: 5px;
+    
+    object-fit: cover;
 }
 
 #userIcon:hover {

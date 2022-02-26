@@ -25,7 +25,7 @@
 			<div id="userBox">
 				<c:forEach var="user" items="${ userList }">
 					<div class="userSelect" onclick="location.href='spring.do?command=message&messagewith=${user.following}'">
-						<img class="userImg" src="/images/${ user.followingImg }">
+						<img class="userImg" src="/images/${ user.followingImg != null ? user.followingImg : "tmpUserIcon.png" }">
 						
 						<div class="userText">
 							<h3>${ user.following }</h3>
