@@ -33,7 +33,7 @@ function goBack(){
 		
 	</div>
 </form>
-<footer>
+<footer style="margin-top: 20px;">
 <%@ include file="/footer.jsp" %>
 </footer>
 </body>
