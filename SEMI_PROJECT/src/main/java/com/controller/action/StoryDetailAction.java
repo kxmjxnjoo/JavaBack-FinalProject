@@ -60,9 +60,6 @@ public class StoryDetailAction implements Action {
 				request.setAttribute("userImg", userImg);
 				request.setAttribute("prev", prev);
 				request.setAttribute("next", next);
-				
-				System.out.println("userid : " + userid);
-				System.out.println("userImg : " + userImg);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
