@@ -33,8 +33,7 @@ function goBack(){
 		
 	</div>
 </form>
-<section style="flex:1"></section>
-<footer style="position:relative; padding-bottom:0;">
+<footer>
 <%@ include file="/footer.jsp" %>
 </footer>
 </body>
