@@ -9,14 +9,9 @@ create table member(
 	useyn varchar2(5) default 'y', /*y:사용중 b:차단됨 n:비활성화*/
 	introduce varchar2(1000),
 	indate date default sysdate,
-)
-
-alter table member modify (email varchar2(100));
-alter table member modify (img varchar2(100));
+);
 
 select * from member
-
-select * from member where (userid like '%'||'hong'||'%' or name like '%'||'hong'||'%') order by indate desc;
 
 /*follow*/
 create table follow(
@@ -36,11 +31,10 @@ create table post (
 	address varchar2(100),
 	userid varchar2(20) references member(userid),
 	create_date date default sysdate
-)
+);
 create sequence post_seq start with 1;	
 
-alter table post modify (content varchar2(280)) 
-select * from post
+select * from post;
 
 /* post의 img와 member img를 함께 출력하기 위한 view 입니다.*/
 create view post_view as
@@ -57,8 +51,8 @@ create table img_upload (
 	img3 varchar2(100),
 	img4 varchar2(100),
 	primary key (post_num)
-)
-select * from img_upload
+);
+select * from img_upload;
 
 /*reply*/
 create table reply (
@@ -67,7 +61,7 @@ create table reply (
 	post_num number(5) references post(post_num),
 	reply_num number(5) primary key,
 	reply_date date default sysdate
-)
+);
 create sequence reply_seq start with 1;
 
 select * from reply
@@ -83,8 +77,8 @@ create table post_like (
 	post_num number(5) references post(post_num),
 	userid varchar2(20) references member(userid),
 	primary key (userid, post_num)
-)
-select * from post_like
+);
+select * from post_like;
 
 
 /*reply_like*/
@@ -92,8 +86,8 @@ create table reply_like (
 	reply_num number(5) references reply(reply_num),
 	userid varchar2(20) references member(userid),
 	primary key (userid, reply_num)
-)
-select * from reply_like
+);
+select * from reply_like;
 
 
 /*story_like*/
@@ -101,8 +95,7 @@ create table story_like(
 	story_num number(5) references story,
 	userid varchar2(20) references member(userid),
 	primary key(story_num, userid)
-)
-
+);
 select * from story_like;
 
 
@@ -114,7 +107,7 @@ create table story(
 	userid references member(userid),
 	fontcolor varchar2(20), 
 	create_date date default sysdate
-)
+);
 
 create sequence story_seq start with 1;
 select * from story
@@ -132,10 +125,8 @@ create table admin(
 	name varchar2(20) not null,
 	email varchar2(20) not null,
 	phone varchar2(20) not null
-)
-
-select * from admin
-
+);
+select * from admin;
 
 /*FAQ*/
 create table faq (
@@ -145,7 +136,6 @@ create table faq (
 );
 create sequence faq_seq start with 1;
 select * from faq;
-
 
 /*QnA*/
 create table qna (
@@ -175,7 +165,7 @@ create table report(
 	handled varchar2(5) default 'n',
 	reason varchar2(100) not null,
 	report_num varchar2(5) primary key
-)
+);
 
 alter table report add(post_num number(5) references post(post_num));
 alter table report RENAME COLUMN post_type TO report_type;
@@ -221,55 +211,3 @@ create table bookmark(
 	save_date date default sysdate
 );
 create sequence bookmark_seq start with 1;
-
-
-/*테스트*/
-
-select max(post_num) from post where userid='hong' group by userid
-select max(post_num) from post group by userid having userid='hong';
-
-
-select * from post;
-update post set address='11', img='1.png', content='222' where post_num=3
-
-select * from post;
-delete post_like where post_num = 21 and userid = 'hong';
-
-select * from story_view
-select min(story_num) as next from story_view where story_num > 1 group by userid having userid='hong';
-delete story where story_num=4;
-
-select max(post_num) as max from post group by userid having userid='hong'
-
-create view follow_view as
-select f.following, f.follower, m.name as followingName, m.img as followingImg
-from follow f, member m
-where m.userid = f.following;
-
-select count(post_num) as likes from post_like group by post_num having post_num=57
-select * from post_view order by create_date desc
-
-select max(story_num) as max from story group by userid having userid='hong'
-
-
-select s.* from story s left outer join (select count(*) as count, userid  from story group by userid) a on s.userid = a.userid ;
-
-
-insert into follow values(follow_seq.nextval, 'love', 'love');
-
-select * from 
-((select distinct userid from story) a, follow f where a.userid = f.following) where follower 
-
-select f.* from (select distinct userid from story) a, follow_view f where a.userid = f.following and follower='nari'
-
-select * from (
-select * from (select * from (select rownum as rn, m.* from 
-((select * from report where reporter_id like '%%' or reported_id like '%%' order by indate desc) m) 
-) where rn>=1) where rn<=10 ) where report_type = 'user'
-
-select * from (
- select * from (select * from (select rownum as rn, m.* from 
-((select * from report where report_type='user') m) 
- ) where rn>=1) where rn<=10 ) order by indate desc
- 
-select * from report where report_type='user' order by indate desc)

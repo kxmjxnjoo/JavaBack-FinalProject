@@ -33,11 +33,11 @@
 					<input type="hidden" name="command" value="editprofile">
 					
 					<input type="text" name="userid" placeholder="${ loginUser.userid } (아이디는 바꿀 수 없어요)" readonly>
-					<input type="text" name="pwd" placeholder="***">
+					<input type="text" name="pwd" placeholder="<c:forEach begin="1" end="${ loginUser.password.length() }">*</c:forEach>">
 					<input type="text" name="name" placeholder="${ loginUser.name }">
 					<input type="text" name="email" placeholder="${ loginUser.email }">
 					<input type="text" name="phone" placeholder="${ loginUser.phone }">
-					<textarea name="introduce" placeholder=""></textarea>
+					<textarea name="introduce" placeholder="${ loginUser.introduce }"></textarea>
 					
 					<input type="submit" value="수정완료" onclick="editCheck();">
 				</form>

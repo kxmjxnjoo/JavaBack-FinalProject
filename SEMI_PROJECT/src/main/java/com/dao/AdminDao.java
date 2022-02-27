@@ -29,20 +29,21 @@ public class AdminDao {
 	public AdminDto adminCheck(String adminid) {
 		AdminDto adto = null;
 		String sql = "select * from admin where adminid=?";
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, adminid);
 			rs = pstmt.executeQuery();
 			if( rs.next() ) {
-			adto = new AdminDto();
-			adto.setAdminid( rs.getString("adminid"));
-			adto.setPassword( rs.getString("password"));
-			/*
-			 * adto.setName( rs.getString("name")); 
-			 * adto.setEmail( rs.getString("eamil"));
-			 * adto.setPhone( rs.getString("phone"));
-			 */
+				adto = new AdminDto();
+				adto.setAdminid( rs.getString("adminid"));
+				adto.setPassword( rs.getString("password"));
+				/*
+				 * adto.setName( rs.getString("name")); 
+				 * adto.setEmail( rs.getString("eamil"));
+				 * adto.setPhone( rs.getString("phone"));
+				 */
 			}
 		} catch (SQLException e) {	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);	}

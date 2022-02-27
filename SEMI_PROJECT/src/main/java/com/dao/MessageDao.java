@@ -117,4 +117,20 @@ public class MessageDao {
 		
 		return result;
 	}
+
+	public int deleteAllMessage(String userid) {
+		int result = 0;
+		String sql = "delete message where userid=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;	
+	}
 }

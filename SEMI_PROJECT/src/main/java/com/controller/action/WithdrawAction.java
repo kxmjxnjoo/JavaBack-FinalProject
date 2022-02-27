@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.BookmarkDao;
 import com.dao.FollowDao;
 import com.dao.MemberDao;
+import com.dao.MessageDao;
 import com.dao.NotificationViewDao;
 import com.dao.PostDao;
+import com.dao.ReplyDao;
 import com.dao.StoryDao;
 import com.dto.MemberDto;
 
@@ -41,6 +44,15 @@ public class WithdrawAction implements Action {
 					FollowDao.getInstance().deleteAllFollow(userid);
 				// Delete story
 					StoryDao.getInstance().deleteAllStory(userid);
+				// Delete Message
+					MessageDao.getInstance().deleteAllMessage(userid);
+				// Delete Bookmark
+					BookmarkDao.getInstance().deleteAllBookmark(userid);
+				// Delete reply
+					ReplyDao.getInstance().deleteAllReply(userid);
+				// Delete qna
+					
+					
 			// Delete user from db
 			int result = MemberDao.getInstance().deleteMember(userid);
 			
