@@ -172,7 +172,7 @@ public class MemberDao {
 	}
 
 	public int deleteMember(String userid) {
-		String sql = "delete member where userid=?";
+		String sql = "delete from member where userid=?";
 		int result = 0;
 		
 		con = Dbman.getConnection();

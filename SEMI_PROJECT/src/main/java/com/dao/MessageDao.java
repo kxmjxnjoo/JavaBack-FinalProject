@@ -120,12 +120,14 @@ public class MessageDao {
 
 	public int deleteAllMessage(String userid) {
 		int result = 0;
-		String sql = "delete message where userid=?";
+		String sql = "delete from message where (message_to=? or message_from=?)";
 		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
+			pstmt.setString(2, userid);
+			
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
