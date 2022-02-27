@@ -12,32 +12,48 @@
 	<%@ include file="/topnav/topnav.jsp" %>
 	
 	<div id="resultBoxWrapper">
-		<c:forEach var="result" items="${ results }">
-			<div class="resultBox">
-			
-				<div class="resultBoxInfo" onclick="location.href='spring.do?command=userpage&userid=${ result.userid }'">
-					<img src="/images/${ result.img == null ? "tmpUserIcon.png" : result.img }">
-					
-					<div class="userText">
-						<h1>${ result.userid }</h1>
-						<h1>${ result.name }</h1>
-					</div>
-				</div>
+		<c:choose>
+			<c:when test="${ results == null }">
+				<div id="searchNoResultBox">
+					<i class="material-icons">sentiment_very_dissatisfied</i>
 				
-				<c:if test="${not empty loginUser}">
-					<c:choose>
-						<c:when test="${ result.isFollowing == 1 }">
-							<input type="button" value="언팔로우" onclick="unfollow('${ result.userid }')">
-						</c:when>
-						
-						<c:otherwise>
-							<input type="button" value="팔로우" onclick="follow('${ result.userid }')">
-						</c:otherwise>
+					<h1>검색 결과가 없어요! 다시 검색해 보세요</h1>
+				</div>
+			</c:when>
+			<c:otherwise>
+			
+				<c:forEach var="result" items="${ results }">
+					<div class="resultBox">
 					
-					</c:choose>
-				</c:if>
-			</div>
-		</c:forEach>
+						<div class="resultBoxInfo" onclick="location.href='spring.do?command=userpage&userid=${ result.userid }'">
+							<img src="/images/${ result.img == null ? "tmpUserIcon.png" : result.img }">
+							
+							<div class="userText">
+								<h1>${ result.userid }</h1>
+								<h1>${ result.name }</h1>
+							</div>
+						</div>
+						
+						<c:if test="${not empty loginUser}">
+							<c:choose>
+								<c:when test="${ result.isFollowing == 1 }">
+									<input type="button" value="언팔로우" onclick="unfollow('${ result.userid }')">
+								</c:when>
+								
+								<c:otherwise>
+									<input type="button" value="팔로우" onclick="follow('${ result.userid }')">
+								</c:otherwise>
+							
+							</c:choose>
+						</c:if>
+					</div>
+				</c:forEach>
+			
+			</c:otherwise>
+		</c:choose>
+	
+		
+		
 	</div>
 	
 		<%@ include file="/footer.jsp" %>
