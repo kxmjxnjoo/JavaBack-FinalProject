@@ -24,6 +24,8 @@ import com.controller.action.FindIdpwdForm;
 import com.controller.action.FindPwdAction;
 import com.controller.action.FollowAction;
 import com.controller.action.FollowArrowsAction;
+import com.controller.action.IdCheckAction;
+import com.controller.action.IdCheckFormAction;
 import com.controller.action.JoinAction;
 import com.controller.action.JoinFormAction;
 import com.controller.action.LikePostAction;
@@ -144,6 +146,7 @@ public class ActionFactory {
 		else if(command.equals("editprofileform"))		ac = new EditProfileFormAction();
 		else if(command.equals("editprofile"))			ac = new EditProfileAction();
 		else if(command.equals("withdraw"))				ac = new WithdrawAction();
+		else if(command.equals("idcheck"))				ac = new IdCheckAction();
 		// Related to bookmark
 		else if(command.equals("addbookmark"))			ac = new AddBookmarkAction();
 		else if(command.equals("deletebookmark"))		ac = new DeleteBookmarkAction();

@@ -24,10 +24,13 @@
 				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName"></div>
 				<div class="text_box">
 				<input type ="text" name="userid" class="input"  placeholder=" 아이디" id="joinId"></div>
+				<input type="hidden" id="useridcheck" name="idcheck">
 				<div class="text_box">
 				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
 		<input type="submit" id="login" value="가입" onclick="return checkJoin()">
-		<input type="button" id="idCheck" value="아이디 중복확인" onclick="idCheck()">
+		
+		<input type="button" id="idCheckButton" value="아이디 중복확인" onclick="idCheck()">
+		
 		<br><br>
 	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
 		</div>
@@ -55,6 +58,7 @@
 				let email = document.getElementById("joinEmail").value
 				let name = document.getElementById("joinName").value
 				let id = document.getElementById("joinId").value
+				let idcheck = document.getElementById("useridcheck").value
 				let pwd = document.getElementById("joinPwd").value
 
 				if(phone == "") {
@@ -73,6 +77,10 @@
 					alert("아이디가 입력되지 않았어요")
 					return false
 				}
+				if(id != idcheck) {
+					alert("아이디 중복확인을 해 주세요")
+					return false
+				}
 				if(pwd == "") {
 					alert("비밀번호가 입력되지 않았어요")
 					return false
@@ -81,6 +89,17 @@
 				
 				return true
 			}
+			
+			function idCheck() {
+				let id = document.getElementById("joinId")
+				
+				if(id.value == "") {
+					alert("아이디 중복확인을 위해 아이디를 입력해 주세요")
+					id.focus()
+				} else {
+					window.open("spring.do?command=idcheck&id=" + id.value)
+				}
+			} 
 		
 		</script>
 	
