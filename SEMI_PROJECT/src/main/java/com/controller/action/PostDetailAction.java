@@ -21,7 +21,10 @@ public class PostDetailAction implements Action {
 		String url = "/post/postDetail.jsp";
 		HttpSession session = request.getSession();
 		MemberDto mdto = (MemberDto) session.getAttribute("loginUser");
-		if(mdto==null) url = "spring.do?command=login";
+		if(mdto==null) {
+			url = "spring.do?command=loginform";
+			request.setAttribute("message", "포스트를 보기 위해서는 로그인 해 주세요");
+		}
 		else {
 				int post_num = Integer.parseInt(request.getParameter("post_num"));
 				int isFollowing = 0;
