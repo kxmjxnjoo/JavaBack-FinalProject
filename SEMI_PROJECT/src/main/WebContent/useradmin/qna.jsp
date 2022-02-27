@@ -22,7 +22,7 @@
 					<c:when test="${ userQnaList == null || userQnaList.size() == 0 }">
 						<div id="noUserQnaBox">
 							<i class="material-icons">sentiment_very_satisfied</i>
-							<h2>${ loginUser.userid }님은 질문을 남기지 않으셨어요! 질문이 있으시면 언제든 남겨 주세요</h2>
+							<h2>${ loginUser.userid }님은 질문을 남기지 않으셨어요. 질문이 있으시면 언제든 남겨 주세요!</h2>
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -38,6 +38,9 @@
 					</c:otherwise>	
 				
 				</c:choose>
+				
+				<button id="addQnaButton" onclick="location.href='spring.do?command=addqnaform'">질문하기</button>
+				
 			</div>
 		</c:if>
 		

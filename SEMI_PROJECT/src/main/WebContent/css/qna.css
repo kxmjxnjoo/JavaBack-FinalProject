@@ -128,3 +128,18 @@
 #noQnaBox i {
     font-size: 100px;
 }
+
+#addQnaButton {
+    width: 30%;
+    height: 40px;
+
+    position: relative;
+    left: 35%;
+
+    margin-top: 30px;
+
+    font-size: 20px;
+
+    border: none;
+    background-color: var(--mainColor);
+}
