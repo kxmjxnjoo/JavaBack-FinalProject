@@ -78,11 +78,11 @@ public class MainAction implements Action {
 								}
 							}
 						}
-					}
-					
-					// Get if loginUser saved the post
-					for(PostViewDto pdto : tmpPostList) {
-						pdto.setIsSaved(BookmarkDao.getInstance().getBookmark(userid, pdto.getPostNum()));
+						// Get if loginUser saved the post
+						for(PostViewDto pdto : tmpPostList) {
+							pdto.setIsSaved(BookmarkDao.getInstance().getBookmark(userid, pdto.getPostNum()));
+						}
+						
 					}
 				}
 				request.setAttribute("postList", postList);

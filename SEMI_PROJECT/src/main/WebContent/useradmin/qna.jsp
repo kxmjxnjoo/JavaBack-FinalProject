@@ -19,8 +19,11 @@
 				<h1>${ loginUser.userid }님이 남긴 질문이에요</h1>
 				
 				<c:choose>
-					<c:when test="${ userQnaList == null }">
-						<h2>${ loginUser.userid }님은 질문을 남기지 않으셨어요</h2>
+					<c:when test="${ userQnaList == null || userQnaList.size() == 0 }">
+						<div id="noUserQnaBox">
+							<i class="material-icons">sentiment_very_satisfied</i>
+							<h2>${ loginUser.userid }님은 질문을 남기지 않으셨어요. 질문이 있으시면 언제든 남겨 주세요!</h2>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="qdto" items="${ userQnaList }">
@@ -35,21 +38,38 @@
 					</c:otherwise>	
 				
 				</c:choose>
+				
+				<button id="addQnaButton" onclick="location.href='spring.do?command=addqnaform'">질문하기</button>
+				
 			</div>
 		</c:if>
 		
 		<div id="allQnaBox">
 			<h1 id="allQnaTitle">다른 분들이 남긴 질문이에요</h1>
 		
-			<c:forEach var="qdto" items="${ qnaList }">
-			<div class="qnaTitle" onclick='showQna("${ qdto.qna_subject}", "${ qdto.qna_content }", "${ qdto.qna_reply }")'>
-				<div class="qnaTitleContent">
-					<h3>Q</h3>
-					<h3>${ qdto.qna_subject }</h3>
-					<h3><fmt:formatDate value="${ qdto.indate }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
-				</div>
-			</div>
-			</c:forEach> 
+			<c:choose>
+				<c:when test="${ qnaList == null || qnaList.size() == 0 }">
+					<div id="noQnaBox">
+						<i class="material-icons">sick</i>
+						<h1>아무도 질문을 남겨 주시지 않았어요... 저 잠시 혼자 있고 싶어요...</h1>
+					</div>
+				</c:when>
+				<c:otherwise>
+				
+					<c:forEach var="qdto" items="${ qnaList }">
+						<div class="qnaTitle" onclick='showQna("${ qdto.qna_subject}", "${ qdto.qna_content }", "${ qdto.qna_reply }")'>
+							<div class="qnaTitleContent">
+								<h3>Q</h3>
+								<h3>${ qdto.qna_subject }</h3>
+								<h3><fmt:formatDate value="${ qdto.indate }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
+							</div>
+						</div>
+					</c:forEach> 
+				
+				</c:otherwise>
+			</c:choose>
+			
+			
 		</div>
 		
 	</div>

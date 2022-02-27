@@ -44,23 +44,28 @@ public class PostViewDao {
 				list.add(pdto);
 			}
 			
+			
 			for(PostViewDto pdto : list) {
-				pstmt = con.prepareStatement(likeSql);
-				pstmt.setInt(1, pdto.getPostNum());
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					pdto.setLikes(rs.getInt("likes"));
+				if(pdto != null) {
+					pstmt = con.prepareStatement(likeSql);
+					pstmt.setInt(1, pdto.getPostNum());
+					rs = pstmt.executeQuery();
+					while(rs.next()) {
+						pdto.setLikes(rs.getInt("likes"));
+					}
 				}
 			}
 			
 			for(PostViewDto pdto : list) {
-				sql = "select * from post_like where post_num=? and userid=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, pdto.getPostNum());
-				pstmt.setString(2, userid);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					pdto.setIsLikedByUser(1);
+				if(pdto != null) {
+					sql = "select * from post_like where post_num=? and userid=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, pdto.getPostNum());
+					pstmt.setString(2, userid);
+					rs = pstmt.executeQuery();
+					while(rs.next()) {
+						pdto.setIsLikedByUser(1);
+					}
 				}
 			}
 		} catch(Exception e) {

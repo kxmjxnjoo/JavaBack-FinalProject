@@ -110,3 +110,36 @@
 #popup h1 {
     display: inline-block;
 }
+
+#noUserQnaBox {
+    text-align: center;
+    color: silver;
+}
+
+#noUserQnaBox i {
+    font-size: 100px;
+}
+
+#noQnaBox {
+    text-align: center;
+    color: silver;
+}
+
+#noQnaBox i {
+    font-size: 100px;
+}
+
+#addQnaButton {
+    width: 30%;
+    height: 40px;
+
+    position: relative;
+    left: 35%;
+
+    margin-top: 30px;
+
+    font-size: 20px;
+
+    border: none;
+    background-color: var(--mainColor);
+}

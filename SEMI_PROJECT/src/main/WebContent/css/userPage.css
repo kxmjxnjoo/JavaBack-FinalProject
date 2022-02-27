@@ -210,3 +210,7 @@ hr {
 
     margin-right: 100px;
 }
+
+#postList h1 {
+	width: 100%;
+}

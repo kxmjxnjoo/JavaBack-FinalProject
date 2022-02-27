@@ -82,7 +82,7 @@ public class QnaDao {
 	
 	public ArrayList<QnaDto> listQna(String userid) {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from where qna_id=? qna order by qna_num desc";
+		String sql = "select * from qna where qna_id=? qna order by qna_num desc";
 		
 		con = Dbman.getConnection();
 		try {
@@ -129,19 +129,22 @@ public class QnaDao {
 		return qdto;
 	}
 	
-	public QnaDto uploadQna(QnaDto qdto) {
+	public int uploadQna(QnaDto qdto) {
 		String sql = "insert into qna(qna_num, qna_subject, qna_content, qna_id)"
 				+ "values(qna_seq.nextVal, ?, ?, ?)";
+		int result = 0;
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, qdto.getQna_subject());
 			pstmt.setString(2, qdto.getQna_content());
 			pstmt.setString(3, qdto.getQna_id());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {	e.printStackTrace();
 		} finally {Dbman.close(con, pstmt, rs);	}
-		return qdto;
+
+		return result;
 	}
 	
 	public void updateQna(QnaDto qdto) {

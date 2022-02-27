@@ -51,9 +51,9 @@
 	
 	<script type="text/javascript">
 		function getCertNum() {
-			let certButton = document.querySelector("#findpwdBox:nth-child(5)")
+			let phoneBtn = document.querySelector("#findpwdPhone")
 			
-			if(certButton.value != "") {
+			if(phoneBtn.value != "") {
 				alert("인증번호는 1111에요")
 			} else {
 				alert("전화번호를 입력해 주세요")

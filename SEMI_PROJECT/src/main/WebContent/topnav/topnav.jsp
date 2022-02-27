@@ -24,18 +24,26 @@
 
 	<div id="icons">
 		<i class="material-icons" onclick="location.href='spring.do?command=main'">home</i>
-		<i class="material-icons" onclick="location.href='spring.do?command=message'">send</i>
-		<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
-		<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
-		<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
 		
 	  	<c:choose>
 			<c:when test="${ loginUser != null }">
+				<i class="material-icons" onclick="location.href='spring.do?command=message'">send</i>
+				<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
+				<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
+				<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
+				
 				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
 				onclick="userIcon('${loginUser.userid}');">
+				
 			</c:when>
 			
 			<c:otherwise>
+				<i class="material-icons" onclick="goLogin()">send</i>
+				<i class="material-icons" onclick="goLogin()">add_box</i>
+				<i class="material-icons" onclick="goLogin()">explore</i>
+				<i class="material-icons" onclick="goLogin()">favorite_border</i>
+				
+			
 				<img id="userIcon" src="/images/tmpUserIcon.png" 
 				onclick="goLogin();">
 			</c:otherwise>
@@ -47,9 +55,10 @@
 	
 <script type="text/javascript">
 	function goLogin() {
-		alert("로그인해주세요.");
-		/* let result = confirm("로그인 하시겠습니까?");
-		if (result==1) location.href= "spring.do?command=loginform"  */
+		alert("로그인해주세요")
+		if(confirm("로그인 할까요?")) {
+			location.href="spring.do?command=loginform"
+		}
 	}
 
 

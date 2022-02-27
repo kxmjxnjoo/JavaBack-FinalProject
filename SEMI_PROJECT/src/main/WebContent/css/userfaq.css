@@ -92,3 +92,13 @@
 #faqPopupBox button:hover {
     opacity: 0.5;
 }
+
+#noFaqBox {
+    text-align: center;
+
+    margin-top: 100px;
+}
+
+#noFaqBox i {
+    font-size: 100px;
+}

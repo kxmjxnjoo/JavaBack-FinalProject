@@ -14,12 +14,25 @@
 		<h1>자주 묻는 질문</h1>
 		<h2>자주 묻는 질문을 모아봤어요. 만약 찾으시는 질문이 없으시면 직접 문의해 주세요.</h2>
 		
-		<c:forEach var="fdto" items="${ faqList }">
-			<div class="faqTitle" onclick="showFaq( '${fdto.faq_subject}', `${ fdto.faq_content }` );">
-				<h3 class="faqQ">Q</h3>
-				<h3>${ fdto.faq_subject }</h3>
-			</div>
-		</c:forEach>
+		
+		<c:choose>
+			<c:when test="${ faqList == null || faqList.size() == 0}">
+				<div id="noFaqBox">
+					<i class="material-icons">sentiment_very_dissatisfied</i>
+					<h1>이런, FAQ가 없어요! 일해라 개발자들</h1>
+				</div>
+			</c:when>
+			<c:otherwise>
+			
+				<c:forEach var="fdto" items="${ faqList }">
+					<div class="faqTitle" onclick="showFaq( '${fdto.faq_subject}', `${ fdto.faq_content }` );">
+						<h3 class="faqQ">Q</h3>
+						<h3>${ fdto.faq_subject }</h3>
+					</div>
+				</c:forEach>
+			
+			</c:otherwise>
+		</c:choose>
 		
 	</div>
 	

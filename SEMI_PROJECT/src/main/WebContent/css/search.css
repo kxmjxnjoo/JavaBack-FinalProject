@@ -70,3 +70,15 @@ body {
 .resultBoxInfo img {
 	width: 100px; height: 100px;
 }
+
+#searchNoResultBox {
+    margin-top: 100px;
+    
+    height: 200px;
+
+    text-align: center;
+}
+
+#searchNoResultBox i {
+    font-size: 100px;
+}
