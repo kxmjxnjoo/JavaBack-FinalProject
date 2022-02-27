@@ -75,89 +75,98 @@
 		</div>
 		
 		<div id="postFeed">
-			
-			<c:forEach var="post" items="${ postList }">
-				<div class="post">
+		<c:choose>
+			<c:when test="${ postList == null || postList.size() == 0 }">
+				<h1 id="noPostMessage">팔로어 분들의 포스트가 없어요!<br> ${ loginUser.name }님이 올려보시는건 어떠세요?</h1>
+				<button id="noPostButton" onclick="location.href='spring.do?command=postuploadForm'">포스트 올리기</button>
 				
-					<div class="postBar">
-						<div class="postBarUserInfo" onclick="location.href='spring.do?command=userpage&userid=${ post.userid }'">
-							<img src="../images/
-								<c:choose>
-									<c:when test="${ post.userImg == null }">
-										tmpUserIcon.png
-									</c:when>
-									<c:otherwise>
-										${ post.userImg }
-									</c:otherwise>
-								</c:choose>
-							">
-							<div class="postBarInfo">
-								<h3>${ post.userid }</h3>
-								<h4>${ post.address }</h4>
-							</div>
-						</div>
-						
-						<button onclick="openPopup(${ post.postNum }, '${ post.userid }')"><i class="material-icons">more_horiz</i></button>
-					</div>
-					
-					<div class="postImg">
-						<img src="../images/${ post.postImg }">
-						<div class="postImgNavigationBar">
-						
-						</div>
-					</div>
-					
-					<div class="postIcons">
-						<i class="material-icons" 
-						<c:choose>
-							<c:when test="${ post.isLikedByUser == 1 }">
-								onclick="location.href='spring.do?command=unlikepost&postnum=${ post.postNum }'"
-								style="color: red;"
-							</c:when>
-							<c:otherwise>
-								onclick="location.href='spring.do?command=likepost&postnum=${ post.postNum }'"
-							</c:otherwise>
-						</c:choose>
-						>favorite_border</i>
-						<i class="material-icons" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">chat_bubble_outline</i>
-						
-						<i class="material-icons" onclick="location.href='spring.do?command=message&messagewith=${ post.userid }'">send</i>
-						
-						<c:choose>
-							<c:when test="${ post.isSaved == 1 }">
-								<i class="material-icons" onclick="location.href='spring.do?command=deletebookmark&postnum=${ post.postNum }'">bookmark</i>
-							</c:when>
-							<c:otherwise>
-								<i class="material-icons" onclick="location.href='spring.do?command=addbookmark&postnum=${ post.postNum }'">bookmark_border</i>
-							</c:otherwise>
-						</c:choose>
-						
-					</div>
-					
-					<div class="postInfo">
-						<h3 class="postLike">${ post.likes } likes</h3>
-						<div class="postContent">
-							<h3><b>${ post.userid }</b></h3>
-							<p>${ post.content }</p>
-						</div>
-						
-						<div class="postComment">
-						
-						</div>
-						
-						<form>
-							<input type="hidden" name="command" value="addreply">
-							<input type="hidden" name="post_num" value="${ post.postNum }">
-							<div class="addComment" id="comment${ post.postNum }">
-								<input type="text" placeholder="댓글을 추가해 주세요..." name="reply_content">
-								<input type="submit" value="추가" onclick="return addReply(${ post.postNum })">
-							</div>
-						</form>
-						
-					</div>
-				</div> 		
+			</c:when>
 			
-			</c:forEach>
+			<c:otherwise>
+				<c:forEach var="post" items="${ postList }">
+					<div class="post">
+					
+						<div class="postBar">
+							<div class="postBarUserInfo" onclick="location.href='spring.do?command=userpage&userid=${ post.userid }'">
+								<img src="../images/
+									<c:choose>
+										<c:when test="${ post.userImg == null }">
+											tmpUserIcon.png
+										</c:when>
+										<c:otherwise>
+											${ post.userImg }
+										</c:otherwise>
+									</c:choose>
+								">
+								<div class="postBarInfo">
+									<h3>${ post.userid }</h3>
+									<h4>${ post.address }</h4>
+								</div>
+							</div>
+							
+							<button onclick="openPopup(${ post.postNum }, '${ post.userid }')"><i class="material-icons">more_horiz</i></button>
+						</div>
+						
+						<div class="postImg">
+							<img src="../images/${ post.postImg }">
+							<div class="postImgNavigationBar">
+							
+							</div>
+						</div>
+						
+						<div class="postIcons">
+							<i class="material-icons" 
+							<c:choose>
+								<c:when test="${ post.isLikedByUser == 1 }">
+									onclick="location.href='spring.do?command=unlikepost&postnum=${ post.postNum }'"
+									style="color: red;"
+								</c:when>
+								<c:otherwise>
+									onclick="location.href='spring.do?command=likepost&postnum=${ post.postNum }'"
+								</c:otherwise>
+							</c:choose>
+							>favorite_border</i>
+							<i class="material-icons" onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">chat_bubble_outline</i>
+							
+							<i class="material-icons" onclick="location.href='spring.do?command=message&messagewith=${ post.userid }'">send</i>
+							
+							<c:choose>
+								<c:when test="${ post.isSaved == 1 }">
+									<i class="material-icons" onclick="location.href='spring.do?command=deletebookmark&postnum=${ post.postNum }'">bookmark</i>
+								</c:when>
+								<c:otherwise>
+									<i class="material-icons" onclick="location.href='spring.do?command=addbookmark&postnum=${ post.postNum }'">bookmark_border</i>
+								</c:otherwise>
+							</c:choose>
+							
+						</div>
+						
+							<div class="postInfo">
+								<h3 class="postLike">${ post.likes } likes</h3>
+								<div class="postContent">
+									<h3><b>${ post.userid }</b></h3>
+									<p>${ post.content }</p>
+								</div>
+								
+								<div class="postComment">
+								
+								</div>
+								
+								<form>
+									<input type="hidden" name="command" value="addreply">
+									<input type="hidden" name="post_num" value="${ post.postNum }">
+									<div class="addComment" id="comment${ post.postNum }">
+										<input type="text" placeholder="댓글을 추가해 주세요..." name="reply_content">
+										<input type="submit" value="추가" onclick="return addReply(${ post.postNum })">
+								</div>
+							</form>
+							
+						</div>
+					</div> 		
+				</c:forEach>
+			</c:otherwise>
+			
+		</c:choose>
 		</div>
 		
 	</div>
