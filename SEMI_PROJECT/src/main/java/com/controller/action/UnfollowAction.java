@@ -24,15 +24,21 @@ public class UnfollowAction implements Action {
 			String follower = ((MemberDto)session.getAttribute("loginUser")).getUserid();
 			String following = request.getParameter("userid");
 			
-			int result = FollowDao.getInstance().deleteFollow(follower, following);
-			
-			if(result == 1) {
-				// SUCESS
-				request.setAttribute("message", following + "님을 언팔로우 했어요");
+			if(!follower.equals(following)) {
+				int result = FollowDao.getInstance().deleteFollow(follower, following);
+				
+				if(result == 1) {
+					// SUCESS
+					request.setAttribute("message", following + "님을 언팔로우 했어요");
+				} else {
+					// FAIL
+					request.setAttribute("message", following + "님을 언팔로우 하는데 실패했어요. 다시 시도해 주세요.");
+				}
 			} else {
-				// FAIL
-				request.setAttribute("message", following + "님을 언팔로우 하는데 실패했어요. 다시 시도해 주세요.");
+				request.setAttribute("messasge", "본인은 언팔로우 할 수 없어요");
 			}
+			
+			
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);		

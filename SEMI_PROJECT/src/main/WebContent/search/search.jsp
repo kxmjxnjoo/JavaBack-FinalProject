@@ -36,6 +36,10 @@
 						
 						<c:if test="${not empty loginUser}">
 							<c:choose>
+								<c:when test="${ result.userid.equals(loginUser.userid) }">
+									
+								</c:when>
+							
 								<c:when test="${ result.isFollowing == 1 }">
 									<input type="button" value="언팔로우" onclick="unfollow('${ result.userid }')">
 								</c:when>
