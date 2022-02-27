@@ -55,9 +55,10 @@
 	
 <script type="text/javascript">
 	function goLogin() {
-		alert("로그인해주세요");
-		/* let result = confirm("로그인 하시겠습니까?");
-		if (result==1) location.href= "spring.do?command=loginform"  */
+		alert("로그인해주세요")
+		if(confirm("로그인 할까요?")) {
+			location.href="spring.do?command=loginform"
+		}
 	}
 
 

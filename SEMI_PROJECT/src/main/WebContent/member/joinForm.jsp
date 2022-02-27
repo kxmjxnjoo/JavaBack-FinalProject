@@ -27,6 +27,7 @@
 				<div class="text_box">
 				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
 		<input type="submit" id="login" value="가입" onclick="return checkJoin()">
+		<input type="button" id="idCheck" value="아이디 중복확인" onclick="idCheck()">
 		<br><br>
 	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
 		</div>
