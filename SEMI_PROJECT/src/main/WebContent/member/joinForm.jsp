@@ -17,16 +17,16 @@
 			<h3 color="gray">친구들의 사진을 보려면 가입하세요.</h3><br>
 				<input type="hidden" name="command" value="join">
 				<div class="text_box">
-				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" ></div>
+				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" id="joinPhone"></div>
 				<div class="text_box">
-				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" ></div>
+				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" id="joinEmail"></div>
 				<div class="text_box">
-				<input type ="text" name="name" class="input"  placeholder=" 성명" ></div>
+				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName"></div>
 				<div class="text_box">
-				<input type ="text" name="userid" class="input"  placeholder=" 아이디" ></div>
+				<input type ="text" name="userid" class="input"  placeholder=" 아이디" id="joinId"></div>
 				<div class="text_box">
-				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" ></div>
-		<input type="submit" id="login" value="가입">
+				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
+		<input type="submit" id="login" value="가입" onclick="return checkJoin()">
 		<br><br>
 	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
 		</div>
@@ -47,6 +47,41 @@
 	</form>
 	
 		<%@ include file="/footer.jsp" %>
+	
+		<script type="text/javascript">
+			function checkJoin() {
+				let phone = document.getElementById("joinPhone").value
+				let email = document.getElementById("joinEmail").value
+				let name = document.getElementById("joinName").value
+				let id = document.getElementById("joinId").value
+				let pwd = document.getElementById("joinPwd").value
+
+				if(phone == "") {
+					alert("휴대폰 번호가 입력되지 않았어요")
+					return false
+				}
+				if(email == "") {
+					alert("이메일이 입력되지 않았어요")
+					return false
+				}
+				if(name == "") {
+					alert("이름이 입력되지 않았어요")
+					return false
+				}
+				if(id == "") {
+					alert("아이디가 입력되지 않았어요")
+					return false
+				}
+				if(pwd == "") {
+					alert("비밀번호가 입력되지 않았어요")
+					return false
+				}
+				
+				
+				return true
+			}
+		
+		</script>
 	
 </body>
 </html>
