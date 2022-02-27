@@ -13,6 +13,7 @@ import com.dao.MemberDao;
 import com.dao.MessageDao;
 import com.dao.NotificationViewDao;
 import com.dao.PostDao;
+import com.dao.QnaDao;
 import com.dao.ReplyDao;
 import com.dao.StoryDao;
 import com.dto.MemberDto;
@@ -51,7 +52,7 @@ public class WithdrawAction implements Action {
 				// Delete reply
 					ReplyDao.getInstance().deleteAllReply(userid);
 				// Delete qna
-					
+					QnaDao.getInstance().deleteAllQna(userid);
 					
 			// Delete user from db
 			int result = MemberDao.getInstance().deleteMember(userid);

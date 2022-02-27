@@ -24,14 +24,20 @@
 			
 			<div id="userBox">
 				<c:forEach var="user" items="${ userList }">
-					<div class="userSelect" onclick="location.href='spring.do?command=message&messagewith=${user.following}'">
-						<img class="userImg" src="/images/${ user.followingImg != null ? user.followingImg : "tmpUserIcon.png" }">
-						
-						<div class="userText">
-							<h3>${ user.following }</h3>
-							<h3>${ user.following }님과 대화해 보세요</h3>
+				
+					<c:if test="${ !user.following.equals(loginUser.userid) }">
+					
+						<div class="userSelect" onclick="location.href='spring.do?command=message&messagewith=${user.following}'">
+							<img class="userImg" src="/images/${ user.followingImg != null ? user.followingImg : "tmpUserIcon.png" }">
+							
+							<div class="userText">
+								<h3>${ user.following }</h3>
+								<h3>${ user.following }님과 대화해 보세요</h3>
+							</div>
 						</div>
-					</div>
+						
+					</c:if>
+					
 				</c:forEach>
 			</div>
 			
