@@ -19,14 +19,15 @@ public class UserQnaAction implements Action {
 		String url = "useradmin/qna.jsp";
 		HttpSession session = request.getSession();
 		
-		// Check if user is logged in
+		// Get all qna
 		ArrayList<QnaDto> qnaList = QnaDao.getInstance().getAllQna();
 		request.setAttribute("qnaList", qnaList);
-
+		
+		// If user is logged in, get user specific qna
 		if(session.getAttribute("loginUser") != null) {
 			String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 			
-			ArrayList<QnaDto> userQnaList = QnaDao.getInstance().listQna(userid);
+			ArrayList<QnaDto> userQnaList = QnaDao.getInstance().getUserQna(userid);
 			request.setAttribute("userQnaList", userQnaList);
 		} 
 		

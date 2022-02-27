@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import com.controller.action.Action;
 import com.dao.AdminDao;
-import com.dto.AdminDto;
 import com.dto.MemberDto;
 import com.util.Paging;
 
@@ -22,9 +21,9 @@ public class MemberListAction implements Action {
 		String url = "/admin/member/adminMemberList.jsp";
 		HttpSession session = request.getSession();
 		
-		AdminDto adto = (AdminDto)session.getAttribute("adminLogin");
-		if(adto == null) url = "spring.do?command=admin";
-		else {
+		if(session.getAttribute("adminLogin") == null) {
+			url = "admin/adminLogin.jsp";
+		} else {
 			String searchKey = request.getParameter("key") == null ? "" : request.getParameter("key");
 
 			AdminDao adao = AdminDao.getInstance();
@@ -44,6 +43,7 @@ public class MemberListAction implements Action {
 			request.setAttribute("memberList" , list);
 			request.setAttribute("paging", paging);	
 		}
+		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

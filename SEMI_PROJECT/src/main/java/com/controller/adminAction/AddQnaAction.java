@@ -16,7 +16,7 @@ public class AddQnaAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/useradmin/qna.jsp";
+		String url = "spring.do?command=userqna";
 		HttpSession session = request.getSession();
 		
 		// Check if user is logged in 

@@ -185,6 +185,7 @@ public class ActionFactory {
 		else if(command.equals("deleteqna"))			ac = new DeleteQnaAction();
 		else if(command.equals("addqnaform"))			ac = new AddQnaFormAction();
 		else if(command.equals("addqna"))				ac = new AddQnaAction();
+		else if(command.equals("deleteqna"))			ac = new DeleteQnaAction();
 		
 		// Related to report
 		else if( command.equals("ReportList")) ac = new ReportListAction();
