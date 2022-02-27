@@ -82,7 +82,7 @@ public class QnaDao {
 	
 	public ArrayList<QnaDto> listQna(String userid) {
 		ArrayList<QnaDto> list = new ArrayList<QnaDto>();
-		String sql = "select * from where qna_id=? qna order by qna_num desc";
+		String sql = "select * from qna where qna_id=? qna order by qna_num desc";
 		
 		con = Dbman.getConnection();
 		try {

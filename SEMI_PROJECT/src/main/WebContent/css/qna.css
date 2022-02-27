@@ -110,3 +110,21 @@
 #popup h1 {
     display: inline-block;
 }
+
+#noUserQnaBox {
+    text-align: center;
+    color: silver;
+}
+
+#noUserQnaBox i {
+    font-size: 100px;
+}
+
+#noQnaBox {
+    text-align: center;
+    color: silver;
+}
+
+#noQnaBox i {
+    font-size: 100px;
+}
