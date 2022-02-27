@@ -19,3 +19,8 @@ footer button {
 footer button:hover {
     background-color: rgb(243, 244, 245)
 }
+
+footer h6 {
+	font-size: 15px;
+	margin: 10px 0px;
+}
