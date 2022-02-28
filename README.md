@@ -91,6 +91,15 @@
 - [ ] QNA에서 답변이 안 달려도 자세히 볼 수 있음
 - [x] 회원탈퇴 안 됨(Action에서 관련 테이블 전체 삭제 해야 함)
 - [ ] postdetail에서 유저 이미지 hover 하면 opacity + userPage로 이동
+- [ ] Detail에서 댓글 enter 치면 등록 안 됨
+- [ ] userPage css 오류
+- [ ] 스토리 모달 hover 효과
+- [ ] detail에서 유저 글씨 누르면 userPage로 가기
+- [ ] detail 유저 프로필/글씨 hover 효과
+- [ ] detail 댓글에서 유저 프로필/아이디 누르면 userPage로
+- [ ] 댓글 알람 안 감
+- [ ] main 페이지에서 팔로우 안 함 사람 포스트도 뜸
+- [ ] 게시글 삭제 안 됨
 
 
 # 시연모습
