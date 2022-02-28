@@ -42,3 +42,7 @@
 #popupBox button:nth-child(1), #popupBox button:nth-child(3) {
     color: rgb(237, 73, 86);
 }
+
+#popupBox button:hover {
+    opacity: 0.5;
+}
