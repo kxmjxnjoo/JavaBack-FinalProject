@@ -69,10 +69,13 @@ public class QnaDao {
 		    	qdto.setQna_reply(rs.getString("qna_reply"));
 		    	qdto.setQna_id(rs.getString("qna_id"));
 		    	qdto.setRep(rs.getString("rep"));
-		    	qdto.setIndate(rs.getTimestamp("indate"));		 
-		    	MemberDto mdto = MemberDao.getInstance().getMember(qdto.getQna_id());
-		    	qdto.setUsername(mdto.getName());
-		    	//qdto.setQna_password(rs.getString("qna_password"));		    	
+		    	qdto.setIndate(rs.getTimestamp("indate"));
+		    	
+		    	if(qdto.getQna_id() != null) {
+			    	MemberDto mdto = MemberDao.getInstance().getMember(qdto.getQna_id());
+			    	qdto.setUsername(mdto.getName());
+			    }
+
 		    	list.add(qdto);
 		    }
 		} catch (SQLException e) {e.printStackTrace();
