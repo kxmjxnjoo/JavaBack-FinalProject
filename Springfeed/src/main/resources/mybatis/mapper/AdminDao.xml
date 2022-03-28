@@ -14,5 +14,14 @@
 		)  }
 	</select>
 	
+	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL memberList( 
+			#{userid},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+		)  }
+	</select>
+	
+	
+	
 	
 </mapper>

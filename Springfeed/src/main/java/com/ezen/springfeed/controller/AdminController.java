@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.PostService;
 
@@ -35,12 +37,12 @@ public class AdminController {
 	
 	@RequestMapping("/admin/loginForm")
 	public String adminLogin( HttpServletRequest request, Model model,
-			@RequestParam("adminID") String adminID,
+			@RequestParam("adminId") String adminId,
 			@RequestParam("adminPwd") String adminPwd) {
 		
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("ref_cursor", null);
-		paramMap.put("adminID", adminID);
+		paramMap.put("adminId", adminId);
 		as.checkAdmin(paramMap); 	//confirm ID
 		
 		ArrayList<HashMap<String,Object>> list
@@ -67,13 +69,65 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/memberList")
-	public String memberList() {
-		return "";
+	public ModelAndView memberList(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			int page = 1;
+			String key = "";
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+		}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("key", key);
+			as.getAllCount(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			
+			paramMap.put("startNum", paging.getStartNum());
+			paramMap.put("endNum", paging.getEndNum());
+			paramMap.put("key", key);
+			paramMap.put("ref_cursor", null);
+			as.memberList(paramMap);
+			
+			ArrayList<HashMap<String,Object>> list
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+			mav.addObject("memberList", list);
+			mav.addObject("paging", paging);
+			mav.addObject("key", key);
+			mav.setViewName("admin/adminMemberList");
+		
+		}
+		return mav;
 	}
 
 	
 	
-	// TODO : implement
 	@RequestMapping("/admin/searchMember")
 	public String searchMember() {
 		return "";
@@ -81,7 +135,6 @@ public class AdminController {
 
 	
 	
-	// TODO : implement
 	@RequestMapping("/admin/report")
 	public String reportList() {
 		return "";

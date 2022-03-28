@@ -9,4 +9,8 @@ public interface IAdminDao {
 
 	void checkAdmin(HashMap<String, Object> paramMap);
 
+	void getAllCount(HashMap<String, Object> paramMap);
+
+	void memberList(HashMap<String, Object> paramMap);
+
 }
