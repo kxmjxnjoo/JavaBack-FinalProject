@@ -22,12 +22,12 @@
 <body>
 
 <article>
-	<form name="frm" method="post" action="spring.do" id="id_pwd" >
+	<form name="frm" method="post" method="post" id="id_pwd" >
 	<div class="loginForm">
 		<div class="title">아이디</div>
-			<input type="hidden" name="command" value="adminLogin">
+			<input type="hidden" name=adminID value="adminLogin">
 			<div class="text_box">
-			<input type ="text" name="adminid" class="input"></div>
+			<input type ="text" name="adminPwd" class="input"></div>
 		<div class="title">비밀번호</div>
 			<div class="text_box">
 			<input type="password" name="password" class="input"></div>

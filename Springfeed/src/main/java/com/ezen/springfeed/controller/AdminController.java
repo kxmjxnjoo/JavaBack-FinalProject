@@ -1,12 +1,19 @@
 package com.ezen.springfeed.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.PostService;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -18,18 +25,45 @@ public class AdminController {
 	@Autowired
 	PostService ps;
 
-	// TODO : implement
+	
 	@RequestMapping("/admin/login")
-	public String adminLogin() {
-		return "";
-	}
+	public String adminLogin() { 
+		return "admin/adminLogin";
+	} 		//move loginForm 
 
-	// TODO : implement
+	
 	@RequestMapping("/admin/loginForm")
-	public String adminLoginForm() {
-		return "";
-	}
+	public String adminLogin( HttpServletRequest request, Model model,
+			@RequestParam("adminID") String adminID,
+			@RequestParam("adminPwd") String adminPwd) {
+		
+		HashMap<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("ref_cursor", null);
+		paramMap.put("adminID", adminID);
+		as.checkAdmin(paramMap); 	//confirm ID
+		
+		ArrayList<HashMap<String,Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+		if(list.size()==0) {	
+			model.addAttribute("message", "아이디가 없습니다");
+			return "admin/adminLoginForm";
+		}
+		HashMap<String,Object> resultMap = list.get(0);
+		if(resultMap.get("PWD")==null) {
+			model.addAttribute("message", "관리자에게 문의하세요");
+			return "admin/adminLogin";
+		}else if( adminPwd.equals((String)resultMap.get("PWD"))) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginAdmin", resultMap);
+			return "redirect:/adminMembertList";
+		}else {
+			model.addAttribute("message", "비밀번호가 맞지 않습니다");
+			return "admin/admingLogin";
+		}
+	}	
 
+	
 	// TODO : implement
 	@RequestMapping("/admin/memberList")
 	public String memberList() {
