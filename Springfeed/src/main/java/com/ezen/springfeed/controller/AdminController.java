@@ -1,16 +1,22 @@
 package com.ezen.springfeed.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 
 import com.ezen.springfeed.service.AdminService;
+import com.ezen.springfeed.service.PostService;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	AdminService as;
+
+	@Autowired
+	PostService ps;
 
 	// TODO : implement
 	@RequestMapping("/admin/login")
@@ -43,6 +49,5 @@ public class AdminController {
 	}
 
 	// TODO : implement
-
 
 }
