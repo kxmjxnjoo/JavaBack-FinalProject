@@ -9,15 +9,17 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MemberController {
 
+	//로그인 폼으로
+	@RequestMapping(value="/loginForm")
+	public String loginForm() {
+		return "member/login";
+	}
+    
     // TODO : implement
     @RequestMapping("/login")
     public String login() {
-        return "";
-    }
-
-    // TODO : implement
-    @RequestMapping("/loginForm")
-    public String loginForm() {
+    	
+    	
         return "";
     }
 
