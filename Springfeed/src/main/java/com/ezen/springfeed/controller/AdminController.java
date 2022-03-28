@@ -32,6 +32,7 @@ public class AdminController {
 	} 		//move loginForm 
 
 	
+	
 	@RequestMapping("/admin/loginForm")
 	public String adminLogin( HttpServletRequest request, Model model,
 			@RequestParam("adminID") String adminID,
@@ -64,24 +65,48 @@ public class AdminController {
 	}	
 
 	
-	// TODO : implement
+	
 	@RequestMapping("/admin/memberList")
 	public String memberList() {
 		return "";
 	}
 
+	
+	
 	// TODO : implement
 	@RequestMapping("/admin/searchMember")
 	public String searchMember() {
 		return "";
 	}
 
+	
+	
 	// TODO : implement
 	@RequestMapping("/admin/report")
-	public String adminReport() {
+	public String reportList() {
+		return "";
+	}
+	
+	
+	
+	@RequestMapping("/admin/report/post")
+	public String postReportCheck() {
+		return "";
+	}
+	
+	
+	
+	@RequestMapping("/admin/report/story")
+	public String storyReportCheck() {
+		return "";
+	}
+	
+	
+	
+	@RequestMapping("/admin/report/handle")
+	public String handleReport() {
 		return "";
 	}
 
-	// TODO : implement
 
 }
