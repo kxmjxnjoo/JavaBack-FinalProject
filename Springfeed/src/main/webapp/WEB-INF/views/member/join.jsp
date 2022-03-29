@@ -34,18 +34,18 @@
 			<h3 color="gray">친구들의 사진을 보려면 가입하세요.</h3><br>
 				<input type="hidden" name="command" value="join">
 				<div class="text_box">
-				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" id="joinPhone"></div>
+				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" id="joinPhone" value="${dto.phone}"></div>
 				<div class="text_box">
-				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" id="joinEmail"></div>
+				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" id="joinEmail" value="${dto.email}"></div>
 				<div class="text_box">
-				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName"></div>
+				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}"></div>
 				<div class="text_box">
-				<input type ="text" name="userid" class="input" oninput="checkId()" placeholder=" 아이디" id="joinId"></div>
+				<input type ="text" name="userid" class="input" oninput="checkId()" placeholder=" 아이디" id="joinId" value="${dto.userid}"></div>
 				<input type="hidden" id="useridcheck" name="idcheck">
 				<span class="material-icons" id="id_ok"> task_alt </span>
 				<span class="material-icons" id="id_already"> cancel </span>
 				<div class="text_box">
-				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
+				<input type="password" name="userpwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
 		<input type="submit" id="login" value="가입" disabled="disabled">
 		
 		<input type="button" id="idCheckButton" value="아이디 중복확인" onclick="idCheck()">

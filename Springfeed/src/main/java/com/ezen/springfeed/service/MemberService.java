@@ -22,4 +22,8 @@ public class MemberService {
 		return cnt;
 	}
 
+	public void insertMember(HashMap<String, Object> paramMap) {
+		mdao.insertMember(paramMap);
+	}
+
 }

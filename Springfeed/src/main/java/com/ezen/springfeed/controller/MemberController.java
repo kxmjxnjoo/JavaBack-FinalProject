@@ -91,7 +91,7 @@ public class MemberController {
     // 회원가입 폼
     @RequestMapping("/join/form")
     public String joinForm() {
-        return "member/joinForm";
+        return "member/join";
     }
     
     
@@ -101,16 +101,54 @@ public class MemberController {
     public int idCheck(@RequestParam("joinId") String id) {
     	System.out.println("userIdCheck 진입");
     	System.out.println("전달 받은 id" + id);
-    	int cnt = ms.idCheck(id);
-    	System.out.println("확인 결과 : " + cnt );
+    	//int cnt = ms.idCheck(id);
+    	//System.out.println("확인 결과 : " + cnt );
     	
-        return cnt;
+    	return 0;
+       
     }
     
     // 회원가입 액션
-    @RequestMapping("/join")
-    public String join() {
-        return "";
+    @RequestMapping(value="/join", method=RequestMethod.POST)
+    public String join(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    		BindingResult result,
+    		@RequestParam(value="reid", required=false) String reid,
+    		@RequestParam(value="pwdCheck", required=false) String pwdCheck,
+    		HttpServletRequest request, Model model) {
+    	
+    	model.addAttribute("reid", reid);
+    	String url = "member/joinForm";
+    	
+    	if(result.getFieldError("userid")!= null) {
+            model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
+         } else if(result.getFieldError("userpwd")!= null) {
+            model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
+         } else if(result.getFieldError("name")!= null) {
+            model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+         } else if(result.getFieldError("email")!= null) {
+            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+         } else if(result.getFieldError("phone")!= null) {
+            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+         } else if(reid==null || (reid != null && !reid.equals(memberdto.getUserid()))) {
+ 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다.");
+ 		} else if(pwdCheck==null || (pwdCheck != null && !pwdCheck.equals(memberdto.getUserpwd()))) {
+ 			model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
+ 		} else {
+ 			
+ 			HashMap<String, Object> paramMap = new HashMap<>();
+ 			paramMap.put("userid",memberdto.getUserid());
+ 			paramMap.put("pwd",memberdto.getUserpwd());
+ 			paramMap.put("name",memberdto.getName());
+ 			paramMap.put("email",memberdto.getEmail());
+ 			paramMap.put("phone",memberdto.getPhone());
+ 			
+ 			ms.insertMember(paramMap);
+ 			
+ 			model.addAttribute("message", "회원가입이 완료되었어요:) 로그인 후 이용해주세요.");
+ 			url = "member/login";
+ 		}
+    	
+        return url;
     }
 
 

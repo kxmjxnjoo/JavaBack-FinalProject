@@ -10,10 +10,14 @@
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getMember( 
 			#{userid},
-			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
 		)  }
 	</select>
 	
-	
+	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL insertMember( 
+			#{userid},#{userpwd},#{name},#{email},#{phone}
+		)}
+	</insert>
 	
 </mapper>

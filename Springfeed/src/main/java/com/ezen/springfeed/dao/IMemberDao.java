@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IMemberDao {
 
 	void getMember(HashMap<String, Object> paramMap);
-	int idCheck(String id);
+	void insertMember(HashMap<String, Object> paramMap);
 
 }
