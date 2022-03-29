@@ -113,11 +113,10 @@ public class MemberController {
     public String join(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result,
     		@RequestParam(value="reid", required=false) String reid,
-    		@RequestParam(value="pwdCheck", required=false) String pwdCheck,
     		HttpServletRequest request, Model model) {
     	
     	model.addAttribute("reid", reid);
-    	String url = "member/joinForm";
+    	String url = "member/join";
     	
     	if(result.getFieldError("userid")!= null) {
             model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
@@ -131,9 +130,7 @@ public class MemberController {
             model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
          } else if(reid==null || (reid != null && !reid.equals(memberdto.getUserid()))) {
  			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다.");
- 		} else if(pwdCheck==null || (pwdCheck != null && !pwdCheck.equals(memberdto.getUserpwd()))) {
- 			model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
- 		} else {
+ 		}  else {
  			
  			HashMap<String, Object> paramMap = new HashMap<>();
  			paramMap.put("userid",memberdto.getUserid());

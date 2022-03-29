@@ -33,10 +33,10 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 없으신가요?<a href="join/form"> 가입하기 </a>
+			<br>계정이 없으신가요?<a href="/join/form"> 가입하기 </a>
 		</div>
 		<div id="box2">
-			<br>관리자이신가요?<a href="admin"> 관리자 페이지 </a>
+			<br>관리자이신가요?<a href="/admin"> 관리자 페이지 </a>
 		</div>
 		앱을 다운로드하세요.<br><br>
 	    <span>

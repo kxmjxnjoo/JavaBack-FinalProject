@@ -25,18 +25,17 @@
 </script>
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 	
-	<form method="post" action="spring.do" name="loginFrm" id="joinform">
-		<input type="hidden" name="command" value="join">
+	<form method="post" action="/join" name="loginFrm" id="joinform">
 		<div id="box1">
 			<h1>Springfeed</h1>
 			<h3 color="gray">친구들의 사진을 보려면 가입하세요.</h3><br>
 				<input type="hidden" name="command" value="join">
 				<div class="text_box">
-				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호" id="joinPhone" value="${dto.phone}"></div>
+				<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호 (숫자만 입력해주세요)" id="joinPhone" value="${dto.phone}"></div>
 				<div class="text_box">
-				<input type ="text" name="email" class="input"  placeholder=" 이메일 주소" id="joinEmail" value="${dto.email}"></div>
+				<input type ="text" name="email" class="input"  placeholder=" 이메일 (example@springfeed.com)" id="joinEmail" value="${dto.email}"></div>
 				<div class="text_box">
 				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}"></div>
 				<div class="text_box">
@@ -46,16 +45,16 @@
 				<span class="material-icons" id="id_already"> cancel </span>
 				<div class="text_box">
 				<input type="password" name="userpwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
-		<input type="submit" id="login" value="가입" disabled="disabled">
+		<input type="submit" id="login" value="가입">
 		
-		<input type="button" id="idCheckButton" value="아이디 중복확인" onclick="idCheck()">
+		<input type="button" id="idCheckButton" value="아이디 중복확인" >
 		
 		<br><br>
 	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 있으신가요?<a href="spring.do?command=loginform"> 로그인 </a>
+			<br>계정이 있으신가요?<a href="/login/form"> 로그인 </a>
 		</div>
 		앱을 다운로드하세요.<br><br>
 	    <span>
@@ -69,9 +68,9 @@
 	    <br><br>
 	</form>
 	
-		<%@ include file="/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 	
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			function checkJoin() {
 				let phone = document.getElementById("joinPhone").value
 				let email = document.getElementById("joinEmail").value
@@ -120,7 +119,7 @@
 				}
 			} 
 		
-		</script>
+		</script> -->
 	
 </body>
 </html>
