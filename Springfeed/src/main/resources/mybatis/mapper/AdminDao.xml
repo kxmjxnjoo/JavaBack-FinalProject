@@ -14,12 +14,42 @@
 		)  }
 	</select>
 	
+	<!--  getAllCount? -->
+	
 	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL memberList( 
 			#{userid},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
 		)  }
 	</select>
+
+	<select id="searchMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL searchMember(
+			${userid}, #{name}
+			#{ref_cursor1, mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=productMap},
+		) }
+	</select>
+	
+	<select id="reportList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL reportList( 
+			#{reporter_id},  #{reported_id},  #{post_num}, 	#{story_num},  #{reason}, 	#{type}
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+		)  }
+	</select>
+	
+	<select id="postReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL postReportCheck( 
+			##{post_num}, 	#{story_num},  #{reason}, 	#{type}
+			#{ref_cursor , mode=IN, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+		)  }
+	</select>
+	
+	storyReportCheck
+	
+	handleReport
+	
+	
+	
 	
 	
 	

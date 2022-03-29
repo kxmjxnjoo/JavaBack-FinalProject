@@ -24,4 +24,16 @@ public class AdminService {
 	public void memberList(HashMap<String, Object> paramMap) {
 		adao.memberList(paramMap);
 	}
+
+	public void searchMember(HashMap<String, Object> paramMap) {
+		adao.searchMember(paramMap);
+	}
+
+	public void reportList(HashMap<String, Object> paramMap) {
+		adao.reportList(paramMap);
+	}
+
+	public void postReportCheck(HashMap<String, Object> paramMap) {
+		adao.postReportCheck(paramMap);
+	}
 }

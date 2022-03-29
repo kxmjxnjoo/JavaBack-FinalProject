@@ -13,4 +13,10 @@ public interface IAdminDao {
 
 	void memberList(HashMap<String, Object> paramMap);
 
+	void searchMember(HashMap<String, Object> paramMap);
+
+	void reportList(HashMap<String, Object> paramMap);
+
+	void postReportCheck(HashMap<String, Object> paramMap);
+
 }

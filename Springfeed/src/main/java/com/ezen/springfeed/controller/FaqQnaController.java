@@ -22,20 +22,20 @@ public class FaqQnaController {
 	@Autowired
 	FaqQnaService fqs;
 	
-	
+
 	@RequestMapping("/admin/faq")
 	public String adminFaqList() {
-		return "";
+		return "faq/adminFaqList";
 	}
 	
-
+	
 	
 	@RequestMapping("/faq/add")
-	public String addFaq() {
-		return "";
+		public String addFaq( ) {
+		return "userfaqqna/faq";
 	}
 	
-	
+	/*
 	
 	@RequestMapping("/faq/add/form")
 	public String addFaqForm() {
@@ -92,7 +92,7 @@ public class FaqQnaController {
 	}
 	
 	
-	
+	*/
 	@RequestMapping("/qna/add/form")
 	public ModelAndView addQnaForm( @ModelAttribute("dto") @Valid QnaDto qnadto,
 			BindingResult result, HttpServletRequest request) {
@@ -124,7 +124,7 @@ public class FaqQnaController {
 	}
 	
 	
-	
+	/*
 	@RequestMapping("/qna/edit")
 	public String editQna() {
 		return "";
@@ -143,4 +143,5 @@ public class FaqQnaController {
 	public String faqList() {
 		return "userfaqqna/faq";
 	}
+	*/
 }
