@@ -1,15 +1,17 @@
 package com.ezen.springfeed.controller;
 
+import com.ezen.springfeed.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.ezen.springfeed.service.PostService;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @Controller
 public class PostController {
@@ -18,16 +20,23 @@ public class PostController {
 	PostService ps;
 
 	@RequestMapping("/")
-	public String main(HttpServletRequest request) {
+	public String main(HttpServletRequest request, Model model) {
+		// Get if user is logged in
 		HttpSession session = request.getSession();
-
 		if(session.getAttribute("loginUser") == null) {
 			return "redirect:/login/form";
 		}
 
+		// Get userid
+		String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+
 		// Get Posts
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("userid", userid);
 
 		// Get Story
+
+		// Get follower
 
 		return "main";
 	}
