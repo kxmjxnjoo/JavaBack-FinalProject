@@ -13,16 +13,16 @@
 
 	<div id="loginFormContent">
 	
-	<form  method="post" action="login" name="loginFrm" id="loginForm">
+	<form  method="post" action="/login" name="loginFrm" id="loginForm">
 		<div id="box1">
 			<h1>Springfeed</h1><br>
 				<!-- <input type="hidden" name="command" value="login"> -->
 				<div class="text_box">
-					<input type ="text" name="userid" class="input"  placeholder="아이디" id="userid">
+					<input type ="text" name="userid" class="input"  placeholder="아이디" id="userid" value="${dto.userid}">
 				</div>
 				
 				<div class="text_box">
-					<input type="password" name="pwd" class="input"  placeholder="비밀번호" id="userpwd">
+					<input type="password" name="userpwd" class="input"  placeholder="비밀번호" id="userpwd">
 				</div>
 		<input type="submit" id="login" value="로그인">
 		

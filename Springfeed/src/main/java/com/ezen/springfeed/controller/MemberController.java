@@ -44,8 +44,8 @@ public class MemberController {
     	System.out.println(memberdto.getUserid());
     	if(result.getFieldError("userid")!= null) {
     		model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-    	} else if(result.getFieldError("pwd")!= null) {
-    		model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+    	} else if(result.getFieldError("userpwd")!= null) {
+    		model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
     	} else {
     		HashMap<String, Object> paramMap = new HashMap<>();
     		paramMap.put("userid", memberdto.getUserid());
@@ -64,7 +64,7 @@ public class MemberController {
     			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
     			//고객센터로 연결하는 버튼 모달 만들기
     			
-    		} else if (memberdto.getPassword().equals((String)mvo.get("PWD"))) {
+    		} else if (memberdto.getUserpwd().equals((String)mvo.get("PWD"))) {
     			HttpSession session = request.getSession();
     			session.setAttribute("loginUser", mvo);
     			url = "redirect:/";
