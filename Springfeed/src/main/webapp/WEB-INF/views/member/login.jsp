@@ -9,22 +9,22 @@
 <script type="text/javascript" src="/script/member.js"></script>
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 
 	<div id="loginFormContent">
 	
-	<form  method="post" action="login" name="loginFrm" id="loginForm">
+	<form  method="post" action="/login" name="loginFrm" id="loginForm">
 		<div id="box1">
 			<h1>Springfeed</h1><br>
 				<!-- <input type="hidden" name="command" value="login"> -->
 				<div class="text_box">
-					<input type ="text" name="userid" class="input"  placeholder="아이디" id="userid">
+					<input type ="text" name="userid" class="input"  placeholder="아이디" id="userid" value="${dto.userid}">
 				</div>
 				
 				<div class="text_box">
-					<input type="password" name="pwd" class="input"  placeholder="비밀번호" id="userpwd">
+					<input type="password" name="userpwd" class="input"  placeholder="비밀번호" id="userpwd">
 				</div>
-		<input type="submit" id="login" value="로그인" onclick="return loginCheck()">
+		<input type="submit" id="login" value="로그인">
 		
 		<br><br>
 	        ----------------- 또는 -----------------<br><br>
@@ -33,7 +33,7 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 없으신가요?<a href="joinform"> 가입하기 </a>
+			<br>계정이 없으신가요?<a href="join/form"> 가입하기 </a>
 		</div>
 		<div id="box2">
 			<br>관리자이신가요?<a href="admin"> 관리자 페이지 </a>
@@ -53,7 +53,7 @@
 	
 	</div>
 
-	<%@ include file="/footer/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 	
 </body>
 </html>

@@ -6,6 +6,23 @@
 <meta charset="UTF-8">
 <title>스프링 피드 회원가입</title>
 <link rel="stylesheet" href="/css/join.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    function checkId(){
+        var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장
+        $.ajax({
+            url:'/join/idCheck', //Controller에서 인식할 주소
+            type:'post', //POST 방식으로 전달
+            data:{joinId:id},
+            success:function(){
+                console.log("처리 성공");
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+    };
+</script>
 </head>
 <body>
 	<%@ include file="/topnav/topnav.jsp" %>
@@ -23,11 +40,13 @@
 				<div class="text_box">
 				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName"></div>
 				<div class="text_box">
-				<input type ="text" name="userid" class="input"  placeholder=" 아이디" id="joinId"></div>
+				<input type ="text" name="userid" class="input" oninput="checkId()" placeholder=" 아이디" id="joinId"></div>
 				<input type="hidden" id="useridcheck" name="idcheck">
+				<span class="material-icons" id="id_ok"> task_alt </span>
+				<span class="material-icons" id="id_already"> cancel </span>
 				<div class="text_box">
 				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
-		<input type="submit" id="login" value="가입" onclick="return checkJoin()">
+		<input type="submit" id="login" value="가입" disabled="disabled">
 		
 		<input type="button" id="idCheckButton" value="아이디 중복확인" onclick="idCheck()">
 		

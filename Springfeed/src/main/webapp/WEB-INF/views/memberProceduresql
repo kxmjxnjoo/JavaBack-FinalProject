@@ -1,0 +1,10 @@
+
+CREATE OR REPLACE PROCEDURE getMember(
+    p_userid IN member2.userid%TYPE, 
+    p_curvar OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_curvar FOR SELECT * FROM member WHERE userid=p_userid;
+END;
+

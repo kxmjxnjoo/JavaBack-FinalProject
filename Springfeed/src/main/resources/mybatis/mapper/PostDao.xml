@@ -5,6 +5,70 @@
 	
 <mapper namespace="com.ezen.springfeed.IPostDao">
 	
-	<resultMap id="PostMap" type="java.util.HashMap"></resultMap>	
+	<resultMap id="postMap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectPostsByUserid"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL selectPostByUserid(
+			    #{userid},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=memberMap
+			    }
+			)
+		}
+	</select>
+
+	<select id="selectPostByNum"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL selectPostByNum(
+			    #{postnum},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=memberMap
+			    }
+			)
+		}
+	</select>
+
+	<insert id="insertPost"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL insertPost(
+			    #{post_img},
+			    #{content},
+			    #{address},
+			    #{userid}
+			)
+		}
+	</insert>
+
+	<update
+		id="updatePost"
+		statementType="CALLABLE"
+		parameterType="java.util.HashMap"
+		>
+		{
+			CALL updatePost(
+			    #{post_img},
+			    #{content},
+			    #{address}
+			)
+		}
+	</update>
 	
 </mapper>
