@@ -175,7 +175,7 @@ public class AdminController {
 			paging.setTotalCount(cnt);
 			paging.paging();
 			//page
-			as.searchMember(paramMap);
+			//as.searchMember(paramMap);
 			
 			
 			mav.setViewName("admin/adminMemberList");
@@ -230,7 +230,7 @@ public class AdminController {
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
 			paramMap.put("ref_cursor", null);
-			as.reportList(paramMap);
+			//as.reportList(paramMap);
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
@@ -288,9 +288,9 @@ public class AdminController {
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
-			paramMap.put("postReportCheck", postReportCheck);
+			//paramMap.put("postReportCheck", postReportCheck);
 			paramMap.put("ref_cursor", null);
-			as.postReportCheck(paramMap);
+			//as.postReportCheck(paramMap);
 			
 			mav.setViewName("redirect:/adminReportList");
 		}

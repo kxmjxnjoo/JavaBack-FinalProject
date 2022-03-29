@@ -30,7 +30,7 @@ public class MemberController {
 	//로그인 폼으로
 	@RequestMapping(value="/login/form")
 	public String loginForm() {
-		return "member/login";
+		return "member/loginForm";
 	}
     
     //로그인 액션

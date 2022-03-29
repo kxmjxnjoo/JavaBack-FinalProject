@@ -72,8 +72,8 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/qna/detail?num=")
-	public String editQnaAction() {
+	@RequestMapping("/qna/reply")
+	public String qnaReply() {
 		return "";
 	}
 	
@@ -117,7 +117,7 @@ public class FaqQnaController {
 	    	paramMap.put("id", loginUser.get("USERID"));
 	    	paramMap.put("subject", qnadto.getQna_subject());
 	    	paramMap.put("content", qnadto.getQna_content());
-	    	fqs.addQna(paramMap);
+	    	//fqs.addQna(paramMap);
 	    	mav.setViewName("redirect:/qnaList");
 	    }
 		return mav;
