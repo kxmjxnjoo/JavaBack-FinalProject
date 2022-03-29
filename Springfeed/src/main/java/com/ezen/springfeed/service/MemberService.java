@@ -15,4 +15,9 @@ public class MemberService {
 		mdao.getMember(paramMap);
 	}
 
+	public int idCheck(String id) {
+		int cnt = mdao.idCheck(id);
+		return cnt;
+	}
+
 }

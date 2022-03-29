@@ -108,6 +108,16 @@ span{
 	color: black;
 }
 
+#id_ok {
+	color:#fff; display: none;
+}
+
+#id_already {
+	color:#6A82FB; display: none;
+}
+
+
+
 /*------------------------------------footer--------------------------*/
 #copy{
 	font-size:90%; 

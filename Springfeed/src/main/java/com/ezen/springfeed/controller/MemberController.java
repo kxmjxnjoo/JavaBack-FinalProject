@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
@@ -86,9 +89,22 @@ public class MemberController {
     
 
     // 회원가입 폼
-    @RequestMapping("/joinForm")
+    @RequestMapping("/join/form")
     public String joinForm() {
         return "member/joinForm";
+    }
+    
+    
+    //아이디 체크
+    @PostMapping("/join/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("joinId") String id) {
+    	System.out.println("userIdCheck 진입");
+    	System.out.println("전달 받은 id" + id);
+    	int cnt = ms.idCheck(id);
+    	System.out.println("확인 결과 : " + cnt );
+    	
+        return cnt;
     }
     
     // 회원가입 액션

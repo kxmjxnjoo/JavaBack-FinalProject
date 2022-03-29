@@ -7,3 +7,4 @@ IS
 BEGIN
     OPEN p_curvar FOR SELECT * FROM member WHERE userid=p_userid;
 END;
+
