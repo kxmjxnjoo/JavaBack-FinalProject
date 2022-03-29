@@ -18,8 +18,8 @@ public class MemberService {
 	}
 
 	public int idCheck(String id) {
-		int cnt = mdao.idCheck(id);
-		return cnt;
+		//int cnt = mdao.idCheck(id);
+		return 0;
 	}
 
 	public void insertMember(HashMap<String, Object> paramMap) {
