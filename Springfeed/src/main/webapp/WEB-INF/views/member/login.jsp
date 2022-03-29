@@ -13,7 +13,7 @@
 
 	<div id="loginFormContent">
 	
-	<form  method="post" action="login" name="loginFrm" id="loginForm">
+	<form  method="post" action="/login" name="loginFrm" id="loginForm">
 		<div id="box1">
 			<h1>Springfeed</h1><br>
 				<!-- <input type="hidden" name="command" value="login"> -->
