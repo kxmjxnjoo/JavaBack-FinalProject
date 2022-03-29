@@ -24,7 +24,7 @@
 				<div class="text_box">
 					<input type="password" name="pwd" class="input"  placeholder="비밀번호" id="userpwd">
 				</div>
-		<input type="submit" id="login" value="로그인" onclick="return loginCheck()">
+		<input type="submit" id="login" value="로그인">
 		
 		<br><br>
 	        ----------------- 또는 -----------------<br><br>
@@ -33,7 +33,7 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 없으신가요?<a href="joinform"> 가입하기 </a>
+			<br>계정이 없으신가요?<a href="join/form"> 가입하기 </a>
 		</div>
 		<div id="box2">
 			<br>관리자이신가요?<a href="admin"> 관리자 페이지 </a>

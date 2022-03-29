@@ -23,11 +23,12 @@
 				<div class="text_box">
 				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName"></div>
 				<div class="text_box">
-				<input type ="text" name="userid" class="input"  placeholder=" 아이디" id="joinId"></div>
+				<input type ="text" name="userid" class="input" oninput="checkId()" placeholder=" 아이디" id="joinId"></div>
 				<input type="hidden" id="useridcheck" name="idcheck">
+				<span class="material-icons"> done </span>
 				<div class="text_box">
 				<input type="password" name="pwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
-		<input type="submit" id="login" value="가입" onclick="return checkJoin()">
+		<input type="submit" id="login" value="가입" disabled="disabled">
 		
 		<input type="button" id="idCheckButton" value="아이디 중복확인" onclick="idCheck()">
 		
