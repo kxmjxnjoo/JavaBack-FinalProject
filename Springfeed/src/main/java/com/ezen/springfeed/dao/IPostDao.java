@@ -6,7 +6,8 @@ import java.util.HashMap;
 
 @Mapper
 public interface IPostDao {
-    void selectPost(HashMap<String, Object> paramMap);
+    void selectPostsByUserid(HashMap<String, Object> paramMap);
+    void selectPostByNum(HashMap<String, Object> paramMap);
     void insertPost(HashMap<String, Object> paramMap);
     void updatePost(HashMap<String, Object> paramMap);
     void deletePost(HashMap<String, Object> paramMap);

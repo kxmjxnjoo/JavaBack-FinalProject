@@ -7,7 +7,7 @@
 	
 	<resultMap id="postMap" type="java.util.HashMap"></resultMap>
 
-	<select id="selectPostByUserid"
+	<select id="selectPostsByUserid"
 			statementType="CALLABLE"
 			parameterType="java.util.HashMap"
 	>

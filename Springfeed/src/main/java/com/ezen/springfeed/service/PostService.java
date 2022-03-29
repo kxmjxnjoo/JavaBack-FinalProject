@@ -1,6 +1,7 @@
 package com.ezen.springfeed.service;
 
 import com.ezen.springfeed.dao.IPostDao;
+import com.ezen.springfeed.dao.IStoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,9 @@ public class PostService {
     @Autowired
     IPostDao pdao;
 
-    public void getPost(HashMap<String, Object> paramMap) {
-        pdao.selectPost(paramMap);
+// Post
+    public void getPostsByUserid(HashMap<String, Object> paramMap) {
+        pdao.selectPostsByUserid(paramMap);
     }
 
     public void addPost(HashMap<String, Object> paramMap) {
