@@ -7,4 +7,8 @@
 	
 	<resultMap id="FaqQnaDao" type="java.util.HashMap"></resultMap>	
 	
+	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL "addQna"( ${qna_id}, #{qna_subject}, #{qna_content} ) }
+	</insert>
+	
 </mapper>

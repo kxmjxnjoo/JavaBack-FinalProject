@@ -136,12 +136,11 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/searchMember")
-	public ModelAndView searchMember(HttpServletRequest request, Model model) {
-		ModelAndView mav = new ModelAndView();
+	public String searchMember(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginAdmin") == null) {
-			mav.setViewName("admin/admingLogin");
+			return "admin/admingLogin";
 		} else {
 			int page = 1;
 			String key = "";
@@ -176,10 +175,19 @@ public class AdminController {
 			paging.paging();
 			//page
 			as.searchMember(paramMap);
-
-			mav.setViewName("admin/adminMemberList");
+			
+			String searchMem = "";
+			if(request.getParameter("searchMameber")!=null) {
+				searchMem = request.getParameter("searchMember");
+				session.setAttribute("searchMember", searchMem);
+			} else if(session.getAttribute("searchMem") != null) {
+				searchMem = (String)session.getAttribute("searchMem");
+			} else {
+				session.removeAttribute("searchMem");
+				searchMem="";
+			}
 		}
-		return mav;
+		return "admin/adminMemberList";
 	}
 
 	
@@ -246,6 +254,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin/report/post")
 	public ModelAndView postReportCheck(HttpServletRequest request, Model model) {
+		
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		
@@ -287,16 +296,25 @@ public class AdminController {
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
+
+			String postReportCheck = "";
+			paramMap.put("postReportCheck", postReportCheck);
 			//paramMap.put("postReportCheck", postReportCheck);
 			paramMap.put("ref_cursor", null);
 			//as.postReportCheck(paramMap);
 			
+			int postNum = Integer.parseInt(request.getParameter("postNum"));
+			int reportNum = Integer.parseInt(request.getParameter("reportNum"));
+			
+			request.setAttribute("postNum", postNum);
+			mav.setViewName("report/postReportCheck");
+			request.setAttribute("reportNum", reportNum);
 			mav.setViewName("redirect:/adminReportList");
 		}
 		return mav;
 	}
 	
-	
+	/*
 	
 	@RequestMapping("/admin/report/story")
 	public String storyReportCheck() {
@@ -310,5 +328,6 @@ public class AdminController {
 		return "";
 	}
 
-
+*/
+	
 }

@@ -11,7 +11,7 @@
 	  if(document.frm.adminid.value==""){
 	      	alert("아이디를 입력하세요.");
 	      	return false;
-	  }else if(document.frm.password.value==""){
+	  }else if(document.frm.adminPwd.value==""){
 	     	alert("비밀번호를 입력하세요.");
 	      	return false;
 	  }
@@ -30,7 +30,7 @@
 			<input type ="text" name="adminPwd" class="input"></div>
 		<div class="title">비밀번호</div>
 			<div class="text_box">
-			<input type="password" name="password" class="input"></div>
+			<input type="password" name="adminPwd" class="input"></div>
 		</div>
 		<div style="color:red;">${message}</div>
 		<input type="submit" id="login" value="로그인" onClick="return workerCheck();">
