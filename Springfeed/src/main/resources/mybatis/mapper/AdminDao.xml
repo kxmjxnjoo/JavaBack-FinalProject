@@ -15,7 +15,14 @@
 	</select>
 	
 	<!--  getAllCount? -->
-	
+	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL checkAdmin(
+				#{adminID},
+				#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}
+			)  }
+	</select>
+
+
 	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL memberList( 
 			#{userid},
@@ -43,7 +50,7 @@
 			#{ref_cursor , mode=IN, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
 		)  }
 	</select>
-	
+
 	
 	
 </mapper>
