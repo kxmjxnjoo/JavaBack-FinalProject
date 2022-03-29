@@ -27,7 +27,6 @@ public class FaqQnaController {
 	public String adminFaqList() {
 		return "";
 	}
-	
 
 	
 	@RequestMapping("/faq/add")
@@ -51,7 +50,7 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/faq/delete?num=")
+	@RequestMapping("/faq/delete")
 	public String deleteFaq() {
 		return "";
 	}
@@ -65,27 +64,23 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/qna/detail?num=")
+	@RequestMapping("/qna/detail")
 	public String qnaView() {
 		return "";
 	}
 	
-	
+
 	
 	@RequestMapping("/qna/reply")
 	public String qnaReply() {
 		return "";
 	}
 	
-	
-	
-	@RequestMapping("/qna?userid=")
+	@RequestMapping("/qna")
 	public String userQna() {
 		return "";
 	}
-	
-	
-	
+
 	@RequestMapping("/qna/add")
 	public String addQna( ) {
 		return "qna/qnaView";

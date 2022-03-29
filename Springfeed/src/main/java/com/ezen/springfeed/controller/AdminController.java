@@ -175,9 +175,8 @@ public class AdminController {
 			paging.setTotalCount(cnt);
 			paging.paging();
 			//page
-			//as.searchMember(paramMap);
-			
-			
+			as.searchMember(paramMap);
+
 			mav.setViewName("admin/adminMemberList");
 		}
 		return mav;
