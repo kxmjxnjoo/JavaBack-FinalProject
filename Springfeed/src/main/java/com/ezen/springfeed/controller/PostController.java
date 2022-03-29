@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -30,13 +32,25 @@ public class PostController {
 		// Get userid
 		String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
 
-		// Get Posts
+		// Create paramMap
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("userid", userid);
+		paramMap.put("ref_cursor", null);
 
-		// Get Story
+		// Get Posts
+		ps.getPostsByUserid(paramMap);
+		ArrayList<HashMap<String, Object>> postList =
+				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
 		// Get follower
+		//ps.getFollowers(paramMap);
+		ArrayList<HashMap<String, Object>> followerList =
+				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+		// Get Story
+		//ps.getDisplayStories(paramMap);
+		ArrayList<HashMap<String, Object>> storyList =
+				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
 		return "main";
 	}
