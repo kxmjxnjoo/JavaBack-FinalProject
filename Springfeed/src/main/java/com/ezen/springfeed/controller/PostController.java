@@ -51,7 +51,7 @@ public class PostController {
 
 	@RequestMapping("/post/add")
 	public String addPost() {
-		return "redirect:/"
+		return "redirect:/";
 	}
 
 	@RequestMapping("/post/edit/form")
@@ -62,28 +62,54 @@ public class PostController {
 		if(member == null) {
 			return "redirect:/login/form";
 		}
-		String userid = (MemberVO)member.getUserid();
+		//String userid = (MemberVO)member.getUserid();
 
 		return "post/addPost";
 	}
 
 	@RequestMapping("/post/edit")
+	public String editPost() {
+		return "";
+	}
 
 	@RequestMapping("/post/delete")
+	public String deletePost() {
+		return "";
+	}
 
 	@RequestMapping("/select")
+	public String selectPostStory() {
+		return "";
+	}
 
 	@RequestMapping("/reply/add")
+	public String addReply() {
+		return "";
+	}
 	
 	@RequestMapping("/reply/delete")
+	public String deleteReply() {
+		return "";
+	}
 	
 	@RequestMapping("/bookmark/add")
+	public String addBookmark() {
+		return "";
+	}
 
 	@RequestMapping("/bookmark/delete")
+	public String deleteBookmark() {
+		return "";
+	}
 
 	@RequestMapping("/report")
+	public String report() {
+		// Determine whether userid or post or story is provided
+		return "";
+	}
 
 	@RequestMapping("/report/form")
-
-	
+	public String reportForm() {
+		return "";
+	}
 }
