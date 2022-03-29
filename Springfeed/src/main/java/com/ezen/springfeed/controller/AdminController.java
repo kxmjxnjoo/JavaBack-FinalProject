@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.service.AdminService;
+import com.ezen.springfeed.service.FaqQnaService;
 import com.ezen.springfeed.service.PostService;
+import com.ezen.springfeed.service.StoryService;
 
 
 @Controller
@@ -26,6 +28,12 @@ public class AdminController {
 
 	@Autowired
 	PostService ps;
+	
+	@Autowired
+	StoryService ss;
+	
+	@Autowired
+	FaqQnaService fqs;
 
 	
 	@RequestMapping("/admin/login")
@@ -33,7 +41,6 @@ public class AdminController {
 		return "admin/adminLogin";
 	} 		//move loginForm 
 
-	
 	
 	@RequestMapping("/admin/loginForm")
 	public String adminLogin( HttpServletRequest request, Model model,
@@ -49,19 +56,19 @@ public class AdminController {
 			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 		
 		if(list.size()==0) {	
-			model.addAttribute("message", "아이디가 없습니다");
+			model.addAttribute("message", "아이디를 확인해주세요");
 			return "admin/adminLoginForm";
 		}
 		HashMap<String,Object> resultMap = list.get(0);
 		if(resultMap.get("PWD")==null) {
-			model.addAttribute("message", "관리자에게 문의하세요");
+			model.addAttribute("message", "다른 관리자에게 문의하세요");
 			return "admin/adminLogin";
 		}else if( adminPwd.equals((String)resultMap.get("PWD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
 			return "redirect:/adminMembertList";
 		}else {
-			model.addAttribute("message", "비밀번호가 맞지 않습니다");
+			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
 		}
 	}	
@@ -129,22 +136,165 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/searchMember")
-	public String searchMember() {
-		return "";
+	public ModelAndView searchMember(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			int page = 1;
+			String key = "";
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+		}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("key", key);
+			as.getAllCount(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			//page
+			as.searchMember(paramMap);
+			
+			
+			mav.setViewName("admin/adminMemberList");
+		}
+		return mav;
 	}
 
 	
 	
 	@RequestMapping("/admin/report")
-	public String reportList() {
-		return "";
+	public ModelAndView reportList(HttpServletRequest request, Model model) {
+		
+		ModelAndView mav = new ModelAndView();
+	
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			int page = 1;
+			String key = "";
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+			}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("key", key);
+			as.getAllCount(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			
+			paramMap.put("startNum", paging.getStartNum());
+			paramMap.put("endNum", paging.getEndNum());
+			paramMap.put("key", key);
+			paramMap.put("ref_cursor", null);
+			as.reportList(paramMap);
+			
+			ArrayList<HashMap<String,Object>> list
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+			mav.addObject("reportList", list);
+			mav.addObject("paging", paging);
+			mav.addObject("key", key);
+			mav.setViewName("redirect:/adminReportList");
+		}
+		return mav;
 	}
 	
 	
 	
 	@RequestMapping("/admin/report/post")
-	public String postReportCheck() {
-		return "";
+	public ModelAndView postReportCheck(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			int page = 1;
+			String key = "";
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+			}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("key", key);
+			as.getAllCount(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			
+			paramMap.put("startNum", paging.getStartNum());
+			paramMap.put("endNum", paging.getEndNum());
+			paramMap.put("key", key);
+			paramMap.put("postReportCheck", postReportCheck);
+			paramMap.put("ref_cursor", null);
+			as.postReportCheck(paramMap);
+			
+			mav.setViewName("redirect:/adminReportList");
+		}
+		return mav;
 	}
 	
 	
