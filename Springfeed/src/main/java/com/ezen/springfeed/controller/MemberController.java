@@ -30,7 +30,7 @@ public class MemberController {
 	//로그인 폼으로
 	@RequestMapping(value="/login/form")
 	public String loginForm() {
-		return "member/loginForm";
+		return "member/login";
 	}
     
     //로그인 액션
@@ -39,7 +39,7 @@ public class MemberController {
     		BindingResult result, HttpServletRequest request,
     		Model model) {
     	
-    	String url = "member/loginForm";
+    	String url = "member/login";
     	
     	System.out.println(memberdto.getUserid());
     	if(result.getFieldError("userid")!= null) {

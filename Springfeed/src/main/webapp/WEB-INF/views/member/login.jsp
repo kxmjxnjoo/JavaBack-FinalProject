@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/script/member.js"></script>
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 
 	<div id="loginFormContent">
 	
@@ -53,7 +53,7 @@
 	
 	</div>
 
-	<%@ include file="/footer/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 	
 </body>
 </html>
