@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
 
@@ -26,9 +25,6 @@ public class MemberController {
 
 	@Autowired
 	MemberService ms;
-	
-	@Autowired
-	
 	
 	//로그인 폼으로
 	@RequestMapping(value="/login/form")

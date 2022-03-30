@@ -24,20 +24,20 @@
 		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{id} )  }
 	</select>
 	
-	<insert id=insertFollow statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL insertFollow( 
 			#{follower}, #{followed}, #{result, mode=OUT, jdbcType=INTEGER } 
 		)}
 	</insert>
 	
-	<insert id=addNotification statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+	<insert id="addNotification" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL addNotification( 
 			#{followed}, #{follower}, #{notitype},
 			#{notiresult, mode=OUT, jdbcType=INTEGER } 
 		)}
 	</insert>
 	
-	<delete id=unfollow statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+	<delete id="unfollow" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL unfollow( 
 			 #{follower}, #{followed},
 			#{result, mode=OUT, jdbcType=INTEGER } 
