@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+body{
+	background:#efebe8;
+}
+
+h3{
+	color: gray;
+}
+#joinform {
+	margin: 0 auto;
+	width:350px;
+	text-align:center;
+	padding-top:20px;
+}
+
+#box1{
+	background:white;
+	padding-top:5%;
+	padding-bottom:30px;
+	border: 1px solid gray;
+}
+
+#box2{
+	background:white;
+	margin: 0 atuo;
+	height:60px;
+	border: 1px solid gray;
+	margin-bottom:15px;
+}
+
+input:focus{outline:none;}
+
+.input{
+	border:0; 
+	outline:none;	
+	width:90%; 
+	height:90%; 
+	font-size:90%; 
+	 text-align:left;
+	}
+	
+#img{
+	vertical-align:middle;}
+
+#id_pwd{
+	position:relative; 
+	width:150px; 
+	height:50px;
+	margin:0 auto; 
+	margin-top:150px;
+	}
+
+.title{position:relative; 
+	width:180px; height:25px;
+	auto; font-weight:bold; 
+	line-height:50%;}
+	
+.text_box{position:relative; 
+	width:270px; 
+	height:40px; 
+	border:1px solid#DADADA; 
+	background:#FFFFFF; 
+	margin:0 auto;
+	margin-bottom:12px;}
+	
+.text_box:focus-within{
+	border:1px solid #e59999;}
+
+
+a { color: #4c4c4c;	
+	text-decoration: none; } 
+
+#login{
+	position:relative; 
+	width:270px; 
+	height:38px; 
+	border:1px solid #e59999; 
+	margin:5px auto;	
+	background: white; 
+	font-size:80%;
+	margin-bottom:5px;}
+	
+#login:hover{
+	background:#f7c4c0;
+}
+
+span{
+	margin: 10px 10px 10px 10px;
+}
+
+#idCheckButton {
+	position:relative; 
+	width:270px; 
+	height:38px; 
+	border:1px solid #e59999; 
+	margin:5px auto;	
+	background: white; 
+	font-size:80%;
+	margin-bottom:5px;
+
+	background-color: var(--warningColor);
+	color: white;
+}
+
+#idcheckbutton:hover {
+	background:#f7c4c0;
+	color: black;
+}
+
+#id_ok {
+	color:#fff; display: none;
+}
+
+#id_already {
+	color:#6A82FB; display: none;
+}
+
+
+
+/*------------------------------------footer--------------------------*/
+#copy{
+	font-size:90%; 
+	text-align:center;
+	}

@@ -18,11 +18,11 @@
             success:function(cnt){
                 console.log("처리 성공");
                 if(cnt != 1) {
-                	$(#id_ok).css("display", "inline-block");
-                	$(#id_already).css("display", "none");
+                	$('#id_ok').css("display", "inline-block");
+                	$('#id_already').css("display", "none");
                 } else {
-                	$(#id_already).css("display", "inline-block");
-                	$(#id_ok).css("display", "none");
+                	$('#id_already').css("display", "inline-block");
+                	$('#id_ok').css("display", "none");
                 }
             },
             error:function(){
@@ -49,8 +49,8 @@
 				<div class="text_box">
 				<input type ="text" name="userid" class="input" oninput="checkId()" placeholder=" 아이디" id="joinId" value="${dto.userid}"></div>
 				<input type="hidden" id="useridcheck" name="idcheck">
-				<span class="material-icons" id="id_ok"> task_alt </span>
-				<span class="material-icons" id="id_already"> cancel </span>
+				<span class="material-icons" id="id_ok" style="color:#00de27"> task_alt </span>
+				<span class="material-icons" id="id_already" style="color:red"> cancel </span>
 				<div class="text_box">
 				<input type="password" name="userpwd" class="input"  placeholder=" 비밀번호" id="joinPwd"></div>
 		<input type="submit" id="login" value="가입">
@@ -75,59 +75,6 @@
 	    </span>
 	    <br><br>
 	</form>
-	
-	<%@ include file="../common/footer.jsp" %>
-	
-		<!-- <script type="text/javascript">
-			function checkJoin() {
-				let phone = document.getElementById("joinPhone").value
-				let email = document.getElementById("joinEmail").value
-				let name = document.getElementById("joinName").value
-				let id = document.getElementById("joinId").value
-				let idcheck = document.getElementById("useridcheck").value
-				let pwd = document.getElementById("joinPwd").value
-
-				if(phone == "") {
-					alert("휴대폰 번호가 입력되지 않았어요")
-					return false
-				}
-				if(email == "") {
-					alert("이메일이 입력되지 않았어요")
-					return false
-				}
-				if(name == "") {
-					alert("이름이 입력되지 않았어요")
-					return false
-				}
-				if(id == "") {
-					alert("아이디가 입력되지 않았어요")
-					return false
-				}
-				if(id != idcheck) {
-					alert("아이디 중복확인을 해 주세요")
-					return false
-				}
-				if(pwd == "") {
-					alert("비밀번호가 입력되지 않았어요")
-					return false
-				}
-				
-				
-				return true
-			}
-			
-			function idCheck() {
-				let id = document.getElementById("joinId")
-				
-				if(id.value == "") {
-					alert("아이디 중복확인을 위해 아이디를 입력해 주세요")
-					id.focus()
-				} else {
-					window.open("spring.do?command=idcheck&id=" + id.value)
-				}
-			} 
-		
-		</script> -->
 	
 </body>
 </html>

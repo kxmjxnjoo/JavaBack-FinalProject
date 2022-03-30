@@ -26,16 +26,15 @@ BEGIN
 END;
 
 --아이디 중복확인
-CREATE OR REPLACE PROCEDURE idCheck(
-    p_userid IN member.userid%TYPE,
-    p_cnt OUT NUMBER
+create or replace PROCEDURE idCheck(
+    p_cnt OUT NUMBER,
+    p_userid IN member.userid%TYPE
 )
 IS 
     v_cnt number(2) := 0;
 BEGIN
     select count(*) into v_cnt from member where userid=p_userid;
     p_cnt := v_cnt;
-        
 END;
 
 --팔로우
@@ -99,3 +98,5 @@ EXCEPTION WHEN OTHERS THEN
     v_result := '0';
     v_result := p_result;
 END;   
+
+

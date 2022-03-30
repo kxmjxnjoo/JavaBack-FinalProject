@@ -1,0 +1,26 @@
+footer {
+    text-align: center;    
+    font-weight: bold;
+
+	margin-top: 150px;
+
+    padding-bottom: 25px;
+}
+
+footer button {
+    border: none;
+    background-color: white;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+}
+
+footer button:hover {
+    background-color: rgb(243, 244, 245)
+}
+
+footer h6 {
+	font-size: 15px;
+	margin: 10px 0px;
+}
