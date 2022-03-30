@@ -9,5 +9,9 @@ public interface IMemberDao {
 
 	void getMember(HashMap<String, Object> paramMap);
 	void insertMember(HashMap<String, Object> paramMap);
+	void idCheck(HashMap<String, Object> paramMap);
+	void insertFollow(HashMap<String, Object> paramMap);
+	void addNotification(HashMap<String, Object> paramMap);
+	void unfollow(HashMap<String, Object> paramMap);
 
 }

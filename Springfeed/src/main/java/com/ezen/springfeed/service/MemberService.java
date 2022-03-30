@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ezen.springfeed.dao.IMemberDao;
 
@@ -17,13 +18,25 @@ public class MemberService {
 		mdao.getMember(paramMap);
 	}
 
-	public int idCheck(String id) {
-		//int cnt = mdao.idCheck(id);
-		return 0;
+	public void idCheck(HashMap<String, Object> paramMap) {
+		mdao.idCheck(paramMap);
 	}
 
+	@Transactional
 	public void insertMember(HashMap<String, Object> paramMap) {
 		mdao.insertMember(paramMap);
+	}
+
+	public void insertFollow(HashMap<String, Object> paramMap) {
+		mdao.insertFollow(paramMap);
+	}
+
+	public void addNotification(HashMap<String, Object> paramMap) {
+		mdao.addNotification(paramMap);
+	}
+
+	public void unfollow(HashMap<String, Object> paramMap) {
+		mdao.unfollow(paramMap);
 	}
 
 }

@@ -20,4 +20,28 @@
 		)}
 	</insert>
 	
+	<select id="idCheck" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{id} )  }
+	</select>
+	
+	<insert id=insertFollow statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+		{  CALL insertFollow( 
+			#{follower}, #{followed}, #{result, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</insert>
+	
+	<insert id=addNotification statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+		{  CALL addNotification( 
+			#{followed}, #{follower}, #{notitype},
+			#{notiresult, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</insert>
+	
+	<delete id=unfollow statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+		{  CALL unfollow( 
+			 #{follower}, #{followed},
+			#{result, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</delete>
+	
 </mapper>

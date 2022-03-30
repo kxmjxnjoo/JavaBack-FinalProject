@@ -27,6 +27,9 @@ public class MemberController {
 	@Autowired
 	MemberService ms;
 	
+	@Autowired
+	
+	
 	//로그인 폼으로
 	@RequestMapping(value="/login/form")
 	public String loginForm() {
@@ -101,11 +104,18 @@ public class MemberController {
     public int idCheck(@RequestParam("joinId") String id) {
     	System.out.println("userIdCheck 진입");
     	System.out.println("전달 받은 id" + id);
-    	//int cnt = ms.idCheck(id);
-    	//System.out.println("확인 결과 : " + cnt );
+    	String userid = id;
     	
-    	return 0;
-       
+    	HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("cnt", 0);
+		paramMap.put("userid", userid);
+		
+    	ms.idCheck(paramMap);
+    	
+    	int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+    	System.out.println("확인 결과 : " + cnt );
+    	
+    	return cnt;
     }
     
     // 회원가입 액션
@@ -148,16 +158,97 @@ public class MemberController {
         return url;
     }
 
-
-    // TODO : implement
+///////////////////////////////////////////////
+    //팔로우도 ajax로 처리해야할 듯 함
+    
+    // 팔로우 
     @RequestMapping("/follow")
-    public String follow() {
-        return "";
+    public String follow(HttpServletRequest request, 
+    		@RequestParam("userid") String userid,
+    		Model model) {
+    	HttpSession session = request.getSession();
+		
+    	String url = "";
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if (loginUser == null) { 
+			url = "member/login";
+		} else {
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("follower", (String) loginUser.get("userid"));
+			paramMap.put("followed", userid);
+			paramMap.put("result", 0);
+			
+			ms.insertFollow(paramMap);
+			
+			int result = Integer.parseInt(paramMap.get("result").toString());
+			
+			if(result == 1) {
+				model.addAttribute("message", userid+"님을 팔로우 했어요");
+				
+				paramMap.put("notitype", 1);
+				paramMap.put("notiresult", 0);
+				
+				ms.addNotification(paramMap);
+				
+			} else {
+				model.addAttribute("message", "오류가 발생했어요:( 다시 시도해주세요.");
+			}
+			url = "redirect:/";
+		}
+    	
+        return url;
     }
 
-    // TODO : implement
+    // 언팔로우
     @RequestMapping("/unfollow")
-    public String unfollow() {
+    public String unfollow(HttpServletRequest request, 
+    		@RequestParam("userid") String userid,
+    		Model model) {
+    	
+    	HttpSession session = request.getSession();
+		
+    	String url = "";
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if (loginUser == null) { 
+			url = "member/login";
+		} else {
+			
+			String follower = (String)loginUser.get("userid");
+			if(!follower.equals(userid)) {
+				HashMap<String, Object> paramMap = new HashMap<String, Object>();
+				paramMap.put("follower", follower);
+				paramMap.put("followed", userid);
+				paramMap.put("result", 0);
+				
+				ms.unfollow(paramMap);
+			}
+			
+		}
         return "";
     }
+    
+    @RequestMapping("/deleteAcount") 
+    public String deleteAcount(HttpServletRequest request,
+    		@RequestParam("userid") String userid) {
+HttpSession session = request.getSession();
+		
+    	String url = "";
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if (loginUser == null) { 
+			url = "member/login";
+		} else {
+			
+			url = "";
+		}
+		
+		return url;
+    }
+    
 }

@@ -26,8 +26,14 @@
 	        <name>ORACLE JDBC Repository</name>
 	        <url>http://maven.jahia.org/maven2</url>
 	    </repository>
+	    
+       <repository>
+	       <id>mesir-repo</id>
+	       <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+	   </repository>
+	   
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,9 +84,9 @@
 
 		<!-- Oracle Cloud DB -->
 		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc10</artifactId>
-			<scope>runtime</scope>
+		    <groupId>com.oracle.ojdbc</groupId>
+		    <artifactId>ojdbc10</artifactId>
+		    <version>19.3.0.0</version>
 		</dependency>
 
 		<dependency>
