@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.ezen.springfeed.service.PostService;
+import com.ezen.springfeed.dto.MemberDto;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,7 +30,8 @@ public class PostController {
 		}
 
 		// Get userid
-		String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+		//String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
+		String userid = "jinkpark";
 
 		// Create paramMap
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
