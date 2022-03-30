@@ -63,11 +63,11 @@ public class MemberController {
     		} 
     		
     		HashMap<String, Object> mvo = list.get(0);
-    		if(mvo.get("PWD") == null) {
+    		if(mvo.get("PASSWORD") == null) {
     			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
     			//고객센터로 연결하는 버튼 모달 만들기
     			
-    		} else if (memberdto.getUserpwd().equals((String)mvo.get("PWD"))) {
+    		} else if (memberdto.getUserpwd().equals((String)mvo.get("PASSWORD"))) {
     			HttpSession session = request.getSession();
     			session.setAttribute("loginUser", mvo);
     			url = "redirect:/";
@@ -244,6 +244,9 @@ HttpSession session = request.getSession();
 		if (loginUser == null) { 
 			url = "member/login";
 		} else {
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			
 			
 			url = "";
 		}

@@ -10,11 +10,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>com.example</groupId>
-	<artifactId>SpM17</artifactId>
+	<groupId>com.ezen</groupId>
+	<artifactId>Springfeed</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_M17_shop</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Springfeed</name>
+	<description>EZEN Final Team Project</description>
 	
 	<properties>
 		<java.version>1.8</java.version>
@@ -26,14 +26,8 @@
 	        <name>ORACLE JDBC Repository</name>
 	        <url>http://maven.jahia.org/maven2</url>
 	    </repository>
-	    
-       <repository>
-	       <id>mesir-repo</id>
-	       <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
-	   </repository>
-	   
 	</repositories>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -84,9 +78,9 @@
 
 		<!-- Oracle Cloud DB -->
 		<dependency>
-		    <groupId>com.oracle.ojdbc</groupId>
-		    <artifactId>ojdbc10</artifactId>
-		    <version>19.3.0.0</version>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc10</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
