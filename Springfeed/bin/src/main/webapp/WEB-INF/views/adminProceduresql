@@ -1,0 +1,60 @@
+create or replace PROCEDURE checkAdmin (
+    p_adminid IN admin.adminid%TYPE,
+    p_rc OUT SYS_REFCURSOR )
+IS 
+BEGIN 
+    OPEN p_rc FOR
+        select * from admin where adminid = p_adminid;
+END;
+
+
+
+create or replace PROCEDURE memberList( 
+    p_userid IN member.userid%TYPE,
+    p_cur OUT SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_cur FOR SELECT * FROM member WHERE userid=p_userid order by indate desc;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE searchMember(
+    p_userid IN member.userid%TYPE,
+    p_name IN member.name%TYPE,
+    p_curvar OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_curvar FOR SELECT * FROM member WHERE userid LIKE '%'||p_userid||'%';
+    OPEN p_curvar FOr SELECT * FROM member WHERE name LIKE '%'||p_name||'%';
+END;
+
+
+
+
+CREATE OR replace PROCEDURE reportList( 
+    p_reported_id IN report.reported_id%TYPE,
+    p_cur OUT SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_cur FOR SELECT * FROM report WHERE reported_id=p_reported_id order by indate desc;
+END;
+
+
+---------------------------------------------------------------------------
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE addQna(
+    p_qna_id IN qna.qna_id%TYPE,
+    p_qna_subject IN qna.qna_subject%TYPE,
+    p_qna_content IN qna.qna_content%TYPE )
+IS
+BEGIN
+    insert into qna(qna_num, qna_id, qna_subject, qna_content)
+    values(qna_seq.nextVal, p_qna_id, p_qna_subject, p_qna_content);
+    commit;
+END;

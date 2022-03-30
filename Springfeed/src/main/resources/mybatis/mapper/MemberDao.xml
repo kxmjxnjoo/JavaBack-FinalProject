@@ -21,7 +21,7 @@
 	</insert>
 	
 	<select id="idCheck" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
-		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{id} )  }
+		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{userid} )  }
 	</select>
 	
 	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">

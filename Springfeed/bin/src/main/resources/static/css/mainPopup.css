@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#popupWindow {
+    position: fixed;
+
+    top: 50px;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#popupBox {
+    width: 30%;
+
+    background-color: white;
+
+    position: relative;
+    left: 35%;
+    top: 30%;    
+
+    border-radius: 10px;
+}
+
+#popupBox button {
+    width: 90%;
+    height: 50px;
+
+    border: none;
+
+    background-color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    position: relative;
+    left: 5%;
+}
+
+#popupBox button:nth-child(1), #popupBox button:nth-child(3) {
+    color: rgb(237, 73, 86);
+}

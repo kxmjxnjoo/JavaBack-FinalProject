@@ -94,13 +94,12 @@ public class MemberController {
     }
     
     
-    //아이디 체크
-    @PostMapping("/join/idCheck")
+    //아이디 체크 
+    @RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
     @ResponseBody
-    public int idCheck(@RequestParam("joinId") String id) {
+    public int idCheck(@RequestParam("userid") String userid) {
     	System.out.println("userIdCheck 진입");
-    	System.out.println("전달 받은 id" + id);
-    	String userid = id;
+    	System.out.println("전달 받은 id = " + userid);
     	
     	HashMap<String, Object> paramMap = new HashMap<>();
 		paramMap.put("cnt", 0);
@@ -124,16 +123,16 @@ public class MemberController {
     	model.addAttribute("reid", reid);
     	String url = "member/join";
     	
-    	if(result.getFieldError("userid")!= null) {
+    	if(result.getFieldError("phone")!= null) {
+            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+         } else if(result.getFieldError("email")!= null) {
+            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+         } else if(result.getFieldError("name")!= null) {
+            model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+         } else if(result.getFieldError("userid")!= null) {
             model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
          } else if(result.getFieldError("userpwd")!= null) {
             model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
-         } else if(result.getFieldError("name")!= null) {
-            model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
-         } else if(result.getFieldError("email")!= null) {
-            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
-         } else if(result.getFieldError("phone")!= null) {
-            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
          } else if(reid==null || (reid != null && !reid.equals(memberdto.getUserid()))) {
  			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다.");
  		}  else {
