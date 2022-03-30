@@ -7,8 +7,28 @@
 	
 	<resultMap id="FaqQnaDao" type="java.util.HashMap"></resultMap>	
 	
-	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL "addQna"( ${qna_id}, #{qna_subject}, #{qna_content} ) }
+	<select id="adminfaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL adminfaqList(
+				#{faq_num}
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+		) }
+	</select>
+
+	<insert id="addFaq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL addFaq( ${faq_num}, #{faq_subject}, #{faq_content} ) }
 	</insert>
+	
+	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL addQna( ${qna_id}, #{qna_subject}, #{qna_content} ) }
+	</insert>
+	
+	<delete id="deleteFaq" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteFaq(  #{faq_num}	) }
+	</delete>
+	
+	<delete id="deleteQna" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteQna(  #{qna_num}	) }
+	</delete>
+	
 	
 </mapper>

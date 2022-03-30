@@ -18,4 +18,8 @@ public interface IAdminDao {
 	void reportList(HashMap<String, Object> paramMap);
 
 	void postReportCheck(HashMap<String, Object> paramMap);
+
+	void storyReportCheck(HashMap<String, Object> paramMap);
+	
+	
 }

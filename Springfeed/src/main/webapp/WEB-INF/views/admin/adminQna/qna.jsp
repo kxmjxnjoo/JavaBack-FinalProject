@@ -44,7 +44,7 @@
 					</c:when>
 					<c:otherwise>
 						"${ qna.qna_reply }"
-					</c:otherwise>
+					</c:otherwise> 
 				</c:choose>
 			
 			></textarea>
