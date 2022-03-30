@@ -13,7 +13,7 @@
 
 
 <div id="topnav">
-	<div id="logo" onclick="location.href='spring.do?command=main'">
+	<div id="logo" onclick="location.href='/'">
 		<img src="/images/springLogoWhite.png">
 	</div>
 	
@@ -28,14 +28,14 @@
 	</form>
 
 	<div id="icons">
-		<i class="material-icons" onclick="location.href='spring.do?command=main'">home</i>
+		<i class="material-icons" onclick="location.href='/'">home</i>
 		
 	  	<c:choose>
 			<c:when test="${ loginUser != null }">
-				<i class="material-icons" onclick="location.href='spring.do?command=message'">send</i>
-				<i class="material-icons" onclick="location.href='spring.do?command=selectPost'">add_box</i>
-				<i class="material-icons" onclick="location.href='spring.do?command=explore'">explore</i>
-				<i class="material-icons" onclick="location.href='spring.do?command=notification'">favorite_border</i>
+				<i class="material-icons" onclick="location.href='/message'">send</i>
+				<i class="material-icons" onclick="location.href='/select'">add_box</i>
+				<i class="material-icons" onclick="location.href='/explore'">explore</i>
+				<i class="material-icons" onclick="location.href='/noti'">favorite_border</i>
 				
 				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
 				onclick="userIcon('${loginUser.userid}');">
