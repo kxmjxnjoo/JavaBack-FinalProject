@@ -19,5 +19,4 @@ public class PostViewDto {
 	private int replyCount;
 	
 	private int isSaved;
-	
 }

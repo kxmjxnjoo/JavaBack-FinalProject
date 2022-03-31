@@ -5,10 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Components
 import Home from './route/Home'
+import Topnav from './components/Topnav'
 
 function App() {
   return (
     <div className="App container">
+		<Topnav/>
 
 		<Router>
 

@@ -1,8 +1,13 @@
 import React from 'react'
 
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const Topnav = () => {
   return (
-    <div>Topnav</div>
+    <nav>
+        Springfeed
+    </nav>
   )
 }
 

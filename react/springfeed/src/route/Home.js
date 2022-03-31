@@ -1,42 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Components
 import Post from '../components/Post'
 
 const Home = () => {
-    const posts = [
-        {
-            userprofile: '',
-            userid: 'JINKPARK',
-            location: '서울시 영등포구',
-            postImage:  'http://picsum.photos/id/100/200/200',
-            likes: 4,
-            isLiked: true,
-            isSaved: true
-        },
-        {
-            userprofile: '',
-            userid: 'JINKPARK',
-            location: '서울시 영등포구',
-            postImage:  'http://picsum.photos/id/200/200/200',
-            likes: 4,
-            isLiked: true,
-            isSaved: false
-        },
-        {
-            userprofile: '',
-            userid: 'JINKPARK',
-            location: '서울시 강남구',
-            postImage:  'http://picsum.photos/id/110/200/200',
-            likes: 1,
-            isLiked: false,
-            isSaved: true
-        }
-    ]
+    const [posts, setPosts] = useState(null)
+    const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
+    useEffect(() => {
+        const headers = new Headers({
+        'Content-Type': 'application/json',
+        });
+
+        fetch('http://localhost:8070/api/post?userid=jinkpark', headers)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                setPosts(data)
+            })
+            .catch((err) => {
+                    setError(true)
+                    alert(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [])
+    
   return (
     <div>
         {
+            isLoading ?
+                "LOADING..."
+            :
+
+            error ? 
+                "ERROR"
+            : 
             posts.map((post) => {
                 return(
                     <Post post={post}/>
