@@ -151,13 +151,11 @@ public class MemberController {
             model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
          } else if(result.getFieldError("userpwd")!= null) {
             model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
-         } else if(reid==null || (reid != null && !reid.equals(memberdto.getUserid()))) {
- 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다.");
- 		}  else {
+         } else {
  			
  			HashMap<String, Object> paramMap = new HashMap<>();
  			paramMap.put("userid",memberdto.getUserid());
- 			paramMap.put("pwd",memberdto.getUserpwd());
+ 			paramMap.put("userpwd",memberdto.getUserpwd());
  			paramMap.put("name",memberdto.getName());
  			paramMap.put("email",memberdto.getEmail());
  			paramMap.put("phone",memberdto.getPhone());
