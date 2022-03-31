@@ -1,5 +1,8 @@
 package com.ezen.springfeed.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,11 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
 
@@ -41,10 +45,10 @@ public class MemberController {
     	String url = "member/login";
     	
     	System.out.println(memberdto.getUserid());
-    	if(result.getFieldError("userid")!= null) {
-    		model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-    	} else if(result.getFieldError("userpwd")!= null) {
-    		model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
+    	if(memberdto.getUserid() == null || memberdto.getUserid().equals("")) {
+    		model.addAttribute("message", "아이디를 입력해주세요");
+    	} else if(memberdto.getUserpwd() == null || memberdto.getUserpwd().equals("")) {
+    		model.addAttribute("message", "비밀번호를 입력해주세요");
     	} else {
     		HashMap<String, Object> paramMap = new HashMap<>();
     		paramMap.put("userid", memberdto.getUserid());
@@ -246,7 +250,7 @@ public class MemberController {
     @RequestMapping("/deleteAcount") 
     public String deleteAcount(HttpServletRequest request,
     		@RequestParam("userid") String userid) {
-HttpSession session = request.getSession();
+    	HttpSession session = request.getSession();
 		
     	String url = "";
 		HashMap<String, Object> loginUser = 
@@ -263,6 +267,57 @@ HttpSession session = request.getSession();
 		}
 		
 		return url;
+    }
+    
+    @RequestMapping("/noti")
+    public ModelAndView Notification(HttpServletRequest request, Model model) {
+    	HttpSession session = request.getSession();
+		
+    	ModelAndView mav = new ModelAndView();
+    	String url = "";
+    	
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if (loginUser == null) { 
+			url = "redirect:/login/form";
+		} else {
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("ref_cursor", null);
+			paramMap.put("userid", loginUser.get("USERID"));
+			ms.getNotification(paramMap);
+			
+			ArrayList<HashMap<String, Object>> notiList 
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			
+			String postImg = "";
+			String replyContent = "";
+			if(notiList != null) {
+				for(HashMap<String, Object> temp : notiList) {
+//					LocalDate now = LocalDate.now();
+//					LocalDate notiDate = ((timeStamp) temp.get("CREATE_DATE")).toLocalDate();
+//					Period period = Period.between(now, notiDate);
+//					long diff = Math.abs(period.getDays());
+//					
+//					if(diff == 0) {
+//						temp.replace("CREATE_DATE", "오늘");
+//					} else if(diff < 30) {
+//						temp.replace("CREATE_DATE", diff+"일 전");
+//					} else if(diff < 365) {
+//						temp.replace("CREATE_DATE", Math.abs(diff / 30) + "달 전");
+//					} else {
+//						temp.replace("CREATE_DATE", "오래 전");
+//					}
+						
+				}
+			}	
+
+			mav.addObject("notiList", notiList);
+			
+			mav.setViewName("noti/noti");	
+		}
+		return mav;
     }
     
 }

@@ -45,4 +45,10 @@
 		)}
 	</delete>
 	
+	<select id="getNotification" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getNotification(
+		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}, 
+		#{userid} )  }
+	</select>
+	
 </mapper>

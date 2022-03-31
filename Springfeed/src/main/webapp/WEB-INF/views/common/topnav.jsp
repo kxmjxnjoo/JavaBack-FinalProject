@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -61,8 +62,8 @@
 <script type="text/javascript">
 	function goLogin() {
 		alert("로그인해주세요")
-		if(confirm("로그인 할까요?")) {
-			location.href="spring.do?command=loginform"
+		if(confirm("로그인 페이지로 이동할까요?")) {
+			location.href="/login/form"
 		}
 	}
 

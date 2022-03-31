@@ -42,4 +42,8 @@ public class MemberService {
 		mdao.phoneCheck(paramMap);
 	}
 
+	public void getNotification(HashMap<String, Object> paramMap) {
+		mdao.getNotification(paramMap);
+	}
+
 }
