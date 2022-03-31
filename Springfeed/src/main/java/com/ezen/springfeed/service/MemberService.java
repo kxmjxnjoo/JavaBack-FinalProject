@@ -38,4 +38,8 @@ public class MemberService {
 		mdao.unfollow(paramMap);
 	}
 
+	public void phoneCheck(HashMap<String, Object> paramMap) {
+		mdao.phoneCheck(paramMap);
+	}
+
 }

@@ -24,6 +24,7 @@
 		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{userid} )  }
 	</select>
 	
+	
 	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL insertFollow( 
 			#{follower}, #{followed}, #{result, mode=OUT, jdbcType=INTEGER } 

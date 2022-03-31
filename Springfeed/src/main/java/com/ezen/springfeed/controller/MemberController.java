@@ -94,24 +94,42 @@ public class MemberController {
     }
     
     
-    //아이디 체크 
+    //회원가입 시 중복, 유효성 체크 
     @RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
     @ResponseBody
-    public int idCheck(@RequestParam("userid") String userid) {
-    	System.out.println("userIdCheck 진입");
-    	System.out.println("전달 받은 id = " + userid);
+    public int idCheck(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    		BindingResult result) {
+
+    	int cnt = 1;
     	
-    	HashMap<String, Object> paramMap = new HashMap<>();
-		paramMap.put("cnt", 0);
-		paramMap.put("userid", userid);
-		
-    	ms.idCheck(paramMap);
-    	
-    	int cnt = Integer.parseInt(paramMap.get("cnt").toString());
-    	System.out.println("확인 결과 : " + cnt );
+    	if(memberdto.getUserid() != null) {
+        	System.out.println("userIdCheck 진입");
+        	System.out.println("전달 받은 id = " + memberdto.getUserid());
+        	String userid = memberdto.getUserid();
+	    	HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("userid", userid);
+			
+	    	ms.idCheck(paramMap);
+	    	
+	    	
+	    	if(result.getFieldError("userid") == null) 
+	    		cnt = Integer.parseInt(paramMap.get("cnt").toString());
+	    	
+	    	System.out.println("확인 결과 : " + cnt );
+    	} else if (memberdto.getEmail() != null) {
+    		if(result.getFieldError("email") == null) cnt = 0;
+    	} else if (memberdto.getPhone() != null) {
+    		if(result.getFieldError("phone") == null) cnt = 0;
+    	} else if (memberdto.getName() != null) {
+    		if(result.getFieldError("name") == null) cnt = 0;
+    	} else if (memberdto.getUserpwd() != null) {
+    		if(result.getFieldError("userpwd") == null) cnt = 0;
+    	}
     	
     	return cnt;
     }
+    
     
     // 회원가입 액션
     @RequestMapping(value="/join", method=RequestMethod.POST)
