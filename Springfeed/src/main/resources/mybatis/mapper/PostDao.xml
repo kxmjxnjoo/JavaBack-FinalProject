@@ -12,14 +12,14 @@
 			parameterType="java.util.HashMap"
 	>
 		{
-			CALL selectPostByUserid(
+			CALL selectPostsByUserid(
 			    #{userid},
 			    #{
 			    	ref_cursor,
 			    	mode=OUT,
 			    	jdbcType=CURSOR,
 			    	javaType=ResultSet,
-			    	resultMap=memberMap
+			    	resultMap=postMap
 			    }
 			)
 		}
@@ -30,14 +30,14 @@
 			parameterType="java.util.HashMap"
 	>
 		{
-			CALL selectPostByNum(
+			CALL selectPostsByNum(
 			    #{postnum},
 			    #{
 			    	ref_cursor,
 			    	mode=OUT,
 			    	jdbcType=CURSOR,
 			    	javaType=ResultSet,
-			    	resultMap=memberMap
+			    	resultMap=postMap
 			    }
 			)
 		}

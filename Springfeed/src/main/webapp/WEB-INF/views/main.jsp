@@ -77,8 +77,8 @@
 		<div id="postFeed">
 		<c:choose>
 			<c:when test="${ postList == null || postList.size() == 0 }">
-				<h1 id="noPostMessage">팔로어 분들의 포스트가 없어요!<br> ${ loginUser.name }님이 올려보시는건 어떠세요?</h1>
-				<button id="noPostButton" onclick="location.href='spring.do?command=postuploadForm'">포스트 올리기</button>
+				<h1 id="noPostMessage">팔로어 분들의 포스트가 없어요!<br> ${ loginUser.userid }님이 올려보시는건 어떠세요?</h1>
+				<button id="noPostButton" onclick="location.href='/post/form'">포스트 올리기</button>
 				
 			</c:when>
 			
@@ -222,7 +222,7 @@
 		</div>
 	</div>
 	
-	<%@ include file="/footer.jsp" %>
+	<%@ include file="./common/footer.jsp" %>
 	
 	<script type="text/javascript">
 		let tmpPostnum = 0
