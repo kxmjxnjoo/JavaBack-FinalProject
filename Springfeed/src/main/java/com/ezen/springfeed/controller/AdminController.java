@@ -9,11 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.dto.Paging;
+import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
 import com.ezen.springfeed.service.PostService;
@@ -34,14 +37,15 @@ public class AdminController {
 	
 	@Autowired
 	FaqQnaService fqs;
-
 	
-	@RequestMapping("/admin/login")
-	public String adminLogin() { 
+	
+
+	@RequestMapping(value="/admin")
+	public String admin() { 
 		return "admin/adminLogin";
-	} 		//move loginForm 
+	} 		// move loginForm 
 
-	
+
 	@RequestMapping("/admin/loginForm")
 	public String adminLogin( HttpServletRequest request, Model model,
 			@RequestParam("adminId") String adminId,
@@ -57,7 +61,7 @@ public class AdminController {
 		
 		if(list.size()==0) {	
 			model.addAttribute("message", "아이디를 확인해주세요");
-			return "admin/adminLoginForm";
+			return "admin/adminLogin";
 		}
 		HashMap<String,Object> resultMap = list.get(0);
 		if(resultMap.get("PWD")==null) {
@@ -66,7 +70,8 @@ public class AdminController {
 		}else if( adminPwd.equals((String)resultMap.get("PWD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-			return "redirect:/adminMembertList";
+			System.out.println("로그인 완");
+			return "admin/adminMembertList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -75,7 +80,7 @@ public class AdminController {
 
 	
 	
-	@RequestMapping("/admin/memberList")
+	@RequestMapping(value="/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -132,10 +137,10 @@ public class AdminController {
 		}
 		return mav;
 	}
-
 	
 	
-	@RequestMapping("/admin/searchMember")
+	
+	@RequestMapping(value="/admin/searchMember")
 	public String searchMember(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
@@ -192,7 +197,7 @@ public class AdminController {
 
 	
 	
-	@RequestMapping("/admin/report")
+	@RequestMapping(value="/admin/reportList")
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -237,12 +242,14 @@ public class AdminController {
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
 			paramMap.put("ref_cursor", null);
-			//as.reportList(paramMap);
+			as.reportList(paramMap);
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 		
 			mav.addObject("reportList", list);
+			paramMap.put("reportList", list);
+			// 둘 중 뭐지?
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
 			mav.setViewName("redirect:/adminReportList");
@@ -252,8 +259,9 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/admin/report/post")
-	public ModelAndView postReportCheck(HttpServletRequest request, Model model) {
+	@RequestMapping(value="/admin/report/post")
+	public ModelAndView postReportCheck( @ModelAttribute("dto")ReportDto reportdto, 
+			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -299,35 +307,52 @@ public class AdminController {
 
 			String postReportCheck = "";
 			paramMap.put("postReportCheck", postReportCheck);
-			//paramMap.put("postReportCheck", postReportCheck);
 			paramMap.put("ref_cursor", null);
-			//as.postReportCheck(paramMap);
+			as.postReportCheck(paramMap);
 			
-			int postNum = Integer.parseInt(request.getParameter("postNum"));
 			int reportNum = Integer.parseInt(request.getParameter("reportNum"));
-			
-			request.setAttribute("postNum", postNum);
+			paramMap.put("reportNum", reportNum);
+			paramMap.put("postNum", reportdto.getPost_num());
 			mav.setViewName("report/postReportCheck");
-			request.setAttribute("reportNum", reportNum);
-			mav.setViewName("redirect:/adminReportList");
+			// check Reporeted post
 		}
+		mav.setViewName("redirect:/adminReportList");
 		return mav;
+		// back admin reportList
+	}
+	
+	
+	
+	@RequestMapping(value="/admin/report/story")
+	public ModelAndView storyReportCheck(@ModelAttribute("dto")ReportDto reportdto, 
+			BindingResult result, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		HashMap<String,Object> paramMap = new HashMap<>();
+		
+		String storyReportCheck = "";
+		paramMap.put("storyReportCheck", storyReportCheck);
+		paramMap.put("ref_cursor", null);
+		as.storyReportCheck(paramMap);
+		
+		int reportNum = Integer.parseInt(request.getParameter("reportNum"));
+		paramMap.put("reportNum", reportNum);
+		paramMap.put("postNum", reportdto.getPost_num());
+		mav.setViewName("report/storyReportCheck");
+		// check Reporeted post
+		
+		mav.setViewName("redirect:/adminReportList");
+		return mav;
+		// back admin reportList
 	}
 	
 	/*
 	
-	@RequestMapping("/admin/report/story")
-	public String storyReportCheck() {
-		return "";
-	}
-	
-	
-	
-	@RequestMapping("/admin/report/handle")
+	@RequestMapping(value="/admin/report/handle")
 	public String handleReport() {
 		return "";
+		
 	}
-
 */
 	
 }

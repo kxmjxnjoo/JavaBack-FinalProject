@@ -9,7 +9,7 @@
 	
 	<select id="checkAdmin" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL checkAdmin( 
-			#{adminID},
+			#{adminId},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}
 		)  }
 	</select>
@@ -45,10 +45,11 @@
 	</select>
 	
 	<select id="postReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL postReportCheck( 
-			##{post_num}, 	#{story_num},  #{reason}, 	#{type}
-			#{ref_cursor , mode=IN, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
-		)  }
+		{  CALL postReportCheck( 	#{post_num}, 	#{reason}, 	#{report_type} 	)  }
+	</select>
+	
+	<select id="storyReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL storyReportCheck( 	#{story_num}, 	#{reason}, 	#{report_type} 	)  }
 	</select>
 
 	

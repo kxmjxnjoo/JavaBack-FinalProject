@@ -13,8 +13,28 @@ public class FaqQnaService {
 	@Autowired
 	IFaqQnaDao fqdao;
 	
+	
+	public void adminFaqList(HashMap<String, Object> paramMap) {
+		fqdao.adminfaqList(paramMap);
+	}
+		
+	public void addFaq(HashMap<String, Object> paramMap) {
+		fqdao.addFaq(paramMap);
+	}
+		
 	public void addQna(HashMap<String, Object> paramMap) {
-	fqdao.addQna(paramMap);
+		fqdao.addQna(paramMap);
 
 	}
+
+	public void deleteFaq(HashMap<String, Object> paramMap) {
+		fqdao.deleteFaq(paramMap);
+	}
+
+	public void deleteQna(HashMap<String, Object> paramMap) {
+		fqdao.deleteQna(paramMap);
+	}
+
+
+
 }

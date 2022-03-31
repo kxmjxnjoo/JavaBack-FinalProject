@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/topnav/topnav.jsp" %> 
-<link rel="stylesheet" href="css/faqDetail.css">
-<script src="script/script.js"></script>
+<%@ include file="../topnav/topnav.jsp" %> 
+<link rel="stylesheet" href="../resources/static/css/admin/faqDetail.css">
+<script src="../resources/static/script/script.js"></script>
 </head>
 <body>
 	<form class="table" name="frm" method="post" action="spring.do?command=qnaWrite">
@@ -17,9 +17,9 @@
 	</table>
 </form><br>
 	<form class="btns">
-	<input type="submit" class="btn" value="작성" class="submit" onClick="location.href='spring.do?command=uploadQna'">
+	<input type="submit" class="btn" value="작성" class="submit" onClick="/admin/addQna'">
 	<input type="reset" class="btn" value="취소" class="reset">
-	<input type="button" class="btn" value="FAQ로 돌아가기" class="submit" onClick="location.href='spring.do?command=faqList'">
+	<input type="button" class="btn" value="FAQ로 돌아가기" class="submit" onClick="/admin/faqList'">
 	</form>
 </body>
 </html>

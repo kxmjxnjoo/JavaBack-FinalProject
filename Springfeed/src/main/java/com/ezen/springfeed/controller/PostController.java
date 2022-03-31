@@ -42,16 +42,17 @@ public class PostController {
 		ps.getPostsByUserid(paramMap);
 		ArrayList<HashMap<String, Object>> postList =
 				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		session.setAttribute("postList", postList);
 
 		// Get follower
 		//ps.getFollowers(paramMap);
-		ArrayList<HashMap<String, Object>> followerList =
-				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		//ArrayList<HashMap<String, Object>> followerList =
+		//		(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
 		// Get Story
 		//ps.getDisplayStories(paramMap);
-		ArrayList<HashMap<String, Object>> storyList =
-				(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		//ArrayList<HashMap<String, Object>> storyList =
+		//		(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
 		return "main";
 	}

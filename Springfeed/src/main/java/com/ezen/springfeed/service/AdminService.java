@@ -36,4 +36,8 @@ public class AdminService {
 	public void postReportCheck(HashMap<String, Object> paramMap) {
 		adao.postReportCheck(paramMap);
 	}
+
+	public void storyReportCheck(HashMap<String, Object> paramMap) {
+		adao.storyReportCheck(paramMap);
+	}
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
-<link rel="stylesheet" href="admin/css/admin.css">
+<%@ include file="../admin/common/admin_submenu.jsp" %>
+<link rel="stylesheet" href="../resources/static/css/admin/admin.css">
 
 <h1>Q&amp;A리스트</h1>
 <span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
+	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 		 
 	<table>
@@ -17,7 +17,7 @@
 		<tr>
 		
 		<c:forEach items="${qnaList}" var="qdto">
-			<tr onclick="location.href='spring.do?command=qnaview&num=${ qdto.qna_num }'" class="qnaItems">
+			<tr onclick="/qnaview&num=${ qdto.qna_num }'" class="qnaItems">
 				<td width="50">${qdto.username}</td>
 				<td width="50">${qdto.qna_id}</td>
 				<td width="50">${qdto.qna_subject}</td>
@@ -73,4 +73,4 @@
 			</c:if>
 		</div>
 
-<%@ include file="/admin/common/footer.jsp"%>
+<%@ include file="../admin/common/footer.jsp"%>

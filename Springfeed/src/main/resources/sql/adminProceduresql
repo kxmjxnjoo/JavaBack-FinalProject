@@ -32,7 +32,6 @@ END;
 
 
 
-
 CREATE OR replace PROCEDURE reportList( 
     p_reported_id IN report.reported_id%TYPE,
     p_cur OUT SYS_REFCURSOR )
@@ -42,9 +41,45 @@ BEGIN
 END;
 
 
+
+
+CREATE OR REPLACE PROCEDURE postReportCheck (
+    p_post_num IN report.p_post_num%TYPE,
+    p_reason IN report.p_reason%TYPE,
+    p_report_type IN report.p_report_type%TYPE )
+IS
+BEGIN
+    insert into report(post_num, reason, report_type)
+    values (p_post_num, p_reason, p_report_type);
+    commit;
+END;
+
+
+
+
+
+
 ---------------------------------------------------------------------------
+create or replace PROCEDURE faqList( 
+    p_faq_num IN faq.faq_num%TYPE,
+    p_cur OUT SYS_REFCURSOR )
+IS
+BEGIN
+    OPEN p_cur FOR SELECT * FROM faq WHERE faq_num=p_faq_num;
+END;
 
 
+
+CREATE OR REPLACE PROCEDURE addFaq(
+    p_faq_num IN faq.faq_num%TYPE,
+    p_faq_subject IN faq.faq_subject%TYPE,
+    p_faq_content IN faq.faq_content%TYPE )
+IS
+BEGIN
+    insert into faq(faq_num, faq_subject, faq_content)
+    values( p_faq_num, p_faq_subject, p_faq_content);
+    commit;
+END;
 
 
 
