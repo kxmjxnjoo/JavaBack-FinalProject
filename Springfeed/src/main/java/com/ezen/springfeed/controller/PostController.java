@@ -30,8 +30,8 @@ public class PostController {
 		}
 
 		// Get userid
-		//String userid = ((MemberDto) session.getAttribute("loginUser")).getUserid();
-		String userid = "jinkpark";
+		String userid = (String) ((HashMap<String, Object>)session.getAttribute("loginUser")).get("USERID");
+		System.out.println(userid);
 
 		// Create paramMap
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
