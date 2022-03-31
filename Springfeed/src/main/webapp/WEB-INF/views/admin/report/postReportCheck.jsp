@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link href="../css/spring.css" rel="stylesheet"> 
 <link href="../css/posting.css" rel="stylesheet"> 
-<link rel="stylesheet" href="admin/css/admin.css">
+<link rel="stylesheet" href="/css/admin/admin.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>

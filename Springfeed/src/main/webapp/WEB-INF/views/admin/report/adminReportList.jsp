@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/admin/css/admin.css">
+<link rel="stylesheet" href="/css/admin/admin.css">
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">(${adminLogin.adminid})님 로그인
@@ -58,29 +58,8 @@
 	</table>
 </form>
 
-	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-	<c:url var="action" value="spring.do?command=ReportList" />
-	
-	<c:if test="${paging.prev}">
-		<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;.
-		
-	</c:if>
-	
-	<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-		<c:choose>
-			<c:when test="${paging.page==index}">
-				<span style="color:red">${index}&nbsp;</span>
-			</c:when>
-			<c:otherwise>
-				<a href="${action}&page=${index}">${index}</a>&nbsp; 
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	
-	<c:if test="${paging.next}">
-		<a href="${action}&page=${paging.endPage+1}">▶</a>&nbsp;
-	</c:if>
-</div>
+<%@ include file="../admin/common/paging.jsp"%>
+
 
 <script type="text/javascript" language="javascript" defer="defer"> 
 

@@ -64,14 +64,14 @@ public class AdminController {
 			return "admin/adminLogin";
 		}
 		HashMap<String,Object> resultMap = list.get(0);
-		if(resultMap.get("PWD")==null) {
+		if(resultMap.get("pwd")==null) {
 			model.addAttribute("message", "다른 관리자에게 문의하세요");
 			return "admin/adminLogin";
-		}else if( adminPwd.equals((String)resultMap.get("PWD"))) {
+		}else if( adminPwd.equals((String)resultMap.get("pwd"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
 			System.out.println("로그인 완");
-			return "admin/adminMembertList";
+			return "redirect:/adminMembertList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -80,7 +80,7 @@ public class AdminController {
 
 	
 	
-	@RequestMapping(value="/admin/memberList")
+	@RequestMapping("/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -132,7 +132,7 @@ public class AdminController {
 			mav.addObject("memberList", list);
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
-			mav.setViewName("admin/adminMemberList");
+			mav.setViewName("/admin/member/adminMemberList");
 		
 		}
 		return mav;
@@ -181,23 +181,23 @@ public class AdminController {
 			//page
 			as.searchMember(paramMap);
 			
-			String searchMem = "";
+			String searchMember = "";
 			if(request.getParameter("searchMameber")!=null) {
-				searchMem = request.getParameter("searchMember");
-				session.setAttribute("searchMember", searchMem);
+				searchMember = request.getParameter("searchMember");
+				session.setAttribute("searchMember", searchMember);
 			} else if(session.getAttribute("searchMem") != null) {
-				searchMem = (String)session.getAttribute("searchMem");
+				searchMember = (String)session.getAttribute("searchMember");
 			} else {
-				session.removeAttribute("searchMem");
-				searchMem="";
+				session.removeAttribute("searchMember");
+				searchMember="";
 			}
 		}
-		return "admin/adminMemberList";
+		return "admin/member/adminMemberList";
 	}
 
 	
 	
-	@RequestMapping(value="/admin/reportList")
+	@RequestMapping("/admin/reportList")
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -252,7 +252,7 @@ public class AdminController {
 			// 둘 중 뭐지?
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
-			mav.setViewName("redirect:/adminReportList");
+			mav.setViewName("admin/report/adminReportList");
 		}
 		return mav;
 	}
@@ -304,7 +304,7 @@ public class AdminController {
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
-
+			
 			String postReportCheck = "";
 			paramMap.put("postReportCheck", postReportCheck);
 			paramMap.put("ref_cursor", null);
@@ -313,7 +313,7 @@ public class AdminController {
 			int reportNum = Integer.parseInt(request.getParameter("reportNum"));
 			paramMap.put("reportNum", reportNum);
 			paramMap.put("postNum", reportdto.getPost_num());
-			mav.setViewName("report/postReportCheck");
+			mav.setViewName("admin/report/postReportCheck");
 			// check Reporeted post
 		}
 		mav.setViewName("redirect:/adminReportList");
@@ -338,7 +338,7 @@ public class AdminController {
 		int reportNum = Integer.parseInt(request.getParameter("reportNum"));
 		paramMap.put("reportNum", reportNum);
 		paramMap.put("postNum", reportdto.getPost_num());
-		mav.setViewName("report/storyReportCheck");
+		mav.setViewName("admin/report/storyReportCheck");
 		// check Reporeted post
 		
 		mav.setViewName("redirect:/adminReportList");

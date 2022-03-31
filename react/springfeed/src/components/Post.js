@@ -10,7 +10,7 @@ import {BsHeart as LikeIcon, BsFillHeartFill as LikeFillIcon, BsChatLeft as Repl
 
 const Post = ({post}) => {
 
-    const {userprofile, userid, location, postImage, likes, isLiked, isSaved} = post
+    const {user_img:userprofile, userid, address:location, post_img:postImage, likeCount:likes, isLiked, isSaved, content} = post
 
     const profileStyle = {
         width: '50px'
@@ -30,10 +30,10 @@ const Post = ({post}) => {
 
                         <div className="row">
                             <div className="col-2">
-                                <img src={userprofile == '' ? defultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle}/>
+                                <img src={userprofile == '' || userprofile == null ? defultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle}/>
                             </div>
                             <div className="col text-left">
-                                <h6>{userid == '' ? 'ERROR' : userid}</h6>
+                                <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>
                                 <h6 className='text-muted '>{location == '' ? 'ERROR' : location}</h6>
                             </div>
                         </div>
@@ -44,7 +44,7 @@ const Post = ({post}) => {
             </div>
 
             <div className="card-body">
-                <img src={postImage == '' ? "http://picsum.photos/200/200" : postImage} alt="" style={postImageStyle}/>
+                <img src={postImage == '' || postImage == null ? "http://picsum.photos/200/200" : postImage} alt="" style={postImageStyle}/>
             </div>
             
             <div className="card-footer h2">
@@ -64,6 +64,7 @@ const Post = ({post}) => {
                     </div>
                 </div>
                 <div className="h2">{ likes } likes</div>
+                <p>{content}</p>
             </div>
 
              <div className="card-footer">
