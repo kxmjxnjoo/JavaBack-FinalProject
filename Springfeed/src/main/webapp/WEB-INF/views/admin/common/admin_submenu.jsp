@@ -4,18 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../resources/static/css/admin/admin.css">
+<link rel="stylesheet" href="/css/admin/admin.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <meta charset="UTF-8">
 <nav id="sub_menu">
 <!-- <h1>Admin Setting</h1>  -->
 <ul>
-	<li><img src ="../resources/static/images/Logo.png" width="63px" class="img" onclick="/admin'"></li>
+	<li><a href="/admin"><img src ="/images/Logo.png" width="63px" class="img"></a></li>
 	<li><a href="/admin/memberList">회원리스트</a></li>
 	<li><a href="/admin/faqList">FAQ리스트</a></li>
 	<li><a href="/admin/qnaList">Q&amp;A리스트</a></li>
-	<li><a href="/admin/faqList">신고리스트</a></li>
+	<li><a href="/admin/reportList">신고리스트</a></li>
 </ul>
 </nav>
 

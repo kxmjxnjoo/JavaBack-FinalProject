@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 로그인</title>
-<link rel="stylesheet" href="../resources/static/css/admin/admin.css">
+<link rel="stylesheet" href="/css/admin/admin.css">
 <script type="text/javascript">
  function workerCheck(){
-	  if(document.frm.adminId.value==""){
+	  if(document.frm.adminId.adminId.value==""){
 	      	alert("아이디를 입력하세요.");
 	      	return false;
 	  }else if(document.frm.adminPwd.value==""){
@@ -21,10 +21,10 @@
 </head>
 <body>
 <article>
-	<form name="frm" id="id_pwd" action="admin/loginForm">
+	<form name="frm" id="id_pwd" method="post" action="/admin/loginForm">
 	<div class="loginForm">
 		<div class="title">아이디</div>
-			<input type="hidden" name="adminid">
+			<input type="hidden" name="adminId">
 			<div class="text_box">
 			<input type ="text" name="adminId" class="input"></div>
 		<div class="title">비밀번호</div>

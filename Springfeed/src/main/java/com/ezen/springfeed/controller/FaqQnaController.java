@@ -1,6 +1,7 @@
 package com.ezen.springfeed.controller;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +47,7 @@ public class FaqQnaController {
 	    	ArrayList<HashMap<String,Object>> list
 	    		= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 	    	mav.addObject("adminfaqList", list);
-	    	mav.setViewName("faq/faqList");
+	    	mav.setViewName("admin/faq/adminFaqList");
 	    }
 		return mav;
 	}
@@ -192,10 +193,10 @@ public class FaqQnaController {
 	@RequestMapping("/qna/delete")
 	public String deleteQna(@RequestParam("qnanum") QnaDto qna_num) {
 			
-			HashMap<String,Object> paramMap = new HashMap<String,Object>();
-			paramMap.put("qnanum", qna_num);
-			fqs.deleteQna(paramMap);
-			
+		HashMap<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("qnanum", qna_num);
+		fqs.deleteQna(paramMap);
+		
 		return "redirect:/qnaList";
 	}
 	
