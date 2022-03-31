@@ -109,7 +109,7 @@ IS
     
 BEGIN
     open p_cur for
-        select n.user_to, n.num, noti_type, n.post_num, p.img as postImg, r.content as replyContent  
+        select n.user_to, n.num, noti_type as notitype, n.post_num, p.img as postImg, r.content as replyContent, n.create_date as create_date  
         from notification n 
             left outer join post p on p.post_num = n.post_num
             left outer join reply r on r.reply_num = n.reply_num    
