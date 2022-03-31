@@ -4,41 +4,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${ loginUser.name }님 프로필 수정</title>
+<title>${ loginUser.NAME }님 프로필 수정</title>
 <link rel="stylesheet" href="/css/editProfile.css">
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="userInfoBox">
 		<div id="editProfileBox">
 			<div id="editProfileBoxContent">				
-				<form name="frm" method="post" enctype="multipart/form-data">
-					
+				<form name="frm" method="post" >
+				<!-- enctype="multipart/form-data" -->
 					<div>
 						<div id="thumbnail">
 							<div id ="image_container" >
-								<img id="userprofile" style="width:250px" src="/images/${ loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img }">
+								<img id="userprofile" style="width:250px" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG }">
 							</div>
 							<label class="input-file-button" for="input-file" onclick="resetImg();">
 							  사진 수정
 							</label>
-							<input type="hidden" name="oldPicture" value="${ loginUser.img }"/>
+							<input type="hidden" name="oldPicture" value="${ loginUser.IMG }"/>
 							<input type="file" name="user_img" id="input-file"  onchange="setThumbnail(event);"/>
 						</div>
 					</div>
 					
-					<h1>${ loginUser.name }님 정보 수정</h1>
+					<h1>${ loginUser.NAME }님 정보 수정</h1>
 				
 					<input type="hidden" name="command" value="editprofile">
 					
-					<input type="text" name="userid" placeholder="${ loginUser.userid } (아이디는 바꿀 수 없어요)" readonly>
-					<input type="text" name="pwd" placeholder="<c:forEach begin="1" end="${ loginUser.password.length() }">*</c:forEach>">
-					<input type="text" name="name" placeholder="${ loginUser.name }">
-					<input type="text" name="email" placeholder="${ loginUser.email }">
-					<input type="text" name="phone" placeholder="${ loginUser.phone }">
-					<textarea name="introduce" placeholder="${ loginUser.introduce }"></textarea>
+					<input type="text" placeholder="${ loginUser.USERID } (아이디는 바꿀 수 없어요)" readonly>
+					<input type="hidden" name="userid" value="${ loginUser.USERID }">
+					<input type="password" name="password" placeholder="<c:forEach begin="1" end="${ loginUser.password.length() }">*</c:forEach>">
+					<input type="text" name="name" value="${ loginUser.NAME }">
+					<input type="text" name="email" value="${ loginUser.EMAIL }">
+					<input type="text" name="phone" value="${ loginUser.PHONE }">
+					<textarea name="introduce" placeholder="${ loginUser.INTRODUCE }">${ loginUser.INTRODUCE }</textarea>
 					
+					<div>${ message }</div>
 					<input type="submit" value="수정완료" onclick="editCheck();">
 				</form>
 			</div>
@@ -52,13 +54,13 @@
 		</div>
 	</div>
 	
-		<%@ include file="/common/footer.jsp" %>
+		<%@ include file="../common/footer.jsp" %>
 	
 	
 	<script type="text/javascript">
 		function withdraw(userid) {
 			if(confirm("정말로 회원탈퇴할까요?")) {
-				location.href = "spring.do?command=withdraw"
+				location.href = "/deleteAcount"
 			}
 		}
 		
@@ -83,7 +85,7 @@
 			let theForm = document.frm;
 			let result = confirm('회원 정보를 수정할까요?');
 			if(result) {
-				theForm.action="spring.do?command=editprofile";
+				theForm.action="/user/edit";
 				theForm.submit();
 			} else {
 				return;

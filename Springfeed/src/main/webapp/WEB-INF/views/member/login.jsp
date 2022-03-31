@@ -22,7 +22,7 @@
 				</div>
 				
 				<div class="text_box">
-					<input type="password" name="userpwd" class="input"  placeholder="비밀번호" id="userpwd">
+					<input type="password" name="password" class="input"  placeholder="비밀번호" id="userpwd">
 				</div>
 		<input type="submit" id="login" value="로그인">
 		

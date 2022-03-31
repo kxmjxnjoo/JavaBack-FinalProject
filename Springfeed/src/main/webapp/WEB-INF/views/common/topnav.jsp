@@ -36,8 +36,12 @@
 				<i class="material-icons" onclick="location.href='/message'">send</i>
 				<i class="material-icons" onclick="location.href='/select'">add_box</i>
 				<i class="material-icons" onclick="location.href='/explore'">explore</i>
-				<i class="material-icons" onclick="location.href='/noti'">favorite_border</i>
-				
+				<i class="material-icons" onclick="location.href='/user/notification'">favorite_border</i>
+				<%-- <c:if test="${ not empty loginUser && loginUser.NOTICOUNT != 0 }">
+					<div class="badge">
+						${ loginUser.NOTICOUNT }
+					</div>
+				</c:if> --%>
 				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
 				onclick="userIcon('${loginUser.userid}');">
 				

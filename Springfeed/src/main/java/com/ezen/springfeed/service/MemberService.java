@@ -46,4 +46,9 @@ public class MemberService {
 		mdao.getNotification(paramMap);
 	}
 
+	@Transactional
+	public void userEdit(HashMap<String, Object> paramMap) {
+		mdao.userEdit(paramMap);
+	}
+
 }

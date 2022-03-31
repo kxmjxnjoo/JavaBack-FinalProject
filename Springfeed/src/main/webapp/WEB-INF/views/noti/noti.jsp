@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${ loginUser.name }님의 알림</title>
+<title>${ loginUser.NAME }님의 알림</title>
 <link rel="stylesheet" href="/css/noti.css">
 </head>
 <body>

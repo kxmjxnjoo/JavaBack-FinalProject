@@ -47,7 +47,7 @@ public class MemberController {
     	System.out.println(memberdto.getUserid());
     	if(memberdto.getUserid() == null || memberdto.getUserid().equals("")) {
     		model.addAttribute("message", "아이디를 입력해주세요");
-    	} else if(memberdto.getUserpwd() == null || memberdto.getUserpwd().equals("")) {
+    	} else if(memberdto.getPassword() == null || memberdto.getPassword().equals("")) {
     		model.addAttribute("message", "비밀번호를 입력해주세요");
     	} else {
     		HashMap<String, Object> paramMap = new HashMap<>();
@@ -67,7 +67,7 @@ public class MemberController {
     			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
     			//고객센터로 연결하는 버튼 모달 만들기
 
-    		} else if (memberdto.getUserpwd().equals((String)mvo.get("PASSWORD"))) {
+    		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
     			HttpSession session = request.getSession();
     			session.setAttribute("loginUser", mvo);
     			url = "redirect:/";
@@ -127,8 +127,8 @@ public class MemberController {
     		if(result.getFieldError("phone") == null) cnt = 0;
     	} else if (memberdto.getName() != null) {
     		if(result.getFieldError("name") == null) cnt = 0;
-    	} else if (memberdto.getUserpwd() != null) {
-    		if(result.getFieldError("userpwd") == null) cnt = 0;
+    	} else if (memberdto.getPassword() != null) {
+    		if(result.getFieldError("password") == null) cnt = 0;
     	}
     	
     	return cnt;
@@ -153,13 +153,13 @@ public class MemberController {
             model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
          } else if(result.getFieldError("userid")!= null) {
             model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-         } else if(result.getFieldError("userpwd")!= null) {
-            model.addAttribute("message", result.getFieldError("userpwd").getDefaultMessage());
+         } else if(result.getFieldError("password")!= null) {
+            model.addAttribute("message", result.getFieldError("password").getDefaultMessage());
          } else {
  			
  			HashMap<String, Object> paramMap = new HashMap<>();
  			paramMap.put("userid",memberdto.getUserid());
- 			paramMap.put("userpwd",memberdto.getUserpwd());
+ 			paramMap.put("password",memberdto.getPassword());
  			paramMap.put("name",memberdto.getName());
  			paramMap.put("email",memberdto.getEmail());
  			paramMap.put("phone",memberdto.getPhone());
@@ -269,7 +269,7 @@ public class MemberController {
 		return url;
     }
     
-    @RequestMapping("/noti")
+    @RequestMapping("/user/notification")
     public ModelAndView Notification(HttpServletRequest request, Model model) {
     	HttpSession session = request.getSession();
 		
@@ -320,4 +320,64 @@ public class MemberController {
 		return mav;
     }
     
+    @RequestMapping("/user/edit/form")
+    public String editUserForm(Model model, HttpServletRequest request) {
+    	MemberDto dto = new MemberDto();
+    	HttpSession session = request.getSession();
+    	
+    	HashMap<String, Object> loginUser 
+    		= (HashMap<String, Object>) session .getAttribute("loginUser");
+    	
+    	if(loginUser == null) 
+    		return "redirect:/login/form";
+    	else {
+	    	dto.setUserid((String) loginUser.get("USERID"));
+	    	dto.setPassword((String) loginUser.get("PASSWORD"));
+	    	dto.setName((String) loginUser.get("NAME"));
+	    	dto.setEmail((String) loginUser.get("EMAIL"));
+	    	dto.setPhone((String) loginUser.get("PHONE"));
+	    	dto.setImg((String) loginUser.get("IMG"));
+	    	dto.setIntroduce((String) loginUser.get("INTRODUCE"));
+	    	
+	    	model.addAttribute("dto", dto);
+    	}
+    	return "member/editProfile";
+    }
+    
+    @RequestMapping("/user/edit")
+    public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    		BindingResult result, HttpServletRequest request, Model model) {
+    	
+    	System.out.println(memberdto.getEmail());
+    	System.out.println(memberdto.getUserid());
+    	System.out.println(memberdto.getName());
+    	System.out.println(memberdto.getPassword());
+    	System.out.println(memberdto.getPhone());
+
+    	String url = "redirect:/user/edit/form";
+    	if(result.getFieldError("password")!= null) {
+            model.addAttribute("message", result.getFieldError("password").getDefaultMessage());
+         } else if(result.getFieldError("name")!= null) {
+             model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+          } else if(result.getFieldError("email")!= null) {
+            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+         }  else if(result.getFieldError("phone")!= null) {
+            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+         } else {
+        		HashMap<String, Object> paramMap = new HashMap<>();
+        		paramMap.put("USERID",memberdto.getUserid());
+     			paramMap.put("PASSWORD",memberdto.getPassword());
+     			paramMap.put("NAME",memberdto.getName());
+     			paramMap.put("EMAIL",memberdto.getEmail());
+     			paramMap.put("PHONE",memberdto.getPhone());
+     			
+     			ms.userEdit(paramMap);
+     			
+     			HttpSession session = request.getSession();
+     			session.setAttribute("loginUser", paramMap);
+     			
+     			url = "redirect:/userPage";
+         }
+    	return url;
+    }
 }

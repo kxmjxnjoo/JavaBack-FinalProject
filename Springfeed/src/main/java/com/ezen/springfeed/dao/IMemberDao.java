@@ -14,5 +14,6 @@ public interface IMemberDao {
 	void unfollow(HashMap<String, Object> paramMap);
 	void phoneCheck(HashMap<String, Object> paramMap);
 	void getNotification(HashMap<String, Object> paramMap);
+	void userEdit(HashMap<String, Object> paramMap);
 
 }

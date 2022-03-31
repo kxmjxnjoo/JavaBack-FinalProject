@@ -21,7 +21,7 @@ public class MemberDto {
 	@NotBlank(message = "비밀번호를 입력하세요") 
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}",
 	message = "비밀번호는 특수문자,영문,숫자를 포함하여 8~16자리로 생성해주세요.")
-	private String userpwd;
+	private String password;
 	
 	@NotNull (message="이름을 입력하세요")
 	@NotEmpty(message="이름을 입력하세요")

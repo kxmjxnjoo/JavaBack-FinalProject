@@ -16,7 +16,7 @@
 	
 	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL insertMember( 
-			#{userid},#{userpwd},#{name},#{email},#{phone}
+			#{userid},#{password},#{name},#{email},#{phone}
 		)}
 	</insert>
 	
@@ -51,4 +51,9 @@
 		#{userid} )  }
 	</select>
 	
+	<update id="userEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userEdit( 
+			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE}
+		)}
+	</update>
 </mapper>
