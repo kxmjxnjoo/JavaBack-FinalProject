@@ -11,3 +11,4 @@
   - react-icon
   - react-intersection-observer
   - redux
+  - axios
