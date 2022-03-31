@@ -9,7 +9,7 @@
 	
 	<select id="checkAdmin" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL checkAdmin( 
-			#{adminID},
+			#{adminId},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}
 		)  }
 	</select>

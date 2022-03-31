@@ -26,8 +26,7 @@ public class FaqQnaController {
 	@Autowired
 	FaqQnaService fqs;
 	
-/*
-	@RequestMapping("/admin/faq")
+	@RequestMapping("/admin/faqList")
 	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -113,7 +112,7 @@ public class FaqQnaController {
 	
 	
 
-	@RequestMapping("/admin/qna")
+	@RequestMapping("/admin/qnaList")
 	public String qnaList() {
 		return "qnaView";
 	}
@@ -206,5 +205,4 @@ public class FaqQnaController {
 	public String faqList() {
 		return "userfaqqna/faq";
 	}
-	*/
 }

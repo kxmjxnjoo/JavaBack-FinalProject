@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
-<link rel="stylesheet" href="admin/css/admin.css">
+<%@ include file="../admin/common/admin_submenu.jsp" %>
+<link rel="stylesheet" href="../resources/static/css/admin/admin.css">
 <script  type="text/javascript">
 function go_search(){
 	if( document.frm.key.value == "" ){
@@ -14,11 +14,11 @@ function go_search(){
 
 <h1>회원리스트</h1>
 <span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
+	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 		 
-<form name="frm" action="spring.do">	
-	<input type="hidden" name="command" value="memberList">
+<form name="frm" value="/admin/memberList">	
+	<input type="hidden" >
 	
 	<input type="text" id="member_search" name="key" value="${key}">
 	<input id="search_btn" type="submit" name="search" value="회원 검색" onClick="return go_search();">
@@ -39,7 +39,7 @@ function go_search(){
 	<!-- 페이지 수 -->
 	<br /><br />
 		<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-			<c:url var="action" value="spring.do?command=adminMemberList" />
+			<c:url var="action" value="/admin/memberList" />
 			<c:if test="${paging.prev}">
 				<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;
 			</c:if>
@@ -60,4 +60,4 @@ function go_search(){
 			</c:if>
 		</div>
 
-<%@ include file="/admin/common/footer.jsp"%>
+<%@ include file="../admin/common/footer.jsp"%>

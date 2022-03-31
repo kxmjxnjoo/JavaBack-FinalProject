@@ -14,7 +14,6 @@ public class FaqQnaService {
 	IFaqQnaDao fqdao;
 	
 	
-	/*
 	public void adminFaqList(HashMap<String, Object> paramMap) {
 		fqdao.adminfaqList(paramMap);
 	}
@@ -35,7 +34,6 @@ public class FaqQnaService {
 	public void deleteQna(HashMap<String, Object> paramMap) {
 		fqdao.deleteQna(paramMap);
 	}
-*/
 
 
 

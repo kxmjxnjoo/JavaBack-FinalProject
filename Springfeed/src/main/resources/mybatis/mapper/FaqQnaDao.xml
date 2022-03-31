@@ -7,6 +7,9 @@
 	
 	<resultMap id="FaqQnaDao" type="java.util.HashMap"></resultMap>	
 	
+	
+	
+	
 	<select id="adminfaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminfaqList(
 				#{faq_num}

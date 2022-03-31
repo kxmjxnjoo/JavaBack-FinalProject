@@ -8,11 +8,11 @@
 <meta charset="UTF-8">
 <title>QNA 답변</title>
 <link rel="stylesheet" href="/admin/css/qnadetail.css">
-<link rel="stylesheet" href="/admin/css/admin.css">
+<link rel="stylesheet" href="../resources/static/css/admin/admin.css">
 </head>
 <body>
 
-	<%@ include file="/admin/common/admin_submenu.jsp" %>
+	<%@ include file="../admin/common/admin_submenu.jsp" %>
 
 	<div id="wrap">
 		<h1 class="mark">Q</h1>
@@ -57,13 +57,13 @@
 	<script type="text/javascript">
 		function deleteQna(num) {
 			if(confirm("QNA를 지우시겠어요?")) {
-				location.href = "spring.do?command=deleteqna&num=" + num
+				location.href = "/deleteqna&num=" + num
 			}
 		}
 	
 	</script>
 
-	<%@ include file="/admin/common/footer.jsp" %>
+	<%@ include file="../admin/common/footer.jsp" %>
 
 </body>
 </html>

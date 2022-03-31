@@ -37,10 +37,11 @@ public class AdminController {
 	
 	@Autowired
 	FaqQnaService fqs;
+	
+	
 
-	/*
-	@RequestMapping("/admin/login")
-	public String adminLogin() { 
+	@RequestMapping(value="/admin")
+	public String admin() { 
 		return "admin/adminLogin";
 	} 		// move loginForm 
 
@@ -60,7 +61,7 @@ public class AdminController {
 		
 		if(list.size()==0) {	
 			model.addAttribute("message", "아이디를 확인해주세요");
-			return "admin/adminLoginForm";
+			return "admin/adminLogin";
 		}
 		HashMap<String,Object> resultMap = list.get(0);
 		if(resultMap.get("PWD")==null) {
@@ -69,7 +70,8 @@ public class AdminController {
 		}else if( adminPwd.equals((String)resultMap.get("PWD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-			return "redirect:/adminMembertList";
+			System.out.println("로그인 완");
+			return "admin/adminMembertList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -78,7 +80,7 @@ public class AdminController {
 
 	
 	
-	@RequestMapping("/admin/memberList")
+	@RequestMapping(value="/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -138,7 +140,7 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/admin/searchMember")
+	@RequestMapping(value="/admin/searchMember")
 	public String searchMember(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
@@ -195,7 +197,7 @@ public class AdminController {
 
 	
 	
-	@RequestMapping("/admin/report")
+	@RequestMapping(value="/admin/reportList")
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -257,7 +259,7 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/admin/report/post")
+	@RequestMapping(value="/admin/report/post")
 	public ModelAndView postReportCheck( @ModelAttribute("dto")ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
@@ -321,7 +323,7 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/admin/report/story")
+	@RequestMapping(value="/admin/report/story")
 	public ModelAndView storyReportCheck(@ModelAttribute("dto")ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
@@ -329,7 +331,7 @@ public class AdminController {
 		HashMap<String,Object> paramMap = new HashMap<>();
 		
 		String storyReportCheck = "";
-		paramMap.put("postReportCheck", postReportCheck);
+		paramMap.put("storyReportCheck", storyReportCheck);
 		paramMap.put("ref_cursor", null);
 		as.storyReportCheck(paramMap);
 		
@@ -344,14 +346,13 @@ public class AdminController {
 		// back admin reportList
 	}
 	
+	/*
 	
-	
-	@RequestMapping("/admin/report/handle")
+	@RequestMapping(value="/admin/report/handle")
 	public String handleReport() {
 		return "";
 		
 	}
 */
-
 	
 }
