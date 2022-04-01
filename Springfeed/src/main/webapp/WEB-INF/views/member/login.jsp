@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>스프링 피드 로그인</title>
 <link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/spring.css">
 <script type="text/javascript" src="/script/member.js"></script>
 </head>
 <body>
@@ -18,11 +19,11 @@
 			<h1>Springfeed</h1><br>
 				<!-- <input type="hidden" name="command" value="login"> -->
 				<div class="text_box">
-					<input type ="text" name="userid" class="input"  placeholder="아이디" id="userid" value="${dto.userid}">
+					<input required type ="text" name="userid" class="input"  placeholder="아이디" id="userid" value="${dto.userid}">
 				</div>
 				
 				<div class="text_box">
-					<input type="password" name="password" class="input"  placeholder="비밀번호" id="userpwd">
+					<input required type="password" name="password" class="input"  placeholder="비밀번호" id="userpwd">
 				</div>
 		<input type="submit" id="login" value="로그인">
 		

@@ -79,11 +79,36 @@
 
 </div>
 
+<div class="message" id="message">
+	${ message }
+</div>
+
+
 <script type="text/javascript">
 
+
+	function disappear() {
+		document.getElementById("message").style.webkitTransform='translateY(-40px)';
+	}
+	
+	function appear() {
+		document.getElementById("message").style.webkitTransform='translateY(40px)';
+	}
+	
 	if("${ message }" != "") {
-		alert("${ message }")
-		${ message = "" }
+		/* alert("${ message }")
+		${ message = "" } */
+		setTimeout(appear, 100); 
+		setTimeout(disappear, 3000); 
+	}
+	
+	
+	if("${ messageConfirm }" != "") {
+		let result = confirm("${ messageConfirm }")
+		if(result) {
+			location.href="${sendUrl}"
+		}
+		
 	}
 	
 	function goSearch() {

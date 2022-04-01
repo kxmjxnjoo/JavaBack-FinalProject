@@ -15,5 +15,7 @@ public interface IMemberDao {
 	void phoneCheck(HashMap<String, Object> paramMap);
 	void getNotification(HashMap<String, Object> paramMap);
 	void userEdit(HashMap<String, Object> paramMap);
+	void deleteAcount(HashMap<String, Object> paramMap);
+	void activateAccount(String userid);
 
 }

@@ -1,4 +1,5 @@
 
+--로그인
 CREATE OR REPLACE PROCEDURE getMember(
     p_userid IN member.userid%TYPE, 
     p_curvar OUT SYS_REFCURSOR
@@ -8,7 +9,6 @@ BEGIN
     OPEN p_curvar FOR SELECT * FROM member WHERE userid=p_userid;
 END;
 
-select * from member;
 
 --회원 추가
 CREATE OR REPLACE PROCEDURE insertMember(
@@ -123,12 +123,33 @@ create or replace PROCEDURE userEdit(
     p_password IN member.password%type,
     p_name IN member.name%type,
     p_email IN member.email%type,
-    p_phone IN member.phone%type
+    p_phone IN member.phone%type,
+    p_introduce IN member.introduce%type
 )
 IS
 BEGIN
-    update member set password=p_password, name=p_name, email=p_email, phone=p_phone
+    update member set password=p_password, name=p_name, email=p_email, phone=p_phone, introduce=p_introduce
     where userid=p_userid;
 END;
 
-    
+--계정 비활성화
+create or replace PROCEDURE deleteAcount(
+    p_userid IN member.userid%type
+)
+IS
+BEGIN
+    update member set useyn = 'n' where userid=p_userid;
+END;
+
+
+--계정 활성화
+create or replace PROCEDURE activateAccount(
+    p_userid IN member.userid%type
+)
+IS
+BEGIN
+    update member set useyn = 'y' where userid=p_userid;
+END;
+
+
+select * from FOLLOW;

@@ -53,7 +53,16 @@
 	
 	<update id="userEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL userEdit( 
-			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE}
+			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE}
 		)}
 	</update>
+	
+	<update id="deleteAcount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL deleteAcount( #{userid} )}
+	</update>
+	
+	<update id="activateAccount" statementType="CALLABLE" parameterType="String">
+		{  CALL activateAccount( #{userid} )}
+	</update>
+	
 </mapper>

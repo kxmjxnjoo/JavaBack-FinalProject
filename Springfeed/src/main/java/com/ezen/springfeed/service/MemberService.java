@@ -51,4 +51,12 @@ public class MemberService {
 		mdao.userEdit(paramMap);
 	}
 
+	public void deleteAcount(HashMap<String, Object> paramMap) {
+		mdao.deleteAcount(paramMap);
+	}
+
+	public void activateAccount(String userid) {
+		mdao.activateAccount(userid);
+	}
+
 }

@@ -49,7 +49,7 @@
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
 				<h3>Springfeed가 마음에 안 드시나요?</h3>
-				<input type="button" value="회원탈퇴" onclick="withdraw()">
+				<input type="button" value="계정 비활성화" onclick="withdraw()">
 			</div>
 		</div>
 	</div>

@@ -67,6 +67,9 @@ public class MemberController {
     			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
     			//고객센터로 연결하는 버튼 모달 만들기
 
+    		}  else if (((String)mvo.get("USEYN")).equals("n") ) {
+    			model.addAttribute("messageConfirm", "비활성화된 계정입니다. 계정을 복구 할까요?");
+    			model.addAttribute("sendUrl", "/user/activate?userid="+memberdto.getUserid());
     		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
     			HttpSession session = request.getSession();
     			session.setAttribute("loginUser", mvo);
@@ -86,6 +89,7 @@ public class MemberController {
         return "redirect:/";
     }
 
+    
     
     //이용약관
     
@@ -247,28 +251,7 @@ public class MemberController {
         return "";
     }
     
-    @RequestMapping("/deleteAcount") 
-    public String deleteAcount(HttpServletRequest request,
-    		@RequestParam("userid") String userid) {
-    	HttpSession session = request.getSession();
 		
-    	String url = "";
-		HashMap<String, Object> loginUser = 
-				(HashMap<String, Object>) session.getAttribute("loginUser");
-		
-		if (loginUser == null) { 
-			url = "member/login";
-		} else {
-			
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			
-			
-			url = "";
-		}
-		
-		return url;
-    }
-    
     @RequestMapping("/user/notification")
     public ModelAndView Notification(HttpServletRequest request, Model model) {
     	HttpSession session = request.getSession();
@@ -370,14 +353,51 @@ public class MemberController {
      			paramMap.put("NAME",memberdto.getName());
      			paramMap.put("EMAIL",memberdto.getEmail());
      			paramMap.put("PHONE",memberdto.getPhone());
+     			paramMap.put("INTRODUCE",memberdto.getIntroduce());
      			
      			ms.userEdit(paramMap);
      			
      			HttpSession session = request.getSession();
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/userPage";
+     			url = "redirect:/post";
          }
     	return url;
+    }
+    
+    @RequestMapping("/deleteAcount")
+    public String deleteAcount(HttpServletRequest request, Model model) {
+    	
+    	String url = "";
+    	
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		
+		if(loginUser == null) 
+			return "redirect:/login/form";
+		else {
+			
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userid", loginUser.get("USERID"));
+			
+			ms.deleteAcount(paramMap);
+			model.addAttribute("message", "계정 비활성화가 완료되었습니다. 다음에 다시 만나요!");
+			
+			return  "member/login";
+		}
+    }
+    
+    //비활성화 해제
+    @RequestMapping("/user/activate")
+    public String activationAccount(HttpServletRequest request, Model model,
+    		@RequestParam("userid") String userid) {
+        HttpSession session = request.getSession();
+        
+        ms.activateAccount(userid);
+        model.addAttribute("message", "계정을 복구했어요! 로그인 후 이용해주세요:)");
+        
+        return "member/login";
+        
     }
 }
