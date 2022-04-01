@@ -1,7 +1,6 @@
 package com.ezen.springfeed.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.dto.FaqDto;
+import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.dto.QnaDto;
+import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
 
 @Controller
@@ -27,6 +28,9 @@ public class FaqQnaController {
 	@Autowired
 	FaqQnaService fqs;
 	
+	@Autowired
+	AdminService as;
+
 	@RequestMapping("/admin/faqList")
 	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -53,11 +57,20 @@ public class FaqQnaController {
 	}
 	
 	
-	@RequestMapping("/faq/add")
-	public String addFaq(HttpServletRequest request, Model model) {
 	
+	@RequestMapping("/faq/add")
+	public ModelAndView addFaq(HttpServletRequest request, Model model) {
 		
-	return "";
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginAdmin
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
+		if (loginAdmin == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			mav.setViewName("admin/faq/faqList");
+		}
+		return mav;
 	}
 	
 
@@ -95,8 +108,18 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/faq/edit/form")
-	public String editFaqForm() {
-		return "editFaq";
+	public ModelAndView editFaqForm(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginAdmin
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
+		HashMap<String,Object> paramMap = new HashMap();
+		if (loginAdmin == null) mav.setViewName("admin/admingLogin");
+	    else {
+	    	fqs.faqEdit(paramMap);
+	    	mav.setViewName("redirect:/faqList");
+	    }
+		return mav;
 	}
 	
 	
@@ -114,8 +137,59 @@ public class FaqQnaController {
 	
 
 	@RequestMapping("/admin/qnaList")
-	public String qnaList() {
-		return "qnaView";
+	public ModelAndView qnaList(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			int page = 1;
+			String key = "";
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+		}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			paramMap.put("key", key);
+			as.getAllCount(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			
+			paramMap.put("startNum", paging.getStartNum());
+			paramMap.put("endNum", paging.getEndNum());
+			paramMap.put("key", key);
+			paramMap.put("ref_cursor", null);
+			fqs.qnaList(paramMap);
+			
+			ArrayList<HashMap<String,Object>> list
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+			mav.addObject("qnaList", list);
+			mav.addObject("paging", paging);
+			mav.addObject("key", key);
+			mav.setViewName("/admin/adminQna/qnaView");
+		}
+		return mav;
 	}
 	
 	
@@ -132,9 +206,17 @@ public class FaqQnaController {
 		return "adminQna/qna";
 	}
 	
+	
+	
 	@RequestMapping("/qna")
-	public String userQna() {
-		return "userFaqQna/qna";
+	public String userQna(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if(loginUser==null) return "member/login";
+		else {
+			return "userFaqQna/qna";
+		}
 	}
 	
 	
@@ -145,8 +227,9 @@ public class FaqQnaController {
 		HashMap<String, Object> loginUser
 			= (HashMap<String, Object>) session.getAttribute("loginUser");
 		if(loginUser==null) return "member/login";
-		
-		return "qna/qnaView";
+		else {
+			return "qna/qnaView";
+		}
 	}
 	
 	
@@ -184,15 +267,24 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/qna/edit")
-	public String editQna() {
-		return "editQna";
+	public ModelAndView editQna(HttpServletRequest request, Model model) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		HashMap<String,Object> paramMap = new HashMap();
+		if (loginUser == null) mav.setViewName("member/login");
+	    else {
+	    	fqs.qnaEdit(paramMap);
+	    	mav.setViewName("redirect:/editQna");
+	    }
+		return mav;
 	}
 	
 	
 	
 	@RequestMapping("/qna/delete")
 	public String deleteQna(@RequestParam("qnanum") QnaDto qna_num) {
-			
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("qnanum", qna_num);
 		fqs.deleteQna(paramMap);

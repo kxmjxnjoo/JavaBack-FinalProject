@@ -23,7 +23,7 @@ const Post = ({post}) => {
     }
 
     return (
-        <div className='card'>
+        <div className='card mb-5'>
             <div className="card-header">
                 <div className="row">
                     <div className="col-10">
@@ -63,8 +63,8 @@ const Post = ({post}) => {
                         
                     </div>
                 </div>
-                <div className="h2">{ likes } likes</div>
-                <p>{content}</p>
+                <div className="h4">{ likes } likes</div>
+                <p className='h5'>{content}</p>
             </div>
 
              <div className="card-footer">

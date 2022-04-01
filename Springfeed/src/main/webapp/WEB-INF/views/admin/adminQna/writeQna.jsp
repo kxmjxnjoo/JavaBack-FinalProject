@@ -4,7 +4,7 @@
 <script src="../resources/static/script/script.js"></script>
 </head>
 <body>
-	<form class="table" name="frm" method="post" action="spring.do?command=qnaWrite">
+	<form class="table" name="frm" method="post" action="/qnaWrite">
 <h1 id="info" style="text-align:center;">궁금하신게 있다면 질문해주세요</h1>
 	<br><br>
 	<table>

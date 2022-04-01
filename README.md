@@ -10,3 +10,6 @@
   - react-bootstrap
   - react-icon
   - react-intersection-observer
+  - redux
+  - axios
+  - context api

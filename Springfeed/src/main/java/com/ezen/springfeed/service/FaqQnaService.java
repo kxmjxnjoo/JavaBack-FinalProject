@@ -35,6 +35,18 @@ public class FaqQnaService {
 		fqdao.deleteQna(paramMap);
 	}
 
+	public void faqEdit(HashMap<String, Object> paramMap) {
+		fqdao.faqEdit(paramMap);
+	}
+
+	public void qnaEdit(HashMap<String, Object> paramMap) {
+		fqdao.qnaEdit(paramMap);
+	}
+
+	public void qnaList(HashMap<String, Object> paramMap) {
+		fqdao.qnaList(paramMap);
+	}
+
 
 
 }

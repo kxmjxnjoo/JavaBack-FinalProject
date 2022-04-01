@@ -40,4 +40,16 @@ public class AdminService {
 	public void storyReportCheck(HashMap<String, Object> paramMap) {
 		adao.storyReportCheck(paramMap);
 	}
+
+	public void deletePost(HashMap<String, Object> paramMap) {
+		adao.deletePost(paramMap);
+	}
+
+	public void deleteStory(HashMap<String, Object> paramMap) {
+		adao.deleteStory(paramMap);
+	}
+
+	public void blockUser(HashMap<String, Object> paramMap) {
+		adao.blockUser(paramMap);
+	}
 }

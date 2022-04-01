@@ -5,7 +5,7 @@
 
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">(${adminLogin.adminid})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="location.href='spring.do?command=logout'"></span>
+	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 	
 <form name="frm" method="post">		
@@ -41,13 +41,13 @@
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${rdto.type.equals('post')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openPost(${rdto.post_num}, ${rdto.report_num});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="/postReportCheck(${rdto.post_num}, ${rdto.report_num});">
 								</c:when>
 								<c:when test="${rdto.type.equals('story')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openStory(${rdto.story_num}, ${rdto.report_num});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="/stotyReportCheck(${rdto.post_num}, ${rdto.report_num});">
 								</c:when>
 								<c:otherwise>
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openUserPage('${rdto.reported_id}', ${rdto.report_num});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="/openUserPage('${rdto.reported_id}', ${rdto.report_num});">
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>

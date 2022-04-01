@@ -17,6 +17,12 @@ public interface IFaqQnaDao {
 
 	void deleteQna(HashMap<String, Object> paramMap);
 
+	void faqEdit(HashMap<String, Object> paramMap);
+
+	void qnaEdit(HashMap<String, Object> paramMap);
+
+	void qnaList(HashMap<String, Object> paramMap);
+	
 
 
 }

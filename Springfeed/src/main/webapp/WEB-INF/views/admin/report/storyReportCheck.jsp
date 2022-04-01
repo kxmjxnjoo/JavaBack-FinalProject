@@ -59,7 +59,7 @@
 function handleReport(story_num, report_num){
 	let result = confirm("신고 받은 게시물을 삭제하시겠습니까?");
 	if(result) {
-		location.href = "spring.do?command=handleReport&story_num="+story_num+"&report_num="+report_num;
+		location.href = "/handleReport&story_num="+story_num+"&report_num="+report_num;
 	}
 }
 </script>
