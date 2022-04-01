@@ -39,7 +39,7 @@ public class AdminController {
 	@Autowired
 	FaqQnaService fqs;
 	
-
+	/*
 	@RequestMapping(value="/admin")
 	public String admin() { 
 		return "admin/adminLogin";
@@ -380,4 +380,5 @@ public class AdminController {
 		}
 		return "redirect:/admin/report/adminReportList";
 	}
+	*/
 }

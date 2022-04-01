@@ -30,7 +30,7 @@ public class FaqQnaController {
 	
 	@Autowired
 	AdminService as;
-	
+
 	@RequestMapping("/admin/faqList")
 	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();

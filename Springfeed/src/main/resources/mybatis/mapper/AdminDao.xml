@@ -6,7 +6,8 @@
 <mapper namespace="com.ezen.springfeed.dao.IAdminDao">
 	
 	<resultMap id="AdminMap" type="java.util.HashMap"></resultMap>	
-	
+
+
 	<select id="checkAdmin" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL checkAdmin( 
 			#{adminid},
@@ -70,5 +71,6 @@
 		  #{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
 		) }
 	</delete>
-	
+
+
 </mapper>

@@ -7,10 +7,6 @@
 	
 	<resultMap id="FaqQnaDao" type="java.util.HashMap"></resultMap>	
 	
-	<insert id = "addFaq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL insertCart( #{id}, #{pseq}, #{quantity} ) }	
-	</insert>
-	
 	<select id="adminfaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminfaqList(
 				#{faq_num}
@@ -51,6 +47,6 @@
 			#{qna_id},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
 		)  }
-	
+	</select>
 	
 </mapper>
