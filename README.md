@@ -12,3 +12,4 @@
   - react-intersection-observer
   - redux
   - axios
+  - context api
