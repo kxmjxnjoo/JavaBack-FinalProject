@@ -20,7 +20,7 @@
 			<div class="contents">
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
-					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'"> 
+					<div id="userprofile" onclick="/userpage&userid=${PostDto.userid}'"> 
 						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
 					<b>${PostDto.userid}</b>  
@@ -33,7 +33,7 @@
 				<!-- 작성한 글 내용 -->
 				<div id="content"> 
 					<div id="posting_wrap">
-					<div id="userprofile" onclick="location.href='spring.do?command=userpage&userid=${PostDto.userid}'">
+					<div id="userprofile" onclick="/userpage&userid=${PostDto.userid}'">
 						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
 						
 						<label>${PostDto.userid}</label>

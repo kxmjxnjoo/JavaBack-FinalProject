@@ -20,7 +20,7 @@
 	
 	<div id="userDetail">
 		<input type="button" value="신고 처리 하기" onclick="handleReport('${user.userid}',${report_num});"> 
-		<input type="button" value="유저페이지로 가기" onclick="location.href='spring.do?command=userpage&userid=${user.userid}'">
+		<input type="button" value="유저페이지로 가기" onclick="/userpage&userid=${user.userid}'">
 		<div id="userName">
 			<h1>${ user.name }</h1>
 		
@@ -43,7 +43,7 @@
 	<c:when test="${ posts != null }">
 		<div id="postList" style="margin-bottom:50px;">
 			<c:forEach var="post" items="${ posts }">
-				<div class="userPost" style="width:26%;"onclick="location.href='spring.do?command=postDetail&post_num=${ post.postNum }'">
+				<div class="userPost" style="width:26%;"onclick="/postDetail&post_num=${ post.postNum }'">
 					<img src="../images/${ post.postImg }">
 					
 					<div class="userPostInfo">
@@ -69,7 +69,7 @@
 function handleReport(userid, report_num){
 	let result = confirm("신고 받은 유저를 차단하시겠습니까?");
 	if(result) {
-		location.href = "spring.do?command=handleReport&userid="+userid+"&report_num="+report_num;
+		location.href = "/handleReport&userid="+userid+"&report_num="+report_num;
 	}
 }
 

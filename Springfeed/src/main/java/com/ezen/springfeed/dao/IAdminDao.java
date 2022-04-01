@@ -20,6 +20,10 @@ public interface IAdminDao {
 	void postReportCheck(HashMap<String, Object> paramMap);
 
 	void storyReportCheck(HashMap<String, Object> paramMap);
+
+	void deletePost(HashMap<String, Object> paramMap);
+
+	void deleteStory(HashMap<String, Object> paramMap);
 	
-	
+	void blockUser(HashMap<String, Object> paramMap);
 }

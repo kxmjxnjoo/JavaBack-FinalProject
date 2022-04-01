@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
@@ -37,7 +38,6 @@ public class AdminController {
 	
 	@Autowired
 	FaqQnaService fqs;
-	
 	
 
 	@RequestMapping(value="/admin")
@@ -133,7 +133,6 @@ public class AdminController {
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
 			mav.setViewName("/admin/member/adminMemberList");
-		
 		}
 		return mav;
 	}
@@ -310,9 +309,9 @@ public class AdminController {
 			paramMap.put("ref_cursor", null);
 			as.postReportCheck(paramMap);
 			
-			int reportNum = Integer.parseInt(request.getParameter("reportNum"));
-			paramMap.put("reportNum", reportNum);
-			paramMap.put("postNum", reportdto.getPost_num());
+			int report_num = Integer.parseInt(request.getParameter("reportNum"));
+			paramMap.put("report_num", report_num);
+			paramMap.put("post_num", reportdto.getPost_num());
 			mav.setViewName("admin/report/postReportCheck");
 			// check Reporeted post
 		}
@@ -335,9 +334,9 @@ public class AdminController {
 		paramMap.put("ref_cursor", null);
 		as.storyReportCheck(paramMap);
 		
-		int reportNum = Integer.parseInt(request.getParameter("reportNum"));
-		paramMap.put("reportNum", reportNum);
-		paramMap.put("postNum", reportdto.getPost_num());
+		int report_num = Integer.parseInt(request.getParameter("reportNum"));
+		paramMap.put("report_num", report_num);
+		paramMap.put("post_num", reportdto.getPost_num());
 		mav.setViewName("admin/report/storyReportCheck");
 		// check Reporeted post
 		
@@ -346,13 +345,39 @@ public class AdminController {
 		// back admin reportList
 	}
 	
-	/*
+	
 	
 	@RequestMapping(value="/admin/report/handle")
-	public String handleReport() {
-		return "";
+	public String handleReport(HttpServletRequest request, 
+			@ModelAttribute("rdto") ReportDto reportdto,
+			@ModelAttribute("mdto") MemberDto memberdto) {
 		
+		int report_num = Integer.parseInt(request.getParameter("report_num"));
+		System.out.println(report_num);
+		int result = 0;
+		ReportDto rdto = new ReportDto();
+		MemberDto mdto = new MemberDto();
+		HashMap<String,Object> paramMap = new HashMap<>();
+		
+		if(request.getParameter("post_num") != null) {
+			int post_num = Integer.parseInt(request.getParameter("post_num"));
+			paramMap.put("report_num", report_num);
+			request.setAttribute("post_num", post_num);
+			request.setAttribute("ReportDto", rdto);
+			as.deletePost(paramMap);
+			
+		} else if(request.getParameter("story_num") != null ) {
+			int story_num = Integer.parseInt(request.getParameter("story_num"));
+			paramMap.put("report_num", report_num);
+			request.setAttribute("story_num", story_num);
+			as.deleteStory(paramMap);
+		} else {
+			String userid = request.getParameter("userid");
+			paramMap.put("report_num", report_num);
+			request.setAttribute("userid", userid);
+			as.blockUser(paramMap);
+			
+		}
+		return "redirect:/admin/report/adminReportList";
 	}
-*/
-	
 }
