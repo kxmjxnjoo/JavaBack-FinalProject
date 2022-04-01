@@ -13,11 +13,11 @@ function go_search(){
 </script>
 
 <h1>회원리스트</h1>
-<span id="info">${adminLogin.name}(${adminLogin.adminid})님 로그인
+<span id="info">${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 		 
-<form name="frm" value="/admin/memberList">	
+<form name="frm" action="/admin/memberList">	
 	<input type="hidden" >
 	
 	<input type="text" id="member_search" name="key" value="${key}">

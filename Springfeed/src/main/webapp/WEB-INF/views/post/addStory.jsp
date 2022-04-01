@@ -7,16 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>스토리 작성</title>
-<link href="../css/spring.css" rel="stylesheet"> 
-<link href="../css/posting.css" rel="stylesheet"> 
-<link href="../css/story.css" rel="stylesheet"> 
+<link href="/css/spring.css" rel="stylesheet"> 
+<link href="/css/posting.css" rel="stylesheet"> 
+<link href="/css/story.css" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body>
-<%@ include file="/topnav/topnav.jsp" %>
+<%@ include file="../common/topnav.jsp" %>
 
-<form name="frm" method="post" enctype="multipart/form-data">
+<form name="frm" method="post">
+<!-- enctype="multipart/form-data" -->
 	<div class="wrap">
 		<div id="postingStory" >
 			<div id="postingTitle">

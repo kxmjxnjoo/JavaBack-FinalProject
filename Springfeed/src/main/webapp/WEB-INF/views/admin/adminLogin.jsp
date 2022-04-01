@@ -22,15 +22,14 @@
 <body>
 <article>
 	<form name="frm" id="id_pwd" method="post" action="/admin/loginForm">
-	<div class="loginForm">
-		<div class="title">아이디</div>
-			<input type="hidden" name="adminId">
-			<div class="text_box">
-			<input type ="text" name="adminId" class="input"></div>
-		<div class="title">비밀번호</div>
-			<div class="text_box">
-			<input type="password" name="adminPwd" class="input"></div>
-		</div>
+		<div class="loginForm">
+			<div class="title">아이디</div>
+				<div class="text_box">
+				<input type ="text" name="adminId" class="input"></div>
+			<div class="title">비밀번호</div>
+				<div class="text_box">
+				<input type="password" name="adminPwd" class="input"></div>
+			</div>
 		<div style="color:red;">${message}</div>
 		<input type="submit" id="login" value="로그인" onClick="return workerCheck();">
 	</form>

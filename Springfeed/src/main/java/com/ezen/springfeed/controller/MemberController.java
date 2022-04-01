@@ -327,6 +327,11 @@ public class MemberController {
     	return "member/editProfile";
     }
     
+    
+    
+    
+    
+    
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model) {
@@ -374,9 +379,10 @@ public class MemberController {
     	HashMap<String, Object> loginUser 
 		= (HashMap<String, Object>) session .getAttribute("loginUser");
 		
-		if(loginUser == null) 
-			return "redirect:/login/form";
-		else {
+		if(loginUser == null) {
+			model.addAttribute("로그인 해주세요.");
+			return "member/login";
+		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("userid", loginUser.get("USERID"));
@@ -400,4 +406,27 @@ public class MemberController {
         return "member/login";
         
     }
+    
+    //블락
+    @RequestMapping("/block")
+    public String block(HttpServletRequest request, Model model, 
+    		@RequestParam("userid") String userid) {
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			model.addAttribute("로그인 해주세요.");
+			return "member/login";
+		} else {
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userid", loginUser.get("USERID"));
+			paramMap.put("blocked", userid);
+			
+			model.addAttribute("message", userid+"님을 차단했어요.");
+			return "";
+		}
+    }
+
+
 }

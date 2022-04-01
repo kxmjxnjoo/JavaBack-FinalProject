@@ -50,6 +50,8 @@ public class AdminController {
 			@RequestParam("adminId") String adminId,
 			@RequestParam("adminPwd") String adminPwd) {
 		
+		System.out.println(adminId);
+		System.out.println(adminPwd);
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("ref_cursor", null);
 		paramMap.put("adminId", adminId);
@@ -62,15 +64,16 @@ public class AdminController {
 			model.addAttribute("message", "아이디를 확인해주세요");
 			return "admin/adminLogin";
 		}
+		
 		HashMap<String,Object> resultMap = list.get(0);
-		if(resultMap.get("pwd")==null) {
+		if(resultMap.get("PASSWORD")==null) {
 			model.addAttribute("message", "다른 관리자에게 문의하세요");
 			return "admin/adminLogin";
-		}else if( adminPwd.equals((String)resultMap.get("pwd"))) {
+		}else if( adminPwd.equals((String)resultMap.get("PASSWORD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
 			System.out.println("로그인 완");
-			return "redirect:/adminMembertList";
+			return "redirect:/admin/memberList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -85,7 +88,7 @@ public class AdminController {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginAdmin") == null) {
-			mav.setViewName("admin/admingLogin");
+			mav.setViewName("admin/adminLogin");
 		} else {
 			int page = 1;
 			String key = "";

@@ -96,8 +96,6 @@
 	}
 	
 	if("${ message }" != "") {
-		/* alert("${ message }")
-		${ message = "" } */
 		setTimeout(appear, 100); 
 		setTimeout(disappear, 3000); 
 	}
