@@ -19,7 +19,7 @@ import logo from '../images/logo.png'
 import '../common.css'
 import profile from '../images/tmpUserIcon.png'
 
-const Topnav = () => {
+const Topnav = ({isLoggedIn, user}) => {
     const logoStyle = {
         width: '30px',
         filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -51,7 +51,6 @@ const Topnav = () => {
 					<div className="row">
 						<div className="col-10">
 							<input type="text" className="form-control mr-sm-2 col-5" placeholder='검색' aria-label="Search"/>
-
 						</div>
 
 						<div className="col-2">
@@ -94,7 +93,11 @@ const Topnav = () => {
 
 					<li className="nav-item">
 						<a href="/user" className="nav-link">
-							<img src={profile} alt="" className="round-circle"  style={profileStyle}/>
+							<img src={
+									isLoggedIn ?
+										user.img :	
+										profile
+							} alt="" className="round-circle"  style={profileStyle}/>
 						</a>
 					</li>
 
@@ -111,12 +114,3 @@ const Topnav = () => {
 }
 
 export default Topnav
-
-/*
-			<form action="/search" className="form-inline my-2 my-lg-0">
-
-					<input type="text" className="form-control mr-sm-2" placeholder='검색' aria-label="Search"/>
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-			</form>
-*/
