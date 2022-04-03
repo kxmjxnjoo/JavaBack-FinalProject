@@ -1,11 +1,11 @@
 package com.ezen.springfeed.controller;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Period;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class MemberController {
@@ -327,8 +329,30 @@ public class MemberController {
     	return "member/editProfile";
     }
     
+    @Autowired
+    ServletContext context;
     
     
+    @RequestMapping("/uploadImg")
+	@ResponseBody
+	public Map<String, Object> fileup(Model model, HttpServletRequest request) {
+		
+		String savePath = context.getRealPath("/WEB-INF/images");
+		HashMap<String,Object> resultMap = new HashMap<>();
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, savePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+			);
+			resultMap.put("STATUS", 1);
+			System.out.println(multi.getFilesystemName("user_img"));
+			resultMap.put("FILENAME", multi.getFilesystemName("user_img"));
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return resultMap;
+	}
     
     
     
