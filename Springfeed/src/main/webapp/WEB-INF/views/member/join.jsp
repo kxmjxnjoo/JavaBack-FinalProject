@@ -80,7 +80,7 @@
         $.ajax({
             url:'/join/idCheck', //Controller에서 인식할 주소
             type:'post', //POST 방식으로 전달
-            data:{userpwd:pwd},
+            data:{password:pwd},
             success:function(cnt){
                 console.log("처리 성공");
                 if(cnt != 1) {
@@ -155,11 +155,11 @@
 					<span class="material-icons" id="id_already" style="color:red"> cancel </span>
 				</div>
 				<div class="text_box" id="pwd_box">
-					<input type="password" name="userpwd" class="input" oninput="checkPwd();" 
+					<input type="password" name="password" class="input" oninput="checkPwd();" 
 					placeholder=" 비밀번호(영문,숫자,특수문자 포함 8~16자리)"  id="joinPwd">
 					<div>
 						<span class="material-icons" id="id_ok" style="color:#00de27"> task_alt </span>
-						<span id="message" style="display:none; float:left; color:red" >영문,숫자,특수문자 포함 8~16자리</span>
+						<!-- <span id="message" style="display:none; float:left; color:red" >영문,숫자,특수문자 포함 8~16자리</span> -->
 						<span class="material-icons" id="id_already" style="float:left; color:red "> cancel </span>
 					</div>
 				</div>

@@ -18,28 +18,45 @@
 	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount(
 				#{adminID},
+<<<<<<< HEAD
 				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+				#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 			)  } 
 	</select>
 	
 <!-- 	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL memberList( 
 			#{userid},
+<<<<<<< HEAD
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		)  }
 	</select> -->
 	
 	<select id="searchMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL searchMember(
+<<<<<<< HEAD
 			${adminId}, #{name}
 			#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+			${userid}, #{name}
+			#{ref_cursor1, mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		) }
 	</select>
 	
 	<select id="reportList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL reportList( 
 			#{reporter_id},  #{reported_id},  #{post_num}, 	#{story_num},  #{reason}, 	#{type}
+<<<<<<< HEAD
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		)  }
 	</select>
 	
@@ -61,14 +78,22 @@
 	<delete id="deleteStory" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{ CALL deleteStory(  
 			#{story_num},
+<<<<<<< HEAD
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		) }
 	</delete>
 	
 	<delete id="blockUser" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{ CALL blockUser(
 		  #{userid}
+<<<<<<< HEAD
 		  #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+=======
+		  #{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+>>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		) }
 	</delete>
 	

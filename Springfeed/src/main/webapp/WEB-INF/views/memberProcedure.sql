@@ -152,4 +152,20 @@ BEGIN
 END;
 
 
-select * from FOLLOW;
+--ºí¶ô
+
+CREATE TABLE BLOCKMEMBER(
+    USERID VARCHAR2(20) REFERENCES MEMBER(USERID) ON DELETE CASCADE,
+    BLOCKED VARCHAR2(20) REFERENCES MEMBER(USERID) ON DELETE CASCADE
+)
+
+--checkAdmin
+create or replace PROCEDURE checkAdmin (
+    p_adminid IN admin.adminid%TYPE,
+     p_rc OUT SYS_REFCURSOR
+     )
+IS 
+BEGIN 
+    OPEN p_rc FOR
+        select * from admin where adminid = p_adminid;
+END;
