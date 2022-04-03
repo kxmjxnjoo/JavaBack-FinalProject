@@ -72,12 +72,7 @@ public class AdminController {
 		}else if( adminPwd.equals((String)resultMap.get("PASSWORD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-<<<<<<< HEAD
 			return "redirect:/admin/membertList";
-=======
-			System.out.println("로그인 완");
-			return "redirect:/admin/memberList";
->>>>>>> 26ef94561369dd429e0b432ad9c3fc7c61ff6fa9
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";

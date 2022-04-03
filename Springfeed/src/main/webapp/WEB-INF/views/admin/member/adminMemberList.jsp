@@ -23,7 +23,7 @@ function go_search(){
 	<input type="text" action="/admin/searchMember" name="key" value="${key}">
 	<input id="search_btn" type="submit" name="search" value="회원 검색" onClick="return go_search();">
 
-</form>
+
 
 	<table>
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
@@ -34,7 +34,6 @@ function go_search(){
 					<td width="50"><fmt:formatDate value="${mdto.indate}"/></td>
 		</c:forEach>
 	</table>
-
-	<!-- 페이지 수 -->
+</form>
 <%@ include file="../admin/common/paging.jsp"%>
 <%@ include file="../admin/common/footer.jsp"%>
