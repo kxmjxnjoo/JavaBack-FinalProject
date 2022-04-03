@@ -100,7 +100,7 @@ public class FaqQnaController {
 		    	paramMap.put("subject", faqdto.getFaq_subject());
 		    	paramMap.put("content", faqdto.getFaq_content());
 		    	fqs.addFaq(paramMap);
-		    	mav.setViewName("redirect:/faqList");
+		    	mav.setViewName("redirect:/admin/faqList");
 		    }
 			return mav;
 		}
@@ -117,7 +117,7 @@ public class FaqQnaController {
 		if (loginAdmin == null) mav.setViewName("admin/admingLogin");
 	    else {
 	    	fqs.faqEdit(paramMap);
-	    	mav.setViewName("redirect:/faqList");
+	    	mav.setViewName("redirect:/admin/faqList");
 	    }
 		return mav;
 	}
@@ -131,7 +131,7 @@ public class FaqQnaController {
 			paramMap.put("faqnum", faq_num);
 			fqs.deleteFaq(paramMap);
 			
-		return "redirect:/adminFaqList";
+		return "redirect:/admin/faqList";
 	}
 	
 	
@@ -246,11 +246,11 @@ public class FaqQnaController {
 	    else {
 	    	if(result.getFieldError("subject") != null) {
 	    		mav.addObject("message", "제목을 입력하세요");
-	    		mav.setViewName("qna/qnaWrite");
+	    		mav.setViewName("qna/qna/add");
 	    		return mav;
 	    	} else if(result.getFieldError("content") != null) {
 	    		mav.addObject("message", "내용을 입력하세요");
-	    		mav.setViewName("redirect:/addQna");
+	    		mav.setViewName("qna/qna/add");
 	    		return mav;
 	    	}
 	    	
@@ -259,7 +259,7 @@ public class FaqQnaController {
 	    	paramMap.put("subject", qnadto.getQna_subject());
 	    	paramMap.put("content", qnadto.getQna_content());
 	    	//fqs.addQna(paramMap);
-	    	mav.setViewName("redirect:/qnaList");
+	    	mav.setViewName("redirect:/qna");
 	    }
 		return mav;
 	}
@@ -276,7 +276,7 @@ public class FaqQnaController {
 		if (loginUser == null) mav.setViewName("member/login");
 	    else {
 	    	fqs.qnaEdit(paramMap);
-	    	mav.setViewName("redirect:/editQna");
+	    	mav.setViewName("redirect:/qna/edit");
 	    }
 		return mav;
 	}
