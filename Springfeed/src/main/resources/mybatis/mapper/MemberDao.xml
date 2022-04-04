@@ -24,6 +24,10 @@
 		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{userid} )  }
 	</select>
 	
+	<select id="getFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getFollow(
+		#{followed}, #{follower}, #{result, mode=OUT, jdbcType=INTEGER }  )  }
+	</select>
 	
 	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL insertFollow( 
@@ -64,5 +68,7 @@
 	<update id="activateAccount" statementType="CALLABLE" parameterType="String">
 		{  CALL activateAccount( #{userid} )}
 	</update>
+	
+	
 	
 </mapper>

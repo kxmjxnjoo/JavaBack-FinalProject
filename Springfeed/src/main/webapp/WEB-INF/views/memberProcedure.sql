@@ -37,6 +37,21 @@ BEGIN
     p_cnt := v_cnt;
 END;
 
+
+--팔로우 체크
+create or replace PROCEDURE getFollow(
+    p_followed IN follow.followed%TYPE,
+    p_follower IN follow.follower%TYPE,
+    p_result OUT number
+)
+IS 
+    v_result number(5) := 0;
+BEGIN
+    select count(*) into v_result from follow where followed=p_followed and follower=p_follower;
+    p_result := v_result;
+END;
+
+
 --팔로우
 CREATE OR REPLACE PROCEDURE insertFollow(
     p_follower IN follow.follower%TYPE, 
@@ -44,18 +59,11 @@ CREATE OR REPLACE PROCEDURE insertFollow(
     p_result OUT NUMBER
 )
 IS 
-    v_result number(2) := '0';
 BEGIN
     insert into follow (follow_num, follower, followed)
     values (follow_seq.nextval,p_follower,p_followed);
     commit;
     
-    v_result := '1';
-    v_result := p_result;
-    
-EXCEPTION WHEN OTHERS THEN
-    v_result := '0';
-    v_result := p_result;
 END;   
     
 --알림 추가
@@ -79,6 +87,7 @@ EXCEPTION WHEN OTHERS THEN
     v_result := '0';
     v_result := p_result;
 END;   
+
 
 --언팔로우
 CREATE OR REPLACE PROCEDURE unfollow(
@@ -169,3 +178,6 @@ BEGIN
     OPEN p_rc FOR
         select * from admin where adminid = p_adminid;
 END;
+
+
+select * from story

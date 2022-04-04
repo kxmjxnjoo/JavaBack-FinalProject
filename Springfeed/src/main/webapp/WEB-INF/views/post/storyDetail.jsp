@@ -22,7 +22,7 @@ function story_like(story_num){
 function deleteCheck(story_num){
 	var answer = confirm("스토리를 삭제할까요?")
 	if(answer){
-		location.href="spring.do?command=deleteStory&story_num="+story_num;
+		location.href="/story/delete?story_num="+story_num;
 	}
 }
 
@@ -36,7 +36,7 @@ function setting_close(){
 
 
 function goReport(story_num) {
-	var url="spring.do?command=reportForm&story_num=" + story_num;
+	var url="reportForm?story_num=" + story_num;
 	var _width = '400';
 	var _height = '500';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
@@ -50,14 +50,15 @@ function goReport(story_num) {
 <body>
 <form name="frm" method="post">
 	
+	<%@ include file="../common/message.jsp" %>
 		
 <!-- setting popup -->
 	<div id="setting">
 		<c:choose> 
-			<c:when test="${StoryDto.userid == loginUser.userid}">
+			<c:when test="${StoryDto.USERID == loginUser.USERID}">
 				<div id="setting_menu">
-					<div class="setting_btn" onclick="location.href='spring.do?command=editStoryForm&story_num=${story_num}'"> 수정</div>
-					<div class="setting_btn" onclick="deleteCheck(${story_num});"> 삭제 </div>
+					<div class="setting_btn" onclick="location.href='/story/edit/form&story_num=${StoryDto.STORY_NUM}'"> 수정</div>
+					<div class="setting_btn" onclick="deleteCheck(${StoryDto.STORY_NUM});"> 삭제 </div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
@@ -66,13 +67,13 @@ function goReport(story_num) {
 					<div id="setting_menu">
 						<c:choose>
 							<c:when test="${ isFollowing == 1 }">
-								<div class="setting_btn" onclick="unfollow('${ StoryDto.userid }')"> 언팔로우</div>
+								<div class="setting_btn" onclick="location.href='/unfollow?userid=${StoryDto.USERID}'"> 언팔로우</div>
 							</c:when>
 							<c:otherwise>
-								<div class="setting_btn" onclick="follow('${ StoryDto.userid }')">팔로우</div>
+								<div class="setting_btn" onclick="location.href='/follow?userid=${StoryDto.USERID}'">팔로우</div>
 							</c:otherwise>
-						</c:choose>
-						<div class="setting_btn" onclick="goReport(${story_num});">신고</div>
+						</c:choose> 
+						<div class="setting_btn" onclick="goReport(${StoryDto.STORY_NUM});">신고</div>
 						<div class="setting_btn" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>
 					</div>
@@ -85,37 +86,39 @@ function goReport(story_num) {
 		
 		<div id=storyArea>
 <!-- 로고 -->
-			<div id="logo" onclick="location.href='spring.do?command=main'"> <img src="../images/logo.png" width="50px"> </div>
+			<div id="logo" onclick="location.href='/'"> <img src="../images/logo.png" width="50px"> </div>
 			
 <!-- 화살표 -->
 			<c:if test="${prev != 0}">
-				<div id=goBefore style=cursor:pointer onclick="location.href='spring.do?command=followArrows&story_num=${prev}'">
+				<div id=goBefore style=cursor:pointer onclick="location.href='/story?story_num=${prev}'">
 					<span class="material-icons"> chevron_left </span> 
 				</div>
 			</c:if>
 			
 			<c:if test="${next != 0}">
-				<div id=goNext style=cursor:pointer onclick="location.href='spring.do?command=followArrows&story_num=${next}'"> 
+				<div id=goNext style=cursor:pointer onclick="location.href='/story?story_num=${next}'"> 
 					<span class="material-icons"> chevron_right </span> 
 				</div>
 			</c:if>
 			
 <!-- 클릭시 유저 프로필로 이동 -->
-			<div id="goUserprofile" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
+			<div id="goUserprofile" onClick="location.href='#'"> 
+			<!-- /post?userid=${StoryDto.USERID} -->
 				<img id="userprofile" src="/images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
 			</div> 
 			
 			
 			<div class=story_content>
 <!-- 스토리 이미지 -->
-				<img id="story_img" src="../images/${StoryDto.story_img}" > 
+				<img id="story_img" src="../images/${StoryDto.STORY_IMG}" > 
 <!-- 글 작성자 프로필 -->
-				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
+				<div id="story_user" onClick="location.href='#'">
+					<!-- /post?userid=${StoryDto.USERID} -->
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 						<img class="userImg" width=50px height=50px src="../images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
 					</div> 
-					<div id="userid"><b> ${StoryDto.userid}</b></div>
-					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>
+					<div id="userid"><b> ${StoryDto.USERID}</b></div>
+					<span id="story_date"><fmt:formatDate value="${StoryDto.CREATE_DATE}"/></span>
 				</div>
 				
 				<div id="buttons" onclick="setting();">
@@ -124,16 +127,16 @@ function goReport(story_num) {
 				
 <!-- 작성한 글 내용 -->
 			<c:choose>
-				<c:when test="empty ${fontColor}">
-					<div id="story_content">  <h2>  ${StoryDto.content}  </h2>  </div>
+				<c:when test="empty ${StoryDto.FONTCOLOR}">
+					<div id="story_content">  <h2>  ${StoryDto.STORY_CONTENT}  </h2>  </div>
 				</c:when>
 				<c:otherwise>
-					<div id="story_content" style="color:${StoryDto.fontColor}"> <h2>  ${StoryDto.content}  </h2>  </div> 
+					<div id="story_content" style="color:${StoryDto.FONTCOLOR}"> <h2>  ${StoryDto.STORY_CONTENT}  </h2>  </div> 
 				</c:otherwise>
 			</c:choose> 
 <!-- 좋아요 버튼 -->
 				<div id="reaction">
-					<span class="material-icons" style="color:${likeColor}" onclick="story_like(${story_num});"> favorite_border </span>
+					<span class="material-icons" style="color:${likeColor}" onclick="story_like(${StoryDto.STORY_NUM});"> favorite_border </span>
 				</div>
 			</div>
 			</div>  

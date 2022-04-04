@@ -59,4 +59,9 @@ public class MemberService {
 		mdao.activateAccount(userid);
 	}
 
+	public void getFollow(HashMap<String, Object> followMap) {
+		mdao.getFollow(followMap);
+	}
+
+
 }

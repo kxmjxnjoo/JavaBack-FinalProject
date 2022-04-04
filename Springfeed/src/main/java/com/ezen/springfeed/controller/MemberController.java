@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
@@ -186,7 +187,7 @@ public class MemberController {
     @RequestMapping("/follow")
     public String follow(HttpServletRequest request, 
     		@RequestParam("userid") String userid,
-    		Model model) {
+    		Model model, RedirectAttributes rttr) {
     	HttpSession session = request.getSession();
 		
     	String url = "";
@@ -198,26 +199,21 @@ public class MemberController {
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("follower", (String) loginUser.get("userid"));
+			paramMap.put("follower", (String) loginUser.get("USERID"));
 			paramMap.put("followed", userid);
 			paramMap.put("result", 0);
 			
 			ms.insertFollow(paramMap);
+	
+			rttr.addFlashAttribute("message", userid+"님을 팔로우 했어요");
 			
-			int result = Integer.parseInt(paramMap.get("result").toString());
+			paramMap.put("notitype", 1);
+			paramMap.put("notiresult", 0);
 			
-			if(result == 1) {
-				model.addAttribute("message", userid+"님을 팔로우 했어요");
-				
-				paramMap.put("notitype", 1);
-				paramMap.put("notiresult", 0);
-				
-				ms.addNotification(paramMap);
-				
-			} else {
-				model.addAttribute("message", "오류가 발생했어요:( 다시 시도해주세요.");
-			}
-			url = "redirect:/";
+			ms.addNotification(paramMap);
+
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     	
         return url;
@@ -227,7 +223,7 @@ public class MemberController {
     @RequestMapping("/unfollow")
     public String unfollow(HttpServletRequest request, 
     		@RequestParam("userid") String userid,
-    		Model model) {
+    		Model model, RedirectAttributes rttr) {
     	
     	HttpSession session = request.getSession();
 		
@@ -239,7 +235,11 @@ public class MemberController {
 			url = "member/login";
 		} else {
 			
-			String follower = (String)loginUser.get("userid");
+			String follower = (String)loginUser.get("USERID");
+			
+			System.out.println(userid);
+			System.out.println(follower);
+			
 			if(!follower.equals(userid)) {
 				HashMap<String, Object> paramMap = new HashMap<String, Object>();
 				paramMap.put("follower", follower);
@@ -247,10 +247,13 @@ public class MemberController {
 				paramMap.put("result", 0);
 				
 				ms.unfollow(paramMap);
+				
+				rttr.addFlashAttribute("message", userid + "님을 언팔로우 했습니다.");
+
 			}
-			
 		}
-        return "";
+		String referer = request.getHeader("Referer");
+	    return "redirect:"+ referer;
     }
     
 		
@@ -276,8 +279,6 @@ public class MemberController {
 			ArrayList<HashMap<String, Object>> notiList 
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-			String postImg = "";
-			String replyContent = "";
 			if(notiList != null) {
 				for(HashMap<String, Object> temp : notiList) {
 //					LocalDate now = LocalDate.now();

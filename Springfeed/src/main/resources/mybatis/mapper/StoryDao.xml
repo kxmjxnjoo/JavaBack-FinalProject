@@ -7,4 +7,23 @@
 	
 	<resultMap id="StoryMap" type="java.util.HashMap"></resultMap>	
 	
+	<insert id="addStory" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL addStory( 
+			#{story_img},#{content},#{fontcolor},#{userid},
+			#{story_num, mode=OUT, jdbcType=INTEGER }
+		)}
+	</insert>
+	
+	<select id="getStory" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getStory( 
+			#{story_num},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap},
+			#{prev, mode=OUT, jdbcType=INTEGER }, #{next, mode=OUT, jdbcType=INTEGER }
+		)  }
+	</select>
+	
+	<delete id="deleteStory" statementType="CALLABLE" parameterType="int">
+		{  CALL deleteStory( #{story_num} )}
+	</delete>
+	
 </mapper>
