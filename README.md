@@ -13,3 +13,4 @@
   - redux
   - axios
   - context api
+  - infinite scroll

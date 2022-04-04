@@ -1,16 +1,17 @@
 import React from 'react'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import defultProfile from '../images/tmpUserIcon.png'
-
 // Icon
-import { BiAlignRight as DetailIcon } from 'react-icons/bi'
-import {BsHeart as LikeIcon, BsFillHeartFill as LikeFillIcon, BsChatLeft as ReplyIcon, BsChatDots as MessageIcon,
-                BsBookmark as SaveIcon, BsFillBookmarkFill as SaveFillIcon} from 'react-icons/bs'
+import {
+    BsHeart as LikeIcon, BsFillHeartFill as LikeFillIcon, BsChatLeft as ReplyIcon, BsChatDots as MessageIcon,
+    BsBookmark as SaveIcon, BsFillBookmarkFill as SaveFillIcon
+} from 'react-icons/bs'
+import { MdOutlineMoreHoriz as DetailIcon } from 'react-icons/md'
 
-const Post = ({post}) => {
+import defaultProfile from '../../images/tmpUserIcon.png'
 
-    const {user_img:userprofile, userid, address:location, post_img:postImage, likeCount:likes, isLiked, isSaved, content} = post
+const Post = ({ post }) => {
+
+    const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content } = post
 
     const profileStyle = {
         width: '50px'
@@ -30,7 +31,7 @@ const Post = ({post}) => {
 
                         <div className="row">
                             <div className="col-2">
-                                <img src={userprofile == '' || userprofile == null ? defultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle}/>
+                                <img src={userprofile == '' || userprofile == null ? defaultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle} />
                             </div>
                             <div className="col text-left">
                                 <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>
@@ -39,39 +40,39 @@ const Post = ({post}) => {
                         </div>
                     </div>
 
-                    <DetailIcon className='col-2' style={ iconStyle }/>
+                    <DetailIcon className='col-2 mt-2' style={iconStyle} />
                 </div>
             </div>
 
             <div className="card-body">
-                <img src={postImage == '' || postImage == null ? "http://picsum.photos/200/200" : postImage} alt="" style={postImageStyle}/>
+                <img src={postImage == '' || postImage == null ? "http://picsum.photos/200/200" : postImage} alt="" style={postImageStyle} />
             </div>
-            
+
             <div className="card-footer h2">
                 <div className="row">
                     <div className="col-10">
                         {
-                            isLiked ? <LikeFillIcon className='m-2 text-danger'/> : <LikeIcon className='m-2'/>
+                            isLiked ? <LikeFillIcon className='m-2 text-danger' /> : <LikeIcon className='m-2' />
                         }
-                        <ReplyIcon className='m-2'/>
-                        <MessageIcon className='m-2'/>
+                        <ReplyIcon className='m-2' />
+                        <MessageIcon className='m-2' />
                     </div>
                     <div className="col-2">
                         {
-                            isSaved ? <SaveFillIcon/> : <SaveIcon/>
+                            isSaved ? <SaveFillIcon /> : <SaveIcon />
                         }
-                        
+
                     </div>
                 </div>
-                <div className="h4">{ likes } likes</div>
+                <div className="h4">{likes} likes</div>
                 <p className='h5'>{content}</p>
             </div>
 
-             <div className="card-footer">
+            <div className="card-footer">
                 <form action="/reply/add">
                     <div className="row form-group">
                         <div className="col-10">
-                            <input type="text" placeholder='댓글을 추가해 주세요...' className='form-control'/> 
+                            <input type="text" placeholder='댓글을 추가해 주세요...' className='form-control' />
                         </div>
                         <div className="col-2">
                             <input type="submit" value="추가" className='btn btn-outline-primary' />

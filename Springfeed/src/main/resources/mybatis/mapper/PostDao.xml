@@ -25,6 +25,26 @@
 		}
 	</select>
 
+	<select id="selectPostFeed"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL selectPostFeed(
+			    #{userid},
+				#{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=postMap
+			    }
+			)
+		}
+
+	</select>
+
 	<select id="selectPostByNum"
 			statementType="CALLABLE"
 			parameterType="java.util.HashMap"

@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IMemberDao {
-
 	void getMember(HashMap<String, Object> paramMap);
 	void insertMember(HashMap<String, Object> paramMap);
 	void idCheck(HashMap<String, Object> paramMap);
@@ -18,5 +17,4 @@ public interface IMemberDao {
 	void deleteAcount(HashMap<String, Object> paramMap);
 	void activateAccount(String userid);
 	void getFollow(HashMap<String, Object> followMap);
-
 }
