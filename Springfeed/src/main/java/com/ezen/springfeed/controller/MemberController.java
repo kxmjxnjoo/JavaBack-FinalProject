@@ -180,9 +180,6 @@ public class MemberController {
         return url;
     }
 
-///////////////////////////////////////////////
-    //팔로우도 ajax로 처리해야할 듯 함
-    
     // 팔로우 
     @RequestMapping("/follow")
     public String follow(HttpServletRequest request, 
@@ -307,16 +304,18 @@ public class MemberController {
     }
     
     @RequestMapping("/user/edit/form")
-    public String editUserForm(Model model, HttpServletRequest request) {
+    public String editUserForm(Model model, HttpServletRequest request,
+    		RedirectAttributes rttr) {
     	MemberDto dto = new MemberDto();
     	HttpSession session = request.getSession();
     	
     	HashMap<String, Object> loginUser 
     		= (HashMap<String, Object>) session .getAttribute("loginUser");
     	
-    	if(loginUser == null) 
-    		return "redirect:/login/form";
-    	else {
+    	if(loginUser == null) {
+    		rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+    		return "redirect:/login/form"; 
+    	} else {
 	    	dto.setUserid((String) loginUser.get("USERID"));
 	    	dto.setPassword((String) loginUser.get("PASSWORD"));
 	    	dto.setName((String) loginUser.get("NAME"));
@@ -336,9 +335,10 @@ public class MemberController {
     
     @RequestMapping("/uploadImg")
 	@ResponseBody
-	public Map<String, Object> fileup(Model model, HttpServletRequest request) {
+	public Map<String, Object> fileup(Model model, HttpServletRequest request,
+			RedirectAttributes rttr) {
 		
-		String savePath = context.getRealPath("/WEB-INF/images");
+		String savePath = context.getRealPath("/images");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		
 		try {
@@ -351,32 +351,32 @@ public class MemberController {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return resultMap;
 	}
     
-    
-    
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
-    		BindingResult result, HttpServletRequest request, Model model) {
+    		BindingResult result, HttpServletRequest request, Model model,
+    		RedirectAttributes rttr) {
     	
     	System.out.println(memberdto.getEmail());
     	System.out.println(memberdto.getUserid());
     	System.out.println(memberdto.getName());
     	System.out.println(memberdto.getPassword());
     	System.out.println(memberdto.getPhone());
+    	System.out.println(memberdto.getImg());
 
     	String url = "redirect:/user/edit/form";
     	if(result.getFieldError("password")!= null) {
-            model.addAttribute("message", result.getFieldError("password").getDefaultMessage());
+             rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
          } else if(result.getFieldError("name")!= null) {
-             model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("name").getDefaultMessage());
           } else if(result.getFieldError("email")!= null) {
-            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("email").getDefaultMessage());
          }  else if(result.getFieldError("phone")!= null) {
-            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("phone").getDefaultMessage());
          } else {
+        	 	HashMap<String, Object> resultMap = (HashMap<String, Object>) rttr.getAttribute("resultMap");
         		HashMap<String, Object> paramMap = new HashMap<>();
         		paramMap.put("USERID",memberdto.getUserid());
      			paramMap.put("PASSWORD",memberdto.getPassword());
@@ -384,13 +384,14 @@ public class MemberController {
      			paramMap.put("EMAIL",memberdto.getEmail());
      			paramMap.put("PHONE",memberdto.getPhone());
      			paramMap.put("INTRODUCE",memberdto.getIntroduce());
+     			paramMap.put("IMG", memberdto.getImg());
      			
      			ms.userEdit(paramMap);
      			
      			HttpSession session = request.getSession();
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/post";
+     			url = "redirect:/post?userid="+memberdto.getUserid();
          }
     	return url;
     }

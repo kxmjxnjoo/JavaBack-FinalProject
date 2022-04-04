@@ -21,6 +21,7 @@
 								<img id="userprofile" style="width:250px" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG }">
 							</div>
 							<input type="hidden" name="oldPicture" value="${ loginUser.IMG }"/>
+							<input type="hidden" name="img" id="newImage" >
 							<label class="input-file-button" for="input-file" id="input-file-button" onclick="resetImg();">
 							  사진 수정
 							</label>
@@ -46,7 +47,6 @@
 				
 				<form id="imgForm" method="post" enctype="multipart/form-data">
 					<input type="file" name="user_img" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
-					<input type="hidden" name="image" id="newImage" >
 					<div id="filename"></div>
 				</form>
 			</div>
@@ -67,12 +67,12 @@
 	<script type="text/javascript">
 	
 	$(function(){
-		$('#input-file-button').click(function(){
+		$('#input-file').change(function(){
 			var formselect = $("#imgForm")[0];   // 지목된 폼을 변수에 저장
 			var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
 			
 			$.ajax({
-				url:"<%=request.getContextPath() %>/uploadImg",
+				url:"/uploadImg",
 				type:"POST",
 				enctype:"multipart/form-data",
 				async: false,

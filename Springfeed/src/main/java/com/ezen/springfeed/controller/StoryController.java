@@ -44,6 +44,7 @@ public class StoryController {
 	
 	@RequestMapping("/story/add") 
 	public String addStory(@ModelAttribute("dto") @Valid StoryDto storydto,
+			@RequestParam("oldPicture") String oldPicture,
 			HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
@@ -54,11 +55,15 @@ public class StoryController {
 			return "member/login";
 		else {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("story_img", storydto.getStory_img());
 			paramMap.put("content", storydto.getStory_content());
 			paramMap.put("fontcolor", storydto.getFontColor());
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("story_num", 0);
+			if(storydto.getStory_img() == null) {
+				paramMap.put("story_img",oldPicture);
+			} else {
+				paramMap.put("story_img", storydto.getStory_img());
+			}
 			
 			ss.addStory(paramMap);
 			

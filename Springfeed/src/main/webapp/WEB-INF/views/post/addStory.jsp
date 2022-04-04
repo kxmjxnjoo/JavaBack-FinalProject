@@ -16,8 +16,7 @@
 <body>
 <%@ include file="../common/topnav.jsp" %>
 
-<form name="frm" method="post">
-<!-- enctype="multipart/form-data" -->
+<form name="frm" method="post" enctype="multipart/form-data" >
 	<div class="wrap">
 		<div id="postingStory" >
 			<div id="postingTitle">
@@ -107,7 +106,7 @@ function uploadCheck(){
 		alert('사진을 첨부해주세요'); 
 		return;
 	} else {
-		theForm.action="spring.do?command=storyUpload";
+		theForm.action="/story/add/form";
 		theForm.submit();
 	}
 }

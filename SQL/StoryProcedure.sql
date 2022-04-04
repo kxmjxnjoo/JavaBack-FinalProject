@@ -59,5 +59,3 @@ BEGIN
     delete from story  where story_num=p_story_num;
     commit;
 END;
-
-SELECT * FROM STORY_LIKE

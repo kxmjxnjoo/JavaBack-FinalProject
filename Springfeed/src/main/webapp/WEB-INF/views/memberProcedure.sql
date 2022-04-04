@@ -133,14 +133,17 @@ create or replace PROCEDURE userEdit(
     p_name IN member.name%type,
     p_email IN member.email%type,
     p_phone IN member.phone%type,
-    p_introduce IN member.introduce%type
+    p_introduce IN member.introduce%type,
+    p_img IN member.img%type
 )
 IS
 BEGIN
-    update member set password=p_password, name=p_name, email=p_email, phone=p_phone, introduce=p_introduce
+    update member set password=p_password, name=p_name, email=p_email, phone=p_phone, 
+    introduce=p_introduce, img=p_img
     where userid=p_userid;
 END;
 
+SELECT * FROM MEMBER
 --계정 비활성화
 create or replace PROCEDURE deleteAcount(
     p_userid IN member.userid%type
