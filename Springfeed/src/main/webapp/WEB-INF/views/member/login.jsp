@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="/css/spring.css">
 <script type="text/javascript" src="/script/member.js"></script>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="/src/main/webapp/WEB-INF/views/react-component/Topnav.js"></script>
+
 </head>
 <body>
 	<%@ include file="../common/topnav.jsp" %>

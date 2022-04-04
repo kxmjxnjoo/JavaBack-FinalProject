@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -9,17 +9,15 @@ import { BsFillHouseDoorFill as HomeIcon, BsMessenger as MessageIcon,
 				BsFillHeartFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
 				BsSearch as SearchIcon
 			} from 'react-icons/bs'
-
-import {MdExplore as ExploreIcon } from 'react-icons/md'
-
-
+import { MdExplore as ExploreIcon } from 'react-icons/md'
 
 // Resources
 import logo from '../images/logo.png'
 import '../common.css'
 import profile from '../images/tmpUserIcon.png'
+import { UserContext } from '../App'
 
-const Topnav = ({isLoggedIn, user}) => {
+const Topnav = () => {
     const logoStyle = {
         width: '30px',
         filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -30,6 +28,8 @@ const Topnav = ({isLoggedIn, user}) => {
 	const profileStyle = {
 		width: '40px'
 	}
+
+	const state = useContext(UserContext)
 
   return (
     <nav className='navbar navbar-nav fixed-top navbar-expand-lg navbar-dark' style={topnavStyle}>
@@ -65,8 +65,8 @@ const Topnav = ({isLoggedIn, user}) => {
 			<div className="col-6">
 				<ul className="nav navbar-nav mr-auto mt-2 mt-lg-0 h3 float-end">
 
-					<li className="nav-item active">
-						<a className="nav-link" href="/">
+					<li className="nav-item">
+						<a className={ "nav-link" + (state.page === 0 ? "active" : "")} href="/">
 							<HomeIcon/>
 						</a>
 					</li>
@@ -94,9 +94,9 @@ const Topnav = ({isLoggedIn, user}) => {
 					<li className="nav-item">
 						<a href="/user" className="nav-link">
 							<img src={
-									isLoggedIn ?
-										user.img :	
-										profile
+								state.isLoggedIn ?
+								state.user.img :	
+								profile
 							} alt="" className="round-circle"  style={profileStyle}/>
 						</a>
 					</li>
@@ -114,3 +114,7 @@ const Topnav = ({isLoggedIn, user}) => {
 }
 
 export default Topnav
+
+const domContainer = document.querySelector('#react-topnav');
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(Topnav));

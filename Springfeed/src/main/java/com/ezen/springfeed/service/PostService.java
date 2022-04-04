@@ -35,4 +35,8 @@ public class PostService {
     public void deletePost(HashMap<String, Object> paramMap) {
         pdao.deletePost(paramMap);
     }
+
+    public void getPostFeed(HashMap<String, Object> paramMap) {
+        pdao.selectPostFeed(paramMap);
+    }
 }

@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class FollowDto {
 	private int followNum;
-	private String following;
+	private String followed;
 	private String follower;
 }
