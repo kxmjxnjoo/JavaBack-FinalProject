@@ -5,12 +5,12 @@
 	
 <mapper namespace="com.ezen.springfeed.dao.IFaqQnaDao">
 	
-	<resultMap id="FaqQnaDao" type="java.util.HashMap"></resultMap>	
+	<resultMap id="FaqQnaMap" type="java.util.HashMap"></resultMap>	
 	
 	<select id="adminfaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminfaqList(
 				#{faq_num}
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		) }
 	</select>
 
@@ -45,7 +45,7 @@
 	<select id="qnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL qnaList( 
 			#{qna_id},
-			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=cartMap}
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>
 	

@@ -43,8 +43,8 @@ public class AdminController {
 	public String admin() { 
 		return "admin/adminLogin";
 	} 		// move loginForm 
-
-
+	
+	
 	@RequestMapping("/admin/loginForm")
 	public String adminLogin( HttpServletRequest request, Model model,
 			@RequestParam("adminId") String adminId,
@@ -72,8 +72,7 @@ public class AdminController {
 		}else if( adminPwd.equals((String)resultMap.get("PASSWORD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-			System.out.println("로그인 완");
-			return "redirect:/admin/memberList";
+			return "redirect:/admin/membertList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -141,7 +140,7 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value="/admin/searchMember")
+	@RequestMapping("/admin/searchMember")
 	public String searchMember(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
@@ -317,7 +316,7 @@ public class AdminController {
 			mav.setViewName("admin/report/postReportCheck");
 			// check Reporeted post
 		}
-		mav.setViewName("redirect:/adminReportList");
+		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
 	}
@@ -342,7 +341,7 @@ public class AdminController {
 		mav.setViewName("admin/report/storyReportCheck");
 		// check Reporeted post
 		
-		mav.setViewName("redirect:/adminReportList");
+		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
 	}
@@ -380,6 +379,6 @@ public class AdminController {
 			as.blockUser(paramMap);
 			
 		}
-		return "redirect:/admin/report/adminReportList";
+		return "redirect:/admin/reportList";
 	}
 }

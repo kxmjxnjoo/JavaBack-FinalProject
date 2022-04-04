@@ -69,13 +69,13 @@ function goOrder(){
 		alert('선택해주세요');
 		return;
 	} else {
-		document.frm.action = "spring.do?command=reportOrder";
+		document.frm.action = "/reportOrder";
 		document.frm.submit();	
 	}
 }
 
 function openPost(post_num, report_num){
-	var url="spring.do?command=postReportCheck&post_num=" + post_num + "&report_num=" + report_num;
+	var url="/postReportCheck&post_num=" + post_num + "&report_num=" + report_num;
 	var _width = '1100';
 	var _height = '700';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
@@ -86,7 +86,7 @@ function openPost(post_num, report_num){
 }
 
 function openStory(story_num, report_num){
-	var url="spring.do?command=storyReportCheck&story_num=" + story_num + "&report_num=" + report_num;
+	var url="/storyReportCheck&story_num=" + story_num + "&report_num=" + report_num;
 	var _width = '1100';
 	var _height = '700';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
@@ -97,7 +97,7 @@ function openStory(story_num, report_num){
 }
 
 function openUserPage(userid, report_num) {
-	var url="spring.do?command=userReportCheck&userid=" + userid + "&report_num=" + report_num;
+	var url="/bolckUser&userid=" + userid + "&report_num=" + report_num;
 	var _width = '1100';
 	var _height = '700';
 	var _left = Math.ceil((window.screen.width - _width)/2); 
