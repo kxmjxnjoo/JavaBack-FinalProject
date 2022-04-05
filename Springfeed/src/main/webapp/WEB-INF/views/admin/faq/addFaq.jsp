@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="/admin/common/admin_submenu.jsp" %>
 	
-	<form action="spring.do" method="post" id="addFaqForm">
+	<form action="/faq/add/form" method="post" id="addFaqForm">
 		<input type="hidden" name="command" value="addfaq">
 		
 		<input type="text" name="subject" placeholder="FAQ 제목">

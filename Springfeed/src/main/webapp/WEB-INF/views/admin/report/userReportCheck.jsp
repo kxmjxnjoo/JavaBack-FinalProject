@@ -14,25 +14,25 @@
 
 <div id="userInfo">
 	<div id="userImg">
-		<img src="images/${ user.img }">
+		<img src="images/${ user.IMG }">
 	</div>
 	
 	
 	<div id="userDetail">
-		<input type="button" value="신고 처리 하기" onclick="handleReport('${user.userid}',${report_num});"> 
-		<input type="button" value="유저페이지로 가기" onclick="/userpage&userid=${user.userid}'">
+		<input type="button" value="신고처리 하기" onclick="handleReport('${user.USERID}',${report_num});"> 
+		<input type="button" value="유저페이지로 가기" onclick="/userpage&userid=${user.USERID}'">
 		<div id="userName">
-			<h1>${ user.name }</h1>
+			<h1>${ user.NAME }</h1>
 		
 		
 		<div id="userStat">
-			<h2>posts ${ user.postNum }</h2>
-			<h2>followers ${ user.followerNum - 1}</h2>
-			<h2>following ${ user.followingNum - 1 }</h2>
+			<h2>posts ${ user.POSTNUM }</h2>
+			<h2>followers ${ user.FOLLOWERNUM - 1}</h2>
+			<h2>following ${ user.FOLLOWINGNUM - 1 }</h2>
 		</div>
 		
 		<div id="userContent">
-			<p>${ user.introduce }</p>
+			<p>${ user.INTRODUCE }</p>
 		</div>
 	</div>
 </div>
@@ -43,15 +43,15 @@
 	<c:when test="${ posts != null }">
 		<div id="postList" style="margin-bottom:50px;">
 			<c:forEach var="post" items="${ posts }">
-				<div class="userPost" style="width:26%;"onclick="/postDetail&post_num=${ post.postNum }'">
-					<img src="../images/${ post.postImg }">
+				<div class="userPost" style="width:26%;"onclick="/postDetail&post_num=${ post.POSTNUM }'">
+					<img src="../images/${ post.POSTIMG }">
 					
 					<div class="userPostInfo">
 						<i class="material-icons">favorite</i>
-						<h3>${ post.likeCount }</h3>
+						<h3>${ post.LIKECOUNT }</h3>
 						
 						<i class="material-icons">chat_bubble</i>
-						<h3>${ post.replyCount }</h3>
+						<h3>${ post.REPLYCOUNT }</h3>
 					</div>
 				</div>
 			</c:forEach>
@@ -59,7 +59,7 @@
 	</c:when>
 	<c:otherwise>
 		<div id="postList">
-			<h1>${ user.userid }님은 아직 포스트를 올리지 않으셨어요.</h1>
+			<h1>${ user.USERID }님은 아직 포스트를 올리지 않으셨어요.</h1>
 		</div>
 	</c:otherwise>
 </c:choose>

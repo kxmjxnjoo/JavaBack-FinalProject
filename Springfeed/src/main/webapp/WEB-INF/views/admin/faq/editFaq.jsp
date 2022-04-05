@@ -10,11 +10,11 @@
 
 	<%@ include file="/admin/common/admin_submenu.jsp" %>
 	
-	<form action="spring.do" method="post" id="editfaqBox">
+	<form action="/faq/edit/form" method="post" id="editfaqBox">
 		<input type="hidden" name="command" value="editfaq">
-		<input type="hidden" name="num" value="${ faq.faq_num }">
+		<input type="hidden" name="num" value="${ faq.FAQ_NUM }">
 		
-		<input type="text" name="subject" placeholder="${ faq.faq_subject }">
+		<input type="text" name="subject" placeholder="${ faq.FAQ_SUBJECT }">
 		<textarea name="content"></textarea>
 		
 		<input type="submit" value="FAQ 등록">

@@ -20,14 +20,14 @@
 
 			<div class=story_content>
 <!-- 스토리 이미지 -->
-				<img id="story_img" src="../images/${StoryDto.story_img}" > 
+				<img id="story_img" src="../images/${StoryDto.STORY_IMG}" > 
 <!-- 글 작성자 프로필 -->
-				<div id="story_user" onClick="location.href='spring.do?command=userpage&userid=${StoryDto.userid}'">
+				<div id="story_user" onClick="/admin/report/story?{StoryDto.USERID}'">
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.USER_IMG == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div> 
-					<div id="userid"><b> ${StoryDto.userid}</b></div>
-					<span id="story_date"><fmt:formatDate value="${StoryDto.create_date}"/></span>
+					<div id="userid"><b> ${StoryDto.USERID}</b></div>
+					<span id="story_date"><fmt:formatDate value="${StoryDto.CREATE_DATE}"/></span>
 				</div>
 				
 				<div id="buttons" onclick="setting();">
@@ -37,10 +37,10 @@
 <!-- 작성한 글 내용 -->
 			<c:choose>
 				<c:when test="empty ${fontColor}">
-					<div id="story_content">  <h2>  ${StoryDto.content}  </h2>  </div>
+					<div id="story_content">  <h2>  ${StoryDto.CONTENT}  </h2>  </div>
 				</c:when>
 				<c:otherwise>
-					<div id="story_content" style="color:${StoryDto.fontColor}"> <h2>  ${StoryDto.content}  </h2>  </div> 
+					<div id="story_content" style="color:${StoryDto.FONTCOLOR}"> <h2>  ${StoryDto.CONTENT}  </h2>  </div> 
 				</c:otherwise>
 			</c:choose> 
 <!-- 좋아요 버튼 -->

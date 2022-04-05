@@ -17,7 +17,7 @@
 	
 	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount(
-				#{adminID},
+				#{adminId},
 				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 			)  } 
 	</select>
@@ -31,8 +31,6 @@
 	
 	<select id="searchMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL searchMember(
-			${adminId}, #{name}
-			#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 			${userid}, #{name}
 			#{ref_cursor1, mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AdminMap}
 		) }
