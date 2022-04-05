@@ -14,16 +14,17 @@
 		background: black; opacity: 0.6; color: white;
 		line-height: 40px; text-align: center;
 		position: relative; top: -50px; transition: 1s;
+		z-index: 1;
 	}
 </style>
 
 <script type="text/javascript">
 	function disappear() {
-		document.getElementById("message").style.webkitTransform='translateY(-40px)';
+		document.getElementById("message").style.webkitTransform='translateY(-50px)';
 	}
 	
 	function appear() {
-		document.getElementById("message").style.webkitTransform='translateY(40px)';
+		document.getElementById("message").style.webkitTransform='translateY(50px)';
 	}
 	
 	if("${ message }" != "") {

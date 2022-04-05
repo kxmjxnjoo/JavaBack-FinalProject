@@ -36,14 +36,16 @@
 				<i class="material-icons" onclick="location.href='/message'">send</i>
 				<i class="material-icons" onclick="location.href='/select'">add_box</i>
 				<i class="material-icons" onclick="location.href='/explore'">explore</i>
-				<i class="material-icons" onclick="location.href='/user/notification'">favorite_border</i>
-				<%-- <c:if test="${ not empty loginUser && loginUser.NOTICOUNT != 0 }">
-					<div class="badge">
-						${ loginUser.NOTICOUNT }
-					</div>
-				</c:if> --%>
-				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.img == null || loginUser.img.equals("") ? "tmpUserIcon.png" : loginUser.img ) : "tmpUserIcon.png" }" 
-				onclick="userIcon('${loginUser.userid}');">
+				<i class="material-icons" onclick="location.href='/user/notification'">notifications</i>
+				<%-- <c:if test="${ not empty loginUser && loginUser.NOTICOUNT != 0 }"> --%>
+						<div class="badge" id="badge" 
+						style="background: #e03112; z-index: 1; position: absolute; top:18px; left:215px;
+						display : none;'">
+							
+						</div>
+				<%-- </c:if> --%>
+				<img id="userIcon" src="/images/${ loginUser != null ? (loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG ) : "tmpUserIcon.png" }" 
+				onclick="userIcon('${loginUser.USERID}');">
 				
 			</c:when>
 			
@@ -54,13 +56,11 @@
 				<i class="material-icons" onclick="goLogin()">favorite_border</i>
 				
 			
+			
 				<img id="userIcon" src="/images/tmpUserIcon.png" 
 				onclick="goLogin();">
 			</c:otherwise>
 		</c:choose> 
-		 
-		
-		 
 	</div>
 	
 <script type="text/javascript">
@@ -73,7 +73,7 @@
 
 
 	function userIcon(userid) {
-		location.href= "spring.do?command=userpage&userid=" + userid;
+		location.href= "/post?userid=" + userid;
 	}
 </script>	
 
@@ -83,8 +83,9 @@
 	${ message }
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 
 
 	function disappear() {

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -207,8 +208,6 @@ public class MemberController {
 			paramMap.put("notitype", 1);
 			paramMap.put("notiresult", 0);
 			
-			ms.addNotification(paramMap);
-
 			String referer = request.getHeader("Referer");
 		    return "redirect:"+ referer;
 		}
@@ -303,6 +302,9 @@ public class MemberController {
 		return mav;
     }
     
+
+    
+    
     @RequestMapping("/user/edit/form")
     public String editUserForm(Model model, HttpServletRequest request,
     		RedirectAttributes rttr) {
@@ -333,6 +335,25 @@ public class MemberController {
     ServletContext context;
     
     
+//    @RequestMapping("/notiCount")
+//   	@ResponseBody
+//   	public Map<String, Object> notiCount(Model model, HttpServletRequest request){
+//    	
+//    	HttpSession session = request.getSession();
+//    	HashMap<String, Object> loginUser 
+//		= (HashMap<String, Object>) session.getAttribute("loginUser");
+//    	
+//    	HashMap<String, Object> paramMap = new HashMap<>();
+//    	paramMap.put("userid", loginUser.get("USERID"));
+//    	paramMap.put("notiCount", 0);
+//    	
+//    	ms.getNotiCount(paramMap);
+//    	
+//    	return paramMap;
+//    }
+  
+    
+    
     @RequestMapping("/uploadImg")
 	@ResponseBody
 	public Map<String, Object> fileup(Model model, HttpServletRequest request,
@@ -358,13 +379,6 @@ public class MemberController {
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
     		RedirectAttributes rttr) {
-    	
-    	System.out.println(memberdto.getEmail());
-    	System.out.println(memberdto.getUserid());
-    	System.out.println(memberdto.getName());
-    	System.out.println(memberdto.getPassword());
-    	System.out.println(memberdto.getPhone());
-    	System.out.println(memberdto.getImg());
 
     	String url = "redirect:/user/edit/form";
     	if(result.getFieldError("password")!= null) {
@@ -403,7 +417,7 @@ public class MemberController {
     	
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
-		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		= (HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
 			model.addAttribute("로그인 해주세요.");

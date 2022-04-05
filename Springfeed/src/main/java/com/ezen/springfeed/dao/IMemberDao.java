@@ -17,4 +17,5 @@ public interface IMemberDao {
 	void deleteAcount(HashMap<String, Object> paramMap);
 	void activateAccount(String userid);
 	void getFollow(HashMap<String, Object> followMap);
+	void getNotiCount(HashMap<String, Object> paramMap);
 }

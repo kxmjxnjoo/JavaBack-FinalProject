@@ -110,6 +110,14 @@
 			<systemPath>${project.basedir}/src/main/resources/jar/osdt_cert-21.3.0.0.jar</systemPath>
 		</dependency>
 
+	<!-- 이메일 전송 -->
+	
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		    <version>1.4.3.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

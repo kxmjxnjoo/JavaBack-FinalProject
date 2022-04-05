@@ -62,5 +62,9 @@ public class MemberService {
 	public void getFollow(HashMap<String, Object> followMap) {
 		mdao.getFollow(followMap);
 	}
+
+	public void getNotiCount(HashMap<String, Object> paramMap) {
+		mdao.getNotiCount(paramMap);
+	}
 }
 

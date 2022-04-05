@@ -78,7 +78,9 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" language="javascript" defer="defer"> 
+<script type="text/javascript"> 
+
+window.onbeforeunload = function() {};
 
 $(function(){
 	$('#input-file').change(function(){

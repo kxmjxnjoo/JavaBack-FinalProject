@@ -102,9 +102,8 @@ function goReport(story_num) {
 			</c:if>
 			
 <!-- 클릭시 유저 프로필로 이동 -->
-			<div id="goUserprofile" onClick="location.href='#'"> 
-			<!-- /post?userid=${StoryDto.USERID} -->
-				<img id="userprofile" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : userImg }">
+			<div id="goUserprofile" onClick="location.href='/post?userid=${StoryDto.USERID}'"> 
+				<img id="userprofile" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG }">
 			</div> 
 			
 			
@@ -112,10 +111,9 @@ function goReport(story_num) {
 <!-- 스토리 이미지 -->
 				<img id="story_img" src="../images/${StoryDto.STORY_IMG}" > 
 <!-- 글 작성자 프로필 -->
-				<div id="story_user" onClick="location.href='#'">
-					<!-- /post?userid=${StoryDto.USERID} -->
-					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<img class="userImg" width=50px height=50px src="../images/${ StoryDto.USER_IMG == null || StoryDto.USER_IMG.equals("") ? "tmpUserIcon.png" : userImg }">
+				<div id="story_user" onClick="location.href='/post?userid=${StoryDto.USERID}'">
+					<div id="userprofile" onClick="location.href='/post?userid=${StoryDto.USERID}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
+						<img class="userImg" width=50px height=50px src="../images/${ StoryDto.USER_IMG == null || StoryDto.USER_IMG.equals("") ? "tmpUserIcon.png" : StoryDto.USER_IMG }">
 					</div> 
 					<div id="userid"><b> ${StoryDto.USERID}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.CREATE_DATE}"/></span>

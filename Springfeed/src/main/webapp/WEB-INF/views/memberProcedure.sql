@@ -9,7 +9,7 @@ BEGIN
     OPEN p_curvar FOR SELECT * FROM member WHERE userid=p_userid;
 END;
 
-
+select * from member
 --회원 추가
 CREATE OR REPLACE PROCEDURE insertMember(
     p_userid IN member.userid%TYPE, 
@@ -76,8 +76,8 @@ CREATE OR REPLACE PROCEDURE addNotification(
 IS 
     v_result number(2) := '0';
 BEGIN
-    insert into notification (num, user_to, user_from)
-    values (notification_seq.nextval,p_followed,p_follower);
+    insert into notification (num, user_to, user_from, noti_type)
+    values (notification_seq.nextval,p_followed,p_follower, p_notitype);
     commit;
     
     v_result := '1';
@@ -122,7 +122,7 @@ BEGIN
         from notification n 
             left outer join post p on p.post_num = n.post_num
             left outer join reply r on r.reply_num = n.reply_num    
-        where n.user_to = p_userid;   
+        where n.user_to = p_userid order by num desc;      
 END;   
 
 
@@ -171,16 +171,14 @@ CREATE TABLE BLOCKMEMBER(
     BLOCKED VARCHAR2(20) REFERENCES MEMBER(USERID) ON DELETE CASCADE
 )
 
---checkAdmin
-create or replace PROCEDURE checkAdmin (
-    p_adminid IN admin.adminid%TYPE,
-     p_rc OUT SYS_REFCURSOR
+
+--notiCount 
+create or replace PROCEDURE getNotiCount (
+    p_userid IN notification.user_to%TYPE,
+    p_notiCount OUT number
      )
 IS 
+    v_notiCount number(100) := 0;
 BEGIN 
-    OPEN p_rc FOR
-        select * from admin where adminid = p_adminid;
+    select count(*) from notification where user_to=p_userid and checked=0;
 END;
-
-
-select * from story

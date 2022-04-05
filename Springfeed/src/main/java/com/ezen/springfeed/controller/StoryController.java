@@ -56,12 +56,6 @@ public class StoryController {
 			return "redirect:/login/form";
 		} else {
 			
-			System.out.println(storydto.getStory_content());
-			System.out.println(storydto.getStory_img());
-			System.out.println(storydto.getFontColor());
-			System.out.println(loginUser.get("USERID"));
-			
-			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			
 			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))

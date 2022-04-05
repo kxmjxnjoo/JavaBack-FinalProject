@@ -110,10 +110,12 @@ span{
 
 #id_ok {
 	color:#fff; display: none;
+	position: absolute; right: 0px; top: -3px; opacity: 0.8;
 }
 
 #id_already {
 	color:#6A82FB; display: none;
+	position: absolute; right: 0px; top: -3px; opacity: 0.8;
 }
 
 

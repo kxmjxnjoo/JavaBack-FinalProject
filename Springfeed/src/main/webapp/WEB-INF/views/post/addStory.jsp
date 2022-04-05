@@ -79,6 +79,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript"> 
 
+window.onbeforeunload = function() {};
+
 $(function(){
 	$('#input-file').change(function(){
 		var formselect = $("#imgForm")[0];   // 지목된 폼을 변수에 저장
