@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import React, { useState, useEffect, useHistory } from 'react'
+import axios from 'axios'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,6 +23,21 @@ function App() {
 	const [isError, setIsError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(null)
 	const [page, setPage] = useState(0)
+	const [searchKey, setSearchKey] = useState('')
+	const [searchResult, setSearchResult] = useState('')
+
+	useEffect(() => {
+		axios.post('/api/search', {
+			key: searchKey
+		})
+			.then((res) => {
+				return res.json()
+			})
+			.then((data) => {
+				setSearchResult(data)
+			})
+	}, [searchKey])
+
 
 	/*
 	useEffect(() => {
@@ -46,7 +62,32 @@ function App() {
 				page={page}
 				isLoggedIn={isLoggedIn}
 				user={user}
+				setSearchKey={setSearchKey}
 			/>
+
+			{
+				searchKey !== "" ?
+					<div className="card w-50 ms-5 mt-5 overflow-auto shadow"
+						style={{
+							height: '300px',
+							position: 'fixed',
+							zIndex: '100',
+							top: '50px',
+							left: '50px'
+						}}>
+						<div className="card-header">
+							<div className="card-title h5 text-center">검색 결과</div>
+						</div>
+						<div className="card-body pt-0">
+							<Search
+								data={searchResult}
+							/>
+						</div>
+					</div>
+					:
+					<></>
+			}
+
 
 			<div className='container'>
 				<Router>

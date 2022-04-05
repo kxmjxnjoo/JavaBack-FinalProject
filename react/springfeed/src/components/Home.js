@@ -11,7 +11,6 @@ import NoPost from './Home/NoPost'
 const Home = ({ user }) => {
     const [posts, setPosts] = useState(null)
     const [followingList, setFollowingList] = useState(null)
-
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
@@ -37,6 +36,14 @@ const Home = ({ user }) => {
             .finally(() => {
                 setIsLoading(false)
             })
+
+        fetch("/api/follow", head)
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                setFollowingList(data)
+            })
     }, [])
 
 
@@ -59,7 +66,10 @@ const Home = ({ user }) => {
             </div>
 
             <div className='col-3 col-md-0 d-none d-md-block sticky-top'>
-
+                <FollowingList
+                    user={user}
+                    followingList={followingList}
+                />
             </div>
 
         </div>

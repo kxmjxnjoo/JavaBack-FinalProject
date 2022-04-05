@@ -3,22 +3,23 @@ import React, { useEffect } from 'react'
 // Components
 import SearchBox from './common/SearchBox'
 
-const Search = () => {
+const Search = ({ data }) => {
 
 	return (
-		<div className='mt-5'>
+		<div className='mt-3'>
 			<div className="row">
 
 				<div className="col-12 col-md-6">
-					<SearchBox
-						type='유저'
-					/>
+					<div className="h3">유저</div>
+					{
+
+					}
 				</div>
 
 				<div className="col-12 col-md-6">
-					<SearchBox
-						type='포스트'
-					/>
+					<div className="h3">포스트</div>
+					{
+					}
 				</div>
 
 			</div>

@@ -23,6 +23,25 @@ END;
 CREATE OR REPLACE PROCEDURE getStory(
     p_story_num IN story.story_num%TYPE,
     p_curvar OUT SYS_REFCURSOR,
+    p_fontcolor out varchar
+)
+IS
+    v_fontcolor varchar2(50) := '';
+BEGIN
+    OPEN p_curvar FOR SELECT * FROM story_view WHERE story_num=p_story_num;
+    
+    select fontcolor into v_fontcolor from story where story_num = p_story_num;
+    p_fontcolor := v_fontcolor;
+    
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    Null;
+END;
+
+
+--이전/ 다음 스토리 번호 출력
+CREATE OR REPLACE PROCEDURE getStoryPrevNext(
+    p_story_num IN story.story_num%TYPE,
     p_prev out number,
     p_next out number
 )
@@ -31,23 +50,20 @@ IS
     v_prev number(5) := 0;
     v_next number(5) := 0;
 BEGIN
-    OPEN p_curvar FOR SELECT * FROM story WHERE story_num=p_story_num;
-    
     select userid into v_userid from story where story_num = p_story_num;
-    
+
     select max(story_num) into v_prev
-    from story_view where story_num < p_story_num group by userid having userid=v_userid;
+    from story where story_num < p_story_num group by userid having userid=v_userid;
     p_prev := v_prev;
     
     select min(story_num) into v_next
-    from story_view where story_num > p_story_num group by userid having userid=v_userid;
+    from story where story_num > p_story_num group by userid having userid=v_userid;
     p_next := v_next; 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
     Null;
 END;
 
-select * from story where userid='king';
 
 --스토리 삭제
 create or replace PROCEDURE deleteStory(
@@ -60,4 +76,17 @@ BEGIN
     commit;
 END;
 
-SELECT * FROM STORY_LIKE
+--스토리 수정
+CREATE OR REPLACE PROCEDURE editStory(
+    p_story_img IN story.img%type, 
+    p_content IN story.story_content%type,
+    p_fontcolor IN story.fontcolor%type,
+    p_story_num story.story_num%type
+)
+IS
+    v_story_num number(5) := 0;
+BEGIN
+    update story set img= p_story_img, story_content= p_content, fontcolor= p_fontcolor
+    where story_num = p_story_num; 
+    commit;
+END;

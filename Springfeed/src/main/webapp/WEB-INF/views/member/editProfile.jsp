@@ -21,6 +21,7 @@
 								<img id="userprofile" style="width:250px" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG }">
 							</div>
 							<input type="hidden" name="oldPicture" value="${ loginUser.IMG }"/>
+							<input type="hidden" name="img" id="newImage" >
 							<label class="input-file-button" for="input-file" id="input-file-button" onclick="resetImg();">
 							  사진 수정
 							</label>
@@ -45,9 +46,7 @@
 				</form>
 				
 				<form id="imgForm" method="post" enctype="multipart/form-data">
-					<input type="file" name="user_img" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
-					<input type="hidden" name="image" id="newImage" >
-					<div id="filename"></div>
+					<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
 				</form>
 			</div>
 		</div>
@@ -67,12 +66,12 @@
 	<script type="text/javascript">
 	
 	$(function(){
-		$('#input-file-button').click(function(){
+		$('#input-file').change(function(){
 			var formselect = $("#imgForm")[0];   // 지목된 폼을 변수에 저장
 			var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
 			
 			$.ajax({
-				url:"<%=request.getContextPath() %>/uploadImg",
+				url:"/uploadImg",
 				type:"POST",
 				enctype:"multipart/form-data",
 				async: false,
@@ -82,16 +81,13 @@
 		        processData : false,
 		        success : function(data){
 		            if(data.STATUS == 1){
-		            	$("#filename").empty();
-		            	$("#filename").append("<div>"+data.FILENAME+"</div>");
-		            	$("#newImage").val(data.FILENAME);
-		            	$("#filename").append(
-		            			"<img src='/images/"+data.FILENAME+"'' height='150'/>");
 		            	
+		            	$("#newImage").val(data.FILENAME);
+		            
 		            }
 		        },
 		        error: function() {
-					alert("실패");
+					alert("이름이 너무 길거나 용량을 초과한 파일입니다. 다시 선택해주세요.");
 				}
 			});
 		});

@@ -25,4 +25,12 @@ public class StoryService {
 		sdao.deleteStory(story_num);
 	}
 
+	public void getStoryPrevNext(HashMap<String, Object> paramMap) {
+		sdao.getStoryPrevNext(paramMap);
+	}
+
+	public void editStory(HashMap<String, Object> paramMap) {
+		sdao.editStory(paramMap);
+	}
+
 }

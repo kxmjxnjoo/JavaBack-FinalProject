@@ -10,20 +10,19 @@ const FollowingList = ({ user, followingList }) => {
     return (
         <div>
             <div>
-                <img src={user.img == null || user.img === '' ? defaultProfile : user.img} alt="" style={imageStyle} />
+                <div className="row">
+                    <div className="col-6">
+                        <img src={defaultProfile} alt="" style={imageStyle} />
+                    </div>
+                    <div className="col-6 mt-2">
+                        <div className="h3">USERID</div>
+                        <div className="h3 text-muted">NAME</div>
+                    </div>
+                </div>
             </div>
 
             <div className="h3 mt-3">내가 팔로우한 사람</div>
             <div>
-                {
-                    followingList.map((following) => {
-                        return (
-                            <div>
-
-                            </div>
-                        )
-                    })
-                }
             </div>
         </div>
     )

@@ -57,7 +57,7 @@
 	
 	<update id="userEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL userEdit( 
-			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE}
+			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE},#{IMG}
 		)}
 	</update>
 	

@@ -31,34 +31,48 @@ public class StoryController {
 	
 	
 	@RequestMapping("/story/add/form") 
-	public String addStoryForm(HttpServletRequest request) {
+	public String addStoryForm(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  
+		if (loginUser == null)  {
+			model.addAttribute("message", "로그인 후 이용해주세요!");
 			return "member/login";
-		else 
+		} else 
 			return "post/addStory";
 	}
 	
 	@RequestMapping("/story/add") 
-	public String addStory(@ModelAttribute("dto") @Valid StoryDto storydto,
-			HttpServletRequest request) {
+	public String addStory(@ModelAttribute("dto") StoryDto storydto,
+			HttpServletRequest request, RedirectAttributes rttr) {
 		
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  
-			return "member/login";
-		else {
+		if (loginUser == null)  {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
+			return "redirect:/login/form";
+		} else {
+			
+			System.out.println(storydto.getStory_content());
+			System.out.println(storydto.getStory_img());
+			System.out.println(storydto.getFontColor());
+			System.out.println(loginUser.get("USERID"));
+			
+			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("story_img", storydto.getStory_img());
-			paramMap.put("content", storydto.getStory_content());
-			paramMap.put("fontcolor", storydto.getFontColor());
+			
+			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))
+				paramMap.put("fontcolor", "white");
+			else
+				paramMap.put("fontcolor", storydto.getFontColor());
+			
+			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("story_num", 0);
+			paramMap.put("story_img", storydto.getStory_img());
 			
 			ss.addStory(paramMap);
 			
@@ -79,15 +93,17 @@ public class StoryController {
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  
+		if (loginUser == null)  {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
 			mav.setViewName("redirect:/login/form");
-		else {
+		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("ref_cursor", null);
 			paramMap.put("story_num", story_num);
 			paramMap.put("prev", 0);
 			paramMap.put("next", 0);
+			paramMap.put("fontcolor", null);
 			
 			ss.getStory(paramMap);
 			
@@ -105,7 +121,11 @@ public class StoryController {
 				
 				HashMap<String, Object> resultMap = list.get(0);
 				mav.addObject("StoryDto", resultMap);
+				mav.addObject("fontcolor", (String)paramMap.get("fontcolor"));
 				
+				//이전글, 다음글 검색
+				ss.getStoryPrevNext(paramMap);
+
 				if(paramMap.get("prev") == null) 
 					mav.addObject("prev", 0);
 				else 
@@ -115,8 +135,6 @@ public class StoryController {
 					mav.addObject("next", 0);
 				else
 					mav.addObject("next", Integer.parseInt(paramMap.get("next").toString()));
-
-				
 				
 				//팔로우 검사
 				HashMap<String, Object> followMap = new HashMap<>();
@@ -129,9 +147,8 @@ public class StoryController {
 				mav.addObject("isFollowing", followMap.get("result"));
 				mav.setViewName("post/storyDetail");
 				
-				
 				System.out.println("next : "+ paramMap.get("next"));
-				System.out.println("prev : "+paramMap.get("prev"));
+				System.out.println("prev : "+ paramMap.get("prev"));
 			}
 		}
 		return mav;
@@ -162,10 +179,83 @@ public class StoryController {
 	}
 	
 	
-	
-	
-	
-	
+	@RequestMapping("/story/edit/form")
+	public String editStory(@RequestParam("story_num") int story_num, 
+			HttpServletRequest request, Model model, RedirectAttributes rttr) {
+
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if(loginUser== null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
+			return "redirect:/login/form";
+		} else {
+			System.out.println(story_num);
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("ref_cursor", null);
+			paramMap.put("story_num", story_num);
+			paramMap.put("fontcolor", "");
+			
+			ss.getStory(paramMap);
+			
+			ArrayList<HashMap<String, Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			
+			HashMap<String, Object> resultMap = list.get(0);
+			
+			System.out.println("스토리번호 : " + resultMap.get("STORY_NUM"));
+			System.out.println("폰트 컬러 : " + paramMap.get("FONTCOLOR"));
+			System.out.println("이미지 : " + resultMap.get("STORY_IMG"));
+			System.out.println("콘텐츠 : " + resultMap.get("STORY_CONTENT"));
+			model.addAttribute("StoryDto", resultMap);
+			model.addAttribute("fontcolor", (String)paramMap.get("fontcolor"));
+			return "post/editStory";
+		}
+		
+	}
+		
+	@RequestMapping("/story/edit") 
+	public String editStory(@ModelAttribute("StoryDto") @Valid StoryDto storydto,
+			HttpServletRequest request, RedirectAttributes rttr,
+			@RequestParam("story_num") int story_num,
+			@RequestParam(value="oldFontColor", required=false) String oldFontcolor,
+			@RequestParam(value="oldPicture", required=false) String oldPicture) {
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if (loginUser == null)  {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
+			return "redirect:/login/form";
+		} else {
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			
+			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))
+				if(oldFontcolor == null || ((String)oldFontcolor).equals(""))
+					paramMap.put("fontcolor", "white");
+				else 
+					paramMap.put("fontcolor", oldFontcolor);
+			else
+				paramMap.put("fontcolor", storydto.getFontColor());
+			
+			if(storydto.getStory_img() == null || ((String)storydto.getStory_img()).equals(""))
+				paramMap.put("story_img", oldPicture);
+			else 
+				paramMap.put("story_img", storydto.getStory_img());
+			
+			paramMap.put("story_content", storydto.getStory_content());
+			paramMap.put("story_num", story_num);
+			
+			ss.editStory(paramMap);
+			
+			rttr.addFlashAttribute("message", "스토리를 수정했어요!");
+			return "redirect:/story?story_num="+story_num;
+			
+		}
+	}
 	
 	
 }
