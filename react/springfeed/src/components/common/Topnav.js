@@ -15,7 +15,7 @@ import { MdExplore as ExploreIcon } from 'react-icons/md'
 import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
 
-const Topnav = ({ page, isLoggedIn, user }) => {
+const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 	const logoStyle = {
 		width: '30px',
 		filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -25,6 +25,10 @@ const Topnav = ({ page, isLoggedIn, user }) => {
 	}
 	const profileStyle = {
 		width: '40px'
+	}
+
+	const handleSearch = (e) => {
+		setSearchKey(e.target.value)
 	}
 
 	return (
@@ -43,19 +47,8 @@ const Topnav = ({ page, isLoggedIn, user }) => {
 
 				<div className="collapse navbar-collapse row" id="navbarTogglerDemo02">
 
-					<form action="/search" className="form-inline my-2 my-lg-0 col-5">
-						<div className="row">
-							<div className="col-10">
-								<input type="text" className="form-control mr-sm-2 col-5" placeholder='검색' aria-label="Search" />
-							</div>
-
-							<div className="col-2">
-								<button class="btn my-2 my-sm-0 col-2 ps-0" type="submit">
-									<SearchIcon className='text-white text-weight-bold' />
-								</button>
-							</div>
-						</div>
-
+					<form action="" className="form-inline my-2 my-lg-0 col-5">
+						<input type="text" className="form-control mr-sm-2 col-5" placeholder="🔎 검색" aria-label="Sesarch" name="key" onChange={handleSearch} />
 					</form>
 
 					<div className="col-6">

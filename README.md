@@ -14,3 +14,4 @@
   - axios
   - context api
   - infinite scroll
+  - react-hot-toast
