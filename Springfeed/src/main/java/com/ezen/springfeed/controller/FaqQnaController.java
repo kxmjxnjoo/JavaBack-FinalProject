@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,38 +74,38 @@ public class FaqQnaController {
 		return mav;
 	}
 	
-
 	
-	@RequestMapping("/faq/add/form")
+	
+	@RequestMapping(value="/faq/add/form",  method=RequestMethod.POST)
 	public ModelAndView addFaqForm( @ModelAttribute("dto") @Valid FaqDto faqdto,
-				BindingResult result, HttpServletRequest request) {
-			
-			ModelAndView mav = new ModelAndView();
-			HttpSession session = request.getSession();
-			HashMap<String,Object> loginUser
-				= (HashMap<String, Object>) session.getAttribute("loginAdmin");
-			if (loginUser == null) mav.setViewName("admin/admingLogin");
-		    else {
-		    	if(result.getFieldError("subject") != null) {
-		    		mav.addObject("message", "제목을 입력하세요");
-		    		mav.setViewName("faq/addFaq");
-		    		return mav;
-		    	} else if(result.getFieldError("content") != null) {
-		    		mav.addObject("message", "내용을 입력하세요");
-		    		mav.setViewName("faq/addFaq");
-		    		return mav;
-		    	}
-		    	
-		    	HashMap<String,Object> paramMap = new HashMap<>();
-		    	paramMap.put("id", loginUser.get("USERID"));
-		    	paramMap.put("subject", faqdto.getFaq_subject());
-		    	paramMap.put("content", faqdto.getFaq_content());
-		    	fqs.addFaq(paramMap);
-		    	mav.setViewName("redirect:/admin/faqList");
-		    }
-			return mav;
-		}
-
+			BindingResult result, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
+		if (loginUser == null) mav.setViewName("admin/admingLogin");
+	    else {
+	    	if(result.getFieldError("subject") != null) {
+	    		mav.addObject("message", "제목을 입력하세요");
+	    		mav.setViewName("faq/addFaq");
+	    		return mav;
+	    	} else if(result.getFieldError("content") != null) {
+	    		mav.addObject("message", "내용을 입력하세요");
+	    		mav.setViewName("faq/addFaq");
+	    		return mav;
+	    	}
+	    	
+	    	HashMap<String,Object> paramMap = new HashMap<>();
+	    	paramMap.put("id", loginUser.get("USERID"));
+	    	paramMap.put("subject", faqdto.getFaq_subject());
+	    	paramMap.put("content", faqdto.getFaq_content());
+	    	fqs.addFaq(paramMap);
+	    	mav.setViewName("redirect:/admin/faqList");
+	    }
+		return mav;
+	}
+	
 	
 	
 	@RequestMapping("/faq/edit/form")
@@ -135,7 +136,7 @@ public class FaqQnaController {
 	}
 	
 	
-
+	
 	@RequestMapping("/admin/qnaList")
 	public ModelAndView qnaList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
@@ -235,7 +236,7 @@ public class FaqQnaController {
 	
 
 	@RequestMapping("/qna/add/form")
-	public ModelAndView addQnaForm( @ModelAttribute("dto") @Valid QnaDto qnadto,
+	public ModelAndView addQnaForm( @ModelAttribute("qdto") @Valid QnaDto qnadto,
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -258,7 +259,7 @@ public class FaqQnaController {
 	    	paramMap.put("id", loginUser.get("USERID"));
 	    	paramMap.put("subject", qnadto.getQna_subject());
 	    	paramMap.put("content", qnadto.getQna_content());
-	    	//fqs.addQna(paramMap);
+	    	fqs.addQna(paramMap);
 	    	mav.setViewName("redirect:/qna");
 	    }
 		return mav;
@@ -284,7 +285,7 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/qna/delete")
-	public String deleteQna(@RequestParam("qnanum") QnaDto qna_num) {
+	public String deleteQna(@RequestParam("qna_num") QnaDto qna_num) {
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("qnanum", qna_num);
 		fqs.deleteQna(paramMap);
@@ -293,7 +294,7 @@ public class FaqQnaController {
 	}
 	
 	
-
+	
 	@RequestMapping("/faqList")
 	public String faqList() {
 		return "userfaqqna/faq";

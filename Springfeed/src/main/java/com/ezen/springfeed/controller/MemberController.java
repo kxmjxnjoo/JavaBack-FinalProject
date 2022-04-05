@@ -398,8 +398,6 @@ public class MemberController {
     @RequestMapping("/deleteAcount")
     public String deleteAcount(HttpServletRequest request, Model model) {
     	
-    	String url = "";
-    	
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
 		= (HashMap<String, Object>) session .getAttribute("loginUser");

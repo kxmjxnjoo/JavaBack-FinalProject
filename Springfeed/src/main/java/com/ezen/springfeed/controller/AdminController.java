@@ -1,6 +1,7 @@
 package com.ezen.springfeed.controller;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.Paging;
+import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
@@ -78,7 +80,7 @@ public class AdminController {
 			return "admin/admingLogin";
 		}
 	}	
-
+	
 	
 	
 	@RequestMapping("/admin/memberList")
@@ -248,7 +250,7 @@ public class AdminController {
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 		
 			mav.addObject("reportList", list);
-			paramMap.put("reportList", list);
+			//paramMap.put("reportList", list);
 			// 둘 중 뭐지?
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
@@ -260,7 +262,7 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/admin/report/post")
-	public ModelAndView postReportCheck( @ModelAttribute("dto")ReportDto reportdto, 
+	public ModelAndView postReportCheck( @ModelAttribute("rdto")ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -324,7 +326,7 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/admin/report/story")
-	public ModelAndView storyReportCheck(@ModelAttribute("dto")ReportDto reportdto, 
+	public ModelAndView storyReportCheck(@ModelAttribute("rdto")ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -351,31 +353,35 @@ public class AdminController {
 	@RequestMapping(value="/admin/report/handle")
 	public String handleReport(HttpServletRequest request, 
 			@ModelAttribute("rdto") ReportDto reportdto,
+			@ModelAttribute("pdto") PostDto postdto,
 			@ModelAttribute("mdto") MemberDto memberdto) {
 		
 		int report_num = Integer.parseInt(request.getParameter("report_num"));
 		System.out.println(report_num);
-		int result = 0;
+		//int result = 0;
 		ReportDto rdto = new ReportDto();
 		MemberDto mdto = new MemberDto();
+		PostDto pdto = new PostDto();
 		HashMap<String,Object> paramMap = new HashMap<>();
 		
 		if(request.getParameter("post_num") != null) {
 			int post_num = Integer.parseInt(request.getParameter("post_num"));
 			paramMap.put("report_num", report_num);
 			request.setAttribute("post_num", post_num);
-			request.setAttribute("ReportDto", rdto);
+			request.setAttribute("pdto", pdto);
 			as.deletePost(paramMap);
 			
 		} else if(request.getParameter("story_num") != null ) {
 			int story_num = Integer.parseInt(request.getParameter("story_num"));
 			paramMap.put("report_num", report_num);
 			request.setAttribute("story_num", story_num);
+			request.setAttribute("rdto", rdto);
 			as.deleteStory(paramMap);
 		} else {
 			String userid = request.getParameter("userid");
 			paramMap.put("report_num", report_num);
 			request.setAttribute("userid", userid);
+			request.setAttribute("mdto", mdto);
 			as.blockUser(paramMap);
 			
 		}

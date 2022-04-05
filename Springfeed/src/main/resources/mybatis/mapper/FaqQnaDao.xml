@@ -13,14 +13,14 @@
 				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		) }
 	</select>
-
+	
 	<insert id="addFaq" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL addFaq( ${faq_num}, #{faq_subject}, #{faq_content} ) }
 	</insert>
 	
 	<update id="faqEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL faqEdit( 
-			#{faq_subject},#{faq_content}
+			#{faq_subject}, #{faq_content}
 		)}
 	</update>
 	
@@ -34,7 +34,7 @@
 	
 	<update id="qnaEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL qnaEdit( 
-			#{qna_subject},#{qna_content}
+			#{qna_subject}, #{qna_content}
 		)}
 	</update>
 	

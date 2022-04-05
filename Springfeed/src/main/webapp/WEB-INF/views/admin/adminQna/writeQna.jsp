@@ -8,9 +8,9 @@
 <h1 id="info" style="text-align:center;">궁금하신게 있다면 질문해주세요</h1>
 	<br><br>
 	<table>
-		<tr><th width="80">작성자</th><td>${loginUser.userid}<input type="hidden"
-			name="userid" value="${loginUser.userid}"></td></tr>
-		<tr><th>이메일</th><td>${loginUser.eamil}</td></tr>
+		<tr><th width="80">작성자</th><td>${loginUser.USERID}<input type="hidden"
+			name="userid" value="${loginUser.USERID}"></td></tr>
+		<tr><th>이메일</th><td>${loginUser.EMAIL}</td></tr>
 		<tr><th>제목</th><td><input type="text" class="text_box" size="70" name="title"></td></tr>
 		<tr><th>내용</th><td><textarea cols="70" rows="15"  class="text_box" name="content"></textarea>
 			</td></tr>

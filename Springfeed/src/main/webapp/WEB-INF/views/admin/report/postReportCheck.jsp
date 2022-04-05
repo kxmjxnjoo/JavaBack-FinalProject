@@ -15,15 +15,15 @@
 		<div class="detail_wrap">
 			<!-- 포스팅한 이미지 표시 -->
 			<div class="detail_img">
-				<img src="../images/${PostDto.post_img}" width="860px"> 
+				<img src="../images/${PostDto.POST_IMG}" width="860px"> 
 			</div>
 			<div class="contents">
 				<!-- 글 작성자 프로필 -->
 				<div id="user">
-					<div id="userprofile" onclick="/userpage&userid=${PostDto.userid}'"> 
-						<img class="userImg" width=50px height=50px src="../images/${ PostDto.user_img == null ? "tmpUserIcon.png" : PostDto.user_img }">
+					<div id="userprofile" onclick="/userpage&userid=${PostDto.USERID}'"> 
+						<img class="userImg" width=50px height=50px src="../images/${ PostDto.USER_IMG == null ? "tmpUserIcon.png" : PostDto.user_img }">
 					</div>
-					<b>${PostDto.userid}</b>  
+					<b>${PostDto.USERID}</b>  
 					<!-- <div id="buttons" onClick="setting();">
 								<span class="material-icons" > more_vert </span>
 					</div> -->
