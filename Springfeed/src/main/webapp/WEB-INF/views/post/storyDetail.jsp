@@ -57,7 +57,7 @@ function goReport(story_num) {
 		<c:choose> 
 			<c:when test="${StoryDto.USERID == loginUser.USERID}">
 				<div id="setting_menu">
-					<div class="setting_btn" onclick="location.href='/story/edit/form&story_num=${StoryDto.STORY_NUM}'"> 수정</div>
+					<div class="setting_btn" onclick="location.href='/story/edit/form?story_num=${StoryDto.STORY_NUM}'"> 수정</div>
 					<div class="setting_btn" onclick="deleteCheck(${StoryDto.STORY_NUM});"> 삭제 </div>
 					<div class="setting_btn" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
@@ -104,7 +104,7 @@ function goReport(story_num) {
 <!-- 클릭시 유저 프로필로 이동 -->
 			<div id="goUserprofile" onClick="location.href='#'"> 
 			<!-- /post?userid=${StoryDto.USERID} -->
-				<img id="userprofile" src="/images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
+				<img id="userprofile" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : userImg }">
 			</div> 
 			
 			
@@ -115,7 +115,7 @@ function goReport(story_num) {
 				<div id="story_user" onClick="location.href='#'">
 					<!-- /post?userid=${StoryDto.USERID} -->
 					<div id="userprofile" onClick="location.href='#'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
-						<img class="userImg" width=50px height=50px src="../images/${ userImg == null || userImg.equals("") ? "tmpUserIcon.png" : userImg }">
+						<img class="userImg" width=50px height=50px src="../images/${ StoryDto.USER_IMG == null || StoryDto.USER_IMG.equals("") ? "tmpUserIcon.png" : userImg }">
 					</div> 
 					<div id="userid"><b> ${StoryDto.USERID}</b></div>
 					<span id="story_date"><fmt:formatDate value="${StoryDto.CREATE_DATE}"/></span>
@@ -127,11 +127,11 @@ function goReport(story_num) {
 				
 <!-- 작성한 글 내용 -->
 			<c:choose>
-				<c:when test="empty ${StoryDto.FONTCOLOR}">
+				<c:when test="empty ${fontcolor}">
 					<div id="story_content">  <h2>  ${StoryDto.STORY_CONTENT}  </h2>  </div>
 				</c:when>
 				<c:otherwise>
-					<div id="story_content" style="color:${StoryDto.FONTCOLOR}"> <h2>  ${StoryDto.STORY_CONTENT}  </h2>  </div> 
+					<div id="story_content" style="color:${fontcolor}"> <h2>  ${StoryDto.STORY_CONTENT}  </h2>  </div> 
 				</c:otherwise>
 			</c:choose> 
 <!-- 좋아요 버튼 -->

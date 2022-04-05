@@ -346,8 +346,8 @@ public class MemberController {
 					request, savePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
 			);
 			resultMap.put("STATUS", 1);
-			System.out.println(multi.getFilesystemName("user_img"));
-			resultMap.put("FILENAME", multi.getFilesystemName("user_img"));
+			System.out.println(multi.getFilesystemName("fileName"));
+			resultMap.put("FILENAME", multi.getFilesystemName("fileName"));
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

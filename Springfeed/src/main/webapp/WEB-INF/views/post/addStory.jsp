@@ -16,7 +16,7 @@
 <body>
 <%@ include file="../common/topnav.jsp" %>
 
-<form name="frm" method="post" enctype="multipart/form-data" >
+<form name="frm" method="post" action="/story/add">
 	<div class="wrap">
 		<div id="postingStory" >
 			<div id="postingTitle">
@@ -32,7 +32,7 @@
 					  업로드
 					</label>
 					<div id ="image_container"></div>
-					<input type="file" name="post_img" id="input-file"  onchange="setThumbnail(event);"/>
+					<input type="hidden" name="story_img" id="newImage">
 				</div>
 				<div id="clear"></div>
 				<select name="fontColor" id="fontColor" class="select-css">
@@ -47,7 +47,7 @@
 					<option value = "#e59999"> 스프링 </option>
 				</select>
 				<div id="postingText">
-					<textarea name="post_content"
+					<textarea name="story_content"
 					onKeyDown="textCounter(this.form.post_content,this.form.remLen,100);" 
 					onKeyUp="textCounter(this.form.post_content,this.form.remLen,100);"
 					placeholder="사진을 설명해주세요" rows="4" cols="50"></textarea>
@@ -59,7 +59,7 @@
 					<label id="input-submit-button" for="input-submit">
 					등록
 					</label>
-					<input type="button" name="input-submit" id="input-submit"  onclick="uploadCheck();">
+					<input type="button" name="input-submit" id="input-submit" onclick="uploadCheck();">
 					<label id="input-reset-button" for="input-reset" onclick="reset();">
 					다시 작성 
 					</label>
@@ -70,7 +70,44 @@
 	</div>
 </form>
 
-<script type="text/javascript" language="javascript" defer="defer"> 
+<!-- 이미지 ajax용 form -->
+<form id="imgForm" method="post" enctype="multipart/form-data">
+	<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+
+$(function(){
+	$('#input-file').change(function(){
+		var formselect = $("#imgForm")[0];   // 지목된 폼을 변수에 저장
+		var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
+		
+		$.ajax({
+			url:"/uploadImg",
+			type:"POST",
+			enctype:"multipart/form-data",
+			async: false,
+			data: formdata,
+	    	timeout: 10000,
+	    	contentType : false,
+	        processData : false,
+	        success : function(data){
+	            if(data.STATUS == 1){
+	            	
+	            	$("#newImage").val(data.FILENAME);
+	            
+	            }
+	        },
+	        error: function() {
+				alert("실패");
+			}
+		});
+	});
+});
+
+
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
 	reader.onload = function(event) { 
@@ -102,14 +139,14 @@ function textCounter(field, countfield, maxlimit) {
 
 function uploadCheck(){
 	var theForm = document.frm;
-	if( theForm.post_img.value=="") {
+	if( theForm.story_img.value=="") {
 		alert('사진을 첨부해주세요'); 
 		return;
 	} else {
-		theForm.action="/story/add/form";
+		theForm.action="/story/add";
 		theForm.submit();
 	}
-}
+} 
 
 </script>
 </body>

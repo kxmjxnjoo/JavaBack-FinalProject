@@ -9,7 +9,7 @@
 	
 	<insert id="addStory" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL addStory( 
-			#{story_img},#{content},#{fontcolor},#{userid},
+			#{story_img},#{story_content},#{fontcolor},#{userid},
 			#{story_num, mode=OUT, jdbcType=INTEGER }
 		)}
 	</insert>
@@ -18,6 +18,13 @@
 		{  CALL getStory( 
 			#{story_num},
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap},
+			#{fontcolor, mode=OUT, jdbcType=VARCHAR }
+		)  }
+	</select>
+	
+	<select id="getStoryPrevNext" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getStoryPrevNext( 
+			#{story_num},
 			#{prev, mode=OUT, jdbcType=INTEGER }, #{next, mode=OUT, jdbcType=INTEGER }
 		)  }
 	</select>
@@ -26,4 +33,9 @@
 		{  CALL deleteStory( #{story_num} )}
 	</delete>
 	
+	<update id="editStory" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL editStory( 
+			#{story_img},#{story_content},#{fontcolor},#{story_num}
+		)}
+	</update>
 </mapper>

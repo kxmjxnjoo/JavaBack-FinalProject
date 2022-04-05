@@ -46,8 +46,7 @@
 				</form>
 				
 				<form id="imgForm" method="post" enctype="multipart/form-data">
-					<input type="file" name="user_img" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
-					<div id="filename"></div>
+					<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
 				</form>
 			</div>
 		</div>
@@ -82,16 +81,13 @@
 		        processData : false,
 		        success : function(data){
 		            if(data.STATUS == 1){
-		            	$("#filename").empty();
-		            	$("#filename").append("<div>"+data.FILENAME+"</div>");
-		            	$("#newImage").val(data.FILENAME);
-		            	$("#filename").append(
-		            			"<img src='/images/"+data.FILENAME+"'' height='150'/>");
 		            	
+		            	$("#newImage").val(data.FILENAME);
+		            
 		            }
 		        },
 		        error: function() {
-					alert("실패");
+					alert("이름이 너무 길거나 용량을 초과한 파일입니다. 다시 선택해주세요.");
 				}
 			});
 		});
