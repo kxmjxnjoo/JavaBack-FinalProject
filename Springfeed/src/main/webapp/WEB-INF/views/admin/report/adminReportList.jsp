@@ -105,5 +105,5 @@ function openUserPage(userid, report_num) {
 		"width="+_width+", height="+_height+", left="+_left;
 	window.open(url, "reportPost", opt);
 }
-
+	
 </script>

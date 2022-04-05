@@ -132,7 +132,7 @@ public class AdminController {
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 		
-			mav.addObject("memberList", list);
+			mav.addObject("mdto", list);
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
 			mav.setViewName("/admin/member/adminMemberList");

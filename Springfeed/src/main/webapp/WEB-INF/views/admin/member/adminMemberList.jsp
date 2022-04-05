@@ -24,7 +24,7 @@ function go_search(){
 	<table>
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
 				<th>가입일</th></tr>
-		<c:forEach items="${memberList}" var="mdto">
+		<c:forEach items="${mdto}" var="mdto">
 			<tr><td width="50">${mdto.NAME}</td> <td width="50">${mdto.USERID}</td> <td width="50">${mdto.EMAIL}</td>
 					<td width="50">${mdto.PHONE}</td> <td width="50">${mdto.USEYN}</td> 
 					<td width="50"><fmt:formatDate value="${mdto.INDATE}"/></td>
