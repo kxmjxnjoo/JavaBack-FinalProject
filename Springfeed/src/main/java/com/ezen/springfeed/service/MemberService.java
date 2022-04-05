@@ -50,7 +50,6 @@ public class MemberService {
 	public void userEdit(HashMap<String, Object> paramMap) {
 		mdao.userEdit(paramMap);
 	}
-<<<<<<< HEAD
 
 	public void deleteAcount(HashMap<String, Object> paramMap) {
 		mdao.deleteAcount(paramMap);
@@ -63,8 +62,4 @@ public class MemberService {
 	public void getFollow(HashMap<String, Object> followMap) {
 		mdao.getFollow(followMap);
 	}
-
-
-=======
->>>>>>> 951acfc (add main post feed)
 }
