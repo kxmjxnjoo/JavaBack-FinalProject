@@ -7,15 +7,16 @@ import FollowingList from './Home/FollowingList'
 import Loading from './common/Loading'
 import Error from './common/Error'
 import NoPost from './Home/NoPost'
+import toast from 'react-hot-toast'
 
-const Home = ({ user }) => {
+const Home = ({ user, setPage }) => {
     const [posts, setPosts] = useState(null)
-    const [followingList, setFollowingList] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [isError, setIsError] = useState(null)
+    const [isPostFeedError, setIsPostFeedError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
+        setPage(0)
         const head = new Headers({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -30,21 +31,14 @@ const Home = ({ user }) => {
             })
             .catch((err) => {
                 //setIsError(true)
-                console.log(err)
                 setErrorMessage(err)
             })
             .finally(() => {
                 setIsLoading(false)
             })
 
-        fetch("/api/follow", head)
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                setFollowingList(data)
-            })
     }, [])
+
 
 
     return (
@@ -54,7 +48,7 @@ const Home = ({ user }) => {
                 <div>
                     {
                         isLoading ? <Loading /> :
-                            isError ? <Error errorMessage={errorMessage} /> :
+                            isPostFeedError ? <Error errorMessage={errorMessage} /> :
                                 posts != null ?
                                     posts.map((post) => {
                                         return (
@@ -68,7 +62,6 @@ const Home = ({ user }) => {
             <div className='col-3 col-md-0 d-none d-md-block sticky-top'>
                 <FollowingList
                     user={user}
-                    followingList={followingList}
                 />
             </div>
 

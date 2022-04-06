@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
 // Icon
 import {
@@ -10,8 +11,7 @@ import { MdOutlineMoreHoriz as DetailIcon } from 'react-icons/md'
 import defaultProfile from '../../images/tmpUserIcon.png'
 
 const Post = ({ post }) => {
-
-    const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content } = post
+    const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content, post_num: postNum } = post
 
     const profileStyle = {
         width: '50px'
@@ -21,6 +21,41 @@ const Post = ({ post }) => {
     }
     const postImageStyle = {
         width: '100%'
+    }
+
+    const [isLikedData, setIsLikedData] = useState(isLiked)
+
+    const handleLike = () => {
+
+        const postLike =
+            fetch("/api/post/like?num=" + postNum)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    setIsLikedData(!isLikedData)
+                })
+                .catch((err) => {
+                    return err
+                })
+
+        if (!isLikedData) {
+            toast.promise(postLike,
+                {
+                    loading: '잠시만 기다려 주세요...',
+                    success: userid + "님의 포스트를 좋아요 했어요",
+                    error: "좋아요 하는데 에러가 났어요 다시 시도해 주세요"
+                }
+            )
+        } else {
+            toast.promise(postLike,
+                {
+                    loading: '잠시만 기다려 주세요...',
+                    success: userid + "님의 포스트의 좋아요를 취소했어요",
+                    error: "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요"
+                }
+            )
+        }
     }
 
     return (
@@ -52,7 +87,7 @@ const Post = ({ post }) => {
                 <div className="row">
                     <div className="col-10">
                         {
-                            isLiked ? <LikeFillIcon className='m-2 text-danger' /> : <LikeIcon className='m-2' />
+                            isLikedData ? <LikeFillIcon className='m-2 text-danger' onClick={handleLike} /> : <LikeIcon className='m-2' onClick={handleLike} />
                         }
                         <ReplyIcon className='m-2' />
                         <MessageIcon className='m-2' />

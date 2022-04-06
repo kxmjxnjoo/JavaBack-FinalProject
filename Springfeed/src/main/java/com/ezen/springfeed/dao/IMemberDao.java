@@ -17,6 +17,10 @@ public interface IMemberDao {
 	void deleteAcount(HashMap<String, Object> paramMap);
 	void activateAccount(String userid);
 	void getFollow(HashMap<String, Object> followMap);
+<<<<<<< HEAD
 	void getNotiCount(HashMap<String, Object> paramMap);
 	void findId(HashMap<String, Object> paramMap);
+=======
+	void getFollowedList(HashMap<String, Object> paramMap);
+>>>>>>> 1d07771 (add message views)
 }
