@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.springfeed.dto.FaqDto;
 import com.ezen.springfeed.dto.Paging;
@@ -222,45 +223,55 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/qna/add")
-	public String addQna(HttpServletRequest request) {
+	@RequestMapping(value="/qna/add", method=RequestMethod.POST)
+	public String addQna(@ModelAttribute("qdto") @Valid QnaDto qnadto,
+			BindingResult result, Model model,
+			HttpServletRequest request, RedirectAttributes rttr) {
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginUser
 			= (HashMap<String, Object>) session.getAttribute("loginUser");
-		if(loginUser==null) return "member/login";
+		if(loginUser==null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			return "member/login";
+		}
 		else {
-			return "qna/qnaView";
+
+	    	System.out.println(qnadto.getQna_content());
+	    	System.out.println(qnadto.getQna_subject());
+	    	
+	    	HashMap<String,Object> paramMap = new HashMap<>();
+	    	paramMap.put("userid", loginUser.get("USERID"));
+	    	paramMap.put("subject", qnadto.getQna_subject());
+	    	paramMap.put("content", qnadto.getQna_content());
+	    	paramMap.put("qna_num", 0);
+	    	fqs.addQna(paramMap);
+	    	
+	    	int qna_num = Integer.parseInt(paramMap.get("qna_num").toString());
+			return "redirect:/qna/view?qna_num="+qna_num;
 		}
 	}
 	
+	@RequestMapping("/qna/view")
+	public ModelAndView qnaView(HttpServletRequest request, RedirectAttributes rttr) {
+		ModelAndView mav = new ModelAndView();
+	
+		return mav;
+	}
 	
 
 	@RequestMapping("/qna/add/form")
-	public ModelAndView addQnaForm( @ModelAttribute("qdto") @Valid QnaDto qnadto,
-			BindingResult result, HttpServletRequest request) {
+	public ModelAndView addQnaForm(HttpServletRequest request, RedirectAttributes rttr) {
 		
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginUser
 			= (HashMap<String, Object>) session.getAttribute("loginUser");
-		if (loginUser == null) mav.setViewName("member/login");
+		if (loginUser == null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			mav.setViewName("redirect:/login/form");
+		}
 	    else {
-	    	if(result.getFieldError("subject") != null) {
-	    		mav.addObject("message", "제목을 입력하세요");
-	    		mav.setViewName("qna/qna/add");
-	    		return mav;
-	    	} else if(result.getFieldError("content") != null) {
-	    		mav.addObject("message", "내용을 입력하세요");
-	    		mav.setViewName("qna/qna/add");
-	    		return mav;
-	    	}
-	    	
-	    	HashMap<String,Object> paramMap = new HashMap<>();
-	    	paramMap.put("id", loginUser.get("USERID"));
-	    	paramMap.put("subject", qnadto.getQna_subject());
-	    	paramMap.put("content", qnadto.getQna_content());
-	    	fqs.addQna(paramMap);
-	    	mav.setViewName("redirect:/qna");
+	    	mav.setViewName("userFaqQna/addQna");
 	    }
 		return mav;
 	}

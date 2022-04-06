@@ -29,7 +29,7 @@
 	</delete>
 	
 	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL addQna( ${qna_id}, #{qna_subject}, #{qna_content} ) }
+		{ CALL addQna( #{userid}, #{subject}, #{content}, #{qna_num, mode=OUT, jdbcType=INTEGER } ) }
 	</insert>
 	
 	<update id="qnaEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
