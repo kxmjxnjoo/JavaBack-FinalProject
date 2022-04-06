@@ -41,7 +41,6 @@
 					<input type="text" name="phone" value="${ loginUser.PHONE }">
 					<textarea name="introduce" placeholder="${ loginUser.INTRODUCE }">${ loginUser.INTRODUCE }</textarea>
 					
-					<div>${ message }</div>
 					<input type="submit" value="수정완료" onclick="editCheck();">
 				</form>
 				

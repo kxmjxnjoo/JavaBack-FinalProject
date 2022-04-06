@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ezen.springfeed.dto.MailDto;
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
+import com.ezen.springfeed.service.sendEmailService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -115,8 +118,6 @@ public class MemberController {
     	int cnt = 1;
     	
     	if(memberdto.getUserid() != null) {
-        	System.out.println("userIdCheck 진입");
-        	System.out.println("전달 받은 id = " + memberdto.getUserid());
         	String userid = memberdto.getUserid();
 	    	HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("cnt", 0);
@@ -378,6 +379,7 @@ public class MemberController {
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
+    		@RequestParam("oldPicture") String oldPicture,
     		RedirectAttributes rttr) {
 
     	String url = "redirect:/user/edit/form";
@@ -398,7 +400,10 @@ public class MemberController {
      			paramMap.put("EMAIL",memberdto.getEmail());
      			paramMap.put("PHONE",memberdto.getPhone());
      			paramMap.put("INTRODUCE",memberdto.getIntroduce());
-     			paramMap.put("IMG", memberdto.getImg());
+     			if(memberdto.getImg()==null || memberdto.getImg().equals(""))
+     				paramMap.put("IMG", oldPicture);
+     			else
+     				paramMap.put("IMG", memberdto.getImg());
      			
      			ms.userEdit(paramMap);
      			
@@ -472,8 +477,36 @@ public class MemberController {
     public String findIdPw() {
     	return "member/findIdPwd";
     }
-   
+
+    //비밀번호 찾기
+    @ResponseBody 
+    @GetMapping("/find/pw")
+    public Map<String, Boolean> pwdFind(@ModelAttribute("dto") @Valid MemberDto memberdto,
+          Model model){
+       Map<String, Boolean> resultMap = new HashMap<>();
+       boolean pwFindCheck = false;
+       ms.userEmailCheck(memberdto.getEmail(), memberdto.getName(), pwFindCheck);
+       
+       System.out.println(pwFindCheck);
+       if(pwFindCheck == true) 
+          resultMap.put("check", pwFindCheck);
+       else 
+          model.addAttribute("message", "해당하는 회원을 찾을 수 없습니다.");
+       return resultMap;
+    }
     
+    @Autowired
+    sendEmailService ses;
+    
+    //이메일 전송
+    @ResponseBody
+    @PostMapping("/find/sendEmail")
+    public void sendEamil(String email, String name) {
+       MailDto dto = ses.createMailAndChangePassword(email, name);
+        ses.mailSend(dto);
+    
+    }
+  
     //아이디 찾기 액션
     @RequestMapping("/find/id")
     public String findId(Model model, HttpServletRequest request, 
@@ -501,6 +534,8 @@ public class MemberController {
     	}    	
     	
     }
+    
+    
     
     
 

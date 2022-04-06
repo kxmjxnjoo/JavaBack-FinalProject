@@ -29,7 +29,7 @@
 	
 		<div id="findpwdBox">
 			<div id="findpwdBoxContent">
-				<form action="spring.do" method="post">
+				<form action="/find/pw" method="post">
 					<h1>비밀번호 찾기</h1>
 					
 					<input type="hidden" name="command" value="findpwd">
@@ -37,7 +37,7 @@
 					<input type="text" name="userid" placeholder="아이디" id="findpwdUserid">
 					<input type="text" name="name" placeholder="이름" id="findpwdName">
 					<input type="text" name=email placeholder="이메일" id="findpwdPhone"> 
-					<input type="button" onclick="getTempPwd()" value="임시비밀번호 전송">
+					<input type="button" class="getTempPwd" value="임시비밀번호 전송">
 					
 					<input type="submit" value="비밀번호 찾기" onclick="return checkPwd()"> 
 				</form>
@@ -48,15 +48,16 @@
 	
 		<%@ include file="../common/footer.jsp" %>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		
-	  	$("#getTempPwd").click(function () {
+	  	$(".getTempPwd").click(function () {
 			let email = $("#email").val();
 			let userid = $("#userid").val();
 			
 			$.ajax({
 				type:"GET",
-				url : "/check/pw",
+				url : "/find/pw",
 				data : {
 					"email" : email,
 					"userid" : userid
@@ -98,7 +99,7 @@
 			
 			return true
 		}
-		
+		/* 
 		function checkPwd() {
 			let id = document.getElementById("findpwdUserid")
 			let name = document.getElementById("findpwdName")
@@ -123,7 +124,7 @@
 			}
 			
 			return true
-		}
+		} */
 	</script>
 	
 </body>

@@ -79,4 +79,15 @@
 		)  }
 	</select>
 	
+	<select id="userEmailCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userEmailCheck( 
+			#{name}, #{email}, #{pwFindCheck, mode=OUT, jdbcType=BOOLEAN }
+		)  }
+	</select>
+	
+	<select id="updatePassword" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updatePassword( 
+			#{str}, #{email}
+		)  }
+	</select>
 </mapper>

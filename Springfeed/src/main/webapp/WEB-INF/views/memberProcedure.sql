@@ -206,5 +206,30 @@ BEGIN
     end if;
 END;
 
+--비밀번호 찾기 - 이메일 확인
+CREATE OR REPLACE PROCEDURE userEmailCheck(
+    p_name IN member.name%TYPE, 
+    p_email IN member.email%TYPE, 
+    pwFindCheck OUT boolean    
+)
+IS
+    v_count number(5) := 0;
+BEGIN
+    SELECT count(*) into v_count FROM member WHERE name=p_name and email=p_email;
+    
+    if v_count = 1 then
+        pwFindCheck := true;
+    else 
+        pwFindCheck := false;
+    end if;
+END;
 
-select * from member
+--임시 비밀번호로 비밀번호 변경
+CREATE OR REPLACE PROCEDURE updatePassword(
+    p_str IN member.password%TYPE, 
+    p_email IN member.email%TYPE
+)
+IS
+BEGIN
+    update member set password=p_str where email = p_email;
+END;
