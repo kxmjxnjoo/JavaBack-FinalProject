@@ -145,7 +145,7 @@ public class StoryController {
 					System.out.println("prev : "+ paramMap.get("prev"));
 				} else {
 					rttr.addFlashAttribute("message", "삭제되었거나 비활성화된 계정의 스토리 입니다.");
-					mav.setViewName("redirect:/");
+				    mav.setViewName("redirect:/");
 				}
 			}
 		}
@@ -251,7 +251,6 @@ public class StoryController {
 			
 			rttr.addFlashAttribute("message", "스토리를 수정했어요!");
 			return "redirect:/story?story_num="+story_num;
-			
 		}
 	}
 	

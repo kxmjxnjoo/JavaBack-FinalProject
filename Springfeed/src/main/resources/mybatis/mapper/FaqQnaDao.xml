@@ -49,4 +49,9 @@
 		)  }
 	</select>
 	
+	<select id="faqList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL faqList( 
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
 </mapper>

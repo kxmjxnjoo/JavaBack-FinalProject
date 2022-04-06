@@ -22,6 +22,8 @@ public interface IFaqQnaDao {
 	void qnaEdit(HashMap<String, Object> paramMap);
 
 	void qnaList(HashMap<String, Object> paramMap);
+
+	void faqList(HashMap<String, Object> paramMap);
 	
 
 

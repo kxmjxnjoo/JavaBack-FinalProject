@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/css/userfaq.css">
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="faqBox">
 		<h1>자주 묻는 질문</h1>
@@ -25,9 +25,9 @@
 			<c:otherwise>
 			
 				<c:forEach var="fdto" items="${ faqList }">
-					<div class="faqTitle" onclick="showFaq( '${fdto.faq_subject}', `${ fdto.faq_content }` );">
+					<div class="faqTitle" onclick="showFaq( '${fdto.FAQ_SUBJECT}', `${ fdto.FAQ_CONTENT }` );">
 						<h3 class="faqQ">Q</h3>
-						<h3>${ fdto.faq_subject }</h3>
+						<h3>${ fdto.FAQ_SUBJECT }</h3>
 					</div>
 				</c:forEach>
 			
@@ -63,6 +63,6 @@
 		}
 	</script>
 	
-	<%@ include file="/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

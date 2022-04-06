@@ -47,6 +47,10 @@ public class FaqQnaService {
 		fqdao.qnaList(paramMap);
 	}
 
+	public void faqList(HashMap<String, Object> paramMap) {
+		fqdao.faqList(paramMap);
+	}
+
 
 
 }

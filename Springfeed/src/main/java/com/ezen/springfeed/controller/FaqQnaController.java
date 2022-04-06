@@ -295,8 +295,21 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/faqList")
-	public String faqList() {
-		return "userfaqqna/faq";
+	@RequestMapping("/faq")
+	public ModelAndView faqList() {
+		
+		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("ref_cursor", null);
+		
+		fqs.faqList(paramMap);
+		
+		ArrayList<HashMap<String, Object>> list
+        = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+		mav.addObject("faqList", list);
+		mav.setViewName("userFaqQna/faq");
+		
+		return mav;
 	}
 }

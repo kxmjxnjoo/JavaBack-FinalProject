@@ -1,0 +1,9 @@
+
+--faqList
+CREATE OR REPLACE PROCEDURE faqList(
+    p_curvar OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_curvar FOR SELECT * FROM faq;
+END;
