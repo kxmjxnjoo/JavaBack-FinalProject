@@ -49,9 +49,30 @@
 		)  }
 	</select>
 	
+	<select id="getQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getQna( 
+			#{qna_num},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
 	<select id="faqList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL faqList( 
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>
+	
+	<select id="getQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getQnaList( 
+			#{userid},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
+	<select id="getAllQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllQna( 
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
 </mapper>

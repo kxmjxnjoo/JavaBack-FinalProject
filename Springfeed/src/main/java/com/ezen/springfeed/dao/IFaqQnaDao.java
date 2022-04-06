@@ -24,6 +24,12 @@ public interface IFaqQnaDao {
 	void qnaList(HashMap<String, Object> paramMap);
 
 	void faqList(HashMap<String, Object> paramMap);
+
+	void getQna(HashMap<String, Object> paramMap);
+
+	void getQnaList(HashMap<String, Object> paramMap);
+
+	void getAllQna(HashMap<String, Object> paramMap);
 	
 
 
