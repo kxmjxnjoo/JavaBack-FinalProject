@@ -90,3 +90,5 @@ BEGIN
     where story_num = p_story_num; 
     commit;
 END;
+
+select * from member

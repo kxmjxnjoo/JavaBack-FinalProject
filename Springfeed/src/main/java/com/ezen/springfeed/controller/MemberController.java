@@ -466,5 +466,42 @@ public class MemberController {
 		}
     }
 
+    
+    //아이디 비밀번호 찾기 폼
+    @RequestMapping("/find/form")
+    public String findIdPw() {
+    	return "member/findIdPwd";
+    }
+   
+    
+    //아이디 찾기 액션
+    @RequestMapping("/find/id")
+    public String findId(Model model, HttpServletRequest request, 
+    		@RequestParam("name") String name,
+    		@RequestParam("phone") String phone) {
+    	
+    	HashMap<String,Object> paramMap = new HashMap<>();
+    	paramMap.put("name", name);
+    	paramMap.put("phone", phone);
+    	paramMap.put("userid", null);
+    	
+    	ms.findId(paramMap);
+    	
+    	String userid = (String) paramMap.get("userid");
+    	
+    	if(userid == null || userid.equals("")) {
+    		model.addAttribute("message", "같은 정보의 회원을 찾을 수 없습니다.");
+    		return "member/findIdPwd";
+    	} else {
+    		model.addAttribute("userid", userid);
+    		model.addAttribute("messageConfirm", 
+    				"회원님의 아이디는 " + userid + " 입니다. 로그인 페이지로 이동할까요?" );
+    		model.addAttribute("sendUrl", "/login/form");
+    		return "member/findIdPwd";
+    	}    	
+    	
+    }
+    
+    
 
 }

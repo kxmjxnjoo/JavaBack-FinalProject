@@ -123,6 +123,7 @@ BEGIN
             left outer join post p on p.post_num = n.post_num
             left outer join reply r on r.reply_num = n.reply_num    
         where n.user_to = p_userid order by num desc;      
+        
 END;   
 
 
@@ -178,7 +179,32 @@ create or replace PROCEDURE getNotiCount (
     p_notiCount OUT number
      )
 IS 
-    v_notiCount number(100) := 0;
+    v_notiCount number(30) := 0;
 BEGIN 
-    select count(*) from notification where user_to=p_userid and checked=0;
+    select count(*) into v_notiCount from notification where user_to=p_userid and checked=0;
+    p_notiCount := v_notiCount;
 END;
+
+
+--아이디 찾기 
+CREATE OR REPLACE PROCEDURE findId(
+    p_name IN member.name%TYPE, 
+    p_phone IN member.phone%TYPE, 
+    p_userid OUT VARCHAR    
+)
+IS
+    v_count number(5) := 0;
+    v_userid varchar2(30) := ''; 
+BEGIN
+    SELECT count(*) into v_count FROM member WHERE name=p_name and phone=p_phone;
+    
+    if v_count = 1 then
+       SELECT userid into v_userid FROM member WHERE name=p_name and phone=p_phone;
+        p_userid := v_userid;
+    else 
+        p_userid := '';
+    end if;
+END;
+
+
+select * from member

@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 비밀번호 찾기0</title>
+<title>아이디 비밀번호 찾기</title>
 <link rel="stylesheet" href="/css/findidpwd.css">
 </head>
-<body>
-	<%@ include file="/topnav/topnav.jsp" %>
+<body>	
+	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="findidpwdBox">
 	
 		<div id="findidBox">
 			<div id="findidBoxContent">
-				<form action="spring.do" method="post">
+				<form action="/find/id" method="post">
 					<h1>아이디 찾기</h1>
 				
 					<input type="hidden" name="command" value="findid">
@@ -36,9 +36,8 @@
 					
 					<input type="text" name="userid" placeholder="아이디" id="findpwdUserid">
 					<input type="text" name="name" placeholder="이름" id="findpwdName">
-					<input type="text" name="phone" placeholder="전화번호" id="findpwdPhone">
-					<input type="button" onclick="getCertNum()" value="인증번호">
-					<input type="text" name="certnum" placeholder="인증번호" id="findpwdCertnum">
+					<input type="text" name=email placeholder="이메일" id="findpwdPhone"> 
+					<input type="button" onclick="getTempPwd()" value="임시비밀번호 전송">
 					
 					<input type="submit" value="비밀번호 찾기" onclick="return checkPwd()"> 
 				</form>
@@ -47,19 +46,43 @@
 		
 	</div>
 	
-		<%@ include file="/footer.jsp" %>
+		<%@ include file="../common/footer.jsp" %>
 	
 	<script type="text/javascript">
-		function getCertNum() {
-			let phoneBtn = document.querySelector("#findpwdPhone")
-			
-			if(phoneBtn.value != "") {
-				alert("인증번호는 1111에요")
-			} else {
-				alert("전화번호를 입력해 주세요")
-			}
-		}
 		
+	  	$("#getTempPwd").click(function () {
+			let email = $("#email").val();
+			let userid = $("#userid").val();
+			
+			$.ajax({
+				type:"GET",
+				url : "/check/pw",
+				data : {
+					"email" : email,
+					"userid" : userid
+				},
+				success: function(res) {
+					if(res['check']) {
+						swal ("발송 완료", "임시 비밀번호를 이메일로 전송했어요.").then((OK) = > {
+							if(OK) {
+									
+								$a.ajax({
+									type: "POST",
+									url: "/find/sendEmail",
+									data: {
+										"email" : email,
+										"userid" : userid
+									}
+								})
+							}
+						})
+					}
+					}
+				})
+			})
+	
+	
+	
 		function checkId() {
 			let name = document.getElementById("findidName")
 			let phone = document.getElementById("findidPhone")

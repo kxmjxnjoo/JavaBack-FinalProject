@@ -69,9 +69,14 @@
 		{  CALL activateAccount( #{userid} )}
 	</update>
 	
-		<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+	<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getNotiCount( #{userid}, #{notiCount, mode=OUT, jdbcType=INTEGER }  )  }
 	</select>
 	
+	<select id="findId" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findId( 
+			#{name}, #{phone}, #{userid, mode=OUT, jdbcType=VARCHAR }
+		)  }
+	</select>
 	
 </mapper>

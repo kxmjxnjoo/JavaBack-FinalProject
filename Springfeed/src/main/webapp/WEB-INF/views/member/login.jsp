@@ -11,7 +11,7 @@
 
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="/src/main/webapp/WEB-INF/views/react-component/Topnav.js"></script>
+<script src="/react-component/Topnav.js"></script>
 
 </head>
 <body>
@@ -34,8 +34,8 @@
 		
 		<br><br>
 	        ----------------- 또는 -----------------<br><br>
-	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
-			<a href="spring.do?command=findidpwdform">아이디 혹은 비밀번호를 잊으셨나요?</a>
+	    <%-- <div>&nbsp;&nbsp;&nbsp;${message}</div> --%>
+			<a href="/find/form">아이디 혹은 비밀번호를 잊으셨나요?</a>
 		</div>
 		<br>
 		<div id="box2">

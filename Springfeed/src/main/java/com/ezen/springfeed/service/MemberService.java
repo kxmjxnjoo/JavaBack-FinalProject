@@ -66,5 +66,9 @@ public class MemberService {
 	public void getNotiCount(HashMap<String, Object> paramMap) {
 		mdao.getNotiCount(paramMap);
 	}
+
+	public void findId(HashMap<String, Object> paramMap) {
+		mdao.findId(paramMap);
+	}
 }
 
