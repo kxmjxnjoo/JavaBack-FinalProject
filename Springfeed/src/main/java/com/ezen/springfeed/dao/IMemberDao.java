@@ -19,6 +19,10 @@ public interface IMemberDao {
 	void getFollow(HashMap<String, Object> followMap);
 	void getNotiCount(HashMap<String, Object> paramMap);
 	void findId(HashMap<String, Object> paramMap);
+<<<<<<< HEAD
 	void userEmailCheck(String email, String name, boolean pwFindCheck);
 	void updatePassword(String str, String email);
+=======
+	void getFollowedList(HashMap<String, Object> paramMap);
+>>>>>>> 4188704df07729e16d391e343a16c961cb82a2fc
 }
