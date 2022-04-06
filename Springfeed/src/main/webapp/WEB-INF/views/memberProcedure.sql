@@ -118,13 +118,16 @@ IS
     
 BEGIN
     open p_cur for
-        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, p.img as postImg, r.content as replyContent, n.create_date as create_date  
+        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, 
+        p.img as postImg, r.content as replyContent, n.create_date as create_date, m.img AS IMG
         from notification n 
             left outer join post p on p.post_num = n.post_num
             left outer join reply r on r.reply_num = n.reply_num    
+            left outer join member m on m.userid = n.user_from
         where n.user_to = p_userid order by num desc;      
         
 END;   
+
 
 
 --회원 정보 수정
@@ -184,7 +187,6 @@ BEGIN
     select count(*) into v_notiCount from notification where user_to=p_userid and checked=0;
     p_notiCount := v_notiCount;
 END;
-
 
 --아이디 찾기 
 CREATE OR REPLACE PROCEDURE findId(

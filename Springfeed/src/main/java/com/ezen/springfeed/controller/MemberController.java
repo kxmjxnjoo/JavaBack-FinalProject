@@ -255,7 +255,8 @@ public class MemberController {
     
 		
     @RequestMapping("/user/notification")
-    public ModelAndView Notification(HttpServletRequest request, Model model) {
+    public ModelAndView Notification(HttpServletRequest request, Model model,
+    		RedirectAttributes rttr) {
     	HttpSession session = request.getSession();
 		
     	ModelAndView mav = new ModelAndView();
@@ -265,6 +266,7 @@ public class MemberController {
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if (loginUser == null) { 
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
 			url = "redirect:/login/form";
 		} else {
 			
