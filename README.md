@@ -2,6 +2,7 @@
 
 # 사용된 기술
 - Spring Framework
+  - STOMP (Web Socket)
 - MyBatis
 - Bootstrap
 
