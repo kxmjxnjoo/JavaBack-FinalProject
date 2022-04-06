@@ -71,6 +71,7 @@
 
 	<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getNotiCount( #{userid}, #{notiCount, mode=OUT, jdbcType=INTEGER }  )  }
+	</select>
 
 	<select id="getFollowedList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{

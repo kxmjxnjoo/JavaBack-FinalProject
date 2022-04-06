@@ -69,6 +69,7 @@ public class MemberService {
 
 	public void findId(HashMap<String, Object> paramMap) {
 		mdao.findId(paramMap);
+	}
 
 	public void getFollowedList(HashMap<String, Object> paramMap) {
 		mdao.getFollowedList(paramMap);
