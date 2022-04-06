@@ -3,7 +3,13 @@
 # 사용된 기술
 - Spring Framework
   - STOMP (Web Socket)
-- MyBatis
+  - SocketJS
+  - Servlet / JSP
+  
+- DB
+  - PL/SQL 
+  - MyBatis
+
 - Bootstrap
 
 - React.js
@@ -16,3 +22,5 @@
   - context api
   - infinite scroll
   - react-hot-toast
+  - react-stomp
+  - sockjs-client
