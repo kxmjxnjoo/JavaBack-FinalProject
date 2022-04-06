@@ -148,6 +148,8 @@ BEGIN
 END;
 
 SELECT * FROM MEMBER
+
+
 --계정 비활성화
 create or replace PROCEDURE deleteAcount(
     p_userid IN member.userid%type
@@ -155,7 +157,10 @@ create or replace PROCEDURE deleteAcount(
 IS
 BEGIN
     update member set useyn = 'n' where userid=p_userid;
+    update story set useyn = 'n' where userid=p_userid;
+    commit;
 END;
+
 
 
 --계정 활성화

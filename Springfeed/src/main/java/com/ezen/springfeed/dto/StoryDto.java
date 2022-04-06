@@ -16,5 +16,5 @@ public class StoryDto {
 	private Timestamp create_date;
 	private String story_content;
 	private String fontColor;
-	
+	private String useyn;
 }

@@ -95,7 +95,7 @@
 	</script>
 	<script type="text/javascript">
 		function withdraw(userid) {
-			if(confirm("정말로 회원탈퇴할까요?")) {
+			if(confirm("정말로 계정을 비활성화 할까요??")) {
 				location.href = "/deleteAcount"
 			}
 		}

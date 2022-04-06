@@ -98,51 +98,55 @@ public class StoryController {
 			paramMap.put("prev", 0);
 			paramMap.put("next", 0);
 			paramMap.put("fontcolor", null);
+			paramMap.put("useyn", null);
 			
 			ss.getStory(paramMap);
 			
 			ArrayList<HashMap<String, Object>> list 
 			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-			
 			if(list.size() == 0) {
-				
 				rttr.addFlashAttribute("message", "존재하지 않는 스토리 입니다.");
-			
 				mav.setViewName("redirect:/");
-				
 			} else {
 				
 				HashMap<String, Object> resultMap = list.get(0);
-				mav.addObject("StoryDto", resultMap);
-				mav.addObject("fontcolor", (String)paramMap.get("fontcolor"));
 				
-				//이전글, 다음글 검색
-				ss.getStoryPrevNext(paramMap);
-
-				if(paramMap.get("prev") == null) 
-					mav.addObject("prev", 0);
-				else 
-					mav.addObject("prev", Integer.parseInt(paramMap.get("prev").toString()));
-				
-				if(paramMap.get("next") == null)
-					mav.addObject("next", 0);
-				else
-					mav.addObject("next", Integer.parseInt(paramMap.get("next").toString()));
-				
-				//팔로우 검사
-				HashMap<String, Object> followMap = new HashMap<>();
-				followMap.put("followed", resultMap.get("USERID"));
-				followMap.put("follower", loginUser.get("USERID"));
-				followMap.put("result", 0);
-				
-				ms.getFollow(followMap);
-				
-				mav.addObject("isFollowing", followMap.get("result"));
-				mav.setViewName("post/storyDetail");
-				
-				System.out.println("next : "+ paramMap.get("next"));
-				System.out.println("prev : "+ paramMap.get("prev"));
+				if(((String)paramMap.get("useyn")).equals("y")) {
+					
+					mav.addObject("StoryDto", resultMap);
+					mav.addObject("fontcolor", (String)paramMap.get("fontcolor"));
+					
+					//이전글, 다음글 검색
+					ss.getStoryPrevNext(paramMap);
+	
+					if(paramMap.get("prev") == null) 
+						mav.addObject("prev", 0);
+					else 
+						mav.addObject("prev", Integer.parseInt(paramMap.get("prev").toString()));
+					
+					if(paramMap.get("next") == null)
+						mav.addObject("next", 0);
+					else
+						mav.addObject("next", Integer.parseInt(paramMap.get("next").toString()));
+					
+					//팔로우 검사
+					HashMap<String, Object> followMap = new HashMap<>();
+					followMap.put("followed", resultMap.get("USERID"));
+					followMap.put("follower", loginUser.get("USERID"));
+					followMap.put("result", 0);
+					
+					ms.getFollow(followMap);
+					
+					mav.addObject("isFollowing", followMap.get("result"));
+					mav.setViewName("post/storyDetail");
+					
+					System.out.println("next : "+ paramMap.get("next"));
+					System.out.println("prev : "+ paramMap.get("prev"));
+				} else {
+					rttr.addFlashAttribute("message", "삭제되었거나 비활성화된 계정의 스토리 입니다.");
+					mav.setViewName("redirect:/");
+				}
 			}
 		}
 		return mav;

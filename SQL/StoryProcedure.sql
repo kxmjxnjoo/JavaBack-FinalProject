@@ -23,21 +23,23 @@ END;
 CREATE OR REPLACE PROCEDURE getStory(
     p_story_num IN story.story_num%TYPE,
     p_curvar OUT SYS_REFCURSOR,
-    p_fontcolor out varchar
+    p_fontcolor out varchar,
+    p_useyn out varchar
 )
 IS
     v_fontcolor varchar2(50) := '';
+    v_useyn varchar2(5) := '';
 BEGIN
     OPEN p_curvar FOR SELECT * FROM story_view WHERE story_num=p_story_num;
     
-    select fontcolor into v_fontcolor from story where story_num = p_story_num;
+    select fontcolor,useyn into v_fontcolor,v_useyn from story where story_num = p_story_num;
     p_fontcolor := v_fontcolor;
+    p_useyn := v_useyn;
     
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
     Null;
 END;
-
 
 --이전/ 다음 스토리 번호 출력
 CREATE OR REPLACE PROCEDURE getStoryPrevNext(
