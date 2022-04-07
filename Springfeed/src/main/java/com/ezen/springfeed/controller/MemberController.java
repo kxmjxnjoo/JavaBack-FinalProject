@@ -383,9 +383,13 @@ public class MemberController {
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
-    		@RequestParam("oldPicture") String oldPicture,
-    		RedirectAttributes rttr) {
+    		@RequestParam("oldPicture") String oldPicture, RedirectAttributes rttr) {
 
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+    	String userid = (String)loginUser.get("USERID");
+    	
     	String url = "redirect:/user/edit/form";
     	if(result.getFieldError("password")!= null) {
              rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
@@ -398,7 +402,7 @@ public class MemberController {
          } else {
         	 	HashMap<String, Object> resultMap = (HashMap<String, Object>) rttr.getAttribute("resultMap");
         		HashMap<String, Object> paramMap = new HashMap<>();
-        		paramMap.put("USERID",memberdto.getUserid());
+        		paramMap.put("USERID", userid);
      			paramMap.put("PASSWORD",memberdto.getPassword());
      			paramMap.put("NAME",memberdto.getName());
      			paramMap.put("EMAIL",memberdto.getEmail());
@@ -411,10 +415,9 @@ public class MemberController {
      			
      			ms.userEdit(paramMap);
      			
-     			HttpSession session = request.getSession();
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/post?userid="+memberdto.getUserid();
+     			url = "redirect:/post?userid="+ userid;
          }
     	return url;
     }
