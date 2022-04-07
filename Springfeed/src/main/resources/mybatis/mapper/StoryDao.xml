@@ -22,10 +22,15 @@
 		)  }
 	</select>
 	
-	<select id="getStoryPrevNext" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL getStoryPrevNext( 
-			#{story_num},
-			#{prev, mode=OUT, jdbcType=INTEGER }, #{next, mode=OUT, jdbcType=INTEGER }
+	<select id="getStoryPrev" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getStoryPrev( 
+			#{story_num}, #{prev, mode=OUT, jdbcType=INTEGER }
+		)  }
+	</select>
+	
+	<select id="getStoryNext" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getStoryNext( 
+			#{story_num}, #{next, mode=OUT, jdbcType=INTEGER }
 		)  }
 	</select>
 	

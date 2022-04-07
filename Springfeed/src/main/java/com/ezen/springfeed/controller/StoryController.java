@@ -117,13 +117,17 @@ public class StoryController {
 					mav.addObject("StoryDto", resultMap);
 					mav.addObject("fontcolor", (String)paramMap.get("fontcolor"));
 					
-					//이전글, 다음글 검색
-					ss.getStoryPrevNext(paramMap);
+					//이전글
+					ss.getStoryPrev(paramMap);
 	
 					if(paramMap.get("prev") == null) 
 						mav.addObject("prev", 0);
 					else 
 						mav.addObject("prev", Integer.parseInt(paramMap.get("prev").toString()));
+					
+					
+					//다음글 검색
+					ss.getStoryNext(paramMap);
 					
 					if(paramMap.get("next") == null)
 						mav.addObject("next", 0);

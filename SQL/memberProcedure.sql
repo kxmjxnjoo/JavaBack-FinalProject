@@ -172,6 +172,9 @@ create or replace PROCEDURE activateAccount(
 IS
 BEGIN
     update member set useyn = 'y' where userid=p_userid;
+    update story set useyn = 'y' where userid=p_userid;
+    update post set useyn = 'y' where userid=p_userid;
+    update reply set useyn = 'y' where userid=p_userid;
 END;
 
 

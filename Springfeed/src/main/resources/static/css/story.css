@@ -17,7 +17,8 @@
 
 .story_content{
 	position:relative; text-align: center; margin: 0 auto;
-	width: 25%; height: 95%; border: 1px solid black; border-radius: 10px;
+	width: 25%; height: 95%; min-width: 400px; max-width: 400px;
+	border: 1px solid black; border-radius: 10px; 
 	float:left; overflow: hidden;
 	background: pink; display: flex;
     flex-direction: row;

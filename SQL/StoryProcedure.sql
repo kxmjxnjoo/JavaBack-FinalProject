@@ -41,8 +41,8 @@ EXCEPTION
     Null;
 END;
 
---이전/ 다음 스토리 번호 출력
-CREATE OR REPLACE PROCEDURE getStoryPrevNext(
+--이전 스토리 번호 리턴
+CREATE OR REPLACE PROCEDURE getStoryPrev(
     p_story_num IN story.story_num%TYPE,
     p_prev out number,
     p_next out number
@@ -57,15 +57,53 @@ BEGIN
     select max(story_num) into v_prev
     from story where story_num < p_story_num group by userid having userid=v_userid;
     p_prev := v_prev;
+      
     
-    select min(story_num) into v_next
-    from story where story_num > p_story_num group by userid having userid=v_userid;
-    p_next := v_next; 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
     Null;
 END;
 
+
+--다음 스토리 번호 리턴
+CREATE OR REPLACE PROCEDURE getStoryNext(
+    p_story_num IN story.story_num%TYPE,
+    p_prev out number,
+    p_next out number
+)
+IS
+    v_userid varchar2(50) := '';
+    v_prev number(5) := 0;
+    v_next number(5) := 0;
+BEGIN
+    select userid into v_userid from story where story_num = p_story_num;
+
+    select max(story_num) into v_prev
+    from story where story_num < p_story_num group by userid having userid=v_userid;
+    p_prev := v_prev;
+      
+    
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    Null;
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    select min(story_num) into v_next
+    from story where story_num > p_story_num group by userid having userid=v_userid;
+    p_next := v_next; 
+    
 
 --스토리 삭제
 create or replace PROCEDURE deleteStory(
@@ -93,4 +131,4 @@ BEGIN
     commit;
 END;
 
-select * from faq
+select * from story

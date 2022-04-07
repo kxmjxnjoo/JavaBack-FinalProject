@@ -427,13 +427,14 @@ public class MemberController {
 		= (HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
-			model.addAttribute("로그인 해주세요.");
+			model.addAttribute("로그인 후 이용해주세요!");
 			return "member/login";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			
+			session.removeAttribute("loginUser");
 			ms.deleteAcount(paramMap);
 			model.addAttribute("message", "계정 비활성화가 완료되었습니다. 다음에 다시 만나요!");
 			
