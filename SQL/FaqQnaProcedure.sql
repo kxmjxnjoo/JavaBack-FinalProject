@@ -57,5 +57,6 @@ create or replace PROCEDURE getAllQna(
     )
 IS
 BEGIN
-    open p_cur for select * from qna order by qna_num desc;
+    open p_cur for select * from qna 
+    where rep='y' order by qna_num desc;
 END;

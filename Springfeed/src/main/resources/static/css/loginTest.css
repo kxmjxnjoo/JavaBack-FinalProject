@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+body{
+padding-top:4.2rem;
+padding-bottom:4.2rem;
+background:#efebe8;
+}
+        
+a{
+text-decoration:none !important;
+}
+         
+h1,h2,h3{
+ margin-top : 20px;
+}
+
+.myform{
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 1rem;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	width: 100%;
+	pointer-events: auto;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0,0,0,.2);
+	outline: 0;
+	max-width: 400px;
+	font-size: 120%;
+}
+ 
+.loginInput{
+	display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.loginInput:focus {
+	border-color: #e59999;
+	box-shadow: 0 0 1px 2px rgba(229, 153, 153, 0.5);
+	box-shadow: 0 0 0 2px -moz-mac-focusring;
+	color: #222;
+	outline: none;
+}
+
+.loginButton {
+	display:block;
+	width:100%;
+	cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid #e59999;
+    background: white;
+    margin: 40px 0 20px 0;
+    
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.loginButton:hover{
+	background : #e59999;
+	color: white;
+}
+ 
+ 
+.tx-tfm{
+text-transform:uppercase;
+}
+
+.mybtn{
+	border:1px solid #e59999; 
+	margin:5px auto;	
+	background: white; 
+}
+
+.mybtn:hover{
+	background:#f7c4c0;
+}
+        
+.login-or {
+position: relative;
+color: #aaa;
+margin-top: 10px;
+margin-bottom: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.span-or {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -2px;
+	margin-left: -25px;
+	background-color: #fff;
+	width: 50px;
+	text-align: center;
+}
+
+.hr-or {
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+        
+
+form .error {
+	color: #ff0000;
+}
+
+         #second{display:none;}

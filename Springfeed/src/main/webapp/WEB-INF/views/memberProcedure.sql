@@ -158,10 +158,12 @@ IS
 BEGIN
     update member set useyn = 'n' where userid=p_userid;
     update story set useyn = 'n' where userid=p_userid;
+    update post set useyn = 'n' where userid=p_userid;
+    update reply set useyn = 'n' where userid=p_userid;
     commit;
 END;
 
-
+select * from story
 
 --계정 활성화
 create or replace PROCEDURE activateAccount(
