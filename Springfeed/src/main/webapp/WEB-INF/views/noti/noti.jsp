@@ -14,8 +14,8 @@
 	<%@ include file="../common/topnav.jsp" %>
 	
 	<c:choose>
-		<c:when test="${ notiList == null }">
-			<h1 id="notiNullMessage">${ loginUser.NAME }님, 알림이 없어요</h1>
+		<c:when test="${ not empty noNotification  }">
+			<h1 id="notiNullMessage"> 아직 받은 알림이 없어요! </h1>
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="noti" items="${ notiList }">

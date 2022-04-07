@@ -278,7 +278,9 @@ public class MemberController {
 			ArrayList<HashMap<String, Object>> notiList 
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-			if(notiList != null) {
+			if (notiList.size() == 0) {
+				mav.addObject("noNotification", 1);
+			} else {
 				for(HashMap<String, Object> temp : notiList) {
 //					LocalDate now = LocalDate.now();
 //					LocalDate notiDate = ((timeStamp) temp.get("CREATE_DATE")).toLocalDate();
@@ -294,9 +296,9 @@ public class MemberController {
 //					} else {
 //						temp.replace("CREATE_DATE", "오래 전");
 //					}
-						
+					
 				}
-			}	
+			} 
 
 			mav.addObject("notiList", notiList);
 			
