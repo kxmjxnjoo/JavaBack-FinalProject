@@ -16,11 +16,17 @@
   - react-router
   - react-bootstrap
   - react-icon
+
   - react-intersection-observer
-  - redux
+  
+  - SOCKET
+    - react-stomp
+    - sockjs-client
+ 
+  - STATE MANAGEMENT
+    - redux
+    - context api
+
   - axios
-  - context api
-  - infinite scroll
   - react-hot-toast
-  - react-stomp
-  - sockjs-client
+  - react-infinite-scroller
