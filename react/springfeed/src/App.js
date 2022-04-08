@@ -102,7 +102,6 @@ function App() {
 							isError ? <Error errorMessage={errorMessage} /> :
 
 								!isLoggedIn ? <>Login First!</>
-
 									:
 									<Routes>
 										<Route path="/" element={
@@ -117,7 +116,9 @@ function App() {
 												setPage={setPage}
 												user={user}
 											/>} />
-										<Route path="/explore" element={<Explore />} />
+										<Route path="/explore" element={<Explore
+											setPage={setPage}
+										/>} />
 									</Routes>
 					}
 				</Router>

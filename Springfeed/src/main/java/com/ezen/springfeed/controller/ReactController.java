@@ -178,6 +178,7 @@ public class ReactController {
 
         return result;
     }
+
     @RequestMapping(value="/api/search/post", produces="application/json")
     public ArrayList<PostDto> getPostSerachResult(@RequestParam(value="key", required = false) String key, @RequestParam(value="page", required = false) Integer page) {
         // Create paramMap
@@ -232,4 +233,6 @@ public class ReactController {
         }
         return result;
     }
+
+
 }

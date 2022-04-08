@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import defaultProfile from '../../images/tmpUserIcon.png'
 
 const MessageDetail = () => {
+    const client = useRef({})
+    const [chatMessages, setChatMessages] = useState([])
+    const [message, setMessage] = useState("")
+
+    /*
+
+    useEffect(() => {
+        connect()
+
+        return () => disconnect()
+    }, [])
+    const connect = () => {
+        client.current = new StompJS.Client({
+            brokerURL: 'ws://localhost8070/hello',
+            connectionHeaders: {
+                'auth-token': 'spring-chat-auth-token'
+            },
+            onConnect: () => {
+                subscribe()
+            },
+            onStompError: (frame) => {
+                console.log(frame)
+            }
+        })
+    }
+
+    const disconnect = () => {
+        client.current.deactivate()
+    }
+
+    */
+
+
+
     const messageData = [
         {
             send: 'user1',

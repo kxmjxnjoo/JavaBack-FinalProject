@@ -32,12 +32,15 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	}
 
 	const [isShowSelect, setIsShowSelect] = useState(false)
+
 	const showSelect = () => {
 		setIsShowSelect(true)
 	}
+
 	const hideSelect = () => {
 		setIsShowSelect(false)
 	}
+
 	const ref = useRef(null)
 
 	return (
@@ -73,7 +76,6 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 									<MessageIcon />
 								</a>
 							</li>
-
 
 							<li className="nav-item" ref={ref}>
 								<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }} onClick={showSelect}>
