@@ -59,7 +59,7 @@ const Explore = ({ setPage }) => {
 
         <div className='mt-5 mb-5'>
             {
-                isLoading ? <Loading className='mt-5' /> :
+                isLoading ? <Loading message='인기 포스트를 불러오고 있어요' className='mt-5' /> :
                     <>
                         <div className="row">
                             <div className="col-4 p-0">

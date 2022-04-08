@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
 import React, { useState, useEffect, useHistory } from 'react'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
+import {Modal} from 'react-bootstrap'
 
 // Components
 import Home from './components/Home'
@@ -14,9 +15,12 @@ import Search from './components/Search'
 import Message from './components/Message'
 import Error from './components/common/Error'
 import Explore from './components/Explore'
+import NoLogin from './components/common/NoLogin'
+import PostDetail from './components/Home/PostDetail'
 
 // Common
 import './common.css'
+import UserPage from './components/common/UserPage'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -26,6 +30,13 @@ function App() {
 	const [errorMessage, setErrorMessage] = useState(null)
 	const [page, setPage] = useState(0)
 	const [searchKey, setSearchKey] = useState('')
+
+	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
+	const [selectedPost, setSelectedPost] = useState(null)
+
+	const closePostDetail = () => {
+		setIsPostDetailOpen(false)
+	}
 
 	useEffect(() => {
 		fetch("/api/user/login")
@@ -98,10 +109,10 @@ function App() {
 			<div className='container'>
 				<Router>
 					{
-						isLoading ? <Loading /> :
+						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
 
-								!isLoggedIn ? <>Login First!</>
+								!isLoggedIn ? <NoLogin/>
 									:
 									<Routes>
 										<Route path="/" element={
@@ -109,6 +120,9 @@ function App() {
 												user={user}
 												setPage={setPage}
 												toast={toast}
+												selectedPost={selectedPost}
+												setSelectedPost={setSelectedPost}
+												setIsPostDetailOpen={setIsPostDetailOpen}
 											/>} />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
@@ -119,10 +133,22 @@ function App() {
 										<Route path="/explore" element={<Explore
 											setPage={setPage}
 										/>} />
+
+										<Route path="/user/:id" element={<UserPage/>}/>
 									</Routes>
 					}
 				</Router>
 			</div>
+
+			<Modal
+				show={isPostDetailOpen}
+				onHide={closePostDetail}
+				dialogClassName="w-90"
+				>
+				<PostDetail
+					post={selectedPost}
+				/>
+			</Modal>
 		</div>
 	);
 }

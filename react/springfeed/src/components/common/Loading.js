@@ -2,7 +2,7 @@ import React from 'react'
 
 import logo from '../../images/logo.png'
 
-const Loading = () => {
+const Loading = ({message}) => {
 	const spinnerStyle = {
 		color: 'var(--mainColor)',
 		width: '5rem',
@@ -16,7 +16,7 @@ const Loading = () => {
 				<span class="sr-only"></span>
 			</div>
 
-			<div className="h1 mt-3">페이지를 불러오고 있어요</div>
+			<div className="h1 mt-3">{message}</div>
 
 		</div>
 	)
