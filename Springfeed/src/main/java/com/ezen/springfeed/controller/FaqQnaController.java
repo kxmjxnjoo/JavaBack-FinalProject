@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.springfeed.dto.FaqDto;
 import com.ezen.springfeed.dto.Paging;
@@ -217,61 +218,123 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/qna")
-	public String userQna(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		HashMap<String, Object> loginUser
-			= (HashMap<String, Object>) session.getAttribute("loginUser");
-		if(loginUser==null) return "member/login";
-		else {
-			return "userFaqQna/qna";
-		}
-	}
-	
-	
-	
-	@RequestMapping("/qna/add")
-	public String addQna(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		HashMap<String, Object> loginUser
-			= (HashMap<String, Object>) session.getAttribute("loginUser");
-		if(loginUser==null) return "member/login";
-		else {
-			return "qna/qnaView";
-		}
-	}
-	
-	
-
-	@RequestMapping("/qna/add/form")
-	public ModelAndView addQnaForm( @ModelAttribute("qdto") @Valid QnaDto qnadto,
-			BindingResult result, HttpServletRequest request) {
-		
+	public ModelAndView userQna(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
+		
 		HttpSession session = request.getSession();
-		HashMap<String,Object> loginUser
+		HashMap<String, Object> loginUser
 			= (HashMap<String, Object>) session.getAttribute("loginUser");
-		if (loginUser == null) mav.setViewName("member/login");
-	    else {
-	    	if(result.getFieldError("subject") != null) {
-	    		mav.addObject("message", "제목을 입력하세요");
-	    		mav.setViewName("qna/qna/add");
-	    		return mav;
-	    	} else if(result.getFieldError("content") != null) {
-	    		mav.addObject("message", "내용을 입력하세요");
-	    		mav.setViewName("qna/qna/add");
-	    		return mav;
-	    	}
-	    	
-	    	HashMap<String,Object> paramMap = new HashMap<>();
-	    	paramMap.put("id", loginUser.get("USERID"));
-	    	paramMap.put("subject", qnadto.getQna_subject());
-	    	paramMap.put("content", qnadto.getQna_content());
-	    	fqs.addQna(paramMap);
-	    	mav.setViewName("redirect:/qna");
-	    }
+		if(loginUser==null) {
+			model.addAttribute("message", "로그인 후 이용해주세요!");
+			 mav.setViewName("member/login");
+		}
+		else {
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userid", loginUser.get("USERID"));
+			paramMap.put("ref_cursor", null);
+			paramMap.put("ref_cursor2", null);
+			
+			fqs.getQnaList(paramMap);
+			
+			fqs.getAllQna(paramMap);
+			
+			ArrayList<HashMap<String, Object>> userQnaList 
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			
+			ArrayList<HashMap<String, Object>> AllQnaList 
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor2");
+			
+			mav.addObject("userQnaList", userQnaList);
+			mav.addObject("qnaList", AllQnaList);
+			mav.setViewName("userFaqQna/qna");
+		}
 		return mav;
 	}
 	
+	
+	
+	@RequestMapping(value="/qna/add", method=RequestMethod.POST)
+	public String addQna(@ModelAttribute("qdto") @Valid QnaDto qnadto,
+			BindingResult result, Model model,
+			HttpServletRequest request, RedirectAttributes rttr) {
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if(loginUser==null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			return "member/login";
+		}
+		else {
+
+	    	System.out.println(qnadto.getQna_content());
+	    	System.out.println(qnadto.getQna_subject());
+	    	
+	    	HashMap<String,Object> paramMap = new HashMap<>();
+	    	paramMap.put("userid", loginUser.get("USERID"));
+	    	paramMap.put("subject", qnadto.getQna_subject());
+	    	paramMap.put("content", qnadto.getQna_content());
+	    	paramMap.put("qna_num", 0);
+	    	fqs.addQna(paramMap);
+
+	    	int qna_num = Integer.parseInt(paramMap.get("qna_num").toString());
+	    	
+	    	rttr.addFlashAttribute("message", "빠르게 답변해드릴게요!");
+	    	return "redirect:/qna?userid="+loginUser.get("USERID");
+			//return "redirect:/qna/view?qna_num="+qna_num;
+		}
+	}
+	
+	@RequestMapping("/qna/add/form")
+	public String addQnaForm(HttpServletRequest request, RedirectAttributes rttr) {
+		
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			return "redirect:/login/form";
+		}
+	    else {
+	    	return "userFaqQna/addQna";
+	    }
+	}
+	
+	@RequestMapping("/qna/view") 
+	public ModelAndView viewQna(HttpServletRequest request, RedirectAttributes rttr,
+			@RequestParam("qna_num") String qna_num) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		HashMap<String,Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			mav.setViewName("redirect:/login/form");
+		} else {
+	    	HashMap<String, Object> paramMap = new HashMap<>();
+	    	paramMap.put("qna_num", qna_num);
+	    	paramMap.put("ref_cursor", null);
+	    	
+	    	fqs.getQna(paramMap);
+	    	
+	    	ArrayList<HashMap<String,Object>> list 
+	    		= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+	    	
+	    	if(list.size() == 0) {
+	    		rttr.addFlashAttribute("message", "존재하지 않는 QNA 게시물 입니다.");
+	    		mav.setViewName("redirect:/");
+	    	} else {
+	    		HashMap<String,Object> resultMap = list.get(0);
+	    		
+	    		mav.addObject("qna", resultMap);
+	    		mav.setViewName("userFaqQna/qnaView");
+	    		
+	    	}
+	    }
+		
+		
+		return mav;
+	}
 	
 	
 	@RequestMapping("/qna/edit")
@@ -289,8 +352,6 @@ public class FaqQnaController {
 		return mav;
 	}
 	
-	
-	
 	@RequestMapping("/qna/delete")
 	public String deleteQna(@RequestParam("qna_num") QnaDto qna_num) {
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
@@ -302,8 +363,21 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/faqList")
-	public String faqList() {
-		return "userfaqqna/faq";
+	@RequestMapping("/faq")
+	public ModelAndView faqList() {
+		
+		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("ref_cursor", null);
+		
+		fqs.faqList(paramMap);
+		
+		ArrayList<HashMap<String, Object>> list
+        = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+		mav.addObject("faqList", list);
+		mav.setViewName("userFaqQna/faq");
+		
+		return mav;
 	}
 }

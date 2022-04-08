@@ -5,6 +5,44 @@
 	
 <mapper namespace="com.ezen.springfeed.dao.IUtilDao">
 	
-	<resultMap id="UtilMap" type="java.util.HashMap"></resultMap>	
+	<resultMap id="UtilMap" type="java.util.HashMap"></resultMap>
+
+	<select id="getMemberSearch"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL getMemberSearch(
+			    #{key},
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=MemberMap
+			    }
+			)
+		}
+	</select>
+
+	<select id="getPostSearch"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL getPostSearch(
+			    #{key},
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=postMap
+			    }
+			)
+		}
+	</select>
 	
 </mapper>

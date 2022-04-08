@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 // Bootstrap
-import 'bootstrap/dist/js/bootstrap.js'
+import { Overlay } from 'react-bootstrap'
 
 // Icons
 import {
@@ -15,7 +16,7 @@ import { MdExplore as ExploreIcon } from 'react-icons/md'
 import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
 
-const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
+const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	const logoStyle = {
 		width: '30px',
 		filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -26,10 +27,18 @@ const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 	const profileStyle = {
 		width: '40px'
 	}
-
 	const handleSearch = (e) => {
 		setSearchKey(e.target.value)
 	}
+
+	const [isShowSelect, setIsShowSelect] = useState(false)
+	const showSelect = () => {
+		setIsShowSelect(true)
+	}
+	const hideSelect = () => {
+		setIsShowSelect(false)
+	}
+	const ref = useRef(null)
 
 	return (
 		<nav className='navbar navbar-nav fixed-top navbar-expand-lg navbar-dark' style={topnavStyle}>
@@ -47,7 +56,7 @@ const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 
 				<div className="collapse navbar-collapse row" id="navbarTogglerDemo02">
 
-					<form action="" className="form-inline my-2 my-lg-0 col-5">
+					<form className="form-inline my-2 my-lg-0 col-5">
 						<input type="text" className="form-control mr-sm-2 col-5" placeholder="🔎 검색" aria-label="Sesarch" name="key" onChange={handleSearch} />
 					</form>
 
@@ -64,11 +73,22 @@ const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 									<MessageIcon />
 								</a>
 							</li>
-							<li className="nav-item">
-								<a className={(page === 2 ? "nav-link active" : "nav-link")} href="/select">
+
+
+							<li className="nav-item" ref={ref}>
+								<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }} onClick={showSelect}>
 									<AddIcon />
-								</a>
+								</button>
+
+								<Overlay
+									show={isShowSelect}
+									placement="bottom"
+								>
+
+								</Overlay>
 							</li>
+
+
 							<li className="nav-item">
 								<a className={(page === 3 ? "nav-link active" : "nav-link")} href="/explore">
 									<ExploreIcon />
@@ -81,12 +101,12 @@ const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 							</li>
 
 							<li className="nav-item">
-								<a href="/user" className="nav-link">
+								<a href={"/user"} className="nav-link">
 									<img src={
 										isLoggedIn ?
 											user.img :
 											defaultProfile
-									} alt="" className="round-circle" style={profileStyle} />
+									} alt="ERR" className="round-circle" style={profileStyle} />
 								</a>
 							</li>
 
@@ -98,7 +118,7 @@ const Topnav = ({ page, isLoggedIn, user, setSearchKey }) => {
 
 			</div>
 
-		</nav>
+		</nav >
 	)
 }
 

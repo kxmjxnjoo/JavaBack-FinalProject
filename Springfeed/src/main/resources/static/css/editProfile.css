@@ -4,6 +4,7 @@ body {
     background-color: #efebe8;
 }
 
+
 #userInfoBox {
     text-align: center;
     width: 25%;
@@ -91,10 +92,15 @@ body {
 
 .input-file-button{
 	position: relative; top: 50%; left: 1%;
-	padding: 6px 25px; background-color:#e59999;
-  	color: white; font-size: 90%;
-  	cursor: pointer; 
+	padding: 6px 25px; border:1px solid #e59999; 
+  	cursor: pointer; margin-bottom: 20px;
+  	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.input-file-button:hover{
+	background:#f7c4c0;
+}
+
 
 #input-file { display : none; }
 

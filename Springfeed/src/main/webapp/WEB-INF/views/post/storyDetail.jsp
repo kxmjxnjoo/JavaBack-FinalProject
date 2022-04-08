@@ -87,7 +87,7 @@ function goReport(story_num) {
 		<div id=storyArea>
 <!-- 로고 -->
 			<div id="logo" onclick="location.href='/'"> <img src="../images/logo.png" width="50px"> </div>
-			
+		
 <!-- 화살표 -->
 			<c:if test="${prev != 0}">
 				<div id=goBefore style=cursor:pointer onclick="location.href='/story?story_num=${prev}'">
@@ -139,6 +139,7 @@ function goReport(story_num) {
 			</div>
 			</div>  
 		</div>
+
 </form>
 </body>
 </html>

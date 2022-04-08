@@ -47,6 +47,22 @@ public class FaqQnaService {
 		fqdao.adminQnaList(paramMap);
 	}
 
+	public void faqList(HashMap<String, Object> paramMap) {
+		fqdao.faqList(paramMap);
+	}
+
+	public void getQna(HashMap<String, Object> paramMap) {
+		fqdao.getQna(paramMap);
+	}
+
+	public void getQnaList(HashMap<String, Object> paramMap) {
+		fqdao.getQnaList(paramMap);
+	}
+
+	public void getAllQna(HashMap<String, Object> paramMap) {
+		fqdao.getAllQna(paramMap);
+	}
+
 
 
 }

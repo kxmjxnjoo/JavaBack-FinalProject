@@ -10,6 +10,6 @@
 	<h6>Contact Us | E-mail: support@springfeed.com | Team B |</h6>
 	<h6>Developer | 김진주 | 박진겸 | 표세인 |</h6>
 	
-	<button onclick="location.href='spring.do?command=userfnq'"><i class="material-icons">live_help</i>자주 묻는 질문</button>
-	<button onclick="location.href='spring.do?command=userqna'"><i class="material-icons">support_agent</i>직접 문의하기</button>
+	<button onclick="location.href='/faq'"><i class="material-icons">live_help</i>자주 묻는 질문</button>
+	<button onclick="location.href='/qna'"><i class="material-icons">support_agent</i>직접 문의하기</button>
 </footer>

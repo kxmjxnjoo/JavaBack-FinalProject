@@ -8,30 +8,31 @@
 <meta charset="UTF-8">
 <title>스프링 피드 QnA</title>
 <link rel="stylesheet" href="/css/qna.css">
+<link rel="stylesheet" href="/css/common.css">
 </head> 
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 
 	<div id="qnaBox">
 	
 		<c:if test="${ loginUser != null }">
 			<div id="userQnaBox">
-				<h1>${ loginUser.userid }님이 남긴 질문이에요</h1>
+				<h1>${ loginUser.USERID }님이 남긴 질문이에요</h1>
 				
 				<c:choose>
 					<c:when test="${ userQnaList == null || userQnaList.size() == 0 }">
 						<div id="noUserQnaBox">
 							<i class="material-icons">sentiment_very_satisfied</i>
-							<h2>${ loginUser.userid }님은 질문을 남기지 않으셨어요. 질문이 있으시면 언제든 남겨 주세요!</h2>
+							<h2>${ loginUser.USERID }님은 질문을 남기지 않으셨어요. 질문이 있으시면 언제든 남겨 주세요!</h2>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="qdto" items="${ userQnaList }">
-							<div class="qnaTitle" onclick='showQna("${ qdto.qna_subject}", "${ qdto.qna_content }", "${ qdto.qna_reply }")'>
+							<div class="qnaTitle" onclick='showQna("${ qdto.QNA_SUBJECT}", "${ qdto.QNA_CONTENT }", "${ qdto.QNA_REPLY }")'>
 								<div class="qnaTitleContent">
 									<h3>Q</h3>
-									<h3>${ qdto.qna_subject }</h3>
-									<h3><fmt:formatDate value="${ qdto.indate }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
+									<h3>${ qdto.QNA_SUBJECT }</h3>
+									<h3><fmt:formatDate value="${ qdto.INDATE }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
 								</div>
 							</div>
 						</c:forEach>
@@ -39,7 +40,7 @@
 				
 				</c:choose>
 				
-				<button id="addQnaButton" onclick="location.href='spring.do?command=addqnaform'">질문하기</button>
+				<button id="addQnaButton" onclick="location.href='/qna/add/form'">질문하기</button>
 				
 			</div>
 		</c:if>
@@ -57,11 +58,11 @@
 				<c:otherwise>
 				
 					<c:forEach var="qdto" items="${ qnaList }">
-						<div class="qnaTitle" onclick='showQna("${ qdto.qna_subject}", "${ qdto.qna_content }", "${ qdto.qna_reply }")'>
+						<div class="qnaTitle" onclick='showQna("${ qdto.QNA_SUBJECT}", "${ qdto.QNA_CONTENT }", "${ qdto.QNA_REPLY }")'>
 							<div class="qnaTitleContent">
 								<h3>Q</h3>
-								<h3>${ qdto.qna_subject }</h3>
-								<h3><fmt:formatDate value="${ qdto.indate }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
+								<h3>${ qdto.QNA_SUBJECT }</h3>
+								<h3><fmt:formatDate value="${ qdto.INDATE }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
 							</div>
 						</div>
 					</c:forEach> 
@@ -85,6 +86,7 @@
 				<h1>답변</h1>
 				<p id="answerPopupContent"></p>
 				
+				<button onclick="showQna()">수정하기</button>
 				<button onclick="showQna()">돌아가기</button>
 			</div>
 		</div>
@@ -101,7 +103,11 @@
 				popup.style.display = ""
 				titleEle.innerHTML = title
 				contentEle.innerHTML = content
-				answerContentEle.innerHTML = reply
+				if(reply == null || reply == '') {
+					answerContentEle.innerHTML = "아직 답변이 오지 않았어요"
+					answerContentEle.style.color = "#efebe8"
+				} else 
+					answerContentEle.innerHTML = reply
 			} else {
 				popup.style.display = "none"
 			}
@@ -110,6 +116,6 @@
 	</script>
 	
 		
-	<%@ include file="/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

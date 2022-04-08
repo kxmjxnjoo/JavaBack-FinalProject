@@ -118,13 +118,16 @@ IS
     
 BEGIN
     open p_cur for
-        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, p.img as postImg, r.content as replyContent, n.create_date as create_date  
+        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, 
+        p.img as postImg, r.content as replyContent, n.create_date as create_date, m.img AS IMG
         from notification n 
             left outer join post p on p.post_num = n.post_num
             left outer join reply r on r.reply_num = n.reply_num    
+            left outer join member m on m.userid = n.user_from
         where n.user_to = p_userid order by num desc;      
         
 END;   
+
 
 
 --회원 정보 수정
@@ -145,6 +148,8 @@ BEGIN
 END;
 
 SELECT * FROM MEMBER
+
+
 --계정 비활성화
 create or replace PROCEDURE deleteAcount(
     p_userid IN member.userid%type
@@ -152,8 +157,13 @@ create or replace PROCEDURE deleteAcount(
 IS
 BEGIN
     update member set useyn = 'n' where userid=p_userid;
+    update story set useyn = 'n' where userid=p_userid;
+    update post set useyn = 'n' where userid=p_userid;
+    update reply set useyn = 'n' where userid=p_userid;
+    commit;
 END;
 
+select * from story
 
 --계정 활성화
 create or replace PROCEDURE activateAccount(
@@ -162,6 +172,9 @@ create or replace PROCEDURE activateAccount(
 IS
 BEGIN
     update member set useyn = 'y' where userid=p_userid;
+    update story set useyn = 'y' where userid=p_userid;
+    update post set useyn = 'y' where userid=p_userid;
+    update reply set useyn = 'y' where userid=p_userid;
 END;
 
 
@@ -185,7 +198,6 @@ BEGIN
     p_notiCount := v_notiCount;
 END;
 
-
 --아이디 찾기 
 CREATE OR REPLACE PROCEDURE findId(
     p_name IN member.name%TYPE, 
@@ -206,5 +218,30 @@ BEGIN
     end if;
 END;
 
+--비밀번호 찾기 - 이메일 확인
+CREATE OR REPLACE PROCEDURE userEmailCheck(
+    p_name IN member.name%TYPE, 
+    p_email IN member.email%TYPE, 
+    pwFindCheck OUT boolean    
+)
+IS
+    v_count number(5) := 0;
+BEGIN
+    SELECT count(*) into v_count FROM member WHERE name=p_name and email=p_email;
+    
+    if v_count = 1 then
+        pwFindCheck := true;
+    else 
+        pwFindCheck := false;
+    end if;
+END;
 
-select * from member
+--임시 비밀번호로 비밀번호 변경
+CREATE OR REPLACE PROCEDURE updatePassword(
+    p_str IN member.password%TYPE, 
+    p_email IN member.email%TYPE
+)
+IS
+BEGIN
+    update member set password=p_str where email = p_email;
+END;

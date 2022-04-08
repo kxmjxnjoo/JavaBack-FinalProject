@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/css/userfaq.css">
 </head>
 <body>
-	<%@ include file="/topnav/topnav.jsp" %>
+	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="faqBox">
 		<h1>자주 묻는 질문</h1>
@@ -60,6 +60,6 @@
 		}
 	</script>
 	
-	<%@ include file="/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

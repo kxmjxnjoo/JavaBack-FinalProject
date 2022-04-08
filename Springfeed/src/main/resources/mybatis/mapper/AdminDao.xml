@@ -5,8 +5,7 @@
 
 <mapper namespace="com.ezen.springfeed.dao.IAdminDao">
 	
-	<resultMap id="AdminMap" type="java.util.HashMap"></resultMap>	
-
+	<resultMap id="AdminMap" type="java.util.HashMap"></resultMap>
 
 	<select id="checkAdmin" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL checkAdmin( 

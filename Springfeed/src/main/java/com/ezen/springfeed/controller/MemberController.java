@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ezen.springfeed.dto.MailDto;
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
+import com.ezen.springfeed.service.sendEmailService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -115,8 +118,6 @@ public class MemberController {
     	int cnt = 1;
     	
     	if(memberdto.getUserid() != null) {
-        	System.out.println("userIdCheck 진입");
-        	System.out.println("전달 받은 id = " + memberdto.getUserid());
         	String userid = memberdto.getUserid();
 	    	HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("cnt", 0);
@@ -254,7 +255,8 @@ public class MemberController {
     
 		
     @RequestMapping("/user/notification")
-    public ModelAndView Notification(HttpServletRequest request, Model model) {
+    public ModelAndView Notification(HttpServletRequest request, Model model,
+    		RedirectAttributes rttr) {
     	HttpSession session = request.getSession();
 		
     	ModelAndView mav = new ModelAndView();
@@ -264,6 +266,7 @@ public class MemberController {
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if (loginUser == null) { 
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
 			url = "redirect:/login/form";
 		} else {
 			
@@ -275,7 +278,9 @@ public class MemberController {
 			ArrayList<HashMap<String, Object>> notiList 
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-			if(notiList != null) {
+			if (notiList.size() == 0) {
+				mav.addObject("noNotification", 1);
+			} else {
 				for(HashMap<String, Object> temp : notiList) {
 //					LocalDate now = LocalDate.now();
 //					LocalDate notiDate = ((timeStamp) temp.get("CREATE_DATE")).toLocalDate();
@@ -291,9 +296,9 @@ public class MemberController {
 //					} else {
 //						temp.replace("CREATE_DATE", "오래 전");
 //					}
-						
+					
 				}
-			}	
+			} 
 
 			mav.addObject("notiList", notiList);
 			
@@ -378,8 +383,13 @@ public class MemberController {
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
-    		RedirectAttributes rttr) {
+    		@RequestParam("oldPicture") String oldPicture, RedirectAttributes rttr) {
 
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+    	String userid = (String)loginUser.get("USERID");
+    	
     	String url = "redirect:/user/edit/form";
     	if(result.getFieldError("password")!= null) {
              rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
@@ -392,20 +402,22 @@ public class MemberController {
          } else {
         	 	HashMap<String, Object> resultMap = (HashMap<String, Object>) rttr.getAttribute("resultMap");
         		HashMap<String, Object> paramMap = new HashMap<>();
-        		paramMap.put("USERID",memberdto.getUserid());
+        		paramMap.put("USERID", userid);
      			paramMap.put("PASSWORD",memberdto.getPassword());
      			paramMap.put("NAME",memberdto.getName());
      			paramMap.put("EMAIL",memberdto.getEmail());
      			paramMap.put("PHONE",memberdto.getPhone());
      			paramMap.put("INTRODUCE",memberdto.getIntroduce());
-     			paramMap.put("IMG", memberdto.getImg());
+     			if(memberdto.getImg()==null || memberdto.getImg().equals(""))
+     				paramMap.put("IMG", oldPicture);
+     			else
+     				paramMap.put("IMG", memberdto.getImg());
      			
      			ms.userEdit(paramMap);
      			
-     			HttpSession session = request.getSession();
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/post?userid="+memberdto.getUserid();
+     			url = "redirect:/post?userid="+ userid;
          }
     	return url;
     }
@@ -418,13 +430,14 @@ public class MemberController {
 		= (HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
-			model.addAttribute("로그인 해주세요.");
+			model.addAttribute("로그인 후 이용해주세요!");
 			return "member/login";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			
+			session.removeAttribute("loginUser");
 			ms.deleteAcount(paramMap);
 			model.addAttribute("message", "계정 비활성화가 완료되었습니다. 다음에 다시 만나요!");
 			
@@ -472,8 +485,36 @@ public class MemberController {
     public String findIdPw() {
     	return "member/findIdPwd";
     }
-   
+
+    //비밀번호 찾기
+    @ResponseBody 
+    @GetMapping("/find/pw")
+    public Map<String, Boolean> pwdFind(@ModelAttribute("dto") @Valid MemberDto memberdto,
+          Model model){
+       Map<String, Boolean> resultMap = new HashMap<>();
+       boolean pwFindCheck = false;
+       ms.userEmailCheck(memberdto.getEmail(), memberdto.getName(), pwFindCheck);
+       
+       System.out.println(pwFindCheck);
+       if(pwFindCheck == true) 
+          resultMap.put("check", pwFindCheck);
+       else 
+          model.addAttribute("message", "해당하는 회원을 찾을 수 없습니다.");
+       return resultMap;
+    }
     
+    @Autowired
+    sendEmailService ses;
+    
+    //이메일 전송
+    @ResponseBody
+    @PostMapping("/find/sendEmail")
+    public void sendEamil(String email, String name) {
+       MailDto dto = ses.createMailAndChangePassword(email, name);
+        ses.mailSend(dto);
+    
+    }
+  
     //아이디 찾기 액션
     @RequestMapping("/find/id")
     public String findId(Model model, HttpServletRequest request, 
@@ -501,6 +542,8 @@ public class MemberController {
     	}    	
     	
     }
+    
+    
     
     
 

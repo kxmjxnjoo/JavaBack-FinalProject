@@ -68,9 +68,20 @@
 	<update id="activateAccount" statementType="CALLABLE" parameterType="String">
 		{  CALL activateAccount( #{userid} )}
 	</update>
-	
+
 	<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getNotiCount( #{userid}, #{notiCount, mode=OUT, jdbcType=INTEGER }  )  }
+	</select>
+
+	<select id="getFollowedList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getFollowedList(
+			    #{ userid },
+			    #{ page },
+			    #{ load },
+			    #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap }
+			)
+		}
 	</select>
 	
 	<select id="findId" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -79,4 +90,15 @@
 		)  }
 	</select>
 	
+	<select id="userEmailCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userEmailCheck( 
+			#{name}, #{email}, #{pwFindCheck, mode=OUT, jdbcType=BOOLEAN }
+		)  }
+	</select>
+	
+	<select id="updatePassword" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updatePassword( 
+			#{str}, #{email}
+		)  }
+	</select>
 </mapper>
