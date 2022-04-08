@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../admin/common/admin_submenu.jsp" %>
+<%@ include file="../../admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="/css/admin/admin.css">
 
 <h1>Q&amp;A리스트</h1>
@@ -35,5 +35,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-<%@ include file="../admin/common/paging.jsp"%>
-<%@ include file="../admin/common/footer.jsp"%>
+<%@ include file="../../admin/common/footer.jsp"%>

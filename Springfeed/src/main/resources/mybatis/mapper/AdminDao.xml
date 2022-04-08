@@ -17,14 +17,17 @@
 	
 	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount(
-				#{adminId},
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+			#{adminId},
+			#{key},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
 			)  } 
 	</select>
 	
  	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL memberList( 
-			#{userid},
+			#{startNum},
+			#{endNum},
+			#{key},
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 		)  }
 	</select> 

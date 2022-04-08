@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
+<%@ include file="../../admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/css/admin/admin.css">
 	
@@ -57,8 +57,7 @@
 	</table>
 </form>
 
-<%@ include file="../admin/common/paging.jsp"%>
-<%@ include file="/admin/common/footer.jsp"%>
+<%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript" language="javascript" defer="defer"> 
 	

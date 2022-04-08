@@ -15,7 +15,7 @@ public class FaqQnaService {
 	
 	
 	public void adminFaqList(HashMap<String, Object> paramMap) {
-		fqdao.adminfaqList(paramMap);
+		fqdao.adminFaqList(paramMap);
 	}
 		
 	public void addFaq(HashMap<String, Object> paramMap) {
@@ -43,8 +43,8 @@ public class FaqQnaService {
 		fqdao.qnaEdit(paramMap);
 	}
 
-	public void qnaList(HashMap<String, Object> paramMap) {
-		fqdao.qnaList(paramMap);
+	public void adminQnaList(HashMap<String, Object> paramMap) {
+		fqdao.adminQnaList(paramMap);
 	}
 
 

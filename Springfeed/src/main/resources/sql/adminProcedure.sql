@@ -9,12 +9,33 @@ END;
 
 
 
+create or replace PROCEDURE getAllCount (
+    p_adminid IN admin.adminid%TYPE,
+    p_key IN member.name%TYPE,
+    p_cnt OUT number
+     )
+IS 
+    v_cnt number := 0;
+BEGIN 
+    select count(*) into v_cnt from admin where adminid=p_adminid;
+    p_cnt := v_cnt;
+END;
+
+
+
 create or replace PROCEDURE memberList( 
-    p_userid IN member.userid%TYPE,
+    p_startNum IN NUMBER,
+    p_endNum IN NUMBER,
+    p_key member.name%TYPE,
     p_cur OUT SYS_REFCURSOR )
 IS
 BEGIN
-    OPEN p_cur FOR SELECT * FROM member WHERE userid=p_userid order by indate desc;
+    OPEN p_cur FOR 
+    select * from (
+    select * from (
+    select rownum as rn, m.* from ((SELECT * FROM member WHERE name like '%'||p_key||'%' order by indate desc)m)
+    ) where rn >= p_startNum
+    ) where rn <= p_endNum;
 END;
 
 
@@ -39,7 +60,6 @@ IS
 BEGIN
     OPEN p_cur FOR SELECT * FROM report WHERE reported_id=p_reported_id order by indate desc;
 END;
-
 
 
 

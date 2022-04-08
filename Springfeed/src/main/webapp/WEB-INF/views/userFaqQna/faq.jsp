@@ -25,15 +25,13 @@
 			<c:otherwise>
 			
 				<c:forEach var="fdto" items="${ faqList }">
-					<div class="faqTitle" onclick="showFaq( '${fdto.faq_subject}', `${ fdto.faq_content }` );">
+					<div class="faqTitle" onclick="showFaq( '${fdto.FAQ_SUBJECT}', `${ fdto.FAQ_CONTENT }` );">
 						<h3 class="faqQ">Q</h3>
-						<h3>${ fdto.faq_subject }</h3>
+						<h3>${ fdto.FAQ_SUBJECT }</h3>
 					</div>
 				</c:forEach>
-			
 			</c:otherwise>
 		</c:choose>
-		
 	</div>
 	
 	<div id="faqPopup" style="display: none;">
@@ -59,7 +57,6 @@
 			} else {
 				popup.style.display = "none"
 			}
-			
 		}
 	</script>
 	

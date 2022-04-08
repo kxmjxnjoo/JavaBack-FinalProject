@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/admin/common/admin_submenu.jsp" %>
+<%@ include file="../../admin/common/admin_submenu.jsp" %>
 <link rel="stylesheet" href="admin/css/admin.css">
 <link rel="stylesheet" href="/admin/css/faq.css">
 	
@@ -32,8 +32,7 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 </form>
 <input type="submit" id="ban" value="정지 처리" onClick="/admin/report/handle'">
 
-<%@ include file="/common/paging" %>
-<%@ include file="/admin/common/footer.jsp"%>
+<%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript">
 	function deleteFaq(num) {

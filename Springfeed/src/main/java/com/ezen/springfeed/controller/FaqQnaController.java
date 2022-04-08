@@ -31,29 +31,29 @@ public class FaqQnaController {
 	
 	@Autowired
 	AdminService as;
-
+	
 	@RequestMapping("/admin/faqList")
 	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session = request.getSession();
-		HashMap<String,Object> loginUser
+		HashMap<String,Object> loginAdmin
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
-		
-	    if (loginUser == null) {
+		System.out.println(5);
+	    if (loginAdmin == null) {
 	    	mav.setViewName("admin/admingLogin");
 	    	return mav;
 	    } else {
 	    	HashMap<String,Object> paramMap = new HashMap<>();
-	    	paramMap.put("userid", loginUser.get("USERID"));
 	    	paramMap.put("ref_cursor", null);
 	    	fqs.adminFaqList(paramMap);
-	    	
+	    System.out.println(6);	
 	    	ArrayList<HashMap<String,Object>> list
 	    		= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-	    	mav.addObject("adminfaqList", list);
+	    	mav.addObject("adminFaqList", list);
 	    	mav.setViewName("admin/faq/adminFaqList");
 	    }
+	    System.out.println(7);
 		return mav;
 	}
 	
@@ -77,7 +77,7 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping(value="/faq/add/form",  method=RequestMethod.POST)
-	public ModelAndView addFaqForm( @ModelAttribute("dto") @Valid FaqDto faqdto,
+	public ModelAndView addFaqForm( @ModelAttribute("fdto") @Valid FaqDto faqdto,
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -138,7 +138,8 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/admin/qnaList")
-	public ModelAndView qnaList(HttpServletRequest request, Model model) {
+	public ModelAndView qnaList(HttpServletRequest request, Model model,  
+			@ModelAttribute("qdto") @Valid QnaDto qnadto) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginAdmin") == null) {
@@ -169,30 +170,36 @@ public class FaqQnaController {
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			System.out.println(qnadto.getQna_num());
+			paramMap.put("qna_num", qnadto.getQna_num());
 			paramMap.put("cnt", 0);
 			paramMap.put("key", key);
+			System.out.println(8);
 			as.getAllCount(paramMap);
+			System.out.println(9);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
+			System.out.println(10);
 			
+			System.out.println(paging.getStartNum());
+			System.out.println(paging.getEndNum());
+			System.out.println(key);
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
-			paramMap.put("key", key);
 			paramMap.put("ref_cursor", null);
-			fqs.qnaList(paramMap);
+			fqs.adminQnaList(paramMap);
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-		
+			System.out.println(11);
 			mav.addObject("qnaList", list);
 			mav.addObject("paging", paging);
-			mav.addObject("key", key);
 			mav.setViewName("/admin/adminQna/qnaView");
 		}
 		return mav;
 	}
-	
+		
 	
 	
 	@RequestMapping("/qna/detail")
