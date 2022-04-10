@@ -43,7 +43,9 @@
 	
 	<select id="adminQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL adminQnaList( 
-			#{qna_id},
+			#{qna_num},
+			#{startNum},
+			#{endNum},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>
@@ -63,7 +65,7 @@
 	
 	<select id="getQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getQnaList( 
-			#{userid},
+			#{qna_id}, #{qna_subject}, #{qna_content},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>

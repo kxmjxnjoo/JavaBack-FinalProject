@@ -59,7 +59,6 @@ public class AdminController {
 		paramMap.put("adminId", adminId);
 		as.checkAdmin(paramMap); 	//confirm ID
 		
-		System.out.println();
 		ArrayList<HashMap<String,Object>> list
 			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 		
@@ -67,20 +66,16 @@ public class AdminController {
 			model.addAttribute("message", "아이디를 확인해주세요");
 			return "admin/adminLogin";
 		}
-		System.out.println(2);
 		HashMap<String,Object> resultMap = list.get(0);
 		if(resultMap.get("PASSWORD")==null) {
 			model.addAttribute("message", "다른 관리자에게 문의하세요");
-			System.out.println(21);
 			return "admin/adminLogin";
 		}else if( adminPwd.equals((String)resultMap.get("PASSWORD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-			System.out.println(22);
 			return "redirect:/admin/memberList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
-			System.out.println(23);
 			return "admin/admingLogin";
 		}
 	}	
@@ -90,7 +85,7 @@ public class AdminController {
 	@RequestMapping("/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(3);
+		System.out.println("B");
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginAdmin 
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
@@ -127,13 +122,10 @@ public class AdminController {
 			paramMap.put("adminId", adminId);
 			paramMap.put("cnt", 0);
 			paramMap.put("key", key);
-			System.out.println(31);
 			as.getAllCount(paramMap);
-			System.out.println(32);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
-			System.out.println(33);
 			
 			System.out.println(paging.getStartNum());
 			System.out.println(paging.getEndNum());
@@ -146,7 +138,7 @@ public class AdminController {
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			System.out.println(4);
+			System.out.println("C");
 			mav.addObject("mdto", list);
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
@@ -211,18 +203,23 @@ public class AdminController {
 		}
 		return "admin/member/adminMemberList";
 	}
-
+	
 	
 	
 	@RequestMapping("/admin/reportList")
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
-		
 		ModelAndView mav = new ModelAndView();
-	
+		ReportDto rdto = new ReportDto();
+		System.out.println(rdto);
+		int report_num = rdto.getReport_num();
+		System.out.println("B");
 		HttpSession session = request.getSession();
+		HashMap<String, Object> loginAdmin 
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
 		if(session.getAttribute("loginAdmin") == null) {
-			mav.setViewName("admin/admingLogin");
+			mav.setViewName("admin/adminLogin");
 		} else {
+			System.out.println("D-1");
 			int page = 1;
 			String key = "";
 			if(request.getParameter("first")!=null) {
@@ -237,39 +234,37 @@ public class AdminController {
 			} else {
 				session.removeAttribute("page");
 			}
-			if(request.getParameter("key")!=null) {
-				key = request.getParameter("key");
-				session.setAttribute("key", key);
-			} else if(session.getAttribute("key")!=null) {
-				key = (String)session.getAttribute("key");
-			} else {
-				session.removeAttribute("key");
-			}
+			System.out.println("D-2");
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			System.out.println(rdto.getReport_num());
+			paramMap.put("report_num", report_num);
 			paramMap.put("cnt", 0);
-			paramMap.put("key", key);
-			as.getAllCount(paramMap);
+			as.getAllCount_r(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
+			System.out.println("E");
 			
+			System.out.println(paging.getStartNum());
+			System.out.println(paging.getEndNum());
+			System.out.println(key);
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
-			paramMap.put("key", key);
 			paramMap.put("ref_cursor", null);
 			as.reportList(paramMap);
 			
+			System.out.println("F");
+			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-		
-			mav.addObject("reportList", list);
-			//paramMap.put("reportList", list);
-			// 둘 중 뭐지?
+			
+			mav.addObject("rdto", list);
+			System.out.println(list);
 			mav.addObject("paging", paging);
-			mav.addObject("key", key);
 			mav.setViewName("admin/report/adminReportList");
+			System.out.println("G");
 		}
 		return mav;
 	}

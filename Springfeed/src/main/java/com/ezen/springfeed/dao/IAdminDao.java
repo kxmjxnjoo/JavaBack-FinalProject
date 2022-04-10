@@ -26,4 +26,8 @@ public interface IAdminDao {
 	void deleteStory(HashMap<String, Object> paramMap);
 	
 	void blockUser(HashMap<String, Object> paramMap);
+
+	void getAllCount_r(HashMap<String, Object> paramMap);
+
+	void getAllCount_q(HashMap<String, Object> paramMap);
 }

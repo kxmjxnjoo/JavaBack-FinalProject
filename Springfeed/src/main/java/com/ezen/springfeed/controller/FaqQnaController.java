@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ezen.springfeed.dto.FaqDto;
 import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.dto.QnaDto;
+import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
 
@@ -40,7 +41,7 @@ public class FaqQnaController {
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginAdmin
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
-		System.out.println(5);
+		System.out.println("faqList Login");
 	    if (loginAdmin == null) {
 	    	mav.setViewName("admin/admingLogin");
 	    	return mav;
@@ -48,13 +49,13 @@ public class FaqQnaController {
 	    	HashMap<String,Object> paramMap = new HashMap<>();
 	    	paramMap.put("ref_cursor", null);
 	    	fqs.adminFaqList(paramMap);
-	    System.out.println(6);	
+	    System.out.println("faqList");	
 	    	ArrayList<HashMap<String,Object>> list
 	    		= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 	    	mav.addObject("adminFaqList", list);
 	    	mav.setViewName("admin/faq/adminFaqList");
 	    }
-	    System.out.println(7);
+	    System.out.println("move");
 		return mav;
 	}
 	
@@ -140,17 +141,22 @@ public class FaqQnaController {
 	
 	@RequestMapping("/admin/qnaList")
 	public ModelAndView qnaList(HttpServletRequest request, Model model,  
-			@ModelAttribute("qdto") @Valid QnaDto qnadto) {
+			@ModelAttribute("qdto") @Valid QnaDto qnadto, BindingResult result) {
+		System.out.println(11111);
+		System.out.println(qnadto);
 		ModelAndView mav = new ModelAndView();
+		QnaDto qdto = new QnaDto();
+		int qna_num = qdto.getQna_num();
 		HttpSession session = request.getSession();
+		HashMap<String, Object> loginAdmin 
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
 		if(session.getAttribute("loginAdmin") == null) {
-			mav.setViewName("admin/admingLogin");
+			mav.setViewName("admin/adminLogin");
 		} else {
+			System.out.println("Q&A로그인 확인");
 			int page = 1;
-			String key = "";
 			if(request.getParameter("first")!=null) {
 				session.removeAttribute("page");
-				session.removeAttribute("key");
 			}
 			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -160,32 +166,19 @@ public class FaqQnaController {
 			} else {
 				session.removeAttribute("page");
 			}
-			if(request.getParameter("key")!=null) {
-				key = request.getParameter("key");
-				session.setAttribute("key", key);
-			} else if(session.getAttribute("key")!=null) {
-				key = (String)session.getAttribute("key");
-			} else {
-				session.removeAttribute("key");
-		}
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
-			System.out.println(qnadto.getQna_num());
-			paramMap.put("qna_num", qnadto.getQna_num());
+			paramMap.put("qna_num", qna_num);
 			paramMap.put("cnt", 0);
-			paramMap.put("key", key);
-			System.out.println(8);
-			as.getAllCount(paramMap);
-			System.out.println(9);
+			System.out.println(paramMap);
+			as.getAllCount_q(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
-			System.out.println(10);
 			
 			System.out.println(paging.getStartNum());
 			System.out.println(paging.getEndNum());
-			System.out.println(key);
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("ref_cursor", null);
@@ -193,10 +186,10 @@ public class FaqQnaController {
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			System.out.println(11);
-			mav.addObject("qnaList", list);
+			
+			mav.addObject("qdto", list);
 			mav.addObject("paging", paging);
-			mav.setViewName("/admin/adminQna/qnaView");
+			mav.setViewName("admin/adminQna/adminQnaList");
 		}
 		return mav;
 	}
@@ -235,7 +228,6 @@ public class FaqQnaController {
 			paramMap.put("ref_cursor2", null);
 			
 			fqs.getQnaList(paramMap);
-			
 			fqs.getAllQna(paramMap);
 			
 			ArrayList<HashMap<String, Object>> userQnaList 

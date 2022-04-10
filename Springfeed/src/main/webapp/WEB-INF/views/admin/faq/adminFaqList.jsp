@@ -5,9 +5,9 @@
 	
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">
-<input type="button" id="button1" value="작성" onClick="/faq/add'">
+	<input type="button" id="button1" value="작성" onClick="/faq/add'">
 ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
-<input type="button" id="button2" value="로그아웃" onClick="/logout'"></span>
+	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 	
 <form name="frm" method="post" action="/admin/faqList">		
@@ -19,7 +19,7 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 				<th>수정</th>
 				<th>삭제</th>
 			</tr>
-			<c:forEach items="${listFaq}" var="fdto">
+			<c:forEach items="${fdto}" var="fdto">
 				<tr align="left" class="faqBox" > <!-- onclick="/faqdetail&num=${ fdto.FAQ_NUM }" -->
 					<td style="width: 10%;">${fdto.FAQ_NUM}</td>
 					<td style="width: 30%;">${fdto.FAQ_SUBJECT}</td>
@@ -30,7 +30,7 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 			</c:forEach>
 	</table>
 </form>
-<input type="submit" id="ban" value="정지 처리" onClick="/admin/report/handle'">
+<!-- <input type="submit" id="ban" value="정지 처리" onClick="/admin/report/handle'"> -->
 
 <%@ include file="../../admin/common/footer.jsp"%>
 

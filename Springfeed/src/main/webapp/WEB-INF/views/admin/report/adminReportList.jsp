@@ -26,7 +26,7 @@
 			<tr>
 				<th>번호</th><th>아이디</th><th>신고 유형</th><th>사유</th><th>신고자</th><th>신고날짜</th><th>처리</th>
 			</tr>
-			<c:forEach items="${reportList}" var="rdto">
+			<c:forEach items="${rdto}" var="rdto">
 				<tr align="left">
 					<td  width="50">${rdto.REPORT_NUM}</td>
 					<td  width="50">${rdto.REPORTED_ID}</td>
@@ -35,15 +35,15 @@
 					<td  width="50">${rdto.REPORTER_ID}</td>
 					<td  width="70"><fmt:formatDate value="${rdto.INDATE}"/></td>
 					<c:choose>
-						<c:when test="${rdto.HANDLED.EQUALS('y')}">
+						<c:when test="${rdto.HANDLED.equals('y')}">
 							<td  width="50"> <input type="button" disabled='disabled' name="banDone" value="처리 완료">					
 						</c:when>
 						<c:otherwise>
 							<c:choose>
-								<c:when test="${rdto.TYPE.EQUALS('post')}">
+								<c:when test="${rdto.TYPE.equals('post')}">
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="/postReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM});">
 								</c:when>
-								<c:when test="${rdto.TYPE.EQUALS('story')}">
+								<c:when test="${rdto.TYPE.equals('story')}">
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="/stotyReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM});">
 								</c:when>
 								<c:otherwise>

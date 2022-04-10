@@ -14,5 +14,5 @@ public class ReportDto {
 	private String reason;
 	private String type;
 	private String handled;
-	
+	private int report_num;
 }

@@ -16,7 +16,7 @@
 			<th>답변여부</th>
 		<tr>
 		
-		<c:forEach items="${qnaList}" var="qdto">
+		<c:forEach items="${qdto}" var="qdto">
 			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }'" class="qnaItems">
 				<td width="50">${qdto.USERNAME}</td>
 				<td width="50">${qdto.QNA_ID}</td>

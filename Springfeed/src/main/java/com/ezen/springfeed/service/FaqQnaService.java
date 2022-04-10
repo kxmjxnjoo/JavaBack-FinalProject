@@ -24,7 +24,6 @@ public class FaqQnaService {
 		
 	public void addQna(HashMap<String, Object> paramMap) {
 		fqdao.addQna(paramMap);
-
 	}
 
 	public void deleteFaq(HashMap<String, Object> paramMap) {
@@ -63,6 +62,7 @@ public class FaqQnaService {
 		fqdao.getAllQna(paramMap);
 	}
 
-
-
+	public void reportList(HashMap<String, Object> paramMap) {
+		fqdao.reportList(paramMap);
+	}
 }
