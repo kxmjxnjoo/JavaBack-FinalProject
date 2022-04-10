@@ -40,14 +40,12 @@
 	
 	<select id="getAllCount_r" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount_r(
-			#{report_num},
 			#{cnt, mode=OUT, jdbcType=INTEGER}
 			)  } 
 	</select>
 	
 	<select id="reportList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL reportList( 
-			#{report_num},
 			#{startNum},
 			#{endNum},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
@@ -55,11 +53,13 @@
 	</select>
 	
 	<select id="postReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL postReportCheck( 	#{post_num}, 	#{reason}, 	#{report_type} 	)  }
+		{  CALL postReportCheck( 	#{post_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
 	</select>
 	
 	<select id="storyReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL storyReportCheck( 	#{story_num}, 	#{reason}, 	#{report_type} 	)  }
+		{  CALL storyReportCheck( 	#{story_num})  }
 	</select>
 	
 	<delete id="deletePost" statementType="CALLABLE" parameterType="java.util.HashMap" >
@@ -89,5 +89,12 @@
 			#{cnt, mode=OUT, jdbcType=INTEGER}
 			)  } 
 	</select>
+	
+	<update id="updateReportPostBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportPostBlock(
+			#{report_num},
+			#{post_num}
+		 ) } 
+	</update>
 	
 </mapper>

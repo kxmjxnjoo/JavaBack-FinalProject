@@ -23,8 +23,8 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 				<tr align="left" class="faqBox" > <!-- onclick="/faqdetail&num=${ fdto.FAQ_NUM }" -->
 					<td style="width: 10%;">${fdto.FAQ_NUM}</td>
 					<td style="width: 30%;">${fdto.FAQ_SUBJECT}</td>
-					<td style="width: 40%;">${fdto.FAQ_CONTENT}</td>
-					<td style="width: 10%;"><button onclick="/faq/edit/form&num=${ fdto.FAQ_NUM }'" id="faqEditButton">수정</button></td>
+					<%-- <td style="width: 40%;">${fdto.FAQ_CONTENT}</td> --%>
+					<td style="width: 10%;"><button onclick="/faq/edit/form?num=${ fdto.FAQ_NUM }'" id="faqEditButton">수정</button></td>
 					<td style="width: 10%;"><button onclick="/faq/delete(${ fdto.FAQ_NUM })" id="faqDeleteButton">삭제</button></td>
 				</tr>
 			</c:forEach>

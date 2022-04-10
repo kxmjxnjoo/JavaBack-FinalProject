@@ -30,4 +30,6 @@ public interface IAdminDao {
 	void getAllCount_r(HashMap<String, Object> paramMap);
 
 	void getAllCount_q(HashMap<String, Object> paramMap);
+
+	void updateReportPostBlock(HashMap<String, Object> paramMap);
 }

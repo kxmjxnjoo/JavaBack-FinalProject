@@ -125,6 +125,7 @@ public class AdminController {
 			as.getAllCount(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
+			System.out.println(cnt);
 			paging.paging();
 			
 			System.out.println(paging.getStartNum());
@@ -210,8 +211,6 @@ public class AdminController {
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		ReportDto rdto = new ReportDto();
-		System.out.println(rdto);
-		int report_num = rdto.getReport_num();
 		System.out.println("B");
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginAdmin 
@@ -238,8 +237,6 @@ public class AdminController {
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
-			System.out.println(rdto.getReport_num());
-			paramMap.put("report_num", report_num);
 			paramMap.put("cnt", 0);
 			as.getAllCount_r(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
@@ -281,52 +278,24 @@ public class AdminController {
 		if(session.getAttribute("loginAdmin") == null) {
 			mav.setViewName("admin/admingLogin");
 		} else {
-			int page = 1;
-			String key = "";
-			if(request.getParameter("first")!=null) {
-				session.removeAttribute("page");
-				session.removeAttribute("key");
-			}
-			if(request.getParameter("page")!=null) {
-				page = Integer.parseInt(request.getParameter("page"));
-				session.setAttribute("page", page);
-			} else if(session.getAttribute("page") != null) {
-				page = (Integer)session.getAttribute("page");
-			} else {
-				session.removeAttribute("page");
-			}
-			if(request.getParameter("key")!=null) {
-				key = request.getParameter("key");
-				session.setAttribute("key", key);
-			} else if(session.getAttribute("key")!=null) {
-				key = (String)session.getAttribute("key");
-			} else {
-				session.removeAttribute("key");
-			}
-			Paging paging = new Paging();
-			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			
+			System.out.println(request.getParameter("post_num"));
+			int post_num = Integer.parseInt(request.getParameter("post_num"));
+			int report_num = Integer.parseInt(request.getParameter("report_num"));
+			paramMap.put("post_num", post_num);
 			paramMap.put("cnt", 0);
-			paramMap.put("key", key);
-			as.getAllCount(paramMap);
-			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
-			paging.setTotalCount(cnt);
-			paging.paging();
-			
-			paramMap.put("startNum", paging.getStartNum());
-			paramMap.put("endNum", paging.getEndNum());
-			paramMap.put("key", key);
-			
-			String postReportCheck = "";
-			paramMap.put("postReportCheck", postReportCheck);
-			paramMap.put("ref_cursor", null);
 			as.postReportCheck(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			if(cnt>0) {
+				
+
+				paramMap.put("report_num", report_num);
+				paramMap.put("handled", "y");
+				// UPDATE 상태변경.
+				as.updateReportPostBlock(paramMap);
 			
-			int report_num = Integer.parseInt(request.getParameter("reportNum"));
-			paramMap.put("report_num", report_num);
-			paramMap.put("post_num", reportdto.getPost_num());
-			mav.setViewName("admin/report/postReportCheck");
-			// check Reporeted post?
+			}
 		}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
