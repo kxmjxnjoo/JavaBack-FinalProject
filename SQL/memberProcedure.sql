@@ -115,8 +115,9 @@ CREATE OR REPLACE PROCEDURE getNotification(
     p_userid IN notification.user_to%TYPE
 )
 IS 
-    
 BEGIN
+    update notification set checked=1 where user_to=p_userid and checked=0;
+    
     open p_cur for
         select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, 
         p.img as postImg, r.content as replyContent, n.create_date as create_date, m.img AS IMG
@@ -125,9 +126,9 @@ BEGIN
             left outer join reply r on r.reply_num = n.reply_num    
             left outer join member m on m.userid = n.user_from
         where n.user_to = p_userid order by num desc;      
-        
+    
+    commit;
 END;   
-
 
 
 --회원 정보 수정
@@ -198,6 +199,7 @@ BEGIN
     p_notiCount := v_notiCount;
 END;
 
+
 --아이디 찾기 
 CREATE OR REPLACE PROCEDURE findId(
     p_name IN member.name%TYPE, 
@@ -245,3 +247,61 @@ IS
 BEGIN
     update member set password=p_str where email = p_email;
 END;
+
+
+--멤버 블락
+CREATE OR REPLACE PROCEDURE insertBlockMember(
+    p_userid IN blockmember.userid%TYPE, 
+    p_blocked IN blockmember.blocked%TYPE
+)
+IS
+BEGIN
+    insert into blockmember values(p_userid, p_blocked);
+    commit;
+END;
+
+--멤버 블락 해제
+CREATE OR REPLACE PROCEDURE unblockMember(
+    p_userid IN blockmember.userid%TYPE, 
+    p_blocked IN blockmember.blocked%TYPE
+)
+IS
+BEGIN
+    delete from blockmember where userid=p_userid and blocked=p_blocked;
+    commit;
+END;
+
+--블락 리스트 확인
+CREATE OR REPLACE PROCEDURE blockCheck(
+    p_userid IN blockmember.userid%TYPE, 
+    p_blocked IN blockmember.blocked%TYPE,
+    p_curvar OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_curvar FOR SELECT * FROM blockmember WHERE userid=p_userid and blocked=p_blocked;
+END;
+
+
+--비공계 계정 설정
+CREATE OR REPLACE PROCEDURE privateAccount(
+    p_userid IN member.userid%TYPE
+)
+IS
+BEGIN
+    update member set useyn='p' where userid = p_userid;
+    commit;
+END;
+
+--계정 공개 전환
+CREATE OR REPLACE PROCEDURE PublicAccount(
+    p_userid IN member.userid%TYPE
+)
+IS
+BEGIN
+    update member set useyn='y' where userid = p_userid;
+    commit;
+END;
+
+
+select * from member

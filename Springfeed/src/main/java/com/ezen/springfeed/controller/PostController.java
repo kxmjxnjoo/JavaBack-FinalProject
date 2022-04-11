@@ -127,14 +127,4 @@ public class PostController {
 		return "";
 	}
 
-	@RequestMapping("/report")
-	public String report() {
-		// Determine whether userid or post or story is provided
-		return "";
-	}
-
-	@RequestMapping("/report/form")
-	public String reportForm() {
-		return "";
-	}
 }

@@ -33,7 +33,7 @@ public class MemberDto {
 	
 	@NotNull (message="전화번호를 입력하세요")
 	@NotEmpty(message="전화번호를 입력하세요")
-	@Pattern(regexp = "(01[016789])(\\d{3,4})(\\d{4})", message = "올바른 휴대폰 번호를 입력해주세요.")
+	@Pattern(regexp = "(01[016789])(\\d{3,4})(\\d{4})", message = "휴대전화번호는 10~11자리 숫자만 입력해주세요.")
 	private String phone;
 	
 	private String useyn;

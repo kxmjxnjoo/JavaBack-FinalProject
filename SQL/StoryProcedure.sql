@@ -89,22 +89,6 @@ EXCEPTION
 END;
 
 
-
-
-
-
-
-
-
-
-
-
-
-    select min(story_num) into v_next
-    from story where story_num > p_story_num group by userid having userid=v_userid;
-    p_next := v_next; 
-    
-
 --스토리 삭제
 create or replace PROCEDURE deleteStory(
     p_story_num IN story.story_num%type
@@ -130,5 +114,3 @@ BEGIN
     where story_num = p_story_num; 
     commit;
 END;
-
-select * from story

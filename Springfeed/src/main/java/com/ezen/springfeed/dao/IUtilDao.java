@@ -7,6 +7,8 @@ import java.util.HashMap;
 @Mapper
 public interface IUtilDao {
     void getMemberSearch(HashMap<String, Object> paramMap);
-
     void getPostSearch(HashMap<String, Object> paramMap);
+	void addStoryReport(HashMap<String, Object> paramMap);
+	void addPostReport(HashMap<String, Object> paramMap);
+	void addUserReport(HashMap<String, Object> paramMap);
 }

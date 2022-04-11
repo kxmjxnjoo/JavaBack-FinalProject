@@ -110,7 +110,7 @@ public class MemberController {
     
     
     //회원가입 시 중복, 유효성 체크 
-    @RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
+    @RequestMapping(value="/join/id", method=RequestMethod.POST)
     @ResponseBody
     public int idCheck(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result) {
@@ -273,6 +273,8 @@ public class MemberController {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("ref_cursor", null);
 			paramMap.put("userid", loginUser.get("USERID"));
+
+			System.out.println(loginUser.get("USERID"));
 			ms.getNotification(paramMap);
 			
 			ArrayList<HashMap<String, Object>> notiList 
@@ -307,6 +309,30 @@ public class MemberController {
 		return mav;
     }
     
+    @RequestMapping("/api/notiCount")
+    public int notiCount(HttpServletRequest request) {
+    	
+    	int notiCount = 0;
+    	
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+    	
+    	if(loginUser == null) {
+    		notiCount = 0;
+    	} else {
+    		HashMap<String, Object> paramMap = new HashMap<>();
+    		paramMap.put("userid", loginUser.get("USERID"));
+    		paramMap.put("notiCount", 0);
+    		
+    		ms.getNotiCount(paramMap);
+    		
+    		notiCount = Integer.parseInt(paramMap.get("notiCount").toString());
+    	}
+    	
+    	return notiCount;
+    }
+    
 
     
     
@@ -338,26 +364,6 @@ public class MemberController {
     
     @Autowired
     ServletContext context;
-    
-    
-//    @RequestMapping("/notiCount")
-//   	@ResponseBody
-//   	public Map<String, Object> notiCount(Model model, HttpServletRequest request){
-//    	
-//    	HttpSession session = request.getSession();
-//    	HashMap<String, Object> loginUser 
-//		= (HashMap<String, Object>) session.getAttribute("loginUser");
-//    	
-//    	HashMap<String, Object> paramMap = new HashMap<>();
-//    	paramMap.put("userid", loginUser.get("USERID"));
-//    	paramMap.put("notiCount", 0);
-//    	
-//    	ms.getNotiCount(paramMap);
-//    	
-//    	return paramMap;
-//    }
-  
-    
     
     @RequestMapping("/uploadImg")
 	@ResponseBody
@@ -461,6 +467,7 @@ public class MemberController {
     //블락
     @RequestMapping("/block")
     public String block(HttpServletRequest request, Model model, 
+    		RedirectAttributes rttr,
     		@RequestParam("userid") String userid) {
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
@@ -471,11 +478,59 @@ public class MemberController {
 			return "member/login";
 		} else {
 			HashMap<String, Object> paramMap = new HashMap<>();
+    		paramMap.put("userid", userid);
+    		paramMap.put("ref_cursor", null);
+    		
+    		System.out.println();
+    		ms.getMember(paramMap);
+    		
+			ArrayList<HashMap<String, Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			if(list.size() == 0) {
+				rttr.addFlashAttribute("message", "존재하지 않는 회원입니다. ");
+				return "redirect:/";
+			} else {
+				ms.blockMember((String) loginUser.get("USERID"), userid);
+				rttr.addFlashAttribute("message", userid+"님을 차단했어요.");
+				
+				String referer = request.getHeader("Referer");
+			    return "redirect:"+ referer;
+			}
+		}
+    }
+    
+    
+    //차단 해제
+    @RequestMapping("/unblock")
+    public String unblock(HttpServletRequest request, Model model, 
+    		RedirectAttributes rttr, @RequestParam("userid") String userid) {
+    	HttpSession session = request.getSession();
+    	HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			model.addAttribute("로그인 해주세요.");
+			return "member/login";
+		} else {
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("blocked", userid);
+			paramMap.put("ref_cursor", null);
 			
-			model.addAttribute("message", userid+"님을 차단했어요.");
-			return "";
+			ms.blockCheck(paramMap);
+			
+			ArrayList<HashMap<String, Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			
+			if(list.size() == 0) {
+				rttr.addFlashAttribute("message", "차단 목록에서 " + userid +"님을 찾을 수 없습니다.");
+			} else {
+				ms.unblockMember((String) loginUser.get("USERID"), userid);
+				rttr.addFlashAttribute("message", "차단을 해제했어요.");
+			}
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     }
 
@@ -544,7 +599,43 @@ public class MemberController {
     }
     
     
+    //비공개 계정 설정
+    @RequestMapping("/user/private")
+    public String privateAccount (HttpServletRequest request, Model model, RedirectAttributes rttr) {
+	    HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			return "redirect:/login/form";
+		} else {
+			String userid = (String) loginUser.get("USERID");
+			ms.privateAccount(userid);
+			
+			rttr.addFlashAttribute("message", "계정이 비공개로 설정되었어요!");
+			return "redirect:/";
+		}
+    }
+    
+    //비공개 계정 -> 공개 계정으로 전환
+    @RequestMapping("/user/public")
+    public String PublicAccount (HttpServletRequest request, Model model, RedirectAttributes rttr) {
+	    HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+			return "redirect:/login/form";
+		} else {
+			String userid = (String) loginUser.get("USERID");
+			ms.PublicAccount(userid);
+			
+			rttr.addFlashAttribute("message", "계정 비공개를 해제 했어요!");
+			return "redirect:/";
+		}
+    }
     
     
-
 }

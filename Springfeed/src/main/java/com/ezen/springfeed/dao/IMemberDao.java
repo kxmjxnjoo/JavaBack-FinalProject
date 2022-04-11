@@ -17,9 +17,14 @@ public interface IMemberDao {
 	void deleteAcount(HashMap<String, Object> paramMap);
 	void activateAccount(String userid);
 	void getFollow(HashMap<String, Object> followMap);
-	void getNotiCount(HashMap<String, Object> paramMap);
 	void findId(HashMap<String, Object> paramMap);
 	void userEmailCheck(String email, String name, boolean pwFindCheck);
 	void updatePassword(String str, String email);
 	void getFollowedList(HashMap<String, Object> paramMap);
+	void getNotiCount(HashMap<String, Object> paramMap);
+	void blockMember(String userid, String blocked);
+	void unblockMember(String userid, String blocked);
+	void blockCheck(HashMap<String, Object> paramMap);
+	void privateAccount(String userid);
+	void PublicAccount(String userid);
 }

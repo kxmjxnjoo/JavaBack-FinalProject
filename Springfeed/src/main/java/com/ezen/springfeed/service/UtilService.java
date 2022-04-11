@@ -19,4 +19,16 @@ public class UtilService {
     public void getPostSearch(HashMap<String, Object> paramMap) {
         udao.getPostSearch(paramMap);
     }
+
+    public void addStoryReport(HashMap<String, Object> paramMap) {
+    	udao.addStoryReport(paramMap);
+	}
+
+	public void addPostReport(HashMap<String, Object> paramMap) {
+		udao.addPostReport(paramMap);
+	}
+
+	public void addUserReport(HashMap<String, Object> paramMap) {
+		udao.addUserReport(paramMap);
+	}
 }

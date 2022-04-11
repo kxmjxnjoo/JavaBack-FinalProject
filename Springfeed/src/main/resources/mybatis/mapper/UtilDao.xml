@@ -43,6 +43,40 @@
 			    }
 			)
 		}
-	</select>
+	</select> 
+	
+	<insert id="addStoryReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addStoryReport(
+				#{reporter},#{reportType},#{reason},#{story_num}
+			)
+		}
+	</insert>
+	
+	
+	<insert id="addPostReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addPostReport(
+				#{reporter},#{reportType},#{reason},#{post_num}
+			)
+		}
+	</insert>
+	
+	<insert id="addUserReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addUserReport(
+				#{reporter},#{reported},#{reportType},#{reason}
+			)
+		}
+	</insert>
 	
 </mapper>
