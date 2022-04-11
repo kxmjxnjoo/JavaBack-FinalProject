@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 
+import {Link } from 'react-router-dom'
+
 // Icon
 import {
     BsHeart as LikeIcon, BsFillHeartFill as LikeFillIcon, BsChatLeft as ReplyIcon, BsChatDots as MessageIcon,
@@ -10,7 +12,7 @@ import { MdOutlineMoreHoriz as DetailIcon } from 'react-icons/md'
 
 import defaultProfile from '../../images/tmpUserIcon.png'
 
-const Post = ({ post }) => {
+const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) => {
     const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content, post_num: postNum } = post
 
     const profileStyle = {
@@ -64,18 +66,27 @@ const Post = ({ post }) => {
                 <div className="row">
                     <div className="col-10">
 
-                        <div className="row">
-                            <div className="col-2">
-                                <img src={userprofile == '' || userprofile == null ? defaultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle} />
+                        <Link to={"/user/" + userid} style={{textDecoration: 'none', color: 'black'}}>
+                            <div className="row">
+                                <div className="col-2">
+                                    <img src={userprofile == '' || userprofile == null ? defaultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle} />
+                                </div>
+                                <div className="col text-left">
+                                    <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>
+                                    <h6 className='text-muted '>{location == '' || location == null ? '위치 정보 없음' : location}</h6>
+                                </div>
                             </div>
-                            <div className="col text-left">
-                                <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>
-                                <h6 className='text-muted '>{location == '' ? 'ERROR' : location}</h6>
-                            </div>
-                        </div>
+                        </Link>
+
+
                     </div>
 
-                    <DetailIcon className='col-2 mt-2' style={iconStyle} />
+                    <DetailIcon className='col-2 mt-2' style={iconStyle} 
+                                onClick={() => {
+                                    setIsDetailMenuOpen(true)
+                                    setSelectedPost(post)
+                                }}
+                    />
                 </div>
             </div>
 
@@ -89,7 +100,9 @@ const Post = ({ post }) => {
                         {
                             isLikedData ? <LikeFillIcon className='m-2 text-danger' onClick={handleLike} /> : <LikeIcon className='m-2' onClick={handleLike} />
                         }
-                        <ReplyIcon className='m-2' />
+                        <ReplyIcon className='m-2' onClick={() => {
+                            openPostDetail({post})
+                        }}/>
                         <MessageIcon className='m-2' />
                     </div>
                     <div className="col-2">

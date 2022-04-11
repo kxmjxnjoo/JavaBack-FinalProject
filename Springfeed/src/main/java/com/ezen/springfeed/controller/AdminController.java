@@ -1,7 +1,6 @@
 package com.ezen.springfeed.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,7 +47,7 @@ public class AdminController {
 	} 		// move loginForm 
 	
 	
-	@RequestMapping("/admin/loginForm")
+	@RequestMapping(value="/admin/loginForm", method=RequestMethod.POST)
 	public String adminLogin( HttpServletRequest request, Model model,
 			@RequestParam("adminId") String adminId,
 			@RequestParam("adminPwd") String adminPwd) {
@@ -66,7 +66,6 @@ public class AdminController {
 			model.addAttribute("message", "아이디를 확인해주세요");
 			return "admin/adminLogin";
 		}
-		
 		HashMap<String,Object> resultMap = list.get(0);
 		if(resultMap.get("PASSWORD")==null) {
 			model.addAttribute("message", "다른 관리자에게 문의하세요");
@@ -74,7 +73,7 @@ public class AdminController {
 		}else if( adminPwd.equals((String)resultMap.get("PASSWORD"))) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", resultMap);
-			return "redirect:/admin/membertList";
+			return "redirect:/admin/memberList";
 		}else {
 			model.addAttribute("message", "비밀번호가 틀렸습니다");
 			return "admin/admingLogin";
@@ -86,8 +85,11 @@ public class AdminController {
 	@RequestMapping("/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("B");
 		HttpSession session = request.getSession();
+		HashMap<String, Object> loginAdmin 
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
+		String adminId = (String)loginAdmin.get("ADMINID");
 		if(session.getAttribute("loginAdmin") == null) {
 			mav.setViewName("admin/adminLogin");
 		} else {
@@ -116,13 +118,19 @@ public class AdminController {
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			System.out.println(adminId);
+			paramMap.put("adminId", adminId);
 			paramMap.put("cnt", 0);
 			paramMap.put("key", key);
 			as.getAllCount(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
+			System.out.println(cnt);
 			paging.paging();
 			
+			System.out.println(paging.getStartNum());
+			System.out.println(paging.getEndNum());
+			System.out.println(key);
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("key", key);
@@ -131,7 +139,7 @@ public class AdminController {
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-		
+			System.out.println("C");
 			mav.addObject("mdto", list);
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
@@ -196,18 +204,21 @@ public class AdminController {
 		}
 		return "admin/member/adminMemberList";
 	}
-
+	
 	
 	
 	@RequestMapping("/admin/reportList")
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
-		
 		ModelAndView mav = new ModelAndView();
-	
+		ReportDto rdto = new ReportDto();
+		System.out.println("B");
 		HttpSession session = request.getSession();
+		HashMap<String, Object> loginAdmin 
+			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
 		if(session.getAttribute("loginAdmin") == null) {
-			mav.setViewName("admin/admingLogin");
+			mav.setViewName("admin/adminLogin");
 		} else {
+			System.out.println("D-1");
 			int page = 1;
 			String key = "";
 			if(request.getParameter("first")!=null) {
@@ -222,39 +233,35 @@ public class AdminController {
 			} else {
 				session.removeAttribute("page");
 			}
-			if(request.getParameter("key")!=null) {
-				key = request.getParameter("key");
-				session.setAttribute("key", key);
-			} else if(session.getAttribute("key")!=null) {
-				key = (String)session.getAttribute("key");
-			} else {
-				session.removeAttribute("key");
-			}
+			System.out.println("D-2");
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
 			paramMap.put("cnt", 0);
-			paramMap.put("key", key);
-			as.getAllCount(paramMap);
+			as.getAllCount_r(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
+			System.out.println("E");
 			
+			System.out.println(paging.getStartNum());
+			System.out.println(paging.getEndNum());
+			System.out.println(key);
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
-			paramMap.put("key", key);
 			paramMap.put("ref_cursor", null);
 			as.reportList(paramMap);
 			
+			System.out.println("F");
+			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-		
-			mav.addObject("reportList", list);
-			//paramMap.put("reportList", list);
-			// 둘 중 뭐지?
+			
+			mav.addObject("rdto", list);
+			System.out.println(list);
 			mav.addObject("paging", paging);
-			mav.addObject("key", key);
 			mav.setViewName("admin/report/adminReportList");
+			System.out.println("G");
 		}
 		return mav;
 	}
@@ -271,52 +278,24 @@ public class AdminController {
 		if(session.getAttribute("loginAdmin") == null) {
 			mav.setViewName("admin/admingLogin");
 		} else {
-			int page = 1;
-			String key = "";
-			if(request.getParameter("first")!=null) {
-				session.removeAttribute("page");
-				session.removeAttribute("key");
-			}
-			if(request.getParameter("page")!=null) {
-				page = Integer.parseInt(request.getParameter("page"));
-				session.setAttribute("page", page);
-			} else if(session.getAttribute("page") != null) {
-				page = (Integer)session.getAttribute("page");
-			} else {
-				session.removeAttribute("page");
-			}
-			if(request.getParameter("key")!=null) {
-				key = request.getParameter("key");
-				session.setAttribute("key", key);
-			} else if(session.getAttribute("key")!=null) {
-				key = (String)session.getAttribute("key");
-			} else {
-				session.removeAttribute("key");
-			}
-			Paging paging = new Paging();
-			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			
+			System.out.println(request.getParameter("post_num"));
+			int post_num = Integer.parseInt(request.getParameter("post_num"));
+			int report_num = Integer.parseInt(request.getParameter("report_num"));
+			paramMap.put("post_num", post_num);
 			paramMap.put("cnt", 0);
-			paramMap.put("key", key);
-			as.getAllCount(paramMap);
-			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
-			paging.setTotalCount(cnt);
-			paging.paging();
-			
-			paramMap.put("startNum", paging.getStartNum());
-			paramMap.put("endNum", paging.getEndNum());
-			paramMap.put("key", key);
-			
-			String postReportCheck = "";
-			paramMap.put("postReportCheck", postReportCheck);
-			paramMap.put("ref_cursor", null);
 			as.postReportCheck(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			if(cnt>0) {
+				
+
+				paramMap.put("report_num", report_num);
+				paramMap.put("handled", "y");
+				// UPDATE 상태변경.
+				as.updateReportPostBlock(paramMap);
 			
-			int report_num = Integer.parseInt(request.getParameter("reportNum"));
-			paramMap.put("report_num", report_num);
-			paramMap.put("post_num", reportdto.getPost_num());
-			mav.setViewName("admin/report/postReportCheck");
-			// check Reporeted post
+			}
 		}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;

@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-body {
-	position: relative;
-	top: 70px;
-}
-
 :root {
 	--mainColor: rgb(230, 153, 153);
 	--warningColor: rgb(233, 49, 47);

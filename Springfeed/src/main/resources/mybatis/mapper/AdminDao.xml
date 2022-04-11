@@ -16,14 +16,17 @@
 	
 	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount(
-				#{adminId},
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+			#{adminId},
+			#{key},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
 			)  } 
 	</select>
 	
  	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL memberList( 
-			#{userid},
+			#{startNum},
+			#{endNum},
+			#{key},
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 		)  }
 	</select> 
@@ -35,19 +38,28 @@
 		) }
 	</select>
 	
+	<select id="getAllCount_r" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount_r(
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+	
 	<select id="reportList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL reportList( 
-			#{reporter_id},  #{reported_id},  #{post_num}, 	#{story_num},  #{reason}, 	#{type}
-			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+			#{startNum},
+			#{endNum},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 		)  }
 	</select>
 	
 	<select id="postReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL postReportCheck( 	#{post_num}, 	#{reason}, 	#{report_type} 	)  }
+		{  CALL postReportCheck( 	#{post_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
 	</select>
 	
 	<select id="storyReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL storyReportCheck( 	#{story_num}, 	#{reason}, 	#{report_type} 	)  }
+		{  CALL storyReportCheck( 	#{story_num})  }
 	</select>
 	
 	<delete id="deletePost" statementType="CALLABLE" parameterType="java.util.HashMap" >
@@ -70,5 +82,19 @@
 		  #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
 		) }
 	</delete>
+	
+	<select id="getAllCount_q" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount_q(
+			#{qna_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+	
+	<update id="updateReportPostBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportPostBlock(
+			#{report_num},
+			#{post_num}
+		 ) } 
+	</update>
 	
 </mapper>

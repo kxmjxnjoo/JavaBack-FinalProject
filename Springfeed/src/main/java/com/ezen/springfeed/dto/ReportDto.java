@@ -12,7 +12,7 @@ public class ReportDto {
 	private int story_num;
 	private Timestamp indate;
 	private String reason;
-	private String type;
+	private String report_type;
 	private String handled;
-	
+	private int report_num;
 }

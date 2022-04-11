@@ -52,4 +52,19 @@ public class AdminService {
 	public void blockUser(HashMap<String, Object> paramMap) {
 		adao.blockUser(paramMap);
 	}
+
+	public void getAllCount_r(HashMap<String, Object> paramMap) {
+		adao.getAllCount_r(paramMap);
+	}
+
+	public void getAllCount_q(HashMap<String, Object> paramMap) {
+		adao.getAllCount_q(paramMap);
+	}
+	
+	
+
+	public void updateReportPostBlock(HashMap<String, Object> paramMap) {
+		adao.updateReportPostBlock(paramMap);
+		
+	}
 }

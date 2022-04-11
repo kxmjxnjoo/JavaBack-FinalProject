@@ -30,10 +30,8 @@
 						<h3>${ fdto.FAQ_SUBJECT }</h3>
 					</div>
 				</c:forEach>
-			
 			</c:otherwise>
 		</c:choose>
-		
 	</div>
 	
 	<div id="faqPopup" style="display: none;">
@@ -59,7 +57,6 @@
 			} else {
 				popup.style.display = "none"
 			}
-			
 		}
 	</script>
 	

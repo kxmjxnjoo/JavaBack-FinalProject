@@ -7,10 +7,9 @@
 	
 	<resultMap id="FaqQnaMap" type="java.util.HashMap"></resultMap>	
 	
-	<select id="adminfaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL adminfaqList(
-				#{faq_num}
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+	<select id="adminFaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL adminFaqList(
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		) }
 	</select>
 	
@@ -42,9 +41,11 @@
 		{ CALL deleteQna(  #{qna_num}	) }
 	</delete>
 	
-	<select id="qnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL qnaList( 
-			#{qna_id},
+	<select id="adminQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL adminQnaList( 
+			#{qna_num},
+			#{startNum},
+			#{endNum},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>
@@ -64,7 +65,7 @@
 	
 	<select id="getQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getQnaList( 
-			#{userid},
+			#{qna_id}, #{qna_subject}, #{qna_content},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>

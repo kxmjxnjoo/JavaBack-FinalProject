@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IFaqQnaDao {
 
-	void adminfaqList(HashMap<String, Object> paramMap);
+	void adminFaqList(HashMap<String, Object> paramMap);
 
 	void addQna(HashMap<String, Object> paramMap);
 
@@ -21,16 +21,17 @@ public interface IFaqQnaDao {
 
 	void qnaEdit(HashMap<String, Object> paramMap);
 
+	void adminQnaList(HashMap<String, Object> paramMap);
+	
 	void qnaList(HashMap<String, Object> paramMap);
-
+	
 	void faqList(HashMap<String, Object> paramMap);
-
+	
 	void getQna(HashMap<String, Object> paramMap);
 
 	void getQnaList(HashMap<String, Object> paramMap);
-
-	void getAllQna(HashMap<String, Object> paramMap);
 	
+	void getAllQna(HashMap<String, Object> paramMap);
 
-
+	void reportList(HashMap<String, Object> paramMap);
 }
