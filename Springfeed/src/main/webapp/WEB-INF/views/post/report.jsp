@@ -12,12 +12,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript">
 function doPostReport(post_num){
-	document.reportFrm.action="spring.do?command=postReport&post_num=" + post_num;
+	document.reportFrm.action="/report?post_num=" + post_num;
 	document.reportFrm.submit();
 }
 
 function doStoryReport(story_num){
-	document.reportFrm.action="spring.do?command=postReport&story_num=" + story_num;
+	document.reportFrm.action="/report?story_num=" + story_num;
 	document.reportFrm.submit();
 }
 </script>

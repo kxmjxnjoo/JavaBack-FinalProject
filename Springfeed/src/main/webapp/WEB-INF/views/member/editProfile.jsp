@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${ loginUser.NAME }님 프로필 수정</title>
 <link rel="stylesheet" href="/css/join.css">
 <link rel="stylesheet" href="/css/editProfile.css">

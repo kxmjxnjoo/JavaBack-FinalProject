@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>스토리 작성</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="/css/posting.css" rel="stylesheet"> 

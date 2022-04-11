@@ -63,10 +63,6 @@ public class MemberService {
 		mdao.getFollow(followMap);
 	}
 
-	public void getNotiCount(HashMap<String, Object> paramMap) {
-		mdao.getNotiCount(paramMap);
-	}
-
 	public void findId(HashMap<String, Object> paramMap) {
 		mdao.findId(paramMap);
 	}
@@ -80,5 +76,29 @@ public class MemberService {
 
 	public void getFollowedList(HashMap<String, Object> paramMap) {
 		mdao.getFollowedList(paramMap);
+	}
+
+	public void getNotiCount(HashMap<String, Object> paramMap) {
+		mdao.getNotiCount(paramMap);
+	}
+
+	public void blockMember(String userid , String blocked) {
+		mdao.blockMember(userid, blocked);
+	}
+
+	public void unblockMember(String userid, String blocked) {
+		mdao.unblockMember(userid, blocked);
+	}
+
+	public void blockCheck(HashMap<String, Object> paramMap) {
+		mdao.blockCheck(paramMap);
+	}
+
+	public void privateAccount(String userid) {
+		mdao.privateAccount(userid);
+	}
+
+	public void PublicAccount(String userid) {
+		mdao.PublicAccount(userid);
 	}
 }

@@ -97,8 +97,28 @@
 	</select>
 	
 	<select id="updatePassword" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL updatePassword( 
-			#{str}, #{email}
-		)  }
+		{  CALL updatePassword( #{str}, #{email} )  }
 	</select>
+	
+	<insert id="blockMember" statementType="CALLABLE" parameterType="String">
+		{  CALL insertBlockMember(  #{userid}, #{blocked} )  }
+	</insert>
+	
+	<delete id="unblockMember" statementType="CALLABLE" parameterType="String">
+		{  CALL unblockMember(  #{userid}, #{blocked} )  }
+	</delete>
+	
+	<select id="blockCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL blockCheck( #{userid}, #{blocked}, 
+		#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap } )  }
+	</select>
+	
+	<update id="privateAccount" statementType="CALLABLE" parameterType="String">
+		{  CALL privateAccount(  #{userid}  )  }
+	</update>
+	
+	<update id="PublicAccount" statementType="CALLABLE" parameterType="String">
+		{  CALL PublicAccount(  #{userid}  )  }
+	</update>
+	
 </mapper>
