@@ -61,10 +61,15 @@ public class AdminService {
 		adao.getAllCount_q(paramMap);
 	}
 	
-	
-
 	public void updateReportPostBlock(HashMap<String, Object> paramMap) {
 		adao.updateReportPostBlock(paramMap);
-		
+	}
+
+	public void updateReportStoryBlock(HashMap<String, Object> paramMap) {
+		adao.updateReportStoryBlock(paramMap);
+	}
+
+	public void updateReportUserBlock(HashMap<String, Object> paramMap) {
+		adao.updateReportUserBlock(paramMap);
 	}
 }

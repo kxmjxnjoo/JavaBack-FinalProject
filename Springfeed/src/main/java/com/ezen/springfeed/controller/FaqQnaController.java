@@ -320,7 +320,6 @@ public class FaqQnaController {
 	    		
 	    		mav.addObject("qna", resultMap);
 	    		mav.setViewName("userFaqQna/qnaView");
-	    		
 	    	}
 	    }
 		

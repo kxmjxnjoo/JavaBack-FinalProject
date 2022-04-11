@@ -287,16 +287,13 @@ public class AdminController {
 			paramMap.put("cnt", 0);
 			as.postReportCheck(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
-			if(cnt>0) {
-				
-
-				paramMap.put("report_num", report_num);
-				paramMap.put("handled", "y");
-				// UPDATE 상태변경.
-				as.updateReportPostBlock(paramMap);
-			
-			}
+		if(cnt>0) {
+			paramMap.put("report_num", report_num);
+			paramMap.put("handled", "y");
+			// UPDATE 상태변경.
+			as.updateReportPostBlock(paramMap);
 		}
+	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
@@ -305,23 +302,31 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/admin/report/story")
-	public ModelAndView storyReportCheck(@ModelAttribute("rdto")ReportDto reportdto, 
+	public ModelAndView storyReportCheck( @ModelAttribute("rdto")ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
-		HashMap<String,Object> paramMap = new HashMap<>();
+		HttpSession session = request.getSession();
 		
-		String storyReportCheck = "";
-		paramMap.put("storyReportCheck", storyReportCheck);
-		paramMap.put("ref_cursor", null);
-		as.storyReportCheck(paramMap);
-		
-		int report_num = Integer.parseInt(request.getParameter("reportNum"));
-		paramMap.put("report_num", report_num);
-		paramMap.put("post_num", reportdto.getPost_num());
-		mav.setViewName("admin/report/storyReportCheck");
-		// check Reporeted post
-		
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
+		} else {
+			HashMap<String,Object> paramMap = new HashMap<>();
+			
+			System.out.println(request.getParameter("post_num"));
+			int story_num = Integer.parseInt(request.getParameter("story_num"));
+			int report_num = Integer.parseInt(request.getParameter("report_num"));
+			paramMap.put("story_num", story_num);
+			paramMap.put("cnt", 0);
+			as.storyReportCheck(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+		if(cnt>0) {
+			paramMap.put("report_num", report_num);
+			paramMap.put("handled", "y");
+			// UPDATE 상태변경.
+			as.updateReportStoryBlock(paramMap);
+		}
+	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
@@ -329,41 +334,33 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value="/admin/report/handle")
-	public String handleReport(HttpServletRequest request, 
-			@ModelAttribute("rdto") ReportDto reportdto,
-			@ModelAttribute("pdto") PostDto postdto,
-			@ModelAttribute("mdto") MemberDto memberdto) {
+	@RequestMapping(value="/admin/report/user")
+	public ModelAndView userReportCheck( @ModelAttribute("mdto") MemberDto reportdto, 
+			BindingResult result, HttpServletRequest request) {
 		
-		int report_num = Integer.parseInt(request.getParameter("report_num"));
-		System.out.println(report_num);
-		//int result = 0;
-		ReportDto rdto = new ReportDto();
-		MemberDto mdto = new MemberDto();
-		PostDto pdto = new PostDto();
-		HashMap<String,Object> paramMap = new HashMap<>();
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		
-		if(request.getParameter("post_num") != null) {
-			int post_num = Integer.parseInt(request.getParameter("post_num"));
-			paramMap.put("report_num", report_num);
-			request.setAttribute("post_num", post_num);
-			request.setAttribute("pdto", pdto);
-			as.deletePost(paramMap);
-			
-		} else if(request.getParameter("story_num") != null ) {
-			int story_num = Integer.parseInt(request.getParameter("story_num"));
-			paramMap.put("report_num", report_num);
-			request.setAttribute("story_num", story_num);
-			request.setAttribute("rdto", rdto);
-			as.deleteStory(paramMap);
+		if(session.getAttribute("loginAdmin") == null) {
+			mav.setViewName("admin/admingLogin");
 		} else {
-			String userid = request.getParameter("userid");
-			paramMap.put("report_num", report_num);
-			request.setAttribute("userid", userid);
-			request.setAttribute("mdto", mdto);
-			as.blockUser(paramMap);
+			HashMap<String,Object> paramMap = new HashMap<>();
 			
+			System.out.println(request.getParameter("useyn"));
+			String useyn = request.getParameter("useyn");
+			paramMap.put("useyn", useyn);
+			paramMap.put("cnt", 0);
+			as.storyReportCheck(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+		if(cnt>0) {
+			paramMap.put("useyn", "b");
+			paramMap.put("handled", "y");
+			// UPDATE 상태변경.
+			as.updateReportStoryBlock(paramMap);
 		}
-		return "redirect:/admin/reportList";
+	}
+		mav.setViewName("redirect:/admin/reportList");
+		return mav;
+		// back admin reportList
 	}
 }
