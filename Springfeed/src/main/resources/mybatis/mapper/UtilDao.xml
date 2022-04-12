@@ -78,8 +78,6 @@
 			)
 		}
 	</insert>
-=======
-	</select>
 
 	<select
 		id="exploreFeed"
