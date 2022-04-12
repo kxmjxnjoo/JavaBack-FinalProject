@@ -36,7 +36,7 @@
 							</c:when>
 						
 							<c:when test="${ noti.NOTITYPE == 3 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
+								<p class="notiContent notiText">님이 포스트에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 4 &&  loginUser.USERID != noti.USERFROM}">

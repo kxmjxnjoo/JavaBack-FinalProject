@@ -24,17 +24,23 @@ CREATE OR REPLACE PROCEDURE getStory(
     p_story_num IN story.story_num%TYPE,
     p_curvar OUT SYS_REFCURSOR,
     p_fontcolor out varchar,
-    p_useyn out varchar
+    p_useyn out varchar,
+    p_memberUseyn out varchar
 )
 IS
+    v_userid varchar2(50) := '';
     v_fontcolor varchar2(50) := '';
     v_useyn varchar2(5) := '';
+    v_memberUseyn varchar2(5) := '';
 BEGIN
     OPEN p_curvar FOR SELECT * FROM story_view WHERE story_num=p_story_num;
     
-    select fontcolor,useyn into v_fontcolor,v_useyn from story where story_num = p_story_num;
+    select userid, fontcolor,useyn into v_userid,v_fontcolor,v_useyn from story where story_num = p_story_num;
     p_fontcolor := v_fontcolor;
     p_useyn := v_useyn;
+    
+    select useyn into v_memberUseyn from member where userid=v_userid;
+    p_memberUseyn := v_memberUseyn;
     
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
@@ -114,3 +120,4 @@ BEGIN
     where story_num = p_story_num; 
     commit;
 END;
+

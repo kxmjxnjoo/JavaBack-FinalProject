@@ -18,7 +18,8 @@
 		{  CALL getStory( 
 			#{story_num},
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap},
-			#{fontcolor, mode=OUT, jdbcType=VARCHAR }, #{useyn, mode=OUT, jdbcType=VARCHAR }
+			#{fontcolor, mode=OUT, jdbcType=VARCHAR }, #{useyn, mode=OUT, jdbcType=VARCHAR },
+			#{memberUseyn, mode=OUT, jdbcType=VARCHAR }
 		)  }
 	</select>
 	

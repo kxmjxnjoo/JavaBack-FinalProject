@@ -356,6 +356,8 @@ public class MemberController {
 	    	dto.setPhone((String) loginUser.get("PHONE"));
 	    	dto.setImg((String) loginUser.get("IMG"));
 	    	dto.setIntroduce((String) loginUser.get("INTRODUCE"));
+	    	dto.setUseyn((String) loginUser.get("USEYN"));
+	    	System.out.println(loginUser.get("USEYN"));
 	    	
 	    	model.addAttribute("dto", dto);
     	}
@@ -492,6 +494,7 @@ public class MemberController {
 			} else {
 				ms.blockMember((String) loginUser.get("USERID"), userid);
 				rttr.addFlashAttribute("message", userid+"님을 차단했어요.");
+				rttr.addFlashAttribute("blocked", "y");
 				
 				String referer = request.getHeader("Referer");
 			    return "redirect:"+ referer;
@@ -612,9 +615,11 @@ public class MemberController {
 		} else {
 			String userid = (String) loginUser.get("USERID");
 			ms.privateAccount(userid);
-			
 			rttr.addFlashAttribute("message", "계정이 비공개로 설정되었어요!");
-			return "redirect:/";
+			loginUser.replace("USEYN", "p");
+			
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     }
     
@@ -633,7 +638,11 @@ public class MemberController {
 			ms.PublicAccount(userid);
 			
 			rttr.addFlashAttribute("message", "계정 비공개를 해제 했어요!");
-			return "redirect:/";
+			
+			loginUser.replace("USEYN", "y");
+			
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     }
     

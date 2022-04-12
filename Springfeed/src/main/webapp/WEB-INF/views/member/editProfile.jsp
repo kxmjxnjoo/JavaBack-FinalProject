@@ -195,20 +195,52 @@
 		
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
+				<c:choose>
+				<c:when test="${ dto.useyn ne 'p' }">
+					<h2>친구들에게만 내 사진을 공유하고 싶어요!</h2>
+					<input type="button" id="login" value="계정 비공개" onclick="privateAccount();">				
+				</c:when>
+				<c:otherwise>
+					<h2>Springfeed의 모두와 친구가 되고 싶어요!</h2>
+					<input type="button" id="login" value="계정 공개" onclick="publicAccount();">		
+				</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+		
+		
+		<div id="withdrawBox">
+			<div id="withdrawBoxContent">
 				<h2>Springfeed가 마음에 안 드시나요?</h2>
-				<input type="button" id="login" value="계정 비활성화" onclick="withdraw()">
+				<input type="button" id="login" value="계정 비활성화" onclick="withdraw();">
 			</div>
 		</div>
 	
 		
 	
+		
+		
+	
 
 	<script type="text/javascript">
-		function withdraw(userid) {
+		function withdraw() {
 			if(confirm("정말로 계정을 비활성화 할까요??")) {
 				location.href = "/deleteAcount"
 			}
 		}
+		
+		function privateAccount() {
+			if(confirm("계정을 비공개로 전환 할까요?")) {
+				location.href = "/user/private"
+			}
+		}
+		
+		function publicAccount() {
+			if(confirm("계정을 공개로 전환 할까요?")) {
+				location.href = "/user/public"
+			}
+		}
+		
 		
 		function setThumbnail(event) { 
 			var reader = new FileReader(); 

@@ -87,9 +87,9 @@ html, body{
 }
 
 #setting .setting_btn{
-	width: 300px; height: 70px; border-radius: 3%
+	width: 300px; height: 70px; border-radius: 3%; color:red;
 	text-align:center; line-height: 70px; font-size:90%; font-weight:700; 
-	border-bottom:1px solid #909090; color: black;
+	border-bottom:1px solid #909090; 
 	
 }
 
@@ -97,15 +97,9 @@ html, body{
 	text-decoration:none; 
 }
 
-#setting .setting_btn:nth-child(2){
-	color: red;
+#setting .setting_btn:first-child{
+	color: black;
 }
-
-#setting .setting_btn:nth-child(3) {
-	color: red; border:0;
-}
-
-
 
 
 /* -----------------------explore-------------------------- */

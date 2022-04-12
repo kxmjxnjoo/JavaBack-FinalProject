@@ -22,8 +22,12 @@ IS
 BEGIN
     insert into member (userid, password, name, email, phone)
     values (p_userid,p_userpwd,p_name,p_email,p_phone);
+    
+    insert into follow
+    values(follow_seq.nextVal, p_userid, p_userid, sysdate);
     commit;
 END;
+
 
 --아이디 중복확인
 create or replace PROCEDURE idCheck(
@@ -42,13 +46,19 @@ END;
 create or replace PROCEDURE getFollow(
     p_followed IN follow.followed%TYPE,
     p_follower IN follow.follower%TYPE,
-    p_result OUT number
+    p_followedResult OUT number,
+    p_followingResult OUT number
 )
 IS 
     v_result number(5) := 0;
 BEGIN
+--로그인유저가 글쓴이를 팔로우 했는지
     select count(*) into v_result from follow where followed=p_followed and follower=p_follower;
-    p_result := v_result;
+    p_followingResult := v_result1;
+
+--글쓴이가 로그인유저를 팔로우 했는지    
+     select count(*) into v_result from follow where follower=p_followed and followed=p_follower;
+    p_followedResult := v_result2;
 END;
 
 
@@ -59,12 +69,23 @@ CREATE OR REPLACE PROCEDURE insertFollow(
     p_result OUT NUMBER
 )
 IS 
+    v_count number(5) := 0;
 BEGIN
     insert into follow (follow_num, follower, followed)
     values (follow_seq.nextval,p_follower,p_followed);
     commit;
     
+    select count(*) into v_count from notification
+    where user_to=p_followed and user_from=p_follower;
+    
+    if v_count = 0 then
+        insert into notification(num, user_to, user_from, noti_type)
+        values (notification_seq.nextVal, p_followed, p_follower, 1);
+    end if;
 END;   
+
+select * from follow
+
     
 --알림 추가
 CREATE OR REPLACE PROCEDURE addNotification(
@@ -181,11 +202,6 @@ END;
 
 --블락
 
-CREATE TABLE BLOCKMEMBER(
-    USERID VARCHAR2(20) REFERENCES MEMBER(USERID) ON DELETE CASCADE,
-    BLOCKED VARCHAR2(20) REFERENCES MEMBER(USERID) ON DELETE CASCADE
-)
-
 
 --notiCount 
 create or replace PROCEDURE getNotiCount (
@@ -255,8 +271,20 @@ CREATE OR REPLACE PROCEDURE insertBlockMember(
     p_blocked IN blockmember.blocked%TYPE
 )
 IS
+    v_count number(2) := 0;
 BEGIN
     insert into blockmember values(p_userid, p_blocked);
+    
+    select count(*) into v_count from follow where follower=p_userid and followed=p_blocked;
+    if(v_count != 0) then
+        delete from follow where follower=p_userid and followed=p_blocked;
+    end if;
+    
+    select count(*) into v_count from follow where follower=p_blocked and followed=p_userid;
+    if(v_count != 0) then
+        delete from follow where follower=p_blocked and followed=p_userid;
+    end if;
+    
     commit;
 END;
 
@@ -292,6 +320,7 @@ BEGIN
     update member set useyn='p' where userid = p_userid;
     commit;
 END;
+
 
 --계정 공개 전환
 CREATE OR REPLACE PROCEDURE PublicAccount(
