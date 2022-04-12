@@ -4,7 +4,7 @@ import InifniteScroll from 'react-infinite-scroller'
 
 // Components
 import Post from './Home/Post'
-import FollowingList from './Home/FollowingList'
+import FollowingList from './Home/MainFollowingList'
 import Loading from './common/Loading'
 import Error from './common/Error'
 import NoPost from './Home/NoPost'

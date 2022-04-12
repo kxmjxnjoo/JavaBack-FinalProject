@@ -67,6 +67,8 @@ function App() {
 
 	return (
 		<div className="App">
+		<Router>
+
 			<div>
 				<Toaster
 					position='bottom-right'
@@ -98,6 +100,8 @@ function App() {
 						<div className="card-body pt-0">
 							<Search
 								searchKey={searchKey}
+								setIsPostDetailOpen={setIsPostDetailOpen}
+								setSelectedPost={setSelectedPost}
 							/>
 						</div>
 					</div>
@@ -107,7 +111,6 @@ function App() {
 
 
 			<div className='container'>
-				<Router>
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
@@ -136,21 +139,21 @@ function App() {
 											setSelectedPost={setSelectedPost}
 										/>} />
 
-										<Route path="/user/:id" element={<UserPage/>}/>
+										<Route path="/user/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
 									</Routes>
 					}
-				</Router>
 			</div>
 
 			<Modal
 				show={isPostDetailOpen}
 				onHide={closePostDetail}
 				dialogClassName='postDetailModal'
-			>
+				>
 				<PostDetail
 					post={selectedPost}
-				/>
+					/>
 			</Modal>
+		</Router>
 		</div>
 	);
 }
