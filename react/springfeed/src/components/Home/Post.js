@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // Icon
 import {
@@ -26,6 +26,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
     }
 
     const [isLikedData, setIsLikedData] = useState(isLiked)
+    const [isSavedData, setIsSavedData] = useState(isSaved)
 
     const handleLike = () => {
 
@@ -56,6 +57,39 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
                     success: userid + "님의 포스트의 좋아요를 취소했어요",
                     error: "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요"
                 }
+            )
+        }
+
+
+    }
+
+    const handleSave = () => {
+        fetch('/api/post/save?num' + postNum)
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                setIsSavedData(!isSavedData)
+            })
+            .catch((err) => {
+                toast.error('포스트를 저장하는데 에러가 났어요')
+            })
+
+        if(!isSavedData) {
+            toast.promise(isSaved,
+                {
+                    loading: '잠시만 기다려 주세요...',
+                    success: userid + '님의 포스트를 저장했어요',
+                    error: '포스트를 저장할 수 없었어요. 다시 시도해 주세요'
+                }
+            )
+        } else {
+            toast.promise(isSaved,
+                {
+                    loading: '잠시만 기다려 주세요...',
+                    success: userid + '님의 포스트를 저장 취소했어요',
+                    error: '포스트를 저장 취소할 수 없었어요. 다시 시도해 주세요'
+                }    
             )
         }
     }
@@ -107,9 +141,8 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
                     </div>
                     <div className="col-2">
                         {
-                            isSaved ? <SaveFillIcon /> : <SaveIcon />
+                            isSavedData ? <SaveFillIcon onClick={handleSave}/> : <SaveIcon onClick={handleSave}/>
                         }
-
                     </div>
                 </div>
                 <div className="h4">{likes} likes</div>
