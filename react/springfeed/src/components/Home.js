@@ -17,7 +17,6 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
-    const [postPage, setPostPage] = useState(1)
 
     const [isDetailMenuOpen, setIsDetailMenuOpen] = useState(false)
     const closeDetailMenu = () => {
@@ -50,7 +49,8 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             })
 
     }, [])
-
+    
+    const [postPage, setPostPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
     const loadFeed = () => {
         fetch('/api/post/feed?page=' + postPage)

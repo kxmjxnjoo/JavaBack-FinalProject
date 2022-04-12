@@ -17,6 +17,9 @@ import Error from './components/common/Error'
 import Explore from './components/Explore'
 import NoLogin from './components/common/NoLogin'
 import PostDetail from './components/Home/PostDetail'
+import Noti from './components/jsp-components/Noti'
+import Login from './components/jsp-components/Login'
+import Logout from './components/jsp-components/Logout'
 
 // Common
 import './common.css'
@@ -115,7 +118,7 @@ function App() {
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
 
-								!isLoggedIn ? <NoLogin/>
+								!isLoggedIn ? <Login/>
 									:
 									<Routes>
 										<Route path="/" element={
@@ -140,6 +143,8 @@ function App() {
 										/>} />
 
 										<Route path="/user/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
+										<Route path='/noti' element={<Noti/>}/>
+										<Route path='/logout' element={<Logout/>}/>
 									</Routes>
 					}
 			</div>

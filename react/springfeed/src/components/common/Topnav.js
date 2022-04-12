@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 // Bootstrap
-import { Overlay, Modal, Navbar } from 'react-bootstrap'
+import { Overlay, Modal, Navbar, Dropdown } from 'react-bootstrap'
 
 // Icons
 import {
@@ -15,6 +15,7 @@ import { MdExplore as ExploreIcon } from 'react-icons/md'
 // Resources
 import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
+import './topnav.css'
 
 const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	const logoStyle = {
@@ -111,15 +112,41 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
-										<a className="nav-link">
-											<img src={
-												isLoggedIn ?
-													user.img :
-													defaultProfile
-											} alt="ERR" className="round-circle" style={profileStyle} />
-										</a>
-									</Link>
+									<Dropdown>
+										<Dropdown.Toggle variant="none" id="dropdown-basic" className='p-0'>
+											<a className="nav-link">
+												<img src={
+													isLoggedIn ?
+														user.img :
+														defaultProfile
+												} alt="ERR" className="round-circle" style={profileStyle} />
+											</a>
+										</Dropdown.Toggle>
+
+										<Dropdown.Menu>
+											{
+												isLoggedIn ? 
+												<>
+													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
+														<Dropdown.Item>내 유저 페이지로 이동</Dropdown.Item>
+													</Link>
+													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
+														<Dropdown.Item href="#/action-2">내 정보 수정</Dropdown.Item>
+													</Link>
+													<Link to={'/logout'} className='text-decoration-none'>
+														<Dropdown.Item className='bg-danger text-white'>로그아웃</Dropdown.Item>
+													</Link>												
+												</>
+												:
+												<>
+													<Link to={'/login'} className='text-decoration-none'>
+														<Dropdown.Item>로그인</Dropdown.Item>
+													</Link>												
+												</>
+											}
+										</Dropdown.Menu>
+									</Dropdown>
+										
 								</div>
 
 							</div>

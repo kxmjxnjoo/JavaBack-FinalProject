@@ -214,7 +214,7 @@ const UserPage = ({setSearchKey}) => {
                     <div className="col-4">{postCount} posts</div>
 
                     <div href='' className="col-4">
-                        <div className="btn p-0">
+                        <div className="btn p-0" onClick={openFollowerList}>
                             {followerCount} followers
                         </div>
                     </div>
@@ -295,7 +295,7 @@ const UserPage = ({setSearchKey}) => {
             </div>
         </Modal>
 
-        <Modal show={isFollowerListOpen} onHide={closeFollowerList}>
+        <Modal show={isFollowerListOpen} onHide={closeFollowerList} className='mt-5'>
             <div className="card">
                 <div className="card-header">
                     <div className="h5 text-center">
