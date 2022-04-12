@@ -23,6 +23,8 @@ public class PostController {
 
 	@RequestMapping("/")
 	public String main(HttpServletRequest request, Model model) {
+		return "main";
+		/*
 		// Get if user is logged in
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginUser") == null) {
@@ -55,6 +57,7 @@ public class PostController {
 		//		(ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
 		return "main";
+		*/
 	}
 
 	@RequestMapping("/post")

@@ -12,4 +12,5 @@ public interface IPostDao {
     void updatePost(HashMap<String, Object> paramMap);
     void deletePost(HashMap<String, Object> paramMap);
     void selectPostFeed(HashMap<String, Object> paramMap);
+    void insertLike(HashMap<String, Object> paramMap);
 }

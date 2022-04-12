@@ -20,6 +20,7 @@ public class UtilService {
         udao.getPostSearch(paramMap);
     }
 
+<<<<<<< HEAD
     public void addStoryReport(HashMap<String, Object> paramMap) {
     	udao.addStoryReport(paramMap);
 	}
@@ -31,4 +32,9 @@ public class UtilService {
 	public void addUserReport(HashMap<String, Object> paramMap) {
 		udao.addUserReport(paramMap);
 	}
+=======
+    public void getExploreFeed(HashMap<String, Object> paramMap) {
+        udao.exploreFeed(paramMap);
+    }
+>>>>>>> 250964fc (apr 12)
 }

@@ -39,4 +39,8 @@ public class PostService {
     public void getPostFeed(HashMap<String, Object> paramMap) {
         pdao.selectPostFeed(paramMap);
     }
+
+    public void insertLike(HashMap<String, Object> paramMap) {
+        pdao.insertLike(paramMap);
+    }
 }
