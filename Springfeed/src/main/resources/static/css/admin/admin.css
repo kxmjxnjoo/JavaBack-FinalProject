@@ -190,10 +190,11 @@ table, th{
 	height: 30px;
 	border: 1px solid #e59999;
 }
+.search {
+	margin: 0 auto;
+}
 /*------------------------------------footer--------------------------*/
 #copy{font-size:90%; text-align:center;}
-
-
 /*------------------------reportList---------------------------------*/
 
 #orderSelect{

@@ -15,9 +15,9 @@ function go_search(){
 	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
 	<br><br><br>
 <form name="frm" action="/admin/memberList">
-	<!-- <input type="hidden" > -->
-	<input type="text" name="key" value="${key}">
-	<input id="search_btn" type="submit" name="search" value="회원 검색" onClick="/admin/searchMember">
+<input type="hidden" > 
+	<input type="text" name="key" value="${key}" class="search">
+	<input id="search_btn" class="search" type="submit" name="search" value="회원 검색" onClick="/admin/searchMember">
 	<table>
 		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
 				<th>가입일</th></tr>

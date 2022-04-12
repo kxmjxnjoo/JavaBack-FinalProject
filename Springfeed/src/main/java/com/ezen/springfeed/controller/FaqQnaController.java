@@ -46,16 +46,47 @@ public class FaqQnaController {
 	    	mav.setViewName("admin/admingLogin");
 	    	return mav;
 	    } else {
-	    	HashMap<String,Object> paramMap = new HashMap<>();
+	    	int page = 1;
+			if(request.getParameter("first")!=null) {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			Paging paging = new Paging();
+			paging.setPage(page);
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("cnt", 0);
+			as.getAllCount_r(paramMap);
+			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			paging.setTotalCount(cnt);
+			paging.paging();
+			System.out.println("E");
+			
+			System.out.println(paging.getStartNum());
+			System.out.println(paging.getEndNum());
+			paramMap.put("startNum", paging.getStartNum());
+			paramMap.put("endNum", paging.getEndNum());
+			paramMap.put("ref_cursor", null);
+			fqs.adminFaqList(paramMap);
+			System.out.println("F");
+			
+			ArrayList<HashMap<String,Object>> list
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			System.out.println("G");
+			
 	    	paramMap.put("ref_cursor", null);
 	    	fqs.adminFaqList(paramMap);
-	    System.out.println("faqList");	
-	    	ArrayList<HashMap<String,Object>> list
-	    		= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-	    	mav.addObject("adminFaqList", list);
+	    	mav.addObject("fdto", list);
+	    	System.out.println(list);
 	    	mav.setViewName("admin/faq/adminFaqList");
 	    }
-	    System.out.println("move");
 		return mav;
 	}
 	
@@ -130,9 +161,9 @@ public class FaqQnaController {
 	@RequestMapping("/faq/delete")
 	public String deleteFaq(	@RequestParam("faqnum") FaqDto faq_num) {
 			
-			HashMap<String,Object> paramMap = new HashMap<String,Object>();
-			paramMap.put("faqnum", faq_num);
-			fqs.deleteFaq(paramMap);
+		HashMap<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("faqnum", faq_num);
+		fqs.deleteFaq(paramMap);
 			
 		return "redirect:/admin/faqList";
 	}
@@ -276,6 +307,8 @@ public class FaqQnaController {
 		}
 	}
 	
+	
+	
 	@RequestMapping("/qna/add/form")
 	public String addQnaForm(HttpServletRequest request, RedirectAttributes rttr) {
 		
@@ -290,6 +323,8 @@ public class FaqQnaController {
 	    	return "userFaqQna/addQna";
 	    }
 	}
+	
+	
 	
 	@RequestMapping("/qna/view") 
 	public ModelAndView viewQna(HttpServletRequest request, RedirectAttributes rttr,

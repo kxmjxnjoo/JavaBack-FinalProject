@@ -12,7 +12,7 @@
 	
 <!-- 정렬 선택 -->
 		<div id="orderSelect">
-			<select name="reportOrder" id="reportOrder" class="select-css">
+<!-- 			<select name="reportOrder" id="reportOrder" class="select-css">
 				<option value="0"> 정렬 </option>
 				<option value="1"> 날짜 내림차순 </option>
 				<option value="2"> 날짜 오름차순 </option>
@@ -20,7 +20,7 @@
 				<option value="4"> 스토리 신고 </option>
 				<option value="5"> 유저 신고 </option>
 			</select>
-			<input type="button" value="검색" onclick ="goOrder();">
+			<input type="button" value="검색" onclick ="goOrder();"> -->
 		</div>
 		<table>
 			<tr>
@@ -41,13 +41,14 @@
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${rdto.REPORT_TYPE.equals('post')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="postReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM} );">
+									<%-- <td  width="50"> <input type="button" name="banCheck" value="처리" onclick="postReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM} );"> --%>
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openPost(${rdto.POST_NUM}, ${rdto.REPORT_NUM} );">
 								</c:when>
 								<c:when test="${rdto.REPORT_TYPE.equals('story')}">
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="storyReportCheck(${rdto.STORY_NUM}, ${rdto.REPORT_NUM});">
 								</c:when>
 								<c:otherwise>
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openUserPage('${rdto.REPORTED_ID}', ${rdto.REPORT_NUM});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="useynReportCheck(<%-- '${mdto.USERID}',  --%>'${mdto.USEYN}', ${rdto.REPORT_NUM});">
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -81,27 +82,8 @@ function postReportCheck(post_num, report_num){
 	document.frm.submit();
 }
 
-function storyReportCheck(useyn, report_num){
-	document.frm.action = "/admin/report/story";
-	
-	// dom에 INPUT.. CREATE
-	var input_useyn = document.createElement('input'); 
-	input_useyn.setAttribute("type", "hidden");
-	input_useyn.setAttribute("name", "story_num");
-	input_useyn.setAttribute("value", story_num);
-	
-	var input_report = document.createElement('input'); 
-	input_report.setAttribute("type", "hidden");
-	input_report.setAttribute("name", "report_num");
-	input_report.setAttribute("value", report_num);
-	
-	document.frm.appendChild(input_story);
-	document.frm.appendChild(input_report);
-	
-	document.frm.submit();
-}
-	
-function userReportCheck(userid, report_num){
+
+function storyReportCheck(story_num, report_num){
 	document.frm.action = "/admin/report/story";
 	
 	// dom에 INPUT.. CREATE
@@ -119,8 +101,77 @@ function userReportCheck(userid, report_num){
 	document.frm.appendChild(input_report);
 	
 	document.frm.submit();
-	
 }
 
+	function useynReportCheck(useyn, report_num){
+	document.frm.action = "/admin/report/user	";
+	
+	// dom에 INPUT.. CREATE
+	var input_userid = document.createElement('input'); 
+	input_userid.setAttribute("type", "hidden");
+	input_userid.setAttribute("name", "userid");
+	input_userid.setAttribute("value", userid);
+	
+	var input_userid = document.createElement('input'); 
+	input_useyn.setAttribute("type", "hidden");
+	input_useyn.setAttribute("name", "useyn");
+	input_useyn.setAttribute("value", useyn);
+	
+	var input_report = document.createElement('input'); 
+	input_report.setAttribute("type", "hidden");
+	input_report.setAttribute("name", "report_num");
+	input_report.setAttribute("value", report_num);
+	
+/* 	document.frm.appendChild(input_userid); */
+	document.frm.appendChild(input_useyn);
+	document.frm.appendChild(input_report);
+	
+	document.frm.submit();
+} 
+ 
+
+ function openPost(post_num, report_num){
+	 document.frm.action = ""&post_num=" + post_num + "&report_num=" + report_num;
+ 	var _width = '1100';
+ 	var _height = '700';
+ 	var _left = Math.ceil((window.screen.width - _width)/2); 
+ 	var _top = Math.ceil((window.screen.width - _height)/2); 
+ 	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
+ 		"width="+_width+", height="+_height+", left="+_left;
+ 	window.open(url, "reportPost", opt);
+ }
+ 
+ function openStory(story_num, report_num){
+ 	var url="spring.do?command=storyReportCheck&story_num=" + story_num + "&report_num=" + report_num;
+ 	var _width = '1100';
+ 	var _height = '700';
+ 	var _left = Math.ceil((window.screen.width - _width)/2); 
+ 	var _top = Math.ceil((window.screen.width - _height)/2); 
+ 	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
+ 		"width="+_width+", height="+_height+", left="+_left;
+ 	window.open(url, "reportPost", opt);
+ }
+ 
+ function openUserPage(userid, report_num) {
+ 	var url="spring.do?command=userReportCheck&userid=" + userid + "&report_num=" + report_num;
+ 	var _width = '1100';
+ 	var _height = '700';
+ 	var _left = Math.ceil((window.screen.width - _width)/2); 
+ 	var _top = Math.ceil((window.screen.width - _height)/2); 
+ 	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
+ 		"width="+_width+", height="+_height+", left="+_left;
+ 	window.open(url, "reportPost", opt);
+ }
+ 
+ function goOrder(){
+		let target = document.getElementById("reportOrder");
+		if(target.options[target.selectedIndex].value=="0") {
+			alert('선택해주세요');
+			return;
+		} else {
+			document.frm.action = "/reportOrder";
+			document.frm.submit();	
+		}
+	}
 	
 </script>
