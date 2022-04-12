@@ -66,8 +66,8 @@ function unblock(userid) {
 </head>
 <body>
 <form name="frm" method="post">
-
-	<%@ include file="../common/topnav.jsp" %>
+	
+	<%@ include file="../common/message.jsp" %>
 		
 <!-- setting popup -->
 	<div id="setting">

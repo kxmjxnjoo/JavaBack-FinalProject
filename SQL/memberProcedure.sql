@@ -54,11 +54,11 @@ IS
 BEGIN
 --로그인유저가 글쓴이를 팔로우 했는지
     select count(*) into v_result from follow where followed=p_followed and follower=p_follower;
-    p_followingResult := v_result1;
+    p_followingResult := v_result;
 
 --글쓴이가 로그인유저를 팔로우 했는지    
      select count(*) into v_result from follow where follower=p_followed and followed=p_follower;
-    p_followedResult := v_result2;
+    p_followedResult := v_result;
 END;
 
 
@@ -147,7 +147,6 @@ BEGIN
             left outer join reply r on r.reply_num = n.reply_num    
             left outer join member m on m.userid = n.user_from
         where n.user_to = p_userid order by num desc;      
-    
     commit;
 END;   
 

@@ -59,6 +59,7 @@
                            </div>
                            <div class="form-group">
                              <p class="text-center"> 아직 계정이 없으신가요? <a href="/join/form" id="signup">가입하기</a></p>
+                             <p class="text-center"> 아이디나 비밀번호를 잊으셨나요? <a href="/find/form" id="signup">아이디/비밀번호 찾기</a></p>
                              <p class="text-center"> 관리자이신가요? <a href="/admin" id="signup">관리자 로그인</a></p>
                            </div>
                         </form>

@@ -165,10 +165,6 @@
 					</div>
 				</div>
 		<input type="submit" id="login" value="가입">
-		
-		
-		<br><br>
-	    <div>&nbsp;&nbsp;&nbsp;${message}</div>
 		</div>
 		<br>
 		<div id="box2">

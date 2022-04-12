@@ -110,7 +110,7 @@ public class MemberController {
     
     
     //회원가입 시 중복, 유효성 체크 
-    @RequestMapping(value="/join/id", method=RequestMethod.POST)
+    @RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
     @ResponseBody
     public int idCheck(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result) {
@@ -206,9 +206,6 @@ public class MemberController {
 	
 			rttr.addFlashAttribute("message", userid+"님을 팔로우 했어요");
 			
-			paramMap.put("notitype", 1);
-			paramMap.put("notiresult", 0);
-			
 			String referer = request.getHeader("Referer");
 		    return "redirect:"+ referer;
 		}
@@ -267,7 +264,7 @@ public class MemberController {
 		
 		if (loginUser == null) { 
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
-			url = "redirect:/login/form";
+			mav.setViewName("redirect:/login/form");
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -301,9 +298,7 @@ public class MemberController {
 					
 				}
 			} 
-
 			mav.addObject("notiList", notiList);
-			
 			mav.setViewName("noti/noti");	
 		}
 		return mav;
