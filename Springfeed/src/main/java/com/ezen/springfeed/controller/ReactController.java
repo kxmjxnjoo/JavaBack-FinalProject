@@ -234,5 +234,48 @@ public class ReactController {
         return result;
     }
 
+    @RequestMapping(value="/api/explore/feed", produces="application/json")
+    public ArrayList<PostDto> getExploreFeed(@RequestParam(value="page", required = false) Integer page) {
+        // Create Hashmap
+        HashMap<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("page", page == null ? 0 : page);
+        paramMap.put("ref_cursor", null);
+        us.getExploreFeed(paramMap);
 
+        ArrayList<HashMap<String, Object>> list =
+                (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+        if(list.size() == 0) {
+            return null;
+        }
+
+        ArrayList<PostDto> result = new ArrayList<PostDto>();
+        for(HashMap<String, Object> post : list) {
+            PostDto pdto = new PostDto();
+            pdto.setPost_img((String) post.get("POST_IMG"));
+            pdto.setReplyCount(Integer.parseInt(String.valueOf(post.get("NUM_REPLY"))));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("NUM_LIKE"))));
+            pdto.setPostNum(Integer.parseInt(String.valueOf(post.get("POST_NUM"))));
+            result.add(pdto);
+        }
+
+        return result;
+    }
+
+    // -1 : fail
+    // 0 : unlike
+    // 1 : like
+    @RequestMapping(value="/api/post/like", produces = "application/json")
+    public int likePost(@RequestParam(value="num") int postNum) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("postNum", postNum);
+        paramMap.put("ref_cursor", null);
+
+        ps.insertLike(paramMap);
+
+        // Get result
+        HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("ref_cursor");
+        return (int) result.get("result");
+    }
 }

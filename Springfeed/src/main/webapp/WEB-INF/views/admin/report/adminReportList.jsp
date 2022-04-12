@@ -44,7 +44,7 @@
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="postReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM} );">
 								</c:when>
 								<c:when test="${rdto.REPORT_TYPE.equals('story')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="stotyReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="storyReportCheck(${rdto.STORY_NUM}, ${rdto.REPORT_NUM});">
 								</c:when>
 								<c:otherwise>
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="openUserPage('${rdto.REPORTED_ID}', ${rdto.REPORT_NUM});">
@@ -81,49 +81,46 @@ function postReportCheck(post_num, report_num){
 	document.frm.submit();
 }
 
+function storyReportCheck(useyn, report_num){
+	document.frm.action = "/admin/report/story";
+	
+	// dom에 INPUT.. CREATE
+	var input_useyn = document.createElement('input'); 
+	input_useyn.setAttribute("type", "hidden");
+	input_useyn.setAttribute("name", "story_num");
+	input_useyn.setAttribute("value", story_num);
+	
+	var input_report = document.createElement('input'); 
+	input_report.setAttribute("type", "hidden");
+	input_report.setAttribute("name", "report_num");
+	input_report.setAttribute("value", report_num);
+	
+	document.frm.appendChild(input_story);
+	document.frm.appendChild(input_report);
+	
+	document.frm.submit();
+}
+	
+function userReportCheck(userid, report_num){
+	document.frm.action = "/admin/report/story";
+	
+	// dom에 INPUT.. CREATE
+	var input_story = document.createElement('input'); 
+	input_story.setAttribute("type", "hidden");
+	input_story.setAttribute("name", "story_num");
+	input_story.setAttribute("value", story_num);
+	
+	var input_report = document.createElement('input'); 
+	input_report.setAttribute("type", "hidden");
+	input_report.setAttribute("name", "report_num");
+	input_report.setAttribute("value", report_num);
+	
+	document.frm.appendChild(input_story);
+	document.frm.appendChild(input_report);
+	
+	document.frm.submit();
+	
+}
 
-function goOrder(){
-	let target = document.getElementById("reportOrder");
-	if(target.options[target.selectedIndex].value=="0") {
-		alert('선택해주세요');
-		return;
-	} else {
-		document.frm.action = "/reportOrder";
-		document.frm.submit();	
-	}
-}
-	
-function openPost(post_num, report_num){
-	var url="/postReportCheck?post_num=" + post_num + "&report_num=" + report_num;
-	var _width = '1100';
-	var _height = '700';
-	var _left = Math.ceil((window.screen.width - _width)/2); 
-	var _top = Math.ceil((window.screen.width - _height)/2); 
-	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
-		"width="+_width+", height="+_height+", left="+_left;
-	window.open(url, "reportPost", opt);
-}
-	
-function openStory(story_num, report_num){
-	var url="/storyReportCheck?story_num=" + story_num + "&report_num=" + report_num;
-	var _width = '1100';
-	var _height = '700';
-	var _left = Math.ceil((window.screen.width - _width)/2); 
-	var _top = Math.ceil((window.screen.width - _height)/2); 
-	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
-		"width="+_width+", height="+_height+", left="+_left;
-	window.open(url, "reportPost", opt);
-}
-	
-function openUserPage(userid, report_num) {
-	var url="/bolckUser?userid=" + userid + "&report_num=" + report_num;
-	var _width = '1100';
-	var _height = '700';
-	var _left = Math.ceil((window.screen.width - _width)/2); 
-	var _top = Math.ceil((window.screen.width - _height)/2); 
-	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " + 
-		"width="+_width+", height="+_height+", left="+_left;
-	window.open(url, "reportPost", opt);
-}
 	
 </script>

@@ -59,7 +59,9 @@
 	</select>
 	
 	<select id="storyReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL storyReportCheck( 	#{story_num})  }
+		{  CALL storyReportCheck( 	#{story_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+		)  }
 	</select>
 	
 	<delete id="deletePost" statementType="CALLABLE" parameterType="java.util.HashMap" >
@@ -85,7 +87,6 @@
 	
 	<select id="getAllCount_q" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllCount_q(
-			#{qna_num},
 			#{cnt, mode=OUT, jdbcType=INTEGER}
 			)  } 
 	</select>
@@ -94,6 +95,20 @@
 		{  CALL updateReportPostBlock(
 			#{report_num},
 			#{post_num}
+		 ) } 
+	</update>
+	
+	<update id="updateReportStoryBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportStoryBlock(
+			#{report_num},
+			#{story_num}
+		 ) } 
+	</update>
+	
+	<update id="updateReportUserBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportUserBlock(
+			#{report_num},
+			#{useyn}
 		 ) } 
 	</update>
 	

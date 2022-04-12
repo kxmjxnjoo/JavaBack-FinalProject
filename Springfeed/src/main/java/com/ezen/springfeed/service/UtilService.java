@@ -31,4 +31,7 @@ public class UtilService {
 	public void addUserReport(HashMap<String, Object> paramMap) {
 		udao.addUserReport(paramMap);
 	}
+    public void getExploreFeed(HashMap<String, Object> paramMap) {
+        udao.exploreFeed(paramMap);
+    }
 }

@@ -43,7 +43,7 @@
 			    }
 			)
 		}
-	</select> 
+	</select>
 	
 	<insert id="addStoryReport"
 			statementType="CALLABLE"
@@ -78,5 +78,25 @@
 			)
 		}
 	</insert>
-	
+
+	<select
+		id="exploreFeed"
+		statementType="CALLABLE"
+		parameterType="java.util.HashMap"
+	>
+		{
+			CALL exploreFeed(
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=postMap
+			    }
+			)
+		}
+
+	</select>
+
 </mapper>

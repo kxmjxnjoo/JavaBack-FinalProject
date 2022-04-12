@@ -11,4 +11,5 @@ public interface IUtilDao {
 	void addStoryReport(HashMap<String, Object> paramMap);
 	void addPostReport(HashMap<String, Object> paramMap);
 	void addUserReport(HashMap<String, Object> paramMap);
+    void exploreFeed(HashMap<String, Object> paramMap);
 }

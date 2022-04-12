@@ -9,20 +9,18 @@
 		 
 	<table>
 		<tr>
-			<th>이름</th>
-			<th>아이디</th>
 			<th>제목</th>
+			<th>답변내용</th>
 			<th>작성일</th>
 			<th>답변여부</th>
 		<tr>
 		
 		<c:forEach items="${qdto}" var="qdto">
 			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }'" class="qnaItems">
-				<td width="50">${qdto.USERNAME}</td>
-				<td width="50">${qdto.QNA_ID}</td>
-				<td width="50">${qdto.QNA_SUBJECT}</td>
-				<td width="50"><fmt:formatDate value="${qdto.INDATE}"/></td>
-				<td width="20">
+				<td>${qdto.QNA_SUBJECT}</td>
+				<td>${qdto.QNA_REPLY}</td>
+				<td><fmt:formatDate value="${qdto.INDATE}"/></td>
+				<td>
 					<c:choose>
 						<c:when test='${ qdto.REP.equals("y") }'>
 							<i class="material-icons" style="color: green;">check_circle</i>
