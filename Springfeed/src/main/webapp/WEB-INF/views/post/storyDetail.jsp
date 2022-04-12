@@ -76,7 +76,7 @@ function unblock(userid) {
 				<div id="setting_menu">
 					<div class="setting_btn" onclick="location.href='/story/edit/form?story_num=${StoryDto.STORY_NUM}'"> 수정</div>
 					<div class="setting_btn" onclick="deleteCheck(${StoryDto.STORY_NUM});"> 삭제 </div>
-					<div class="setting_btn" onclick="setting_close();">닫기</div>
+					<div class="setting_btn" style="border:0;" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
 			</c:when>
@@ -84,12 +84,12 @@ function unblock(userid) {
 				<div id="setting_menu">
 					<div class="setting_btn" onclick="goReport(${StoryDto.STORY_NUM});">신고</div>
 						<div class="setting_btn" onclick="unblock('${StoryDto.USERID}');">차단 해제</div>
-					<div class="setting_btn" onclick="setting_close();">닫기</div>
+					<div class="setting_btn" style="border:0;" onclick="setting_close();">닫기</div>
 					<div class="setting_layer"></div>
 				</div>
 			</c:when>
 			<c:otherwise>
-					<div id="setting_menu">
+					<div id="setting_menu" style="height:280px;">
 						<c:choose>
 							<c:when test="${ isFollowing == 1 }">
 								<div class="setting_btn" onclick="location.href='/unfollow?userid=${StoryDto.USERID}'"> 언팔로우</div>
@@ -98,9 +98,9 @@ function unblock(userid) {
 								<div class="setting_btn" onclick="location.href='/follow?userid=${StoryDto.USERID}'">팔로우</div>
 							</c:otherwise>
 						</c:choose> 
-						<div class="setting_btn" onclick="goReport(${StoryDto.STORY_NUM});">신고</div>
+						<div class="setting_btn" style="color:red;'" onclick="goReport(${StoryDto.STORY_NUM});">신고</div>
 						<div class="setting_btn" onclick="goBlock('${StoryDto.USERID}');">차단</div>
-						<div class="setting_btn" onclick="setting_close()">닫기</div>
+						<div class="setting_btn" style="border:0;" onclick="setting_close()">닫기</div>
 						<div class="setting_layer"></div>
 					</div>
 			</c:otherwise>
@@ -125,7 +125,8 @@ function unblock(userid) {
 			<div class=innerStory >
 			
 <!-- 정상 -->
-			<c:if test = "${ empty blocked }">
+	<c:choose>
+		<c:when test = "${ empty blocked and empty privateAccount }">
 			
 <!-- 화살표 -->
 			<c:if test="${prev != 0}" >
@@ -169,10 +170,9 @@ function unblock(userid) {
 						<span class="material-icons" style="color:${likeColor}" onclick="story_like(${StoryDto.STORY_NUM});"> favorite_border </span>
 					</div>
 				</div>
-			</c:if>
+			</c:when>
 			
-<!-- 차단된 경우 -->
-			<c:if test = "${ not empty blocked }">
+			<c:otherwise>
 				<div class=story_content style="background:#999; align-content: center;">
 					<!-- 글 작성자 프로필 -->
 					<div id="story_user" onClick="location.href='/post?userid=${StoryDto.USERID}'">
@@ -186,10 +186,18 @@ function unblock(userid) {
 					<div id="buttons" onclick="setting();">
 						<span class="material-icons" onClick="openSetting();"> more_vert </span>
 					</div>
-					<div style="color:white;"> 차단한 사용자가 작성한 스토리입니다. </div>
+					<c:choose>
+						<c:when test = "${ not empty blocked }"> 
+							<div style="color:white;"> 차단한 사용자가 작성한 스토리입니다. </div>
+						</c:when>
+						<c:when test="${ not empty privateAccount}">
+							<div style="color:white;"> 비공개된 게시물입니다. </div>
+						</c:when>
+					</c:choose>
 				</div>
-			</c:if>
-
+			</c:otherwise>
+		</c:choose>
+			
 		</div>
 	</div>
 </div>  

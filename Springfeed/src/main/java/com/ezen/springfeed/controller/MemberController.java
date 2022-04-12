@@ -110,7 +110,7 @@ public class MemberController {
     
     
     //회원가입 시 중복, 유효성 체크 
-    @RequestMapping(value="/join/id", method=RequestMethod.POST)
+    @RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
     @ResponseBody
     public int idCheck(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result) {
@@ -206,9 +206,6 @@ public class MemberController {
 	
 			rttr.addFlashAttribute("message", userid+"님을 팔로우 했어요");
 			
-			paramMap.put("notitype", 1);
-			paramMap.put("notiresult", 0);
-			
 			String referer = request.getHeader("Referer");
 		    return "redirect:"+ referer;
 		}
@@ -267,7 +264,7 @@ public class MemberController {
 		
 		if (loginUser == null) { 
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
-			url = "redirect:/login/form";
+			mav.setViewName("redirect:/login/form");
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -301,9 +298,7 @@ public class MemberController {
 					
 				}
 			} 
-
 			mav.addObject("notiList", notiList);
-			
 			mav.setViewName("noti/noti");	
 		}
 		return mav;
@@ -356,6 +351,8 @@ public class MemberController {
 	    	dto.setPhone((String) loginUser.get("PHONE"));
 	    	dto.setImg((String) loginUser.get("IMG"));
 	    	dto.setIntroduce((String) loginUser.get("INTRODUCE"));
+	    	dto.setUseyn((String) loginUser.get("USEYN"));
+	    	System.out.println(loginUser.get("USEYN"));
 	    	
 	    	model.addAttribute("dto", dto);
     	}
@@ -492,6 +489,7 @@ public class MemberController {
 			} else {
 				ms.blockMember((String) loginUser.get("USERID"), userid);
 				rttr.addFlashAttribute("message", userid+"님을 차단했어요.");
+				rttr.addFlashAttribute("blocked", "y");
 				
 				String referer = request.getHeader("Referer");
 			    return "redirect:"+ referer;
@@ -612,9 +610,11 @@ public class MemberController {
 		} else {
 			String userid = (String) loginUser.get("USERID");
 			ms.privateAccount(userid);
-			
 			rttr.addFlashAttribute("message", "계정이 비공개로 설정되었어요!");
-			return "redirect:/";
+			loginUser.replace("USEYN", "p");
+			
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     }
     
@@ -633,7 +633,11 @@ public class MemberController {
 			ms.PublicAccount(userid);
 			
 			rttr.addFlashAttribute("message", "계정 비공개를 해제 했어요!");
-			return "redirect:/";
+			
+			loginUser.replace("USEYN", "y");
+			
+			String referer = request.getHeader("Referer");
+		    return "redirect:"+ referer;
 		}
     }
     

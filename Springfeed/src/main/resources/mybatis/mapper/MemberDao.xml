@@ -26,7 +26,8 @@
 	
 	<select id="getFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getFollow(
-		#{followed}, #{follower}, #{result, mode=OUT, jdbcType=INTEGER }  )  }
+		#{followed}, #{follower}, 
+		#{followedResult, mode=OUT, jdbcType=INTEGER },  #{followingResult, mode=OUT, jdbcType=INTEGER })  }
 	</select>
 	
 	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">

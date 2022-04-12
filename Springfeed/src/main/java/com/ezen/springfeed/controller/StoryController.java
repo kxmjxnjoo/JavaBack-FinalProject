@@ -99,6 +99,8 @@ public class StoryController {
 			paramMap.put("next", 0);
 			paramMap.put("fontcolor", null);
 			paramMap.put("useyn", null);
+			paramMap.put("memberUseyn", null);
+			
 			
 			ss.getStory(paramMap);
 			
@@ -111,8 +113,35 @@ public class StoryController {
 			} else {
 				
 				HashMap<String, Object> resultMap = list.get(0);
+				mav.addObject("StoryDto", resultMap);
 				
-				if(((String)paramMap.get("useyn")).equals("y")) {
+				//팔로우 검사
+				HashMap<String, Object> followMap = new HashMap<>();
+				followMap.put("followed", resultMap.get("USERID"));
+				followMap.put("follower", loginUser.get("USERID"));
+				followMap.put("followedResult", 0);
+				followMap.put("followingResult", 0);
+				
+				ms.getFollow(followMap);
+				
+				int followedResult = Integer.parseInt(followMap.get("followedResult").toString());
+				int followingResult = Integer.parseInt(followMap.get("followingResult").toString());
+				
+				//사용자가 글쓴이를 팔로우 했는지
+				mav.addObject("isFollowing", followingResult);
+				
+				System.out.println(paramMap.get("memberUseyn") + " " + followedResult 
+						+ " " + followingResult);
+
+				if(((String)paramMap.get("memberUseyn")).equals("p") && 
+						(followedResult == 0 || followingResult == 0)) {
+					
+					// 비공개 계정과 맞팔이 아닐 경우
+						mav.addObject("privateAccount", "y");
+						
+						mav.setViewName("post/storyDetail");
+					
+				} else if(((String)paramMap.get("useyn")).equals("y") ) {
 					
 					System.out.println(loginUser.get("USERID"));
 					System.out.println(resultMap.get("USERID"));
@@ -127,42 +156,27 @@ public class StoryController {
 					ArrayList<HashMap<String, Object>> blockList 
 						= (ArrayList<HashMap<String, Object>>) blockCheckMap.get("ref_cursor");
 					
-					mav.addObject("StoryDto", resultMap);
-					
 					if (blockList.size() == 0) {
+						
 						mav.addObject("fontcolor", (String)paramMap.get("fontcolor"));
+						
 						
 						//이전글
 						ss.getStoryPrev(paramMap);
-		
-						if(paramMap.get("prev") == null) 
-							mav.addObject("prev", 0);
-						else 
-							mav.addObject("prev", Integer.parseInt(paramMap.get("prev").toString()));
-						
+						if(paramMap.get("prev") == null) mav.addObject("prev", 0);
+						else mav.addObject("prev", Integer.parseInt(paramMap.get("prev").toString()));
 						
 						//다음글 검색
 						ss.getStoryNext(paramMap);
+						if(paramMap.get("next") == null) mav.addObject("next", 0);
+						else mav.addObject("next", Integer.parseInt(paramMap.get("next").toString()));
 						
-						if(paramMap.get("next") == null)
-							mav.addObject("next", 0);
-						else
-							mav.addObject("next", Integer.parseInt(paramMap.get("next").toString()));
-						
-						//팔로우 검사
-						HashMap<String, Object> followMap = new HashMap<>();
-						followMap.put("followed", resultMap.get("USERID"));
-						followMap.put("follower", loginUser.get("USERID"));
-						followMap.put("result", 0);
-						
-						ms.getFollow(followMap);
-						
-						mav.addObject("isFollowing", followMap.get("result"));
 						mav.setViewName("post/storyDetail");
 					} else {
 						mav.addObject("blocked", "y");
 						mav.setViewName("post/storyDetail");
 					}
+					
 				} else {
 					rttr.addFlashAttribute("message", "삭제되었거나 비활성화된 계정의 스토리 입니다.");
 				    mav.setViewName("redirect:/");

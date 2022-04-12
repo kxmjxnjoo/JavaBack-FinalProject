@@ -90,5 +90,17 @@
 			)
 		}
 	</update>
+
+	<insert id="insertLike"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL insertLike(
+			    #{postNum}
+			)
+		}
+
+	</insert>
 	
 </mapper>

@@ -132,6 +132,8 @@ function App() {
 											/>} />
 										<Route path="/explore" element={<Explore
 											setPage={setPage}
+											setIsPostDetailOpen={setIsPostDetailOpen}
+											setSelectedPost={setSelectedPost}
 										/>} />
 
 										<Route path="/user/:id" element={<UserPage/>}/>
@@ -143,8 +145,8 @@ function App() {
 			<Modal
 				show={isPostDetailOpen}
 				onHide={closePostDetail}
-				dialogClassName="w-90"
-				>
+				dialogClassName='postDetailModal'
+			>
 				<PostDetail
 					post={selectedPost}
 				/>

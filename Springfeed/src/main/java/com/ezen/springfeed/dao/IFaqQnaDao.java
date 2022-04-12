@@ -22,7 +22,7 @@ public interface IFaqQnaDao {
 	void qnaEdit(HashMap<String, Object> paramMap);
 
 	void adminQnaList(HashMap<String, Object> paramMap);
-	
+
 	void qnaList(HashMap<String, Object> paramMap);
 	
 	void faqList(HashMap<String, Object> paramMap);
@@ -30,7 +30,7 @@ public interface IFaqQnaDao {
 	void getQna(HashMap<String, Object> paramMap);
 
 	void getQnaList(HashMap<String, Object> paramMap);
-	
+
 	void getAllQna(HashMap<String, Object> paramMap);
 
 	void reportList(HashMap<String, Object> paramMap);

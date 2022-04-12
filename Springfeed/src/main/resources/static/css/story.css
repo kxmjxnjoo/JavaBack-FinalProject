@@ -16,7 +16,7 @@
 }
 
 
-.innerStory{
+.innerStory {
    	width: 80%;
     min-width: 400px;
     max-width: 600px;
@@ -27,25 +27,65 @@
     align-content: center;
 }
 
-.story_content{
-	position: relative;
-    text-align: center;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 362px;
-    border: 1px solid black;
-    border-radius: 10px;
-    float: left;
-    overflow: hidden;
-    background: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: 85%;
-    background-size: 450px;
-    background-position: center;
-    background-repeat: no-repeat;
+@media (max-width : 500px){
+	.story_content{
+		position: relative;
+	    text-align: center;
+	    margin: 0 auto;
+	    width: 72%;
+	    max-width: 362px;
+	    border: 1px solid black;
+	    border-radius: 10px;
+	    float: left;
+	    overflow: hidden;
+	    background: black;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    flex-wrap: wrap;
+	    height: 83%;
+	    background-size: 100%;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	}
+	
+	#storyArea #reaction{
+		width: 35px; height: 35px; opacity: 80%;
+	    background: white; border-radius: 50%;
+	    display: flex; flex-direction: column; justify-content: center;
+	    position: relative; bottom: -90%;
+	}
+}
+
+
+@media (min-width : 500px){
+	.story_content {
+	    position: relative;
+	    text-align: center;
+	    margin: 0 auto;
+	    width: 90%;
+	    max-width: 386px;
+	    border: 1px solid black;
+	    border-radius: 10px;
+	    float: left;
+	    overflow: hidden;
+	    background: black;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    flex-wrap: wrap;
+	    padding-top: min(125%, 624px);
+	    background-size: 450px;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	}
+	
+	#storyArea #reaction{
+		width: 35px; height: 35px; opacity: 80%;
+	    background: white; border-radius: 50%;
+	    display: flex; flex-direction: column; justify-content: center;
+	    position: relative; bottom: 100%;
+	}
 }
 
 #story_img{
@@ -72,12 +112,7 @@
 	position: absolute; top:10%; right: 35%; display: inline-block; 
 }
 
-#storyArea #reaction{
-	width: 35px; height: 35px; opacity: 80%;
-    background: white; border-radius: 50%;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; bottom: 30%;
-}
+
 
 
 #story_date{

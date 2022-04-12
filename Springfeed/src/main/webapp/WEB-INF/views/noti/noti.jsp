@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${ loginUser.NAME }님의 알림</title>
 <link rel="stylesheet" href="/css/noti.css">
 </head>
@@ -21,7 +22,8 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-					<img class="userImg" src="/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG }">
+					<div class="userImg" style="background-image:url(/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG })"> </div>
+					<%-- <img class="userImg" src="/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG }"> --%>
 					
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.USERFROM }</h2>
@@ -36,7 +38,7 @@
 							</c:when>
 						
 							<c:when test="${ noti.NOTITYPE == 3 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
+								<p class="notiContent notiText">님이 포스트에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 4 &&  loginUser.USERID != noti.USERFROM}">
@@ -52,13 +54,13 @@
 							<fmt:formatDate value="${ noti.CREATE_DATE }"/>
 						</h2>
 					</div>
-					
+					<%-- 
 					<c:if test="${ noti.NOTITYPE != 1 && noti.NOTITYPE != 5 }">
 						<img class="postImg" src="/images/${ noti.POSTIMG }">
 					</c:if>
 					<c:if test="${ noti.notiType == 5}">
 						<img class="postImg" src="/images/${ noti.STORYIMG }">
-					</c:if>
+					</c:if> --%>
 				</div>
 			</div>
 			</c:forEach>
