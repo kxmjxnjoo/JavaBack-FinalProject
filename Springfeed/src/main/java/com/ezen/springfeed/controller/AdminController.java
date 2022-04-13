@@ -194,7 +194,7 @@ public class AdminController {
 			if(request.getParameter("searchMameber")!=null) {
 				searchMember = request.getParameter("searchMember");
 				session.setAttribute("searchMember", searchMember);
-			} else if(session.getAttribute("searchMem") != null) {
+			} else if(session.getAttribute("searchMember") != null) {
 				searchMember = (String)session.getAttribute("searchMember");
 			} else {
 				session.removeAttribute("searchMember");
@@ -247,8 +247,6 @@ public class AdminController {
 			paramMap.put("ref_cursor", null);
 			as.reportList(paramMap);
 			
-			System.out.println("F");
-			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
@@ -286,8 +284,8 @@ public class AdminController {
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
 			as.updateReportPostBlock(paramMap);
+			}
 		}
-	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
@@ -319,8 +317,8 @@ public class AdminController {
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
 			as.updateReportStoryBlock(paramMap);
+			}
 		}
-	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
