@@ -36,4 +36,8 @@ public interface IAdminDao {
 	void updateReportStoryBlock(HashMap<String, Object> paramMap);
 
 	void updateReportUserBlock(HashMap<String, Object> paramMap);
+
+	void userReportCheck(HashMap<String, Object> paramMap);
+
+	void updateReportPostUnBlock(HashMap<String, Object> paramMap);
 }

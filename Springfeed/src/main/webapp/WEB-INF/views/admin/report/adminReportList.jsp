@@ -31,7 +31,7 @@
 					<td  width="50">${rdto.REPORT_NUM}</td>
 					<td  width="50">${rdto.REPORTED_ID}</td>
 					<td  width="50">${rdto.REPORT_TYPE}</td>
-					<td  width="200">${rdto.REASON}</td>
+					<td  width="200"><a href="">${rdto.REASON}</a></td>
 					<td  width="50">${rdto.REPORTER_ID}</td>
 					<td  width="70"><fmt:formatDate value="${rdto.INDATE}"/></td>
 					<c:choose>
@@ -48,7 +48,7 @@
 									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="storyReportCheck(${rdto.STORY_NUM}, ${rdto.REPORT_NUM});">
 								</c:when>
 								<c:otherwise>
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="useynReportCheck(<%-- '${mdto.USERID}',  --%>'${mdto.USEYN}', ${rdto.REPORT_NUM});">
+									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="userReportCheck( '${mdto.USEYN}', <%-- '${mdto.USEYN}',--%> ${rdto.REPORT_NUM});">
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -103,19 +103,19 @@ function storyReportCheck(story_num, report_num){
 	document.frm.submit();
 }
 
-	function useynReportCheck(useyn, report_num){
+	function userReportCheck(userid, report_num){
 	document.frm.action = "/admin/report/user	";
 	
 	// dom에 INPUT.. CREATE
-	var input_userid = document.createElement('input'); 
-	input_userid.setAttribute("type", "hidden");
-	input_userid.setAttribute("name", "userid");
-	input_userid.setAttribute("value", userid);
-	
-	var input_userid = document.createElement('input'); 
+ 	var input_useyn = document.createElement('input'); 
+ 	input_useyn.setAttribute("type", "hidden");
+ 	input_useyn.setAttribute("name", "useyn");
+ 	input_useyn.setAttribute("value", useyn);
+
+	/* 	var input_useyn = document.createElement('input'); 
 	input_useyn.setAttribute("type", "hidden");
 	input_useyn.setAttribute("name", "useyn");
-	input_useyn.setAttribute("value", useyn);
+	input_useyn.setAttribute("value", useyn); */
 	
 	var input_report = document.createElement('input'); 
 	input_report.setAttribute("type", "hidden");

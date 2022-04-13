@@ -21,7 +21,7 @@
 	
 	<update id="faqEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL faqEdit( 
-			#{faq_subject}, #{faq_content}
+			#{faq_num}, #{faq_subject}, #{faq_content} 
 		)}
 	</update>
 	
