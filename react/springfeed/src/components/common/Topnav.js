@@ -127,10 +127,10 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 											{
 												isLoggedIn ? 
 												<>
-													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
+													<Link to={"/user/page/" + (user != null ? user.userid : '')} className='text-decoration-none'>
 														<Dropdown.Item>내 유저 페이지로 이동</Dropdown.Item>
 													</Link>
-													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
+													<Link to='/user/edit' className='text-decoration-none'>
 														<Dropdown.Item href="#/action-2">내 정보 수정</Dropdown.Item>
 													</Link>
 													<Link to={'/logout'} className='text-decoration-none'>

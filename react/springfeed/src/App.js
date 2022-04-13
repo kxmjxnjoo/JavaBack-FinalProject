@@ -20,6 +20,8 @@ import PostDetail from './components/Home/PostDetail'
 import Noti from './components/jsp-components/Noti'
 import Login from './components/jsp-components/Login'
 import Logout from './components/jsp-components/Logout'
+import Join from './components/jsp-components/Join'
+import UserEdit from './components/jsp-components/UserEdit'
 
 // Common
 import './common.css'
@@ -142,9 +144,11 @@ function App() {
 											setSelectedPost={setSelectedPost}
 										/>} />
 
-										<Route path="/user/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
 										<Route path='/noti' element={<Noti/>}/>
 										<Route path='/logout' element={<Logout/>}/>
+										<Route path='/join' element={<Join/>}/>
+										<Route path='/user/edit' element={<UserEdit/>}/>
 									</Routes>
 					}
 			</div>
