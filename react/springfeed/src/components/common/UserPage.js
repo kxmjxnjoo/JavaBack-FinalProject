@@ -258,7 +258,7 @@ const UserPage = ({setSearchKey}) => {
                 isPostSelected ?
 
                     posts == null || posts.length == 0 ?
-                    <div className="h1">포스트가 없어요!</div>
+                    <div className="h1 text-center mt-5">포스트가 없어요!</div>
                     :
                     posts.map((post) => {
                         return(
