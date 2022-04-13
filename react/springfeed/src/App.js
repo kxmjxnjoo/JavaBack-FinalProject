@@ -157,6 +157,7 @@ function App() {
 				show={isPostDetailOpen}
 				onHide={closePostDetail}
 				dialogClassName='postDetailModal'
+				className='mt-5'
 				>
 				<PostDetail
 					post={selectedPost}

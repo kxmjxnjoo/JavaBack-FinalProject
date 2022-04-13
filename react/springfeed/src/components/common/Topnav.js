@@ -7,7 +7,7 @@ import { Overlay, Modal, Navbar, Dropdown } from 'react-bootstrap'
 // Icons
 import {
 	BsFillHouseDoorFill as HomeIcon, BsMessenger as MessageIcon,
-	BsFillHeartFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
+	BsFillBellFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
 	BsSearch as SearchIcon
 } from 'react-icons/bs'
 import { MdExplore as ExploreIcon } from 'react-icons/md'
