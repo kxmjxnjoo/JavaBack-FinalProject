@@ -60,15 +60,13 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
                                 {
                                     exploreData.map((data, index) => {
                                         return(
-                                            <div className={'p-0 ' + ((Math.floor(index + 1) / 3 % 2) == 0 ? 'col-4' : (index + 1) % 3 == 0 ? 'col-4' : 'col-4')}
+                                            <div className='col-4 p-0'
                                                 onClick={
                                                     () => {
                                                         openPostDetail(data.postNum)
                                                     }
                                                 }
                                             >
-
-
                                                 <div className="row justify-content-center h2 position-absolute text-white m-0">
                                                     <div className="col-2 text-dark">
                                                         <LikeIcon/>
@@ -85,8 +83,6 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
                                                 </div>
 
                                                 <img src="http://picsum.photos/500/500" alt="" style={imgStyle} className='w-100 img-responsive exploreImg' />
-
-
                                             </div>
                                         )
                                     })
