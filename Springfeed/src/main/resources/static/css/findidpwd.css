@@ -4,6 +4,59 @@ body {
     background-color: #efebe8;
 }
 
+
+@media(min-width : 705px) {
+	#findForm{
+		margin: 0 auto;
+		width:350px;
+		text-align:center;
+		padding-top:20px;
+		display: flex;
+	    justify-content: center;
+	}
+	
+	#findId{ margin-right: 30px; }
+}
+
+@media(max-width : 705px){
+	#findForm{
+	    margin: 0 auto;
+	    width: 350px;
+	    text-align: center;
+	    padding-top: 20px;
+	    display: flex;
+	    justify-content: center;
+	    flex-direction: column;
+	    align-items: center;
+	}
+	
+	#findId{ margin-bottom: 30px; }
+}
+
+#findId{
+    padding: 5% 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#findPw{
+    padding: 5% 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #findidpwdBox {
     width: 50%;
     height: 600px;
