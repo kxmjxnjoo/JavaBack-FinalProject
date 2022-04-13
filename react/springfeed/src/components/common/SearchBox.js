@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // Resources
 import profile from '../../images/tmpUserIcon.png'
 

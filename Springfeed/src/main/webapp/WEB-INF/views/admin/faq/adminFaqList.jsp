@@ -15,7 +15,6 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
-				<th>내용</th>
 				<th>수정</th>
 				<th>삭제</th>
 			</tr>
@@ -23,21 +22,41 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 				<tr align="left" class="faqBox" > <!-- onclick="/faqdetail&num=${ fdto.FAQ_NUM }" -->
 					<td style="width: 10%;">${fdto.FAQ_NUM}</td>
 					<td style="width: 30%;">${fdto.FAQ_SUBJECT}</td>
-					<%-- <td style="width: 40%;">${fdto.FAQ_CONTENT}</td> --%>
-					<td style="width: 10%;"><button onclick="/faq/edit/form?num=${ fdto.FAQ_NUM }'" id="faqEditButton">수정</button></td>
-					<td style="width: 10%;"><button onclick="/faq/delete(${ fdto.FAQ_NUM })" id="faqDeleteButton">삭제</button></td>
+					<td style="width: 10%;"><button ${ fdto.FAQ_NUM } id="faqEditButton" onClick="edit();">수정</button></td>
+					<td style="width: 10%;"><button ${ fdto.FAQ_NUM } id="faqDeleteButton" onClick="delete();">삭제</button></td>
 				</tr>
 			</c:forEach>
 	</table>
 </form>
-<!-- <input type="submit" id="ban" value="정지 처리" onClick="/admin/report/handle'"> -->
 
 <%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript">
-	function deleteFaq(num) {
-		if(confirm(num + "번 FAQ를 지울까요?")) {
-			location.href = "/faq/delete" + num
+	function delete(faq_num){
+		document.frm.action = "	/faq/delete";
+		if(confirm(faq_num + "번 FAQ를 삭제할까요?")) {
 		}
-	} 
+		
+		var input_faq = document.createElement('input'); 
+		input_faq.setAttribute("type", "hidden");
+		input_faq.setAttribute("name", "faq_num");
+		input_faq.setAttribute("value", faq_num);
+		
+		document.frm.appendChild(input_faq);
+		document.frm.submit();
+	}
+	
+	function edit(faq_num){
+		document.frm.action = "	/qna/edit";
+		if(confirm(faq_num + "번 FAQ를 수정할까요?")) {
+		}
+		
+		var input_faq = document.createElement('input'); 
+		input_faq.setAttribute("type", "hidden");
+		input_faq.setAttribute("name", "faq_num");
+		input_faq.setAttribute("value", faq_num);
+		
+		document.frm.appendChild(input_faq);
+		document.frm.submit();
+	}
 </script>

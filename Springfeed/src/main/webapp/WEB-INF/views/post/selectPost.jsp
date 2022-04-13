@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+`<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,6 @@ function goBack(){
 			<label id="input-goBack-button" for="input-reset"> 뒤로가기 </label>
 			<input type="button" id="input-reset"> 
 		</div>
-		
 	</div>
 </form>
 <footer style="margin-top: 20px;">

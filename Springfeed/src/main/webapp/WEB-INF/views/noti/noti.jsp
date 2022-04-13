@@ -11,9 +11,6 @@
 <link rel="stylesheet" href="/css/noti.css">
 </head>
 <body>
-
-	<%@ include file="../common/topnav.jsp" %>
-	
 	<c:choose>
 		<c:when test="${ not empty noNotification  }">
 			<h1 id="notiNullMessage"> 아직 받은 알림이 없어요! </h1>

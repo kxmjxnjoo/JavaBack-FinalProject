@@ -139,7 +139,6 @@ public class AdminController {
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			System.out.println("C");
 			mav.addObject("mdto", list);
 			mav.addObject("paging", paging);
 			mav.addObject("key", key);
@@ -353,12 +352,12 @@ public class AdminController {
 			as.storyReportCheck(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 		if(cnt>0) {
-			paramMap.put("useyn", "b");
+			paramMap.put("report_num", "report_num");
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
 			as.updateReportStoryBlock(paramMap);
+			}
 		}
-	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList

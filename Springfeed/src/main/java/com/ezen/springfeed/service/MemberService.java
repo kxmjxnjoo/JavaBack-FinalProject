@@ -101,4 +101,16 @@ public class MemberService {
 	public void PublicAccount(String userid) {
 		mdao.PublicAccount(userid);
 	}
+
+    public void getFollowerCount(HashMap<String, Object> paramMap) {
+		mdao.getFollowerCount(paramMap);
+    }
+
+	public void getFollowingCount(HashMap<String, Object> paramMap) {
+		mdao.getFollowingCount(paramMap);
+	}
+
+    public void getFollowerList(HashMap<String, Object> paramMap) {
+		mdao.getFollowerList(paramMap);
+    }
 }

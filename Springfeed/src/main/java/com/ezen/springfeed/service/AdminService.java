@@ -72,4 +72,5 @@ public class AdminService {
 	public void updateReportUserBlock(HashMap<String, Object> paramMap) {
 		adao.updateReportUserBlock(paramMap);
 	}
+
 }

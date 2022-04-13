@@ -9,16 +9,16 @@
 		 
 	<table>
 		<tr>
+			<th>번호</th>
 			<th>제목</th>
-			<th>답변내용</th>
 			<th>작성일</th>
-			<th>답변여부</th>
+			<th>답변</th>
 		<tr>
 		
 		<c:forEach items="${qdto}" var="qdto">
-			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }'" class="qnaItems">
+			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }" class="qnaItems">
+				<td>${qdto.QNA_NUM}</td>
 				<td>${qdto.QNA_SUBJECT}</td>
-				<td>${qdto.QNA_REPLY}</td>
 				<td><fmt:formatDate value="${qdto.INDATE}"/></td>
 				<td>
 					<c:choose>
