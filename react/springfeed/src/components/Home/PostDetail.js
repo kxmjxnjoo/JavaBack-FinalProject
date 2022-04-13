@@ -45,13 +45,13 @@ const PostDetail = ({post}) => {
         <div className="row ms-0 me-0">
 
             <div className="col-6 ps-0">
-                <img src="http://picsum.photos/600/600" alt="" style={{width: '100%'}}/>
+                <img src="http://picsum.photos/600/600" alt="" style={{width: '100%', height: '100%'}}/>
             </div>
 
             <div className="col-6">
                 <div className="row mt-3" style={{height: '20%'}}>
                     <div className="col-2">
-                        <img src="http://picsum.photos/200/200" alt="" style={{width: '75px'}} className='rounded-circle'/>
+                        <img src="http://picsum.photos/200/200" alt="" style={{width: '50px', height: '50px'}} className='rounded-circle'/>
                     </div>
                     <div className="col-8 align-self-center">
                         <div className="h3">{userid == '' || userid == null ? 'USERID' : userid}</div>
@@ -92,18 +92,14 @@ const PostDetail = ({post}) => {
                     <form action="/reply/add">
                         <div className="row form-group">
                             <div className="col-10">
-                                <input type="text" placeholder='댓글을 추가해 주세요...' className='form-control' />
+                                <input type="text" placeholder='댓글을 추가해 주세요...' className='form-control w-100 h-100' />
                             </div>
-                            <div className="col-2">
-                                <input type="submit" value="추가" className='btn btn-outline-primary' />
+                            <div className="col-2 self-align-center">
+                                <input type="submit" value="추가" className='btn btn-outline-primary w-100 h-100' />
                             </div>
                         </div>
                     </form>
-
                 </div>
-
-
-
 
             </div>
         </div>
@@ -142,36 +138,3 @@ const Comment = ({comment}) => {
         </div>
     )
 }
-
-/*
-                    <div className="row">
-                            <div className="col-10">
-                                <div className="row">
-                                    <div className="col-2">
-                                        <img src={userprofile} alt="" />
-                                    </div>
-
-                                    <div className="col-8">
-                                        <div className="row">
-                                            {userid}
-                                        </div>
-                                        <div className="row text-muted">
-                                            {location}
-                                        </div>
-                                    </div>
-
-                                    <div className="col-2">
-                                        <div className="btn btn-success">
-                                            팔로우
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-2">
-                                <DetailIcon/>
-                            </div>
-                        </div>
-                </div>
-
-*/

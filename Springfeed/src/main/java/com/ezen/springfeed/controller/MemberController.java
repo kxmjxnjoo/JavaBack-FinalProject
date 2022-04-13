@@ -304,7 +304,7 @@ public class MemberController {
 		return mav;
     }
     
-    @RequestMapping("/api/notiCount")
+    @RequestMapping("/api/noti/count")
     public int notiCount(HttpServletRequest request) {
     	
     	int notiCount = 0;

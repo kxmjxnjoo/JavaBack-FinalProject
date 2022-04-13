@@ -25,9 +25,7 @@
 
 
 <body>
-
-<%@ include file="../common/topnav.jsp" %>
-    <div class="container">
+ <div class="container">
         <div class="row">
 			<div class="col-md-5 mx-auto">
 			<div id="first">

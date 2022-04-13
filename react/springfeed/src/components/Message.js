@@ -5,7 +5,7 @@ import MessageNotSelected from './Message/MessageNotSelected'
 
 // Bootstrap
 import { Modal } from 'react-bootstrap'
-import FollowingList from './Home/FollowingList'
+import FollowingList from './Home/MainFollowingList'
 import { useState } from 'react'
 import MessageDetail from './Message/MessageDetail'
 

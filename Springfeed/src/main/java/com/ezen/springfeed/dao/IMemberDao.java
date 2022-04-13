@@ -27,4 +27,8 @@ public interface IMemberDao {
 	void blockCheck(HashMap<String, Object> paramMap);
 	void privateAccount(String userid);
 	void PublicAccount(String userid);
+
+	void getFollowerCount(HashMap<String, Object> paramMap);
+	void getFollowingCount(HashMap<String, Object> paramMap);
+	void getFollowerList(HashMap<String, Object> paramMap);
 }

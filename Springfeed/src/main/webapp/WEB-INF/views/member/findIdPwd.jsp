@@ -4,47 +4,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아이디 비밀번호 찾기</title>
 <link rel="stylesheet" href="/css/findidpwd.css">
+<link rel="stylesheet" href="/css/join.css">
 </head>
 <body>	
 	<%@ include file="../common/topnav.jsp" %>
 	
-	<div id="findidpwdBox">
-	
-		<div id="findidBox">
-			<div id="findidBoxContent">
-				<form action="/find/id" method="post">
-					<h1>아이디 찾기</h1>
-				
-					<input type="hidden" name="command" value="findid">
-					
-					<input type="text" name="name" placeholder="이름" id="findidName">
-					<input type="text" name="phone" placeholder="전화번호" id="findidPhone">
-					
-					<input type="submit" value="아이디 찾기" onclick="return checkId()">
-				</form>
+	<form method="post" action="/find/id" name="loginFrm" id="findForm">
+		<div class="box1" id="findId">
+			<h1>Springfeed</h1>
+			<h3 color="gray">아이디 찾기</h3><br>
+			<div class="text_box" id="name_box">
+				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}">
 			</div>
+			<div class="text_box" id="phone_box">
+				<input type ="text" name="phone" class="input"  placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone" value="${dto.phone}">
+			</div>
+			<input type="submit" value="아이디 찾기" id="login" onclick="return checkId();">
 		</div>
 	
-		<div id="findpwdBox">
-			<div id="findpwdBoxContent">
-				<form action="/find/pw" method="post">
-					<h1>비밀번호 찾기</h1>
-					
-					<input type="hidden" name="command" value="findpwd">
-					
-					<input type="text" name="userid" placeholder="아이디" id="findpwdUserid">
-					<input type="text" name="name" placeholder="이름" id="findpwdName">
-					<input type="text" name=email placeholder="이메일" id="findpwdPhone"> 
-					<input type="button" class="getTempPwd" value="임시비밀번호 전송">
-					
-					<input type="submit" value="비밀번호 찾기" onclick="return checkPwd()"> 
-				</form>
+		<div class="box1" id="findPw">
+			<h1>Springfeed</h1>
+			<h3 color="gray">비밀번호 찾기</h3><br>
+			<div class="text_box" id="name_box">
+				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}">
 			</div>
+			<div class="text_box" id="phone_box">
+				<input type ="text" name="phone" class="input"  placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone" value="${dto.phone}">
+			</div>
+			<div class="text_box" id="email_box">
+				<input type ="text" name="email" class="input"  placeholder=" 이메일 (example@springfeed.com)" id="joinEmail" value="${dto.email}">
+			</div>
+			<input type="submit" value="비밀번호 찾기" id="login" onclick="return checkPwd();">
 		</div>
-		
-	</div>
+	</form>
 	
 		<%@ include file="../common/footer.jsp" %>
 	

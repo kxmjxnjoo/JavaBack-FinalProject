@@ -17,6 +17,11 @@ import Error from './components/common/Error'
 import Explore from './components/Explore'
 import NoLogin from './components/common/NoLogin'
 import PostDetail from './components/Home/PostDetail'
+import Noti from './components/jsp-components/Noti'
+import Login from './components/jsp-components/Login'
+import Logout from './components/jsp-components/Logout'
+import Join from './components/jsp-components/Join'
+import UserEdit from './components/jsp-components/UserEdit'
 
 // Common
 import './common.css'
@@ -67,6 +72,8 @@ function App() {
 
 	return (
 		<div className="App">
+		<Router>
+
 			<div>
 				<Toaster
 					position='bottom-right'
@@ -98,6 +105,8 @@ function App() {
 						<div className="card-body pt-0">
 							<Search
 								searchKey={searchKey}
+								setIsPostDetailOpen={setIsPostDetailOpen}
+								setSelectedPost={setSelectedPost}
 							/>
 						</div>
 					</div>
@@ -107,12 +116,11 @@ function App() {
 
 
 			<div className='container'>
-				<Router>
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
 
-								!isLoggedIn ? <NoLogin/>
+								!isLoggedIn ? <Login/>
 									:
 									<Routes>
 										<Route path="/" element={
@@ -136,21 +144,26 @@ function App() {
 											setSelectedPost={setSelectedPost}
 										/>} />
 
-										<Route path="/user/:id" element={<UserPage/>}/>
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
+										<Route path='/noti' element={<Noti/>}/>
+										<Route path='/logout' element={<Logout/>}/>
+										<Route path='/join' element={<Join/>}/>
+										<Route path='/user/edit' element={<UserEdit/>}/>
 									</Routes>
 					}
-				</Router>
 			</div>
 
 			<Modal
 				show={isPostDetailOpen}
 				onHide={closePostDetail}
 				dialogClassName='postDetailModal'
-			>
+				className='mt-5'
+				>
 				<PostDetail
 					post={selectedPost}
-				/>
+					/>
 			</Modal>
+		</Router>
 		</div>
 	);
 }

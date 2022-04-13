@@ -5,12 +5,38 @@
 	
 <mapper namespace="com.ezen.springfeed.dao.IMemberDao">
 	
-	<resultMap id="MemberMap" type="java.util.HashMap"></resultMap>	
+	<resultMap id="MemberMap" type="java.util.HashMap"></resultMap>
+
+	<select id="getFollowingCount"
+			statementType="CALLABLE"
+			parameterType="String"
+			resultType="_int"
+	>
+		{
+			CALL getFollowingCount(
+			    #{userid},
+			    #{followingCount, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<select id="getFollowerCount"
+			statementType="CALLABLE"
+			parameterType="String"
+			resultType="_int"
+	>
+		{
+			CALL getFollowerCount(
+			    #{userid},
+			    #{followerCount, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
 	
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getMember( 
 			#{userid},
-			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
 		)  }
 	</select>
 	
@@ -81,6 +107,17 @@
 			    #{ page },
 			    #{ load },
 			    #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap }
+			)
+		}
+	</select>
+
+	<select id="getFollowerList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getFollowerList(
+			    #{ userid },
+			    #{ page },
+			    #{ load },
+			    #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
 			)
 		}
 	</select>

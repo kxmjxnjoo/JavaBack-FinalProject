@@ -11,9 +11,6 @@
 <link rel="stylesheet" href="/css/noti.css">
 </head>
 <body>
-
-	<%@ include file="../common/topnav.jsp" %>
-	
 	<c:choose>
 		<c:when test="${ not empty noNotification  }">
 			<h1 id="notiNullMessage"> 아직 받은 알림이 없어요! </h1>
@@ -22,15 +19,15 @@
 			<c:forEach var="noti" items="${ notiList }">
 			<div class="notiBox">
 				<div class="notiBoxContent">
-					<div class="userImg" style="background-image:url(/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG })"> </div>
-					<%-- <img class="userImg" src="/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG }"> --%>
+					<div class="userImg" style="background-image:url(/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG })"
+					onclick="location.href='/post?userid=${ noti.USERFRPM }'"> </div>
 					
 					<div class="notiTextBox">
-						<h2 class="userName notiText">${ noti.USERFROM }</h2>
+						<h2 class="userName notiText">${ noti.NAME }</h2>
 						
 						<c:choose>
 							<c:when test="${ noti.NOTITYPE == 1 }">
-								<p class="notiContent notiText">님이 ${ loginUser.NAME }님을 팔로우하셨습니다</p>
+								<p class="notiContent notiText">님이 나를 팔로우합니다</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 2 && loginUser.USERID != noti.USERFROM}">

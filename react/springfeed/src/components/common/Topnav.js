@@ -2,12 +2,12 @@ import React, { useContext, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 // Bootstrap
-import { Overlay, Modal, Navbar } from 'react-bootstrap'
+import { Overlay, Modal, Navbar, Dropdown } from 'react-bootstrap'
 
 // Icons
 import {
 	BsFillHouseDoorFill as HomeIcon, BsMessenger as MessageIcon,
-	BsFillHeartFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
+	BsFillBellFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
 	BsSearch as SearchIcon
 } from 'react-icons/bs'
 import { MdExplore as ExploreIcon } from 'react-icons/md'
@@ -15,6 +15,7 @@ import { MdExplore as ExploreIcon } from 'react-icons/md'
 // Resources
 import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
+import './topnav.css'
 
 const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	const logoStyle = {
@@ -23,7 +24,8 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	}
 	const topnavStyle = {
 		backgroundColor: 'var(--mainColor)',
-		color: 'white'
+		color: 'white',
+		zIndex: '2000'
 	}
 	const profileStyle = {
 		width: '40px'
@@ -45,14 +47,14 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 	const ref = useRef(null)
 
 	return (
-		<Navbar style={topnavStyle} expand='lg' className='p-lg-0'>
+		<Navbar style={topnavStyle} expand='lg' className='p-lg-0 position-fixed top-0 left-0 w-100'>
 			<div className="container">
-				<Navbar.Brand>
-				<a href="/" className="navbar-brand ms-3 text-light">
-					<img src={logo} alt="" className="d-inline-block align-top me-1" style={logoStyle} />
-					Springfeed
-				</a>
-				</Navbar.Brand>
+				<Link to="/" className='text-decoration-none navbar-brand'>
+					<Navbar.Brand className='text-light'>
+						<img src={logo} alt="" className="d-inline-block align-top me-1" style={logoStyle} />
+						Springfeed
+					</Navbar.Brand>
+				</Link>
 
 				<Navbar.Toggle aria-controls="topnav-toggle"></Navbar.Toggle>
 
@@ -67,15 +69,19 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 						<div className="nav navbar-nav mr-auto mt-2 mt-lg-0 h3 float-end">
 							<div className="row justify-content-center">
 								<div className="col-2 p-lg-0 align-self-center">
-									<a className={(page === 0 ? "nav-link active" : "nav-link")} href="/">
-										<HomeIcon style={{color: 'white'}}/>
-									</a>
+									<Link to="/">
+										<a className={(page === 0 ? "nav-link active" : "nav-link")}>
+											<HomeIcon style={{color: 'white'}}/>
+										</a>
+									</Link>
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<a className={(page === 1 ? "nav-link active" : "nav-link")} href="/message">
-										<MessageIcon style={{color: 'white'}}/>
-									</a>
+									<Link to="/message">
+										<a className={(page === 1 ? "nav-link active" : "nav-link")}>
+											<MessageIcon style={{color: 'white'}}/>
+										</a>
+									</Link>
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
@@ -91,26 +97,56 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<a className={(page === 3 ? "nav-link active" : "nav-link")} href="/explore">
-										<ExploreIcon style={{color: 'white'}}/>
-									</a>
+									<Link to='/explore'>
+										<a className={(page === 3 ? "nav-link active" : "nav-link")} href="/explore">
+											<ExploreIcon style={{color: 'white'}}/>
+										</a>
+									</Link>
+								</div>
+								<div className="col-2 p-lg-0 align-self-center">
+									<Link to="/noti">
+										<a className={(page === 4 ? "nav-link active" : "nav-link")} href="/noti">
+											<NotiIcon style={{color: 'white'}}/>
+										</a>
+									</Link>
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<a className={(page === 4 ? "nav-link active" : "nav-link")} href="/noti">
-										<NotiIcon style={{color: 'white'}}/>
-									</a>
+									<Dropdown>
+										<Dropdown.Toggle variant="none" id="dropdown-basic" className='p-0'>
+											<a className="nav-link">
+												<img src={
+													isLoggedIn ?
+														user.img :
+														defaultProfile
+												} alt="ERR" className="round-circle" style={profileStyle} />
+											</a>
+										</Dropdown.Toggle>
 
-								</div>
-								<div className="col-2 p-lg-0 align-self-center">
-									<a href={"/user/" + (user != null ? user.userid : '')} className="nav-link">
-										<img src={
-											isLoggedIn ?
-												user.img :
-												defaultProfile
-										} alt="ERR" className="round-circle" style={profileStyle} />
-									</a>
-
+										<Dropdown.Menu>
+											{
+												isLoggedIn ? 
+												<>
+													<Link to={'/user/page/' + (user != null ? user.userid : '')} className='text-decoration-none'>
+														<Dropdown.Item href='/user/page'>내 유저 페이지로 이동</Dropdown.Item>
+													</Link>
+													<Link to='/user/edit' className='text-decoration-none'>
+														<Dropdown.Item href='/user/edit'>내 정보 수정</Dropdown.Item>
+													</Link>
+													<Link to='/logout' className='text-decoration-none'>
+														<Dropdown.Item href='/logout' className='bg-danger text-white'>로그아웃</Dropdown.Item>
+													</Link>												
+												</>
+												:
+												<>
+													<Link to={'/login'} className='text-decoration-none'>
+														<Dropdown.Item>로그인</Dropdown.Item>
+													</Link>												
+												</>
+											}
+										</Dropdown.Menu>
+									</Dropdown>
+										
 								</div>
 
 							</div>

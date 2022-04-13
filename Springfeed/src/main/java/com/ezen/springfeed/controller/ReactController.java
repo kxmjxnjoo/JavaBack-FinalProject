@@ -17,6 +17,7 @@ import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -151,6 +152,32 @@ public class ReactController {
         return mdto;
     }
 
+    // Get userpage info
+    @RequestMapping(value="/api/user/follow/count", produces="application/json")
+    public HashMap<String, Object> getUserpage(@RequestParam(value="id") String id) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", id);
+        paramMap.put("ref_cursor", null);
+
+        // Get followerCount
+        int followerCount = 0;
+        ms.getFollowerCount(paramMap);
+        followerCount = Integer.parseInt((String) paramMap.get("followerCount"));
+
+        // Get followingCount
+        int followingCount = 0;
+        ms.getFollowingCount(paramMap);
+        followingCount = Integer.parseInt((String) paramMap.get("followingCount"));
+
+        // Create map
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("follower", followerCount);
+        result.put("following", followingCount);
+
+        return result;
+    }
+
     // Get search result
     @RequestMapping(value="/api/search/member", produces="application/json")
     public ArrayList<MemberDto> getMemberSearchResult(@RequestParam(value="key") String key, @RequestParam(value="page", required = false) Integer page) {
@@ -208,6 +235,7 @@ public class ReactController {
         return result;
     }
 
+    // Get user's following list (page)
     @RequestMapping(value="/api/user/following", produces="application/json")
     public ArrayList<MemberDto> getUserFollowingList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
         HashMap<String, Object> paramMap = new HashMap<>();
@@ -231,6 +259,35 @@ public class ReactController {
 
             result.add(mdto);
         }
+        return result;
+    }
+
+    // Get user's follower list (page)
+    @RequestMapping(value="/api/user/follower", produces = "application/json")
+    public ArrayList<MemberDto> getUserFollowerList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", id);
+        paramMap.put("page", page != null ? page : 0);
+        paramMap.put("load", 5);
+        paramMap.put("ref_cursor", null);
+
+        // Get data from db
+        ms.getFollowerList(paramMap);
+
+        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+        if(list.size() == 0) {
+            return null;
+        }
+        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        for(HashMap<String, Object> mem : list) {
+            MemberDto mdto = new MemberDto();
+            mdto.setUserid((String) mem.get("USERID"));
+            mdto.setImg((String) mem.get("IMG"));
+            mdto.setName((String) mem.get("NAME"));
+            result.add(mdto);
+        }
+
         return result;
     }
 

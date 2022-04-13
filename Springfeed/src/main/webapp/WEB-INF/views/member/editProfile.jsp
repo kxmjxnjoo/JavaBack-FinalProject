@@ -132,7 +132,7 @@
 	
 			
 		<form name="frm" method="post" id="joinform">
-			<div id="box1">
+			<div class="box1">
 				<h1 style="margin-bottom: 20px; font-size: 3rem">Springfeed</h1>
 				<h3 style="color:gray;">회원 정보 수정</h3><br>
 				<div>

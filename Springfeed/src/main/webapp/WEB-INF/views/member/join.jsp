@@ -127,10 +127,9 @@
 	<%@ include file="../common/topnav.jsp" %>
 	
 	<form method="post" action="/join" name="loginFrm" id="joinform">
-		<div id="box1">
+		<div class="box1">
 			<h1>Springfeed</h1>
 			<h3 color="gray">친구들의 사진을 보려면 가입하세요.</h3><br>
-				<input type="hidden" name="command" value="join">
 				<div class="text_box" id="phone_box">
 					<input type ="text" name="phone" class="input"  placeholder=" 휴대폰 번호 (숫자만 입력해주세요)" id="joinPhone" value="${dto.phone}"
 					oninput="checkPhone();">

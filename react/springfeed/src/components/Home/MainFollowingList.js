@@ -7,19 +7,14 @@ import defaultProfile from '../../images/tmpUserIcon.png'
 
 import Loading from '../common/Loading'
 
-const FollowingList = ({ user }) => {
+const MainFollowingList = ({ user }) => {
     const [followingListIndex, setFollowingListIndex] = useState(0)
     const [followingList, setFollowingList] = useState(null)
     const [isFollowingError, setIsFollowingError] = useState(false)
     const [isError, setIsError] = useState(false)
 
     useEffect(() => {
-        const head = new Headers({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        });
-
-        fetch("/api/user/following?id=" + user.userid, head)
+        fetch("/api/user/following?id=" + user.userid)
             .then((res) => {
                 return res.json()
             })
@@ -60,7 +55,7 @@ const FollowingList = ({ user }) => {
     return (
         <div>
             <div>
-                <Link to={'/user/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={'/user/page/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
                     <div className="row">
                         <div className="col-6">
                             <img src={defaultProfile} alt="" style={imageStyle} />
@@ -81,7 +76,7 @@ const FollowingList = ({ user }) => {
                     !isError && followingList != null ?
                         followingList.map((data) => {
                             return (
-                                <Link to={'/user/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
+                                <Link to={'/user/page/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
                                     <div className="row">
                                         <div className="col-4">
                                             <img src={defaultProfile} alt="" style={imageUserStyle} />
@@ -98,10 +93,11 @@ const FollowingList = ({ user }) => {
                         :
                         <Loading message='로딩중'/>
                 }
+
                 <div className="btn btn-success w-100 mt-3" onClick={loadFollowingList}>더 보기</div>
             </div>
         </div>
     )
 }
 
-export default FollowingList
+export default MainFollowingList

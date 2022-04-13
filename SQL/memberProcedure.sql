@@ -140,7 +140,7 @@ BEGIN
     update notification set checked=1 where user_to=p_userid and checked=0;
     
     open p_cur for
-        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, 
+        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, m.name as name, 
         p.img as postImg, r.content as replyContent, n.create_date as create_date, m.img AS IMG
         from notification n 
             left outer join post p on p.post_num = n.post_num
@@ -149,7 +149,6 @@ BEGIN
         where n.user_to = p_userid order by num desc;      
     commit;
 END;   
-
 
 --회원 정보 수정
 create or replace PROCEDURE userEdit(
