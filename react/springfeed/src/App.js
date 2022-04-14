@@ -146,21 +146,25 @@ function App() {
 												setIsPostDetailOpen={setIsPostDetailOpen}
 												setIsStoryOpen={setIsStoryOpen}
 												setStoryNum={setStoryNum}
+												setIsSelectOpen={setIsSelectOpen}
 											/>} />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
 											<Message
 												setPage={setPage}
 												user={user}
+												setIsSelectOpen={setIsSelectOpen}
 											/>} />
 										<Route path="/explore" element={<Explore
 											setPage={setPage}
 											setIsPostDetailOpen={setIsPostDetailOpen}
 											setSelectedPost={setSelectedPost}
+											setIsSelectOpen={setIsSelectOpen}
 										/>} />
+										<Route path='/noti' element={<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
-										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
-										<Route path='/noti' element={<Noti/>}/>
+
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
 										<Route path='/user/edit' element={<UserEdit/>}/>

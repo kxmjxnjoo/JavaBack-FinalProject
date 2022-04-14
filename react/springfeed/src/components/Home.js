@@ -15,7 +15,7 @@ import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
 
-const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum }) => {
+const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum, setIsSelectOpen }) => {
     const [posts, setPosts] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
@@ -32,6 +32,8 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
     }
     useEffect(() => {
         setPage(0)
+        setIsSelectOpen(false)
+
         const head = new Headers({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'

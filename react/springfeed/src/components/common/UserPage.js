@@ -10,7 +10,7 @@ import { Modal } from 'react-bootstrap'
 
 import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
 
-const UserPage = ({setSearchKey}) => {
+const UserPage = ({setSearchKey, setIsSelectOpen}) => {
     const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -105,6 +105,7 @@ const UserPage = ({setSearchKey}) => {
 
     useEffect(() => {
         setSearchKey('')
+        setIsSelectOpen(false)
         
         // Get user introduction, isFollowing
         fetch('/api/user?id=' + id)

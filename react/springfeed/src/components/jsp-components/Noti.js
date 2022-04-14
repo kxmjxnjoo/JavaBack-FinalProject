@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Noti = () => {
+const Noti = ({setIsSelectOpen}) => {
     const [jspElement, setJspElement] = useState(null);
 
     const createMarkup = (data) => {
@@ -8,6 +8,8 @@ const Noti = () => {
     }
 
     useEffect(() => {
+        setIsSelectOpen(false)
+        
         fetch('/user/notification')
             .then((res) => {
                 return res.text()

@@ -9,9 +9,10 @@ import FollowingList from './Home/MainFollowingList'
 import { useState } from 'react'
 import MessageDetail from './Message/MessageDetail'
 
-const Message = ({ setPage, user }) => {
+const Message = ({ setPage, user, setIsSelectOpen }) => {
 	useEffect(() => {
 		setPage(1)
+		setIsSelectOpen(false)
 	}, [])
 
 	const [isShowingFollowingList, setIsShowingFollowingList] = useState(false)
