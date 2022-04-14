@@ -26,6 +26,9 @@ import UserEdit from './components/jsp-components/UserEdit'
 // Common
 import './common.css'
 import UserPage from './components/common/UserPage'
+import Footer from './components/common/Footer'
+import Qna from './components/jsp-components/Qna'
+import Faq from './components/jsp-components/Faq'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -149,9 +152,13 @@ function App() {
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
 										<Route path='/user/edit' element={<UserEdit/>}/>
+										<Route path='/faq' element={<Faq/>}/>
+										<Route path='qna' element={<Qna/>}/>
 									</Routes>
 					}
 			</div>
+
+			<Footer/>
 
 			<Modal
 				show={isPostDetailOpen}
