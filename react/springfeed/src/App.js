@@ -132,12 +132,11 @@ function App() {
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
-
-								!isLoggedIn ? <Login/>
-									:
 									<Routes>
 										<Route path="/" element={
-											<Home
+												!isLoggedIn ? <Login/>
+												:
+												<Home
 												user={user}
 												setPage={setPage}
 												toast={toast}
@@ -147,27 +146,38 @@ function App() {
 												setIsStoryOpen={setIsStoryOpen}
 												setStoryNum={setStoryNum}
 												setIsSelectOpen={setIsSelectOpen}
-											/>} />
+												/>}
+											 />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
+											!isLoggedIn ? <Login/>
+											:
 											<Message
 												setPage={setPage}
 												user={user}
 												setIsSelectOpen={setIsSelectOpen}
 											/>} />
-										<Route path="/explore" element={<Explore
-											setPage={setPage}
-											setIsPostDetailOpen={setIsPostDetailOpen}
-											setSelectedPost={setSelectedPost}
-											setIsSelectOpen={setIsSelectOpen}
+										<Route path="/explore" element={										
+											<Explore
+												setPage={setPage}
+												setIsPostDetailOpen={setIsPostDetailOpen}
+												setSelectedPost={setSelectedPost}
+												setIsSelectOpen={setIsSelectOpen}
 										/>} />
-										<Route path='/noti' element={<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
+										<Route path='/noti' element={
+											!isLoggedIn ? <Login/>
+											:
+											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
 										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
-										<Route path='/user/edit' element={<UserEdit/>}/>
+
+										<Route path='/user/edit' element={
+											!isLoggedIn ? <Login/>
+											:
+											<UserEdit/>}/>
 										<Route path='/faq' element={<Faq/>}/>
 										<Route path='/qna' element={<Qna/>}/>
 

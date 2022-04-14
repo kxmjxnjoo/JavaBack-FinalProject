@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const Select = () => {
   return (
     <div className='justify-content-center'>
-        <div className="h1 text-center mt-3 mb-3">
+        <div className="h1 text-center mt-3 mb-3 mt-5">
             무엇을 올리고 싶으세요?
         </div>
 

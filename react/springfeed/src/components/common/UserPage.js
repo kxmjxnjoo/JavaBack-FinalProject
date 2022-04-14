@@ -16,7 +16,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const [posts, setPosts] = useState(null)
-    const [savedPosts, setSaved] = useState(null)
+    const [savedPosts, setSavedPosts] = useState(null)
 
     const [introduction, setIntroduction] = useState(null)
     
@@ -113,7 +113,6 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                 return res.json()
             })
             .then((data) => {
-                console.log(data)
                 setIntroduction(data.introduce)
                 setIsFollowing(data.isFollowing == 0 ? false : true)
             })
@@ -155,13 +154,25 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
 
         // Get whether loginUser is following current userPage's user
 
-
     }, [])
 
     useEffect(() => {
         if(savedPosts == null) {
+            setIsLoading(true)
             // Fetch saved posts
-
+            fetch('/api/post/save/list?id=' + id)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    setSavedPosts(data)
+                })
+                .catch((err) => {
+                    toast.error(err)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
         }
     }, [isPostSelected])
 
