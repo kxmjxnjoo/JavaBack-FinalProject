@@ -17,7 +17,7 @@ import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
 import './topnav.css'
 
-const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
+const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOpen }) => {
 	const logoStyle = {
 		width: '30px',
 		filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -85,16 +85,13 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }} onClick={showSelect}>
+									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }}
+										onClick={() => {
+											setIsSelectOpen(true)
+										}}
+									>
 										<AddIcon style={{color: 'white'}}/>
 									</button>
-
-									<Overlay
-										show={isShowSelect}
-										placement="bottom"
-									>
-									</Overlay>
-
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
 									<Link to='/explore'>

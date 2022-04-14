@@ -22,6 +22,8 @@ import Login from './components/jsp-components/Login'
 import Logout from './components/jsp-components/Logout'
 import Join from './components/jsp-components/Join'
 import UserEdit from './components/jsp-components/UserEdit'
+import UploadStory from './components/UploadStory'
+import UploadPost from './components/UploadPost'
 
 // Common
 import './common.css'
@@ -30,6 +32,7 @@ import Footer from './components/common/Footer'
 import Qna from './components/jsp-components/Qna'
 import Faq from './components/jsp-components/Faq'
 import Story from './components/jsp-components/Story'
+import Select from './components/Select'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -45,6 +48,8 @@ function App() {
 
 	const [isStoryOpen, setIsStoryOpen] = useState(false)
 	const [storyNum, setStoryNum] = useState(null)
+
+	const [isSelectOpen, setIsSelectOpen] = useState(false) 
 
 	const closePostDetail = () => {
 		setIsPostDetailOpen(false)
@@ -94,6 +99,7 @@ function App() {
 				user={user}
 				searchKey={searchKey}
 				setSearchKey={setSearchKey}
+				setIsSelectOpen={setIsSelectOpen}
 			/>
 
 			{
@@ -159,7 +165,10 @@ function App() {
 										<Route path='/join' element={<Join/>}/>
 										<Route path='/user/edit' element={<UserEdit/>}/>
 										<Route path='/faq' element={<Faq/>}/>
-										<Route path='qna' element={<Qna/>}/>
+										<Route path='/qna' element={<Qna/>}/>
+
+										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
+										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
 									</Routes>
 					}
 			</div>
@@ -190,6 +199,16 @@ function App() {
 				/>
 			</Modal>
 
+			<Modal
+				show={isSelectOpen}
+				onHide={() => {
+					setIsSelectOpen(false)
+				}}
+				dialogClassName='selectModal'
+				className='mt-5'
+			>
+				<Select/>
+			</Modal>
 			
 		</Router>
 		</div>
