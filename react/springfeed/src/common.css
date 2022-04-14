@@ -14,3 +14,11 @@ body {
 	width: 90vw;
 	max-width: 90vw;	
 }
+
+.storyModal {
+	width: 90vw;
+	max-width: 90vw;
+
+	height: 90vw;
+	max-height: 100vw;
+}

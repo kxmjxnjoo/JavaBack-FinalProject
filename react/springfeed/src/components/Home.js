@@ -8,11 +8,14 @@ import FollowingList from './Home/MainFollowingList'
 import Loading from './common/Loading'
 import Error from './common/Error'
 import NoPost from './Home/NoPost'
+import StoryList from './Home/StoryList'
+
+
 import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
 
-const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost }) => {
+const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum }) => {
     const [posts, setPosts] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
@@ -78,6 +81,13 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
         <div className='container row mt-5'>
 
             <div className='col-12 col-md-9'>
+                <div>
+                    <StoryList
+                        setIsStoryOpen={setIsStoryOpen}
+                        setStoryNum={setStoryNum}
+                    />
+                </div>
+
                 <div>
                     {
                         isLoading ? <Loading message='포스트를 불러오고 있어요'/> :

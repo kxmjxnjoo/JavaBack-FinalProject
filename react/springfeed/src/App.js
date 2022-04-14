@@ -29,6 +29,7 @@ import UserPage from './components/common/UserPage'
 import Footer from './components/common/Footer'
 import Qna from './components/jsp-components/Qna'
 import Faq from './components/jsp-components/Faq'
+import Story from './components/jsp-components/Story'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -41,6 +42,9 @@ function App() {
 
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
+
+	const [isStoryOpen, setIsStoryOpen] = useState(false)
+	const [storyNum, setStoryNum] = useState(null)
 
 	const closePostDetail = () => {
 		setIsPostDetailOpen(false)
@@ -134,6 +138,8 @@ function App() {
 												selectedPost={selectedPost}
 												setSelectedPost={setSelectedPost}
 												setIsPostDetailOpen={setIsPostDetailOpen}
+												setIsStoryOpen={setIsStoryOpen}
+												setStoryNum={setStoryNum}
 											/>} />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
@@ -170,6 +176,21 @@ function App() {
 					post={selectedPost}
 					/>
 			</Modal>
+
+			<Modal
+				show={isStoryOpen}
+				onHide={() => {
+					setIsStoryOpen(false)
+				}}
+				dialogClassName='storyModal'
+				className='mt-5 overflow-hidden'
+			>
+				<Story
+					storyNum={storyNum}
+				/>
+			</Modal>
+
+			
 		</Router>
 		</div>
 	);
