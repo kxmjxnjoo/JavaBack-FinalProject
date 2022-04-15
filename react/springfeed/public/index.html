@@ -5,23 +5,152 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>Springfeed</title>
   </head>
   <body>
     <div id="root"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript">
+      $(document).ready(function () {  
+        $("#loginFrm").submit(function (event) {
+          var formData = {
+            userid: $("#userid").val(),
+            password: $("#password").val(),
+            superheroAlias: $("#superheroAlias").val(),
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "/login",
+            data: formData,
+            dataType: "json",
+            encode: true,
+          }).done(function (data) {
+            if(data == 1){
+            location.href="/";
+            } else {
+              alert('다시 로그인하세요')
+            }
+          });
+
+          event.preventDefault();
+        });
+      });
+
+      function checkId(){
+          var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장
+          $.ajax({
+              url:'/join/idCheck', //Controller에서 인식할 주소
+              type:'post', //POST 방식으로 전달
+              data:{userid:id},
+              success:function(cnt){
+                  if(cnt != 1) {
+                    $('#id_box #id_ok').css("display", "inline-block");
+                    $('#id_box #id_already').css("display", "none");
+                  } else {
+                    $('#id_box #id_already').css("display", "inline-block");
+                    $('#id_box #id_ok').css("display", "none");
+                  }
+              },
+              error:function(){
+                  alert("에러입니다");
+              }
+          });
+      };
+      
+      function checkPhone(){
+          var phone = $('#joinPhone').val(); //id값이 "id"인 입력란의 값을 저장
+          $.ajax({
+              url:'/join/idCheck', //Controller에서 인식할 주소
+              type:'post', //POST 방식으로 전달
+              data:{phone:phone},
+              success:function(cnt){
+                  console.log("처리 성공");
+                  if(cnt != 1) {
+                    $('#phone_box #id_ok').css("display", "inline-block");
+                    $('#phone_box #id_already').css("display", "none");
+                  } else {
+                    $('#phone_box #id_already').css("display", "inline-block");
+                    $('#phone_box #id_ok').css("display", "none");
+                  }
+              },
+              error:function(){
+                  alert("에러입니다");
+              }
+          });
+      };
+      
+      function checkEmail(){
+          var email = $('#joinEmail').val(); //id값이 "id"인 입력란의 값을 저장
+          $.ajax({
+              url:'/join/idCheck', //Controller에서 인식할 주소
+              type:'post', //POST 방식으로 전달
+              data:{email:email},
+              success:function(cnt){
+                  console.log("처리 성공");
+                  if(cnt != 1) {
+                    $('#email_box #id_ok').css("display", "inline-block");
+                    $('#email_box #id_already').css("display", "none");
+                  } else {
+                    $('#email_box #id_already').css("display", "inline-block");
+                    $('#email_box #id_ok').css("display", "none");
+                  }
+              },
+              error:function(){
+                  alert("에러입니다");
+              }
+          });
+      };
+      
+      function checkPwd(){
+          var pwd = $('#joinPwd').val(); //id값이 "id"인 입력란의 값을 저장
+          $.ajax({
+              url:'/join/idCheck', //Controller에서 인식할 주소
+              type:'post', //POST 방식으로 전달
+              data:{password:pwd},
+              success:function(cnt){
+                  console.log("처리 성공");
+                  if(cnt != 1) {
+                    $('#pwd_box #id_ok').css("display", "inline-block");
+                    $('#pwd_box #id_already').css("display", "none");
+                    $('#pwd_box #message').css("display", "none");
+                  } else {
+                    $('#pwd_box #id_already').css("display", "inline-block");
+                    $('#pwd_box #message').css("display", "inline-block");
+                    $('#pwd_box #id_ok').css("display", "none");
+                  }
+              },
+              error:function(){
+                  alert("에러입니다");
+              }
+          });
+      };
+      
+      function checkName(){
+          var name = $('#joinName').val(); //id값이 "id"인 입력란의 값을 저장
+          $.ajax({
+              url:'/join/idCheck', //Controller에서 인식할 주소
+              type:'post', //POST 방식으로 전달
+              data:{name:name},
+              success:function(cnt){
+                  console.log("처리 성공");
+                  if(cnt != 1) {
+                    $('#name_box #id_ok').css("display", "inline-block");
+                    $('#name_box #id_already').css("display", "none");
+                  } else {
+                    $('#name_box #id_already').css("display", "inline-block");
+                    $('#name_box #id_ok').css("display", "none");
+                  }
+              },
+              error:function(){
+                  alert("에러입니다");
+              }
+          });
+      };
+    </script>
   </body>
 </html>

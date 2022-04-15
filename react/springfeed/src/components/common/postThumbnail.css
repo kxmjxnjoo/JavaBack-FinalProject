@@ -1,0 +1,7 @@
+.post-info {
+    display: none;
+}
+
+.post-thumbnail:hover {
+    opacity: 0.7;
+}

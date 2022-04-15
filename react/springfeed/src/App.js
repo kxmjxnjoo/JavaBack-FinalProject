@@ -25,6 +25,7 @@ import UserEdit from './components/jsp-components/UserEdit'
 import UploadStory from './components/jsp-components/UploadStory'
 import UploadPost from './components/UploadPost'
 import Find from './components/jsp-components/Find'
+import Admin from './components/jsp-components/Admin'
 
 // Common
 import './common.css'
@@ -186,7 +187,9 @@ function App() {
 										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
 
-										<Route path='/find/acoount' element={<Find/>}/>
+										<Route path='/find/account' element={<Find/>}/>
+
+										<Route path='/admin' element={<Admin/>}/>
 
 									</Routes>
 					}
