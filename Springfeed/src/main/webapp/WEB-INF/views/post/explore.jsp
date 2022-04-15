@@ -12,7 +12,6 @@
 </head>
 <body>
 	<div id="exploreWrap">
-		<%@ include file="/topnav/topnav.jsp" %>
 		<div id ="highClear"></div>
 		<div id="postList">
 			<c:forEach var="post" items="${posts}">
@@ -28,7 +27,6 @@
 			</c:forEach>
 		</div>
 		<div id ="highClear"></div>
-		<%@ include file="/footer.jsp" %>
 	</div>
 	<footer>
 	</footer>

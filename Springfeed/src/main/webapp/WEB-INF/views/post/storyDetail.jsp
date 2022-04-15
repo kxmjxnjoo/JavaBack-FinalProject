@@ -71,7 +71,6 @@ function goBack(){
 <body style="background: rgba(var(--d87,255,255,255),1)">
 <form name="frm" method="post">
 	
-	<%@ include file="../common/message.jsp" %>
 		
 <!-- setting popup -->
 	<div id="setting">

@@ -15,7 +15,6 @@
 
 </head>
 <body>
-<%@ include file="../common/topnav.jsp" %>
 
 <form name="frm" method="post" action="/story/add">
 	<div class="wrap">

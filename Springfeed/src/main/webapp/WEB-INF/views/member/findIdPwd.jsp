@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="/css/join.css">
 </head>
 <body>	
-	<%@ include file="../common/topnav.jsp" %>
-	
 	<form method="post" action="/find/id" name="loginFrm" id="findForm">
 		<div class="box1" id="findId">
 			<h1>Springfeed</h1>

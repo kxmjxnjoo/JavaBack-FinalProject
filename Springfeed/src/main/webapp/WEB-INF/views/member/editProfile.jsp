@@ -128,9 +128,6 @@
 </script>
 </head>
 <body>
-	<%@ include file="../common/topnav.jsp" %>
-	
-			
 		<form name="frm" method="post" id="joinform">
 			<div class="box1">
 				<h1 style="margin-bottom: 20px; font-size: 3rem">Springfeed</h1>
@@ -272,5 +269,4 @@
 
 	</script>
 </body>
-<%@ include file="../common/footer.jsp" %>
 </html>

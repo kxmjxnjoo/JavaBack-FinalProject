@@ -419,7 +419,7 @@ public class MemberController {
      			
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/post?userid="+ userid;
+     			url = "redirect:/user/page/"+ userid;
          }
     	return url;
     }

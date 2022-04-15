@@ -14,7 +14,6 @@ function goBack(){
 </script>
 </head>
 <body style="display: flex;  flex-direction: column; ">
-<%@ include file="/topnav/topnav.jsp" %>
 <form name="frm" id="frm">
 	<div class="button_wrap">
 		<div class="icon_wrap">
@@ -33,7 +32,6 @@ function goBack(){
 	</div>
 </form>
 <footer style="margin-top: 20px;">
-<%@ include file="/footer.jsp" %>
 </footer>
 </body>
 </html>

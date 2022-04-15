@@ -54,7 +54,6 @@ function resetImg(){
 
 </head>
 <body>
-<%@ include file="/topnav/topnav.jsp" %>
 <form name="frm" method="post" enctype="multipart/form-data">
 	<div class="wrap">
 		<div id="postingDiv" >
