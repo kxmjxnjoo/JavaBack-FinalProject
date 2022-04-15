@@ -172,6 +172,7 @@ function App() {
 											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
 										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} setIsSelectOpen={setIsSelectOpen}/>}/>
+										<Route path='/login' element={<Login/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
 

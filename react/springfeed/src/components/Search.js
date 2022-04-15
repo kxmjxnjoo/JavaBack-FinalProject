@@ -81,7 +81,7 @@ const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
 												<img src={
 													user.img === '' || user.img == null ?
 														defaultProfile :
-														user.img
+														'/images/' + user.img
 												} alt="" style={{ width: '50px' }} />
 											</div>
 											<div className="col-9 ms-3">
