@@ -83,7 +83,7 @@ function App() {
 	}, [])
 
 	return (
-		<div className="App">
+		<div className="App d-flex flex-column min-vh-100">
 		<Router>
 
 			<div>
@@ -128,7 +128,7 @@ function App() {
 			}
 
 
-			<div className='container'>
+			<div className='container min-vh-100'>
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :

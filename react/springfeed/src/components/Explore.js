@@ -5,7 +5,7 @@ import Error from './common/Error'
 
 import './explore.css'
 
-import {BsFillHeartFill as LikeIcon, BsChatLeftFill as ReplyIcon} from 'react-icons/bs'
+import PostThumbnail from './common/PostThumbnail'
 
 const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpen }) => {
     const [isLoading, setIsLoading] = useState(true)
@@ -38,11 +38,6 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
     }, [])
 
 
-    const imgStyle = {
-        width: '100%',
-        objectFit: 'cover'
-    }
-
     const openPostDetail = (postNum) => {
         setIsPostDetailOpen(true)
         setSelectedPost(postNum)
@@ -50,7 +45,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
 
     return (
 
-        <div className='mt-5 mb-5'>
+        <div className='mb-5'>
             {
                 isLoading ? <Loading message='인기 포스트를 불러오고 있어요' className='mt-5' /> :
                     <>
@@ -61,29 +56,14 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                 {
                                     exploreData.map((data, index) => {
                                         return(
-                                            <div className='col-4 p-0'
-                                                onClick={
-                                                    () => {
-                                                        openPostDetail(data.postNum)
-                                                    }
-                                                }
-                                            >
-                                                <div className="row justify-content-center h2 position-absolute text-white m-0">
-                                                    <div className="col-2 text-dark">
-                                                        <LikeIcon/>
-                                                    </div>
-                                                    <div className="col-2 text-dark me-3">
-                                                        {data.likeCount}
-                                                    </div>
-                                                    <div className="col-2 text-dark">
-                                                        <ReplyIcon/>
-                                                    </div>
-                                                    <div className="col-2 text-dark">
-                                                        {data.replyCount}
-                                                    </div>
-                                                </div>
-
-                                                <img src="http://picsum.photos/500/500" alt="" style={imgStyle} className='w-100 img-responsive exploreImg' />
+                                            <div className="col-4 p-0">
+                                                <PostThumbnail
+                                                    postNum={data.postNum}
+                                                    postImg={data.img}
+                                                    likeCount={data.likeCount}
+                                                    replyCount={data.replyCount}
+                                                    openPostDetail={openPostDetail}
+                                                />
                                             </div>
                                         )
                                     })

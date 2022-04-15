@@ -80,7 +80,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
 
 
     return (
-        <div className='container row mt-5'>
+        <div className='container row'>
 
             <div className='col-12 col-md-9'>
                 <div>

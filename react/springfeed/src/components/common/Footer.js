@@ -6,7 +6,7 @@ import {MdOutlineSupportAgent as FaqIcon} from 'react-icons/md'
 
 const Footer = () => {
   return (
-    <footer className='container text-center mt-3 mb-3'>
+    <footer className='container text-center mt-3 mb-3 mt-auto'>
         <div>
             @2022 SpringFeed Inc. All Rights Reserved
         </div>

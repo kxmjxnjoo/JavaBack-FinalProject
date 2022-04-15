@@ -24,7 +24,7 @@ const Logout = () => {
     }
 
     return (
-        <div className='' style={{marginTop: '300px'}}>
+        <div>
             {
                 isLoading ? 
                     <Loading message='로그아웃 하고 있어요'/>

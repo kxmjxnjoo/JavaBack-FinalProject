@@ -166,6 +166,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                 })
                 .then((data) => {
                     setSavedPosts(data)
+                    console.log(data)
                 })
                 .catch((err) => {
                     toast.error(err)
@@ -180,14 +181,14 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
 
 
     const handleFollow = () => {
-        // fetch POST
+        // POST follow
 
         // Toggle UI
         setIsFollowing(!isFollowing)
     }
 
   return (
-    <div className='mt-5'>
+    <div>
 
         {
             !isUserExist ?
@@ -293,9 +294,10 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                             savedPosts == null || savedPosts.length == 0 ?
                             <div className="h1 text-center mt-5">저장된 포스트가 없어요!</div>
                             :
-                            savedPosts.map((savedPost) => {
+                            savedPosts.map((post) => {
                                 <div className="col-4 mb-3">
-                                    <img src={savedPost.img} alt="SAVED POST IMAGE" />
+                                    <img src={post.post_img} alt="SAVED POST IMAGE" />
+                                    <h1>post.likeCount</h1>
                                 </div>
                             })
 

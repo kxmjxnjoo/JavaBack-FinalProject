@@ -23,7 +23,7 @@ const Message = ({ setPage, user, setIsSelectOpen }) => {
 	const [messageUser, setMessageUser] = useState(true)
 
 	return (
-		<div className='container-fluid mt-5 border'>
+		<div className='container-fluid border mb-5'>
 			<div className="row">
 				<div className="col-4">
 					USERLIST
