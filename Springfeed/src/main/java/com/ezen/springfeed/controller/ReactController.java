@@ -49,7 +49,7 @@ public class ReactController {
             PostDto pdto = new PostDto();
             pdto.setAddress((String) postHashmap.get("ADDRESS"));
             pdto.setUserid((String) postHashmap.get("USERID"));
-            pdto.setPost_img((String) postHashmap.get("POST_IMG"));
+            pdto.setPost_img((String) postHashmap.get("IMG"));
             pdto.setContent((String) postHashmap.get("CONTENT"));
             postList.add(pdto);
         }
@@ -84,7 +84,7 @@ public class ReactController {
             pdto.setUserid((String) pvo.get("USERID"));
             pdto.setAddress((String) pvo.get("ADDRESS"));
             pdto.setContent((String) pvo.get("CONTENT"));
-            pdto.setPost_img((String) pvo.get("POST_IMG"));
+            pdto.setPost_img((String) pvo.get("IMG"));
             pdto.setCreate_date((Timestamp) pvo.get("CREATE_DATE"));
 
 

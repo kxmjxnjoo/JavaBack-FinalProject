@@ -10,7 +10,7 @@ END;
 
 select * from member;
 
---È¸¿ø Ãß°¡
+--È¸ï¿½ï¿½ ï¿½ß°ï¿½
 CREATE OR REPLACE PROCEDURE insertMember(
     p_userid IN member.userid%TYPE, 
     p_userpwd IN member.password%type,
@@ -25,7 +25,7 @@ BEGIN
     commit;
 END;
 
---¾ÆÀÌµð Áßº¹È®ÀÎ
+--ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½È®ï¿½ï¿½
 create or replace PROCEDURE idCheck(
     p_cnt OUT NUMBER,
     p_userid IN member.userid%TYPE
@@ -37,7 +37,7 @@ BEGIN
     p_cnt := v_cnt;
 END;
 
---ÆÈ·Î¿ì
+--ï¿½È·Î¿ï¿½
 CREATE OR REPLACE PROCEDURE insertFollow(
     p_follower IN follow.follower%TYPE, 
     p_followed IN follow.followed%TYPE,
@@ -58,7 +58,7 @@ EXCEPTION WHEN OTHERS THEN
     v_result := p_result;
 END;   
     
---¾Ë¸² Ãß°¡
+--ï¿½Ë¸ï¿½ ï¿½ß°ï¿½
 CREATE OR REPLACE PROCEDURE addNotification(
     p_followed IN notification.user_to%TYPE, 
     p_follower IN notification.user_from%TYPE,
@@ -97,6 +97,4 @@ BEGIN
 EXCEPTION WHEN OTHERS THEN
     v_result := '0';
     v_result := p_result;
-END;   
-
-
+END;
