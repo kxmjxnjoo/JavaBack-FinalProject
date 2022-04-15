@@ -188,7 +188,7 @@
 	
 			<form id="imgForm" method="post" enctype="multipart/form-data">
 				<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
-		</form>
+			</form>
 		
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">

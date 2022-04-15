@@ -45,12 +45,12 @@ public class MemberController {
     
     //로그인 액션
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String login(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    @ResponseBody
+    public int login(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request,
     		Model model) {
     	
-    	String url = "member/login";
-    	
+    	int cnt =0;
     	System.out.println(memberdto.getUserid());
     	if(memberdto.getUserid() == null || memberdto.getUserid().equals("")) {
     		model.addAttribute("message", "아이디를 입력해주세요");
@@ -66,26 +66,26 @@ public class MemberController {
     			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
     		if(list.size() == 0) {
     			model.addAttribute("message", "잘못된 사용자 아이디입니다. 다시 확인하세요.");
-    			return "member/login";
     		} 
     		
-    		HashMap<String, Object> mvo = list.get(0);
-    		if(mvo.get("PASSWORD") == null) {
-    			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
-    			//고객센터로 연결하는 버튼 모달 만들기
-
-    		}  else if (((String)mvo.get("USEYN")).equals("n") ) {
-    			model.addAttribute("messageConfirm", "비활성화된 계정입니다. 계정을 복구 할까요?");
-    			model.addAttribute("sendUrl", "/user/activate?userid="+memberdto.getUserid());
-    		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
-    			HttpSession session = request.getSession();
-    			session.setAttribute("loginUser", mvo);
-    			url = "redirect:/";
-    		} else {
-    			model.addAttribute("message", "잘못된 비밀번호입니다. 다시 확인하세요.");
+    		else { HashMap<String, Object> mvo = list.get(0);
+	    		if(mvo.get("PASSWORD") == null) {
+	    			model.addAttribute("message", "로그인에 문제가 발생했어요:( QnA를 남겨주시면 빠르게 해결해드릴게요!");
+	    			//고객센터로 연결하는 버튼 모달 만들기
+	
+	    		}  else if (((String)mvo.get("USEYN")).equals("n") ) {
+	    			model.addAttribute("messageConfirm", "비활성화된 계정입니다. 계정을 복구 할까요?");
+	    			model.addAttribute("sendUrl", "/user/activate?userid="+memberdto.getUserid());
+	    		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
+	    			HttpSession session = request.getSession();
+	    			session.setAttribute("loginUser", mvo);
+	    			cnt = 1;
+	    		} else {
+	    			model.addAttribute("message", "잘못된 비밀번호입니다. 다시 확인하세요.");
+	    		}
     		}
     	}
-        return url;
+        return cnt;
     }
 
     //로그아웃
