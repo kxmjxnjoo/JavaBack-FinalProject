@@ -11,7 +11,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
-    const [exploreData, setExploreData] = useState(null)
+    const [exploreData, setExploreData] = useState([])
 
     useEffect(() => {
         setPage(3)
@@ -25,8 +25,9 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                 if(data == null || data == '' || typeof data == 'undefined') {
                     setIsError(true)
                 } else {
-                    setExploreData(data);
-                    console.log("DATA : " + data);
+                    console.log(data)
+                    setExploreData([...exploreData, [...data]]);
+                    console.log(exploreData)
                 }
                 setIsLoading(false)
             })
@@ -54,17 +55,85 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                             :
                             <div className="row">
                                 {
-                                    exploreData.map((data, index) => {
+                                    (exploreData == null || exploreData.length == 0) ?
+                                    <Error message='로딩하는데 오류가 났거나 인기 포스트가 없어요' errorMessage=''/>
+                                    :
+                                    exploreData.map((data) => {
                                         return(
-                                            <div className="col-4 p-0">
-                                                <PostThumbnail
-                                                    postNum={data.postNum}
-                                                    postImg={data.img}
-                                                    likeCount={data.likeCount}
-                                                    replyCount={data.replyCount}
-                                                    openPostDetail={openPostDetail}
-                                                />
-                                            </div>
+                                            <>
+                                                <div className="row">
+                                                    <div className="col-4 p-0">
+                                                    <PostThumbnail
+                                                        postNum={data[0].postNum}
+                                                        postImg={data[0].img}
+                                                        likeCount={data[0].likeCount}
+                                                        replyCount={data[0].replyCount}
+                                                        openPostDetail={openPostDetail}
+
+                                                        className=''
+                                                        />
+                                                        <PostThumbnail
+                                                        postNum={data[1].postNum}
+                                                        postImg={data[1].img}
+                                                        likeCount={data[1].likeCount}
+                                                        replyCount={data[1].replyCount}
+                                                        openPostDetail={openPostDetail}
+
+                                                        className=''
+                                                        />
+                                                    </div>
+                                                    <div className="col-8 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[2].postNum}
+                                                            postImg={data[2].img}
+                                                            likeCount={data[2].likeCount}
+                                                            replyCount={data[2].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                            style={{objectFit: 'cover', height: '800px'}}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="row p">
+                                                    <div className="col-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[3].postNum}
+                                                            postImg={data[3].img}
+                                                            likeCount={data[3].likeCount}
+                                                            replyCount={data[3].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                        />
+
+                                                    </div>
+                                                    <div className="col-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[4].postNum}
+                                                            postImg={data[4].img}
+                                                            likeCount={data[4].likeCount}
+                                                            replyCount={data[4].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className='p-2'
+                                                        />
+
+                                                    </div>
+                                                    <div className="col-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[5].postNum}
+                                                            postImg={data[5].img}
+                                                            likeCount={data[5].likeCount}
+                                                            replyCount={data[5].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </>
                                         )
                                     })
                                 }

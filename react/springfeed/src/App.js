@@ -186,7 +186,7 @@ function App() {
 										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
 
-										<Route path='/find/acoount' element={<Find/>}/>
+										<Route path='/find/account' element={<Find/>}/>
 
 									</Routes>
 					}
