@@ -13,8 +13,7 @@
 	<div id="faqBox">
 		<h1>자주 묻는 질문</h1>
 		<h2>자주 묻는 질문을 모아봤어요. 만약 찾으시는 질문이 없으시면 직접 문의해 주세요.</h2>
-		
-		
+
 		<c:choose>
 			<c:when test="${ faqList == null || faqList.size() == 0}">
 				<div id="noFaqBox">
