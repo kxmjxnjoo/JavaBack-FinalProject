@@ -256,9 +256,11 @@ public class FaqQnaController {
 			HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("ref_cursor", null);
-			paramMap.put("ref_cursor2", null);
 			
 			fqs.getQnaList(paramMap);
+
+			paramMap.put("ref_cursor2", null);
+			
 			fqs.getAllQna(paramMap);
 			
 			ArrayList<HashMap<String, Object>> userQnaList 

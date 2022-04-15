@@ -141,7 +141,7 @@ public class StoryController {
 						
 						mav.setViewName("post/storyDetail");
 					
-				} else if(((String)paramMap.get("useyn")).equals("y") ) {
+				} else if(!((String)paramMap.get("useyn")).equals("n") ) {
 					
 					System.out.println(loginUser.get("USERID"));
 					System.out.println(resultMap.get("USERID"));

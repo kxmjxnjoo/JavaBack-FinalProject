@@ -1,3 +1,5 @@
+select * from member
+
 --스토리 신고
 CREATE OR REPLACE PROCEDURE addStoryReport(
     p_reporter IN report.reporter_id%TYPE, 

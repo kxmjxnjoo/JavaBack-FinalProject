@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>QNA 답변</title>
 <link rel="stylesheet" href="/css/admin/qnadetail.css">
 <link rel="stylesheet" href="/css/admin/admin.css">

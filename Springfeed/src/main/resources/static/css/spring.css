@@ -137,7 +137,7 @@ html, body{
     position: relative;
     width: 80%;
     max-width: 400px;
-    padding-top: 65%;
+    padding-top: 76%;
     background: white;
     overflow: hidden;
     border: 1px solid black;
@@ -159,7 +159,7 @@ html, body{
 
 
 #submit-buttons{
-	position: relative; top: 15px;
+	position: relative;
 	width: 100%; height: 50px; margin: 0 auto; 
 }
 
@@ -216,12 +216,18 @@ html, body{
     margin: 0 auto;
     width: 80%;
     max-width: 550px;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
+    margin-bottom: 30px;
     border: 1px solid black;
-    border-radius: 10px;
     text-align: center;
     overflow: hidden;
     max-height: 700px;
+}
+
+@media(min-width: 400px){
+	#postingStory {
+		padding-bottom: min(30%, 230px);
+	}
 }
 
 #postingStory textarea {

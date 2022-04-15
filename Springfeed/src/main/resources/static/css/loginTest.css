@@ -16,6 +16,7 @@ h1,h2,h3{
 
 .myform{
 	position: relative;
+	top: 70px;
 	display: -ms-flexbox;
 	display: flex;
 	padding: 1rem;
@@ -28,7 +29,6 @@ h1,h2,h3{
 	border: 1px solid rgba(0,0,0,.2);
 	outline: 0;
 	max-width: 400px;
-	font-size: 120%;
 }
  
 .loginInput{

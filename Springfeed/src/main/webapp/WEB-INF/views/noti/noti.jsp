@@ -20,7 +20,7 @@
 			<div class="notiBox">
 				<div class="notiBoxContent">
 					<div class="userImg" style="background-image:url(/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG })"
-					onclick="location.href='/post?userid=${ noti.USERFRPM }'"> </div>
+					onclick="location.href='/post?userid=${ noti.USERFROM }'"> </div>
 					
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.NAME }</h2>
@@ -31,22 +31,23 @@
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 2 && loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 포스트를 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">포스트</a>를 좋아요 했어요</p>
 							</c:when>
 						
 							<c:when test="${ noti.NOTITYPE == 3 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 포스트에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
+								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">포스트에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 4 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 내 댓글을 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">내 댓글을 좋아요 했어요</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 5 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 스토리 를 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.STORY_NUM }">스토리 를 좋아요 했어요</p>
 							</c:when>
 						</c:choose>
 						
+						<br>
 						<h2 class="notiDate notiText">
 							<fmt:formatDate value="${ noti.CREATE_DATE }"/>
 						</h2>

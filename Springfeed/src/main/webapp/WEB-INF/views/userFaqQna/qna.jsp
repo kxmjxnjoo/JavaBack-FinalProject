@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>스프링 피드 QnA</title>
 <link rel="stylesheet" href="/css/qna.css">
 <link rel="stylesheet" href="/css/common.css">
@@ -30,9 +31,9 @@
 						<c:forEach var="qdto" items="${ userQnaList }">
 							<div class="qnaTitle" onclick='showQna("${ qdto.QNA_SUBJECT}", "${ qdto.QNA_CONTENT }", "${ qdto.QNA_REPLY }")'>
 								<div class="qnaTitleContent">
-									<h3>Q</h3>
-									<h3>${ qdto.QNA_SUBJECT }</h3>
-									<h3><fmt:formatDate value="${ qdto.INDATE }" pattern="yy년 MM월 dd일"></fmt:formatDate></h3>
+									<h3 style="margin-right: 10px;">Q</h3>
+									<h3> ${ qdto.QNA_SUBJECT } </h3>
+									<h3><fmt:formatDate value="${ qdto.INDATE }" pattern="yy-MM-dd"></fmt:formatDate></h3>
 								</div>
 							</div>
 						</c:forEach>
@@ -45,7 +46,7 @@
 			</div>
 		</c:if>
 		
-		<div id="allQnaBox">
+		<%-- <div id="allQnaBox">
 			<h1 id="allQnaTitle">다른 분들이 남긴 질문이에요</h1>
 		
 			<c:choose>
@@ -71,7 +72,7 @@
 			</c:choose>
 			
 			
-		</div>
+		</div> --%>
 		
 	</div>
 	
@@ -86,7 +87,6 @@
 				<h1>답변</h1>
 				<p id="answerPopupContent"></p>
 				
-				<button onclick="showQna()">수정하기</button>
 				<button onclick="showQna()">돌아가기</button>
 			</div>
 		</div>
@@ -105,9 +105,10 @@
 				contentEle.innerHTML = content
 				if(reply == null || reply == '') {
 					answerContentEle.innerHTML = "아직 답변이 오지 않았어요"
-					answerContentEle.style.color = "#efebe8"
+					answerContentEle.style.color = "silver"
 				} else 
 					answerContentEle.innerHTML = reply
+					answerContentEle.style.color = "black"
 			} else {
 				popup.style.display = "none"
 			}

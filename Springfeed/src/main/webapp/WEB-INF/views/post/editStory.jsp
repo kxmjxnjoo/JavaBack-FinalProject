@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>스토리 수정</title>
 <link href="/css/spring.css" rel="stylesheet"> 
 <link href="/css/posting.css" rel="stylesheet"> 
@@ -27,7 +28,7 @@
 			<div id="clear"></div>
 			<div id="postingContent">
 				<div id="thumbnail">
-					<label class="input-file-button" for="input-file" style="z-inex:-1" onclick="resetImg();">
+					<label class="input-file-button" for="input-file" style="z-index:1; width:100px;'" onclick="resetImg();">
 					  사진 수정
 					</label>
 					<div id ="image_container"><img width="400px" src="/images/${StoryDto.STORY_IMG}"></div>
@@ -148,7 +149,8 @@ function editCheck(story_num){
 }
 
 function resetImg(){
-	document.querySelector("div#image_container img").src = "";
+	let elem = document.querySelector("div#image_container img");
+	elem.parentNode.removeChild(elem);
 }
 
 </script>

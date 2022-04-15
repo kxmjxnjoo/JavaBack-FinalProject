@@ -271,7 +271,6 @@ public class MemberController {
 			paramMap.put("ref_cursor", null);
 			paramMap.put("userid", loginUser.get("USERID"));
 
-			System.out.println(loginUser.get("USERID"));
 			ms.getNotification(paramMap);
 			
 			ArrayList<HashMap<String, Object>> notiList 

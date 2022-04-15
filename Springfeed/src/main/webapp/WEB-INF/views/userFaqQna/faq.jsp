@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>자주 묻는 질문</title>
 <link rel="stylesheet" href="/css/userfaq.css">
 </head>
@@ -26,7 +27,7 @@
 			
 				<c:forEach var="fdto" items="${ faqList }">
 					<div class="faqTitle" onclick="showFaq( '${fdto.FAQ_SUBJECT}', `${ fdto.FAQ_CONTENT }` );">
-						<h3 class="faqQ">Q</h3>
+						<h3 class="faqQ" style="margin-right: 10px;">Q</h3>
 						<h3>${ fdto.FAQ_SUBJECT }</h3>
 					</div>
 				</c:forEach>
