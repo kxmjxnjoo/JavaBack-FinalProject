@@ -114,9 +114,9 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 											<a className="nav-link">
 												<img src={
 													isLoggedIn ?
-														user.img :
+														'/images/' + user.img :
 														defaultProfile
-												} alt="ERR" className="round-circle" style={profileStyle} />
+												} alt="ERR" className="rounded-circle" style={profileStyle} />
 											</a>
 										</Dropdown.Toggle>
 
