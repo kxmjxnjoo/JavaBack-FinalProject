@@ -22,7 +22,7 @@ import Login from './components/jsp-components/Login'
 import Logout from './components/jsp-components/Logout'
 import Join from './components/jsp-components/Join'
 import UserEdit from './components/jsp-components/UserEdit'
-import UploadStory from './components/UploadStory'
+import UploadStory from './components/jsp-components/UploadStory'
 import UploadPost from './components/UploadPost'
 
 // Common
@@ -183,6 +183,7 @@ function App() {
 
 										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
+
 									</Routes>
 					}
 			</div>
