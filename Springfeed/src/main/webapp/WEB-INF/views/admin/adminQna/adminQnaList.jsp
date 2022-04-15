@@ -18,7 +18,7 @@
 		<c:forEach items="${qdto}" var="qdto">
 			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }" class="qnaItems">
 				<td>${qdto.QNA_NUM}</td>
-				<td>${qdto.QNA_SUBJECT}</td>
+				<td><a href="">${qdto.QNA_SUBJECT}</a></td>
 				<td><fmt:formatDate value="${qdto.INDATE}"/></td>
 				<td>
 					<c:choose>

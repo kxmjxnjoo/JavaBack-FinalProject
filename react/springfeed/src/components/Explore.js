@@ -7,7 +7,7 @@ import './explore.css'
 
 import {BsFillHeartFill as LikeIcon, BsChatLeftFill as ReplyIcon} from 'react-icons/bs'
 
-const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
+const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpen }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
@@ -15,6 +15,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
 
     useEffect(() => {
         setPage(3)
+        setIsSelectOpen(false)
         
         fetch('/api/explore/feed')
             .then((res) => {

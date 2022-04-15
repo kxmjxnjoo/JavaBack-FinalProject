@@ -7,7 +7,7 @@ import { Overlay, Modal, Navbar, Dropdown } from 'react-bootstrap'
 // Icons
 import {
 	BsFillHouseDoorFill as HomeIcon, BsMessenger as MessageIcon,
-	BsFillHeartFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
+	BsFillBellFill as NotiIcon, BsFillPlusSquareFill as AddIcon,
 	BsSearch as SearchIcon
 } from 'react-icons/bs'
 import { MdExplore as ExploreIcon } from 'react-icons/md'
@@ -17,7 +17,7 @@ import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
 import './topnav.css'
 
-const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
+const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOpen }) => {
 	const logoStyle = {
 		width: '30px',
 		filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -85,16 +85,13 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }} onClick={showSelect}>
+									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }}
+										onClick={() => {
+											setIsSelectOpen(true)
+										}}
+									>
 										<AddIcon style={{color: 'white'}}/>
 									</button>
-
-									<Overlay
-										show={isShowSelect}
-										placement="bottom"
-									>
-									</Overlay>
-
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
 									<Link to='/explore'>
@@ -127,14 +124,14 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 											{
 												isLoggedIn ? 
 												<>
-													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
-														<Dropdown.Item>내 유저 페이지로 이동</Dropdown.Item>
+													<Link to={'/user/page/' + (user != null ? user.userid : '')} className='text-decoration-none'>
+														<Dropdown.Item href='/user/page'>내 유저 페이지로 이동</Dropdown.Item>
 													</Link>
-													<Link to={"/user/" + (user != null ? user.userid : '')} className='text-decoration-none'>
-														<Dropdown.Item href="#/action-2">내 정보 수정</Dropdown.Item>
+													<Link to='/user/edit' className='text-decoration-none'>
+														<Dropdown.Item href='/user/edit'>내 정보 수정</Dropdown.Item>
 													</Link>
-													<Link to={'/logout'} className='text-decoration-none'>
-														<Dropdown.Item className='bg-danger text-white'>로그아웃</Dropdown.Item>
+													<Link to='/logout' className='text-decoration-none'>
+														<Dropdown.Item href='/logout' className='bg-danger text-white'>로그아웃</Dropdown.Item>
 													</Link>												
 												</>
 												:

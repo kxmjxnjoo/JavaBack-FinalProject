@@ -20,10 +20,19 @@ import PostDetail from './components/Home/PostDetail'
 import Noti from './components/jsp-components/Noti'
 import Login from './components/jsp-components/Login'
 import Logout from './components/jsp-components/Logout'
+import Join from './components/jsp-components/Join'
+import UserEdit from './components/jsp-components/UserEdit'
+import UploadStory from './components/UploadStory'
+import UploadPost from './components/UploadPost'
 
 // Common
 import './common.css'
 import UserPage from './components/common/UserPage'
+import Footer from './components/common/Footer'
+import Qna from './components/jsp-components/Qna'
+import Faq from './components/jsp-components/Faq'
+import Story from './components/jsp-components/Story'
+import Select from './components/Select'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -36,6 +45,11 @@ function App() {
 
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
+
+	const [isStoryOpen, setIsStoryOpen] = useState(false)
+	const [storyNum, setStoryNum] = useState(null)
+
+	const [isSelectOpen, setIsSelectOpen] = useState(false) 
 
 	const closePostDetail = () => {
 		setIsPostDetailOpen(false)
@@ -85,6 +99,7 @@ function App() {
 				user={user}
 				searchKey={searchKey}
 				setSearchKey={setSearchKey}
+				setIsSelectOpen={setIsSelectOpen}
 			/>
 
 			{
@@ -117,47 +132,98 @@ function App() {
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
-
-								!isLoggedIn ? <Login/>
-									:
 									<Routes>
 										<Route path="/" element={
-											<Home
+												!isLoggedIn ? <Login/>
+												:
+												<Home
 												user={user}
 												setPage={setPage}
 												toast={toast}
 												selectedPost={selectedPost}
 												setSelectedPost={setSelectedPost}
 												setIsPostDetailOpen={setIsPostDetailOpen}
-											/>} />
+												setIsStoryOpen={setIsStoryOpen}
+												setStoryNum={setStoryNum}
+												setIsSelectOpen={setIsSelectOpen}
+												/>}
+											 />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
+											!isLoggedIn ? <Login/>
+											:
 											<Message
 												setPage={setPage}
 												user={user}
+												setIsSelectOpen={setIsSelectOpen}
 											/>} />
-										<Route path="/explore" element={<Explore
-											setPage={setPage}
-											setIsPostDetailOpen={setIsPostDetailOpen}
-											setSelectedPost={setSelectedPost}
+										<Route path="/explore" element={										
+											<Explore
+												setPage={setPage}
+												setIsPostDetailOpen={setIsPostDetailOpen}
+												setSelectedPost={setSelectedPost}
+												setIsSelectOpen={setIsSelectOpen}
 										/>} />
 
-										<Route path="/user/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
-										<Route path='/noti' element={<Noti/>}/>
+										<Route path='/noti' element={
+											!isLoggedIn ? <Login/>
+											:
+											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
+
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} setIsSelectOpen={setIsSelectOpen}/>}/>
 										<Route path='/logout' element={<Logout/>}/>
+										<Route path='/join' element={<Join/>}/>
+
+										<Route path='/user/edit' element={
+											!isLoggedIn ? <Login/>
+											:
+											<UserEdit/>}/>
+										<Route path='/faq' element={<Faq/>}/>
+										<Route path='/qna' element={<Qna/>}/>
+
+										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
+										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
 									</Routes>
 					}
 			</div>
+
+			<Footer/>
 
 			<Modal
 				show={isPostDetailOpen}
 				onHide={closePostDetail}
 				dialogClassName='postDetailModal'
+				className='mt-5'
 				>
 				<PostDetail
 					post={selectedPost}
 					/>
 			</Modal>
+
+			<Modal
+				show={isStoryOpen}
+				onHide={() => {
+					setIsStoryOpen(false)
+				}}
+				dialogClassName='storyModal'
+				className='mt-5 overflow-hidden'
+			>
+				<Story
+					storyNum={storyNum}
+				/>
+			</Modal>
+
+			<Modal
+				show={isSelectOpen}
+				onHide={() => {
+					setIsSelectOpen(false)
+				}}
+				dialogClassName='selectModal'
+				className='mt-5'
+			>
+				<Select/>
+			</Modal>
+			
 		</Router>
 		</div>
 	);

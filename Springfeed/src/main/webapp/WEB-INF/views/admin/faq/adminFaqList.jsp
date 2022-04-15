@@ -5,9 +5,9 @@
 	
 <h1>FAQ 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">
-	<input type="button" id="button1" value="작성" onClick="/faq/add'">
+	<input type="button" id="button1" value="작성" onClick="faqadd()">
 ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
+	<input type="button" id="logout" value="로그아웃" onClick="/logout"></span>
 	<br><br><br>
 	
 <form name="frm" method="post" action="/admin/faqList">		
@@ -21,9 +21,9 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 			<c:forEach items="${fdto}" var="fdto">
 				<tr align="left" class="faqBox" > <!-- onclick="/faqdetail&num=${ fdto.FAQ_NUM }" -->
 					<td style="width: 10%;">${fdto.FAQ_NUM}</td>
-					<td style="width: 30%;">${fdto.FAQ_SUBJECT}</td>
-					<td style="width: 10%;"><button ${ fdto.FAQ_NUM } id="faqEditButton" onClick="edit();">수정</button></td>
-					<td style="width: 10%;"><button ${ fdto.FAQ_NUM } id="faqDeleteButton" onClick="delete();">삭제</button></td>
+					<td style="width: 30%;"><a href="">${fdto.FAQ_SUBJECT}</a></td>
+					<td style="width: 10%;"><button id="faqEditButton" onClick="editFaq();">수정</button></td>
+					<td style="width: 10%;"><button id="faqDeleteButton" onClick="deleteFaq();">삭제</button></td>
 				</tr>
 			</c:forEach>
 	</table>
@@ -32,7 +32,11 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 <%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript">
-	function delete(faq_num){
+	function faqadd(){
+		action = "/faq/add/form";
+	}
+
+	function deleteFaq(faq_num){
 		document.frm.action = "	/faq/delete";
 		if(confirm(faq_num + "번 FAQ를 삭제할까요?")) {
 		}
@@ -46,8 +50,8 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 		document.frm.submit();
 	}
 	
-	function edit(faq_num){
-		document.frm.action = "	/qna/edit";
+	function editFaq(faq_num){
+		document.frm.action = "	/faq/edit";
 		if(confirm(faq_num + "번 FAQ를 수정할까요?")) {
 		}
 		

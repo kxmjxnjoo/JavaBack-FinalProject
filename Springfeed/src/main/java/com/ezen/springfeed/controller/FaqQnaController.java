@@ -34,6 +34,7 @@ public class FaqQnaController {
 	@Autowired
 	AdminService as;
 	
+	
 	@RequestMapping("/admin/faqList")
 	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -67,7 +68,6 @@ public class FaqQnaController {
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
-			System.out.println("E");
 			
 			System.out.println(paging.getStartNum());
 			System.out.println(paging.getEndNum());
@@ -75,11 +75,9 @@ public class FaqQnaController {
 			paramMap.put("endNum", paging.getEndNum());
 			paramMap.put("ref_cursor", null);
 			fqs.adminFaqList(paramMap);
-			System.out.println("F");
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			System.out.println("G");
 			
 	    	paramMap.put("ref_cursor", null);
 	    	fqs.adminFaqList(paramMap);
@@ -102,7 +100,7 @@ public class FaqQnaController {
 		if (loginAdmin == null) {
 			mav.setViewName("admin/admingLogin");
 		} else {
-			mav.setViewName("admin/faq/faqList");
+			mav.setViewName("admin/faq/addFaq");
 		}
 		return mav;
 	}
@@ -141,8 +139,8 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/faq/edit/form")
-	public ModelAndView editFaqForm(HttpServletRequest request, Model model) {
+	@RequestMapping("/faq/edit")
+	public ModelAndView faqEdit(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginAdmin
@@ -150,9 +148,10 @@ public class FaqQnaController {
 		HashMap<String,Object> paramMap = new HashMap();
 		if (loginAdmin == null) mav.setViewName("admin/admingLogin");
 	    else {
+	    	mav.setViewName("admin/faq/editFaq");
 	    	fqs.faqEdit(paramMap);
-	    	mav.setViewName("redirect:/admin/faqList");
 	    }
+		mav.setViewName("redirect:/admin/faqList");
 		return mav;
 	}
 	
@@ -232,7 +231,7 @@ public class FaqQnaController {
 		return "";
 	}
 	
-
+	
 	
 	@RequestMapping("/qna/reply")
 	public String qnaReply() {
@@ -291,14 +290,14 @@ public class FaqQnaController {
 		}
 		else {
 
+			System.out.println(qnadto.getQna_subject());
 	    	System.out.println(qnadto.getQna_content());
-	    	System.out.println(qnadto.getQna_subject());
 	    	
 	    	HashMap<String,Object> paramMap = new HashMap<>();
+	    	paramMap.put("qna_num", 0);
 	    	paramMap.put("userid", loginUser.get("USERID"));
 	    	paramMap.put("subject", qnadto.getQna_subject());
 	    	paramMap.put("content", qnadto.getQna_content());
-	    	paramMap.put("qna_num", 0);
 	    	fqs.addQna(paramMap);
 
 	    	int qna_num = Integer.parseInt(paramMap.get("qna_num").toString());
@@ -359,10 +358,9 @@ public class FaqQnaController {
 	    		mav.setViewName("userFaqQna/qnaView");
 	    	}
 	    }
-		
-		
 		return mav;
 	}
+	
 	
 	
 	@RequestMapping("/qna/edit")
@@ -379,6 +377,8 @@ public class FaqQnaController {
 	    }
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping("/qna/delete")
 	public String deleteQna(@RequestParam("qna_num") QnaDto qna_num) {

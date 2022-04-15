@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Noti = ({setIsSelectOpen}) => {
+const Faq = () => {
     const [jspElement, setJspElement] = useState(null);
 
     const createMarkup = (data) => {
@@ -8,9 +8,7 @@ const Noti = ({setIsSelectOpen}) => {
     }
 
     useEffect(() => {
-        setIsSelectOpen(false)
-        
-        fetch('/user/notification')
+        fetch('/faq')
             .then((res) => {
                 return res.text()
             })
@@ -24,4 +22,4 @@ const Noti = ({setIsSelectOpen}) => {
   )
 }
 
-export default Noti
+export default Faq

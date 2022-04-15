@@ -194,7 +194,7 @@ public class AdminController {
 			if(request.getParameter("searchMameber")!=null) {
 				searchMember = request.getParameter("searchMember");
 				session.setAttribute("searchMember", searchMember);
-			} else if(session.getAttribute("searchMem") != null) {
+			} else if(session.getAttribute("searchMember") != null) {
 				searchMember = (String)session.getAttribute("searchMember");
 			} else {
 				session.removeAttribute("searchMember");
@@ -210,14 +210,12 @@ public class AdminController {
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		ReportDto rdto = new ReportDto();
-		System.out.println("B");
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginAdmin 
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
 		if(session.getAttribute("loginAdmin") == null) {
 			mav.setViewName("admin/adminLogin");
 		} else {
-			System.out.println("D-1");
 			int page = 1;
 			String key = "";
 			if(request.getParameter("first")!=null) {
@@ -232,7 +230,6 @@ public class AdminController {
 			} else {
 				session.removeAttribute("page");
 			}
-			System.out.println("D-2");
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
@@ -241,7 +238,6 @@ public class AdminController {
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
-			System.out.println("E");
 			
 			System.out.println(paging.getStartNum());
 			System.out.println(paging.getEndNum());
@@ -251,8 +247,6 @@ public class AdminController {
 			paramMap.put("ref_cursor", null);
 			as.reportList(paramMap);
 			
-			System.out.println("F");
-			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
@@ -260,7 +254,6 @@ public class AdminController {
 			System.out.println(list);
 			mav.addObject("paging", paging);
 			mav.setViewName("admin/report/adminReportList");
-			System.out.println("G");
 		}
 		return mav;
 	}
@@ -291,8 +284,8 @@ public class AdminController {
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
 			as.updateReportPostBlock(paramMap);
+			}
 		}
-	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
@@ -324,8 +317,8 @@ public class AdminController {
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
 			as.updateReportStoryBlock(paramMap);
+			}
 		}
-	}
 		mav.setViewName("redirect:/admin/reportList");
 		return mav;
 		// back admin reportList
@@ -349,13 +342,14 @@ public class AdminController {
 			String useyn = request.getParameter("useyn");
 			paramMap.put("useyn", useyn);
 			paramMap.put("cnt", 0);
-			as.storyReportCheck(paramMap);
+			as.userReportCheck(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 		if(cnt>0) {
 			paramMap.put("report_num", "report_num");
+			paramMap.put("useyn", "b");
 			paramMap.put("handled", "y");
 			// UPDATE 상태변경.
-			as.updateReportStoryBlock(paramMap);
+			as.updateReportUserBlock(paramMap);
 			}
 		}
 		mav.setViewName("redirect:/admin/reportList");

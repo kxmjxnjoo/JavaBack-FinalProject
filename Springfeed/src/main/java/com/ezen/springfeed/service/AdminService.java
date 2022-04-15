@@ -73,4 +73,12 @@ public class AdminService {
 		adao.updateReportUserBlock(paramMap);
 	}
 
+	public void userReportCheck(HashMap<String, Object> paramMap) {
+		adao.userReportCheck(paramMap);
+	}
+
+	public void updateReportPostUnBlock(HashMap<String, Object> paramMap) {
+		adao.updateReportPostUnBlock(paramMap);
+	}
+
 }

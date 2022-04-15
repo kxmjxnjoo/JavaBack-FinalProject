@@ -8,13 +8,15 @@ import {InfiniteScroll } from 'react-infinite-scroller'
 
 import { Modal } from 'react-bootstrap'
 
-const UserPage = ({setSearchKey}) => {
+import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
+
+const UserPage = ({setSearchKey, setIsSelectOpen}) => {
     const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
 
     const [posts, setPosts] = useState(null)
-    const [savedPosts, setSaved] = useState(null)
+    const [savedPosts, setSavedPosts] = useState(null)
 
     const [introduction, setIntroduction] = useState(null)
     
@@ -99,9 +101,11 @@ const UserPage = ({setSearchKey}) => {
         setIsFollowerListOpen(false)
     }
 
+    const [isUserExist, setIsUserExist] = useState(true)
 
     useEffect(() => {
         setSearchKey('')
+        setIsSelectOpen(false)
         
         // Get user introduction, isFollowing
         fetch('/api/user?id=' + id)
@@ -109,12 +113,12 @@ const UserPage = ({setSearchKey}) => {
                 return res.json()
             })
             .then((data) => {
-                console.log(data)
                 setIntroduction(data.introduce)
                 setIsFollowing(data.isFollowing == 0 ? false : true)
             })
             .catch((err) => {
                 toast.error('자기소개를 불러올 수 없었어요')
+                setIsUserExist(false)
             })
 
         // Get follower count
@@ -150,13 +154,25 @@ const UserPage = ({setSearchKey}) => {
 
         // Get whether loginUser is following current userPage's user
 
-
     }, [])
 
     useEffect(() => {
         if(savedPosts == null) {
+            setIsLoading(true)
             // Fetch saved posts
-
+            fetch('/api/post/save/list?id=' + id)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    setSavedPosts(data)
+                })
+                .catch((err) => {
+                    toast.error(err)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
         }
     }, [isPostSelected])
 
@@ -172,113 +188,121 @@ const UserPage = ({setSearchKey}) => {
 
   return (
     <div className='mt-5'>
-        <div className="row border-bottom">
-            <div className="col-4">
-                <div className="row justify-content-center">
-                    <img src="http://picsum.photos/100/100" alt="" className="rounded-circle" 
-                        style={{width: '150px'}}
-                    />
-                </div>
-            </div>
 
-            <div className="col-8">
-                <div className="row p-3">
-                    <div className="col-6">
-                        <div className="h3">
-                            {id}
-                        </div>
-                    </div>
-                    
-                    <div className="col-3">
-                        <div className="btn btn-danger w-100">
-                            신고하기
-                        </div>
-                    </div>
-
-                    <div className="col-3" onClick={ handleFollow }>
-                        {
-                            isFollowing ?
-                            <div className="btn btn-warning w-100">
-                                언팔로우
-                            </div>
-                            :
-                            <div className="btn btn-success w-100">
-                                팔로우
-                            </div>
-                        }
-                    </div>
-                    
-                </div>
-
-                <div className="row p-3">
-                    <div className="col-4">{postCount} posts</div>
-
-                    <div href='' className="col-4">
-                        <div className="btn p-0" onClick={openFollowerList}>
-                            {followerCount} followers
-                        </div>
-                    </div>
-
+        {
+            !isUserExist ?
+            <NoUserPage/>
+            :
+            <>
+                <div className="row border-bottom">
                     <div className="col-4">
-                        <div className="btn p-0" onClick={openFollowingList}>
-                            {followingCount} following
+                        <div className="row justify-content-center">
+                            <img src="http://picsum.photos/100/100" alt="" className="rounded-circle" 
+                                style={{width: '150px'}}
+                            />
                         </div>
-                        
+                    </div>
+
+                    <div className="col-8">
+                        <div className="row p-3">
+                            <div className="col-6">
+                                <div className="h3">
+                                    {id}
+                                </div>
+                            </div>
+                            
+                            <div className="col-3">
+                                <div className="btn btn-danger w-100">
+                                    신고하기
+                                </div>
+                            </div>
+
+                            <div className="col-3" onClick={ handleFollow }>
+                                {
+                                    isFollowing ?
+                                    <div className="btn btn-warning w-100">
+                                        언팔로우
+                                    </div>
+                                    :
+                                    <div className="btn btn-success w-100">
+                                        팔로우
+                                    </div>
+                                }
+                            </div>
+                            
+                        </div>
+
+                        <div className="row p-3">
+                            <div className="col-4">{postCount} posts</div>
+
+                            <div href='' className="col-4">
+                                <div className="btn p-0" onClick={openFollowerList}>
+                                    {followerCount} followers
+                                </div>
+                            </div>
+
+                            <div className="col-4">
+                                <div className="btn p-0" onClick={openFollowingList}>
+                                    {followingCount} following
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div className="row p-4">
+                            {introduction}
+                        </div>
                     </div>
                 </div>
 
-                <div className="row p-4">
-                    {introduction}
+                <div className="row justify-content-center mt-3">
+                    <div className="col-3">
+                        <div className={"btn btn-outline-primary w-100" + (isPostSelected ? ' active' : '')}
+                            onClick={() => {
+                                setIsPostSelected(true)
+                            }}
+                        >POSTS</div>
+                    </div>
+                    <div className="col-3">
+                        <div className={"btn btn-outline-primary w-100" + (!isPostSelected ? ' active' : '')}
+                            onClick={() => {
+                                setIsPostSelected(false)
+                            }}
+                        >SAVED</div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div className="row justify-content-center mt-3">
-            <div className="col-3">
-                <div className={"btn btn-outline-primary w-100" + (isPostSelected ? ' active' : '')}
-                    onClick={() => {
-                        setIsPostSelected(true)
-                    }}
-                >POSTS</div>
-            </div>
-            <div className="col-3">
-                <div className={"btn btn-outline-primary w-100" + (!isPostSelected ? ' active' : '')}
-                    onClick={() => {
-                        setIsPostSelected(false)
-                    }}
-                >SAVED</div>
-            </div>
-        </div>
+                <div className="row mt-4 mb-5">
+                    {
+                        isLoading ? 
+                        <Loading message='포스트를 불러오고 있어요...'/>
+                        :
+                        isPostSelected ?
 
-        <div className="row mt-4 mb-5">
-            {
-                isLoading ? 
-                <Loading message='포스트를 불러오고 있어요...'/>
-                :
-                isPostSelected ?
+                            posts == null || posts.length == 0 ?
+                            <div className="h1 text-center mt-5">포스트가 없어요!</div>
+                            :
+                            posts.map((post) => {
+                                return(
+                                    <div className="col-4 mb-3">
+                                        <img src={post.img} alt="POST IMAGE"/>                                        
+                                    </div>
+                                )
+                            })
+                        :
+                            savedPosts == null || savedPosts.length == 0 ?
+                            <div className="h1 text-center mt-5">저장된 포스트가 없어요!</div>
+                            :
+                            savedPosts.map((savedPost) => {
+                                <div className="col-4 mb-3">
+                                    <img src={savedPost.img} alt="SAVED POST IMAGE" />
+                                </div>
+                            })
 
-                    posts == null || posts.length == 0 ?
-                    <div className="h1">포스트가 없어요!</div>
-                    :
-                    posts.map((post) => {
-                        return(
-                            <div className="col-4 mb-3">
-                                <img src={post.img} alt="POST IMAGE"/>                                        
-                            </div>
-                        )
-                    })
-                :
-                    savedPosts == null || savedPosts.length == 0 ?
-                    <div className="h1 text-center mt-5">저장된 포스트가 없어요!</div>
-                    :
-                    savedPosts.map((savedPost) => {
-                        <div className="col-4 mb-3">
-                            <img src={savedPost.img} alt="SAVED POST IMAGE" />
-                        </div>
-                    })
-
-            }
-        </div>
+                    }
+                </div>
+            </>
+        }
 
         <Modal show={isFollowingListOpen} onHide={closeFollowingList} className='mt-5'>
             <div className="card">
@@ -312,6 +336,20 @@ const UserPage = ({setSearchKey}) => {
         </Modal>
     </div>
   )
+}
+
+
+const NoUserPage = () => {
+    return(
+        <>
+            <div className="h1 text-center mb-5">
+                <div className="row text-danger h1 mb-5">
+                    <NoUserIcon/>
+                </div>
+                유저가 없어요!
+            </div>
+        </>
+    )
 }
 
 export default UserPage

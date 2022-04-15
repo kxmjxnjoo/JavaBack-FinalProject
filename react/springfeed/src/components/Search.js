@@ -75,7 +75,7 @@ const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
 							:
 							userResult.map((user) => {
 								return (
-									<Link to={'/user/' + user.userid} className='text-decoration-none'>
+									<Link to={'/user/page/' + user.userid} className='text-decoration-none'>
 										<div className="row">
 											<div className="col-2">
 												<img src={

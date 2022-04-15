@@ -55,7 +55,7 @@ const MainFollowingList = ({ user }) => {
     return (
         <div>
             <div>
-                <Link to={'/user/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={'/user/page/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
                     <div className="row">
                         <div className="col-6">
                             <img src={defaultProfile} alt="" style={imageStyle} />
@@ -76,7 +76,7 @@ const MainFollowingList = ({ user }) => {
                     !isError && followingList != null ?
                         followingList.map((data) => {
                             return (
-                                <Link to={'/user/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
+                                <Link to={'/user/page/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
                                     <div className="row">
                                         <div className="col-4">
                                             <img src={defaultProfile} alt="" style={imageUserStyle} />

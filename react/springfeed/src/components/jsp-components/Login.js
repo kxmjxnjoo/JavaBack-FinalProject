@@ -18,7 +18,7 @@ const Login = () => {
     }, [])
 
   return (
-    <div dangerouslySetInnerHTML={{__html: jspElement}}/>
+    <div dangerouslySetInnerHTML={{__html: jspElement}} className='' style={{marginTop: '100px'}}/>
   )
 }
 
