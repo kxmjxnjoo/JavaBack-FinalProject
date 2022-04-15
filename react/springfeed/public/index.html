@@ -15,31 +15,32 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script type="text/javascript">
-      $(document).ready(function () {  
-        $("#loginFrm").submit(function (event) {
-          var formData = {
-            userid: $("#userid").val(),
-            password: $("#password").val(),
-            superheroAlias: $("#superheroAlias").val(),
-          };
+      
+      function loginCheck(event) {
 
-          $.ajax({
-            type: "POST",
-            url: "/login",
-            data: formData,
-            dataType: "json",
-            encode: true,
-          }).done(function (data) {
-            if(data == 1){
-            location.href="/";
-            } else {
-              alert('다시 로그인하세요')
-            }
-          });
+        event.preventDefault()
+        console.log("function start")
+        var formData = {
+          userid: $("#userid").val(),
+          password: $("#password").val(),
+          superheroAlias: $("#superheroAlias").val(),
+        };
 
-          event.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: "/login",
+          data: formData,
+          dataType: "json",
+          encode: true,
+        }).done(function (data) {
+          if(data == 1){
+          location.href="/";
+          } else {
+            alert('다시 로그인하세요')
+          }
         });
-      });
+      };
+      
 
       function checkId(){
           var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장

@@ -49,7 +49,7 @@
                               
                            </div>
                            <div class="form-group">
-                              <button type="submit" class="loginButton">로그인</button>
+                              <button type="submit" class="loginButton" onclick="loginCheck(event);">로그인</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
