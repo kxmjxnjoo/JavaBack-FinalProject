@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="/css/common.css">
 </head> 
 <body>
-	<%@ include file="../common/topnav.jsp" %>
-
 	<div id="qnaBox">
 	
 		<c:if test="${ loginUser != null }">

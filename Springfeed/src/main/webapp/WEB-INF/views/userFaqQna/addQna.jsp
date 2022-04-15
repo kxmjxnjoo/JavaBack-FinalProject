@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="/css/addQna.css">
 </head>
 <body>
-	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="addQnaBox">
 	
@@ -40,6 +39,5 @@
 	</script>
 	
 	
-	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
