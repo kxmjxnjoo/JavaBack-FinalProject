@@ -103,7 +103,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
                         <Link to={"/user/page/" + userid} style={{textDecoration: 'none', color: 'black'}}>
                             <div className="row">
                                 <div className="col-2">
-                                    <img src={userprofile == '' || userprofile == null ? defaultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle} />
+                                    <img src={userprofile == '' || userprofile == null ? defaultProfile : ('/images/' + userprofile)} alt="Profile" className="rounded-circle" style={profileStyle} />
                                 </div>
                                 <div className="col text-left">
                                     <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>

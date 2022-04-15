@@ -19,6 +19,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
     const [savedPosts, setSavedPosts] = useState(null)
 
     const [introduction, setIntroduction] = useState(null)
+    const [profileImg, setProfileImg] = useState(null)
     
     const [postCount, setPostCount] = useState(0)
     const [followerCount, setFollowerCount] = useState(0)
@@ -114,6 +115,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
             })
             .then((data) => {
                 setIntroduction(data.introduce)
+                setProfileImg('/images/' + data.img)
                 setIsFollowing(data.isFollowing == 0 ? false : true)
             })
             .catch((err) => {
@@ -198,7 +200,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                 <div className="row border-bottom">
                     <div className="col-4">
                         <div className="row justify-content-center">
-                            <img src="http://picsum.photos/100/100" alt="" className="rounded-circle" 
+                            <img src={profileImg} alt="PROFILE" className="rounded-circle" 
                                 style={{width: '150px'}}
                             />
                         </div>
@@ -286,7 +288,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                             posts.map((post) => {
                                 return(
                                     <div className="col-4 mb-3">
-                                        <img src={post.img} alt="POST IMAGE"/>                                        
+                                        <img src={'/images/' + post.img} alt="POST IMAGE"/>                                        
                                     </div>
                                 )
                             })
