@@ -11,9 +11,6 @@
 <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
 <body>
-	
-	<%@ include file="../common/topnav.jsp" %>
-
 	<div id="wrap">
 		<h1 class="mark">Q</h1>
 		<h1 class="qnaTitle">${ qna.QNA_SUBJECT }</h1>
@@ -62,8 +59,5 @@
 		}
 	
 	</script>
-
-	<%@ include file="../common/footer.jsp" %>
-
 </body>
 </html>
