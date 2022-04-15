@@ -73,7 +73,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             })
             .catch((err) => {
                 setHasMore(false)
-                toast.error('포스트가 더 이상 없는거 같아요')
+                toast.error('에러가 났어요')
             })
     }
 

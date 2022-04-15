@@ -108,7 +108,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
         setSearchKey('')
         setIsSelectOpen(false)
         
-        // Get user introduction, isFollowing
+        // Get user introduction, isFollowing, profile image
         fetch('/api/user?id=' + id)
             .then((res) => {
                 return res.json()
@@ -288,7 +288,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                             posts.map((post) => {
                                 return(
                                     <div className="col-4 mb-3">
-                                        <img src={'/images/' + post.img} alt="POST IMAGE"/>                                        
+                                        <img src={'/images/' + post.post_img} alt="POST_IMAGE" className='img-fluid' style={{height: 'auto'}}/>                                        
                                     </div>
                                 )
                             })

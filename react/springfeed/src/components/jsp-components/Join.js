@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import $ from 'jquery'
+
 const Join = () => {
     const [jspElement, setJspElement] = useState(null);
 
