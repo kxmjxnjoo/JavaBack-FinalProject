@@ -366,6 +366,7 @@ public class MemberController {
 	public Map<String, Object> fileup(Model model, HttpServletRequest request,
 			RedirectAttributes rttr) {
 		
+    	System.out.println("/uploadImg access");
 		String savePath = context.getRealPath("/images");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		

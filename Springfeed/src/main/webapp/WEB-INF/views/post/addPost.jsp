@@ -98,16 +98,6 @@ function textCounter(field, countfield, maxlimit) {
 	countfield.value = maxlimit - field.value.length;
 }
 
-function uploadCheck(){
-	var theForm = document.frm;
-	if( theForm.post_img.value=="") {
-		alert('사진을 첨부해주세요'); 
-		return;
-	} else {
-		theForm.action="spring.do?command=postUpload";
-		theForm.submit();
-	}
-}
 
 </script>
 

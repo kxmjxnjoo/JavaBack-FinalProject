@@ -63,6 +63,12 @@ public class StoryController {
 			else
 				paramMap.put("fontcolor", storydto.getFontColor());
 			
+			
+			System.out.println("font " + storydto.getFontColor());
+			System.out.println("content " + storydto.getStory_content());
+			System.out.println("img " + storydto.getStory_img());
+			
+			
 			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("story_num", 0);
