@@ -10,32 +10,34 @@
 <link rel="stylesheet" href="/css/join.css">
 </head>
 <body>	
-	<form method="post" action="/find/id" name="loginFrm" id="findForm">
+<%@include file="../common/message.jsp" %>
+	<form method="post" action="/find/id" name="loginFrm" id="findIdForm">
 		<div class="box1" id="findId">
 			<h1>Springfeed</h1>
 			<h3 color="gray">아이디 찾기</h3><br>
 			<div class="text_box" id="name_box">
-				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}">
+				<input type ="text" name="name" class="input" placeholder=" 성명" id="joinName" value="${dto.name}">
 			</div>
 			<div class="text_box" id="phone_box">
-				<input type ="text" name="phone" class="input"  placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone" value="${dto.phone}">
+				<input type ="text" name="phone" class="input" placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone" value="${dto.phone}">
 			</div>
-			<input type="submit" value="아이디 찾기" id="login" onclick="return checkId();">
+			<input type="submit" value="아이디 찾기" id="login" onclick="findIdCheck(event);">
 		</div>
-	
+	</form>
+	<form method="post" action="/find/pw" name="loginFrm" id="findPwForm">
 		<div class="box1" id="findPw">
 			<h1>Springfeed</h1>
 			<h3 color="gray">비밀번호 찾기</h3><br>
 			<div class="text_box" id="name_box">
-				<input type ="text" name="name" class="input"  placeholder=" 성명" id="joinName" value="${dto.name}">
+				<input type ="text" name="userid" class="input"  placeholder=" 아이디" id="joinId" value="${dto.userid}">
 			</div>
 			<div class="text_box" id="phone_box">
-				<input type ="text" name="phone" class="input"  placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone" value="${dto.phone}">
+				<input type ="text" name="phone" class="input"  placeholder=" 전화번호(10~11자리 숫자)" id="joinPhone2" value="${dto.phone}">
 			</div>
 			<div class="text_box" id="email_box">
 				<input type ="text" name="email" class="input"  placeholder=" 이메일 (example@springfeed.com)" id="joinEmail" value="${dto.email}">
 			</div>
-			<input type="submit" value="비밀번호 찾기" id="login" onclick="return checkPwd();">
+			<input type="submit" value="비밀번호 찾기" id="login" onclick="findPwCheck(event);">
 		</div>
 	</form>
 	

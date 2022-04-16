@@ -13,18 +13,19 @@
 		width:100%; height: 40px;
 		background: black; opacity: 0.6; color: white;
 		line-height: 40px; text-align: center;
-		position: relative; top: -50px; transition: 1s;
+		position: relative; top: -70px; transition: 1s;
 		z-index: 1;
 	}
 </style>
 
 <script type="text/javascript">
 	function disappear() {
-		document.getElementById("message").style.webkitTransform='translateY(-50px)';
+		document.getElementById("message").style.webkitTransform='translateY(-70px)';
 	}
 	
 	function appear() {
-		document.getElementById("message").style.webkitTransform='translateY(50px)';
+		document.getElementById("message").style.webkitTransform='translateY(70px)';
+		console.log(document.getElementById("message").value);
 	}
 	
 	if("${ message }" != "") {
@@ -43,8 +44,12 @@
 </script>
 
 
-<div class="message" id="message">
-	${ message }
+<div class="message" id="message" onchange="showMessage('${message}')">
+	${ message } 
 </div>
 
+<div class="message" id="message" onchange="showConfirm('${ messageConfirm }, ${ sendUrl }')">
+	${ messageConfirm }
+</div>
 
+<input type="hidden" value="${ messageConfirm }">

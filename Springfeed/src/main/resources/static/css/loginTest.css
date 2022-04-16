@@ -16,7 +16,7 @@ h1,h2,h3{
 
 .myform{
 	position: relative;
-	top: 70px;
+	top: 30px;
 	display: -ms-flexbox;
 	display: flex;
 	padding: 1rem;

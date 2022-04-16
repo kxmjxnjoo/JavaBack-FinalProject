@@ -20,7 +20,7 @@
 			<div class="notiBox">
 				<div class="notiBoxContent">
 					<div class="userImg" style="background-image:url(/images/${ noti.IMG == null ? "tmpUserIcon.png" : noti.IMG })"
-					onclick="location.href='/post?userid=${ noti.USERFROM }'"> </div>
+					onclick="location.href='/user/page/${ noti.USERFROM }'"> </div>
 					
 					<div class="notiTextBox">
 						<h2 class="userName notiText">${ noti.NAME }</h2>

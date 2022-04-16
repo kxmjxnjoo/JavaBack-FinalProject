@@ -212,7 +212,7 @@ public class StoryController {
 			ss.deleteStory(story_num);
 			
 			rttr.addFlashAttribute("message", "스토리를 삭제했어요!");
-		    return "redirect:/user/page/"+userid;
+		    return "redirect:http://localhost:3000/user/page/"+userid;
 		}
 	}
 	

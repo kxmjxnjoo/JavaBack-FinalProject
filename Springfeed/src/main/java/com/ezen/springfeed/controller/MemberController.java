@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ezen.springfeed.dto.MailDto;
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.service.MemberService;
 import com.ezen.springfeed.service.sendEmailService;
@@ -393,7 +391,7 @@ public class MemberController {
 		= (HashMap<String, Object>) session .getAttribute("loginUser");
     	String userid = (String)loginUser.get("USERID");
     	
-    	String url = "redirect:/user/edit/form";
+    	String url = "redirect:http://localhost:3000/user/edit";
     	if(result.getFieldError("password")!= null) {
              rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
          } else if(result.getFieldError("name")!= null) {
@@ -420,7 +418,7 @@ public class MemberController {
      			
      			session.setAttribute("loginUser", paramMap);
      			
-     			url = "redirect:/user/page/"+ userid;
+     			url = "redirect:http://localhost:3000/user/page/"+ userid;
          }
     	return url;
     }
@@ -434,7 +432,7 @@ public class MemberController {
 		
 		if(loginUser == null) {
 			model.addAttribute("로그인 후 이용해주세요!");
-			return "member/login";
+			return "redirect:http://localhost:3000/";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<>();
@@ -444,7 +442,7 @@ public class MemberController {
 			ms.deleteAcount(paramMap);
 			model.addAttribute("message", "계정 비활성화가 완료되었습니다. 다음에 다시 만나요!");
 			
-			return  "member/login";
+			return  "redirect:http://localhost:3000/";
 		}
     }
     
@@ -457,7 +455,7 @@ public class MemberController {
         ms.activateAccount(userid);
         model.addAttribute("message", "계정을 복구했어요! 로그인 후 이용해주세요:)");
         
-        return "member/login";
+        return "redirect:http://localhost:3000/";
         
     }
     
@@ -492,7 +490,7 @@ public class MemberController {
 				rttr.addFlashAttribute("blocked", "y");
 				
 				String referer = request.getHeader("Referer");
-			    return "redirect:"+ referer;
+			    return "redirect:http://localhost:3000/"+ referer;
 			}
 		}
     }
@@ -528,7 +526,7 @@ public class MemberController {
 				rttr.addFlashAttribute("message", "차단을 해제했어요.");
 			}
 			String referer = request.getHeader("Referer");
-		    return "redirect:"+ referer;
+		    return "redirect:http://localhost:3000/"+ referer;
 		}
     }
 
@@ -538,39 +536,47 @@ public class MemberController {
     public String findIdPw() {
     	return "member/findIdPwd";
     }
+    
+    @Autowired sendEmailService sms;
 
     //비밀번호 찾기
     @ResponseBody 
-    @GetMapping("/find/pw")
-    public Map<String, Boolean> pwdFind(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    @RequestMapping(value="/find/pw", method=RequestMethod.POST)
+    public Map<String, Object> pwdFind(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    		BindingResult result, HttpServletRequest request,
           Model model){
-       Map<String, Boolean> resultMap = new HashMap<>();
-       boolean pwFindCheck = false;
-       ms.userEmailCheck(memberdto.getEmail(), memberdto.getName(), pwFindCheck);
+       Map<String, Object> resultMap = new HashMap<>();
+       String userid = memberdto.getUserid();
        
-       System.out.println(pwFindCheck);
-       if(pwFindCheck == true) 
-          resultMap.put("check", pwFindCheck);
-       else 
-          model.addAttribute("message", "해당하는 회원을 찾을 수 없습니다.");
+       HashMap<String,Object> paramMap = new HashMap<>();
+	   paramMap.put("userid", userid);
+	   paramMap.put("phone", memberdto.getPhone());
+	   paramMap.put("email", memberdto.getEmail());
+	   paramMap.put("cnt", null);
+	   	
+	   ms.findPw(paramMap);
+	   
+	   int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+	   
+	   if(cnt == 1) {
+		   String tempPassword = sms.getTempPassword();
+		   ms.changePw(userid, tempPassword);
+		   resultMap.put("cnt", 1);
+		   resultMap.put("message", userid + "님의 임시 비밀번호는 " + tempPassword + "입니다. 로그인 후 비밀번호를 변경해주세요!");
+		   
+	   } else {
+		   resultMap.put("cnt", 0);
+		   resultMap.put("message", "같은 정보의 회원을 찾을 수 없습니다.");
+	   }
+  
        return resultMap;
     }
-    
-    @Autowired
-    sendEmailService ses;
-    
-    //이메일 전송
-    @ResponseBody
-    @PostMapping("/find/sendEmail")
-    public void sendEamil(String email, String name) {
-       MailDto dto = ses.createMailAndChangePassword(email, name);
-        ses.mailSend(dto);
-    
-    }
+   
   
     //아이디 찾기 액션
-    @RequestMapping("/find/id")
-    public String findId(Model model, HttpServletRequest request, 
+    @RequestMapping(value="/find/id", method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> findId(Model model, HttpServletRequest request, RedirectAttributes rttr,
     		@RequestParam("name") String name,
     		@RequestParam("phone") String phone) {
     	
@@ -583,17 +589,16 @@ public class MemberController {
     	
     	String userid = (String) paramMap.get("userid");
     	
-    	if(userid == null || userid.equals("")) {
-    		model.addAttribute("message", "같은 정보의 회원을 찾을 수 없습니다.");
-    		return "member/findIdPwd";
-    	} else {
-    		model.addAttribute("userid", userid);
-    		model.addAttribute("messageConfirm", 
-    				"회원님의 아이디는 " + userid + " 입니다. 로그인 페이지로 이동할까요?" );
-    		model.addAttribute("sendUrl", "/login/form");
-    		return "member/findIdPwd";
-    	}    	
+    	HashMap<String, Object> result = new HashMap<>();
     	
+    	if(userid == null || userid.equals("")) {
+    		result.put("cnt", 0);
+    		result.put("message", "같은 정보의 회원을 찾을 수 없습니다.");
+    	} else {
+    		result.put("cnt", 1);
+    		result.put("message", "회원님의 아이디는 " + userid + " 입니다. 로그인 페이지로 이동할까요?");
+    	}    	
+    	return result;
     }
     
     
