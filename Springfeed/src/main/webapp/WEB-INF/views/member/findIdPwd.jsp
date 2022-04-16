@@ -40,7 +40,7 @@
 			<input type="submit" value="비밀번호 찾기" id="login" onclick="findPwCheck(event);">
 		</div>
 	</form>
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		

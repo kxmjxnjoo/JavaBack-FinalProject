@@ -119,7 +119,7 @@
         img.setAttribute("src", event.target.result); 
         document.querySelector("div#image_container").appendChild(img); 
       }; 
-      
+    
       reader.readAsDataURL(event.target.files[0]); 
     }
 
@@ -194,6 +194,7 @@
         });
       };
       
+
 
       function checkId(){
           var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장
