@@ -82,8 +82,6 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             })
     }
 
-
-
     return (
         <div className='container row'>
 
@@ -111,7 +109,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                                                         openPostDetail={openPostDetail}
                                                         setIsDetailMenuOpen={setIsDetailMenuOpen}
                                                         setSelectedPost={setSelectedPost}
-                                                        setSelectedUser={post.userid}
+                                                        setSelectedUser={setSelectedUser}
                                                     />
                                                 )
                                             }) 

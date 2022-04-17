@@ -12,8 +12,8 @@ import { MdOutlineMoreHoriz as DetailIcon } from 'react-icons/md'
 
 import defaultProfile from '../../images/tmpUserIcon.png'
 
-const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) => {
-    const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content, post_num: postNum } = post
+const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost, setSelectedUser }) => {
+    const { user_img: userprofile, userid, address: location, post_img: postImage, likeCount: likes, isLiked, isSaved, content, postNum } = post
 
     const profileStyle = {
         width: '50px'
@@ -64,35 +64,37 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
     }
 
     const handleSave = () => {
-        fetch('/api/post/save?num' + postNum)
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                setIsSavedData(!isSavedData)
-            })
-            .catch((err) => {
-                toast.error('포스트를 저장하는데 에러가 났어요')
-            })
-
-        if(!isSavedData) {
-            toast.promise(isSaved,
-                {
-                    loading: '잠시만 기다려 주세요...',
-                    success: userid + '님의 포스트를 저장했어요',
-                    error: '포스트를 저장할 수 없었어요. 다시 시도해 주세요'
-                }
-            )
-        } else {
-            toast.promise(isSaved,
-                {
-                    loading: '잠시만 기다려 주세요...',
-                    success: userid + '님의 포스트를 저장 취소했어요',
-                    error: '포스트를 저장 취소할 수 없었어요. 다시 시도해 주세요'
-                }    
-            )
+        if(isSaved) {
+            unSavePost(postNum)
+        } {
+            savePost(postNum)
         }
     }
+
+    const savePost = (postnum) => {
+        fetch('/api/post/save/insert?num=' + postnum)
+            .then((res) => {
+                if(res.text() == 0) {  
+                    toast.error('포스트를 저장하지 못 했어요. 다시 시도해 주세요')
+                } else {
+                    toast.success('포스트를 저장했어요')
+                    setIsSavedData(true)
+                }
+            })
+    }
+
+    const unSavePost = (postnum) => {
+        fetch('/api/post/save/delete?num=' + postnum)
+            .then((res) => {
+                if(res.text() == 0) {
+                    toast.error('저장한 포스트를 지우지 못 했어요. 다시 시도해 주세요')
+                } else {
+                    toast.success('포스트를 저장 목록에서 지웠어요')
+                    setIsSavedData(false)
+                }
+            })
+    }
+
 
     return (
         <div className='card mb-5'>
@@ -119,6 +121,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
                                 onClick={() => {
                                     setIsDetailMenuOpen(true)
                                     setSelectedPost(post)
+                                    setSelectedUser(userid)
                                 }}
                     />
                 </div>
