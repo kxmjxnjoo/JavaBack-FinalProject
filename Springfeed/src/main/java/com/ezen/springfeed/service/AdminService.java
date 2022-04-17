@@ -81,4 +81,8 @@ public class AdminService {
 		adao.updateReportPostUnBlock(paramMap);
 	}
 
+	public void getAllCount_f(HashMap<String, Object> paramMap) {
+		adao.getAllCount_f(paramMap);
+	}
+
 }

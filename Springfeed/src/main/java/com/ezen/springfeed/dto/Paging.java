@@ -14,7 +14,7 @@ public class Paging {
     boolean prev;     //화면에 안보이는 이전 페이지로 이동하는 버튼
     boolean next;    //화면에 안보이는 다음 페이지로 이동하는 버튼
     private int startNum;    //화면에 표시되는 게시물의 시작 번호(num , pseq  같은 번호아닌 rownum)
-    private int endNum;    //화면에 표시된는 게시물의 끝번호(num , pseq  같은 번호아닌 rownum)
+    private int endNum;    //화면에 표시되는 게시물의 끝번호(num , pseq  같은 번호아닌 rownum)
     
     public void paging() {
     	endPage = ( (int)Math.ceil( page/(double)displayPage ) ) * displayPage;

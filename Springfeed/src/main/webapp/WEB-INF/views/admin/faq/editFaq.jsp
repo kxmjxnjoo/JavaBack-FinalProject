@@ -8,20 +8,20 @@
 </head>
 <body>
 
-	<%@ include file="/admin/common/admin_submenu.jsp" %>
+	<%@ include file="../../admin/common/admin_submenu.jsp" %>
 	
-	<form action="/faq/edit/form" method="post" id="editfaqBox">
-		<input type="hidden" name="command" value="editfaq">
-		<input type="hidden" name="num" value="${ faq.FAQ_NUM }">
+	<form action="/faq/edit" method="post" id="editfaqBox">
+		<input type="hidden" value="editfaq">
+		<input type="hidden" name="faq_num" value="${ fdto.FAQ_NUM }">
 		
-		<input type="text" name="subject" placeholder="${ faq.FAQ_SUBJECT }">
-		<textarea name="content"></textarea>
+		<input type="text" name="faq_subject" placeholder="${ fdto.FAQ_SUBJECT }">
+		<textarea name="faq_content"></textarea>
 		
-		<input type="submit" value="FAQ 등록">
+		<input type="submit" value="FAQ 수정">
 		
 	</form> 
 	
-	<%@ include file="/admin/common/footer.jsp" %>
+	<%@ include file="../../admin/common/footer.jsp" %>
 	
 </body>
 </html>

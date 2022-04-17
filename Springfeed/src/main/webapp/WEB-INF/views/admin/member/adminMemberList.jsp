@@ -12,15 +12,19 @@ function go_search(){
 </script>
 <h1>회원리스트</h1>
 <span id="info">${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
+	<button type="button" class="btn btn-outline-secondary" onclick="location.href/logoutAdmin'">로그아웃</button></span>
 	<br><br><br>
 <form name="frm" action="/admin/memberList">
 <input type="hidden" > 
-	<input type="text" name="key" value="${key}" class="search">
-	<input id="search_btn" class="search" type="submit" name="search" value="회원 검색" onClick="/admin/searchMember">
-	<table>
-		<tr><th>이름</th><th>아이디</th><th>이메일</th><th>핸드폰</th><th>사용계정</th>
-				<th>가입일</th></tr>
+<div class="row"> <div class="col-lg-6">	<input type="text" name="key" value="${key}" class="search">
+	<input id="search_btn" class="search" type="submit" name="search" value="회원 검색" onClick="/admin/searchMember"></div></div>
+	<table class="table table-hover" class="col-md-6" >
+		<tr><th width="10%">이름</th>
+				<th width="10%">아이디</th>
+				<th width="10%">이메일</th>
+				<th width="10%">핸드폰</th>
+				<th width="10%">사용계정</th>
+				<th width="10%">가입일</th></tr>
 		<c:forEach items="${mdto}" var="mdto">
 			<tr><td width="50">${mdto.NAME}</td> <td width="50">${mdto.USERID}</td> <td width="50">${mdto.EMAIL}</td>
 					<td width="50">${mdto.PHONE}</td> <td width="50">${mdto.USEYN}</td> 

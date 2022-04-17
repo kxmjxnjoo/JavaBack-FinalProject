@@ -65,4 +65,12 @@ public class FaqQnaService {
 	public void reportList(HashMap<String, Object> paramMap) {
 		fqdao.reportList(paramMap);
 	}
+
+	public void qnaDetail(HashMap<String, Object> paramMap) {
+		fqdao.qnaDetail(paramMap);
+	}
+
+	public void insertReply(HashMap<String, Object> paramMap) {
+		fqdao.insertReply(paramMap);
+	}
 }
