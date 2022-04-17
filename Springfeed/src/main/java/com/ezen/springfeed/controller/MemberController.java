@@ -299,6 +299,7 @@ public class MemberController {
 		return mav;
     }
     
+    @ResponseBody
     @RequestMapping("/api/noti/count")
     public int notiCount(HttpServletRequest request) {
     	
@@ -320,12 +321,15 @@ public class MemberController {
     		notiCount = Integer.parseInt(paramMap.get("notiCount").toString());
     	}
     	
+    	System.out.println(loginUser.get("USERID"));
+    	System.out.println(notiCount);
+    	
     	return notiCount;
     }
     
 
     
-    
+   
     @RequestMapping("/user/edit/form")
     public String editUserForm(Model model, HttpServletRequest request,
     		RedirectAttributes rttr) {
@@ -379,6 +383,8 @@ public class MemberController {
 		return resultMap;
 	}
     
+    
+    @ResponseBody
     @RequestMapping("/user/edit")
     public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
