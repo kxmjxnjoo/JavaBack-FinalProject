@@ -86,11 +86,10 @@ public class ReactController {
             pdto.setContent((String) pvo.get("CONTENT"));
             pdto.setPost_img((String) pvo.get("IMG"));
             pdto.setCreate_date((Timestamp) pvo.get("CREATE_DATE"));
+            pdto.setPostNum( Integer.parseInt(String.valueOf( pvo.get("POST_NUM"))));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(pvo.get("LIKECOUNT"))));
 
-
-//            pdto.setPostNum((Integer) pvo.get("POSTNUM"));
-            //pdto.setLikeCount(pvo.get("LIKECOUNT"));
-            //pdto.setReplyCount();
+            //pdto.setReplyCount(pvo.get("REPLYCOUNT");
             postList.add(pdto);
         }
 

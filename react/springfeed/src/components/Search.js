@@ -42,7 +42,6 @@ const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
 				return res.json()
 			})
 			.then((data) => {
-				console.log(data)
 				setPostResult(data)
 			})
 			.catch((err) => {

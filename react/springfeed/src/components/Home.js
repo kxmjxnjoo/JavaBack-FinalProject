@@ -10,7 +10,6 @@ import Error from './common/Error'
 import NoPost from './Home/NoPost'
 import StoryList from './Home/StoryList'
 
-
 import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
@@ -94,7 +93,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                     {
                         isLoading ? <Loading message='포스트를 불러오고 있어요'/> :
                             isPostFeedError ? <Error errorMessage={errorMessage} /> :
-                                posts != null ?
+                                posts != null || posts.length == 0 ?
 
                                     <InifniteScroll
                                         pageStart={postPage}
@@ -123,6 +122,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             <div className='col-3 col-md-0 d-none d-md-block sticky-top'>
                 <FollowingList
                     user={user}
+                    loginUser={user}
                 />
             </div>
 

@@ -7,7 +7,7 @@ import defaultProfile from '../../images/tmpUserIcon.png'
 
 import Loading from '../common/Loading'
 
-const MainFollowingList = ({ user }) => {
+const MainFollowingList = ({ user, loginUser }) => {
     const [followingListIndex, setFollowingListIndex] = useState(0)
     const [followingList, setFollowingList] = useState(null)
     const [isFollowingError, setIsFollowingError] = useState(false)
@@ -19,7 +19,9 @@ const MainFollowingList = ({ user }) => {
                 return res.json()
             })
             .then((data) => {
-                setFollowingList(data)
+                setFollowingList(data.filter((user) => {
+                    return !(user.userid === loginUser.userid)
+                }))
             })
             .catch((err) => {
                 setIsFollowingError(true)
