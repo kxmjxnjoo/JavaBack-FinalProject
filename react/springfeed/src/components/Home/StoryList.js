@@ -38,16 +38,13 @@ const StoryList = () => {
                     (storyList != null && storyList.length != 0) ?
                         storyList.map((arr) => {
                             return(
-                                <div className='row'>
-                                    <div className="col-1 align-self-center ms-3">
-                                        <LeftArrowIcon className='h1'/>
-                                    </div>
+                                <div className='row ms-5'>
                                     {
                                         arr.map((user) => {
                                             return(
                                                 <div className="col-2 text-center">
                                                     <Link to={'/story/' + user.userid} className='text-decoration-none text-black'>
-                                                        <img src={ user.img == null ? defaultUserIcon : ('/images/' + user.img) } alt="PROFILE" className='d-block rounded-circle' style={{width: '75px'}}/>
+                                                        <img src={ user.img == null ? defaultUserIcon : ('/images/' + user.img) } alt="PROFILE" className='d-block rounded-circle' style={{width: '75px', height: '75px'}}/>
                                                         <div className="h5">
                                                             {user.userid}
                                                         </div>
@@ -56,9 +53,6 @@ const StoryList = () => {
                                             )
                                         })
                                     }
-                                    <div className="col-1 align-self-center me-3">
-                                        <RightArrowIcon className='h1'/>
-                                    </div>
                                 </div>
                             )
                         })
@@ -71,5 +65,16 @@ const StoryList = () => {
     </div>
   )
 }
+
+/*
+<div className="col-1 align-self-center me-3">
+    <RightArrowIcon className='h1'/>
+</div>
+
+<div className="col-1 align-self-center ms-3">
+    <LeftArrowIcon className='h1'/>
+</div>
+
+*/
 
 export default StoryList
