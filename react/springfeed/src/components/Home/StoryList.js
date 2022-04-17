@@ -14,70 +14,36 @@ const StoryList = ({setIsStoryOpen, setStoryNum}) => {
                 return res.json()
             })
             .then((data) => {
-                setStoryList(data)
+                setStoryList([data])
             })
-    })
-
-
-    /*
-    const storyList = [
-        [
-            {
-                num: 1,
-                img: '',
-                userid: 'userid1'
-            },
-            {
-                num: 2,
-                img: '',
-                userid: 'userid2'
-            },
-            {
-                num: 3,
-                img: '',
-                userid: 'userid3'
-            },    
-            {
-                num: 4,
-                img: '',
-                userid: 'userid4'
-            },  
-            {
-                num: 5,
-                img: '',
-                userid: 'userid5'
-            }
-        ]
-    ]
-    */
-
+    }, [])
 
   return (
     <div className='mb-3 border'>
 
         <Carousel variant='dark' indicators={false} wrap={false}>
             {
-                (storyList != null && storyList.length != null)?
-                    storyList.map((stories) => {
+                (storyList != null && storyList.length != 0) ?
+                    storyList.map((arr) => {
                         return(
                             <Carousel.Item>
-                                <div className="row justify-content-center">
-                                    {
-                                        stories.map((story) => {
-                                            return(
+                                {
+                                    arr.map((user) => {
+                                        return(
+                                            <div className="row justify-content-center">
                                                 <div className="col-2 text-center" onClick={() => {
                                                     setIsStoryOpen(true)
-                                                    setStoryNum(story.num)
+                                                    setStoryNum(0)
                                                 }}>
-                                                    <img src={defaultUserIcon} alt="" className='d-block' style={{width: '75px'}}/>
+                                                    <img src={ user.img == null ? defaultUserIcon : ('/images/' + user.img) } alt="PROFILE" className='d-block rounded-circle' style={{width: '75px'}}/>
                                                     <div className="h5">
-                                                        {story.userid}
+                                                        {user.userid}
                                                     </div>
                                                 </div>
-                                            )
-                                        })
-                                    }
-                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Carousel.Item>
                         )
                     })

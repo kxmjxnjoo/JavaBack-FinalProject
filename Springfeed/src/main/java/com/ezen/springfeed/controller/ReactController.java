@@ -4,6 +4,7 @@ import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.service.MemberService;
 import com.ezen.springfeed.service.PostService;
+import com.ezen.springfeed.service.StoryService;
 import com.ezen.springfeed.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,9 @@ public class ReactController {
 
     @Autowired
     UtilService us;
+
+    @Autowired
+    StoryService ss;
 
     // Get user's post
     @RequestMapping(value="/api/post")
@@ -333,5 +337,29 @@ public class ReactController {
         // Get result
         HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("ref_cursor");
         return (int) result.get("result");
+    }
+
+    // Get Main Storylist
+    @RequestMapping(value="/api/story/list", produces = "application/json")
+    public ArrayList<MemberDto> getStoryList(HttpServletRequest request) {
+        String userid = getLoginUserid(request);
+
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", userid);
+
+        ss.getStoryList(paramMap);
+
+        // Get MemberDto from paramMap
+        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        for(HashMap<String, Object> mem : list) {
+            MemberDto mdto = new MemberDto();
+            mdto.setImg((String) mem.get("IMG"));
+            mdto.setUserid((String) mem.get("USERID"));
+            result.add(mdto);
+        }
+
+        return result;
     }
 }

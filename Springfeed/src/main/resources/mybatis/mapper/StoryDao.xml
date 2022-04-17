@@ -44,4 +44,13 @@
 			#{story_img},#{story_content},#{fontcolor},#{story_num}
 		)}
 	</update>
+
+	<select id="getStoryList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getStoryList(
+			    #{userid},
+			    #{p_cur, mode=OUT, jdbcType=CURSOR, javaType=ResultSet ,resultMap=MemberMap}
+			)
+		}
+	</select>
 </mapper>
