@@ -202,58 +202,86 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
 
     const follow = () => {
         confirmAlert({
-            title: id + '님을 팔로우 할까요?',
-            message: id + '님을 팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 있어요. 그리고 ' + loginUser.userid + '님이 팔로우 했다고 알람이 가요',
-            buttons: [
-                {
-                    label: '네! 팔로우 할래요',
-                    onClick: () => {
-                        fetch('/api/user/follow?id=' + id)
-                        .then((res) => {
-                            console.log(res);
-                            return res;
-                        })
-                        .then((data) => {
-                            if(data == 1) {
-                                toast.success(id + '님을 팔로우 했어요!')
-                            } else {
-                                toast.error('무슨 이유에서인지, ' + id + '님을 팔로우 못 했어요. 다시 시도해 주세요')
-                            }
-                        })            
-                    }
-                },
-                {
-                    label: '취소할게요'
-                }
-            ]
+            customUI: ({onClose}) => {
+                return(
+                    <div className="custom-ui justify-content-center">
+                        <div className="h1 text-center">
+                            {id + '님을 팔로우 할까요?'}
+                        </div>
+                        <p>{id + '님을 팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 있어요. 그리고 ' + loginUser.userid + '님이 팔로우 했다고 알람이 가요'}</p>
+
+                        <div className="row">
+                            <div className="col-6">
+                                <button className="btn btn-primary w-100" onClick={() => {
+                                    onClose();
+                                    fetch('/api/user/follow?id=' + id)
+                                    .then((res) => {
+                                        console.log(res);
+                                        return res;
+                                    })
+                                    .then((data) => {
+                                        if(data == 1) {
+                                            toast.success(id + '님을 팔로우 했어요!')
+                                        } else {
+                                            toast.error('무슨 이유에서인지, ' + id + '님을 팔로우 못 했어요. 다시 시도해 주세요')
+                                        }
+                                    })       
+                                }}>
+                                    네! 팔로우 할래요
+                                </button>
+                            </div>
+                            <div className="col-6">
+                                <button className="btn btn-danger w-100" onClick={onClose}>
+                                    아니요 팔로우 안 할래요
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                )
+            }
         })
     }
 
     const unfollow = () => {
         confirmAlert({
-            title: id + '님을 언팔로우 할까요?',
-            message: id + '님을 언팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 없고, ' + id + '님에게 ' + loginUser.userid + '님이 언팔로우 했다고 알람이 가요',
-            buttons: [
-                {
-                    label: '상관없어요. 언팔로우할게요',
-                    onClick: () => {
-                        fetch('/api/user/unfollow?id=' + id)
-                        .then((res) => {
-                            return res;
-                        })
-                        .then((data) => {
-                            if(data == 1) {
-                                toast.success(id + '님을 언팔로우 했어요')
-                            } else {
-                                toast.error('무슨 이유에서인지, ' + id + '님을 언팔로우 못 했어요. 다시 시도해 주세요')
-                            }
-                        })
-                    }
-                },
-                {
-                    label: '다시 생각해 볼래요'
-                }
-            ]
+            customUI: ({onClose}) => {
+                return(
+                    <div className="custom-ui justify-content-center">
+                        <div className="h1 text-center">
+                            {id + '님을 언팔로우 할까요?'}
+                        </div>
+                        <p>{id + '님을 언팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 없고, ' + id + '님에게 ' + loginUser.userid + '님이 언팔로우 했다고 알람이 가요'}</p>
+
+                        <div className="row">
+                            <div className="col-6">
+                                <button className="btn btn-danger w-100" onClick={() => {
+                                    onClose();
+                                    fetch('/api/user/unfollow?id=' + id)
+                                    .then((res) => {
+                                        return res;
+                                    })
+                                    .then((data) => {
+                                        if(data == 1) {
+                                            toast.success(id + '님을 언팔로우 했어요')
+                                        } else {
+                                            toast.error('무슨 이유에서인지, ' + id + '님을 언팔로우 못 했어요. 다시 시도해 주세요')
+                                        }
+                                    })
+                                }}>
+                                    상관없어요. 언팔로우할게요
+                                </button>
+                            </div>
+                            <div className="col-6">
+                                <button className="btn btn-primary w-100" onClick={onClose}>
+                                    다시 생각해 볼래요
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                )
+            }
         })
     }
 
