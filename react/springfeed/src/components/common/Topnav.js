@@ -49,10 +49,15 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 	const [notiCount, setNotiCount] = useState(0)
 
 	useEffect(() => {
-		fetch('/api/noti/count?userid=' + user.userid)
-			.then((res) => {
-				console.log(res)
-			})
+		if(user != null) {
+			fetch('/api/noti/count?userid=' + user.userid)
+				.then((res) => {
+					return res.text()
+				})
+				.then((noti) => {
+					setNotiCount(noti)
+				})
+		}
 	}, [])
 
 	return (

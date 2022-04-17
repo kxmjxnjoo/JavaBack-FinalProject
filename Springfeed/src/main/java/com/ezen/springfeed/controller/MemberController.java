@@ -327,8 +327,6 @@ public class MemberController {
     	return notiCount;
     }
     
-
-    
    
     @RequestMapping("/user/edit/form")
     public String editUserForm(Model model, HttpServletRequest request,
