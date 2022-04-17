@@ -38,7 +38,7 @@ const StoryList = () => {
                     (storyList != null && storyList.length != 0) ?
                         storyList.map((arr) => {
                             return(
-                                <div className='row ms-5'>
+                                <div className='row ms-5 mt-3'>
                                     {
                                         arr.map((user) => {
                                             return(
