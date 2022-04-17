@@ -34,6 +34,11 @@ public interface IMemberDao {
 	void getFollowerCount(HashMap<String, Object> paramMap);
 	void getFollowingCount(HashMap<String, Object> paramMap);
 	void getFollowerList(HashMap<String, Object> paramMap);
+<<<<<<< HEAD
 	
 	
+=======
+
+    void getIsFollowing(HashMap<String, Object> paramMap);
+>>>>>>> 47e7b85cbaede67d14efb4e03e47e4d6ce2a0eb6
 }

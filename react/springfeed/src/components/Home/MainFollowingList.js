@@ -7,7 +7,7 @@ import defaultProfile from '../../images/tmpUserIcon.png'
 
 import Loading from '../common/Loading'
 
-const MainFollowingList = ({ user }) => {
+const MainFollowingList = ({ user, loginUser }) => {
     const [followingListIndex, setFollowingListIndex] = useState(0)
     const [followingList, setFollowingList] = useState(null)
     const [isFollowingError, setIsFollowingError] = useState(false)
@@ -19,7 +19,9 @@ const MainFollowingList = ({ user }) => {
                 return res.json()
             })
             .then((data) => {
-                setFollowingList(data)
+                setFollowingList(data.filter((user) => {
+                    return !(user.userid === loginUser.userid)
+                }))
             })
             .catch((err) => {
                 setIsFollowingError(true)
@@ -58,7 +60,7 @@ const MainFollowingList = ({ user }) => {
                 <Link to={'/user/page/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
                     <div className="row">
                         <div className="col-6">
-                            <img src={defaultProfile} alt="" style={imageStyle} />
+                            <img src={user.img == null ? defaultProfile : ('/images/' + user.img)} alt="" style={imageStyle} className='rounded-circle'/>
                         </div>
                         <div className="col-6 mt-2">
                             <div className="h3">{user.userid}</div>
@@ -79,7 +81,9 @@ const MainFollowingList = ({ user }) => {
                                 <Link to={'/user/page/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
                                     <div className="row">
                                         <div className="col-4">
-                                            <img src={defaultProfile} alt="" style={imageUserStyle} />
+                                            <img src={(data.img == null || data.img == '') ? defaultProfile : ('/images/' + data.img)} alt="" style={imageUserStyle} 
+                                                className='rounded-circle'
+                                            />
                                         </div>
 
                                         <div className="col-7 ms-2">

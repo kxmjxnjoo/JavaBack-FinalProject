@@ -37,4 +37,7 @@ public class StoryService {
 		sdao.getStoryNext(paramMap);
 	}
 
+    public void getStoryList(HashMap<String, Object> paramMap) {
+		sdao.getStoryList(paramMap);
+    }
 }

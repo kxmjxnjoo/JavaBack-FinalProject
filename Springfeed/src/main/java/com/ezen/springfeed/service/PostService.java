@@ -43,4 +43,8 @@ public class PostService {
     public void insertLike(HashMap<String, Object> paramMap) {
         pdao.insertLike(paramMap);
     }
+
+    public void getSavedPost(HashMap<String, Object> paramMap) {
+        pdao.getSavePost(paramMap);
+    }
 }
