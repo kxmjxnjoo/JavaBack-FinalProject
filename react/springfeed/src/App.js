@@ -27,6 +27,7 @@ import UploadPost from './components/UploadPost'
 import Find from './components/jsp-components/Find'
 import Admin from './components/jsp-components/Admin'
 import Report from './components/jsp-components/Report'
+import StoryNum from './components/jsp-components/StoryNum'
 
 // Common
 import './common.css'
@@ -199,6 +200,7 @@ function App() {
 										<Route path='/admin' element={<Admin/>}/>
 
 										<Route path='/story/:id' element={<Story/>}/>
+										<Route path='/storynum/:num' element={<StoryNum/>}/>
 
 									</Routes>
 					}

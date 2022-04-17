@@ -10,10 +10,6 @@ const PostDetail = ({post}) => {
         post_img: postImage, likeCount: likes, isLiked, 
         isSaved, content, post_num: postNum } = post
 
-    
-    
-
-
     const commentDummyData = [
         {
             userImg: 'http://picsum.photos/400/400',
@@ -50,7 +46,7 @@ const PostDetail = ({post}) => {
         <div className="row ms-0 me-0">
 
             <div className="col-6 ps-0">
-                <img src="http://picsum.photos/600/600" alt="" style={{width: '100%', height: '100%'}}/>
+                <img src={postImage != null ? '/images/' + postImage : 'http://picsum.photos/id/100/400/400'} alt="" style={{width: '100%', height: '100%'}}/>
             </div>
 
             <div className="col-6">
