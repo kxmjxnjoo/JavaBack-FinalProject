@@ -125,7 +125,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
             </div>
 
             <div className="card-body">
-                <img src={(postImage == '' || postImage == null) ? 'http://picsum.photos/100/100' : '/images/' + postImage} alt="" style={postImageStyle} />
+                <img src={(postImage == '' || postImage == null) ? 'http://picsum.photos/100/100' : '/images/' + postImage} alt="이미지를 불러올 수 없어요" style={postImageStyle} />
             </div>
 
             <div className="card-footer h2">

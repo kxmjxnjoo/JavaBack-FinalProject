@@ -159,28 +159,3 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 }
 
 export default Topnav
-
-/*
-		<nav className='navbar navbar-nav fixed-top navbar-expand-lg navbar-dark' >
-			<div className='container-fluid'>
-
-				<button className="navbar-toggler me-4" data-toggle="collapse"
-					data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span className="navbar-toggler-icon"></span>
-				</button>
-
-				<div className="collapse navbar-collapse row" id="navbarTogglerDemo02">
-
-
-
-				</div>
-
-			</div>
-
-		</nav >
-
-
-
-
-*/

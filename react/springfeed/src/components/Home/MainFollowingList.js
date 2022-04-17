@@ -60,7 +60,7 @@ const MainFollowingList = ({ user, loginUser }) => {
                 <Link to={'/user/page/' + user.userid} style={{textDecoration: 'none', color: 'black'}}>
                     <div className="row">
                         <div className="col-6">
-                            <img src={defaultProfile} alt="" style={imageStyle} />
+                            <img src={user.img == null ? defaultProfile : ('/images/' + user.img)} alt="" style={imageStyle} className='rounded-circle'/>
                         </div>
                         <div className="col-6 mt-2">
                             <div className="h3">{user.userid}</div>
@@ -81,7 +81,9 @@ const MainFollowingList = ({ user, loginUser }) => {
                                 <Link to={'/user/page/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
                                     <div className="row">
                                         <div className="col-4">
-                                            <img src={defaultProfile} alt="" style={imageUserStyle} />
+                                            <img src={(data.img == null || data.img == '') ? defaultProfile : ('/images/' + data.img)} alt="" style={imageUserStyle} 
+                                                className='rounded-circle'
+                                            />
                                         </div>
 
                                         <div className="col-7 ms-2">

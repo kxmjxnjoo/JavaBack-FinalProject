@@ -36,6 +36,8 @@ import Faq from './components/jsp-components/Faq'
 import Story from './components/jsp-components/Story'
 import Select from './components/Select'
 
+import './search.css'
+
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [user, setUser] = useState(null)
@@ -106,13 +108,13 @@ function App() {
 
 			{
 				searchKey !== "" ?
-					<div className="card w-50 ms-5 mt-5 overflow-auto shadow"
+					<div className="card w-50 ms-5 mt-md-5 mt-6 overflow-auto shadow-lg"
 						style={{
 							height: '300px',
 							position: 'fixed',
 							zIndex: '100',
 							top: '50px',
-							left: '50px'
+							left: '50px',
 						}}>
 						<div className="card-header">
 							<div className="card-title h5 text-center">검색 결과</div>

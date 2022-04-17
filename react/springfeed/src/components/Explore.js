@@ -62,7 +62,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                         return(
                                             <>
                                                 <div className="row">
-                                                    <div className="col-4 p-0">
+                                                    <div className="col-12 col-md-4 p-0">
                                                     <PostThumbnail
                                                         postNum={data[0].postNum}
                                                         postImg={data[0].img}
@@ -82,7 +82,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                         className=''
                                                         />
                                                     </div>
-                                                    <div className="col-8 p-0">
+                                                    <div className="col-12 col-md-8 p-0">
                                                         <PostThumbnail
                                                             postNum={data[2].postNum}
                                                             postImg={data[2].img}
@@ -97,7 +97,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                 </div>
 
                                                 <div className="row p">
-                                                    <div className="col-4 p-0">
+                                                    <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[3].postNum}
                                                             postImg={data[3].img}
@@ -109,7 +109,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                         />
 
                                                     </div>
-                                                    <div className="col-4 p-0">
+                                                    <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[4].postNum}
                                                             postImg={data[4].img}
@@ -121,7 +121,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                         />
 
                                                     </div>
-                                                    <div className="col-4 p-0">
+                                                    <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[5].postNum}
                                                             postImg={data[5].img}

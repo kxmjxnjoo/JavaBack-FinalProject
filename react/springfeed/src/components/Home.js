@@ -99,7 +99,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                                         pageStart={postPage}
                                         loadMore={loadFeed}
                                         hasMore={hasMore}
-                                        loader={<Loading message='포스트를 더 불러오고 있어요' className='mb-5'/>}
+                                        loader={<Loading message='포스트를 더 불러오고 있어요' className='mb-5 mt-5'/>}
                                     >
                                         {
                                             posts.map((post) => {
