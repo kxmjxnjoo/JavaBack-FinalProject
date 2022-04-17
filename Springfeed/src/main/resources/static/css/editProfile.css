@@ -48,7 +48,10 @@ body {
 
 #withdrawBox {
     background-color: white;
-    margin-top: 30px;
+    margin: 30px auto;
+    border: 1px solid gray;
+    text-align: center;
+    width: 350px;
 }
 
 #withdrawBoxContent{
@@ -56,6 +59,7 @@ body {
     flex-direction: column;
     align-content: center;
     flex-wrap: wrap;
+    padding: 10px;
 }
 
 

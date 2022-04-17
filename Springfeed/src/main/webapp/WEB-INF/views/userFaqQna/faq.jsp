@@ -4,17 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>자주 묻는 질문</title>
 <link rel="stylesheet" href="/css/userfaq.css">
 </head>
 <body>
-	<%@ include file="../common/topnav.jsp" %>
 	
 	<div id="faqBox">
 		<h1>자주 묻는 질문</h1>
 		<h2>자주 묻는 질문을 모아봤어요. 만약 찾으시는 질문이 없으시면 직접 문의해 주세요.</h2>
-		
-		
+
 		<c:choose>
 			<c:when test="${ faqList == null || faqList.size() == 0}">
 				<div id="noFaqBox">
@@ -26,7 +25,7 @@
 			
 				<c:forEach var="fdto" items="${ faqList }">
 					<div class="faqTitle" onclick="showFaq( '${fdto.FAQ_SUBJECT}', `${ fdto.FAQ_CONTENT }` );">
-						<h3 class="faqQ">Q</h3>
+						<h3 class="faqQ" style="margin-right: 10px;">Q</h3>
 						<h3>${ fdto.FAQ_SUBJECT }</h3>
 					</div>
 				</c:forEach>
@@ -59,7 +58,5 @@
 			}
 		}
 	</script>
-	
-	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

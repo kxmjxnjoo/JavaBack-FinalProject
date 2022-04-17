@@ -62,12 +62,15 @@ function unblock(userid) {
 	}
 }
 
+function goBack(){
+	window.history.back();
+}
+
 </script>
 </head>
-<body>
+<body style="background: rgba(var(--d87,255,255,255),1)">
 <form name="frm" method="post">
 	
-	<%@ include file="../common/message.jsp" %>
 		
 <!-- setting popup -->
 	<div id="setting">
@@ -113,16 +116,8 @@ function unblock(userid) {
 		<div id=storyArea>
 <!-- 로고 -->
 			<div id="logo" onclick="location.href='/'"> <img src="../images/logo.png" width="50px"> </div>
-		
-<!-- 화살표 -->
-			
-			
-<!-- 클릭시 유저 프로필로 이동 -->
-			<div id="goUserprofile" onClick="location.href='/post?userid=${StoryDto.USERID}'"> 
-				<img id="userprofile" src="/images/${ loginUser.IMG == null || loginUser.IMG.equals("") ? "tmpUserIcon.png" : loginUser.IMG }">
-			</div> 
-			
-			<div class=innerStory >
+
+	<div class=innerStory >
 			
 <!-- 정상 -->
 	<c:choose>

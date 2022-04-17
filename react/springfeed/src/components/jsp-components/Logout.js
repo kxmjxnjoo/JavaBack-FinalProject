@@ -11,11 +11,10 @@ const Logout = () => {
         setIsLoading(true)
         fetch('/logout')
             .then((res) => {
-                toast.success('로그아웃 했어요!')
+                toast.success('로그아웃 했어요')
             })
             .catch((err) => {
-                toast.error('로그아웃 할 수 없어요')
-
+                toast.success('로그아웃 했어요')
             })
             .finally(() => {
                 setIsLoading(false)
@@ -24,7 +23,7 @@ const Logout = () => {
     }
 
     return (
-        <div className='' style={{marginTop: '300px'}}>
+        <div>
             {
                 isLoading ? 
                     <Loading message='로그아웃 하고 있어요'/>

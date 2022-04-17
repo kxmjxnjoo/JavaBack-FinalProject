@@ -13,5 +13,5 @@ public interface IStoryDao {
 	void editStory(HashMap<String, Object> paramMap);
 	void getStoryPrev(HashMap<String, Object> paramMap);
 	void getStoryNext(HashMap<String, Object> paramMap);
-
+    void getStoryList(HashMap<String, Object> paramMap);
 }

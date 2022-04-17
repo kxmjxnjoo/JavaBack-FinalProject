@@ -1,4 +1,3 @@
-
 --로그인
 CREATE OR REPLACE PROCEDURE getMember(
     p_userid IN member.userid%TYPE, 
@@ -130,6 +129,7 @@ EXCEPTION WHEN OTHERS THEN
     v_result := p_result;
 END;
 
+
 --getNotification : notification 리스트 호출
 CREATE OR REPLACE PROCEDURE getNotification(
     p_cur OUT SYS_REFCURSOR,
@@ -140,10 +140,12 @@ BEGIN
     update notification set checked=1 where user_to=p_userid and checked=0;
     
     open p_cur for
-        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num, m.name as name, 
-        p.img as postImg, r.content as replyContent, n.create_date as create_date, m.img AS IMG
+        select n.user_to, n.user_from as userfrom, n.num, noti_type as notitype, n.post_num as post_num, 
+        m.name as name, s.story_num as story_num, 
+        r.content as replyContent, n.create_date as create_date, m.img AS IMG, 
         from notification n 
             left outer join post p on p.post_num = n.post_num
+            left outer join story s on s.story_num = n.story_num
             left outer join reply r on r.reply_num = n.reply_num    
             left outer join member m on m.userid = n.user_from
         where n.user_to = p_userid order by num desc;      
@@ -332,3 +334,6 @@ END;
 
 
 select * from member
+
+insert into follow (follow_num, follower, followed)
+values (follow_seq.nextVal, 'moon', 'moon')

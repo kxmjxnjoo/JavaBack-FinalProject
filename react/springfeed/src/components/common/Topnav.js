@@ -17,7 +17,7 @@ import logo from '../../images/logo.png'
 import defaultProfile from '../../images/tmpUserIcon.png'
 import './topnav.css'
 
-const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
+const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOpen }) => {
 	const logoStyle = {
 		width: '30px',
 		filter: 'opacity(0.5) drop-shadow(0 0 0 blue)'
@@ -59,7 +59,7 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 				<Navbar.Toggle aria-controls="topnav-toggle"></Navbar.Toggle>
 
 				<Navbar.Collapse id="navbar-toggle">
-					<form className="form-inline my-2 my-lg-0 col-12 col-lg-5">
+					<form className="form-inline my-2 my-lg-0 col-12 col-lg-5" autocomplete="off">
 						<input type="text" className="form-control mr-sm-2 col-lg-5" 
 						placeholder="🔎 검색" aria-label="Sesarch" name="key" 
 						onChange={handleSearch} />
@@ -85,16 +85,13 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }} onClick={showSelect}>
+									<button className={(page === 2 ? "nav-link active" : "nav-link")} style={{ border: 'none', backgroundColor: 'transparent' }}
+										onClick={() => {
+											setIsSelectOpen(true)
+										}}
+									>
 										<AddIcon style={{color: 'white'}}/>
 									</button>
-
-									<Overlay
-										show={isShowSelect}
-										placement="bottom"
-									>
-									</Overlay>
-
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
 									<Link to='/explore'>
@@ -117,9 +114,9 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 											<a className="nav-link">
 												<img src={
 													isLoggedIn ?
-														user.img :
+														'/images/' + user.img :
 														defaultProfile
-												} alt="ERR" className="round-circle" style={profileStyle} />
+												} alt="ERR" className="rounded-circle" style={profileStyle} />
 											</a>
 										</Dropdown.Toggle>
 
@@ -139,8 +136,8 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 												</>
 												:
 												<>
-													<Link to={'/login'} className='text-decoration-none'>
-														<Dropdown.Item>로그인</Dropdown.Item>
+													<Link to='/login' className='text-decoration-none'>
+														<Dropdown.Item href='/login'>로그인</Dropdown.Item>
 													</Link>												
 												</>
 											}
@@ -162,28 +159,3 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey }) => {
 }
 
 export default Topnav
-
-/*
-		<nav className='navbar navbar-nav fixed-top navbar-expand-lg navbar-dark' >
-			<div className='container-fluid'>
-
-				<button className="navbar-toggler me-4" data-toggle="collapse"
-					data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span className="navbar-toggler-icon"></span>
-				</button>
-
-				<div className="collapse navbar-collapse row" id="navbarTogglerDemo02">
-
-
-
-				</div>
-
-			</div>
-
-		</nav >
-
-
-
-
-*/

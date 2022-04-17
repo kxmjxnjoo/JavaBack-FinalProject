@@ -60,7 +60,7 @@ public class UtilController {
 	public String Report(HttpServletRequest request, Model model, 
 			@RequestParam("reportReson") String reason,
 			@RequestParam(value="story_num", required=false) String reportedStory_num,
-			@RequestParam(value="post_num", required=false) String reportedPost_num,
+			@RequestParam(value="post", required=false) String reportedPost_num,
 			@RequestParam(value="userid", required=false) String reportedUserid ) {
 		
 		HttpSession session = request.getSession();

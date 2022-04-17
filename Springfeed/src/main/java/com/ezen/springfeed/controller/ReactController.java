@@ -4,20 +4,17 @@ import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.service.MemberService;
 import com.ezen.springfeed.service.PostService;
+import com.ezen.springfeed.service.StoryService;
 import com.ezen.springfeed.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -31,6 +28,9 @@ public class ReactController {
 
     @Autowired
     UtilService us;
+
+    @Autowired
+    StoryService ss;
 
     // Get user's post
     @RequestMapping(value="/api/post")
@@ -49,7 +49,7 @@ public class ReactController {
             PostDto pdto = new PostDto();
             pdto.setAddress((String) postHashmap.get("ADDRESS"));
             pdto.setUserid((String) postHashmap.get("USERID"));
-            pdto.setPost_img((String) postHashmap.get("POST_IMG"));
+            pdto.setPost_img((String) postHashmap.get("IMG"));
             pdto.setContent((String) postHashmap.get("CONTENT"));
             postList.add(pdto);
         }
@@ -84,13 +84,12 @@ public class ReactController {
             pdto.setUserid((String) pvo.get("USERID"));
             pdto.setAddress((String) pvo.get("ADDRESS"));
             pdto.setContent((String) pvo.get("CONTENT"));
-            pdto.setPost_img((String) pvo.get("POST_IMG"));
+            pdto.setPost_img((String) pvo.get("IMG"));
             pdto.setCreate_date((Timestamp) pvo.get("CREATE_DATE"));
+            pdto.setPostNum( Integer.parseInt(String.valueOf( pvo.get("POST_NUM"))));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(pvo.get("LIKECOUNT"))));
 
-
-//            pdto.setPostNum((Integer) pvo.get("POSTNUM"));
-            //pdto.setLikeCount(pvo.get("LIKECOUNT"));
-            //pdto.setReplyCount();
+            //pdto.setReplyCount(pvo.get("REPLYCOUNT");
             postList.add(pdto);
         }
 
@@ -129,7 +128,7 @@ public class ReactController {
 
     // Get specific user's info
     @RequestMapping(value="/api/user", produces="application/json")
-    public MemberDto getUser(@RequestParam("id") String id) {
+    public MemberDto getUser(HttpServletRequest request, @RequestParam("id") String id) {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", id);
         paramMap.put("ref_cursor", null);
@@ -148,6 +147,18 @@ public class ReactController {
         mdto.setEmail((String) mvo.get("EMAIL"));
         mdto.setUserid((String) mvo.get("USERID"));
         mdto.setImg((String) mvo.get("IMG"));
+
+        // Get isfollowing
+        String loginUser = getLoginUserid(request);
+        if(loginUser != null) {
+            paramMap = new HashMap<>();
+            paramMap.put("follower", loginUser);
+            paramMap.put("userid", id);
+
+            ms.getIsFollowing(paramMap);
+
+            mdto.setIsFollowing(Integer.parseInt(String.valueOf(paramMap.get("isFollowing"))));
+        }
 
         return mdto;
     }
@@ -334,5 +345,78 @@ public class ReactController {
         // Get result
         HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("ref_cursor");
         return (int) result.get("result");
+    }
+
+    // Get Main Storylist
+    @RequestMapping(value="/api/story/list", produces = "application/json")
+    public ArrayList<MemberDto> getStoryList(HttpServletRequest request) {
+        String userid = getLoginUserid(request);
+
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", userid);
+
+        ss.getStoryList(paramMap);
+
+        // Get MemberDto from paramMap
+        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        for(HashMap<String, Object> mem : list) {
+            MemberDto mdto = new MemberDto();
+            mdto.setImg((String) mem.get("IMG"));
+            mdto.setUserid((String) mem.get("USERID"));
+            result.add(mdto);
+        }
+
+        return result;
+    }
+
+    // Get saved post
+    @RequestMapping(value="/api/post/save", produces = "application/json")
+    public ArrayList<PostDto> getSavedPost(@RequestParam("id") String id, @RequestParam(value="page", required = false) Integer page) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", id);
+        paramMap.put("page", page == null ? 0 : page);
+
+        // Get result
+        ps.getSavedPost(paramMap);
+
+        // Convert it to PostDto
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<PostDto> list = new ArrayList<>();
+        for(HashMap<String, Object> post : result) {
+            PostDto pdto = new PostDto();
+            pdto.setPost_img((String) post.get("IMG"));
+            pdto.setPostNum(Integer.parseInt(String.valueOf(post.get("POST_NUM"))));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("NUM_LIKE"))));
+            list.add(pdto);
+        }
+
+        return list;
+    }
+
+    @RequestMapping(value="/api/user/follow", produces="application/json")
+    public int follow(HttpServletRequest request, @RequestParam("id") String following) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("follower", getLoginUserid(request));
+        paramMap.put("followed", following);
+
+        ms.insertFollow(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("result")));
+    }
+
+    @RequestMapping(value="/api/user/unfollow")
+    public int unfollow(HttpServletRequest request, @RequestParam("id") String following) {
+        // Create ParamMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("followed", following);
+        paramMap.put("follower", getLoginUserid(request));
+
+        ms.unfollow(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("result")));
     }
 }

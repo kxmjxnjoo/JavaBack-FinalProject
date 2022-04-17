@@ -30,3 +30,4 @@
   - axios
   - react-hot-toast
   - react-infinite-scroller
+  - react-confirm-alert

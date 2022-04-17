@@ -8,10 +8,12 @@ import { Modal } from 'react-bootstrap'
 import FollowingList from './Home/MainFollowingList'
 import { useState } from 'react'
 import MessageDetail from './Message/MessageDetail'
+import MessageList from './Message/MessageList'
 
-const Message = ({ setPage, user }) => {
+const Message = ({ setPage, user, setIsSelectOpen }) => {
 	useEffect(() => {
 		setPage(1)
+		setIsSelectOpen(false)
 	}, [])
 
 	const [isShowingFollowingList, setIsShowingFollowingList] = useState(false)
@@ -19,13 +21,15 @@ const Message = ({ setPage, user }) => {
 		setIsShowingFollowingList(false)
 	}
 
-	const [messageUser, setMessageUser] = useState(true)
+	const [messageUser, setMessageUser] = useState(null)
 
 	return (
-		<div className='container-fluid mt-5 border'>
-			<div className="row">
-				<div className="col-4">
-					USERLIST
+		<div className='container-fluid border mb-5'>
+			<div className="row vh-60 overflow-hidden">
+				<div className="col-4 border">
+					<MessageList
+						setMessageUser={setMessageUser}
+					/>
 				</div>
 
 				<div className="col-8">

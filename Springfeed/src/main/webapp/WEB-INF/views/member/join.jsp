@@ -124,7 +124,6 @@
 </script>
 </head>
 <body>
-	<%@ include file="../common/topnav.jsp" %>
 	
 	<form method="post" action="/join" name="loginFrm" id="joinform">
 		<div class="box1">

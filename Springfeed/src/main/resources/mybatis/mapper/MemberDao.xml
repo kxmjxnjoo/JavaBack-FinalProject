@@ -159,4 +159,21 @@
 		{  CALL PublicAccount(  #{userid}  )  }
 	</update>
 	
+	<select id="findPw" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findPw(  #{userid},#{phone},#{email},#{cnt, mode=OUT, jdbcType=INTEGER}  )  }
+	</select>
+	
+	<update id="changePw" statementType="CALLABLE" parameterType="String">
+		{  CALL changePw(  #{userid}, #{tempPassword}  )  }
+	</update>
+
+	<select id="getIsFollowing" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{
+			CALL getIsFollowing(
+			    #{userid},
+			    #{follower},
+			    #{isFollowing, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
 </mapper>

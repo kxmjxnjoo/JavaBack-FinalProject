@@ -103,7 +103,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
                         <Link to={"/user/page/" + userid} style={{textDecoration: 'none', color: 'black'}}>
                             <div className="row">
                                 <div className="col-2">
-                                    <img src={userprofile == '' || userprofile == null ? defaultProfile : userprofile} alt="Profile" className="rounded-circle" style={profileStyle} />
+                                    <img src={userprofile == '' || userprofile == null ? defaultProfile : ('/images/' + userprofile)} alt="Profile" className="rounded-circle" style={profileStyle} />
                                 </div>
                                 <div className="col text-left">
                                     <h6>{userid == '' || userid == null ? 'ERROR' : userid}</h6>
@@ -125,7 +125,7 @@ const Post = ({ post, openPostDetail, setIsDetailMenuOpen, setSelectedPost }) =>
             </div>
 
             <div className="card-body">
-                <img src={postImage == '' || postImage == null ? "http://picsum.photos/200/200" : postImage} alt="" style={postImageStyle} />
+                <img src={(postImage == '' || postImage == null) ? 'http://picsum.photos/100/100' : '/images/' + postImage} alt="이미지를 불러올 수 없어요" style={postImageStyle} />
             </div>
 
             <div className="card-footer h2">

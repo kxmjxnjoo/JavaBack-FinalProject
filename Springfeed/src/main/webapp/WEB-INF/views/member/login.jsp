@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>스프링 피드 로그인</title>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/loginTest.css">
 <link rel="stylesheet" href="/css/spring.css">
@@ -14,7 +17,6 @@
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 <script src="/react-component/Topnav.js"></script>
-
 
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -36,7 +38,7 @@
 							<h2 style="margin:20px;"> 로그인</h3>
 						 </div>
 					</div>
-                   <form method="post" name="login" action="/login">
+                   <form method="post" id="loginFrm" name="login" action="/login">
                            <div class="form-group">
                               <input type="text" name="userid"  required class="loginInput" id="userid" aria-describedby="emailHelp" placeholder="아이디">
                            </div>
@@ -47,7 +49,7 @@
                               
                            </div>
                            <div class="form-group">
-                              <button type="submit" class="loginButton">로그인</button>
+                              <button type="submit" class="loginButton" onclick="loginCheck(event);">로그인</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
@@ -56,8 +58,8 @@
                               </div>
                            </div>
                            <div class="form-group">
-                             <p class="text-center"> 아직 계정이 없으신가요? <a href="/join/form" id="signup">가입하기</a></p>
-                             <p class="text-center"> 아이디나 비밀번호를 잊으셨나요? <a href="/find/form" id="signup">아이디/비밀번호 찾기</a></p>
+                             <p class="text-center"> 아직 계정이 없으신가요? <a href="/join" id="signup">가입하기</a></p>
+                             <p class="text-center"> 아이디나 비밀번호를 잊으셨나요? <a href="/find/account" id="signup">아이디/비밀번호 찾기</a></p>
                              <p class="text-center"> 관리자이신가요? <a href="/admin" id="signup">관리자 로그인</a></p>
                            </div>
                         </form>
@@ -66,6 +68,9 @@
 			</div>
 			</div>
 		</div>
-      </div>   
-<%@ include file="../common/footer.jsp" %>  
+      </div>
+<!--       
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	
 </body>

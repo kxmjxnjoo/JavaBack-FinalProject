@@ -128,9 +128,6 @@
 </script>
 </head>
 <body>
-	<%@ include file="../common/topnav.jsp" %>
-	
-			
 		<form name="frm" method="post" id="joinform">
 			<div class="box1">
 				<h1 style="margin-bottom: 20px; font-size: 3rem">Springfeed</h1>
@@ -190,18 +187,18 @@
 			
 	
 			<form id="imgForm" method="post" enctype="multipart/form-data">
-				<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
-		</form>
+				<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event); uploadImg();"/>
+			</form>
 		
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
 				<c:choose>
 				<c:when test="${ dto.useyn ne 'p' }">
-					<h2>친구들에게만 내 사진을 공유하고 싶어요!</h2>
+					<h3>친구들에게만 내 사진을 공유하고 싶어요!</h3>
 					<input type="button" id="login" value="계정 비공개" onclick="privateAccount();">				
 				</c:when>
 				<c:otherwise>
-					<h2>Springfeed의 모두와 친구가 되고 싶어요!</h2>
+					<h3>Springfeed의 모두와 친구가 되고 싶어요!</h3>
 					<input type="button" id="login" value="계정 공개" onclick="publicAccount();">		
 				</c:otherwise>
 				</c:choose>
@@ -211,7 +208,7 @@
 		
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
-				<h2>Springfeed가 마음에 안 드시나요?</h2>
+				<h3>Springfeed가 마음에 안 드시나요?</h3>
 				<input type="button" id="login" value="계정 비활성화" onclick="withdraw();">
 			</div>
 		</div>
@@ -272,5 +269,4 @@
 
 	</script>
 </body>
-<%@ include file="../common/footer.jsp" %>
 </html>

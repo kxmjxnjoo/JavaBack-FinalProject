@@ -8,11 +8,13 @@ import FollowingList from './Home/MainFollowingList'
 import Loading from './common/Loading'
 import Error from './common/Error'
 import NoPost from './Home/NoPost'
+import StoryList from './Home/StoryList'
+
 import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
 
-const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost }) => {
+const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum, setIsSelectOpen }) => {
     const [posts, setPosts] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
@@ -29,6 +31,8 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
     }
     useEffect(() => {
         setPage(0)
+        setIsSelectOpen(false)
+
         const head = new Headers({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -68,27 +72,34 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             })
             .catch((err) => {
                 setHasMore(false)
-                toast.error('포스트가 더 이상 없는거 같아요')
+                toast.error('에러가 났어요')
             })
     }
 
 
 
     return (
-        <div className='container row mt-5'>
+        <div className='container row'>
 
             <div className='col-12 col-md-9'>
+                <div>
+                    <StoryList
+                        setIsStoryOpen={setIsStoryOpen}
+                        setStoryNum={setStoryNum}
+                    />
+                </div>
+
                 <div>
                     {
                         isLoading ? <Loading message='포스트를 불러오고 있어요'/> :
                             isPostFeedError ? <Error errorMessage={errorMessage} /> :
-                                posts != null ?
+                                posts != null || posts.length == 0 ?
 
                                     <InifniteScroll
                                         pageStart={postPage}
                                         loadMore={loadFeed}
                                         hasMore={hasMore}
-                                        loader={<Loading message='포스트를 더 불러오고 있어요' className='mb-5'/>}
+                                        loader={<Loading message='포스트를 더 불러오고 있어요' className='mb-5 mt-5'/>}
                                     >
                                         {
                                             posts.map((post) => {
@@ -108,9 +119,10 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                 </div>
             </div>
 
-            <div className='col-3 col-md-0 d-none d-md-block sticky-top'>
+            <div className='col-3 col-md-0 d-none d-md-block' style={{position: 'fixed', left: '70%'}}>
                 <FollowingList
                     user={user}
+                    loginUser={user}
                 />
             </div>
 

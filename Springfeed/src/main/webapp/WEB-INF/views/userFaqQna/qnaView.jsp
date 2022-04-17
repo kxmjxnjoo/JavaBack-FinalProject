@@ -5,14 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>QNA 답변</title>
 <link rel="stylesheet" href="/css/admin/qnadetail.css">
 <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
 <body>
-	
-	<%@ include file="../common/topnav.jsp" %>
-
 	<div id="wrap">
 		<h1 class="mark">Q</h1>
 		<h1 class="qnaTitle">${ qna.QNA_SUBJECT }</h1>
@@ -61,8 +59,5 @@
 		}
 	
 	</script>
-
-	<%@ include file="../common/footer.jsp" %>
-
 </body>
 </html>

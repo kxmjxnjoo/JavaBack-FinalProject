@@ -113,4 +113,16 @@ public class MemberService {
     public void getFollowerList(HashMap<String, Object> paramMap) {
 		mdao.getFollowerList(paramMap);
     }
+
+	public void findPw(HashMap<String, Object> paramMap) {
+		mdao.findPw(paramMap);
+	}
+
+	public void changePw(String userid, String tempPassword) {
+		mdao.changePw(userid, tempPassword);
+	}
+
+    public void getIsFollowing(HashMap<String, Object> paramMap) {
+		mdao.getIsFollowing(paramMap);
+    }
 }

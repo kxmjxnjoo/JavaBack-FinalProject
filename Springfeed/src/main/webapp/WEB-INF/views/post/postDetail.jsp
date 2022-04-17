@@ -84,7 +84,6 @@ function deleteReplyCheck(reply_num, post_num){
 </script>
 </head>
 <body>
-<%@ include file="/topnav/topnav.jsp" %>
 
 <form name="frm" method="post">
 <!-- report modal -->

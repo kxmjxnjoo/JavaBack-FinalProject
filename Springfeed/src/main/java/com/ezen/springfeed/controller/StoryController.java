@@ -63,6 +63,12 @@ public class StoryController {
 			else
 				paramMap.put("fontcolor", storydto.getFontColor());
 			
+			
+			System.out.println("font " + storydto.getFontColor());
+			System.out.println("content " + storydto.getStory_content());
+			System.out.println("img " + storydto.getStory_img());
+			
+			
 			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("story_num", 0);
@@ -141,7 +147,7 @@ public class StoryController {
 						
 						mav.setViewName("post/storyDetail");
 					
-				} else if(((String)paramMap.get("useyn")).equals("y") ) {
+				} else if(!((String)paramMap.get("useyn")).equals("n") ) {
 					
 					System.out.println(loginUser.get("USERID"));
 					System.out.println(resultMap.get("USERID"));
@@ -206,7 +212,7 @@ public class StoryController {
 			ss.deleteStory(story_num);
 			
 			rttr.addFlashAttribute("message", "스토리를 삭제했어요!");
-		    return "redirect:/post?userid="+userid;
+		    return "redirect:http://localhost:3000/user/page/"+userid;
 		}
 	}
 	

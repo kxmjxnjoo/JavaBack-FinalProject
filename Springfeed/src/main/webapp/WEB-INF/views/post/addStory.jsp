@@ -15,7 +15,6 @@
 
 </head>
 <body>
-<%@ include file="../common/topnav.jsp" %>
 
 <form name="frm" method="post" action="/story/add">
 	<div class="wrap">
@@ -36,8 +35,8 @@
 					<input type="hidden" name="story_img" id="newImage">
 				</div>
 				<div id="clear"></div>
-				<select name="fontColor" id="fontColor" class="select-css">
-					<option> 스토리에 표시될 폰트 색을 선택해주세요 </option>
+				<select name="fontcolor" id="fontColor" class="select-css">
+					<option value = ""> 스토리에 표시될 폰트 색을 선택해주세요 </option>
 					<option value = "white"> 흰색 </option>
 					<option value = "black"> 검정 </option>
 					<option value = "purple"> 보라 </option>
@@ -73,7 +72,7 @@
 
 <!-- 이미지 ajax용 form -->
 <form id="imgForm" method="post" enctype="multipart/form-data">
-	<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);"/>
+	<input type="file" name="fileName" id="input-file" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event); uploadImg();"/>
 </form>
 
 

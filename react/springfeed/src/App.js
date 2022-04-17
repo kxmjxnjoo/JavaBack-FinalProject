@@ -22,10 +22,22 @@ import Login from './components/jsp-components/Login'
 import Logout from './components/jsp-components/Logout'
 import Join from './components/jsp-components/Join'
 import UserEdit from './components/jsp-components/UserEdit'
+import UploadStory from './components/jsp-components/UploadStory'
+import UploadPost from './components/UploadPost'
+import Find from './components/jsp-components/Find'
+import Admin from './components/jsp-components/Admin'
+import Report from './components/jsp-components/Report'
 
 // Common
 import './common.css'
 import UserPage from './components/common/UserPage'
+import Footer from './components/common/Footer'
+import Qna from './components/jsp-components/Qna'
+import Faq from './components/jsp-components/Faq'
+import Story from './components/jsp-components/Story'
+import Select from './components/Select'
+
+import './search.css'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -35,9 +47,12 @@ function App() {
 	const [errorMessage, setErrorMessage] = useState(null)
 	const [page, setPage] = useState(0)
 	const [searchKey, setSearchKey] = useState('')
-
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
+	const [isStoryOpen, setIsStoryOpen] = useState(false)
+	const [storyNum, setStoryNum] = useState(null)
+	const [isSelectOpen, setIsSelectOpen] = useState(false) 
+	const [isReportOpen, setIsReportOpen] = useState(false)
 
 	const closePostDetail = () => {
 		setIsPostDetailOpen(false)
@@ -70,8 +85,13 @@ function App() {
 			})
 	}, [])
 
+	const openPostDetail = (postNum) => {
+        setIsPostDetailOpen(true)
+        setSelectedPost(postNum)
+    }
+
 	return (
-		<div className="App">
+		<div className="App d-flex flex-column min-vh-100">
 		<Router>
 
 			<div>
@@ -87,17 +107,18 @@ function App() {
 				user={user}
 				searchKey={searchKey}
 				setSearchKey={setSearchKey}
+				setIsSelectOpen={setIsSelectOpen}
 			/>
 
 			{
 				searchKey !== "" ?
-					<div className="card w-50 ms-5 mt-5 overflow-auto shadow"
+					<div className="card w-50 ms-5 mt-md-5 mt-6 overflow-auto shadow-lg"
 						style={{
 							height: '300px',
 							position: 'fixed',
 							zIndex: '100',
 							top: '50px',
-							left: '50px'
+							left: '50px',
 						}}>
 						<div className="card-header">
 							<div className="card-title h5 text-center">검색 결과</div>
@@ -115,43 +136,77 @@ function App() {
 			}
 
 
-			<div className='container'>
+			<div className='container min-vh-100'>
 					{
 						isLoading ? <Loading message='로딩중이에요'/> :
 							isError ? <Error errorMessage={errorMessage} /> :
-
-								!isLoggedIn ? <Login/>
-									:
 									<Routes>
 										<Route path="/" element={
-											<Home
-												user={user}
-												setPage={setPage}
-												toast={toast}
-												selectedPost={selectedPost}
-												setSelectedPost={setSelectedPost}
-												setIsPostDetailOpen={setIsPostDetailOpen}
-											/>} />
+												!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
+												:
+												<Home
+													user={user}
+													setPage={setPage}
+													toast={toast}
+													selectedPost={selectedPost}
+													setSelectedPost={setSelectedPost}
+													setIsPostDetailOpen={setIsPostDetailOpen}
+													setIsStoryOpen={setIsStoryOpen}
+													setStoryNum={setStoryNum}
+													setIsSelectOpen={setIsSelectOpen}
+												/>}
+											 />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
+											:
 											<Message
 												setPage={setPage}
 												user={user}
+												setIsSelectOpen={setIsSelectOpen}
 											/>} />
-										<Route path="/explore" element={<Explore
-											setPage={setPage}
-											setIsPostDetailOpen={setIsPostDetailOpen}
-											setSelectedPost={setSelectedPost}
+										<Route path="/explore" element={										
+											<Explore
+												setPage={setPage}
+												setIsPostDetailOpen={setIsPostDetailOpen}
+												setSelectedPost={setSelectedPost}
+												setIsSelectOpen={setIsSelectOpen}
 										/>} />
 
-										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey}/>}/>
-										<Route path='/noti' element={<Noti/>}/>
+										<Route path='/noti' element={
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
+											:
+											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
+
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} 
+																						setIsSelectOpen={setIsSelectOpen} 
+																						isLoggedIn={isLoggedIn} 
+																						loginUser={user}/>}
+																						openPostDetail={openPostDetail}
+																						/>
+										<Route path='/login' element={<Login isLoggedIn={isLoggedIn}/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
-										<Route path='/user/edit' element={<UserEdit/>}/>
+
+										<Route path='/user/edit' element={
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
+											:
+											<UserEdit/>}/>
+										<Route path='/faq' element={<Faq/>}/>
+										<Route path='/qna' element={<Qna/>}/>
+
+										<Route path='/upload/story' element={<UploadStory setIsSelectOpen={setIsSelectOpen}/>}/>
+										<Route path='/upload/post' element={<UploadPost setIsSelectOpen={setIsSelectOpen}/>}/>
+
+										<Route path='/find/account' element={<Find/>}/>
+
+										<Route path='/admin' element={<Admin/>}/>
+
 									</Routes>
 					}
 			</div>
+
+			<Footer/>
 
 			<Modal
 				show={isPostDetailOpen}
@@ -163,6 +218,41 @@ function App() {
 					post={selectedPost}
 					/>
 			</Modal>
+
+			<Modal
+				show={isStoryOpen}
+				onHide={() => {
+					setIsStoryOpen(false)
+				}}
+				dialogClassName='storyModal'
+				className='mt-5 overflow-hidden'
+			>
+				<Story
+					storyNum={storyNum}
+				/>
+			</Modal>
+
+			<Modal
+				show={isSelectOpen}
+				onHide={() => {
+					setIsSelectOpen(false)
+				}}
+				dialogClassName='selectModal'
+				className='mt-5'
+			>
+				<Select/>
+			</Modal>
+
+			<Modal
+				show={isReportOpen}
+				onHide={() => {
+					setIsReportOpen(false)
+				}}
+				className='mt-5'
+			>
+				<Report/>
+			</Modal>
+			
 		</Router>
 		</div>
 	);

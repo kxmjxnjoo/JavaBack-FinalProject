@@ -18,7 +18,7 @@
 
 .faqQ {
     color: silver;
-    margin-right: 5x;
+    margin-right: 10x;
 }
 
 .faqTitle {
@@ -29,6 +29,10 @@
     width: 90%;
     position: relative;
     left: 5%;
+}
+
+.faqTitle h3{
+	display: inline;
 }
 
 .faqTitle:hover {

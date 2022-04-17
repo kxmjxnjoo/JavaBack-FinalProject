@@ -75,6 +75,7 @@
 	
 	<select id="getQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getQnaList( 
+			#{userid},
 			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
 		)  }
 	</select>

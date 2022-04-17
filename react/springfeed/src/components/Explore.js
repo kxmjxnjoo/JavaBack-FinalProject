@@ -5,16 +5,17 @@ import Error from './common/Error'
 
 import './explore.css'
 
-import {BsFillHeartFill as LikeIcon, BsChatLeftFill as ReplyIcon} from 'react-icons/bs'
+import PostThumbnail from './common/PostThumbnail'
 
-const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
+const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpen }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
-    const [exploreData, setExploreData] = useState(null)
+    const [exploreData, setExploreData] = useState([])
 
     useEffect(() => {
         setPage(3)
+        setIsSelectOpen(false)
         
         fetch('/api/explore/feed')
             .then((res) => {
@@ -24,8 +25,9 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
                 if(data == null || data == '' || typeof data == 'undefined') {
                     setIsError(true)
                 } else {
-                    setExploreData(data);
-                    console.log("DATA : " + data);
+                    console.log(data)
+                    setExploreData([...exploreData, [...data]]);
+                    console.log(exploreData)
                 }
                 setIsLoading(false)
             })
@@ -37,11 +39,6 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
     }, [])
 
 
-    const imgStyle = {
-        width: '100%',
-        objectFit: 'cover'
-    }
-
     const openPostDetail = (postNum) => {
         setIsPostDetailOpen(true)
         setSelectedPost(postNum)
@@ -49,7 +46,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
 
     return (
 
-        <div className='mt-5 mb-5'>
+        <div className='mb-5'>
             {
                 isLoading ? <Loading message='인기 포스트를 불러오고 있어요' className='mt-5' /> :
                     <>
@@ -58,32 +55,85 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
                             :
                             <div className="row">
                                 {
-                                    exploreData.map((data, index) => {
+                                    (exploreData == null || exploreData.length == 0) ?
+                                    <Error message='로딩하는데 오류가 났거나 인기 포스트가 없어요' errorMessage=''/>
+                                    :
+                                    exploreData.map((data) => {
                                         return(
-                                            <div className='col-4 p-0'
-                                                onClick={
-                                                    () => {
-                                                        openPostDetail(data.postNum)
-                                                    }
-                                                }
-                                            >
-                                                <div className="row justify-content-center h2 position-absolute text-white m-0">
-                                                    <div className="col-2 text-dark">
-                                                        <LikeIcon/>
+                                            <>
+                                                <div className="row">
+                                                    <div className="col-12 col-md-4 p-0">
+                                                    <PostThumbnail
+                                                        postNum={data[0].postNum}
+                                                        postImg={data[0].img}
+                                                        likeCount={data[0].likeCount}
+                                                        replyCount={data[0].replyCount}
+                                                        openPostDetail={openPostDetail}
+
+                                                        className=''
+                                                        />
+                                                        <PostThumbnail
+                                                        postNum={data[1].postNum}
+                                                        postImg={data[1].img}
+                                                        likeCount={data[1].likeCount}
+                                                        replyCount={data[1].replyCount}
+                                                        openPostDetail={openPostDetail}
+
+                                                        className=''
+                                                        />
                                                     </div>
-                                                    <div className="col-2 text-dark me-3">
-                                                        {data.likeCount}
-                                                    </div>
-                                                    <div className="col-2 text-dark">
-                                                        <ReplyIcon/>
-                                                    </div>
-                                                    <div className="col-2 text-dark">
-                                                        {data.replyCount}
+                                                    <div className="col-12 col-md-8 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[2].postNum}
+                                                            postImg={data[2].img}
+                                                            likeCount={data[2].likeCount}
+                                                            replyCount={data[2].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                            style={{objectFit: 'cover', height: '800px'}}
+                                                        />
                                                     </div>
                                                 </div>
 
-                                                <img src="http://picsum.photos/500/500" alt="" style={imgStyle} className='w-100 img-responsive exploreImg' />
-                                            </div>
+                                                <div className="row p">
+                                                    <div className="col-12 col-md-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[3].postNum}
+                                                            postImg={data[3].img}
+                                                            likeCount={data[3].likeCount}
+                                                            replyCount={data[3].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                        />
+
+                                                    </div>
+                                                    <div className="col-12 col-md-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[4].postNum}
+                                                            postImg={data[4].img}
+                                                            likeCount={data[4].likeCount}
+                                                            replyCount={data[4].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className='p-2'
+                                                        />
+
+                                                    </div>
+                                                    <div className="col-12 col-md-4 p-0">
+                                                        <PostThumbnail
+                                                            postNum={data[5].postNum}
+                                                            postImg={data[5].img}
+                                                            likeCount={data[5].likeCount}
+                                                            replyCount={data[5].replyCount}
+                                                            openPostDetail={openPostDetail}
+
+                                                            className=''
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </>
                                         )
                                     })
                                 }
