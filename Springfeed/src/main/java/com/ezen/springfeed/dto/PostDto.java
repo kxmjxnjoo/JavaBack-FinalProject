@@ -14,4 +14,7 @@ public class PostDto {
 	private String user_img;
 	private int likeCount;
 	private int replyCount;
+
+	private int isLiked;
+	private int isSaved;
 }

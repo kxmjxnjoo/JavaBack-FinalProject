@@ -3,6 +3,8 @@ import {Carousel} from 'react-bootstrap';
 import Error from '../common/Error';
 import Loading from '../common/Loading';
 
+import {AiOutlineArrowRight as RightArrowIcon, AiOutlineArrowLeft as LeftArrowIcon} from 'react-icons/ai';
+
 // Resources
 import defaultUserIcon from '../../images/tmpUserIcon.png'
 
@@ -30,16 +32,18 @@ const StoryList = ({setIsStoryOpen, setStoryNum}) => {
             isLoading ?
             <Loading message='스토리를 불러오고 있어요'/>
             :
-            <Carousel variant='dark' indicators={false} wrap={false}>
+            <>
                 {
                     (storyList != null && storyList.length != 0) ?
                         storyList.map((arr) => {
                             return(
-                                <Carousel.Item>
+                                <div className='row'>
+                                    <div className="col-1 align-self-center ms-3">
+                                        <LeftArrowIcon className='h1'/>
+                                    </div>
                                     {
                                         arr.map((user) => {
                                             return(
-                                                <div className="row justify-content-center">
                                                     <div className="col-2 text-center" onClick={() => {
                                                         setIsStoryOpen(true)
                                                         setStoryNum(0)
@@ -49,17 +53,19 @@ const StoryList = ({setIsStoryOpen, setStoryNum}) => {
                                                             {user.userid}
                                                         </div>
                                                     </div>
-                                                </div>
                                             )
                                         })
                                     }
-                                </Carousel.Item>
+                                    <div className="col-1 align-self-center me-3">
+                                        <RightArrowIcon className='h1'/>
+                                    </div>
+                                </div>
                             )
                         })
                     :
                     <Error errorMessage='스토리를 불러올 수 없었어요'/>
                 }
-            </Carousel>
+            </>
         }
         
     </div>

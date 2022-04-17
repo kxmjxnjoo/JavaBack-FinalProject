@@ -2,6 +2,7 @@ package com.ezen.springfeed.controller;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.PostDto;
+import com.ezen.springfeed.dto.ReplyDto;
 import com.ezen.springfeed.service.MemberService;
 import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.service.StoryService;
@@ -418,5 +419,56 @@ public class ReactController {
         ms.unfollow(paramMap);
 
         return Integer.parseInt(String.valueOf(paramMap.get("result")));
+    }
+
+    @RequestMapping(value="/api/post/num")
+    public PostDto getPostByNum(@RequestParam("num") int num) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("num", num);
+        paramMap.put("p_cur", null);
+
+        ps.getPostByNum(paramMap);
+
+        // Get postdto
+        HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("p_cur");
+
+        PostDto pdto = new PostDto();
+        pdto.setLikeCount(result.get("LIKE_COUNT"));
+        pdto.setPost_img(result.get("IMG"));
+        pdto.setContent(result.get("CONTENT"));
+        pdto.setAddress(result.get("ADDRESS"));
+        pdto.setCreate_date(result.get("CREATE_DATE"));
+        pdto.setUserid(result.get("USERID"));
+        pdto.setUser_img(result.get("USERIMG"));
+        pdto.setIsLiked(result.get("ISLIKED"));
+        pdto.setIsSaved(result.get("ISSAVED"));
+    }
+
+    @RequestMapping(value="/api/post/comment")
+    public ArrayList<ReplyDto> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("postnum", postNum);
+        paramMap.put("page", page == null ? 0 : page);
+        paramMap.put("p_cur", null);
+
+        ps.getReplyByPostNum(paramMap);
+
+        // Convert it to ReplyDto
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<ReplyDto> list = new ArrayList<>();
+
+        for(HashMap<String, Object> re : result) {
+            ReplyDto rdto = new ReplyDto();
+            rdto.setContent((String) re.get("CONTENT"));
+            rdto.setImg((String) re.get("IMG"));
+            rdto.setUserid((String) re.get("USERID"));
+            rdto.setReply_date((Timestamp) re.get("REPLY_DATE"));
+
+            list.add(rdto);
+        }
+
+        return list;
     }
 }

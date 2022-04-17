@@ -3,8 +3,10 @@ import { MdOutlineMoreHoriz as DetailIcon } from 'react-icons/md'
 import { BsHeart as LikeIcon, BsFillHeartFill as LikeFillIcon, BsChatLeft as ReplyIcon, BsChatDots as MessageIcon,
     BsBookmark as SaveIcon, BsFillBookmarkFill as SaveFillIcon } from 'react-icons/bs'
 
+    import defaultProfile from '../../images/tmpUserIcon.png'
+
 const PostDetail = ({post}) => {
-    const { user_img: userprofile, userid, address: location, 
+    const { user_img: userProfile, userid, address: location, 
         post_img: postImage, likeCount: likes, isLiked, 
         isSaved, content, post_num: postNum } = post
 
@@ -51,7 +53,7 @@ const PostDetail = ({post}) => {
             <div className="col-6">
                 <div className="row mt-3" style={{height: '20%'}}>
                     <div className="col-2">
-                        <img src="http://picsum.photos/200/200" alt="" style={{width: '50px', height: '50px'}} className='rounded-circle'/>
+                        <img src={userProfile != null ? '/images/' + userProfile : defaultProfile } alt="" style={{width: '50px', height: '50px'}} className='rounded-circle'/>
                     </div>
                     <div className="col-8 align-self-center">
                         <div className="h3">{userid == '' || userid == null ? 'USERID' : userid}</div>

@@ -109,7 +109,7 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
-									<Dropdown>
+									<Dropdown align='end'>
 										<Dropdown.Toggle variant="none" id="dropdown-basic" className='p-0'>
 											<a className="nav-link">
 												<img src={
