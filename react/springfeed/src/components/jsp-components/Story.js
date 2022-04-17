@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Loading from '../common/Loading';
+import {useParams} from 'react-router-dom'
 
-const Story = ({storyUser}) => {
+const Story = () => {
+    const {id} = useParams()
+
     const [jspElement, setJspElement] = useState(null);
 
     const createMarkup = (data) => {
@@ -12,7 +15,7 @@ const Story = ({storyUser}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch('/story?userid=' + storyUser)
+        fetch('/story?userid=' + id)
             .then((res) => {
                 return res.text()
             })
@@ -25,14 +28,14 @@ const Story = ({storyUser}) => {
     }, [])
 
   return (
-    <>
+    <div>
         {
             isLoading ? 
             <Loading message='스토리를 가져오고 있어요'/>
             :
             <div dangerouslySetInnerHTML={{__html: jspElement}} className='mt-5 vh-100' style={{margin: '0px'}}/>
         }  
-    </>
+    </div>
   )
 }
 

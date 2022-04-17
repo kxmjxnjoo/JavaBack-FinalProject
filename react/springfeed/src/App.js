@@ -49,8 +49,6 @@ function App() {
 	const [searchKey, setSearchKey] = useState('')
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
-	const [isStoryOpen, setIsStoryOpen] = useState(false)
-	const [storyUser, setStoryUser] = useState(null)
 	const [isSelectOpen, setIsSelectOpen] = useState(false) 
 	const [isReportOpen, setIsReportOpen] = useState(false)
 
@@ -151,8 +149,6 @@ function App() {
 													selectedPost={selectedPost}
 													setSelectedPost={setSelectedPost}
 													setIsPostDetailOpen={setIsPostDetailOpen}
-													setIsStoryOpen={setIsStoryOpen}
-													setStoryUser={setStoryUser}
 													setIsSelectOpen={setIsSelectOpen}
 												/>}
 											 />
@@ -202,6 +198,8 @@ function App() {
 
 										<Route path='/admin' element={<Admin/>}/>
 
+										<Route path='/story/:id' element={<Story/>}/>
+
 									</Routes>
 					}
 			</div>
@@ -217,19 +215,6 @@ function App() {
 				<PostDetail
 					post={selectedPost}
 					/>
-			</Modal>
-
-			<Modal
-				show={isStoryOpen}
-				onHide={() => {
-					setIsStoryOpen(false)
-				}}
-				dialogClassName='storyModal'
-				className='overflow-hidden'
-			>
-				<Story
-					storyUser={storyUser}
-				/>
 			</Modal>
 
 			<Modal

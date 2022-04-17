@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import {Carousel} from 'react-bootstrap';
 import Error from '../common/Error';
 import Loading from '../common/Loading';
+import {Link} from 'react-router-dom'
 
 import {AiOutlineArrowRight as RightArrowIcon, AiOutlineArrowLeft as LeftArrowIcon} from 'react-icons/ai';
 
 // Resources
 import defaultUserIcon from '../../images/tmpUserIcon.png'
 
-const StoryList = ({setIsStoryOpen, setStoryUser}) => {
+const StoryList = () => {
     const [storyList, setStoryList] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -44,15 +45,14 @@ const StoryList = ({setIsStoryOpen, setStoryUser}) => {
                                     {
                                         arr.map((user) => {
                                             return(
-                                                    <div className="col-2 text-center" onClick={() => {
-                                                        setIsStoryOpen(true)
-                                                        setStoryUser(user.userid)
-                                                    }}>
+                                                <div className="col-2 text-center">
+                                                    <Link to={'/story/' + user.userid} className='text-decoration-none text-black'>
                                                         <img src={ user.img == null ? defaultUserIcon : ('/images/' + user.img) } alt="PROFILE" className='d-block rounded-circle' style={{width: '75px'}}/>
                                                         <div className="h5">
                                                             {user.userid}
                                                         </div>
-                                                    </div>
+                                                    </Link>
+                                                </div>
                                             )
                                         })
                                     }
