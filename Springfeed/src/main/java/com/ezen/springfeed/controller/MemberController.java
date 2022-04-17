@@ -381,17 +381,11 @@ public class MemberController {
 		return resultMap;
 	}
     
-    
-    @ResponseBody
-    @RequestMapping("/user/editing")
-    public Map<String, Object> userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    @RequestMapping("/user/edit")
+    public String userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, Model model,
     		@RequestParam("oldPicture") String oldPicture, RedirectAttributes rttr) {
 
-    	Map<String, Object> returnMap = new HashMap<>(); 
-    	
-    	System.out.println("회원정보 수정 메소드");
-    	
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
 		= (HashMap<String, Object>) session .getAttribute("loginUser");
@@ -400,16 +394,12 @@ public class MemberController {
     	String url = "redirect:http://localhost:3000/user/edit";
     	if(result.getFieldError("password")!= null) {
              rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
-             returnMap.put("cnt", 0);
          } else if(result.getFieldError("name")!= null) {
         	 rttr.addFlashAttribute("message", result.getFieldError("name").getDefaultMessage());
-        	 returnMap.put("cnt", 0);
           } else if(result.getFieldError("email")!= null) {
         	 rttr.addFlashAttribute("message", result.getFieldError("email").getDefaultMessage());
-        	 returnMap.put("cnt", 0);
          }  else if(result.getFieldError("phone")!= null) {
         	 rttr.addFlashAttribute("message", result.getFieldError("phone").getDefaultMessage());
-        	 returnMap.put("cnt", 0);
          } else {
         	 	HashMap<String, Object> resultMap = (HashMap<String, Object>) rttr.getAttribute("resultMap");
         		HashMap<String, Object> paramMap = new HashMap<>();
@@ -428,9 +418,9 @@ public class MemberController {
      			
      			session.setAttribute("loginUser", paramMap);
      			
-     			returnMap.put("cnt", 1);
+     			url = "redirect:http://localhost:3000/user/page/"+ userid;
          }
-    	return returnMap;
+    	return url;
     }
     
     @RequestMapping("/deleteAcount")

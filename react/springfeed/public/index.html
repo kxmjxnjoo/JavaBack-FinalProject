@@ -269,6 +269,20 @@ function goBack(){
       };
 
 //회원정보 수정
+      //수정전
+  function editCheck(){
+			let theForm = document.frm;
+			
+			let result = confirm('회원 정보를 수정할까요?');
+			if(result) {
+				theForm.action="/user/edit";
+				theForm.submit();
+			} else {
+				return;
+			}
+		}
+
+
       function userEditCheck(event) {
         console.log('userEditCheck');
         event.preventDefault()

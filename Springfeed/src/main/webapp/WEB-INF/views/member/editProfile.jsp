@@ -43,7 +43,6 @@
 </script>
 </head>
 <body>
-<%@ include file="../common/message.jsp" %>
 
 		<form name="frm" method="post" id="joinform">
 			<div class="box1">
@@ -98,7 +97,7 @@
 				<textarea class="text_box" name="introduce" id="introduce_box" placeholder="${ loginUser.INTRODUCE }">${ loginUser.INTRODUCE }</textarea>
 					
 				
-				<input type="submit" id="login" value="회원 정보 수정" onclick="userEditCheck(event);">
+				<input type="submit" id="login" value="회원 정보 수정" onclick="editCheck();">
 			</div>
 		</form>
 			
