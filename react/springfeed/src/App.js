@@ -26,6 +26,7 @@ import UploadStory from './components/jsp-components/UploadStory'
 import UploadPost from './components/UploadPost'
 import Find from './components/jsp-components/Find'
 import Admin from './components/jsp-components/Admin'
+import Report from './components/jsp-components/Report'
 
 // Common
 import './common.css'
@@ -46,14 +47,12 @@ function App() {
 	const [errorMessage, setErrorMessage] = useState(null)
 	const [page, setPage] = useState(0)
 	const [searchKey, setSearchKey] = useState('')
-
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
-
 	const [isStoryOpen, setIsStoryOpen] = useState(false)
 	const [storyNum, setStoryNum] = useState(null)
-
 	const [isSelectOpen, setIsSelectOpen] = useState(false) 
+	const [isReportOpen, setIsReportOpen] = useState(false)
 
 	const closePostDetail = () => {
 		setIsPostDetailOpen(false)
@@ -143,23 +142,23 @@ function App() {
 							isError ? <Error errorMessage={errorMessage} /> :
 									<Routes>
 										<Route path="/" element={
-												!isLoggedIn ? <Login/>
+												!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
 												:
 												<Home
-												user={user}
-												setPage={setPage}
-												toast={toast}
-												selectedPost={selectedPost}
-												setSelectedPost={setSelectedPost}
-												setIsPostDetailOpen={setIsPostDetailOpen}
-												setIsStoryOpen={setIsStoryOpen}
-												setStoryNum={setStoryNum}
-												setIsSelectOpen={setIsSelectOpen}
+													user={user}
+													setPage={setPage}
+													toast={toast}
+													selectedPost={selectedPost}
+													setSelectedPost={setSelectedPost}
+													setIsPostDetailOpen={setIsPostDetailOpen}
+													setIsStoryOpen={setIsStoryOpen}
+													setStoryNum={setStoryNum}
+													setIsSelectOpen={setIsSelectOpen}
 												/>}
 											 />
 										<Route path="/search" element={<Search />} />
 										<Route path="/message" element={
-											!isLoggedIn ? <Login/>
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
 											:
 											<Message
 												setPage={setPage}
@@ -175,7 +174,7 @@ function App() {
 										/>} />
 
 										<Route path='/noti' element={
-											!isLoggedIn ? <Login/>
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
 											:
 											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
@@ -185,12 +184,12 @@ function App() {
 																						loginUser={user}/>}
 																						openPostDetail={openPostDetail}
 																						/>
-										<Route path='/login' element={<Login/>}/>
+										<Route path='/login' element={<Login isLoggedIn={isLoggedIn}/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>
 
 										<Route path='/user/edit' element={
-											!isLoggedIn ? <Login/>
+											!isLoggedIn ? <Login isLoggedIn={isLoggedIn}/>
 											:
 											<UserEdit/>}/>
 										<Route path='/faq' element={<Faq/>}/>
@@ -242,6 +241,16 @@ function App() {
 				className='mt-5'
 			>
 				<Select/>
+			</Modal>
+
+			<Modal
+				show={isReportOpen}
+				onHide={() => {
+					setIsReportOpen(false)
+				}}
+				className='mt-5'
+			>
+				<Report/>
 			</Modal>
 			
 		</Router>

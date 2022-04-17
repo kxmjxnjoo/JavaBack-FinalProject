@@ -14,7 +14,7 @@ const FollowList = ({isError, followList}) => {
             !isError && followList != null ?
             followList.map((data) => {
                 return (
-                    <Link to={'/user/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
+                    <a href={'/user/page/' + data.userid} style={{textDecoration: 'none', color: 'black'}}>
                         <div className="row">
                             <div className="col-4">
                                 <img src={defaultProfile} alt="" style={imageUserStyle} />
@@ -25,7 +25,7 @@ const FollowList = ({isError, followList}) => {
                                 <div className="h5 text-muted">{data.name}</div>
                             </div>
                         </div>
-                    </Link>
+                    </a>
                 )
             })
             :

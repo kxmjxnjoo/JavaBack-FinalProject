@@ -119,7 +119,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                 </div>
             </div>
 
-            <div className='col-3 col-md-0 d-none d-md-block sticky-top'>
+            <div className='col-3 col-md-0 d-none d-md-block' style={{position: 'fixed', left: '70%'}}>
                 <FollowingList
                     user={user}
                     loginUser={user}

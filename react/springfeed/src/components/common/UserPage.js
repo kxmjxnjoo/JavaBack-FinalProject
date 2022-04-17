@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import Loading from './Loading'
 import FollowList from '../common/FollowList'
 import PostThumbnail from '../common/PostThumbnail'
@@ -10,6 +10,7 @@ import {InfiniteScroll } from 'react-infinite-scroller'
 import { Modal } from 'react-bootstrap'
 
 import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
+import Report from '../jsp-components/Report'
 
 const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPostDetail}) => {
     const {id} = useParams()
@@ -28,6 +29,8 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
     
     const [isPostSelected, setIsPostSelected] = useState(true)
     const [isFollowing, setIsFollowing] = useState(false)
+
+    const [isReportOpen, setIsReportOpen] = useState(false)
 
     const [followingList, setFollowingList] = useState(null)
     const [isFollowingListOpen, setIsFollowingListOpen] = useState(false)
@@ -217,25 +220,46 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
                                     {id}
                                 </div>
                             </div>
-                            
-                            <div className="col-3">
-                                <div className="btn btn-danger w-100">
-                                    신고하기
-                                </div>
-                            </div>
+                            {   
+                                loginUser != null ?
+                                id !== loginUser.userid ?
+                                <>
+                                    <div className="col-6 col-md-3">
+                                        <div className="btn btn-danger w-100" onClick={() => {
+                                            setIsReportOpen(true)
+                                        }}>
+                                            신고하기
+                                        </div>
+                                    </div>
 
-                            <div className="col-3" onClick={ handleFollow }>
-                                {
-                                    isFollowing ?
-                                    <div className="btn btn-warning w-100">
-                                        언팔로우
-                                    </div>
-                                    :
-                                    <div className="btn btn-success w-100">
-                                        팔로우
-                                    </div>
-                                }
-                            </div>
+                                    <div className="col-6 col-md-3" onClick={ handleFollow }>
+                                        {
+                                            isFollowing ?
+                                            <div className="btn btn-warning w-100">
+                                                언팔로우
+                                            </div>
+                                            :
+                                            <div className="btn btn-success w-100">
+                                                팔로우
+                                            </div>
+                                        }
+                                    </div>                                
+                                </>
+                                :
+                                <>
+                                    <div className="col-6 col-md-3" onClick={ handleFollow }>
+                                        {
+                                            <Link to='/user/edit'>
+                                                <div className="btn btn-primary w-100">
+                                                    내 정보 수정
+                                                </div>
+                                            </Link>
+                                        }
+                                    </div>      
+                                </>
+                                :
+                                <></>
+                            }
                             
                         </div>
 
@@ -350,6 +374,15 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
                     </div>
                 </div>
             </div>
+        </Modal>
+
+        <Modal show={isReportOpen}
+                onHide={() => {
+                    setIsReportOpen(false)
+                }}
+                className='mt-5'
+        >
+            <Report className='vh-100'/>
         </Modal>
     </div>
   )
