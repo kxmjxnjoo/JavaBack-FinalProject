@@ -118,7 +118,9 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 									<Link to="/noti">
 										<a className={(page === 4 ? "position-relative nav-link active" : "position-relative nav-link")} href="/noti">
 											<NotiIcon style={{color: 'white'}}/>
-											<span className={"position-absolute top-45 start-90 translate-middle badge rounded-pill p-1 " + (notiCount == 0 ? 'bg-primary' : 'bg-danger')}>
+											<span className={"position-absolute top-45 start-90 translate-middle badge rounded-pill p-1 " + (notiCount == 0 ? 'bg-primary' : 'bg-danger')} 
+													style={{width: '30px', height: '30px'}}
+											>
 												{notiCount}
 											</span>
 										</a>
