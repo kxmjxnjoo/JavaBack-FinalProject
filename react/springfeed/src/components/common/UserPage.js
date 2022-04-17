@@ -10,7 +10,7 @@ import { Modal } from 'react-bootstrap'
 
 import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
 
-const UserPage = ({setSearchKey, setIsSelectOpen}) => {
+const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser}) => {
     const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -83,7 +83,13 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                 return res.json()
             })
             .then((data) => {
-                setFollowerList(data)
+                setFollowerList(data.filter((follow) => {
+                    if(isLoggedIn) {
+                        return !(follow.userid == loginUser.userid)
+                    } else {
+                        return true
+                    }
+                }))
             })
             .catch((err) => {
                 toast.err('팔로워 목록을 불러오지 못 했어요')
@@ -129,8 +135,8 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                 return res.json()
             })
             .then((data) => {
-                setFollowerCount(data.follower)
-                setFollowingCount(data.following)
+                setFollowerCount(data.follower - 1)
+                setFollowingCount(data.following - 1)
             })
             .catch((err) => {
                 toast.err('팔로워를 불러올 수 없었어요')
@@ -162,13 +168,12 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
         if(savedPosts == null) {
             setIsLoading(true)
             // Fetch saved posts
-            fetch('/api/post/save/list?id=' + id)
+            fetch('/api/post/save?id=' + id)
                 .then((res) => {
                     return res.json()
                 })
                 .then((data) => {
                     setSavedPosts(data)
-                    console.log(data)
                 })
                 .catch((err) => {
                     toast.error(err)
@@ -293,12 +298,12 @@ const UserPage = ({setSearchKey, setIsSelectOpen}) => {
                                 )
                             })
                         :
-                            savedPosts == null || savedPosts.length == 0 ?
+                            (savedPosts == null || savedPosts.length == 0) ?
                             <div className="h1 text-center mt-5">저장된 포스트가 없어요!</div>
                             :
                             savedPosts.map((post) => {
                                 <div className="col-4 mb-3">
-                                    <img src={post.post_img} alt="SAVED POST IMAGE" />
+                                    <img src={post.post_img == null ? '/images/image_not_found.jpg' : '/images/' + post.post_img} alt="SAVED POST IMAGE" className='img-fluid'/>
                                     <h1>post.likeCount</h1>
                                 </div>
                             })

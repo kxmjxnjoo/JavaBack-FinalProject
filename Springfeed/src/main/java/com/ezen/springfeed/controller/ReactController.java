@@ -9,16 +9,12 @@ import com.ezen.springfeed.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -361,5 +357,30 @@ public class ReactController {
         }
 
         return result;
+    }
+
+    // Get saved post
+    @RequestMapping(value="/api/post/save", produces = "application/json")
+    public ArrayList<PostDto> getSavedPost(@RequestParam("id") String id, @RequestParam(value="page", required = false) Integer page) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", id);
+        paramMap.put("page", page == null ? 0 : page);
+
+        // Get result
+        ps.getSavedPost(paramMap);
+
+        // Convert it to PostDto
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<PostDto> list = new ArrayList<>();
+        for(HashMap<String, Object> post : result) {
+            PostDto pdto = new PostDto();
+            pdto.setPost_img((String) post.get("IMG"));
+            pdto.setPostNum(Integer.parseInt(String.valueOf(post.get("POST_NUM"))));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("NUM_LIKE"))));
+            list.add(pdto);
+        }
+
+        return list;
     }
 }

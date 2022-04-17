@@ -102,5 +102,15 @@
 		}
 
 	</insert>
+
+	<select id="getSavePost" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getSavePost(
+			    #{userid},
+			    #{page},
+			    #{p_cur, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=postMap}
+			)
+		}
+	</select>
 	
 </mapper>
