@@ -85,7 +85,9 @@ public class StoryController {
 	
 	
 	@RequestMapping("/story")
-	public ModelAndView storyDetail(@RequestParam("story_num") int story_num, 
+	public ModelAndView storyDetail(
+			@RequestParam(value="userid", required=false) String userid, 
+			@RequestParam(value="story_num", required=false) String story_num, 
 			HttpServletRequest request, Model model, RedirectAttributes rttr) {
 		ModelAndView mav = new ModelAndView();
 
@@ -99,8 +101,16 @@ public class StoryController {
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			
+			if(story_num == null) paramMap.put("story_num", null);
+			else paramMap.put("story_num", Integer.parseInt(story_num));
+			
+			if(userid != null) {
+				paramMap.put("userid", userid);
+				ms.findRecentStory(paramMap);
+			}
+			
 			paramMap.put("ref_cursor", null);
-			paramMap.put("story_num", story_num);
 			paramMap.put("prev", 0);
 			paramMap.put("next", 0);
 			paramMap.put("fontcolor", null);

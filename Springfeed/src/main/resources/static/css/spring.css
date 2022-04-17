@@ -149,7 +149,7 @@ html, body{
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 89px;
+    width: 100px;
 }
 
 #goBack{
@@ -226,7 +226,7 @@ html, body{
 
 @media(min-width: 400px){
 	#postingStory {
-		padding-bottom: min(30%, 230px);
+		padding-bottom: min(30%, 280px);
 	}
 }
 

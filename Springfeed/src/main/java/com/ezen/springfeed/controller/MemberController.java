@@ -127,7 +127,6 @@ public class MemberController {
 	    	if(result.getFieldError("userid") == null) 
 	    		cnt = Integer.parseInt(paramMap.get("cnt").toString());
 	    	
-	    	System.out.println("확인 결과 : " + cnt );
     	} else if (memberdto.getEmail() != null) {
     		if(result.getFieldError("email") == null) cnt = 0;
     	} else if (memberdto.getPhone() != null) {
@@ -145,23 +144,22 @@ public class MemberController {
     // 회원가입 액션
     @RequestMapping(value="/join", method=RequestMethod.POST)
     public String join(@ModelAttribute("dto") @Valid MemberDto memberdto,
-    		BindingResult result,
+    		BindingResult result, RedirectAttributes rttr,
     		@RequestParam(value="reid", required=false) String reid,
-    		HttpServletRequest request, Model model) {
+    		HttpServletRequest request) {
     	
-    	model.addAttribute("reid", reid);
     	String url = "member/join";
     	
     	if(result.getFieldError("phone")!= null) {
-            model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+    		rttr.addFlashAttribute("message", result.getFieldError("phone").getDefaultMessage());
          } else if(result.getFieldError("email")!= null) {
-            model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("email").getDefaultMessage());
          } else if(result.getFieldError("name")!= null) {
-            model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("name").getDefaultMessage());
          } else if(result.getFieldError("userid")!= null) {
-            model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("userid").getDefaultMessage());
          } else if(result.getFieldError("password")!= null) {
-            model.addAttribute("message", result.getFieldError("password").getDefaultMessage());
+        	 rttr.addFlashAttribute("message", result.getFieldError("password").getDefaultMessage());
          } else {
  			
  			HashMap<String, Object> paramMap = new HashMap<>();
@@ -173,8 +171,8 @@ public class MemberController {
  			
  			ms.insertMember(paramMap);
  			
- 			model.addAttribute("message", "회원가입이 완료되었어요:) 로그인 후 이용해주세요.");
- 			url = "member/login";
+ 			rttr.addFlashAttribute("message", "회원가입이 완료되었어요:) 로그인 후 이용해주세요.");
+ 			url = "redirect:http://localhost:3000/";
  		}
     	
         return url;

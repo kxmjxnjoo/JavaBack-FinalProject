@@ -121,4 +121,8 @@ public class MemberService {
 	public void changePw(String userid, String tempPassword) {
 		mdao.changePw(userid, tempPassword);
 	}
+
+	public void findRecentStory(HashMap<String, Object> paramMap) {
+		mdao.findRecentStory(paramMap);
+	}
 }
