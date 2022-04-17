@@ -50,7 +50,7 @@ function App() {
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
 	const [isStoryOpen, setIsStoryOpen] = useState(false)
-	const [storyNum, setStoryNum] = useState(null)
+	const [storyUser, setStoryUser] = useState(null)
 	const [isSelectOpen, setIsSelectOpen] = useState(false) 
 	const [isReportOpen, setIsReportOpen] = useState(false)
 
@@ -152,7 +152,7 @@ function App() {
 													setSelectedPost={setSelectedPost}
 													setIsPostDetailOpen={setIsPostDetailOpen}
 													setIsStoryOpen={setIsStoryOpen}
-													setStoryNum={setStoryNum}
+													setStoryUser={setStoryUser}
 													setIsSelectOpen={setIsSelectOpen}
 												/>}
 											 />
@@ -228,7 +228,7 @@ function App() {
 				className='mt-5 overflow-hidden'
 			>
 				<Story
-					storyNum={storyNum}
+					storyUser={storyUser}
 				/>
 			</Modal>
 

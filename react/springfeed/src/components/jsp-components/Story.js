@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Loading from '../common/Loading';
 
-const Story = ({storyNum}) => {
+const Story = ({storyUser}) => {
     const [jspElement, setJspElement] = useState(null);
 
     const createMarkup = (data) => {
@@ -12,7 +12,7 @@ const Story = ({storyNum}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch('/story?story_num=' + storyNum)
+        fetch('/story?userid=' + storyUser)
             .then((res) => {
                 return res.text()
             })

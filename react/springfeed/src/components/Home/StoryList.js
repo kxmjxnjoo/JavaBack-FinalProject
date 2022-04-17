@@ -8,7 +8,7 @@ import {AiOutlineArrowRight as RightArrowIcon, AiOutlineArrowLeft as LeftArrowIc
 // Resources
 import defaultUserIcon from '../../images/tmpUserIcon.png'
 
-const StoryList = ({setIsStoryOpen, setStoryNum}) => {
+const StoryList = ({setIsStoryOpen, setStoryUser}) => {
     const [storyList, setStoryList] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -46,7 +46,7 @@ const StoryList = ({setIsStoryOpen, setStoryNum}) => {
                                             return(
                                                     <div className="col-2 text-center" onClick={() => {
                                                         setIsStoryOpen(true)
-                                                        setStoryNum(0)
+                                                        setStoryUser(user.userid)
                                                     }}>
                                                         <img src={ user.img == null ? defaultUserIcon : ('/images/' + user.img) } alt="PROFILE" className='d-block rounded-circle' style={{width: '75px'}}/>
                                                         <div className="h5">

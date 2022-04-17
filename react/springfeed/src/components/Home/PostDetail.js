@@ -10,6 +10,9 @@ const PostDetail = ({post}) => {
         post_img: postImage, likeCount: likes, isLiked, 
         isSaved, content, post_num: postNum } = post
 
+    
+    
+
 
     const commentDummyData = [
         {

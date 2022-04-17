@@ -14,7 +14,7 @@ import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
 
-const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum, setIsSelectOpen }) => {
+const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryUser, setIsSelectOpen }) => {
     const [posts, setPosts] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
@@ -85,7 +85,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                 <div>
                     <StoryList
                         setIsStoryOpen={setIsStoryOpen}
-                        setStoryNum={setStoryNum}
+                        setStoryUser={setStoryUser}
                     />
                 </div>
 
