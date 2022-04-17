@@ -318,7 +318,7 @@ public class MemberController {
     		
     		ms.getNotiCount(paramMap);
     		
-    		notiCount = Integer.parseInt(paramMap.get("notiCount").toString());
+    		notiCount = Integer.parseInt(String.valueOf(paramMap.get("notiCount")));
     	}
     	
     	System.out.println(loginUser.get("USERID"));

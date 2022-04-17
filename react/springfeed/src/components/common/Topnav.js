@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // Bootstrap
@@ -45,6 +45,15 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 	}
 
 	const ref = useRef(null)
+	
+	const [notiCount, setNotiCount] = useState(0)
+
+	useEffect(() => {
+		fetch('/api/noti/count?userid=' + user.userid)
+			.then((res) => {
+				console.log(res)
+			})
+	}, [])
 
 	return (
 		<Navbar style={topnavStyle} expand='lg' className='p-lg-0 position-fixed top-0 left-0 w-100'>
@@ -102,8 +111,11 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 								</div>
 								<div className="col-2 p-lg-0 align-self-center">
 									<Link to="/noti">
-										<a className={(page === 4 ? "nav-link active" : "nav-link")} href="/noti">
+										<a className={(page === 4 ? "position-relative nav-link active" : "position-relative nav-link")} href="/noti">
 											<NotiIcon style={{color: 'white'}}/>
+											<span className={"position-absolute top-45 start-90 translate-middle badge rounded-pill p-1 " + (notiCount == 0 ? 'bg-primary' : 'bg-danger')}>
+												{notiCount}
+											</span>
 										</a>
 									</Link>
 
