@@ -225,7 +225,7 @@ function App() {
 					setIsStoryOpen(false)
 				}}
 				dialogClassName='storyModal'
-				className='mt-5 overflow-hidden'
+				className='overflow-hidden'
 			>
 				<Story
 					storyUser={storyUser}

@@ -30,7 +30,7 @@ const Story = ({storyUser}) => {
             isLoading ? 
             <Loading message='스토리를 가져오고 있어요'/>
             :
-            <div dangerouslySetInnerHTML={{__html: jspElement}} className='mt-5 vh-100' style={{margin: ''}}/>
+            <div dangerouslySetInnerHTML={{__html: jspElement}} className='mt-5 vh-100' style={{margin: '0px'}}/>
         }  
     </>
   )
