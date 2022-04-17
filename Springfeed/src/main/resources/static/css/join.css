@@ -16,6 +16,7 @@ h3{
 }
 
 .box1{
+	margin: 0 auto;
 	background:white;
 	padding: 5% 30px;
 	border: 1px solid gray;
@@ -23,7 +24,7 @@ h3{
     flex-direction: column;
     align-items: center;
     
-    max-width: 500px;
+    max-width: 450px;
     width: 100%;
 }
 
@@ -34,6 +35,7 @@ h3{
 	margin: auto;
 	margin-bottom:15px;
 	line-height: 20px;
+	max-width: 450px;
 }
 
 input:focus{outline:none;}

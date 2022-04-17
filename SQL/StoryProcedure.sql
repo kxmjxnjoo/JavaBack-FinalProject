@@ -18,6 +18,20 @@ BEGIN
     p_story_num := v_story_num;
 END;
 
+select * from story
+
+--최신 스토리 찾기
+CREATE OR REPLACE PROCEDURE findRecentStory(
+    p_userid IN story.userid%type,
+    p_story_num OUT number
+)
+IS
+    v_story_num number(5) := 0;
+BEGIN
+    select max(story_num) into v_story_num from story where userid = p_userid;
+    p_story_num := v_story_num;
+END;
+
 
 --스토리 상세보기 (getStory)
 CREATE OR REPLACE PROCEDURE getStory(
@@ -121,3 +135,7 @@ BEGIN
     commit;
 END;
 
+
+update member set useyn='y' where userid='king'
+
+select * from member

@@ -166,7 +166,7 @@
 		</div>
 		<br>
 		<div id="box2">
-			<br>계정이 있으신가요?<a href="/login/form"> 로그인 </a>
+			<br>계정이 있으신가요?<a href="/login"> 로그인 </a>
 		</div>
 		앱을 다운로드하세요.<br><br>
 	    <span>

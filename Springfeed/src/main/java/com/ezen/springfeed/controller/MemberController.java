@@ -609,7 +609,7 @@ public class MemberController {
 		
 		if(loginUser == null) {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
-			return "redirect:/login/form";
+			return "redirect:http://localhost:3000/";
 		} else {
 			String userid = (String) loginUser.get("USERID");
 			ms.privateAccount(userid);
@@ -617,7 +617,11 @@ public class MemberController {
 			loginUser.replace("USEYN", "p");
 			
 			String referer = request.getHeader("Referer");
-		    return "redirect:"+ referer;
+			
+			System.out.println("private access");
+			System.out.println("referer : " + referer);
+			
+		    return "redirect:http://localhost:3000/"+ referer;
 		}
     }
     

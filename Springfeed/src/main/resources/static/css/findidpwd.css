@@ -17,20 +17,9 @@ body {
 
 #findId{ margin-bottom: 30px; }
 
-@media(min-width: 1000px){
-
-	#findId { float: left; margin-right: 30px; }
-	#findPwForm { display: flex; }
-	
-}
 
 
-#findId{
-    padding: 5% 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
+
 
 #findPw{
     padding: 5% 30px;

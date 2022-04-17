@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="/css/join.css">
 </head>
 <body>	
-<%@include file="../common/message.jsp" %>
 <div class="formWrap">
 	<form method="post" action="/find/id" name="loginFrm" id="findIdForm">
 		<div class="box1" id="findId">

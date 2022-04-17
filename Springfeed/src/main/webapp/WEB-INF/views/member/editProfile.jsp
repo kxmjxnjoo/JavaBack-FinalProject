@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,92 +12,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-    function checkPhone(){
-        var phone = $('#joinPhone').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
-            url:'/join/idCheck', //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            data:{phone:phone},
-            success:function(cnt){
-                if(cnt != 1) {
-                	$('#phone_box #id_ok').css("display", "inline-block");
-                	$('#phone_box #id_already').css("display", "none");
-                } else {
-                	$('#phone_box #id_already').css("display", "inline-block");
-                	$('#phone_box #id_ok').css("display", "none");
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    };
-    
-    function checkEmail(){
-        var email = $('#joinEmail').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
-            url:'/join/idCheck', //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            data:{email:email},
-            success:function(cnt){
-                if(cnt != 1) {
-                	$('#email_box #id_ok').css("display", "inline-block");
-                	$('#email_box #id_already').css("display", "none");
-                } else {
-                	$('#email_box #id_already').css("display", "inline-block");
-                	$('#email_box #id_ok').css("display", "none");
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    };
-    
-    function checkPwd(){
-        var pwd = $('#joinPwd').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
-            url:'/join/idCheck', //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            data:{password:pwd},
-            success:function(cnt){
-                if(cnt != 1) {
-                	$('#pwd_box #id_ok').css("display", "inline-block");
-                	$('#pwd_box #id_already').css("display", "none");
-                	$('#pwd_box #message').css("display", "none");
-                } else {
-                	$('#pwd_box #id_already').css("display", "inline-block");
-                	$('#pwd_box #message').css("display", "inline-block");
-                	$('#pwd_box #id_ok').css("display", "none");
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    };
-    
-    function checkName(){
-        var name = $('#joinName').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
-            url:'/join/idCheck', //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            data:{name:name},
-            success:function(cnt){
-                if(cnt != 1) {
-                	$('#name_box #id_ok').css("display", "inline-block");
-                	$('#name_box #id_already').css("display", "none");
-                } else {
-                	$('#name_box #id_already').css("display", "inline-block");
-                	$('#name_box #id_ok').css("display", "none");
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    };
-    
 
 	$(function(){
 		$('#input-file').change(function(){
@@ -128,6 +43,8 @@
 </script>
 </head>
 <body>
+<%@ include file="../common/message.jsp" %>
+
 		<form name="frm" method="post" id="joinform">
 			<div class="box1">
 				<h1 style="margin-bottom: 20px; font-size: 3rem">Springfeed</h1>
@@ -193,14 +110,14 @@
 		<div id="withdrawBox">
 			<div id="withdrawBoxContent">
 				<c:choose>
-				<c:when test="${ dto.useyn ne 'p' }">
-					<h3>친구들에게만 내 사진을 공유하고 싶어요!</h3>
-					<input type="button" id="login" value="계정 비공개" onclick="privateAccount();">				
-				</c:when>
-				<c:otherwise>
-					<h3>Springfeed의 모두와 친구가 되고 싶어요!</h3>
-					<input type="button" id="login" value="계정 공개" onclick="publicAccount();">		
-				</c:otherwise>
+					<c:when test="${ dto.useyn ne 'p' }">
+						<h3>친구들에게만 내 사진을 공유하고 싶어요!</h3>
+						<input type="button" id="login" value="계정 비공개" onclick="privateAccount();">				
+					</c:when>
+					<c:otherwise>
+						<h3>Springfeed의 모두와 친구가 되고 싶어요!</h3>
+						<input type="button" id="login" value="계정 공개" onclick="publicAccount();">		
+					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
@@ -258,6 +175,8 @@
 		
 		function editCheck(){
 			let theForm = document.frm;
+			if()
+			
 			let result = confirm('회원 정보를 수정할까요?');
 			if(result) {
 				theForm.action="/user/edit";

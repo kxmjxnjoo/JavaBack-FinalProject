@@ -44,12 +44,15 @@
 </script>
 
 
-<div class="message" id="message" onchange="showMessage('${message}')">
+<%-- <div class="message" id="message" onchange="showMessage('${message}')">
 	${ message } 
 </div>
 
 <div class="message" id="message" onchange="showConfirm('${ messageConfirm }, ${ sendUrl }')">
 	${ messageConfirm }
-</div>
+</div> --%>
 
-<input type="hidden" value="${ messageConfirm }">
+<input id="message" type="hidden" value="${message}">
+<input id="messageConfirm" type="hidden" value="${messageConfirm}">
+<input id="sendUrl" type="hidden" value="${sendUrl}">
+

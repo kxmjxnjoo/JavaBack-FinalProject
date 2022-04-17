@@ -77,7 +77,7 @@ html, body{
 
 #setting_menu{
     width: 300px; height: 210px;
-    text-align: center; background: #fff; border-radius:3%;
+    text-align: center; background: #fff;
 }
 
 #setting .setting_layer{
@@ -87,7 +87,7 @@ html, body{
 }
 
 #setting .setting_btn{
-	width: 300px; height: 70px; border-radius: 3%; color:red;
+	width: 300px; height: 70px; color:red;
 	text-align:center; line-height: 70px; font-size:90%; font-weight:700; 
 	border-bottom:1px solid #909090; 
 	
@@ -221,7 +221,7 @@ html, body{
     border: 1px solid black;
     text-align: center;
     overflow: hidden;
-    max-height: 700px;
+    max-height: 770px;
 }
 
 @media(min-width: 400px){

@@ -18,15 +18,38 @@
 
   <script type="text/javascript" >
 
+//회원정보수정
+
+  function withdraw() {
+			if(confirm("정말로 계정을 비활성화 할까요??")) {
+				location.href = "/deleteAcount"
+			}
+		}
+		
+		function privateAccount() {
+			if(confirm("계정을 비공개로 전환 할까요?")) {
+				location.href = "/user/private"
+			}
+		}
+		
+		function publicAccount() {
+			if(confirm("계정을 공개로 전환 할까요?")) {
+				location.href = "/user/public"
+			}
+		}
+
+
+
 //메시지 표시
-  function disappear() {
-		document.getElementById("message").style.webkitTransform='translateY(-70px)';
-	}
+  // function disappear() {
+	// 	document.getElementById("message").style.webkitTransform='translateY(-70px)';
+	// }
 	
-	function appear() {
-		document.getElementById("message").style.webkitTransform='translateY(70px)';
-		console.log(document.getElementById("message").value);
-	}
+	// function appear() {
+	// 	document.getElementById("message").style.webkitTransform='translateY(70px)';
+	// 	console.log(document.getElementById("message").value);
+	// }
+
 
 //아이디 찾기
     function findIdCheck(event) {
@@ -168,6 +191,57 @@
           elem.parentNode.removeChild(elem);
       }
 
+      function story_like(story_num){
+	var url = "spring.do?command=checkStoryLike&story_num=" + story_num;
+	document.frm.action=url;
+	document.frm.submit();
+}
+
+function deleteCheck(story_num){
+	var answer = confirm("스토리를 삭제할까요?")
+	if(answer){
+		location.href="/story/delete?story_num="+story_num;
+	}
+}
+
+function setting(){
+	document.getElementById("setting").style.display="flex";
+}
+
+function setting_close(){
+	document.getElementById("setting").style.display="none";
+}
+
+
+function goReport(story_num) {
+	var url="/report/form?story_num=" + story_num;
+	var _width = '400';
+	var _height = '500';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
+}
+
+
+function goBlock(userid) {
+	var answer = confirm(userid + "님을 차단할까요?");
+	if(answer) {
+		location.href="/block?userid="+userid;
+	}
+}
+
+function unblock(userid) {
+	var answer = confirm("차단을 해제할까요?");
+	if(answer) {
+		location.href="/unblock?userid="+userid;
+	}
+}
+
+function goBack(){
+	window.history.back();
+}
 
 //로그인 ajax
           
