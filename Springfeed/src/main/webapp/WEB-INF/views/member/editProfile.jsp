@@ -98,7 +98,7 @@
 				<textarea class="text_box" name="introduce" id="introduce_box" placeholder="${ loginUser.INTRODUCE }">${ loginUser.INTRODUCE }</textarea>
 					
 				
-				<input type="submit" id="login" value="회원 정보 수정" onclick="editCheck();">
+				<input type="submit" id="login" value="회원 정보 수정" onclick="userEditCheck(event);">
 			</div>
 		</form>
 			

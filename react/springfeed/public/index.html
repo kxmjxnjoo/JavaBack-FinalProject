@@ -267,6 +267,49 @@ function goBack(){
           }
         });
       };
+
+//회원정보 수정
+      function userEditCheck(event) {
+        console.log('userEditCheck');
+        event.preventDefault()
+
+        if(document.getElementById("joinPwd").value==null) alert('비밀번호를 입력하세요')
+        if(document.getElementById("joinPhone").value==null) alert('휴대전화번호를 입력하세요')
+        if(document.getElementById("joinEmail").value==null) alert('이메일을 입력하세요')
+        if(document.getElementById("joinName").value==null) alert('성명을 입력하세요')
+
+        if(document.getElementById("newImage").value==null) {
+          var userImg=document.getElementById("oldPicture").value
+        }
+
+        var formData = {
+          password: $("#joinPwd").val(),
+          email: $("#joinEmail").val(),
+          phone: $("#joinPhone").val(),
+          img: userImg,
+          name: $("#joinName").val(),
+          introduce: $("#introduce_box").val()
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "/user/editing",
+          data: formData,
+          dataType: "json",
+          encode: true,
+        }).done(function (data) {
+          if(data.cnt == 1){
+          location.href="/";
+          } else {
+          }
+        });
+      }
+
+
+
+
+
+
       
       function checkId(){
           var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장
