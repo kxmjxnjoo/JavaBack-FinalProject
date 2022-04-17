@@ -59,7 +59,7 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 				<Navbar.Toggle aria-controls="topnav-toggle"></Navbar.Toggle>
 
 				<Navbar.Collapse id="navbar-toggle">
-					<form className="form-inline my-2 my-lg-0 col-12 col-lg-5">
+					<form className="form-inline my-2 my-lg-0 col-12 col-lg-5" autocomplete="off">
 						<input type="text" className="form-control mr-sm-2 col-lg-5" 
 						placeholder="🔎 검색" aria-label="Sesarch" name="key" 
 						onChange={handleSearch} />
@@ -136,7 +136,7 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 												</>
 												:
 												<>
-													<Link to={'/login'} className='text-decoration-none'>
+													<Link to='/login' className='text-decoration-none'>
 														<Dropdown.Item>로그인</Dropdown.Item>
 													</Link>												
 												</>
