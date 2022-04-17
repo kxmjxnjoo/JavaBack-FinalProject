@@ -421,6 +421,7 @@ public class ReactController {
         return Integer.parseInt(String.valueOf(paramMap.get("result")));
     }
 
+    /*
     @RequestMapping(value="/api/post/num")
     public PostDto getPostByNum(@RequestParam("num") int num) {
         // Create paramMap
@@ -444,7 +445,9 @@ public class ReactController {
         pdto.setIsLiked(result.get("ISLIKED"));
         pdto.setIsSaved(result.get("ISSAVED"));
     }
+    */
 
+    /*
     @RequestMapping(value="/api/post/comment")
     public ArrayList<ReplyDto> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
         // Create paramMap
@@ -471,4 +474,5 @@ public class ReactController {
 
         return list;
     }
+    */
 }
