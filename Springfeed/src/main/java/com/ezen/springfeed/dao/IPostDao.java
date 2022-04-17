@@ -14,4 +14,6 @@ public interface IPostDao {
     void selectPostFeed(HashMap<String, Object> paramMap);
     void insertLike(HashMap<String, Object> paramMap);
     void getSavePost(HashMap<String, Object> paramMap);
+    void getReplyByPostNum(HashMap<String, Object> paramMap);
+    void insertSavePost(HashMap<String, Object> paramMap);
 }

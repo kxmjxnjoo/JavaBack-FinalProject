@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -397,6 +398,19 @@ public class ReactController {
         return list;
     }
 
+    // Insert save post
+    @RequestMapping(value="/api/post/save/insert", produces="application/json")
+    public int insertSavePost(HttpServletRequest request, @RequestParam("num") int num) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", getLoginUserid(request));
+        paramMap.put("postnum", num);
+
+        ps.insertSavePost(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("RESULT")));
+    }
+
     @RequestMapping(value="/api/user/follow", produces="application/json")
     public int follow(HttpServletRequest request, @RequestParam("id") String following) {
         // Create paramMap
@@ -421,33 +435,41 @@ public class ReactController {
         return Integer.parseInt(String.valueOf(paramMap.get("result")));
     }
 
-    /*
     @RequestMapping(value="/api/post/num")
-    public PostDto getPostByNum(@RequestParam("num") int num) {
+    public PostDto getPostByNum(HttpServletRequest request, @RequestParam("num") int num, @RequestParam(value="userid", required = false) String userid) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("num", num);
+        paramMap.put("postnum", num);
+        paramMap.put("userid", userid == null ? getLoginUserid(request) : userid);
         paramMap.put("p_cur", null);
 
-        ps.getPostByNum(paramMap);
+        ps.selectPostByNum(paramMap);
 
         // Get postdto
-        HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("p_cur");
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
 
-        PostDto pdto = new PostDto();
-        pdto.setLikeCount(result.get("LIKE_COUNT"));
-        pdto.setPost_img(result.get("IMG"));
-        pdto.setContent(result.get("CONTENT"));
-        pdto.setAddress(result.get("ADDRESS"));
-        pdto.setCreate_date(result.get("CREATE_DATE"));
-        pdto.setUserid(result.get("USERID"));
-        pdto.setUser_img(result.get("USERIMG"));
-        pdto.setIsLiked(result.get("ISLIKED"));
-        pdto.setIsSaved(result.get("ISSAVED"));
+        if(result == null) {
+            return null;
+        }
+
+        for(HashMap<String, Object> post : result) {
+            PostDto pdto = new PostDto();
+            pdto.setPost_img((String) post.get("IMG"));
+            pdto.setContent((String) post.get("CONTENT"));
+            pdto.setAddress((String) post.get("ADDRESS"));
+            pdto.setUserid((String) post.get("USERID"));
+            pdto.setCreate_date((Timestamp) post.get("CREATE_DATE"));
+            pdto.setUser_img((String) post.get("USERIMG"));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("LIKE_COUNT"))));
+
+            pdto.setIsLiked(Integer.parseInt(String.valueOf(post.get("ISLIKED"))));
+            pdto.setIsSaved(Integer.parseInt(String.valueOf(post.get("ISSAVED"))));
+            return pdto;
+        }
+
+        return null;
     }
-    */
 
-    /*
     @RequestMapping(value="/api/post/comment")
     public ArrayList<ReplyDto> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
         // Create paramMap
@@ -474,5 +496,4 @@ public class ReactController {
 
         return list;
     }
-    */
 }

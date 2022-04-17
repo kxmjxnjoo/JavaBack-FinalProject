@@ -50,8 +50,9 @@
 			parameterType="java.util.HashMap"
 	>
 		{
-			CALL selectPostsByNum(
+			CALL selectPostByNum(
 			    #{postnum},
+			    #{userid},
 			    #{
 			    	ref_cursor,
 			    	mode=OUT,
@@ -73,6 +74,18 @@
 			    #{content},
 			    #{address},
 			    #{userid}
+			)
+		}
+	</insert>
+
+	<insert id="insertSavePost"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap">
+		{
+			CALL insertSavePost(
+				#{userid},
+			    #{postnum},
+				#{result, mode=OUT, jdbcType=INTEGER}
 			)
 		}
 	</insert>
@@ -112,5 +125,13 @@
 			)
 		}
 	</select>
-	
+
+	<select id="getReplyByPostNum" statementType="CALLABLE" parameterType="java.util.HashMap">
+		CALL getReplyByPostNum {
+			#{postnum},
+		    #{page},
+		    #{p_cur, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReplyMap}
+		}
+	</select>
+
 </mapper>
