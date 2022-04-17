@@ -86,6 +86,11 @@ function App() {
 			})
 	}, [])
 
+	const openPostDetail = (postNum) => {
+        setIsPostDetailOpen(true)
+        setSelectedPost(postNum)
+    }
+
 	return (
 		<div className="App d-flex flex-column min-vh-100">
 		<Router>
@@ -174,7 +179,12 @@ function App() {
 											:
 											<Noti setIsSelectOpen={setIsSelectOpen}/>}/>
 
-										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} setIsSelectOpen={setIsSelectOpen} isLoggedIn={isLoggedIn} loginUser={user}/>}/>
+										<Route path="/user/page/:id" element={<UserPage setSearchKey={setSearchKey} 
+																						setIsSelectOpen={setIsSelectOpen} 
+																						isLoggedIn={isLoggedIn} 
+																						loginUser={user}/>}
+																						openPostDetail={openPostDetail}
+																						/>
 										<Route path='/login' element={<Login/>}/>
 										<Route path='/logout' element={<Logout/>}/>
 										<Route path='/join' element={<Join/>}/>

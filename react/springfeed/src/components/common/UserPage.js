@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import {useParams} from 'react-router-dom'
 import Loading from './Loading'
 import FollowList from '../common/FollowList'
+import PostThumbnail from '../common/PostThumbnail'
 
 import {InfiniteScroll } from 'react-infinite-scroller'
 
@@ -10,7 +11,7 @@ import { Modal } from 'react-bootstrap'
 
 import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
 
-const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser}) => {
+const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPostDetail}) => {
     const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -64,7 +65,9 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser}) => {
                 return res.json()
             })
             .then((data) => {
-                setFollowingList(data)
+                setFollowingList(data.filter((follow) => {
+                    return !(follow.userid == id)
+                }))
             })
             .catch((err) => {
                 toast.err('팔로잉 목록을 불러오지 못 했어요')
@@ -84,11 +87,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser}) => {
             })
             .then((data) => {
                 setFollowerList(data.filter((follow) => {
-                    if(isLoggedIn) {
-                        return !(follow.userid == loginUser.userid)
-                    } else {
-                        return true
-                    }
+                    return !(follow.userid == id)
                 }))
             })
             .catch((err) => {
@@ -302,10 +301,19 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser}) => {
                             <div className="h1 text-center mt-5">저장된 포스트가 없어요!</div>
                             :
                             savedPosts.map((post) => {
-                                <div className="col-4 mb-3">
-                                    <img src={post.post_img == null ? '/images/image_not_found.jpg' : '/images/' + post.post_img} alt="SAVED POST IMAGE" className='img-fluid'/>
-                                    <h1>post.likeCount</h1>
-                                </div>
+                                return(
+                                    <div className="col-12 col-md-4">
+                                        <PostThumbnail
+                                            postNum={post.postNum}
+                                            postImg={post.post_img}
+                                            likeCount={post.likeCount}
+                                            replyCount={0}
+                                            openPostDetail={openPostDetail}
+    
+                                            className='p-2'
+                                        />
+                                    </div>
+                                )
                             })
 
                     }

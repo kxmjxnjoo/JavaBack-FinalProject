@@ -3,14 +3,7 @@ import {BsFillHeartFill as LikeIcon, BsChatLeftFill as ReplyIcon} from 'react-ic
 
 import './postThumbnail.css'
 
-const PostThumbnail = ({postNum, postImg, likeCount, replyCount, openPostDetail}) => {
-    const imgStyle = {
-        objectFit: 'cover',
-        backgroundImage: 'url("http://picsum.photos/500/500")',
-        width: '100%',
-        height: '400px'
-    }
-    
+const PostThumbnail = ({postNum, postImg, likeCount, replyCount, openPostDetail}) => {    
     return (
         <div
             onClick={
@@ -18,9 +11,10 @@ const PostThumbnail = ({postNum, postImg, likeCount, replyCount, openPostDetail}
                     openPostDetail(postNum)
                 }
             }
-            style={imgStyle}
             className='post-thumbnail'
         >
+            <img src={'/images/' + postImg} alt="POST IMAGE" style={{width: '100%'}}/>
+
             <div className="row h2 m-0 text-center justify-content-center h-100 mh-100">
                 <div className="col-2 text-dark">
                     <div className="align-self-center">
