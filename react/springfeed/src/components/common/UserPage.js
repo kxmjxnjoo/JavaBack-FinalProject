@@ -9,6 +9,9 @@ import {InfiniteScroll } from 'react-infinite-scroller'
 
 import { Modal } from 'react-bootstrap'
 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import {FaUserSlash as NoUserIcon} from 'react-icons/fa'
 import Report from '../jsp-components/Report'
 
@@ -28,7 +31,8 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
     const [followingCount, setFollowingCount] = useState(0)
     
     const [isPostSelected, setIsPostSelected] = useState(true)
-    const [isFollowing, setIsFollowing] = useState(false)
+    const [isFollowing, setIsFollowing] = useState(0
+        )
 
     const [isReportOpen, setIsReportOpen] = useState(false)
 
@@ -124,7 +128,7 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
             .then((data) => {
                 setIntroduction(data.introduce)
                 setProfileImg('/images/' + data.img)
-                setIsFollowing(data.isFollowing == 0 ? false : true)
+                setIsFollowing(data.isFollowing)
             })
             .catch((err) => {
                 toast.error('자기소개를 불러올 수 없었어요')
@@ -196,6 +200,63 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
         setIsFollowing(!isFollowing)
     }
 
+    const follow = () => {
+        confirmAlert({
+            title: id + '님을 팔로우 할까요?',
+            message: id + '님을 팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 있어요. 그리고 ' + loginUser.userid + '님이 팔로우 했다고 알람이 가요',
+            buttons: [
+                {
+                    label: '네! 팔로우 할래요',
+                    onClick: () => {
+                        fetch('/api/user/follow?id=' + id)
+                        .then((res) => {
+                            console.log(res);
+                            return res;
+                        })
+                        .then((data) => {
+                            if(data == 1) {
+                                toast.success(id + '님을 팔로우 했어요!')
+                            } else {
+                                toast.error('무슨 이유에서인지, ' + id + '님을 팔로우 못 했어요. 다시 시도해 주세요')
+                            }
+                        })            
+                    }
+                },
+                {
+                    label: '취소할게요'
+                }
+            ]
+        })
+    }
+
+    const unfollow = () => {
+        confirmAlert({
+            title: id + '님을 언팔로우 할까요?',
+            message: id + '님을 언팔로우하면 ' + id + '님의 게시물과 스토리를 볼 수 없고, ' + id + '님에게 ' + loginUser.userid + '님이 언팔로우 했다고 알람이 가요',
+            buttons: [
+                {
+                    label: '상관없어요. 언팔로우할게요',
+                    onClick: () => {
+                        fetch('/api/user/unfollow?id=' + id)
+                        .then((res) => {
+                            return res;
+                        })
+                        .then((data) => {
+                            if(data == 1) {
+                                toast.success(id + '님을 언팔로우 했어요')
+                            } else {
+                                toast.error('무슨 이유에서인지, ' + id + '님을 언팔로우 못 했어요. 다시 시도해 주세요')
+                            }
+                        })
+                    }
+                },
+                {
+                    label: '다시 생각해 볼래요'
+                }
+            ]
+        })
+    }
+
   return (
     <div>
 
@@ -232,14 +293,18 @@ const UserPage = ({setSearchKey, setIsSelectOpen, isLoggedIn, loginUser, openPos
                                         </div>
                                     </div>
 
-                                    <div className="col-6 col-md-3" onClick={ handleFollow }>
+                                    <div className="col-6 col-md-3">
                                         {
-                                            isFollowing ?
-                                            <div className="btn btn-warning w-100">
+                                            isFollowing == 1 ?
+                                            <div className="btn btn-warning w-100" onClick={() => {
+                                                unfollow()
+                                            }}>
                                                 언팔로우
                                             </div>
                                             :
-                                            <div className="btn btn-success w-100">
+                                            <div className="btn btn-success w-100" onClick={() => {
+                                                follow()
+                                            }}>
                                                 팔로우
                                             </div>
                                         }

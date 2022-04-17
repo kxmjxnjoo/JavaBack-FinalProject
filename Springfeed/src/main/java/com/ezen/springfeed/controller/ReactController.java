@@ -151,7 +151,7 @@ public class ReactController {
         // Get isfollowing
         String loginUser = getLoginUserid(request);
         if(loginUser != null) {
-            paramMap = null;
+            paramMap = new HashMap<>();
             paramMap.put("follower", loginUser);
             paramMap.put("userid", id);
 
@@ -394,5 +394,29 @@ public class ReactController {
         }
 
         return list;
+    }
+
+    @RequestMapping(value="/api/user/follow", produces="application/json")
+    public int follow(HttpServletRequest request, @RequestParam("id") String following) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("follower", getLoginUserid(request));
+        paramMap.put("followed", following);
+
+        ms.insertFollow(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("result")));
+    }
+
+    @RequestMapping(value="/api/user/unfollow")
+    public int unfollow(HttpServletRequest request, @RequestParam("id") String following) {
+        // Create ParamMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("followed", following);
+        paramMap.put("follower", getLoginUserid(request));
+
+        ms.unfollow(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("result")));
     }
 }
