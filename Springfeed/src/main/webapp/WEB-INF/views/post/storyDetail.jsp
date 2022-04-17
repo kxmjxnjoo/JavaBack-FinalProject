@@ -123,7 +123,6 @@ function goBack(){
 					<span class="material-icons"> chevron_left </span> 
 				</div>
 			</c:if>
-			
 			<c:if test="${next != 0 }">
 				<div id=goNext style=cursor:pointer onclick="location.href='/storynum/${next}'"> 
 					<span class="material-icons"> chevron_right </span> 
