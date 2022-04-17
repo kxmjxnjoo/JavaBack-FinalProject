@@ -137,7 +137,7 @@ const Topnav = ({ page, isLoggedIn, user, searchKey, setSearchKey, setIsSelectOp
 												:
 												<>
 													<Link to='/login' className='text-decoration-none'>
-														<Dropdown.Item>로그인</Dropdown.Item>
+														<Dropdown.Item href='/login'>로그인</Dropdown.Item>
 													</Link>												
 												</>
 											}

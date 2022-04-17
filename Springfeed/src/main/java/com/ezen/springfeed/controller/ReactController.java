@@ -128,7 +128,7 @@ public class ReactController {
 
     // Get specific user's info
     @RequestMapping(value="/api/user", produces="application/json")
-    public MemberDto getUser(@RequestParam("id") String id) {
+    public MemberDto getUser(HttpServletRequest request, @RequestParam("id") String id) {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", id);
         paramMap.put("ref_cursor", null);
@@ -147,6 +147,18 @@ public class ReactController {
         mdto.setEmail((String) mvo.get("EMAIL"));
         mdto.setUserid((String) mvo.get("USERID"));
         mdto.setImg((String) mvo.get("IMG"));
+
+        // Get isfollowing
+        String loginUser = getLoginUserid(request);
+        if(loginUser != null) {
+            paramMap = null;
+            paramMap.put("follower", loginUser);
+            paramMap.put("userid", id);
+
+            ms.getIsFollowing(paramMap);
+
+            mdto.setIsFollowing(Integer.parseInt(String.valueOf(paramMap.get("isFollowing"))));
+        }
 
         return mdto;
     }

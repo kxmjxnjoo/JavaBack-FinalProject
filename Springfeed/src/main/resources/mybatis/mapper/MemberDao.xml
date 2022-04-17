@@ -166,4 +166,14 @@
 	<update id="changePw" statementType="CALLABLE" parameterType="String">
 		{  CALL changePw(  #{userid}, #{tempPassword}  )  }
 	</update>
+
+	<select id="getIsFollowing" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{
+			CALL getIsFollowing(
+			    #{userid},
+			    #{follower},
+			    #{isFollowing, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
 </mapper>

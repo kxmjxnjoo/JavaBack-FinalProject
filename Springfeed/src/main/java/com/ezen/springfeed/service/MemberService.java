@@ -121,4 +121,8 @@ public class MemberService {
 	public void changePw(String userid, String tempPassword) {
 		mdao.changePw(userid, tempPassword);
 	}
+
+    public void getIsFollowing(HashMap<String, Object> paramMap) {
+		mdao.getIsFollowing(paramMap);
+    }
 }
