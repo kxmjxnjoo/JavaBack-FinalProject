@@ -16,7 +16,7 @@ function go_search(){
 	<br><br><br>
 <form name="frm" action="/admin/memberList">
 <input type="hidden" > 
-<div class="row"> <div class="col-lg-6">	<input type="text" name="key" value="${key}" class="search">
+<div class="row"> <div style="center">	<input type="text" name="key" value="${key}" class="search">
 	<input id="search_btn" class="search" type="submit" name="search" value="회원 검색" onClick="/admin/searchMember"></div></div>
 	<table class="table table-hover" class="col-md-6" >
 		<tr><th width="10%">이름</th>

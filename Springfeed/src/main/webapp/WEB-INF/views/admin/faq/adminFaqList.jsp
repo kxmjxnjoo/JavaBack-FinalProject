@@ -28,7 +28,7 @@ ${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
 			</c:forEach>
 	</table>
 </form>
-<%@ include file="../../admin/common/paging.jsp"%>
+<%-- <%@ include file="../../admin/common/paging.jsp"%> --%>
 <%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript">
