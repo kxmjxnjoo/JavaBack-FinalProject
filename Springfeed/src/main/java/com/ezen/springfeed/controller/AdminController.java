@@ -82,6 +82,15 @@ public class AdminController {
 	
 	
 	
+    @RequestMapping("/logoutAdmin")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("loginAdmin");
+        return "redirect:/";
+    }
+	
+    
+    
 	@RequestMapping("/admin/memberList")
 	public ModelAndView memberList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
@@ -210,6 +219,7 @@ public class AdminController {
 	public ModelAndView reportList(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		ReportDto rdto = new ReportDto();
+		
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginAdmin 
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
@@ -220,7 +230,6 @@ public class AdminController {
 			String key = "";
 			if(request.getParameter("first")!=null) {
 				session.removeAttribute("page");
-				session.removeAttribute("key");
 			}
 			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -327,9 +336,10 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/admin/report/user")
-	public ModelAndView userReportCheck( @ModelAttribute("mdto") MemberDto reportdto, 
+	public ModelAndView userReportCheck( @ModelAttribute("rdto") ReportDto reportdto, 
 			BindingResult result, HttpServletRequest request) {
 		
+		System.out.println("userid 전달 확인 : " +reportdto.getReported_id());
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		
@@ -338,17 +348,16 @@ public class AdminController {
 		} else {
 			HashMap<String,Object> paramMap = new HashMap<>();
 			
-			System.out.println(request.getParameter("useyn"));
-			String useyn = request.getParameter("useyn");
-			paramMap.put("useyn", useyn);
-			paramMap.put("cnt", 0);
+			paramMap.put("userid", request.getParameter("reported_id"));
+			//paramMap.put("cnt", 0);
 			as.userReportCheck(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
+			System.out.println(request.getParameter("reported_id") 
+					+ "   " + cnt);
+			
 		if(cnt>0) {
-			paramMap.put("report_num", "report_num");
-			paramMap.put("useyn", "b");
-			paramMap.put("handled", "y");
-			// UPDATE 상태변경.
+			paramMap.put("report_num", reportdto.getReport_num());
+			// UPDATE 상태변경.`
 			as.updateReportUserBlock(paramMap);
 			}
 		}

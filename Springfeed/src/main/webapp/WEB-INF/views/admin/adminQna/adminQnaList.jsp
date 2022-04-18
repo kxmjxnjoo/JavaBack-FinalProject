@@ -4,12 +4,13 @@
 
 <h1>Q&amp;A리스트</h1>
 <span id="info">${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
+	<button type="button" class="btn btn-outline-secondary" onclick="location.href/logoutAdmin'">로그아웃</button></span>
 	<br><br><br>
 		 
-	<table>
+	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
+			<th>아이디</th>
 			<th>제목</th>
 			<th>작성일</th>
 			<th>답변</th>
@@ -18,7 +19,8 @@
 		<c:forEach items="${qdto}" var="qdto">
 			<tr onclick="/qnaview&num=${ qdto.QNA_NUM }" class="qnaItems">
 				<td>${qdto.QNA_NUM}</td>
-				<td><a href="">${qdto.QNA_SUBJECT}</a></td>
+				<td>${qdto.QNA_ID}</td>
+				<td><a href=" '/qna/detail + ${qdto.QNA_NUM}'">${qdto.QNA_SUBJECT}</a></td>
 				<td><fmt:formatDate value="${qdto.INDATE}"/></td>
 				<td>
 					<c:choose>
@@ -33,4 +35,5 @@
 			</tr>
 		</c:forEach>
 	</table>
+<%@ include file="../../admin/common/paging.jsp"%>
 <%@ include file="../../admin/common/footer.jsp"%>

@@ -34,4 +34,8 @@ public interface IFaqQnaDao {
 	void getAllQna(HashMap<String, Object> paramMap);
 
 	void reportList(HashMap<String, Object> paramMap);
+
+	void qnaDetail(HashMap<String, Object> paramMap);
+
+	void insertReply(HashMap<String, Object> paramMap);
 }

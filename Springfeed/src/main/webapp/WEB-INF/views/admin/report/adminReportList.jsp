@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../admin/common/admin_submenu.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/css/admin/admin.css">
+<link rel="stylesheet" href="../../css/admin/admin.css">
 	
 <h1>신고 회원 리스트<!-- <img src="images/Report.png"> --></h1>
 <span id="info">${loginAdmin.NAME}(${loginAdmin.ADMINID})님 로그인
-	<input type="button" id="logout" value="로그아웃" onClick="/logout'"></span>
+	<button type="button" class="btn btn-outline-secondary" onclick="location.href/logoutAdmin'">로그아웃</button></span>
 	<br><br><br>
 	
 <form name="frm" method="post">		
@@ -22,7 +22,7 @@
 			</select>
 			<input type="button" value="검색" onclick ="goOrder();"> -->
 		</div>
-		<table>
+			<table class="table table-hover">
 			<tr>
 				<th>번호</th><th>아이디</th><th>신고 유형</th><th>사유</th><th>신고자</th><th>신고날짜</th><th>처리</th>
 			</tr>
@@ -41,13 +41,16 @@
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${rdto.REPORT_TYPE.equals('post')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="postReportCheck(${rdto.POST_NUM}, ${rdto.REPORT_NUM});">
+									<td  width="50">
+									<button type="button" class="btn btn-outline-danger" onclick="postReportCheck('${rdto.POST_NUM}', '${rdto.REPORT_NUM}');">처리</button> 
 								</c:when>
 								<c:when test="${rdto.REPORT_TYPE.equals('story')}">
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="storyReportCheck(${rdto.STORY_NUM}, ${rdto.REPORT_NUM});">
+									<td  width="50"> 
+									<button type="button" class="btn btn-outline-danger" onclick="storyReportCheck('${rdto.STORY_NUM}', '${rdto.REPORT_NUM}');">처리</button> 
 								</c:when>
 								<c:otherwise>
-									<td  width="50"> <input type="button" name="banCheck" value="처리" onclick="userReportCheck( '${mdto.USEYN}', ${rdto.REPORT_NUM});">
+									<td  width="50">
+									<button type="button" class="btn btn-outline-danger" onclick="userReportCheck('${rdto.REPORTED_ID}' , '${rdto.REPORT_NUM}');">처리</button> 
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -56,7 +59,7 @@
 			</c:forEach>
 	</table>
 </form>
-
+<%@ include file="../../admin/common/paging.jsp"%>
 <%@ include file="../../admin/common/footer.jsp"%>
 
 <script type="text/javascript" language="javascript" defer="defer"> 
@@ -81,7 +84,6 @@ function postReportCheck(post_num, report_num){
 	document.frm.submit();
 }
 
-
 function storyReportCheck(story_num, report_num){
 	document.frm.action = "/admin/report/story";
 	
@@ -101,27 +103,25 @@ function storyReportCheck(story_num, report_num){
 	
 	document.frm.submit();
 }
-/* 
-	function userReportCheck(useyn, report_num){
+
+	function userReportCheck(reported_id, report_num){
 	document.frm.action = "/admin/report/user	";
 	
 	// dom에 INPUT.. CREATE
- 	var input_useyn = document.createElement('input'); 
- 	input_useyn.setAttribute("type", "hidden");
- 	input_useyn.setAttribute("name", "useyn");
- 	input_useyn.setAttribute("value", useyn);
+ 	var input_reported_id = document.createElement('input'); 
+ 	input_reported_id.setAttribute("type", "hidden");
+ 	input_reported_id.setAttribute("name", "reported_id");
+ 	input_reported_id.setAttribute("value", reported_id);
 
 	var input_report = document.createElement('input'); 
 	input_report.setAttribute("type", "hidden");
 	input_report.setAttribute("name", "report_num");
 	input_report.setAttribute("value", report_num);
 	
-	document.frm.appendChild(input_userid);
-	document.frm.appendChild(input_useyn);
+	document.frm.appendChild(input_reported_id);
 	document.frm.appendChild(input_report);
 	
 	document.frm.submit();
 } 
-*/
 
 </script>

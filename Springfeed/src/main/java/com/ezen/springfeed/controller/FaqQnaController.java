@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ezen.springfeed.dto.FaqDto;
 import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.dto.QnaDto;
-import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
 
@@ -36,9 +35,11 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/admin/faqList")
-	public ModelAndView adminFaqList(Model model, HttpServletRequest request) {
+	public ModelAndView adminFaqList(HttpServletRequest request, Model model,  
+			@ModelAttribute("fdto") @Valid FaqDto faqdto, BindingResult result){
 		ModelAndView mav = new ModelAndView();
-		
+		FaqDto fdto = new FaqDto();
+		int faq_num = fdto.getFaq_num();
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginAdmin
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
@@ -50,7 +51,6 @@ public class FaqQnaController {
 	    	int page = 1;
 			if(request.getParameter("first")!=null) {
 				session.removeAttribute("page");
-				session.removeAttribute("key");
 			}
 			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -63,8 +63,10 @@ public class FaqQnaController {
 			Paging paging = new Paging();
 			paging.setPage(page);
 			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("faq_num", faq_num);
 			paramMap.put("cnt", 0);
-			as.getAllCount_r(paramMap);
+			System.out.println(paramMap);
+			as.getAllCount_f(paramMap);
 			int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 			paging.setTotalCount(cnt);
 			paging.paging();
@@ -73,13 +75,13 @@ public class FaqQnaController {
 			System.out.println(paging.getEndNum());
 			paramMap.put("startNum", paging.getStartNum());
 			paramMap.put("endNum", paging.getEndNum());
+			
 			paramMap.put("ref_cursor", null);
 			fqs.adminFaqList(paramMap);
 			
 			ArrayList<HashMap<String,Object>> list
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-	    	paramMap.put("ref_cursor", null);
 	    	fqs.adminFaqList(paramMap);
 	    	mav.addObject("fdto", list);
 	    	System.out.println(list);
@@ -115,13 +117,15 @@ public class FaqQnaController {
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginUser
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");
-		if (loginUser == null) mav.setViewName("admin/admingLogin");
-	    else {
-	    	if(result.getFieldError("subject") != null) {
+		 if (loginUser == null) mav.setViewName("admin/admingLogin"); 
+		 else {
+	    	System.out.println("A");
+	    	if(result.getFieldError("faq_subject") != null) {
 	    		mav.addObject("message", "제목을 입력하세요");
 	    		mav.setViewName("faq/addFaq");
 	    		return mav;
-	    	} else if(result.getFieldError("content") != null) {
+	    	} else if(result.getFieldError("faq_content") != null) {
+    		System.out.println("B");
 	    		mav.addObject("message", "내용을 입력하세요");
 	    		mav.setViewName("faq/addFaq");
 	    		return mav;
@@ -129,8 +133,8 @@ public class FaqQnaController {
 	    	
 	    	HashMap<String,Object> paramMap = new HashMap<>();
 	    	paramMap.put("id", loginUser.get("USERID"));
-	    	paramMap.put("subject", faqdto.getFaq_subject());
-	    	paramMap.put("content", faqdto.getFaq_content());
+	    	paramMap.put("faq_subject", faqdto.getFaq_subject());
+	    	paramMap.put("faq_content", faqdto.getFaq_content());
 	    	fqs.addFaq(paramMap);
 	    	mav.setViewName("redirect:/admin/faqList");
 	    }
@@ -139,7 +143,7 @@ public class FaqQnaController {
 	
 	
 	
-	@RequestMapping("/faq/edit")
+	@RequestMapping(value="/faq/edit", method=RequestMethod.POST)
 	public ModelAndView faqEdit(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -151,8 +155,15 @@ public class FaqQnaController {
 	    	mav.setViewName("admin/faq/editFaq");
 	    	fqs.faqEdit(paramMap);
 	    }
-		mav.setViewName("redirect:/admin/faqList");
-		return mav;
+	
+		ArrayList<HashMap<String,Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+    	fqs.adminFaqList(paramMap);
+    	mav.addObject("fdto", list);
+    	System.out.println(list);
+    	mav.setViewName("admin/faq/adminFaqList");
+    	return mav;
 	}
 	
 	
@@ -172,7 +183,6 @@ public class FaqQnaController {
 	@RequestMapping("/admin/qnaList")
 	public ModelAndView qnaList(HttpServletRequest request, Model model,  
 			@ModelAttribute("qdto") @Valid QnaDto qnadto, BindingResult result) {
-		System.out.println(11111);
 		System.out.println(qnadto);
 		ModelAndView mav = new ModelAndView();
 		QnaDto qdto = new QnaDto();
@@ -183,7 +193,6 @@ public class FaqQnaController {
 		if(session.getAttribute("loginAdmin") == null) {
 			mav.setViewName("admin/adminLogin");
 		} else {
-			System.out.println("Q&A로그인 확인");
 			int page = 1;
 			if(request.getParameter("first")!=null) {
 				session.removeAttribute("page");
@@ -227,15 +236,57 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/qna/detail")
-	public String qnaView() {
-		return "";
+	public String qnaView(HttpServletRequest request, Model model, 
+			@ModelAttribute("qdto") @Valid QnaDto qnadto, BindingResult result) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if(loginUser==null) {
+			model.addAttribute("message", "로그인 후 이용해주세요!");
+			 mav.setViewName("member/login");
+		}	else {
+			
+			HashMap<String,Object> paramMap = new HashMap<>();
+			paramMap.put("qna_num", qnadto.getQna_num());
+			paramMap.put("ref_cursor1", null);
+			paramMap.put("ref_cursor2", null);
+			
+			fqs.qnaDetail(paramMap);
+			
+			ArrayList<HashMap<String,Object>> list1
+				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor1");
+
+			ArrayList<HashMap<String,Object>> list2
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor1");
+			
+			mav.addObject("qdto", list1);
+			mav.addObject("reply", list2);
+			mav.setViewName("redirect:/admin/qnaList");
+			
+		}
+		return "mav";
 	}
 	
 	
 	
 	@RequestMapping("/qna/reply")
-	public String qnaReply() {
-		return "adminQna/qna";
+	public String qnaReply(
+			@RequestParam("qna_num") int qna_num,
+			@RequestParam("qna_content") String qna_content,
+			@RequestParam("qna_reply") String qna_reply, HttpServletRequest request) {
+		
+		//댓글 추가
+		HashMap<String, Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("qna_num", qna_num);
+		paramMap.put("qna_content", qna_content);
+		paramMap.put("qna_refply", qna_reply);
+		
+		fqs.insertReply(paramMap);
+		
+		return "redirect:/admin/qnaList" + qna_num;
 	}
 	
 	
@@ -350,7 +401,7 @@ public class FaqQnaController {
 	    	
 	    	if(list.size() == 0) {
 	    		rttr.addFlashAttribute("message", "존재하지 않는 QNA 게시물 입니다.");
-	    		mav.setViewName("redirect:/");
+	    		mav.setViewName("redirect:/admin/qnaList");
 	    	} else {
 	    		HashMap<String,Object> resultMap = list.get(0);
 	    		
