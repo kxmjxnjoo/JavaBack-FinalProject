@@ -215,6 +215,8 @@ BEGIN
     p_notiCount := v_notiCount;
 END;
 
+select count(*) from notification where user_to='king' and checked=0;
+
 
 --아이디 찾기 
 CREATE OR REPLACE PROCEDURE findId(

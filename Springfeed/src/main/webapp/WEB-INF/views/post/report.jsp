@@ -23,7 +23,7 @@ function doStoryReport(story_num){
 </script>
 </head>
 <body>
-<form name="reportFrm" method="post">
+<form name="reportFrm" method="post" style="height: 525px;">
 	<div id="wrap">
 		<div class="report_wrap"> 
 			<div class="reportTitle"> <h3>신고</h3> </div>

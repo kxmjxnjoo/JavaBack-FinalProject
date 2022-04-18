@@ -136,6 +136,9 @@ BEGIN
 END;
 
 
-update member set useyn='y' where userid='king'
+update member set img=null where name='±Ë¡¯¡÷'
 
-select * from member
+select * from notification
+
+update notification set checked=0 where user_to='king'
+
