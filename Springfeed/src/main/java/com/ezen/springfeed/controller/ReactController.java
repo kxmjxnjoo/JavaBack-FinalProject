@@ -2,6 +2,7 @@ package com.ezen.springfeed.controller;
 
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.PostDto;
+import com.ezen.springfeed.dto.ReplyDto;
 import com.ezen.springfeed.service.MemberService;
 import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.service.StoryService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -396,6 +398,19 @@ public class ReactController {
         return list;
     }
 
+    // Insert save post
+    @RequestMapping(value="/api/post/save/insert", produces="application/json")
+    public int insertSavePost(HttpServletRequest request, @RequestParam("num") int num) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", getLoginUserid(request));
+        paramMap.put("postnum", num);
+
+        ps.insertSavePost(paramMap);
+
+        return Integer.parseInt(String.valueOf(paramMap.get("RESULT")));
+    }
+
     @RequestMapping(value="/api/user/follow", produces="application/json")
     public int follow(HttpServletRequest request, @RequestParam("id") String following) {
         // Create paramMap
@@ -418,5 +433,67 @@ public class ReactController {
         ms.unfollow(paramMap);
 
         return Integer.parseInt(String.valueOf(paramMap.get("result")));
+    }
+
+    @RequestMapping(value="/api/post/num")
+    public PostDto getPostByNum(HttpServletRequest request, @RequestParam("num") int num, @RequestParam(value="userid", required = false) String userid) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("postnum", num);
+        paramMap.put("userid", userid == null ? getLoginUserid(request) : userid);
+        paramMap.put("p_cur", null);
+
+        ps.selectPostByNum(paramMap);
+
+        // Get postdto
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+
+        if(result == null) {
+            return null;
+        }
+
+        for(HashMap<String, Object> post : result) {
+            PostDto pdto = new PostDto();
+            pdto.setPost_img((String) post.get("IMG"));
+            pdto.setContent((String) post.get("CONTENT"));
+            pdto.setAddress((String) post.get("ADDRESS"));
+            pdto.setUserid((String) post.get("USERID"));
+            pdto.setCreate_date((Timestamp) post.get("CREATE_DATE"));
+            pdto.setUser_img((String) post.get("USERIMG"));
+            pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("LIKE_COUNT"))));
+
+            pdto.setIsLiked(Integer.parseInt(String.valueOf(post.get("ISLIKED"))));
+            pdto.setIsSaved(Integer.parseInt(String.valueOf(post.get("ISSAVED"))));
+            return pdto;
+        }
+
+        return null;
+    }
+
+    @RequestMapping(value="/api/post/comment")
+    public ArrayList<ReplyDto> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
+        // Create paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("postnum", postNum);
+        paramMap.put("page", page == null ? 0 : page);
+        paramMap.put("p_cur", null);
+
+        ps.getReplyByPostNum(paramMap);
+
+        // Convert it to ReplyDto
+        ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<ReplyDto> list = new ArrayList<>();
+
+        for(HashMap<String, Object> re : result) {
+            ReplyDto rdto = new ReplyDto();
+            rdto.setContent((String) re.get("CONTENT"));
+            rdto.setImg((String) re.get("IMG"));
+            rdto.setUserid((String) re.get("USERID"));
+            rdto.setReply_date((Timestamp) re.get("REPLY_DATE"));
+
+            list.add(rdto);
+        }
+
+        return list;
     }
 }

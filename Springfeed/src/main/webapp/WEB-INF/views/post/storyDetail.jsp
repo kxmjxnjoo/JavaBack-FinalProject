@@ -109,14 +109,8 @@ function goBack(){
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
-	<div class="wrap" style="position:absolute">
-	
-		
-		<div id=storyArea>
-<!-- 로고 -->
-			<div id="logo" onclick="location.href='/'"> <img src="../images/logo.png" width="50px"> </div>
-
+<div class="wrap" style="position:absolute">
+<div id=storyArea>
 	<div class=innerStory >
 			
 <!-- 정상 -->
@@ -125,13 +119,12 @@ function goBack(){
 			
 <!-- 화살표 -->
 			<c:if test="${prev != 0}" >
-				<div id=goBefore style=cursor:pointer onclick="location.href='/story?story_num=${prev}'">
+				<div id=goBefore style=cursor:pointer onclick="location.href='/storynum/${prev}'">
 					<span class="material-icons"> chevron_left </span> 
 				</div>
 			</c:if>
-			
 			<c:if test="${next != 0 }">
-				<div id=goNext style=cursor:pointer onclick="location.href='/story?story_num=${next}'"> 
+				<div id=goNext style=cursor:pointer onclick="location.href='/storynum/${next}'"> 
 					<span class="material-icons"> chevron_right </span> 
 				</div>
 			</c:if>
@@ -139,8 +132,8 @@ function goBack(){
 			<!-- 스토리 이미지 -->
 				<div class=story_content style="background-image:url(../images/${StoryDto.STORY_IMG})">
 					<!-- 글 작성자 프로필 -->
-					<div id="story_user" onClick="location.href='/post?userid=${StoryDto.USERID}'">
-						<div id="userprofile" onClick="location.href='/post?userid=${StoryDto.USERID}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
+					<div id="story_user" onClick="location.href='/user/page/${StoryDto.USERID}'">
+						<div id="userprofile" onClick="location.href='/user/page/${StoryDto.USERID}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 							<img class="userImg" width=50px height=50px src="../images/${ StoryDto.USER_IMG == null || StoryDto.USER_IMG.equals("") ? "tmpUserIcon.png" : StoryDto.USER_IMG }">
 						</div> 
 						<div id="userid"><b> ${StoryDto.USERID}</b></div>
@@ -170,8 +163,8 @@ function goBack(){
 			<c:otherwise>
 				<div class=story_content style="background:#999; align-content: center;">
 					<!-- 글 작성자 프로필 -->
-					<div id="story_user" onClick="location.href='/post?userid=${StoryDto.USERID}'">
-						<div id="userprofile" onClick="location.href='/post?userid=${StoryDto.USERID}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
+					<div id="story_user" onClick="location.href='/user/page/${StoryDto.USERID}'">
+						<div id="userprofile" onClick="location.href='/user/page/${StoryDto.USERID}'"> <!-- 클릭 시 유저 프로필로 이동하도록 function 추가 -->
 							<img class="userImg" width=50px height=50px src="../images/${ StoryDto.USER_IMG == null || StoryDto.USER_IMG.equals("") ? "tmpUserIcon.png" : StoryDto.USER_IMG }">
 						</div> 
 						<div id="userid"><b> ${StoryDto.USERID}</b></div>

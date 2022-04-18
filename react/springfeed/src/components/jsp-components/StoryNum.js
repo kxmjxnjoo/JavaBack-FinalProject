@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Loading from '../common/Loading';
 import {useParams} from 'react-router-dom'
 
-const Story = () => {
-    const {id} = useParams()
+const StoryNum = () => {
+    const {num} = useParams()
 
     const [jspElement, setJspElement] = useState(null);
 
@@ -15,7 +15,7 @@ const Story = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch('/story?userid=' + id)
+        fetch('/story?story_num=' + num)
             .then((res) => {
                 return res.text()
             })
@@ -39,4 +39,4 @@ const Story = () => {
   )
 }
 
-export default Story
+export default StoryNum

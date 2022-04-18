@@ -47,11 +47,13 @@ const MainFollowingList = ({ user, loginUser }) => {
     }
 
     const imageStyle = {
-        width: '100px'
+        width: '100px',
+        height: '100px'
     }
 
     const imageUserStyle = {
-        width: '75px'
+        width: '75px',
+        height: '75px'
     }
 
     return (

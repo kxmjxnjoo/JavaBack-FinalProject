@@ -47,4 +47,16 @@ public class PostService {
     public void getSavedPost(HashMap<String, Object> paramMap) {
         pdao.getSavePost(paramMap);
     }
+
+    public void getReplyByPostNum(HashMap<String, Object> paramMap) {
+        pdao.getReplyByPostNum(paramMap);
+    }
+
+    public void selectPostByNum(HashMap<String, Object> paramMap) {
+        pdao.selectPostByNum(paramMap);
+    }
+
+    public void insertSavePost(HashMap<String, Object> paramMap) {
+        pdao.insertSavePost(paramMap);
+    }
 }

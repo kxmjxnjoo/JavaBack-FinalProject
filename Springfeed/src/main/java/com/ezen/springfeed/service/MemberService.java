@@ -122,6 +122,10 @@ public class MemberService {
 		mdao.changePw(userid, tempPassword);
 	}
 
+	public void findRecentStory(HashMap<String, Object> paramMap) {
+		mdao.findRecentStory(paramMap);
+	}
+
     public void getIsFollowing(HashMap<String, Object> paramMap) {
 		mdao.getIsFollowing(paramMap);
     }

@@ -53,7 +53,7 @@ public class StoryController {
 		
 		if (loginUser == null)  {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:/login/form";
+			return "redirect:http://localhost:3000/";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -78,14 +78,16 @@ public class StoryController {
 			
 			int story_num = Integer.parseInt(paramMap.get("story_num").toString());
 			
-			return "redirect:/story?story_num="+story_num;
+			return "redirect:http://localhost:3000/storynum/"+story_num;
 		}
 	}
 	
 	
 	
 	@RequestMapping("/story")
-	public ModelAndView storyDetail(@RequestParam("story_num") int story_num, 
+	public ModelAndView storyDetail(
+			@RequestParam(value="userid", required=false) String userid, 
+			@RequestParam(value="story_num", required=false) String story_num, 
 			HttpServletRequest request, Model model, RedirectAttributes rttr) {
 		ModelAndView mav = new ModelAndView();
 
@@ -95,12 +97,22 @@ public class StoryController {
 		
 		if (loginUser == null)  {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
-			mav.setViewName("redirect:/login/form");
+			mav.setViewName("redirect:http://localhost:3000/");
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			
+			
+			
+			if(story_num == null) paramMap.put("story_num", null);
+			else paramMap.put("story_num", Integer.parseInt(story_num));
+			
+			if(userid != null) {
+				paramMap.put("userid", userid);
+				ms.findRecentStory(paramMap);
+			}
+			
 			paramMap.put("ref_cursor", null);
-			paramMap.put("story_num", story_num);
 			paramMap.put("prev", 0);
 			paramMap.put("next", 0);
 			paramMap.put("fontcolor", null);
@@ -115,11 +127,14 @@ public class StoryController {
 			
 			if(list.size() == 0) {
 				rttr.addFlashAttribute("message", "존재하지 않는 스토리 입니다.");
-				mav.setViewName("redirect:/");
+				mav.setViewName("redirect:http://localhost:3000/");
 			} else {
 				
 				HashMap<String, Object> resultMap = list.get(0);
 				mav.addObject("StoryDto", resultMap);
+				
+				System.out.println(paramMap.get("story_num"));
+				System.out.println("스토리넘버 : " + resultMap.get("USERID"));
 				
 				//팔로우 검사
 				HashMap<String, Object> followMap = new HashMap<>();
@@ -185,7 +200,7 @@ public class StoryController {
 					
 				} else {
 					rttr.addFlashAttribute("message", "삭제되었거나 비활성화된 계정의 스토리 입니다.");
-				    mav.setViewName("redirect:/");
+				    mav.setViewName("redirect:http://localhost:3000/");
 				}
 			}
 		}
@@ -205,14 +220,14 @@ public class StoryController {
 		
 		if(loginUser== null) {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:/login/form";
+			return "redirect:http://localhost:3000/";
 		} else {
 			String userid = (String) loginUser.get("USERID");
 			
 			ss.deleteStory(story_num);
 			
 			rttr.addFlashAttribute("message", "스토리를 삭제했어요!");
-		    return "redirect:http://localhost:3000/user/page/"+userid;
+		    return "redirect:http://localhost:3000/user/"+userid;
 		}
 	}
 	
@@ -227,7 +242,7 @@ public class StoryController {
 		
 		if(loginUser== null) {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:/login/form";
+			return "redirect:http://localhost:3000/";
 		} else {
 			System.out.println(story_num);
 			HashMap<String, Object> paramMap = new HashMap<>();
@@ -266,7 +281,7 @@ public class StoryController {
 		
 		if (loginUser == null)  {
 			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:/login/form";
+			return "redirect:http://localhost:3000/";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -290,7 +305,7 @@ public class StoryController {
 			ss.editStory(paramMap);
 			
 			rttr.addFlashAttribute("message", "스토리를 수정했어요!");
-			return "redirect:/story?story_num="+story_num;
+			return "redirect:http://localhost:3000/storynum/"+story_num;
 		}
 	}
 	

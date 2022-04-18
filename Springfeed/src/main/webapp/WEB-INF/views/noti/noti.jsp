@@ -31,19 +31,19 @@
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 2 && loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">포스트</a>를 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post/${ noti.POST_NUM }">포스트</a>를 좋아요 했어요</p>
 							</c:when>
 						
 							<c:when test="${ noti.NOTITYPE == 3 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">포스트에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
+								<p class="notiContent notiText">님이 <a href="post/${ noti.POST_NUM }">포스트</a>에 댓글을 다셨어요 : ${ noti.REPLYCONTENT }</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 4 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.POST_NUM }">내 댓글을 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post/${ noti.POST_NUM }">내 댓글</a>을 좋아요 했어요</p>
 							</c:when>
 							
 							<c:when test="${ noti.NOTITYPE == 5 &&  loginUser.USERID != noti.USERFROM}">
-								<p class="notiContent notiText">님이 <a href="post?post_num=${ noti.STORY_NUM }">스토리 를 좋아요 했어요</p>
+								<p class="notiContent notiText">님이 <a href="post/${ noti.STORY_NUM }">스토리</a> 를 좋아요 했어요</p>
 							</c:when>
 						</c:choose>
 						

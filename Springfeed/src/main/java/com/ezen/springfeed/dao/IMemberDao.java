@@ -29,10 +29,10 @@ public interface IMemberDao {
 	void PublicAccount(String userid);
 	void findPw(HashMap<String, Object> paramMap);
 	void changePw(String userid, String tempPassword);
+	void findRecentStory(HashMap<String, Object> paramMap);
 	
 	void getFollowerCount(HashMap<String, Object> paramMap);
 	void getFollowingCount(HashMap<String, Object> paramMap);
 	void getFollowerList(HashMap<String, Object> paramMap);
-
     void getIsFollowing(HashMap<String, Object> paramMap);
 }

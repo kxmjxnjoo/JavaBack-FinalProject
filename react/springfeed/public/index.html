@@ -18,21 +18,43 @@
 
   <script type="text/javascript" >
 
+//회원정보수정
+
+  function withdraw() {
+			if(confirm("정말로 계정을 비활성화 할까요??")) {
+				location.href = "/deleteAcount"
+			}
+		}
+		
+		function privateAccount() {
+			if(confirm("계정을 비공개로 전환 할까요?")) {
+				location.href = "/user/private"
+			}
+		}
+		
+		function publicAccount() {
+			if(confirm("계정을 공개로 전환 할까요?")) {
+				location.href = "/user/public"
+			}
+		}
+
+
+
 //메시지 표시
-  function disappear() {
-		document.getElementById("message").style.webkitTransform='translateY(-70px)';
-	}
+  // function disappear() {
+	// 	document.getElementById("message").style.webkitTransform='translateY(-70px)';
+	// }
 	
-	function appear() {
-		document.getElementById("message").style.webkitTransform='translateY(70px)';
-		console.log(document.getElementById("message").value);
-	}
+	// function appear() {
+	// 	document.getElementById("message").style.webkitTransform='translateY(70px)';
+	// 	console.log(document.getElementById("message").value);
+	// }
+
 
 //아이디 찾기
     function findIdCheck(event) {
 
       event.preventDefault()
-      console.log("function start")
       var formData = {
         name: $("#joinName").val(),
         phone: $("#joinPhone").val()
@@ -60,7 +82,6 @@
     function findPwCheck(event) {
 
     event.preventDefault()
-    console.log("function start")
     var formData = {
       userid: $("#joinId").val(),
       phone: $("#joinPhone2").val(),
@@ -170,13 +191,63 @@
           elem.parentNode.removeChild(elem);
       }
 
+      function story_like(story_num){
+	var url = "spring.do?command=checkStoryLike&story_num=" + story_num;
+	document.frm.action=url;
+	document.frm.submit();
+}
+
+function deleteCheck(story_num){
+	var answer = confirm("스토리를 삭제할까요?")
+	if(answer){
+		location.href="/story/delete?story_num="+story_num;
+	}
+}
+
+function setting(){
+	document.getElementById("setting").style.display="flex";
+}
+
+function setting_close(){
+	document.getElementById("setting").style.display="none";
+}
+
+
+function goReport(story_num) {
+	var url="/report/form?story_num=" + story_num;
+	var _width = '400';
+	var _height = '500';
+	var _left = Math.ceil((window.screen.width - _width)/2); 
+	var _top = Math.ceil((window.screen.width - _height)/2); 
+	var opt = "toolbar=no, menubar=no, resizable=no, fullscreen=yes, location=no, " +
+		"width="+_width+", height="+_height+", left="+_left;
+	window.open(url, "reportPost", opt);
+}
+
+
+function goBlock(userid) {
+	var answer = confirm(userid + "님을 차단할까요?");
+	if(answer) {
+		location.href="/block?userid="+userid;
+	}
+}
+
+function unblock(userid) {
+	var answer = confirm("차단을 해제할까요?");
+	if(answer) {
+		location.href="/unblock?userid="+userid;
+	}
+}
+
+function goBack(){
+	window.history.back();
+}
 
 //로그인 ajax
           
       function loginCheck(event) {
 
         event.preventDefault()
-        console.log("function start")
         var formData = {
           userid: $("#userid").val(),
           password: $("#password").val()
@@ -196,6 +267,63 @@
           }
         });
       };
+
+//회원정보 수정
+      //수정전
+  function editCheck(){
+			let theForm = document.frm;
+			
+			let result = confirm('회원 정보를 수정할까요?');
+			if(result) {
+				theForm.action="/user/edit";
+				theForm.submit();
+			} else {
+				return;
+			}
+		}
+
+
+      function userEditCheck(event) {
+        console.log('userEditCheck');
+        event.preventDefault()
+
+        if(document.getElementById("joinPwd").value==null) alert('비밀번호를 입력하세요')
+        if(document.getElementById("joinPhone").value==null) alert('휴대전화번호를 입력하세요')
+        if(document.getElementById("joinEmail").value==null) alert('이메일을 입력하세요')
+        if(document.getElementById("joinName").value==null) alert('성명을 입력하세요')
+
+        if(document.getElementById("newImage").value==null) {
+          var userImg=document.getElementById("oldPicture").value
+        }
+
+        var formData = {
+          password: $("#joinPwd").val(),
+          email: $("#joinEmail").val(),
+          phone: $("#joinPhone").val(),
+          img: userImg,
+          name: $("#joinName").val(),
+          introduce: $("#introduce_box").val()
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "/user/editing",
+          data: formData,
+          dataType: "json",
+          encode: true,
+        }).done(function (data) {
+          if(data.cnt == 1){
+          location.href="/";
+          } else {
+          }
+        });
+      }
+
+
+
+
+
+
       
       function checkId(){
           var id = $('#joinId').val(); //id값이 "id"인 입력란의 값을 저장

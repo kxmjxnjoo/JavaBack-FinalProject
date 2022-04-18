@@ -167,6 +167,11 @@
 		{  CALL changePw(  #{userid}, #{tempPassword}  )  }
 	</update>
 
+	<select id="findRecentStory" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findRecentStory(  #{userid},#{story_num, mode=OUT, jdbcType=INTEGER}  )  }
+	</select>
+
+
 	<select id="getIsFollowing" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{
 			CALL getIsFollowing(

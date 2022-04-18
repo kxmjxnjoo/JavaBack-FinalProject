@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import InifniteScroll from 'react-infinite-scroller'
 
+import { Link } from 'react-router-dom'
+
 // Components
 import Post from './Home/Post'
 import FollowingList from './Home/MainFollowingList'
@@ -13,12 +15,16 @@ import StoryList from './Home/StoryList'
 import toast from 'react-hot-toast'
 
 import { Modal } from 'react-bootstrap'
+import Report from './jsp-components/Report'
 
-const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsStoryOpen, setStoryNum, setIsSelectOpen }) => {
+const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPost, setIsSelectOpen }) => {
     const [posts, setPosts] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [isPostFeedError, setIsPostFeedError] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
+
+    const [isReportOpen, setIsReportOpen] = useState(false)
+    const [selectedUser, setSelectedUser] = useState(null)
 
     const [isDetailMenuOpen, setIsDetailMenuOpen] = useState(false)
     const closeDetailMenu = () => {
@@ -76,17 +82,12 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             })
     }
 
-
-
     return (
         <div className='container row'>
 
             <div className='col-12 col-md-9'>
                 <div>
-                    <StoryList
-                        setIsStoryOpen={setIsStoryOpen}
-                        setStoryNum={setStoryNum}
-                    />
+                    <StoryList/>
                 </div>
 
                 <div>
@@ -108,6 +109,7 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
                                                         openPostDetail={openPostDetail}
                                                         setIsDetailMenuOpen={setIsDetailMenuOpen}
                                                         setSelectedPost={setSelectedPost}
+                                                        setSelectedUser={setSelectedUser}
                                                     />
                                                 )
                                             }) 
@@ -133,21 +135,38 @@ const Home = ({ user, setPage, setIsPostDetailOpen, selectedPost, setSelectedPos
             >
                 <div className="card">
                     <div className="row">
-                        <div className="btn text-danger p-3">
-                            언팔로우
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="btn text-danger p-3">
+                        <div className="btn text-danger p-3" onClick={() => {
+                            setIsReportOpen(true)
+                        }}>
                             신고하기
                         </div>
                     </div>
                     <div className="row">
-                        <div className="btn p-3">
+                        <div className="btn p-3" onClick={() => {
+                            setIsPostDetailOpen(true)
+                        }}>
                             포스트로 이동
                         </div>
                     </div>
+
+                    <div className="row">
+                        <Link to={'/user/page/' + selectedUser} className='text-center'>
+                            <div className="btn p-3">
+                                유저 페이지로 이동
+                            </div>
+                        </Link>
+                    </div>
                 </div>
+            </Modal>
+
+            <Modal
+                show={isReportOpen}
+                onHide={() => {
+                    setIsReportOpen(false)
+                }}
+                className='mt-5'
+            >
+                <Report/>
             </Modal>
 
         </div>

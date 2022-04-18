@@ -16,6 +16,7 @@ create or replace procedure selectPostFeed(
 is
 begin
 open p_cur for
+
 select p.post_num, p.img, p.address, p.userid, p.create_date, p.content, count(l.post_num) as LIKECOUNT
 from (post p inner join post_like l on l.post_num=p.post_num)
 where p.userid in (select followed from follow where follower='jinkpark')

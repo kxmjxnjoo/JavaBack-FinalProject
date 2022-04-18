@@ -31,14 +31,14 @@
         <div class="row">
 			<div class="col-md-5 mx-auto">
 			<div id="first">
-				<div class="myform form ">
+				<div class="myform form " style="margin-top: 30px;">
 					 <div class="logo mb-3">
 						 <div class="col-md-12 text-center">
 							<h1 style="margin:20px; font-size:3rem">Springfeed</h1>
 							<h2 style="margin:20px;"> 로그인</h3>
 						 </div>
 					</div>
-                   <form method="post" id="loginFrm" name="login" action="/login">
+                   <form method="post" id="loginFrm" name="login" action="/login" >
                            <div class="form-group">
                               <input type="text" name="userid"  required class="loginInput" id="userid" aria-describedby="emailHelp" placeholder="아이디">
                            </div>

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/join.css">
 </head>
 <body>	
-<%@include file="../common/message.jsp" %>
+<div class="formWrap">
 	<form method="post" action="/find/id" name="loginFrm" id="findIdForm">
 		<div class="box1" id="findId">
 			<h1>Springfeed</h1>
@@ -40,7 +40,7 @@
 			<input type="submit" value="비밀번호 찾기" id="login" onclick="findPwCheck(event);">
 		</div>
 	</form>
-
+</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		

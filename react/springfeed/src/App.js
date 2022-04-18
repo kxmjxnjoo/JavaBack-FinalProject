@@ -27,6 +27,7 @@ import UploadPost from './components/UploadPost'
 import Find from './components/jsp-components/Find'
 import Admin from './components/jsp-components/Admin'
 import Report from './components/jsp-components/Report'
+import StoryNum from './components/jsp-components/StoryNum'
 
 // Common
 import './common.css'
@@ -49,8 +50,6 @@ function App() {
 	const [searchKey, setSearchKey] = useState('')
 	const [isPostDetailOpen, setIsPostDetailOpen] = useState(false)
 	const [selectedPost, setSelectedPost] = useState(null)
-	const [isStoryOpen, setIsStoryOpen] = useState(false)
-	const [storyNum, setStoryNum] = useState(null)
 	const [isSelectOpen, setIsSelectOpen] = useState(false) 
 	const [isReportOpen, setIsReportOpen] = useState(false)
 
@@ -151,8 +150,6 @@ function App() {
 													selectedPost={selectedPost}
 													setSelectedPost={setSelectedPost}
 													setIsPostDetailOpen={setIsPostDetailOpen}
-													setIsStoryOpen={setIsStoryOpen}
-													setStoryNum={setStoryNum}
 													setIsSelectOpen={setIsSelectOpen}
 												/>}
 											 />
@@ -202,6 +199,9 @@ function App() {
 
 										<Route path='/admin' element={<Admin/>}/>
 
+										<Route path='/story/:id' element={<Story/>}/>
+										<Route path='/storynum/:num' element={<StoryNum/>}/>
+
 									</Routes>
 					}
 			</div>
@@ -217,19 +217,6 @@ function App() {
 				<PostDetail
 					post={selectedPost}
 					/>
-			</Modal>
-
-			<Modal
-				show={isStoryOpen}
-				onHide={() => {
-					setIsStoryOpen(false)
-				}}
-				dialogClassName='storyModal'
-				className='mt-5 overflow-hidden'
-			>
-				<Story
-					storyNum={storyNum}
-				/>
 			</Modal>
 
 			<Modal
