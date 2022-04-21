@@ -65,7 +65,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                     <div className="col-12 col-md-4 p-0">
                                                     <PostThumbnail
                                                         postNum={data[0].postNum}
-                                                        postImg={data[0].img}
+                                                        postImg='http://picsum.photos/400/400/'
                                                         likeCount={data[0].likeCount}
                                                         replyCount={data[0].replyCount}
                                                         openPostDetail={openPostDetail}
@@ -74,7 +74,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                         />
                                                         <PostThumbnail
                                                         postNum={data[1].postNum}
-                                                        postImg={data[1].img}
+                                                        postImg='http://picsum.photos/400/400//'
                                                         likeCount={data[1].likeCount}
                                                         replyCount={data[1].replyCount}
                                                         openPostDetail={openPostDetail}
@@ -85,7 +85,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                     <div className="col-12 col-md-8 p-0">
                                                         <PostThumbnail
                                                             postNum={data[2].postNum}
-                                                            postImg={data[2].img}
+                                                            postImg='http://picsum.photos/400/400///'
                                                             likeCount={data[2].likeCount}
                                                             replyCount={data[2].replyCount}
                                                             openPostDetail={openPostDetail}
@@ -100,7 +100,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                     <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[3].postNum}
-                                                            postImg={data[3].img}
+                                                            postImg='http://picsum.photos/400/400////'
                                                             likeCount={data[3].likeCount}
                                                             replyCount={data[3].replyCount}
                                                             openPostDetail={openPostDetail}
@@ -112,7 +112,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                     <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[4].postNum}
-                                                            postImg={data[4].img}
+                                                            postImg='http://picsum.photos/400/400/////'
                                                             likeCount={data[4].likeCount}
                                                             replyCount={data[4].replyCount}
                                                             openPostDetail={openPostDetail}
@@ -124,7 +124,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost, setIsSelectOpe
                                                     <div className="col-12 col-md-4 p-0">
                                                         <PostThumbnail
                                                             postNum={data[5].postNum}
-                                                            postImg={data[5].img}
+                                                            postImg='http://picsum.photos/400/400//////'
                                                             likeCount={data[5].likeCount}
                                                             replyCount={data[5].replyCount}
                                                             openPostDetail={openPostDetail}

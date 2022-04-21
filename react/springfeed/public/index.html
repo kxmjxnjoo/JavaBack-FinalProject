@@ -18,6 +18,53 @@
 
   <script type="text/javascript" >
 
+function checkQna() {
+			let subject = document.getElementById("qnaTitle")
+			let content = document.getElementById("qnaContent")
+			
+			if(confirm("QNA를 등록할까요?")) {
+				return true
+			}
+			
+			return false
+		}
+
+  function showFaq(title, content) {
+    let popup = document.getElementById("faqPopup")
+    let titleEle = document.getElementById("faqPopupTitle")
+    let contentEle = document.getElementById("faqPopupContent")
+    
+    if(popup.style.display == "none") {
+      popup.style.display = ""
+      titleEle.innerHTML = title
+      contentEle.innerHTML = content
+    } else {
+      popup.style.display = "none"
+    }
+  }
+  
+  function showQna(title, content, reply) {
+			let popup = document.getElementById("popup")
+			let titleEle = document.getElementById("popupTitle")
+			let contentEle = document.getElementById("popupContent")
+			let answerContentEle = document.getElementById("answerPopupContent")
+			
+			if(popup.style.display == "none") {
+				popup.style.display = ""
+				titleEle.innerHTML = title
+				contentEle.innerHTML = content
+				if(reply == null || reply == '') {
+					answerContentEle.innerHTML = "아직 답변이 오지 않았어요"
+					answerContentEle.style.color = "silver"
+				} else 
+					answerContentEle.innerHTML = reply
+					answerContentEle.style.color = "black"
+			} else {
+				popup.style.display = "none"
+			}
+			
+		}
+
 //회원정보수정
 
   function withdraw() {
@@ -38,18 +85,16 @@
 			}
 		}
 
+//신고
+  function doPostReport(post_num){
+    document.reportFrm.action="/report?post_num=" + post_num;
+    document.reportFrm.submit();
+  }
 
-
-//메시지 표시
-  // function disappear() {
-	// 	document.getElementById("message").style.webkitTransform='translateY(-70px)';
-	// }
-	
-	// function appear() {
-	// 	document.getElementById("message").style.webkitTransform='translateY(70px)';
-	// 	console.log(document.getElementById("message").value);
-	// }
-
+  function doStoryReport(story_num){
+    document.reportFrm.action="/report?story_num=" + story_num;
+    document.reportFrm.submit();
+  }
 
 //아이디 찾기
     function findIdCheck(event) {

@@ -1,4 +1,7 @@
-select * from member
+
+select * from post where userid='정의'
+
+
 
 --스토리 신고
 CREATE OR REPLACE PROCEDURE addStoryReport(

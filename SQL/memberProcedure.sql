@@ -8,23 +8,32 @@ BEGIN
     OPEN p_curvar FOR SELECT * FROM member WHERE userid=p_userid;
 END;
 
-select * from member
+select * from member;
+
 --회원 추가
 CREATE OR REPLACE PROCEDURE insertMember(
     p_userid IN member.userid%TYPE, 
     p_userpwd IN member.password%type,
     p_name IN member.name%type,
     p_email IN member.email%type,
-    p_phone IN member.phone%type
+    p_phone IN member.phone%type,
+    p_status out number
 )
 IS
+    v_status number(5) := 0;
 BEGIN
     insert into member (userid, password, name, email, phone)
     values (p_userid,p_userpwd,p_name,p_email,p_phone);
     
     insert into follow
     values(follow_seq.nextVal, p_userid, p_userid, sysdate);
+    v_status := 1;
+    p_status := v_status;
     commit;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;
 END;
 
 

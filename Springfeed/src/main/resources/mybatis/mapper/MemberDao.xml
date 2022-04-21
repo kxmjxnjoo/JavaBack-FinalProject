@@ -42,7 +42,7 @@
 	
 	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL insertMember( 
-			#{userid},#{password},#{name},#{email},#{phone}
+			#{userid},#{password},#{name},#{email},#{phone},#{status, mode=OUT, jdbcType=INTEGER}
 		)}
 	</insert>
 	
