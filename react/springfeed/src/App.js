@@ -202,6 +202,8 @@ function App() {
 										<Route path='/story/:id' element={<Story/>}/>
 										<Route path='/storynum/:num' element={<StoryNum/>}/>
 
+										<Route path='/post/:num' element={<Post/>}/>
+
 									</Routes>
 					}
 			</div>

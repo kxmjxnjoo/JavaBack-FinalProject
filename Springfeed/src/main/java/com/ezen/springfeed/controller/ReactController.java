@@ -432,7 +432,16 @@ public class ReactController {
 
         ms.unfollow(paramMap);
 
-        return Integer.parseInt(String.valueOf(paramMap.get("result")));
+        int result = Integer.parseInt(String.valueOf(paramMap.get("result")));
+
+        /* Add noti
+        if(result != 0) {
+            HashMap<String, Object> paramMap = new HashMap<>();
+            ms.addNotification();
+        }
+         */
+
+        return result;
     }
 
     @RequestMapping(value="/api/post/num")
