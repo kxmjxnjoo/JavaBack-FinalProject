@@ -55,8 +55,8 @@ public class MemberService {
 		mdao.deleteAcount(paramMap);
 	}
 
-	public void activateAccount(String userid) {
-		mdao.activateAccount(userid);
+	public void activateAccount(HashMap<String, Object> paramMap) {
+		mdao.activateAccount(paramMap);
 	}
 
 	public void getFollow(HashMap<String, Object> followMap) {
@@ -82,12 +82,12 @@ public class MemberService {
 		mdao.getNotiCount(paramMap);
 	}
 
-	public void blockMember(String userid , String blocked) {
-		mdao.blockMember(userid, blocked);
+	public void blockMember(HashMap<String, Object> paramMap) {
+		mdao.blockMember(paramMap);
 	}
 
-	public void unblockMember(String userid, String blocked) {
-		mdao.unblockMember(userid, blocked);
+	public void unblockMember(HashMap<String, Object> paramMap) {
+		mdao.unblockMember(paramMap);
 	}
 
 	public void blockCheck(HashMap<String, Object> paramMap) {

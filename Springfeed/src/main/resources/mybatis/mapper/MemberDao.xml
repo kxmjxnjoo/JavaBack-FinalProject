@@ -84,16 +84,16 @@
 	
 	<update id="userEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL userEdit( 
-			#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE},#{IMG}
+			#{status, mode=OUT, jdbcType=INTEGER},#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE},#{IMG}
 		)}
 	</update>
 	
 	<update id="deleteAcount" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{  CALL deleteAcount( #{userid} )}
+		{  CALL deleteAcount( #{userid},  #{status, mode=OUT, jdbcType=INTEGER})}
 	</update>
 	
-	<update id="activateAccount" statementType="CALLABLE" parameterType="String">
-		{  CALL activateAccount( #{userid} )}
+	<update id="activateAccount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL activateAccount( #{userid}, #{status, mode=OUT, jdbcType=INTEGER})}
 	</update>
 
 	<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -139,11 +139,11 @@
 	</select>
 	
 	<insert id="blockMember" statementType="CALLABLE" parameterType="String">
-		{  CALL insertBlockMember(  #{userid}, #{blocked} )  }
+		{  CALL insertBlockMember(  #{userid}, #{blocked}, #{status, mode=OUT, jdbcType=INTEGER} )  }
 	</insert>
 	
-	<delete id="unblockMember" statementType="CALLABLE" parameterType="String">
-		{  CALL unblockMember(  #{userid}, #{blocked} )  }
+	<delete id="unblockMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL unblockMember(  #{userid}, #{blocked}, #{status, mode=OUT, jdbcType=INTEGER} )  }
 	</delete>
 	
 	<select id="blockCheck" statementType="CALLABLE" parameterType="java.util.HashMap">

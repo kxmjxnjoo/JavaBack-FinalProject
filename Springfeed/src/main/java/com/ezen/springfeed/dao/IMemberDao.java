@@ -15,15 +15,15 @@ public interface IMemberDao {
 	void getNotification(HashMap<String, Object> paramMap);
 	void userEdit(HashMap<String, Object> paramMap);
 	void deleteAcount(HashMap<String, Object> paramMap);
-	void activateAccount(String userid);
+	void activateAccount(HashMap<String, Object> paramMap);
 	void getFollow(HashMap<String, Object> followMap);
 	void findId(HashMap<String, Object> paramMap);
 	void userEmailCheck(String email, String name, boolean pwFindCheck);
 	void updatePassword(String str, String email);
 	void getFollowedList(HashMap<String, Object> paramMap);
 	void getNotiCount(HashMap<String, Object> paramMap);
-	void blockMember(String userid, String blocked);
-	void unblockMember(String userid, String blocked);
+	void blockMember(HashMap<String, Object> paramMap);
+	void unblockMember(HashMap<String, Object> paramMap);
 	void blockCheck(HashMap<String, Object> paramMap);
 	void privateAccount(String userid);
 	void PublicAccount(String userid);

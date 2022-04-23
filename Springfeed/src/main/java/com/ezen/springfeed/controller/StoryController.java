@@ -29,10 +29,7 @@ public class StoryController {
 	@Autowired
 	MemberService ms;
 	
-	@RequestMapping(value="/login/form")
-	public String loginForm() {
-		return "member/login";
-	}
+	
 	
 	@RequestMapping("/story/add/form") 
 	public String addStoryForm(HttpServletRequest request, Model model) {

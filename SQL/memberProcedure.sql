@@ -163,6 +163,7 @@ END;
 
 --회원 정보 수정
 create or replace PROCEDURE userEdit(
+    p_status out number,
     p_userid IN member.userid%type,
     p_password IN member.password%type,
     p_name IN member.name%type,
@@ -172,40 +173,66 @@ create or replace PROCEDURE userEdit(
     p_img IN member.img%type
 )
 IS
+    v_status number(5) := 0;
 BEGIN
     update member set password=p_password, name=p_name, email=p_email, phone=p_phone, 
     introduce=p_introduce, img=p_img
     where userid=p_userid;
+    commit;
+    v_status := 1;
+    p_status := v_status;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;
 END;
 
-SELECT * FROM MEMBER
 
 
 --계정 비활성화
 create or replace PROCEDURE deleteAcount(
-    p_userid IN member.userid%type
+    p_userid IN member.userid%type,
+    p_status out number
 )
 IS
+    v_status number(5) := 0;
 BEGIN
     update member set useyn = 'n' where userid=p_userid;
     update story set useyn = 'n' where userid=p_userid;
     update post set useyn = 'n' where userid=p_userid;
     update reply set useyn = 'n' where userid=p_userid;
     commit;
+    
+    v_status := 1;
+    p_status := v_status;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;    
 END;
 
-select * from story
+select * from member
 
 --계정 활성화
 create or replace PROCEDURE activateAccount(
-    p_userid IN member.userid%type
+    p_userid IN member.userid%type,
+    p_status out number
 )
 IS
+    v_status number(5) := 0;
 BEGIN
     update member set useyn = 'y' where userid=p_userid;
     update story set useyn = 'y' where userid=p_userid;
     update post set useyn = 'y' where userid=p_userid;
     update reply set useyn = 'y' where userid=p_userid;
+    commit;   
+    
+    v_status := 1;
+    p_status := v_status;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;    
 END;
 
 
@@ -279,36 +306,63 @@ END;
 --멤버 블락
 CREATE OR REPLACE PROCEDURE insertBlockMember(
     p_userid IN blockmember.userid%TYPE, 
-    p_blocked IN blockmember.blocked%TYPE
+    p_blocked IN blockmember.blocked%TYPE,
+    p_status out number 
 )
 IS
     v_count number(2) := 0;
+    v_status number(5) := 0;
 BEGIN
-    insert into blockmember values(p_userid, p_blocked);
-    
-    select count(*) into v_count from follow where follower=p_userid and followed=p_blocked;
-    if(v_count != 0) then
-        delete from follow where follower=p_userid and followed=p_blocked;
-    end if;
-    
-    select count(*) into v_count from follow where follower=p_blocked and followed=p_userid;
-    if(v_count != 0) then
-        delete from follow where follower=p_blocked and followed=p_userid;
+    select count(*) into v_count from blockmember where userid=p_userid and blocked=p_blocked;
+    if v_count=0 then 
+        insert into blockmember values(p_userid, p_blocked);
+        
+        select count(*) into v_count from follow where follower=p_userid and followed=p_blocked;
+        if v_count != 0 then
+            delete from follow where follower=p_userid and followed=p_blocked;
+        end if;
+        
+        select count(*) into v_count from follow where follower=p_blocked and followed=p_userid;
+        if v_count != 0 then
+            delete from follow where follower=p_blocked and followed=p_userid;
+        end if;
+        v_status := 1;
+        p_status := v_status;
+    else 
+        v_status := -1;
+        p_status := v_status;
     end if;
     
     commit;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;    
 END;
+
+select * from blockmember
 
 --멤버 블락 해제
 CREATE OR REPLACE PROCEDURE unblockMember(
     p_userid IN blockmember.userid%TYPE, 
-    p_blocked IN blockmember.blocked%TYPE
+    p_blocked IN blockmember.blocked%TYPE,
+    p_status out number
 )
 IS
+    v_status number(5) := 0;
 BEGIN
     delete from blockmember where userid=p_userid and blocked=p_blocked;
     commit;
+    
+    v_status := 1;
+    p_status := v_status;
+exception when others then
+    v_status := 0;
+    p_status := v_status;
+    rollback;    
 END;
+
+
 
 --블락 리스트 확인
 CREATE OR REPLACE PROCEDURE blockCheck(
