@@ -30,7 +30,7 @@
 	</delete>
 	
 	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL addQna( #{userid}, #{subject}, #{content} ) }
+		{ CALL addQna( #{status, mode=OUT, jdbcType=INTEGER}, #{userid}, #{subject}, #{content} ) }
 	</insert>
 	
 	<update id="qnaEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -40,7 +40,7 @@
 	</update>
 	
 	<delete id="deleteQna" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{ CALL deleteQna(  #{qna_num}	) }
+		{ CALL deleteQna(  #{userid}, #{qnanum}, #{status, mode=OUT, jdbcType=INTEGER}	) }
 	</delete>
 	
 	<select id="adminQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -82,7 +82,8 @@
 	
 	<select id="getAllQna" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL getAllQna( 
-			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap},
+			#{userid}
 		)  }
 	</select>
 	

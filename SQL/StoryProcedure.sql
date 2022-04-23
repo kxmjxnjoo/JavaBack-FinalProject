@@ -18,7 +18,7 @@ BEGIN
     p_story_num := v_story_num;
 END;
 
-select * from story
+select * from qna;
 
 --최신 스토리 찾기
 CREATE OR REPLACE PROCEDURE findRecentStory(

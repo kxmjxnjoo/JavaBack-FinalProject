@@ -36,7 +36,6 @@ public class MemberController {
 	MemberService ms;
 	
 	
-	
     //로그인 액션
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
@@ -352,9 +351,8 @@ public class MemberController {
 	}
     
     @RequestMapping(value="/user/edit", produces="application/json")
-    public HashMap<String, Object> userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
-    		BindingResult result, HttpServletRequest request, Model model,
-    		@RequestParam("oldPicture") String oldPicture) {
+    public Map<String, Object> userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    		BindingResult result, HttpServletRequest request, @RequestParam("oldPicture") String oldPicture) {
 
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
@@ -362,7 +360,7 @@ public class MemberController {
     	String userid = (String)loginUser.get("USERID");
     	int status = 0;
     	String message = "";
-    	HashMap<String, Object> resultMap = new HashMap<>();
+    	Map<String, Object> resultMap = new HashMap<>();
     	
     	if(result.getFieldError("password")!= null) {
     		message = result.getFieldError("password").getDefaultMessage();
@@ -388,11 +386,11 @@ public class MemberController {
      			
      			ms.userEdit(paramMap);
      			
-     			message = "회원 정보 수정이 완료되었습니다";
      			status = Integer.parseInt(paramMap.get("status").toString());
+     			if(status == 1) message = "회원 정보 수정이 완료되었어요!";
+     			else message = "회원 정보 수정에 실패했어요. 다시 시도해주세요.";
      			session.setAttribute("loginUser", paramMap);
          }
-    	
     	resultMap.put("message", message);
     	resultMap.put("status", status); 
     	return resultMap;
@@ -664,6 +662,4 @@ public class MemberController {
 		
 		return resultMap;
     }
-    
-    
 }

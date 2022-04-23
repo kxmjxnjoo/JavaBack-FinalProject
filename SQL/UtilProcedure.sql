@@ -1,7 +1,5 @@
 
-select * from post where userid='정의'
-
-
+select * from qna
 
 --스토리 신고
 CREATE OR REPLACE PROCEDURE addStoryReport(
