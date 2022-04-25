@@ -1,3 +1,7 @@
+select * from follow
+update story set useyn='b' where story_num=121
+insert into follow (follow_num, follower, followed)
+values(follow_seq.nextVal(), 'king', 'sckim'); 
 
 --스토리 추가
 CREATE OR REPLACE PROCEDURE addStory(
@@ -5,10 +9,12 @@ CREATE OR REPLACE PROCEDURE addStory(
     p_content IN story.story_content%type,
     p_fontcolor IN story.fontcolor%type,
     p_userid IN story.userid%type,
-    p_story_num OUT number
+    p_story_num OUT number,
+    p_status out number
 )
 IS
     v_story_num number(5) := 0;
+    v_status number(5) := 1;
 BEGIN
     insert into story (story_num, img, story_content, fontcolor, userid)
     values (story_seq.nextVal, p_story_img,p_content,p_fontcolor,p_userid);
@@ -16,6 +22,10 @@ BEGIN
     
     select max(story_num) into v_story_num from story where userid = p_userid;
     p_story_num := v_story_num;
+    p_status := v_status;
+EXCEPTION when others then
+    v_status := 0;
+    p_status := v_status;
 END;
 
 select * from qna;

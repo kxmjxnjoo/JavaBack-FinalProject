@@ -58,15 +58,16 @@ create or replace PROCEDURE getFollow(
     p_followingResult OUT number
 )
 IS 
-    v_result number(5) := 0;
+    v_result1 number(5) := 0;
+    v_result2 number(5) := 0;
 BEGIN
 --로그인유저가 글쓴이를 팔로우 했는지
-    select count(*) into v_result from follow where followed=p_followed and follower=p_follower;
-    p_followingResult := v_result;
+    select count(*) into v_result1 from follow where followed=p_followed and follower=p_follower;
+    p_followingResult := v_result1;
 
 --글쓴이가 로그인유저를 팔로우 했는지    
-     select count(*) into v_result from follow where follower=p_followed and followed=p_follower;
-    p_followedResult := v_result;
+    select count(*) into v_result2 from follow where follower=p_followed and followed=p_follower;
+    p_followedResult := v_result2;
 END;
 
 

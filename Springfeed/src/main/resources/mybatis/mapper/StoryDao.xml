@@ -10,7 +10,7 @@
 	<insert id="addStory" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL addStory( 
 			#{story_img},#{story_content},#{fontcolor},#{userid},
-			#{story_num, mode=OUT, jdbcType=INTEGER }
+			#{story_num, mode=OUT, jdbcType=INTEGER }, #{status, mode=OUT, jdbcType=INTEGER}
 		)}
 	</insert>
 	
