@@ -41,7 +41,7 @@
 	
 	<update id="editStory" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL editStory( 
-			#{story_img},#{story_content},#{fontcolor},#{story_num}
+			#{story_img},#{story_content},#{fontcolor},#{story_num}, #{status, mode=OUT, jdbcType=INTEGER}
 		)}
 	</update>
 

@@ -1,7 +1,4 @@
-select * from follow
-update story set useyn='b' where story_num=121
-insert into follow (follow_num, follower, followed)
-values(follow_seq.nextVal(), 'king', 'sckim'); 
+select * from story where story_num=121
 
 --스토리 추가
 CREATE OR REPLACE PROCEDURE addStory(
@@ -135,14 +132,20 @@ CREATE OR REPLACE PROCEDURE editStory(
     p_story_img IN story.img%type, 
     p_content IN story.story_content%type,
     p_fontcolor IN story.fontcolor%type,
-    p_story_num story.story_num%type
+    p_story_num IN story.story_num%type,
+    p_status OUT number
 )
 IS
     v_story_num number(5) := 0;
+    v_status number(5) := 1;
 BEGIN
     update story set img= p_story_img, story_content= p_content, fontcolor= p_fontcolor
     where story_num = p_story_num; 
     commit;
+    p_status := v_status;
+EXCEPTION when other then
+    v_status := 0;
+    p_status := v_status;
 END;
 
 

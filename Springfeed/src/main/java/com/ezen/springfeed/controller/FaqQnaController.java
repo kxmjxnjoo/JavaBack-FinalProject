@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.springfeed.dto.FaqDto;
 import com.ezen.springfeed.dto.Paging;
 import com.ezen.springfeed.dto.QnaDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;
+import com.ezen.springfeed.service.UtilService;
 
 @RestController
 public class FaqQnaController {
@@ -33,7 +33,88 @@ public class FaqQnaController {
 	
 	@Autowired
 	AdminService as;
+	
+	@Autowired
+	UtilService us;
+	
 
+	//임시로 report를 이쪽으로 옮겼습니다
+	@RequestMapping(value="/report", produces="application/json")
+	public Map<String, Object> Report(HttpServletRequest request, 
+			@RequestParam("reportReson") String reason,
+			@RequestParam(value="story_num", required=false) String reportedStory_num,
+			@RequestParam(value="post_num", required=false) String reportedPost_num,
+			@RequestParam(value="userid", required=false) String reportedUserid ) {
+		
+		String message = "";
+		int status = 0;
+		System.out.println(reportedPost_num);
+		System.out.println(reportedStory_num);
+		System.out.println(reportedUserid);
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		String url = "";
+		if(loginUser==null) {
+			message = "로그인 후 이용해주세요!";
+		}
+		else {
+			String reportReason = "";
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("reporter", loginUser.get("USERID"));
+			
+			if(reportedUserid == null || reportedUserid.equals("")) {
+				if(reason.equals("1")) reportReason = "스팸";
+				else if(reason.equals("2")) reportReason = "민감한 콘텐츠";
+				else if(reason.equals("3")) reportReason = "폭력적인 콘텐츠";
+				else if(reason.equals("4")) reportReason = "허위 사실 유포";
+				else if(reason.equals("5")) reportReason = "자살 또는 자해 요소";
+				else if(reason.equals("6")) reportReason = "불법 또는 규제 상품 판매";
+				else if(reason.equals("7")) reportReason = "섭식 장애";
+				else if(reason.equals("8")) reportReason = "혐오 발언 또는 상징";
+				else if(reason.equals("9")) reportReason = "지식재산권 침해";
+				
+				paramMap.put("reason", reportReason);
+				paramMap.put("status", status);
+				
+				if(reportedStory_num != null) { 	//스토리 신고
+					paramMap.put("reportType", "story");
+					paramMap.put("story_num", reportedStory_num);
+					
+					us.addStoryReport(paramMap);
+				} else { 	//포스트 신고
+					paramMap.put("reportType", "post");
+					paramMap.put("post_num", reportedPost_num);
+
+					us.addPostReport(paramMap);
+				}
+			} else {
+				//유저 신고
+				if(reason.equals("1")) reportReason = "적합하지 않은 콘텐츠 게시";
+				else if(reason.equals("2")) reportReason = "타인을 사칭하는 계정";
+				else if(reason.equals("3")) reportReason = "만 14세 미만 계정";
+				
+				paramMap.put("reported", reportedUserid);
+				paramMap.put("reason", reportReason);
+				paramMap.put("reportType", "user");
+				paramMap.put("status", status);
+				
+				us.addUserReport(paramMap);
+			}
+			
+			status = Integer.parseInt(paramMap.get("status").toString());
+			if(status == 0) message = "신고에 실패했어요. 다시 시도해주세요."; 
+			//↑ 존재하지 않는 게시물, 유저인 경우도 포함 
+			else message = "신고가 완료되었습니다.";
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("status", status);
+		resultMap.put("message", message);
+	    return resultMap;
+	}
 	
 	@RequestMapping(value="/qna", produces = "application/json")
 	public Map<String, Object> userQna(HttpServletRequest request) {

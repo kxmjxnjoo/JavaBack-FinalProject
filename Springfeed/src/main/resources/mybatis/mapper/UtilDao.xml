@@ -51,7 +51,7 @@
 			>
 		{
 			CALL addStoryReport(
-				#{reporter},#{reportType},#{reason},#{story_num}
+				#{reporter},#{reportType},#{reason},#{story_num},#{status, mode=OUT, jdbcType=INTEGER}
 			)
 		}
 	</insert>
@@ -63,7 +63,7 @@
 			>
 		{
 			CALL addPostReport(
-				#{reporter},#{reportType},#{reason},#{post_num}
+				#{reporter},#{reportType},#{reason},#{post_num},#{status, mode=OUT, jdbcType=INTEGER}
 			)
 		}
 	</insert>
@@ -74,7 +74,7 @@
 			>
 		{
 			CALL addUserReport(
-				#{reporter},#{reported},#{reportType},#{reason}
+				#{reporter},#{reported},#{reportType},#{reason},#{status, mode=OUT, jdbcType=INTEGER}
 			)
 		}
 	</insert>

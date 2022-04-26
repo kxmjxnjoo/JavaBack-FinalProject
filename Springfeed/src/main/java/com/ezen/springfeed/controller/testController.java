@@ -13,13 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.service.StoryService;
+import com.ezen.springfeed.service.UtilService;
 
+//localhost:8070 테스트용 controller입니다 
 @Controller
 public class testController {
 	
 	@Autowired 
 	StoryService ss;
+	
+	@Autowired
+	PostService ps;
+	
+	@Autowired
+	UtilService us;
 	
 	@RequestMapping(value="/login/form")
 	public String loginForm() {
@@ -53,46 +62,7 @@ public class testController {
 		} else 
 			return "post/addStory";
 	}
-	
-	@RequestMapping("/story/edit/form")
-	public String editStory(@RequestParam("story_num") int story_num, 
-			HttpServletRequest request, Model model, RedirectAttributes rttr) {
 
-		HttpSession session = request.getSession();
-		HashMap<String, Object> loginUser = 
-				(HashMap<String, Object>) session.getAttribute("loginUser");
-		
-		if(loginUser== null) {
-			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:http://localhost:3000/";
-		} else {
-			System.out.println(story_num);
-			HashMap<String, Object> paramMap = new HashMap<>();
-			paramMap.put("ref_cursor", null);
-			paramMap.put("story_num", story_num);
-			paramMap.put("fontcolor", "");
-			
-			ss.getStory(paramMap);
-			
-			ArrayList<HashMap<String, Object>> list
-			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			
-			HashMap<String, Object> resultMap = list.get(0);
-			
-			System.out.println("스토리번호 : " + resultMap.get("STORY_NUM"));
-			System.out.println("폰트 컬러 : " + paramMap.get("FONTCOLOR"));
-			System.out.println("이미지 : " + resultMap.get("STORY_IMG"));
-			System.out.println("콘텐츠 : " + resultMap.get("STORY_CONTENT"));
-			model.addAttribute("StoryDto", resultMap);
-			model.addAttribute("fontcolor", (String)paramMap.get("fontcolor"));
-			return "post/editStory";
-		}
-		
-	}
-	
-	
-    
-    
 	@RequestMapping("/qna/add/form")
 	public String addQnaForm(HttpServletRequest request, RedirectAttributes rttr) {
 		
@@ -106,5 +76,37 @@ public class testController {
 	    else {
 	    	return "userFaqQna/addQna";
 	    }
+	}
+	
+
+	@RequestMapping("/report/form") 
+	public String ReportForm(HttpServletRequest request, Model model, 
+			@RequestParam(value="story_num", required=false) String story_num,
+			@RequestParam(value="post_num", required=false) String post_num,
+			@RequestParam(value="userid", required=false) String userid ){
+		
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		String url = "";
+		if(loginUser==null) {
+			model.addAttribute("message", "로그인 후 이용해주세요!");
+			url = "member/login";
+		}
+		else {
+			if(userid == null || userid.equals("")) {
+				url = "post/report";
+				if(story_num != null) 
+					model.addAttribute("story_num", story_num);
+				else
+					model.addAttribute("post_num", post_num);
+			} else {
+				model.addAttribute("reported", userid);
+				url = "post/reportUser";
+			}
+		}
+		return url;
 	}
 }

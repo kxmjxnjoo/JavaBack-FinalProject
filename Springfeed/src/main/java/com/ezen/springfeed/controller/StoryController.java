@@ -79,7 +79,7 @@ public class StoryController {
 	
 	
 	
-	@RequestMapping("/story")
+	@RequestMapping(value="/story", produces="application/json")
 	public Map<String, Object> storyDetail(
 			@RequestParam(value="userid", required=false) String userid, 
 			@RequestParam(value="story_num", required=false) String story_num, 
@@ -197,7 +197,7 @@ public class StoryController {
 		return resultMap;
 	}
 
-	@RequestMapping("/story/delete")
+	@RequestMapping(value="/story/delete", produces="application/json")
 	public Map<String, Object> deleteStory(@RequestParam("story_num") int story_num, 
 			HttpServletRequest request) {
 		int status = 0;
@@ -216,7 +216,7 @@ public class StoryController {
 			ss.deleteStory(story_num);
 			
 			message = "스토리를 삭제했어요!";
-			status = 0;
+			status = 1;
 		}
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("message", message);
@@ -224,23 +224,72 @@ public class StoryController {
 		return resultMap;
 	}
 	
-	
-	///////////////////////여기부터
+	@RequestMapping(value="/story/edit/form", produces="application/json")
+	public Map<String, Object> editStory(@RequestParam("story_num") int story_num, 
+			HttpServletRequest request) {
+
+		String message = "";
+		int status = 0;
+		Map<String, Object> resultMap = new HashMap<>();
 		
-	@RequestMapping("/story/edit") 
-	public String editStory(@ModelAttribute("StoryDto") @Valid StoryDto storydto,
-			HttpServletRequest request, RedirectAttributes rttr,
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		if(loginUser== null) {
+			message = "로그인 후 이용해주세요.";
+		} else {
+			System.out.println(story_num);
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("ref_cursor", null);
+			paramMap.put("story_num", story_num);
+			paramMap.put("fontcolor", "");
+			paramMap.put("useyn", "");
+			paramMap.put("memberUseyn", "");
+			
+			ss.getStory(paramMap);
+			
+			ArrayList<HashMap<String, Object>> list
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+			
+			HashMap<String, Object> storyMap = list.get(0);
+			
+			if(((String) storyMap.get("USERID")).equals((String)loginUser.get("USERID"))) {
+				message = "내 스토리만 수정할 수 있어요!";
+			} else {
+				status = 1;
+				System.out.println("스토리번호 : " + storyMap.get("STORY_NUM"));
+				System.out.println("폰트 컬러 : " + paramMap.get("FONTCOLOR"));
+				System.out.println("이미지 : " + storyMap.get("STORY_IMG"));
+				System.out.println("콘텐츠 : " + storyMap.get("STORY_CONTENT"));
+				resultMap.put("StoryDto", storyMap);
+				resultMap.put("fontcolor", (String)paramMap.get("fontcolor"));
+			}
+		}
+		resultMap.put("status", status);
+		resultMap.put("message", message);
+		return resultMap;
+	}
+	
+		
+	@RequestMapping(value="/story/edit", produces="application/json") 
+	public Map<String, Object> editStory(@ModelAttribute("StoryDto") @Valid StoryDto storydto,
+			HttpServletRequest request,
 			@RequestParam("story_num") int story_num,
 			@RequestParam(value="oldFontColor", required=false) String oldFontcolor,
 			@RequestParam(value="oldPicture", required=false) String oldPicture) {
+		
+		String message = "";
+		int status = 0;
+		Map<String, Object> resultMap = new HashMap<>();
 		
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
 		if (loginUser == null)  {
-			rttr.addFlashAttribute("message", "로그인 후 이용해주세요.");
-			return "redirect:http://localhost:3000/";
+			message = "로그인 후 이용해주세요.";
+			
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -260,13 +309,17 @@ public class StoryController {
 			
 			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("story_num", story_num);
+			paramMap.put("status", 0);
 			
 			ss.editStory(paramMap);
 			
-			rttr.addFlashAttribute("message", "스토리를 수정했어요!");
-			return "redirect:http://localhost:3000/storynum/"+story_num;
+			status = Integer.parseInt(paramMap.get("status").toString());
+			
+			if(status==0) message = "스토리 수정에 실패했어요. 다시 시도해주세요.";
+			else message = "스토리를 수정했어요!";
 		}
+		resultMap.put("status", status);
+		resultMap.put("message", message);
+		return resultMap;
 	}
-	
-	
 }
