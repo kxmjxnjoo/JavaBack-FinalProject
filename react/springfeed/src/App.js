@@ -28,6 +28,7 @@ import Find from './components/jsp-components/Find'
 import Admin from './components/jsp-components/Admin'
 import Report from './components/jsp-components/Report'
 import StoryNum from './components/jsp-components/StoryNum'
+import Post from './components/Home/Post'
 
 // Common
 import './common.css'
