@@ -24,8 +24,6 @@ public class UtilController {
 	@Autowired
 	UtilService us;
 
-	
-	
 	// Message
 	@MessageMapping("/hello")
 	@SendTo("/topic/greetings")

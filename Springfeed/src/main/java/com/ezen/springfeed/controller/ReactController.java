@@ -65,7 +65,7 @@ public class ReactController {
 
         String userid = getLoginUserid(request);
         if(userid == null) {
-            return null;
+            return new ArrayList<>();
         }
 
         // Get 10 posts by pages
@@ -78,7 +78,7 @@ public class ReactController {
         ArrayList<HashMap<String, Object>> list =
                 (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
         if(list.size() == 0 || list == null) {
-            return null;
+            return new ArrayList<>();
         }
         ArrayList<PostDto> postList = new ArrayList<PostDto>();
         for(HashMap<String, Object> pvo : list) {
