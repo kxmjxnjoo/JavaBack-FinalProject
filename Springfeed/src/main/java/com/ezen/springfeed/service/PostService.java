@@ -63,4 +63,8 @@ public class PostService {
     public void getPostDetail(HashMap<String, Object> paramMap) {
         pdao.getPostDetail(paramMap);
     }
+
+    public void getReply(HashMap<String, Object> paramMap) {
+        pdao.getReply(paramMap);
+    }
 }

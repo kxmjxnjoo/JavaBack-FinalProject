@@ -102,6 +102,17 @@
 			}
 	</select>
 
+	<select id="getReply"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap">
+		{
+			CALL getReply(
+				#{num},
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=postMap}
+			)
+		}
+	</select>
+
 
 	<update
 		id="updatePost"

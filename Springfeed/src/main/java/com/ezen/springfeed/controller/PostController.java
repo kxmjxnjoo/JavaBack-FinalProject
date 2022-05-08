@@ -60,6 +60,37 @@ public class PostController {
 		return "main";
 	}
 
+	@RequestMapping(value="/post/detail/reply/{num}", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> getPostReply(@PathVariable(value="num") int postNum) {
+		// paramMap
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("num", postNum);
+		paramMap.put("ref_cursor", null);
+
+		ps.getReply(paramMap);
+
+		ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+		if(result == null || result.size() == 0) {
+			return new ArrayList<>();
+		}
+
+		ArrayList<HashMap<String, Object>> replies = new ArrayList<>();
+		for(HashMap<String, Object> reply : result) {
+			HashMap<String, Object> tmp = new HashMap<>();
+			tmp.put("userid", reply.get("USERID"));
+			tmp.put("userImg", reply.get("USER_IMG"));
+			tmp.put("content", reply.get("CONTENT"));
+			tmp.put("createdDate", reply.get("REPLY_DATE"));
+			tmp.put("like", reply.get("REPLY_LIKE_COUNT"));
+
+			replies.add(tmp);
+		}
+
+		return replies;
+	}
+
 	@RequestMapping(value="/post/detail/{num}", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap<String, Object> viewPost(@PathVariable(value="num") int postNum) {

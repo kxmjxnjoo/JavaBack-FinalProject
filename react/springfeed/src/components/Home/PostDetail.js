@@ -12,16 +12,16 @@ import {
 import defaultProfile from "../../images/tmpUserIcon.png";
 import Loading from "../common/Loading";
 import Error from "../common/Error";
+import NoContent from "../common/NoContent";
 
 import { Link } from "react-router-dom";
 
 const PostDetail = ({ selectedPost }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [post, setPost] = useState(null);
+    const [replies, setReplies] = useState(null);
 
     useEffect(() => {
-        console.log("selectedPost: " + selectedPost);
-        console.log("selectedPost(Obj): " + JSON.stringify(selectedPost));
         Promise.all([
             fetch("/post/detail/" + selectedPost.post.postNum)
                 .then((res) => {
@@ -32,43 +32,21 @@ const PostDetail = ({ selectedPost }) => {
                 })
                 .catch((err) => {
                     return err;
-                })
-                .finally(() => {
-                    setIsLoading(false);
                 }),
-        ]);
+            fetch("/post/detail/reply/" + selectedPost.post.postNum)
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    setReplies(data);
+                })
+                .catch((err) => {
+                    return err;
+                }),
+        ]).finally(() => {
+            setIsLoading(false);
+        });
     }, []);
-
-    const commentDummyData = [
-        {
-            userImg: "http://picsum.photos/400/400",
-            userid: "USERID1",
-            content: "HEYYYYYYYYYY",
-            like: 1,
-            createdDate: "",
-        },
-        {
-            userImg: "http://picsum.photos/400/400/",
-            userid: "USERID2",
-            content: "",
-            like: 5,
-            createdDate: "",
-        },
-        {
-            userImg: "http://picsum.photos/400/400//",
-            userid: "USERID3",
-            content: "HEYYYYYYYYYY",
-            like: 1000,
-            createdDate: "",
-        },
-        {
-            userImg: "http://picsum.photos/400/400///",
-            userid: "USERID4",
-            content: "HEYYYYYYYYYY",
-            like: 3,
-            createdDate: "",
-        },
-    ];
 
     return (
         <div className="p-5">
@@ -132,14 +110,18 @@ const PostDetail = ({ selectedPost }) => {
                             style={{ height: "50%", overflow: "scroll" }}
                         >
                             <div className="col-12">
-                                {commentDummyData.map((comment) => {
-                                    return <Comment comment={comment} />;
-                                })}
+                                {replies == null ? (
+                                    <NoContent message="댓글이 없어요" />
+                                ) : (
+                                    replies.map((comment) => {
+                                        return <Comment comment={comment} />;
+                                    })
+                                )}
                             </div>
                         </div>
 
                         <div
-                            className="row h2 justify-content-center w-100"
+                            className="row h2 justify-content-center w-100 mt-5"
                             style={{ height: "20%" }}
                         >
                             <div className="col-10">
@@ -189,7 +171,7 @@ const Comment = ({ comment }) => {
         <div className="row mb-2">
             <div className="col-2">
                 <img
-                    src={userImg}
+                    src={"/images/" + userImg}
                     alt="PROFILE"
                     className="img-fluid rounded-circle"
                     style={{ width: "100px" }}
@@ -204,7 +186,13 @@ const Comment = ({ comment }) => {
 
                     <div className="col-9">{content}</div>
                 </div>
-                <div className="row text-muted">{createdDate}</div>
+                <div className="row text-muted">
+                    {createdDate
+                        .substring(2, createdDate.indexOf("T"))
+                        .replace("-", "년 ")
+                        .replace("-", "월 ")
+                        .concat("일")}
+                </div>
             </div>
 
             <div className="col-2">
