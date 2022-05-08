@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -59,11 +60,33 @@ public class PostController {
 		return "main";
 	}
 
-	@RequestMapping(value="/post/detail{num}", produces="application/json;charset=UTF-8")
-	public String viewPost(@PathVariable(value="num") int postNum) {
+	@RequestMapping(value="/post/detail/{num}", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public HashMap<String, Object> viewPost(@PathVariable(value="num") int postNum) {
+		// paramMap
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("num", postNum);
+		paramMap.put("ref_cursor", null);
 
+		ps.getPostDetail(paramMap);
+		ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 
-		return "post/postDetail";
+		if(result == null || result.size() == 0) {
+			return new HashMap<>();
+		}
+
+		HashMap<String, Object> returnMap = new HashMap<>();
+		returnMap.put("userProfile", result.get(0).get("USER_IMG"));
+		returnMap.put("userid", result.get(0).get("USERID"));
+		returnMap.put("address", result.get(0).get("ADDRESS"));
+		returnMap.put("post_img", result.get(0).get("POST_IMG"));
+		returnMap.put("likeCount", 0);
+		returnMap.put("isLiked", 0);
+		returnMap.put("isSaved", 0);
+		returnMap.put("content", result.get(0).get("CONTENT"));
+		returnMap.put("post_num", result.get(0).get("POST_NUM"));
+
+		return returnMap;
 	}
 
 	@RequestMapping("/post/add/form")

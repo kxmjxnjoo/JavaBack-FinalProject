@@ -90,6 +90,19 @@
 		}
 	</insert>
 
+	<select id="getPostDetail"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+	>
+		{
+			CALL getPostDetail(
+				#{num},
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=postMap}
+			)
+			}
+	</select>
+
+
 	<update
 		id="updatePost"
 		statementType="CALLABLE"

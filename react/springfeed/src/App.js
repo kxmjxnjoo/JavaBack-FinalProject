@@ -47,15 +47,18 @@ import Select from "./components/Select";
 import "./search.css";
 
 function App() {
+    const [page, setPage] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [page, setPage] = useState(0);
     const [searchKey, setSearchKey] = useState("");
+
     const [isPostDetailOpen, setIsPostDetailOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
+
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const [isReportOpen, setIsReportOpen] = useState(false);
 
@@ -217,6 +220,9 @@ function App() {
                                         setIsSelectOpen={setIsSelectOpen}
                                         isLoggedIn={isLoggedIn}
                                         loginUser={user}
+                                        setIsPostDetailOpen={
+                                            setIsPostDetailOpen
+                                        }
                                     />
                                 }
                                 openPostDetail={openPostDetail}
@@ -286,7 +292,7 @@ function App() {
                     dialogClassName="postDetailModal"
                     className="mt-5"
                 >
-                    <PostDetail post={selectedPost} />
+                    <PostDetail selectedPost={selectedPost} />
                 </Modal>
 
                 <Modal
