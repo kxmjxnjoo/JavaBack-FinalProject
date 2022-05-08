@@ -9,8 +9,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
+import lombok.Setter;
 
 @Data
+@Setter
 public class MemberDto {
 	
 	@NotBlank(message = "아이디를 입력하세요") 

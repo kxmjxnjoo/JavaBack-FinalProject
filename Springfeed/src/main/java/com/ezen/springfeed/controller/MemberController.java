@@ -39,9 +39,7 @@ public class MemberController {
     //로그인 액션
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String login(@ModelAttribute("dto") @Valid MemberDto memberdto,
-    		BindingResult result, HttpServletRequest request,
-    		Model model) {
+    public String login(@ModelAttribute("dto") @Valid MemberDto memberdto, HttpServletRequest request) {
     	
     	String status = "";
     	System.out.println(memberdto.getUserid());

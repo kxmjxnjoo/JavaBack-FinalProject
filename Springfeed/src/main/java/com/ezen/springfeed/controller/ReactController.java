@@ -322,10 +322,11 @@ public class ReactController {
         ArrayList<PostDto> result = new ArrayList<PostDto>();
         for(HashMap<String, Object> post : list) {
             PostDto pdto = new PostDto();
-            pdto.setPost_img((String) post.get("POST_IMG"));
+            pdto.setPost_img((String) post.get("IMG"));
             pdto.setReplyCount(Integer.parseInt(String.valueOf(post.get("NUM_REPLY"))));
             pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("NUM_LIKE"))));
             pdto.setPostNum(Integer.parseInt(String.valueOf(post.get("POST_NUM"))));
+
             result.add(pdto);
         }
 
