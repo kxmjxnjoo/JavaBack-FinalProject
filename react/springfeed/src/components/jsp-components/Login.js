@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
 import toast from "react-hot-toast";
 
-const Login = ({ isLoggedIn }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const [jspElement, setJspElement] = useState(null);
 
     const [id, setId] = useState(null);
@@ -52,7 +51,7 @@ const Login = ({ isLoggedIn }) => {
 
                     <div className="row">
                         <input
-                            type="submit"
+                            type="button"
                             value="로그인"
                             className="p-4 m-4 btn"
                             style={{ border: "1px solid var(--mainColor)" }}
@@ -74,7 +73,13 @@ const Login = ({ isLoggedIn }) => {
                                         return res.text();
                                     })
                                     .then((data) => {
-                                        toast.error(data);
+                                        if (data == "loginComplete") {
+                                            toast.success("반가워요!");
+                                            setIsLoggedIn(true);
+                                            this.props.history.push("/path");
+                                        } else {
+                                            toast.error(data);
+                                        }
                                     });
                             }}
                         />

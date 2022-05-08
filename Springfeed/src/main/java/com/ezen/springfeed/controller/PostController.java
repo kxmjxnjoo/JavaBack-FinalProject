@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.dto.MemberDto;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 @Controller
 public class PostController {
@@ -57,9 +59,9 @@ public class PostController {
 		return "main";
 	}
 
-	@RequestMapping("/post")
-	public String viewPost() {
-		// Determine whether userid or postnum is provided
+	@RequestMapping(value="/post/detail{num}", produces="application/json;charset=UTF-8")
+	public String viewPost(@PathVariable(value="num") int postNum) {
+
 
 		return "post/postDetail";
 	}

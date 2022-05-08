@@ -30,16 +30,16 @@ const Explore = ({
                 if (data == null || data == "" || typeof data == "undefined") {
                     setIsError(true);
                 } else {
-                    console.log(data);
-                    setExploreData([...exploreData, [...data]]);
-                    console.log(exploreData);
+                    setExploreData(data);
                 }
-                setIsLoading(false);
             })
             .catch((err) => {
                 toast.error("에러가 났어요 : " + err);
                 setErrorMessage(err);
                 setIsError(true);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }, []);
 
@@ -77,10 +77,7 @@ const Explore = ({
                                                 <div className="col-12 col-md-4 p-0">
                                                     <PostThumbnail
                                                         postNum={data.postNum}
-                                                        postImg={
-                                                            "/images/" +
-                                                            data.post_img
-                                                        }
+                                                        postImg={data.post_img}
                                                         likeCount={
                                                             data.likeCount
                                                         }
