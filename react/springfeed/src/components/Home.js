@@ -59,19 +59,20 @@ const Home = ({
             });
     }, []);
 
-    const [postPage, setPostPage] = useState(1);
+    const [postPage, setPostPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
 
     const loadFeed = () => {
         fetch("/api/post/feed?page=" + postPage)
             .then((res) => {
                 setPostPage(postPage + 1);
+
                 return res.json();
             })
             .then((data) => {
                 if (data == null || data.length == 0) {
-                    setHasMore(false);
                     toast.error("포스트가 더 이상 없는거 같아요");
+                    setHasMore(false);
                 } else {
                     setPosts([...posts, ...data]);
                 }

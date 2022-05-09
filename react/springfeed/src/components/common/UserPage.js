@@ -18,7 +18,6 @@ import Report from "../jsp-components/Report";
 const UserPage = ({
     setSearchKey,
     setIsSelectOpen,
-    isLoggedIn,
     loginUser,
     openPostDetail,
     setIsPostDetailOpen,
@@ -477,18 +476,23 @@ const UserPage = ({
                                     포스트가 없어요!
                                 </div>
                             ) : (
-                                posts.map((post) => {
-                                    return (
-                                        <div className="col-4 mb-3">
-                                            <img
-                                                src={"/images/" + post.post_img}
-                                                alt="POST_IMAGE"
-                                                className="img-fluid"
-                                                style={{ height: "auto" }}
-                                            />
-                                        </div>
-                                    );
-                                })
+                                <div className="row">
+                                    {posts.map((post) => {
+                                        return (
+                                            <div className="col-4">
+                                                <PostThumbnail
+                                                    postNum={post.postNum}
+                                                    postImg={post.post_img}
+                                                    likeCount={post.likeCount}
+                                                    replyCount={0}
+                                                    openPostDetail={
+                                                        openPostDetail
+                                                    }
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             )
                         ) : savedPosts == null || savedPosts.length == 0 ? (
                             <div className="h1 text-center mt-5">

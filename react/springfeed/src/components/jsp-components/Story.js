@@ -10,9 +10,12 @@ import {
     AiOutlineArrowRight as NextIcon,
     AiOutlineArrowLeft as PrevIcon,
 } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const Story = () => {
     const { id } = useParams();
+
+    const [val, setVal] = useState(id);
 
     const [story, setStory] = useState(null);
 
@@ -22,10 +25,7 @@ const Story = () => {
         setIsLoading(true);
 
         // check if id is num or string
-        fetch(
-            "/story?" +
-                (typeof id == "string" ? "userid=" + id : "story_num=" + id)
-        )
+        fetch("/story?" + (isNaN(val) ? "userid=" + val : "story_num=" + val))
             .then((res) => {
                 return res.json();
             })
@@ -38,7 +38,7 @@ const Story = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [val]);
 
     return (
         <div>
@@ -48,7 +48,7 @@ const Story = () => {
                 <Error />
             ) : typeof id != "number" ? (
                 <div className="container">
-                    <div className="row">
+                    <div className="row mb-5">
                         <div className="col-2">
                             <img
                                 src={
@@ -58,6 +58,7 @@ const Story = () => {
                                 }
                                 alt=""
                                 className="rounded-circle img-fluid"
+                                style={{ width: "100px" }}
                             />
                         </div>
 
@@ -74,12 +75,16 @@ const Story = () => {
 
                     <div className="row">
                         <div className="col-1 align-self-center">
-                            <Link
-                                to={"/story/" + story.prev}
-                                className="text-dark"
-                            >
-                                <PrevIcon className="h1" />
-                            </Link>
+                            <PrevIcon
+                                className="h1"
+                                onClick={() => {
+                                    if (story.prev != null && story.prev != 0) {
+                                        setVal(story.prev);
+                                    } else {
+                                        toast.error("그 전의 스토리가 없어요");
+                                    }
+                                }}
+                            />
                         </div>
                         <div className="col-10">
                             <img
@@ -89,12 +94,19 @@ const Story = () => {
                             />
                         </div>
                         <div className="col-1 align-self-center">
-                            <Link
-                                to={"/story/" + story.StoryDto.next}
-                                className={"text-dark"}
-                            >
-                                <NextIcon className="h1" />
-                            </Link>
+                            <NextIcon
+                                className="h1"
+                                onClick={() => {
+                                    if (
+                                        story.StoryDto.next != null &&
+                                        story.StoryDto.next != 0
+                                    ) {
+                                        setVal(story.StoryDto.next);
+                                    } else {
+                                        toast.error("더 이상 스토리가 없어요");
+                                    }
+                                }}
+                            />
                         </div>
                     </div>
 

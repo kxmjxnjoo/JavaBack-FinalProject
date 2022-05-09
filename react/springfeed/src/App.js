@@ -231,6 +231,7 @@ function App() {
                                         setIsPostDetailOpen={
                                             setIsPostDetailOpen
                                         }
+                                        openPostDetail={openPostDetail}
                                     />
                                 }
                                 openPostDetail={openPostDetail}

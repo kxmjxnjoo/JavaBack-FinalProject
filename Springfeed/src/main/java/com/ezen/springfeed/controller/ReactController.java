@@ -36,7 +36,7 @@ public class ReactController {
 
     // Get user's post
     @RequestMapping(value="/api/post")
-    public ArrayList<PostDto> getPostsByUserid(@RequestParam("userid") String userid) {
+    public ArrayList<HashMap<String, Object>> getPostsByUserid(@RequestParam("userid") String userid) {
         // Get Posts from db
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("userid", userid);
@@ -46,13 +46,14 @@ public class ReactController {
                 (ArrayList<HashMap<String, Object>>)  paramMap.get("ref_cursor");
 
         // Convert Hashmap to PostDto
-        ArrayList<PostDto> postList = new ArrayList<PostDto>();
+        ArrayList<HashMap<String, Object>> postList = new ArrayList<>();
         for(HashMap<String, Object> postHashmap : postHashList) {
-            PostDto pdto = new PostDto();
-            pdto.setAddress((String) postHashmap.get("ADDRESS"));
-            pdto.setUserid((String) postHashmap.get("USERID"));
-            pdto.setPost_img((String) postHashmap.get("IMG"));
-            pdto.setContent((String) postHashmap.get("CONTENT"));
+            HashMap<String, Object> pdto = new HashMap<>();
+            pdto.put("address", postHashmap.get("ADDRESS"));
+            pdto.put("userid", postHashmap.get("USERID"));
+            pdto.put("post_img", postHashmap.get("IMG"));
+            pdto.put("content", postHashmap.get("CONTENT"));
+            pdto.put("postNum", postHashmap.get("POST_NUM"));
             postList.add(pdto);
         }
 
