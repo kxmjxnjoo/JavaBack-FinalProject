@@ -97,11 +97,8 @@ const Story = () => {
                             <NextIcon
                                 className="h1"
                                 onClick={() => {
-                                    if (
-                                        story.StoryDto.next != null &&
-                                        story.StoryDto.next != 0
-                                    ) {
-                                        setVal(story.StoryDto.next);
+                                    if (story.next != null && story.next != 0) {
+                                        setVal(story.next);
                                     } else {
                                         toast.error("더 이상 스토리가 없어요");
                                     }

@@ -70,7 +70,7 @@ const PostDetail = ({ selectedPost }) => {
                     </div>
 
                     <div className="col-6">
-                        <div className="row mt-3" style={{ height: "20%" }}>
+                        <div className="row " style={{ height: "20%" }}>
                             <div className="col-2 align-self-center">
                                 <img
                                     src={
@@ -121,7 +121,7 @@ const PostDetail = ({ selectedPost }) => {
                         </div>
 
                         <div
-                            className="row h2 justify-content-center w-100 mt-5"
+                            className="row h2 justify-content-center w-100 mt-2"
                             style={{ height: "20%" }}
                         >
                             <div className="col-10">
@@ -147,7 +147,6 @@ const PostDetail = ({ selectedPost }) => {
                                     </div>
                                     <div className="col-2 self-align-center">
                                         <input
-                                            type="submit"
                                             value="추가"
                                             className="btn btn-outline-primary w-100 h-100"
                                         />
