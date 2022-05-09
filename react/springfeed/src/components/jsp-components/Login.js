@@ -62,6 +62,9 @@ const Login = ({
                                 className="p-4 mb-4 btn form-control btn-outline"
                                 style={{ border: "1px solid var(--mainColor)" }}
                                 onClick={() => {
+                                    let noti =
+                                        toast.loading("로그인하고 있어요");
+
                                     fetch("/login", {
                                         method: "POST",
                                         headers: {
@@ -80,29 +83,43 @@ const Login = ({
                                         })
                                         .then((data) => {
                                             if (data == "loginComplete") {
-                                                toast.success("반가워요!");
+                                                toast.success("반가워요!", {
+                                                    id: noti,
+                                                });
                                                 setIsLoggedIn(true);
                                                 navigate("/");
                                             } else {
                                                 if (data == "emptyId") {
                                                     toast.error(
-                                                        "아이디를 입력해 주세요!"
+                                                        "아이디를 입력해 주세요!",
+                                                        {
+                                                            id: noti,
+                                                        }
                                                     );
                                                 } else if (
                                                     data == "emptyPassword"
                                                 ) {
                                                     toast.error(
-                                                        "비밀번호를 입력해 주세요!"
+                                                        "비밀번호를 입력해 주세요!",
+                                                        {
+                                                            id: noti,
+                                                        }
                                                     );
                                                 } else if (
                                                     data == "wrongPassword"
                                                 ) {
                                                     toast.error(
-                                                        "비밀번호가 틀렸어요"
+                                                        "비밀번호가 틀렸어요",
+                                                        {
+                                                            id: noti,
+                                                        }
                                                     );
                                                 } else if (data == "wrongId") {
                                                     toast.error(
-                                                        "존재하지 않는 아이디에요"
+                                                        "존재하지 않는 아이디에요",
+                                                        {
+                                                            id: noti,
+                                                        }
                                                     );
                                                 } else {
                                                     toast.error(data);

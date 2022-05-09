@@ -33,7 +33,7 @@ const PostThumbnail = ({
                     </div>
                 </div>
                 <div className="col-3 text-dark me-3 align-items-center">
-                    {likeCount}
+                    {likeCount == null ? 0 : likeCount}
                 </div>
                 <div className="col-2 text-primary align-items-center">
                     <ReplyIcon />

@@ -87,7 +87,7 @@ const Home = ({
         <div className="container row">
             <div className="col-12 col-md-9">
                 <div>
-                    <StoryList />
+                    <StoryList loginUser={user} />
                 </div>
 
                 <div>

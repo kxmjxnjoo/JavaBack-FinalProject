@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const UploadPost = ({ setIsSelectOpen }) => {
     useEffect(() => {
         setIsSelectOpen(false);
     }, []);
 
+    const [image, setImage] = useState(null);
+
     return (
-        <div className="container border" style={{ height: "500px" }}>
+        <div className="container border" style={{ height: "1000px" }}>
             <div
                 className="row"
                 style={{ backgroundColor: "var(--mainColor)" }}
@@ -14,7 +16,17 @@ const UploadPost = ({ setIsSelectOpen }) => {
                 <div className="h2 text-center text-white p-2">새 포스트</div>
             </div>
 
-            <form className="mt-5 ">
+            <form className="">
+                <div className="form-group p-3">
+                    <label htmlFor="">미리보기</label>
+                    <img
+                        src={image}
+                        alt=""
+                        className="form-control img-fluid"
+                        style={{ height: "500px" }}
+                    />
+                </div>
+
                 <div className="form-group p-3">
                     <label htmlFor="">이미지</label>
                     <input
@@ -23,6 +35,9 @@ const UploadPost = ({ setIsSelectOpen }) => {
                         id=""
                         accept="image/*"
                         className="form-control"
+                        onChange={(e) =>
+                            setImage(URL.createObjectURL(e.target.files[0]))
+                        }
                     />
                 </div>
 

@@ -6,6 +6,12 @@ const UserEdit = () => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [password, setPassword] = useState(null);
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [introduction, setIntroduction] = useState(null);
+
     useEffect(() => {
         fetch("/user/edit/form")
             .then((res) => {
@@ -50,6 +56,7 @@ const UserEdit = () => {
                                 type="password"
                                 className="form-control"
                                 placeholder={"*".repeat(user.password.length)}
+                                onChange={(e) => setPassword(e.target.value)}
                             ></input>
                         </div>
                         <div className="form-group p-3">
@@ -58,6 +65,8 @@ const UserEdit = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder={user.name}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             ></input>
                         </div>
                         <div className="form-group p-3">
@@ -66,6 +75,8 @@ const UserEdit = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder={user.email}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             ></input>
                         </div>
                         <div className="form-group p-3">
@@ -74,6 +85,8 @@ const UserEdit = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder={user.phone}
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                             ></input>
                         </div>
                         <div className="form-group p-3">
@@ -82,16 +95,35 @@ const UserEdit = () => {
                                 type="text"
                                 className="form-control"
                                 value={user.introduce}
+                                onChange={(e) =>
+                                    setIntroduction(e.target.value)
+                                }
                             ></textarea>
                         </div>
                         <div className="form-group p-3">
                             <div className="row">
                                 <div className="col-4">
                                     <input
-                                        type="submit"
+                                        type="button"
                                         value="수정하기"
                                         className="w-100 btn btn-success"
                                         style={{ height: "50px" }}
+                                        onClick={() => {
+                                            fetch("", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json;charset=UTF-8",
+                                                },
+                                                body: JSON.stringify({
+                                                    password: password,
+                                                    name: name,
+                                                    email: email,
+                                                    phone: phone,
+                                                    introduce: introduction,
+                                                }),
+                                            });
+                                        }}
                                     />
                                 </div>
                                 <div className="col-4">

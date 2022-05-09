@@ -167,7 +167,7 @@ const Comment = ({ comment }) => {
     const { userImg, userid, content, like, createdDate } = comment;
 
     return (
-        <div className="row mb-2">
+        <div className="row mb-4">
             <div className="col-2">
                 <img
                     src={"/images/" + userImg}
@@ -185,7 +185,7 @@ const Comment = ({ comment }) => {
 
                     <div className="col-9">{content}</div>
                 </div>
-                <div className="row text-muted">
+                <div className="row text-muted ms-0 mt-3">
                     {createdDate
                         .substring(2, createdDate.indexOf("T"))
                         .replace("-", "년 ")

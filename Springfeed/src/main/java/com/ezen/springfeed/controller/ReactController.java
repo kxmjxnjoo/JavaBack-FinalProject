@@ -91,6 +91,7 @@ public class ReactController {
             pdto.setCreate_date((Timestamp) pvo.get("CREATE_DATE"));
             pdto.setPostNum( Integer.parseInt(String.valueOf( pvo.get("POST_NUM"))));
             pdto.setLikeCount(Integer.parseInt(String.valueOf(pvo.get("LIKECOUNT"))));
+            pdto.setIsSaved(Integer.parseInt(String.valueOf(pvo.get("ISSAVED"))));
 
             //pdto.setReplyCount(pvo.get("REPLYCOUNT");
             postList.add(pdto);
@@ -401,16 +402,23 @@ public class ReactController {
     }
 
     // Insert save post
-    @RequestMapping(value="/api/post/save/insert", produces="application/json")
-    public int insertSavePost(HttpServletRequest request, @RequestParam("num") int num) {
+    @RequestMapping(value="/api/post/save/insert", produces="application/json", method=RequestMethod.POST)
+    public ArrayList<Integer> insertSavePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", getLoginUserid(request));
-        paramMap.put("postnum", num);
+        paramMap.put("postnum", postNum.get("postNum"));
+
+        System.out.println("userid: " + getLoginUserid(request));
+        System.out.println("postnum: " + postNum.get("postNum"));
 
         ps.insertSavePost(paramMap);
 
-        return Integer.parseInt(String.valueOf(paramMap.get("RESULT")));
+        ArrayList<Integer> result = new ArrayList<>();
+//        result.add(Integer.parseInt(String.valueOf(paramMap.get("RESULT"))));
+        result.add(1);
+
+        return result;
     }
 
     @RequestMapping(value="/api/user/follow", produces="application/json")
