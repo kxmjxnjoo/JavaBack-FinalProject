@@ -23,7 +23,7 @@ const PostDetail = ({ selectedPost }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("/post/detail/" + selectedPost.post.postNum)
+            fetch("/post/detail/" + selectedPost)
                 .then((res) => {
                     return res.json();
                 })
@@ -33,7 +33,7 @@ const PostDetail = ({ selectedPost }) => {
                 .catch((err) => {
                     return err;
                 }),
-            fetch("/post/detail/reply/" + selectedPost.post.postNum)
+            fetch("/post/detail/reply/" + selectedPost)
                 .then((res) => {
                     return res.json();
                 })
@@ -55,7 +55,7 @@ const PostDetail = ({ selectedPost }) => {
             ) : post == null ? (
                 <Error className="m-5" />
             ) : (
-                <div className="row ms-0 me-0">
+                <div className="row ms-0 me-0" style={{ minHeight: "600px" }}>
                     <div className="col-6 ps-0">
                         <img
                             src={
@@ -110,7 +110,7 @@ const PostDetail = ({ selectedPost }) => {
                             style={{ height: "50%", overflow: "scroll" }}
                         >
                             <div className="col-12">
-                                {replies == null ? (
+                                {replies == null || replies.length == 0 ? (
                                     <NoContent message="댓글이 없어요" />
                                 ) : (
                                     replies.map((comment) => {

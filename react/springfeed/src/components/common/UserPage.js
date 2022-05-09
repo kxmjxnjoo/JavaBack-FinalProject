@@ -46,6 +46,7 @@ const UserPage = ({
     const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
     const [followingListIndex, setFollowingListIndex] = useState(0);
     const [hasFollowingMore, setHasFollowingMore] = useState(true);
+
     const loadFollowingList = () => {
         setFollowingListIndex(followingListIndex + 1);
         fetch("/api/user/following?id=" + id + "&page=" + followingListIndex)
@@ -231,21 +232,21 @@ const UserPage = ({
                                         onClose();
                                         fetch("/api/user/follow?id=" + id)
                                             .then((res) => {
-                                                console.log(res);
                                                 return res;
                                             })
                                             .then((data) => {
-                                                if (data == 1) {
-                                                    toast.success(
-                                                        id +
-                                                            "님을 팔로우 했어요!"
-                                                    );
-                                                } else {
+                                                if (data.result == 0) {
                                                     toast.error(
                                                         "무슨 이유에서인지, " +
                                                             id +
                                                             "님을 팔로우 못 했어요. 다시 시도해 주세요"
                                                     );
+                                                } else {
+                                                    toast.success(
+                                                        id +
+                                                            "님을 팔로우 했어요!"
+                                                    );
+                                                    setIsFollowing(1);
                                                 }
                                             });
                                     }}
@@ -298,17 +299,18 @@ const UserPage = ({
                                                 return res;
                                             })
                                             .then((data) => {
-                                                if (data == 1) {
-                                                    toast.success(
-                                                        id +
-                                                            "님을 언팔로우 했어요"
-                                                    );
-                                                } else {
+                                                if (data.result == 0) {
                                                     toast.error(
                                                         "무슨 이유에서인지, " +
                                                             id +
                                                             "님을 언팔로우 못 했어요. 다시 시도해 주세요"
                                                     );
+                                                } else {
+                                                    toast.success(
+                                                        id +
+                                                            "님을 언팔로우 했어요"
+                                                    );
+                                                    setIsFollowing(0);
                                                 }
                                             });
                                     }}

@@ -413,7 +413,7 @@ public class ReactController {
     }
 
     @RequestMapping(value="/api/user/follow", produces="application/json")
-    public int follow(HttpServletRequest request, @RequestParam("id") String following) {
+    public HashMap<String, Object> follow(HttpServletRequest request, @RequestParam("id") String following) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("follower", getLoginUserid(request));
@@ -421,7 +421,10 @@ public class ReactController {
 
         ms.insertFollow(paramMap);
 
-        return Integer.parseInt(String.valueOf(paramMap.get("result")));
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("result", 1);
+
+        return result;
     }
 
     @RequestMapping(value="/api/user/unfollow")

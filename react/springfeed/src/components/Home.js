@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import InifniteScroll from "react-infinite-scroller";
 
 import { Link } from "react-router-dom";
@@ -21,7 +20,6 @@ const Home = ({
     user,
     setPage,
     setIsPostDetailOpen,
-    selectedPost,
     setSelectedPost,
     setIsSelectOpen,
 }) => {
@@ -40,7 +38,7 @@ const Home = ({
 
     const openPostDetail = ({ post }) => {
         setIsPostDetailOpen(true);
-        setSelectedPost({ post });
+        setSelectedPost(post.postNum);
     };
     useEffect(() => {
         setPage(0);

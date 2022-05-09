@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
-    const [jspElement, setJspElement] = useState(null);
-
+const Login = ({
+    isLoggedIn,
+    setIsLoggedIn,
+    user,
+    setPage,
+    setSelectedPost,
+    setIsPostDetailOpen,
+    setIsSelectOpen,
+}) => {
     const [id, setId] = useState(null);
     const [pw, setPw] = useState(null);
 
-    const createMarkup = (data) => {
-        return { __html: data };
-    };
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -76,7 +81,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                         if (data == "loginComplete") {
                                             toast.success("반가워요!");
                                             setIsLoggedIn(true);
-                                            this.props.history.push("/path");
+                                            navigate("/");
                                         } else {
                                             toast.error(data);
                                         }

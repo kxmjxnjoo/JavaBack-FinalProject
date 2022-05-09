@@ -159,8 +159,6 @@ function App() {
                                         <Home
                                             user={user}
                                             setPage={setPage}
-                                            toast={toast}
-                                            selectedPost={selectedPost}
                                             setSelectedPost={setSelectedPost}
                                             setIsPostDetailOpen={
                                                 setIsPostDetailOpen
@@ -175,7 +173,17 @@ function App() {
                                 path="/message"
                                 element={
                                     !isLoggedIn ? (
-                                        <Login isLoggedIn={isLoggedIn} />
+                                        <Login
+                                            isLoggedIn={isLoggedIn}
+                                            setIsLoggedIn={setIsLoggedIn}
+                                            user={user}
+                                            setPage={setPage}
+                                            setSelectedPost={setSelectedPost}
+                                            setIsPostDetailOpen={
+                                                setIsPostDetailOpen
+                                            }
+                                            setIsSelectOpen={setIsSelectOpen}
+                                        />
                                     ) : (
                                         <Message
                                             setPage={setPage}
@@ -236,7 +244,12 @@ function App() {
                                     />
                                 }
                             />
-                            <Route path="/logout" element={<Logout />} />
+                            <Route
+                                path="/logout"
+                                element={
+                                    <Logout setIsLoggedIn={setIsLoggedIn} />
+                                }
+                            />
                             <Route path="/join" element={<Join />} />
 
                             <Route
