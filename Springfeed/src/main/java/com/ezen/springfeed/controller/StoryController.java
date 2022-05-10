@@ -173,17 +173,20 @@ public class StoryController {
 						resultMap.put("fontcolor", (String)paramMap.get("fontcolor"));
 						
 						//이전글
-						ss.getStoryPrev(paramMap);
+						ss.getStoryPrev(paramMap);	//현재 게시물을 제외한 나머지 게시물 중 가장 큰 story_num
 						if(paramMap.get("prev") == null) storyMap.put("prev", 0);
 						else resultMap.put("prev", Integer.parseInt(paramMap.get("prev").toString()));
 						
 						//다음글 검색
-						ss.getStoryNext(paramMap);
+						ss.getStoryNext(paramMap); //현재 게시물을 제외한 나머지 게시물 중 가장 작은 story_num
 						if(paramMap.get("next") == null) storyMap.put("next", 0);
 						else resultMap.put("next", Integer.parseInt(paramMap.get("next").toString()));
 						
 						status = 1;
 					} 
+					else {	//차단한 유저일 경우
+						message = "차단한 유저의 게시물이에요.";
+					}
 				} else {
 					message = "삭제되었거나 비활성화된 계정의 스토리 입니다.";
 				}
@@ -220,6 +223,7 @@ public class StoryController {
 		return resultMap;
 	}
 	
+	//스토리의 내용을 가지고 스토리 수정 폼으로 이동
 	@RequestMapping(value="/story/edit/form", produces="application/json")
 	public Map<String, Object> editStory(@RequestParam("story_num") int story_num, 
 			HttpServletRequest request) {
@@ -267,7 +271,7 @@ public class StoryController {
 		return resultMap;
 	}
 	
-		
+	//스토리 수정
 	@RequestMapping(value="/story/edit", produces="application/json") 
 	public Map<String, Object> editStory(@ModelAttribute("StoryDto") @Valid StoryDto storydto,
 			HttpServletRequest request,
@@ -283,23 +287,23 @@ public class StoryController {
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  {
+		if (loginUser == null)  {	//로그인 확인
 			message = "로그인 후 이용해주세요.";
 			
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			
-			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))
-				if(oldFontcolor == null || ((String)oldFontcolor).equals(""))
+			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))	//새로 폰트컬러를 지정하지 않은 경우
+				if(oldFontcolor == null || ((String)oldFontcolor).equals(""))	//기존 폰트컬러 값이 존재하지 않는 경우
 					paramMap.put("fontcolor", "white");
 				else 
 					paramMap.put("fontcolor", oldFontcolor);
 			else
 				paramMap.put("fontcolor", storydto.getFontColor());
 			
-			if(storydto.getStory_img() == null || ((String)storydto.getStory_img()).equals(""))
-				paramMap.put("story_img", oldPicture);
+			if(storydto.getStory_img() == null || ((String)storydto.getStory_img()).equals(""))	//이미지를 수정하지 않은 경우
+				paramMap.put("story_img", oldPicture);	//기존 이미지를 유지
 			else 
 				paramMap.put("story_img", storydto.getStory_img());
 			
