@@ -40,8 +40,7 @@ public class MemberController {
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String login(@ModelAttribute("dto") @Valid MemberDto memberdto,
-    		BindingResult result, HttpServletRequest request,
-    		Model model) {
+    		HttpServletRequest request) {
     	
     	String status = "";
     	System.out.println(memberdto.getUserid());
@@ -53,7 +52,7 @@ public class MemberController {
     		HashMap<String, Object> paramMap = new HashMap<>();
     		paramMap.put("userid", memberdto.getUserid());
     		paramMap.put("ref_cursor", null);
-    		ms.getMember(paramMap);
+    		ms.getMember(paramMap); //아이디로 사용자 검색
     		
     		ArrayList<HashMap<String, Object>> list
     			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
@@ -67,7 +66,6 @@ public class MemberController {
 	    		}  else if (((String)mvo.get("USEYN")).equals("n") ) {
 	    			status = "disableAccount";
 	    			//비활성화 계정 confirm 필요 
-	    			//model.addAttribute("messageConfirm", "비활성화된 계정입니다. 계정을 복구 할까요?");
 	    		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
 	    			status = "loginComplete"; //정상 로그인
 	    			HttpSession session = request.getSession();
@@ -83,14 +81,12 @@ public class MemberController {
     //로그아웃
     @RequestMapping(value="/logout", produces = "application/json")
     public int logout(HttpServletRequest request) {
-    	
     	int result = 0;
     	try {
     		HttpSession session = request.getSession();
-            session.removeAttribute("loginUser");
+            session.removeAttribute("loginUser");	//세션에서 로그인 정보 삭제
             result = 1;
     	} catch (Exception e) {  e.printStackTrace(); }
-        
         return result;
     }
     
@@ -100,22 +96,19 @@ public class MemberController {
     public int idCheck(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result) {
 
-    	int cnt = 1;
-    	
-    	if(memberdto.getUserid() != null) {
+    	int cnt = 1;	//중복/유효성 테스트 통과시 1, 통과 못할 시 0
+    	if(memberdto.getUserid() != null) {		// 아이디 중복 검사
         	String userid = memberdto.getUserid();
 	    	HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("cnt", 0);
 			paramMap.put("userid", userid);
-			
-	    	ms.idCheck(paramMap);
-	    	
-	    	
+	    	ms.idCheck(paramMap);	//userid로 사용자 검색
+	
 	    	if(result.getFieldError("userid") == null) 
-	    		cnt = Integer.parseInt(paramMap.get("cnt").toString());
-	    	
+	    		cnt = Integer.parseInt(paramMap.get("cnt").toString()); 
+	    		//select count(*) from member where userid=? 결과가 리턴
     	} else if (memberdto.getEmail() != null) {
-    		if(result.getFieldError("email") == null) cnt = 0;
+    		if(result.getFieldError("email") == null) cnt = 0;	//validation error 발생 시 0을 리턴
     	} else if (memberdto.getPhone() != null) {
     		if(result.getFieldError("phone") == null) cnt = 0;
     	} else if (memberdto.getName() != null) {
@@ -139,6 +132,7 @@ public class MemberController {
     	String message = null;
     	int status = 0;
     	
+    	//validation 에러 체크
     	if(result.getFieldError("phone")!= null) {
     		message = result.getFieldError("phone").getDefaultMessage();
          } else if(result.getFieldError("email")!= null) {
@@ -159,7 +153,7 @@ public class MemberController {
  			paramMap.put("status", status);
  			
  			ms.insertMember(paramMap);
- 			status = Integer.parseInt((paramMap.get("status").toString()));
+ 			status = Integer.parseInt((paramMap.get("status").toString()));	//DB insert 오류 시 0을 리턴
  			
  			if(status==1)
  				message = "회원가입이 완료되었어요. 로그인 후 이용해주세요.";
@@ -169,82 +163,12 @@ public class MemberController {
     	
     	resultMap.put("message", message);
     	resultMap.put("status", status);
-    	System.out.println(message + " " + status);
     	return resultMap;
     }
 
-    // 팔로우 
-//    @RequestMapping(value="/follow", produces = "application/json")
-//    public int follow(HttpServletRequest request, 
-//    		@RequestParam("userid") String userid, Model model, RedirectAttributes rttr) {
-//    	
-//    	int result = 0;
-//    	
-//    	HttpSession session = request.getSession();
-//		HashMap<String, Object> loginUser = 
-//				(HashMap<String, Object>) session.getAttribute("loginUser");
-//		
-//		if (loginUser == null) { 
-//			result = 0;
-//		} else {
-//			
-//			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-//			paramMap.put("follower", (String) loginUser.get("USERID"));
-//			paramMap.put("followed", userid);
-//			paramMap.put("result", 0);
-//			
-//			ms.insertFollow(paramMap);
-//	
-//			rttr.addFlashAttribute("message", userid+"님을 팔로우 했어요");
-//			
-//			String referer = request.getHeader("Referer");
-//		    result = 1;
-//		}
-//    	
-//        return result;
-//    }
-//
-//    // 언팔로우
-//    @RequestMapping("/unfollow")
-//    public String unfollow(HttpServletRequest request, 
-//    		@RequestParam("userid") String userid,
-//    		Model model, RedirectAttributes rttr) {
-//    	
-//    	HttpSession session = request.getSession();
-//		
-//    	String url = "";
-//		HashMap<String, Object> loginUser = 
-//				(HashMap<String, Object>) session.getAttribute("loginUser");
-//		
-//		if (loginUser == null) { 
-//			url = "member/login";
-//		} else {
-//			
-//			String follower = (String)loginUser.get("USERID");
-//			
-//			System.out.println(userid);
-//			System.out.println(follower);
-//			
-//			if(!follower.equals(userid)) {
-//				HashMap<String, Object> paramMap = new HashMap<String, Object>();
-//				paramMap.put("follower", follower);
-//				paramMap.put("followed", userid);
-//				paramMap.put("result", 0);
-//				
-//				ms.unfollow(paramMap);
-//				
-//				rttr.addFlashAttribute("message", userid + "님을 언팔로우 했습니다.");
-//
-//			}
-//		}
-//		String referer = request.getHeader("Referer");
-//	    return "redirect:"+ referer;
-//    }
-    
-		
-//get Notification
+    //알림 가지고 오기
     @RequestMapping(value="/user/notification",  produces="application/json")
-    public ArrayList<HashMap<String, Object>> Notification(HttpServletRequest request, Model model) {
+    public ArrayList<HashMap<String, Object>> Notification(HttpServletRequest request) {
     	HttpSession session = request.getSession();
 		
 		HashMap<String, Object> loginUser = 
@@ -256,9 +180,9 @@ public class MemberController {
 			System.out.println(loginUser.get("USERID"));
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("ref_cursor", null);
-			paramMap.put("userid", loginUser.get("USERID"));
+			paramMap.put("userid", loginUser.get("USERID")); 
 
-			ms.getNotification(paramMap);
+			ms.getNotification(paramMap); //로그인한 유저의 알림 목록을 가지고 옴
 			
 			ArrayList<HashMap<String, Object>> notiList 
 				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
@@ -271,6 +195,7 @@ public class MemberController {
 		}
     }
     
+    // 알림 숫자 체크
     @ResponseBody
     @RequestMapping("/api/noti/count")
     public int notiCount(HttpServletRequest request) {
@@ -293,13 +218,10 @@ public class MemberController {
     		notiCount = Integer.parseInt(String.valueOf(paramMap.get("notiCount")));
     	}
     	
-    	System.out.println(loginUser.get("USERID"));
-    	System.out.println(notiCount);
-    	
     	return notiCount;
     }
     
-   
+    //수정폼으로 이동 시, 비밀번호를 제외한 정보를 보냄
     @RequestMapping(value="/user/edit/form", produces="application/json")
     public MemberDto editUserForm(Model model, HttpServletRequest request) {
     	MemberDto dto = new MemberDto();
@@ -325,15 +247,15 @@ public class MemberController {
     	}
     }
     
+    //이미지 업로드
     @Autowired
     ServletContext context;
     
     @RequestMapping("/uploadImg")
-	@ResponseBody
+	@ResponseBody	//ajax를 통해 이미지를 업로드 
 	public Map<String, Object> fileup(Model model, HttpServletRequest request,
 			RedirectAttributes rttr) {
-		
-    	System.out.println("/uploadImg access");
+    	
 		String savePath = context.getRealPath("/images");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		
@@ -347,9 +269,10 @@ public class MemberController {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		return resultMap;
+		return resultMap;  
 	}
     
+    //사용자 정보 수정
     @RequestMapping(value="/user/edit", produces="application/json")
     public Map<String, Object> userEdit(@ModelAttribute("dto") @Valid MemberDto memberdto,
     		BindingResult result, HttpServletRequest request, @RequestParam("oldPicture") String oldPicture) {
@@ -362,6 +285,7 @@ public class MemberController {
     	String message = "";
     	Map<String, Object> resultMap = new HashMap<>();
     	
+    	//Validation
     	if(result.getFieldError("password")!= null) {
     		message = result.getFieldError("password").getDefaultMessage();
          } else if(result.getFieldError("name")!= null) {
@@ -379,8 +303,8 @@ public class MemberController {
      			paramMap.put("EMAIL",memberdto.getEmail());
      			paramMap.put("PHONE",memberdto.getPhone());
      			paramMap.put("INTRODUCE",memberdto.getIntroduce());
-     			if(memberdto.getImg()==null || memberdto.getImg().equals(""))
-     				paramMap.put("IMG", oldPicture);
+     			if(memberdto.getImg()==null || memberdto.getImg().equals(""))	//새로 업로드된 사진이 없을 때
+     				paramMap.put("IMG", oldPicture);	//기존의 사진을 그대로 유지
      			else
      				paramMap.put("IMG", memberdto.getImg());
      			
@@ -396,6 +320,7 @@ public class MemberController {
     	return resultMap;
     }
     
+    //계정 비활성화 
     @RequestMapping("/deleteAcount")
     public int deleteAcount(HttpServletRequest request, Model model) {
     	
@@ -408,40 +333,32 @@ public class MemberController {
 		if(loginUser == null) {
 			//model.addAttribute("로그인 후 이용해주세요!");
 		} else {
-			
-			System.out.println(loginUser.get("USERID"));
-			
+	
 			HashMap<String, Object> paramMap = new HashMap<>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("status", status);
 			
 			session.removeAttribute("loginUser");
 			
-			ms.deleteAcount(paramMap);
+			ms.deleteAcount(paramMap); //member 테이블의 useyn 필드를 n으로 변경
 			//model.addAttribute("message", "계정 비활성화가 완료되었습니다. 다음에 다시 만나요!");
 
 			status = Integer.parseInt(paramMap.get("status").toString());
-			session.removeAttribute("loginUser");
-			
-			System.out.println("delete account status : " + status); //성공 1, 실패 0
+			session.removeAttribute("loginUser");	//로그아웃 처리
 		}
-    	return status;
+    	return status; //성공 1, 실패 0
     }
     
     //비활성화 해제
     @RequestMapping(value="/user/activate", produces="application/json")
-    public int activationAccount(HttpServletRequest request, Model model,
-    		@RequestParam("userid") String userid) {
-        HttpSession session = request.getSession();
+    public int activationAccount(@RequestParam("userid") String userid) {
         int status = 0;
-        
-        System.out.println(userid);
         
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", userid);
         paramMap.put("status", status);
         
-        ms.activateAccount(paramMap);
+        ms.activateAccount(paramMap); //member 테이블의 useyn 필드를 y로 변경
         
         status = Integer.parseInt(paramMap.get("status").toString());
         System.out.println("activate account status : " + status); //성공 1, 실패 0
@@ -449,24 +366,24 @@ public class MemberController {
         return status;
     }
     
+    
     //블락
     @RequestMapping(value="/block", produces="application/json")
     public Map<String, Object> block(HttpServletRequest request, @RequestParam("userid") String userid) {
     	HttpSession session = request.getSession();
     	HashMap<String, Object> loginUser 
-		= (HashMap<String, Object>) session .getAttribute("loginUser");
+		= (HashMap<String, Object>) session .getAttribute("loginUser");	
 		
     	int status = 0;
     	String message = "";
     	
-		if(loginUser == null) {
+		if(loginUser == null) {	 //로그인 확인
 			message = "로그인 해주세요.";
 		} else {
 			HashMap<String, Object> paramMap = new HashMap<>();
     		paramMap.put("userid", userid);
     		paramMap.put("ref_cursor", null);
     		
-    		System.out.println();
     		ms.getMember(paramMap);
     		
 			ArrayList<HashMap<String, Object>> list
@@ -480,14 +397,13 @@ public class MemberController {
 				paramMap.put("status", status);
 				
 				ms.blockMember(paramMap);
-				status = Integer.parseInt(paramMap.get("status").toString());
+				status = Integer.parseInt(paramMap.get("status").toString());	//DB 오류시 0
 				
 				if(status == 1) message = userid+"님을 차단했어요.";
 				else if (status == -1) message = "이미 차단된 회원입니다.";
 				else message = "차단에 실패했어요. 다시 시도해주세요."; 
 			}
 		}
-		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("message", message);
 		resultMap.put("status", status);
@@ -505,16 +421,15 @@ public class MemberController {
     	int status = 0;
     	String message = "";
 		
-		if(loginUser == null) {
+		if(loginUser == null) {	//로그인 확인
 			message = "로그인 후 이용해주세요!";
 		} else {
-			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("blocked", userid);
 			paramMap.put("ref_cursor", null);
 			
-			ms.blockCheck(paramMap);
+			ms.blockCheck(paramMap);	//해당 유저가 블락 되어 있느지 확인
 			
 			ArrayList<HashMap<String, Object>> list
 			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
@@ -524,7 +439,7 @@ public class MemberController {
 			} else {
 				paramMap.put("status", status);
 				ms.unblockMember(paramMap);
-				
+	
 				status = Integer.parseInt(paramMap.get("status").toString());
 				if(status == 0) message = "차단을 해제하지 못했어요. 다시 시도해주세요.";
 				else message = "차단을 해제했어요.";
@@ -537,7 +452,7 @@ public class MemberController {
 		return resultMap;
     }
 
-    @Autowired sendEmailService sms;
+    @Autowired sendEmailService sms; 
 
     //비밀번호 찾기
     @ResponseBody 
@@ -554,13 +469,13 @@ public class MemberController {
 	   paramMap.put("email", memberdto.getEmail());
 	   paramMap.put("cnt", null);
 	   	
-	   ms.findPw(paramMap);
+	   ms.findPw(paramMap);	//select count(*) from member where userid=?, phone=?, email=? 의 결과가 cnt
 	   
 	   int cnt = Integer.parseInt(paramMap.get("cnt").toString());
 	   
 	   if(cnt == 1) {
-		   String tempPassword = sms.getTempPassword();
-		   ms.changePw(userid, tempPassword);
+		   String tempPassword = sms.getTempPassword();	//무작위로 생성된 임시 비밀번호를 받아옴
+		   ms.changePw(userid, tempPassword); //비밀번호를 임시 비밀번호로 변경
 		   resultMap.put("cnt", 1);
 		   resultMap.put("message", userid + "님의 임시 비밀번호는 " + tempPassword + "입니다. 로그인 후 비밀번호를 변경해주세요!");
 		   
@@ -568,7 +483,6 @@ public class MemberController {
 		   resultMap.put("cnt", 0);
 		   resultMap.put("message", "같은 정보의 회원을 찾을 수 없습니다.");
 	   }
-  
        return resultMap;
     }
    
@@ -576,7 +490,7 @@ public class MemberController {
     //아이디 찾기 액션 //ajax
     @RequestMapping(value="/find/id", method=RequestMethod.POST, produces="application/json")
     @ResponseBody
-    public Map<String, Object> findId(Model model, HttpServletRequest request, RedirectAttributes rttr,
+    public Map<String, Object> findId(Model model, HttpServletRequest request,
     		@RequestParam("name") String name,
     		@RequestParam("phone") String phone) {
     	
@@ -585,16 +499,16 @@ public class MemberController {
     	paramMap.put("phone", phone);
     	paramMap.put("userid", null);
     	
-    	ms.findId(paramMap);
+    	ms.findId(paramMap);	//select userid from member where phone=?, email=? 의 결과가 userid
     	
     	String userid = (String) paramMap.get("userid");
     	
     	HashMap<String, Object> result = new HashMap<>();
     	
-    	if(userid == null || userid.equals("")) {
+    	if(userid == null || userid.equals("")) {	//userid 결과가 없는 경우
     		result.put("status", 0);
     		result.put("message", "같은 정보의 회원을 찾을 수 없습니다.");
-    	} else {
+    	} else {	//userid 결과가 있는 경우
     		result.put("status", 1);
     		result.put("message", "회원님의 아이디는 " + userid + " 입니다. 로그인 페이지로 이동할까요?");
     	}    	
@@ -619,10 +533,10 @@ public class MemberController {
 				message = "이미 계정이 비공개로 설정되어있어요:)";
 			} else {
 				String userid = (String) loginUser.get("USERID");
-				ms.privateAccount(userid);
+				ms.privateAccount(userid);	//로그인한 사용자의 useyn을 p로 변경
 				message = "계정이 비공개로 설정되었어요!";
 				status = 1;
-				loginUser.replace("USEYN", "p");
+				loginUser.replace("USEYN", "p");	//세션의 로그인 정보도 수정
 			}
 		}
 		Map<String, Object> resultMap = new HashMap<>();
@@ -649,11 +563,11 @@ public class MemberController {
 				message = "이미 공개된 계정이에요:)";
 			} else {
 				String userid = (String) loginUser.get("USERID");
-				ms.PublicAccount(userid);
+				ms.PublicAccount(userid);	//로그인한 사용자의 useyn을 y로 변경
 				
 				message = "계정 비공개를 해제 했어요!";
 				status = 1;
-				loginUser.replace("USEYN", "y");
+				loginUser.replace("USEYN", "y");	//세션의 로그인 정보도 수정
 			}
 		}
 		Map<String, Object> resultMap = new  HashMap<>();
