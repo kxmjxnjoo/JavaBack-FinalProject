@@ -140,6 +140,18 @@
 
 	</insert>
 
+	<insert id="addReply"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap">
+		{
+			CALL addReply(
+			    #{userid},
+			    #{postnum},
+			    #{content}
+			)
+		}
+	</insert>
+
 	<select id="getSavePost" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL getSavePost(

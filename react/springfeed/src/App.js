@@ -177,6 +177,7 @@ function App() {
                                             isLoggedIn={isLoggedIn}
                                             setIsLoggedIn={setIsLoggedIn}
                                             user={user}
+                                            setUser={setUser}
                                             setPage={setPage}
                                             setSelectedPost={setSelectedPost}
                                             setIsPostDetailOpen={
