@@ -11,6 +11,9 @@ import {
     AiOutlineArrowLeft as PrevIcon,
 } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { Modal } from "react-bootstrap";
+
+import "../../common.css";
 
 const Story = () => {
     const { id } = useParams();
@@ -20,6 +23,8 @@ const Story = () => {
     const [story, setStory] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -68,7 +73,11 @@ const Story = () => {
 
                         <div className="col-2 aling-self-center">
                             <div style={{ fontSize: "50px" }}>
-                                <DetailIcon />
+                                <DetailIcon
+                                    onClick={() => {
+                                        setIsModalOpen(true);
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -141,7 +150,10 @@ const Story = () => {
                         </div>
 
                         <div className="col-2 aling-self-center">
-                            <div style={{ fontSize: "50px" }}>
+                            <div
+                                style={{ fontSize: "50px" }}
+                                className="hoverEffect"
+                            >
                                 <DetailIcon />
                             </div>
                         </div>
@@ -188,6 +200,32 @@ const Story = () => {
                     </div>
                 </div>
             )}
+
+            <Modal
+                show={isModalOpen}
+                onHide={() => {
+                    setIsModalOpen(false);
+                }}
+                className="mt-5"
+            >
+                <Modal.Body>
+                    <div className="card">
+                        <div className="row">
+                            <div className="btn text-danger w-100 p-3">
+                                신고하기
+                            </div>
+                        </div>
+                        <div className="row">
+                            <Link
+                                to={"/user/page/" + id}
+                                className="btn text-decoration-none text-dark w-100 p-3"
+                            >
+                                유저 페이지로 이동
+                            </Link>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };

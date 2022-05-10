@@ -30,3 +30,7 @@ body {
 	height: 50vw;
 	max-height: 50vw;
 }
+
+.hoverEffect:hover {
+	opacity: 100%;
+}
