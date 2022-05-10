@@ -7,13 +7,16 @@ import org.springframework.stereotype.Controller;
 import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.dto.MemberDto;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 @Controller
 public class PostController {
@@ -57,11 +60,64 @@ public class PostController {
 		return "main";
 	}
 
-	@RequestMapping("/post")
-	public String viewPost() {
-		// Determine whether userid or postnum is provided
+	@RequestMapping(value="/post/detail/reply/{num}", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> getPostReply(@PathVariable(value="num") int postNum) {
+		// paramMap
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("num", postNum);
+		paramMap.put("ref_cursor", null);
 
-		return "post/postDetail";
+		ps.getReply(paramMap);
+
+		ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+		if(result == null || result.size() == 0) {
+			return new ArrayList<>();
+		}
+
+		ArrayList<HashMap<String, Object>> replies = new ArrayList<>();
+		for(HashMap<String, Object> reply : result) {
+			HashMap<String, Object> tmp = new HashMap<>();
+			tmp.put("userid", reply.get("USERID"));
+			tmp.put("userImg", reply.get("USER_IMG"));
+			tmp.put("content", reply.get("CONTENT"));
+			tmp.put("createdDate", reply.get("REPLY_DATE"));
+			tmp.put("like", reply.get("REPLY_LIKE_COUNT"));
+
+			replies.add(tmp);
+		}
+
+		return replies;
+	}
+
+	@RequestMapping(value="/post/detail/{num}", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public HashMap<String, Object> viewPost(@PathVariable(value="num") int postNum) {
+		// paramMap
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("num", postNum);
+		paramMap.put("ref_cursor", null);
+
+		ps.getPostDetail(paramMap);
+		ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+		if(result == null || result.size() == 0) {
+			return new HashMap<>();
+		}
+
+		HashMap<String, Object> returnMap = new HashMap<>();
+		returnMap.put("userProfile", result.get(0).get("USER_IMG"));
+		returnMap.put("userid", result.get(0).get("USERID"));
+		returnMap.put("address", result.get(0).get("ADDRESS"));
+		returnMap.put("post_img", result.get(0).get("POST_IMG"));
+		returnMap.put("likeCount", 0);
+		returnMap.put("isLiked", 0);
+		returnMap.put("isSaved", 0);
+		returnMap.put("content", result.get(0).get("CONTENT"));
+		returnMap.put("post_num", result.get(0).get("POST_NUM"));
+
+		return returnMap;
 	}
 
 	@RequestMapping("/post/add/form")
@@ -126,5 +182,4 @@ public class PostController {
 	public String deleteBookmark() {
 		return "";
 	}
-
 }

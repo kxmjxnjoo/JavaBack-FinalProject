@@ -36,7 +36,7 @@ public class ReactController {
 
     // Get user's post
     @RequestMapping(value="/api/post")
-    public ArrayList<PostDto> getPostsByUserid(@RequestParam("userid") String userid) {
+    public ArrayList<HashMap<String, Object>> getPostsByUserid(@RequestParam("userid") String userid) {
         // Get Posts from db
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("userid", userid);
@@ -46,13 +46,14 @@ public class ReactController {
                 (ArrayList<HashMap<String, Object>>)  paramMap.get("ref_cursor");
 
         // Convert Hashmap to PostDto
-        ArrayList<PostDto> postList = new ArrayList<PostDto>();
+        ArrayList<HashMap<String, Object>> postList = new ArrayList<>();
         for(HashMap<String, Object> postHashmap : postHashList) {
-            PostDto pdto = new PostDto();
-            pdto.setAddress((String) postHashmap.get("ADDRESS"));
-            pdto.setUserid((String) postHashmap.get("USERID"));
-            pdto.setPost_img((String) postHashmap.get("IMG"));
-            pdto.setContent((String) postHashmap.get("CONTENT"));
+            HashMap<String, Object> pdto = new HashMap<>();
+            pdto.put("address", postHashmap.get("ADDRESS"));
+            pdto.put("userid", postHashmap.get("USERID"));
+            pdto.put("post_img", postHashmap.get("IMG"));
+            pdto.put("content", postHashmap.get("CONTENT"));
+            pdto.put("postNum", postHashmap.get("POST_NUM"));
             postList.add(pdto);
         }
 
@@ -65,7 +66,7 @@ public class ReactController {
 
         String userid = getLoginUserid(request);
         if(userid == null) {
-            return null;
+            return new ArrayList<>();
         }
 
         // Get 10 posts by pages
@@ -78,7 +79,7 @@ public class ReactController {
         ArrayList<HashMap<String, Object>> list =
                 (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
         if(list.size() == 0 || list == null) {
-            return null;
+            return new ArrayList<>();
         }
         ArrayList<PostDto> postList = new ArrayList<PostDto>();
         for(HashMap<String, Object> pvo : list) {
@@ -90,6 +91,7 @@ public class ReactController {
             pdto.setCreate_date((Timestamp) pvo.get("CREATE_DATE"));
             pdto.setPostNum( Integer.parseInt(String.valueOf( pvo.get("POST_NUM"))));
             pdto.setLikeCount(Integer.parseInt(String.valueOf(pvo.get("LIKECOUNT"))));
+            pdto.setIsSaved(Integer.parseInt(String.valueOf(pvo.get("ISSAVED"))));
 
             //pdto.setReplyCount(pvo.get("REPLYCOUNT");
             postList.add(pdto);
@@ -322,10 +324,11 @@ public class ReactController {
         ArrayList<PostDto> result = new ArrayList<PostDto>();
         for(HashMap<String, Object> post : list) {
             PostDto pdto = new PostDto();
-            pdto.setPost_img((String) post.get("POST_IMG"));
+            pdto.setPost_img((String) post.get("IMG"));
             pdto.setReplyCount(Integer.parseInt(String.valueOf(post.get("NUM_REPLY"))));
             pdto.setLikeCount(Integer.parseInt(String.valueOf(post.get("NUM_LIKE"))));
             pdto.setPostNum(Integer.parseInt(String.valueOf(post.get("POST_NUM"))));
+
             result.add(pdto);
         }
 
@@ -399,20 +402,27 @@ public class ReactController {
     }
 
     // Insert save post
-    @RequestMapping(value="/api/post/save/insert", produces="application/json")
-    public int insertSavePost(HttpServletRequest request, @RequestParam("num") int num) {
+    @RequestMapping(value="/api/post/save/insert", produces="application/json", method=RequestMethod.POST)
+    public ArrayList<Integer> insertSavePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", getLoginUserid(request));
-        paramMap.put("postnum", num);
+        paramMap.put("postnum", postNum.get("postNum"));
+
+        System.out.println("userid: " + getLoginUserid(request));
+        System.out.println("postnum: " + postNum.get("postNum"));
 
         ps.insertSavePost(paramMap);
 
-        return Integer.parseInt(String.valueOf(paramMap.get("RESULT")));
+        ArrayList<Integer> result = new ArrayList<>();
+//        result.add(Integer.parseInt(String.valueOf(paramMap.get("RESULT"))));
+        result.add(1);
+
+        return result;
     }
 
     @RequestMapping(value="/api/user/follow", produces="application/json")
-    public int follow(HttpServletRequest request, @RequestParam("id") String following) {
+    public HashMap<String, Object> follow(HttpServletRequest request, @RequestParam("id") String following) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("follower", getLoginUserid(request));
@@ -420,7 +430,10 @@ public class ReactController {
 
         ms.insertFollow(paramMap);
 
-        return Integer.parseInt(String.valueOf(paramMap.get("result")));
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("result", 1);
+
+        return result;
     }
 
     @RequestMapping(value="/api/user/unfollow")

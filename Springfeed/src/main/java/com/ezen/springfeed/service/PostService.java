@@ -59,4 +59,12 @@ public class PostService {
     public void insertSavePost(HashMap<String, Object> paramMap) {
         pdao.insertSavePost(paramMap);
     }
+
+    public void getPostDetail(HashMap<String, Object> paramMap) {
+        pdao.getPostDetail(paramMap);
+    }
+
+    public void getReply(HashMap<String, Object> paramMap) {
+        pdao.getReply(paramMap);
+    }
 }

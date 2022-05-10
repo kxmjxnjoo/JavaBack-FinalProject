@@ -563,11 +563,11 @@ public class MemberController {
 				message = "이미 공개된 계정이에요:)";
 			} else {
 				String userid = (String) loginUser.get("USERID");
-				ms.PublicAccount(userid);	//로그인한 사용자의 useyn을 y로 변경
+				ms.PublicAccount(userid);	
 				
 				message = "계정 비공개를 해제 했어요!";
 				status = 1;
-				loginUser.replace("USEYN", "y");	//세션의 로그인 정보도 수정
+				loginUser.replace("USEYN", "y");
 			}
 		}
 		Map<String, Object> resultMap = new  HashMap<>();
