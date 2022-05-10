@@ -163,11 +163,6 @@ public class PostController {
 		return "";
 	}
 
-	@RequestMapping("/reply/add")
-	public String addReply() {
-		return "";
-	}
-	
 	@RequestMapping("/reply/delete")
 	public String deleteReply() {
 		return "";

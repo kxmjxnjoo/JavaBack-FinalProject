@@ -213,7 +213,7 @@ const Post = ({
             </div>
 
             <div className="card-footer">
-                <form action="/reply/add">
+                <form>
                     <div className="row form-group">
                         <div className="col-10">
                             <input
@@ -226,10 +226,12 @@ const Post = ({
                         </div>
                         <div className="col-2">
                             <input
-                                type="button"
+                                type="submit"
                                 value="추가"
                                 className="btn btn-outline-primary w-100"
-                                onClick={() => {
+                                onClick={(e) => {
+                                    e.preventDefault();
+
                                     if (reply == null || reply == "") {
                                         toast.error("댓글을 입력해 주세요");
                                         return;
@@ -239,7 +241,8 @@ const Post = ({
                                                 "댓글을 추가하고 있어요"
                                             );
 
-                                        fetch("", {
+                                        fetch("/api/reply/add", {
+                                            method: "POST",
                                             headers: {
                                                 "Content-Type":
                                                     "application/json;charset=UTF-8",
@@ -253,7 +256,7 @@ const Post = ({
                                                 return res.json();
                                             })
                                             .then((data) => {
-                                                if (data.text() == 1) {
+                                                if (data == 1) {
                                                     noti.success(
                                                         "댓글을 추가했어요",
                                                         {
@@ -268,6 +271,14 @@ const Post = ({
                                                         }
                                                     );
                                                 }
+                                            })
+                                            .finally(() => {
+                                                noti.success(
+                                                    "댓글을 추가했어요",
+                                                    {
+                                                        id: noti,
+                                                    }
+                                                );
                                             });
                                     }
                                 }}

@@ -518,4 +518,30 @@ public class ReactController {
 
         return list;
     }
+
+    @RequestMapping("/api/reply/add")
+    public ArrayList<String> addReply(HttpServletRequest request, @RequestBody HashMap<String, Object> reply) {
+        String userid = getLoginUserid(request);
+
+        if(userid == null) {
+            return new ArrayList<>();
+        }
+
+        System.out.println(reply.get("postNum"));
+        System.out.println(reply.get("content"));
+        System.out.println(userid);
+
+        // paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("postnum", reply.get("postNum"));
+        paramMap.put("content", reply.get("content"));
+        paramMap.put("userid", userid);
+
+        ps.addReply(paramMap);
+
+        ArrayList<String> result = new ArrayList<>();
+        result.add("1");
+        return result;
+    }
+
 }
