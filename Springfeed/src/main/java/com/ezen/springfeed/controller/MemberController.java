@@ -11,10 +11,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,11 +39,10 @@ public class MemberController {
     //로그인 액션
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String login(@ModelAttribute("dto") @Valid MemberDto memberdto,
+    public String login(@RequestBody MemberDto memberdto, 
     		HttpServletRequest request) {
     	
     	String status = "";
-    	System.out.println(memberdto.getUserid());
     	if(memberdto.getUserid() == null || memberdto.getUserid().equals("")) {
     		status = "emptyId"; //아이디 미입력
     	} else if(memberdto.getPassword() == null || memberdto.getPassword().equals("")) {
@@ -168,32 +167,53 @@ public class MemberController {
 
     //알림 가지고 오기
     @RequestMapping(value="/user/notification",  produces="application/json")
-    public ArrayList<HashMap<String, Object>> Notification(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-		
-		HashMap<String, Object> loginUser = 
-				(HashMap<String, Object>) session.getAttribute("loginUser");
-		
-		if (loginUser == null) { 
-			return null; 
-		} else {
-			System.out.println(loginUser.get("USERID"));
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("ref_cursor", null);
-			paramMap.put("userid", loginUser.get("USERID")); 
+    public ModelAndView Notification(HttpServletRequest request, Model model,
+			 RedirectAttributes rttr) {
+HttpSession session = request.getSession();
 
-			ms.getNotification(paramMap); //로그인한 유저의 알림 목록을 가지고 옴
-			
-			ArrayList<HashMap<String, Object>> notiList 
-				= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-			
-			if (notiList.size() == 0) {
-				return null; 
-			} else {
-				return notiList;
-			} 
-		}
-    }
+ModelAndView mav = new ModelAndView();
+String url = "";
+
+HashMap<String, Object> loginUser =
+(HashMap<String, Object>) session.getAttribute("loginUser");
+
+if (loginUser == null) {
+rttr.addFlashAttribute("message", "로그인 후 이용해주세요!");
+mav.setViewName("redirect:/login/form");
+} else {
+HashMap<String, Object> paramMap = new HashMap<String, Object>();
+paramMap.put("ref_cursor", null);
+paramMap.put("userid", loginUser.get("USERID"));
+
+ms.getNotification(paramMap);
+ArrayList<HashMap<String, Object>> notiList
+= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+
+if (notiList.size() == 0) {	mav.addObject("noNotification", 1);
+} else {for(HashMap<String, Object> temp : notiList) {
+//LocalDate now = LocalDate.now();
+//LocalDate notiDate = ((timeStamp) temp.get("CREATE_DATE")).toLocalDate();
+//Period period = Period.between(now, notiDate);
+//long diff = Math.abs(period.getDays());
+//
+//if(diff == 0) {
+//temp.replace("CREATE_DATE", "오늘");
+//} else if(diff < 30) {
+//temp.replace("CREATE_DATE", diff+"일 전");
+//} else if(diff < 365) {
+//temp.replace("CREATE_DATE", Math.abs(diff / 30) + "달 전");
+//} else {
+//temp.replace("CREATE_DATE", "오래 전");
+//}
+
+}
+}
+mav.addObject("notiList", notiList);
+mav.setViewName("noti/noti");
+}
+return mav;
+}
+    
     
     // 알림 숫자 체크
     @ResponseBody
@@ -559,15 +579,15 @@ public class MemberController {
 		if(loginUser == null) {
 			message = "로그인 후 이용해주세요!";
 		} else {
-			if(((String)loginUser.get("USEYN")).equals("y")) {
+			if(((String)loginUser.get("USEYN")).equals("y")) { 
 				message = "이미 공개된 계정이에요:)";
 			} else {
 				String userid = (String) loginUser.get("USERID");
-				ms.PublicAccount(userid);	
+				ms.PublicAccount(userid);	//로그인한 사용자의 useyn을 y로 변경
 				
 				message = "계정 비공개를 해제 했어요!";
 				status = 1;
-				loginUser.replace("USEYN", "y");
+				loginUser.replace("USEYN", "y");	//세션의 로그인 정보도 수정
 			}
 		}
 		Map<String, Object> resultMap = new  HashMap<>();

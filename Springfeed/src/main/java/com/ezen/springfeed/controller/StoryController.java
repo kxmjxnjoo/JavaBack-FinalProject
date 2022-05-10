@@ -30,7 +30,7 @@ public class StoryController {
 	@Autowired
 	MemberService ms;
 
-	
+	//스토리 추가
 	@RequestMapping(value="/story/add", produces="application/json") 
 	public Map<String, Object> addStory(@ModelAttribute("dto") StoryDto storydto,
 			HttpServletRequest request) {
@@ -43,13 +43,14 @@ public class StoryController {
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  {
+		if (loginUser == null)  {	//로그인 체크
 			message = "로그인 후 이용해주세요.";
 		} else {
 			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			
 			if(storydto.getFontColor() == null || ((String)storydto.getFontColor()).equals(""))
+				//폰트 색을 지정하지 않은 경우 기본 흰색
 				paramMap.put("fontcolor", "white");
 			else
 				paramMap.put("fontcolor", storydto.getFontColor());
@@ -60,7 +61,7 @@ public class StoryController {
 			paramMap.put("story_img", storydto.getStory_img());
 			paramMap.put("status", status);
 			
-			ss.addStory(paramMap);
+			ss.addStory(paramMap);	
 			
 			status = Integer.parseInt(paramMap.get("status").toString());
 			
@@ -78,7 +79,9 @@ public class StoryController {
 	}
 	
 	
-	
+	//스토리 읽어오기
+	//파라미터로 userid (메인 스토리목록을 클릭해 들어온 경우), story_num(이전, 다음 게시물보기를 통한 접근 혹은 직접 접근)
+	//두 가지 경우로 나눠서 처리
 	@RequestMapping(value="/story", produces="application/json")
 	public Map<String, Object> storyDetail(
 			@RequestParam(value="userid", required=false) String userid, 
@@ -93,17 +96,17 @@ public class StoryController {
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
 		
-		if (loginUser == null)  {
+		if (loginUser == null)  {	//로그인 확인
 			message = "로그인 후 이용해주세요!";
-		} else {
+		} else { //로그인이 되어이 ㅆ는 경우
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			
-			if(story_num == null) paramMap.put("story_num", null);
-			else paramMap.put("story_num", Integer.parseInt(story_num));
+			if(story_num == null) paramMap.put("story_num", null);	//userid 로 접근한 경우
+			else paramMap.put("story_num", Integer.parseInt(story_num));	//story_num으로 접근한 경우
 			
-			if(userid != null) {
+			if(userid != null) {	//userid 으로 접근한 경우 
 				paramMap.put("userid", userid);
-				ms.findRecentStory(paramMap);
+				ms.findRecentStory(paramMap);	//해당 유저가 작성흔 스토리 중 가장 큰 story_num을 검색하여 story_num에 대입받음
 			}
 			
 			paramMap.put("ref_cursor", null);
@@ -113,23 +116,19 @@ public class StoryController {
 			paramMap.put("useyn", null);
 			paramMap.put("memberUseyn", null);
 			
-			ss.getStory(paramMap);
+			ss.getStory(paramMap);	//story_num으로 게시물 조회
 			
 			ArrayList<HashMap<String, Object>> list 
 			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
 			
-			if(list.size() == 0) {
+			if(list.size() == 0) {	
 				message = "존재하지 않는 스토리 입니다.";
-			} else if(((String)paramMap.get("useyn")).equals("b") ){
+			} else if(((String)paramMap.get("useyn")).equals("b") ){	//신고받은 게시물
 				resultMap.put("useyn", "b");
 				message = "차단된 계시물 입니다.";
 			} else {
-				
 				HashMap<String, Object> storyMap = list.get(0);
 				resultMap.put("StoryDto", storyMap);
-				
-				System.out.println(paramMap.get("story_num"));
-				System.out.println("스토리넘버 : " + storyMap.get("STORY_NUM"));
 				
 				//팔로우 검사
 				HashMap<String, Object> followMap = new HashMap<>();
@@ -138,7 +137,9 @@ public class StoryController {
 				followMap.put("followedResult", 0);
 				followMap.put("followingResult", 0);
 				
-				ms.getFollow(followMap);
+				ms.getFollow(followMap);	
+				//로그인 유저가 글슨이를 팔로잉 했다면 followingResult 1
+				//글쓴이가 로그인 유저를 팔로잉 했다면 followedResult 1
 				
 				int followedResult = Integer.parseInt(followMap.get("followedResult").toString());
 				int followingResult = Integer.parseInt(followMap.get("followingResult").toString());
@@ -146,17 +147,13 @@ public class StoryController {
 				//사용자가 글쓴이를 팔로우 했는지
 				resultMap.put("isFollowing", followingResult);
 				
-				System.out.println(paramMap.get("memberUseyn") + " " + followedResult 
-						+ " " + followingResult);
-
-				if(((String)paramMap.get("memberUseyn")).equals("p") && 
-						(followedResult == 0 || followingResult == 0)) {
+				if(((String)paramMap.get("memberUseyn")).equals("p") && 	
+						(followedResult == 0 || followingResult == 0)) { //비공개 계정과 맞팔이 아닐 경우
 					
-					// 비공개 계정과 맞팔이 아닐 경우
 						resultMap.put("useyn", "p");
 						message = "비공개된 게시물이에요.";
 					
-				} else if(((String)paramMap.get("useyn")).equals("y") ) {
+				} else if(((String)paramMap.get("useyn")).equals("y") ) { //비공개 계정이 아닌 경우 
 					
 					System.out.println("로그인 한 유저 : " + loginUser.get("USERID"));
 					System.out.println("스토리 작성자 : " + storyMap.get("USERID"));
@@ -166,12 +163,12 @@ public class StoryController {
 					blockCheckMap.put("blocked", storyMap.get("USERID"));
 					blockCheckMap.put("ref_cursor", null);
 					
-					ms.blockCheck(blockCheckMap);
+					ms.blockCheck(blockCheckMap);	//차단한 유저인지 검색
 					
 					ArrayList<HashMap<String, Object>> blockList 
 						= (ArrayList<HashMap<String, Object>>) blockCheckMap.get("ref_cursor");
 					
-					if (blockList.size() == 0) {
+					if (blockList.size() == 0) {	//차단한 유저가 아닐 경우
 						
 						resultMap.put("fontcolor", (String)paramMap.get("fontcolor"));
 						
@@ -197,6 +194,7 @@ public class StoryController {
 		return resultMap;
 	}
 
+	//스토리 삭제
 	@RequestMapping(value="/story/delete", produces="application/json")
 	public Map<String, Object> deleteStory(@RequestParam("story_num") int story_num, 
 			HttpServletRequest request) {
@@ -206,13 +204,11 @@ public class StoryController {
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginUser = 
 				(HashMap<String, Object>) session.getAttribute("loginUser");
-		
-		
+
 		if(loginUser== null) {
 			message = "로그인 후 이용해주세요.";
 		} else {
 			String userid = (String) loginUser.get("USERID");
-			
 			ss.deleteStory(story_num);
 			
 			message = "스토리를 삭제했어요!";
