@@ -35,6 +35,8 @@ const Post = ({
         postNum,
     } = post;
 
+    const [reply, setReply] = useState(null);
+
     const profileStyle = {
         width: "50px",
     };
@@ -181,7 +183,7 @@ const Post = ({
 
             <div className="card-footer h2">
                 <div className="row">
-                    <div className="col-10">
+                    <div className="col-11">
                         {isLikedData ? (
                             <LikeFillIcon
                                 className="m-2 text-danger"
@@ -198,7 +200,7 @@ const Post = ({
                         />
                         <MessageIcon className="m-2" />
                     </div>
-                    <div className="col-2">
+                    <div className="col-1">
                         {isSavedData ? (
                             <SaveFillIcon onClick={handleSave} />
                         ) : (
@@ -218,13 +220,57 @@ const Post = ({
                                 type="text"
                                 placeholder="댓글을 추가해 주세요..."
                                 className="form-control"
+                                value={reply}
+                                onChange={(e) => setReply(e.target.value)}
                             />
                         </div>
                         <div className="col-2">
                             <input
-                                type="submit"
+                                type="button"
                                 value="추가"
-                                className="btn btn-outline-primary"
+                                className="btn btn-outline-primary w-100"
+                                onClick={() => {
+                                    if (reply == null || reply == "") {
+                                        toast.error("댓글을 입력해 주세요");
+                                        return;
+                                    } else {
+                                        let noti =
+                                            toast.loading(
+                                                "댓글을 추가하고 있어요"
+                                            );
+
+                                        fetch("", {
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json;charset=UTF-8",
+                                            },
+                                            body: JSON.stringify({
+                                                postNum: postNum,
+                                                content: reply,
+                                            }),
+                                        })
+                                            .then((res) => {
+                                                return res.json();
+                                            })
+                                            .then((data) => {
+                                                if (data.text() == 1) {
+                                                    noti.success(
+                                                        "댓글을 추가했어요",
+                                                        {
+                                                            id: noti,
+                                                        }
+                                                    );
+                                                } else {
+                                                    noti.error(
+                                                        "댓글을 추가하지 못했어요. 다시 시도해 주세요",
+                                                        {
+                                                            id: noti,
+                                                        }
+                                                    );
+                                                }
+                                            });
+                                    }
+                                }}
                             />
                         </div>
                     </div>

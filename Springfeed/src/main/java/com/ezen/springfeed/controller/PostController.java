@@ -182,5 +182,4 @@ public class PostController {
 	public String deleteBookmark() {
 		return "";
 	}
-
 }

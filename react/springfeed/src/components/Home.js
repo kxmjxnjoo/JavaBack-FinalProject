@@ -63,10 +63,9 @@ const Home = ({
     const [hasMore, setHasMore] = useState(true);
 
     const loadFeed = () => {
+        setPostPage(postPage + 1);
         fetch("/api/post/feed?page=" + postPage)
             .then((res) => {
-                setPostPage(postPage + 1);
-
                 return res.json();
             })
             .then((data) => {
@@ -99,7 +98,7 @@ const Home = ({
                         <InifniteScroll
                             pageStart={postPage}
                             loadMore={loadFeed}
-                            hasMore={hasMore}
+                            hasMore={posts.length < 10 ? false : hasMore}
                             loader={
                                 <Loading
                                     message="포스트를 더 불러오고 있어요"

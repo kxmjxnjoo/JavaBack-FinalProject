@@ -212,12 +212,13 @@ const Topnav = ({
                                             <a className="nav-link">
                                                 <img
                                                     src={
-                                                        isLoggedIn
-                                                            ? user.img != null
-                                                                ? "/images/" +
-                                                                  user.img
-                                                                : defaultProfile
-                                                            : defaultProfile
+                                                        // isLoggedIn
+                                                        //     ? user.img != null
+                                                        //         ? "/images/" +
+                                                        //           user.img
+                                                        //         : defaultProfile
+                                                        //     : defaultProfile
+                                                        defaultProfile
                                                     }
                                                     alt="ERR"
                                                     className="rounded-circle"

@@ -6,6 +6,7 @@ const Login = ({
     isLoggedIn,
     setIsLoggedIn,
     user,
+    setUser,
     setPage,
     setSelectedPost,
     setIsPostDetailOpen,
@@ -58,10 +59,13 @@ const Login = ({
 
                         <div className="form-group">
                             <input
+                                type="submit"
                                 value="로그인"
                                 className="p-4 mb-4 btn form-control btn-outline"
                                 style={{ border: "1px solid var(--mainColor)" }}
-                                onClick={() => {
+                                onClick={(e) => {
+                                    e.preventDefault();
+
                                     let noti =
                                         toast.loading("로그인하고 있어요");
 
@@ -87,7 +91,34 @@ const Login = ({
                                                     id: noti,
                                                 });
                                                 setIsLoggedIn(true);
-                                                navigate("/");
+
+                                                fetch("/api/user/login")
+                                                    .then((res) => {
+                                                        return res.json();
+                                                    })
+                                                    .then((data) => {
+                                                        setUser(data);
+                                                    })
+                                                    .catch((err) => {
+                                                        return err;
+                                                    });
+
+                                                navigate(
+                                                    "/",
+                                                    { replace: true },
+                                                    {
+                                                        state: {
+                                                            user: user,
+                                                            setPage: setPage,
+                                                            setSelectedPost:
+                                                                setSelectedPost,
+                                                            setIsPostDetailOpen:
+                                                                setIsPostDetailOpen,
+                                                            setIsSelectOpen:
+                                                                setIsSelectOpen,
+                                                        },
+                                                    }
+                                                );
                                             } else {
                                                 if (data == "emptyId") {
                                                     toast.error(
@@ -133,13 +164,13 @@ const Login = ({
 
                     <div className="row mt-5 mb-5">
                         <div className="col-5 align-self-center">
-                            <div className="h3 text-center">---------</div>
+                            <div className="h3 text-center">-</div>
                         </div>
                         <div className="col-2 align-self-center">
                             <div className="h3 text-center">or</div>
                         </div>
                         <div className="col-5 align-self-center">
-                            <div className="h3 text-center">---------</div>
+                            <div className="h3 text-center">-</div>
                         </div>
                     </div>
 

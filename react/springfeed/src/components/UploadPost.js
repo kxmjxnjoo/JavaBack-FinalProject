@@ -22,7 +22,7 @@ const UploadPost = ({ setIsSelectOpen }) => {
                     <img
                         src={image}
                         alt=""
-                        className="form-control img-fluid"
+                        className="form-control"
                         style={{ height: "500px" }}
                     />
                 </div>
