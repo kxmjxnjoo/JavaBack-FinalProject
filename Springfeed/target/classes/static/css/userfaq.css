@@ -1,0 +1,108 @@
+#faqBox {
+    width: 70%;
+
+    position: relative;
+    left: 15%;
+    
+}
+
+#faqBox h2 {
+    color: silver;
+
+    margin-bottom: 40px;
+}
+
+#faqBox h3 {
+    display: inline-block;
+}
+
+.faqQ {
+    color: silver;
+    margin-right: 10x;
+}
+
+.faqTitle {
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    width: 90%;
+    position: relative;
+    left: 5%;
+}
+
+.faqTitle h3{
+	display: inline;
+}
+
+.faqTitle:hover {
+    background-color: rgb(243, 244, 245);
+}
+
+#faqPopup {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#faqPopupBox {
+    background-color: white;
+    width: 70%;
+    height: 500px;
+    
+    position: relative;
+    left: 15%;
+    top: 200px;
+}
+
+#faqPopupBoxContent {
+    width: 70%;
+    height: 440px;
+
+    position: relative;
+    left: 15%;
+    top: 30px;
+}
+
+#faqPopupBox h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#faqPopupBox p {
+    font-size: 130%;
+}
+
+#faqPopupBox button {
+    position: absolute;
+    width: 50%;
+    height: 40px;
+    
+    left: 25%;
+    bottom: 0px;
+
+    font-size: 20px;
+
+    border: none;
+    background-color: rgb(230, 153, 153);
+    color: white;
+}
+
+#faqPopupBox button:hover {
+    opacity: 0.5;
+}
+
+#noFaqBox {
+    text-align: center;
+
+    margin-top: 100px;
+}
+
+#noFaqBox i {
+    font-size: 100px;
+}

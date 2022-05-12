@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.springfeed.dao.IMemberDao">
+	
+	<resultMap id="MemberMap" type="java.util.HashMap"></resultMap>
+
+	<select id="getFollowingCount"
+			statementType="CALLABLE"
+			parameterType="String"
+			resultType="_int"
+	>
+		{
+			CALL getFollowingCount(
+			    #{userid},
+			    #{followingCount, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<select id="getFollowerCount"
+			statementType="CALLABLE"
+			parameterType="String"
+			resultType="_int"
+	>
+		{
+			CALL getFollowerCount(
+			    #{userid},
+			    #{followerCount, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getMember( 
+			#{userid},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
+		)  }
+	</select>
+	
+	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL insertMember( 
+			#{userid},#{password},#{name},#{email},#{phone},#{status, mode=OUT, jdbcType=INTEGER}
+		)}
+	</insert>
+	
+	<select id="idCheck" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="_int">
+		{  CALL idCheck( #{cnt, mode=OUT, jdbcType=INTEGER }, #{userid} )  }
+	</select>
+	
+	<select id="getFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getFollow(
+		#{followed}, #{follower}, 
+		#{followedResult, mode=OUT, jdbcType=INTEGER },  #{followingResult, mode=OUT, jdbcType=INTEGER })  }
+	</select>
+	
+	<insert id="insertFollow" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL insertFollow( 
+			#{follower}, #{followed}, #{result, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</insert>
+	
+	<insert id="addNotification" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL addNotification( 
+			#{followed}, #{follower}, #{notitype},
+			#{notiresult, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</insert>
+	
+	<delete id="unfollow" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL unfollow( 
+			 #{follower}, #{followed},
+			#{result, mode=OUT, jdbcType=INTEGER } 
+		)}
+	</delete>
+	
+	<select id="getNotification" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getNotification(
+		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}, 
+		#{userid} )  }
+	</select>
+	
+	<update id="userEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userEdit( 
+			#{status, mode=OUT, jdbcType=INTEGER},#{USERID},#{PASSWORD},#{NAME},#{EMAIL},#{PHONE},#{INTRODUCE},#{IMG}
+		)}
+	</update>
+	
+	<update id="deleteAcount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL deleteAcount( #{userid},  #{status, mode=OUT, jdbcType=INTEGER})}
+	</update>
+	
+	<update id="activateAccount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL activateAccount( #{userid}, #{status, mode=OUT, jdbcType=INTEGER})}
+	</update>
+
+	<select id="getNotiCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getNotiCount( #{userid}, #{notiCount, mode=OUT, jdbcType=INTEGER }  )  }
+	</select>
+
+	<select id="getFollowedList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getFollowedList(
+			    #{ userid },
+			    #{ page },
+			    #{ load },
+			    #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap }
+			)
+		}
+	</select>
+
+	<select id="getFollowerList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getFollowerList(
+			    #{ userid },
+			    #{ page },
+			    #{ load },
+			    #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
+			)
+		}
+	</select>
+	
+	<select id="findId" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findId( 
+			#{name}, #{phone}, #{userid, mode=OUT, jdbcType=VARCHAR }
+		)  }
+	</select>
+	
+	<select id="userEmailCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userEmailCheck( 
+			#{name}, #{email}, #{pwFindCheck, mode=OUT, jdbcType=BOOLEAN }
+		)  }
+	</select>
+	
+	<select id="updatePassword" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updatePassword( #{str}, #{email} )  }
+	</select>
+	
+	<insert id="blockMember" statementType="CALLABLE" parameterType="String">
+		{  CALL insertBlockMember(  #{userid}, #{blocked}, #{status, mode=OUT, jdbcType=INTEGER} )  }
+	</insert>
+	
+	<delete id="unblockMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL unblockMember(  #{userid}, #{blocked}, #{status, mode=OUT, jdbcType=INTEGER} )  }
+	</delete>
+	
+	<select id="blockCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL blockCheck( #{userid}, #{blocked}, 
+		#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap } )  }
+	</select>
+	
+	<update id="privateAccount" statementType="CALLABLE" parameterType="String">
+		{  CALL privateAccount(  #{userid}  )  }
+	</update>
+	
+	<update id="PublicAccount" statementType="CALLABLE" parameterType="String">
+		{  CALL PublicAccount(  #{userid}  )  }
+	</update>
+	
+	<select id="findPw" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findPw(  #{userid},#{phone},#{email},#{cnt, mode=OUT, jdbcType=INTEGER}  )  }
+	</select>
+	
+	<update id="changePw" statementType="CALLABLE" parameterType="String">
+		{  CALL changePw(  #{userid}, #{tempPassword}  )  }
+	</update>
+
+	<select id="findRecentStory" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL findRecentStory(  #{userid},#{story_num, mode=OUT, jdbcType=INTEGER}  )  }
+	</select>
+
+
+	<select id="getIsFollowing" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{
+			CALL getIsFollowing(
+			    #{userid},
+			    #{follower},
+			    #{isFollowing, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
+</mapper>

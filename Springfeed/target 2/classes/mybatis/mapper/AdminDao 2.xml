@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.springfeed.dao.IAdminDao">
+	
+	<resultMap id="AdminMap" type="java.util.HashMap"></resultMap>
+
+	<select id="checkAdmin" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL checkAdmin( 
+			#{adminId},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		)  }
+	</select>
+	
+	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount(
+			#{adminId},
+			#{key},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+		
+	<select id="getAllCount_f" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount_f(
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+	
+	<select id="getAllCount_q" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount_q(
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+		
+	<select id="getAllCount_r" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllCount_r(
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+	
+ 	<select id="memberList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL memberList( 
+			#{startNum},
+			#{endNum},
+			#{key},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		)  }
+	</select> 
+	
+	<select id="searchMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL searchMember(
+			${userid}
+			#{ref_cursor, mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AdminMap}
+		) }
+	</select>
+	
+	<select id="reportList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL reportList( 
+			#{startNum},
+			#{endNum},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		)  }
+	</select>
+	
+	<select id="postReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL postReportCheck( 	#{post_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+			)  } 
+	</select>
+	
+	<select id="storyReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL storyReportCheck( 	#{story_num},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+		)  }
+	</select>
+	
+	<select id="userReportCheck" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL userReportCheck( 	#{userid},
+			#{cnt, mode=OUT, jdbcType=INTEGER}
+		)  }
+	</select>
+	
+	<delete id="deletePost" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deletePost(  
+			#{post_num},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		) }
+	</delete>
+	
+	<delete id="deleteStory" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteStory(  
+			#{story_num},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		) }
+	</delete>
+	
+	<delete id="blockUser" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL blockUser(
+		  #{userid}
+		  #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap}
+		) }
+	</delete>
+	
+	<update id="updateReportPostBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportPostBlock(
+			#{report_num},
+			#{post_num}
+		 ) } 
+	</update>
+	
+	<update id="updateReportStoryBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportStoryBlock(
+			#{report_num},
+			#{story_num}
+		 ) } 
+	</update>
+	
+	<update id="updateReportUserBlock" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL updateReportUserBlock(
+			#{report_num},
+			#{userid}
+		 ) } 
+	</update>
+	
+</mapper>

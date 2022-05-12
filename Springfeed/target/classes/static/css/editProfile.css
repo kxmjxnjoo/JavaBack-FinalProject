@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+body {
+    background-color: #efebe8;
+}
+
+
+#userInfoBox {
+    text-align: center;
+    width: 25%;
+    position: relative;
+    left: 37.5%;
+}
+
+#editProfileBox {
+    background-color: white;
+    
+    height: 900px;
+}
+
+#editProfileBoxContent {
+    position: relative;
+    top: 25px;
+}
+
+#editProfileBox input, textarea {
+    width: 80%;
+    height: 40px;
+    font-size: 20px;
+
+    padding-left: 20px;
+    
+    margin-bottom: 20px;
+}
+
+#editProfileBox textarea {
+    height: 80px;
+}
+
+#editProfileBox input[type=submit] {
+    width: 90%;
+    
+    border: none;
+
+    background-color: #e59999;
+    color: white;
+}
+
+#withdrawBox {
+    background-color: white;
+    margin: 30px auto;
+    border: 1px solid gray;
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+}
+
+#withdrawBoxContent{
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+
+#withdrawBoxContent h3 {
+    width: 70%;
+    display: inline-block;
+
+    font-size: 20px;
+}
+
+#image_container{
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+	border-radius: 50%;
+	overflow: hidden;
+	display:flex;
+	margin-bottom: 10px;
+}
+
+
+#image_container img {
+	display: block;
+	width:400px;
+	height: auto;
+	object-fit: cover;
+}
+
+.input-file-button{
+	position: relative; top: 50%; left: 1%;
+	padding: 6px 25px; border:1px solid #e59999; 
+  	cursor: pointer; margin-bottom: 20px;
+  	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.input-file-button:hover{
+	background:#f7c4c0;
+}
+
+
+#input-file { display : none; }
+

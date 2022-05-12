@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+html, body {
+	height:100%;
+}
+
+#exploreWrap{
+	padding-bottom: 200px;
+	min-height: 100%;
+	position: relative;	
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#postList {
+	position: relative;
+	width: 65%; height:100%; 
+	margin:0 auto;
+}
+
+.userPost {
+	position: relative; float: left;  margin: 24px 12px auto; 
+	width: 300px; height: 300px; 
+	overflow:hidden;
+	background: #e59999;
+	display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+    align-items: center;
+}
+
+
+.userPost img{
+	object-fit: cover; 
+	width: 100%
+}
+
+.userPostInfo {
+	color: white; z-index: 1;
+	position: absolute; top: 45%;
+	transition-duration: 0.5s; opacity: 0;
+	display: flex; align-items: center;
+}
+
+.userPostInfo h3{
+	float: left;
+}
+
+.userPostInfo i{
+	float: left;
+}
+
+.userPostInfo h3:nth-child(2) {
+	margin-left: 40px;
+}
+
+.userPostInfoLayer{
+	position:absolute; top:0; left:0; 
+	width:300px; height:300px; opacity: 0; transition-duration: 0.5s;
+	background:rgba(0, 0, 0, 0.5); backdrop-filter: blur(2px);
+}
+
+
+.userPost:hover .userPostInfo {
+	opacity: 0.88;
+}
+
+.userPost:hover .userPostInfoLayer {
+	opacity: 1;
+}

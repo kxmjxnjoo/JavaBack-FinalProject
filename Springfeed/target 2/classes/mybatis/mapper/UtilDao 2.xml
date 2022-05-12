@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.springfeed.dao.IUtilDao">
+	
+	<resultMap id="UtilMap" type="java.util.HashMap"></resultMap>
+
+	<select id="getMemberSearch"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL getMemberSearch(
+			    #{key},
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=MemberMap
+			    }
+			)
+		}
+	</select>
+
+	<select id="getPostSearch"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL getPostSearch(
+			    #{key},
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=postMap
+			    }
+			)
+		}
+	</select>
+	
+	<insert id="addStoryReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addStoryReport(
+				#{reporter},#{reportType},#{reason},#{story_num},#{status, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</insert>
+	
+	
+	<insert id="addPostReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addPostReport(
+				#{reporter},#{reportType},#{reason},#{post_num},#{status, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</insert>
+	
+	<insert id="addUserReport"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL addUserReport(
+				#{reporter},#{reported},#{reportType},#{reason},#{status, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</insert>
+
+	<select
+		id="exploreFeed"
+		statementType="CALLABLE"
+		parameterType="java.util.HashMap"
+	>
+		{
+			CALL exploreFeed(
+			    #{page},
+			    #{
+			    	ref_cursor,
+			    	mode=OUT,
+			    	jdbcType=CURSOR,
+			    	javaType=ResultSet,
+			    	resultMap=postMap
+			    }
+			)
+		}
+
+	</select>
+
+</mapper>

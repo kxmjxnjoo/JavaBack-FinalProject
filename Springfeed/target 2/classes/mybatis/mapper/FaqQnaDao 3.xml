@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.springfeed.dao.IFaqQnaDao">
+	
+	<resultMap id="FaqQnaMap" type="java.util.HashMap"></resultMap>	
+	
+	<select id="adminFaqList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL adminFaqList(
+			#{startNum},
+			#{endNum},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		) }
+	</select>
+	
+	<insert id="addFaq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL addFaq(  #{faq_subject}, #{faq_content} ) }
+	</insert>
+	
+	<update id="faqEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL faqEdit( 
+			#{faq_subject}, #{faq_content} 
+		)}
+	</update>
+	
+	<delete id="deleteFaq" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteFaq(  #{faq_num}	) }
+	</delete>
+	
+	<insert id="addQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL addQna( #{status, mode=OUT, jdbcType=INTEGER}, #{userid}, #{subject}, #{content} ) }
+	</insert>
+	
+	<update id="qnaEdit" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL qnaEdit( 
+			#{qna_subject}, #{qna_content}
+		)}
+	</update>
+	
+	<delete id="deleteQna" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL deleteQna(  #{userid}, #{qnanum}, #{status, mode=OUT, jdbcType=INTEGER}	) }
+	</delete>
+	
+	<select id="adminQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL adminQnaList( 
+			#{startNum},
+			#{endNum},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
+	<select id="getQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getQna( 
+			#{qna_num},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+
+	<select id="qnaDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL qnaDetail( 
+			#{qna_num},
+			#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap },
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap2 }
+
+		)  }
+	</select>
+	
+	<select id="faqList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL faqList( 
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
+	<select id="getQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getQnaList( 
+			#{userid},
+			#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap}
+		)  }
+	</select>
+	
+	<select id="getAllQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{  CALL getAllQna( 
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FaqQnaMap},
+			#{userid}
+		)  }
+	</select>
+	
+	<update id="insertReply" statementType="CALLABLE"  parameterType="java.util.HashMap">
+		{CALL insertReply( #{qna_num}, #{qna_content}, #{qna_reply} ) }
+	</update>
+	
+	
+</mapper>
