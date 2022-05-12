@@ -17,7 +17,7 @@ import { MdExplore as ExploreIcon } from "react-icons/md";
 // Resources
 import logo from "../../images/logo.png";
 import defaultProfile from "../../images/tmpUserIcon.png";
-import "./topnav.css";
+import "../../resources/topnav.css";
 
 const Topnav = ({
     page,

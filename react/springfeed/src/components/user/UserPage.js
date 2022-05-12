@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams, Link } from "react-router-dom";
-import Loading from "./Loading";
-import FollowList from "../common/FollowList";
-import PostThumbnail from "../common/PostThumbnail";
+import Loading from "../common/Loading";
+import FollowList from "./FollowList";
+import PostThumbnail from "../post/PostThumbnail";
 
 import { InfiniteScroll } from "react-infinite-scroller";
 
@@ -13,7 +13,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 import { FaUserSlash as NoUserIcon } from "react-icons/fa";
-import Report from "../jsp-components/Report";
+import Report from "../admin/Report";
 
 const UserPage = ({
     setSearchKey,

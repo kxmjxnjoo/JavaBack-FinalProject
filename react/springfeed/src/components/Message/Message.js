@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 
 // Components
-import MessageNotSelected from "./Message/MessageNotSelected";
+import MessageNotSelected from "./MessageNotSelected";
 
 // Bootstrap
 import { Modal } from "react-bootstrap";
-import FollowingList from "./Home/MainFollowingList";
+import MainFollowingList from "../home/MainFollowingList";
 import { useState } from "react";
-import MessageDetail from "./Message/MessageDetail";
-import MessageList from "./Message/MessageList";
+import MessageDetail from "./MessageDetail";
+import MessageList from "./MessageList";
 
 import { BiErrorCircle as ErrorIcon } from "react-icons/bi";
 

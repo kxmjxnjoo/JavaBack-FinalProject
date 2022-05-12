@@ -5,46 +5,38 @@ import {
     useParams,
 } from "react-router-dom";
 import React, { useState, useEffect, useHistory } from "react";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 // Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
 
 // Components
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Topnav from "./components/common/Topnav";
 import Loading from "./components/common/Loading";
-import Search from "./components/Search";
-import Message from "./components/Message";
+import Search from "./components/search/Search";
+import Message from "./components/message/Message";
 import Error from "./components/common/Error";
-import Explore from "./components/Explore";
-import NoLogin from "./components/common/NoLogin";
-import PostDetail from "./components/Home/PostDetail";
-import Noti from "./components/jsp-components/Noti";
-import Login from "./components/jsp-components/Login";
-import Logout from "./components/jsp-components/Logout";
-import Join from "./components/jsp-components/Join";
-import UserEdit from "./components/jsp-components/UserEdit";
-import UploadStory from "./components/jsp-components/UploadStory";
-import UploadPost from "./components/UploadPost";
-import Find from "./components/jsp-components/Find";
-import Admin from "./components/jsp-components/Admin";
-import Report from "./components/jsp-components/Report";
-import StoryNum from "./components/jsp-components/StoryNum";
-import Post from "./components/Home/Post";
-
-// Common
-import "./common.css";
-import UserPage from "./components/common/UserPage";
+import Explore from "./components/explore/Explore";
+import PostDetail from "./components/post/PostDetail";
+import Noti from "./components/noti/Noti";
+import Login from "./components/user/Login";
+import Logout from "./components/user/Logout";
+import Join from "./components/user/Join";
+import UserEdit from "./components/user/UserEdit";
+import UploadStory from "./components/story/UploadStory";
+import UploadPost from "./components/post/UploadPost";
+import Find from "./components/user/Find";
+import Admin from "./components/admin/Admin";
+import Report from "./components/admin/Report";
+import StoryNum from "./components/story/StoryNum";
+import Post from "./components/post/Post";
+import UserPage from "./components/user/UserPage";
 import Footer from "./components/common/Footer";
-import Qna from "./components/jsp-components/Qna";
-import Faq from "./components/jsp-components/Faq";
-import Story from "./components/jsp-components/Story";
-import Select from "./components/Select";
-
-import "./search.css";
+import Qna from "./components/admin/Qna";
+import Faq from "./components/admin/Faq";
+import Story from "./components/story/Story";
+import Select from "./components/post/Select";
 
 function App() {
     const [page, setPage] = useState(0);
@@ -64,6 +56,11 @@ function App() {
 
     const closePostDetail = () => {
         setIsPostDetailOpen(false);
+    };
+
+    const openPostDetail = (postNum) => {
+        setIsPostDetailOpen(true);
+        setSelectedPost(postNum);
     };
 
     useEffect(() => {
@@ -86,15 +83,8 @@ function App() {
                     });
                 }
             })
-            .catch((err) => {
-                toast.error("에러가 났어요! " + err.message);
-            });
+            .catch((err) => {});
     }, []);
-
-    const openPostDetail = (postNum) => {
-        setIsPostDetailOpen(true);
-        setSelectedPost(postNum);
-    };
 
     return (
         <div className="App d-flex flex-column min-vh-100">

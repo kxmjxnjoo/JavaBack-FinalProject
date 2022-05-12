@@ -13,8 +13,6 @@ import {
 import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 
-import "../../common.css";
-
 const Story = () => {
     const { id } = useParams();
 

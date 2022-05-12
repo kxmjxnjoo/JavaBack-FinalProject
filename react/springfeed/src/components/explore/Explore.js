@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Loading from "./common/Loading";
-import Error from "./common/Error";
+import Loading from "../common/Loading";
+import Error from "../common/Error";
 
-import "./explore.css";
+import "../../resources/explore.css";
 
-import PostThumbnail from "./common/PostThumbnail";
+import PostThumbnail from "../post/PostThumbnail";
 
 const Explore = ({
     setPage,

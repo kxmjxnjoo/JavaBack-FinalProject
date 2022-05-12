@@ -4,7 +4,7 @@ import {
     BsChatLeftFill as ReplyIcon,
 } from "react-icons/bs";
 
-import "./postThumbnail.css";
+import "../../resources/postThumbnail.css";
 
 const PostThumbnail = ({
     postNum,

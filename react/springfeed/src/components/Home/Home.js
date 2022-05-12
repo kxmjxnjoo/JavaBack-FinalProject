@@ -4,17 +4,17 @@ import InifniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 
 // Components
-import Post from "./Home/Post";
-import FollowingList from "./Home/MainFollowingList";
-import Loading from "./common/Loading";
-import Error from "./common/Error";
-import NoPost from "./Home/NoPost";
-import StoryList from "./Home/StoryList";
+import Post from "../post/Post";
+import FollowingList from "./MainFollowingList";
+import Loading from "../common/Loading";
+import Error from "../common/Error";
+import NoPost from "../post/NoPost";
+import StoryList from "../story/StoryList";
 
 import toast from "react-hot-toast";
 
 import { Modal } from "react-bootstrap";
-import Report from "./jsp-components/Report";
+import Report from "../admin/Report";
 
 const Home = ({
     user,
