@@ -1,9 +1,10 @@
 # EZEN Java Spring Framework Final Project (Team B)
 
+# 소개
+인스타그램으 참고해 만든 봄 테마의 SNS 서비스입니다.
+
 # 사용된 기술
 - Spring Framework
-  - STOMP (Web Socket)
-  - SocketJS
   - Servlet / JSP
   
 - DB
@@ -18,15 +19,7 @@
   - react-icon
 
   - react-intersection-observer
-  
-  - SOCKET
-    - react-stomp
-    - sockjs-client
  
-  - STATE MANAGEMENT
-    - redux
-    - context api
-
   - axios
   - react-hot-toast
   - react-infinite-scroller
