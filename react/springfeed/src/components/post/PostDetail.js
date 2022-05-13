@@ -65,12 +65,13 @@ const PostDetail = ({ selectedPost }) => {
                                     : "http://picsum.photos/id/100/400/400"
                             }
                             alt=""
-                            style={{ width: "100%", height: "100%" }}
+                            style={{ height: "600px" }}
+                            className="img-fluid"
                         />
                     </div>
 
                     <div className="col-6">
-                        <div className="row " style={{ height: "20%" }}>
+                        <div className="row " style={{}}>
                             <div className="col-2 align-self-center">
                                 <img
                                     src={
@@ -79,7 +80,7 @@ const PostDetail = ({ selectedPost }) => {
                                             : defaultProfile
                                     }
                                     alt=""
-                                    style={{ width: "75px", height: "75px" }}
+                                    style={{ height: "75px" }}
                                     className="rounded-circle"
                                 />
                             </div>
@@ -107,7 +108,7 @@ const PostDetail = ({ selectedPost }) => {
 
                         <div
                             className="row"
-                            style={{ height: "50%", overflow: "scroll" }}
+                            style={{ height: "300px", overflow: "scroll" }}
                         >
                             <div className="col-12">
                                 {replies == null || replies.length == 0 ? (

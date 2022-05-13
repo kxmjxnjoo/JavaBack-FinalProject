@@ -4,7 +4,7 @@ import {
     Route,
     useParams,
 } from "react-router-dom";
-import React, { useState, useEffect, useHistory } from "react";
+import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 // Bootstrap
@@ -48,20 +48,11 @@ function App() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [searchKey, setSearchKey] = useState("");
 
-    const [isPostDetailOpen, setIsPostDetailOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
 
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const [isReportOpen, setIsReportOpen] = useState(false);
-
-    const closePostDetail = () => {
-        setIsPostDetailOpen(false);
-    };
-
-    const openPostDetail = (postNum) => {
-        setIsPostDetailOpen(true);
-        setSelectedPost(postNum);
-    };
+    const [isPostDetailOpen, setIsPostDetailOpen] = useState(false);
 
     useEffect(() => {
         fetch("/api/user/login")
@@ -81,6 +72,13 @@ function App() {
                         success: <b>Success!</b>,
                         error: <b>ERROR!</b>,
                     });
+
+                    toast(
+                        "안녕하세요! Spring Feed를 이용하기 위해 로그인 해 주세요",
+                        {
+                            icon: "👋",
+                        }
+                    );
                 }
             })
             .catch((err) => {});
@@ -100,6 +98,7 @@ function App() {
                     searchKey={searchKey}
                     setSearchKey={setSearchKey}
                     setIsSelectOpen={setIsSelectOpen}
+                    setUser={setUser}
                 />
 
                 {searchKey !== "" ? (
@@ -197,7 +196,6 @@ function App() {
                                     />
                                 }
                             />
-
                             <Route
                                 path="/noti"
                                 element={
@@ -210,7 +208,6 @@ function App() {
                                     )
                                 }
                             />
-
                             <Route
                                 path="/user/page/:id"
                                 element={
@@ -222,10 +219,12 @@ function App() {
                                         setIsPostDetailOpen={
                                             setIsPostDetailOpen
                                         }
-                                        openPostDetail={openPostDetail}
+                                        openPostDetail={(postNum) => {
+                                            setIsPostDetailOpen(true);
+                                            setSelectedPost(postNum);
+                                        }}
                                     />
                                 }
-                                openPostDetail={openPostDetail}
                             />
                             <Route
                                 path="/login"
@@ -243,7 +242,6 @@ function App() {
                                 }
                             />
                             <Route path="/join" element={<Join />} />
-
                             <Route
                                 path="/user/edit"
                                 element={
@@ -256,7 +254,6 @@ function App() {
                             />
                             <Route path="/faq" element={<Faq />} />
                             <Route path="/qna" element={<Qna />} />
-
                             <Route
                                 path="/upload/story"
                                 element={
@@ -273,17 +270,13 @@ function App() {
                                     />
                                 }
                             />
-
                             <Route path="/find/account" element={<Find />} />
-
                             <Route path="/admin" element={<Admin />} />
-
                             <Route path="/story/:id" element={<Story />} />
                             <Route
                                 path="/storynum/:num"
                                 element={<StoryNum />}
                             />
-
                             <Route path="/post/:num" element={<Post />} />
                         </Routes>
                     )}
@@ -293,7 +286,9 @@ function App() {
 
                 <Modal
                     show={isPostDetailOpen}
-                    onHide={closePostDetail}
+                    onHide={() => {
+                        setIsPostDetailOpen(false);
+                    }}
                     dialogClassName="postDetailModal"
                     className="mt-5"
                 >

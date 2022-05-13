@@ -12,6 +12,8 @@ const UserEdit = () => {
     const [phone, setPhone] = useState(null);
     const [introduction, setIntroduction] = useState(null);
 
+    const [image, setImage] = useState(null);
+
     useEffect(() => {
         fetch("/user/edit/form")
             .then((res) => {
@@ -20,6 +22,18 @@ const UserEdit = () => {
             .then((data) => {
                 setUser(data);
             })
+            .then(() => {
+                if (user != null) {
+                    fetch("/images/" + user.img)
+                        .then((res) => {
+                            return res.blob();
+                        })
+                        .then((data) => {
+                            setImage(URL.createObjectURL(data));
+                        });
+                }
+            })
+
             .finally(() => {
                 setIsLoading(false);
             });
@@ -34,7 +48,7 @@ const UserEdit = () => {
                     <div className="row">
                         <div className="col-4">
                             <img
-                                src={"/images/" + user.img}
+                                src={image}
                                 alt=""
                                 className="rounded-circle"
                                 style={{ width: "150px", height: "150px" }}
@@ -50,6 +64,22 @@ const UserEdit = () => {
                     </div>
 
                     <form className="mt-5">
+                        <div className="form-group p-3">
+                            <label>프로필</label>
+                            <input
+                                type="file"
+                                name=""
+                                id=""
+                                accept="image/*"
+                                className="form-control"
+                                onChange={(e) =>
+                                    setImage(
+                                        URL.createObjectURL(e.target.files[0])
+                                    )
+                                }
+                            />
+                        </div>
+
                         <div className="form-group p-3">
                             <label htmlFor="">비밀번호</label>
                             <input

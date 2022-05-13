@@ -30,6 +30,11 @@ const Home = ({
 
     const [isReportOpen, setIsReportOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [isFollowingError, setIsFollowingError] = useState(false);
+
+    const [followingList, setFollowingList] = useState(null);
+    const [postPage, setPostPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const [isDetailMenuOpen, setIsDetailMenuOpen] = useState(false);
     const closeDetailMenu = () => {
@@ -40,27 +45,6 @@ const Home = ({
         setIsPostDetailOpen(true);
         setSelectedPost(post.postNum);
     };
-    useEffect(() => {
-        setPage(0);
-        setIsSelectOpen(false);
-
-        fetch("/api/post/feed")
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setPosts(data);
-            })
-            .catch((err) => {
-                toast.error("에러가 났아요 : " + err);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }, []);
-
-    const [postPage, setPostPage] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
 
     const loadFeed = () => {
         setPostPage(postPage + 1);
@@ -82,56 +66,104 @@ const Home = ({
             });
     };
 
+    useEffect(() => {
+        setPage(0);
+        setIsSelectOpen(false);
+
+        Promise.all([
+            fetch("/api/post/feed")
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    setPosts(data);
+                })
+                .catch((err) => {
+                    toast.error("에러가 났아요 : " + err);
+                }),
+            fetch("/api/user/following?id=" + user.userid)
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    setFollowingList(
+                        data.filter((u) => {
+                            return !(u.userid === user.userid);
+                        })
+                    );
+                })
+                .catch((err) => {
+                    setIsFollowingError(true);
+                }),
+        ]).finally(() => {
+            setIsLoading(false);
+        });
+    }, []);
+
     return (
         <div className="container row">
-            <div className="col-12 col-md-9">
-                <div>
-                    <StoryList loginUser={user} />
-                </div>
+            {isLoading ? (
+                <Loading message="메인 화면을 불러오고 있어요" />
+            ) : isPostFeedError ? (
+                <Error errorMessage={errorMessage} />
+            ) : (
+                <>
+                    <div className="col-12 col-md-9">
+                        <div>
+                            <StoryList user={user} />
+                        </div>
 
-                <div>
-                    {isLoading ? (
-                        <Loading message="포스트를 불러오고 있어요" />
-                    ) : isPostFeedError ? (
-                        <Error errorMessage={errorMessage} />
-                    ) : posts != null || posts.length == 0 ? (
-                        <InifniteScroll
-                            pageStart={postPage}
-                            loadMore={loadFeed}
-                            hasMore={posts.length < 10 ? false : hasMore}
-                            loader={
-                                <Loading
-                                    message="포스트를 더 불러오고 있어요"
-                                    className="mb-5 mt-5"
-                                />
-                            }
-                        >
-                            {posts.map((post) => {
-                                return (
-                                    <Post
-                                        post={post}
-                                        openPostDetail={openPostDetail}
-                                        setIsDetailMenuOpen={
-                                            setIsDetailMenuOpen
-                                        }
-                                        setSelectedPost={setSelectedPost}
-                                        setSelectedUser={setSelectedUser}
-                                    />
-                                );
-                            })}
-                        </InifniteScroll>
-                    ) : (
-                        <NoPost />
-                    )}
-                </div>
-            </div>
+                        <div>
+                            {posts != null || posts.length == 0 ? (
+                                <InifniteScroll
+                                    pageStart={postPage}
+                                    loadMore={loadFeed}
+                                    hasMore={
+                                        posts.length < 10 ? false : hasMore
+                                    }
+                                    loader={
+                                        <Loading
+                                            message="포스트를 더 불러오고 있어요"
+                                            className="mb-5 mt-5"
+                                        />
+                                    }
+                                >
+                                    {posts.map((post) => {
+                                        return (
+                                            <Post
+                                                post={post}
+                                                openPostDetail={openPostDetail}
+                                                setIsDetailMenuOpen={
+                                                    setIsDetailMenuOpen
+                                                }
+                                                setSelectedPost={
+                                                    setSelectedPost
+                                                }
+                                                setSelectedUser={
+                                                    setSelectedUser
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </InifniteScroll>
+                            ) : (
+                                <NoPost />
+                            )}
+                        </div>
+                    </div>
 
-            <div
-                className="col-3 col-md-0 d-none d-md-block"
-                style={{ position: "fixed", left: "70%" }}
-            >
-                <FollowingList user={user} loginUser={user} />
-            </div>
+                    <div
+                        className="col-3 col-md-0 d-none d-md-block"
+                        style={{ position: "fixed", left: "70%" }}
+                    >
+                        <FollowingList
+                            user={user}
+                            followingList={followingList}
+                            isFollowingError={isFollowingError}
+                        />
+                    </div>
+                </>
+            )}
 
             <Modal
                 show={isDetailMenuOpen}

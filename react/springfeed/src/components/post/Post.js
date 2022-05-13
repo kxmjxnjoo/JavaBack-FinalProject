@@ -158,7 +158,7 @@ const Post = ({
                     </div>
 
                     <DetailIcon
-                        className="col-2 mt-2"
+                        className="col-2 mt-2 hoverEffect"
                         style={iconStyle}
                         onClick={() => {
                             setIsDetailMenuOpen(true);
@@ -257,14 +257,15 @@ const Post = ({
                                             })
                                             .then((data) => {
                                                 if (data == 1) {
-                                                    noti.success(
+                                                    toast.success(
                                                         "댓글을 추가했어요",
                                                         {
                                                             id: noti,
                                                         }
                                                     );
+                                                    setReply("");
                                                 } else {
-                                                    noti.error(
+                                                    toast.error(
                                                         "댓글을 추가하지 못했어요. 다시 시도해 주세요",
                                                         {
                                                             id: noti,
@@ -272,14 +273,7 @@ const Post = ({
                                                     );
                                                 }
                                             })
-                                            .finally(() => {
-                                                noti.success(
-                                                    "댓글을 추가했어요",
-                                                    {
-                                                        id: noti,
-                                                    }
-                                                );
-                                            });
+                                            .finally(() => {});
                                     }
                                 }}
                             />

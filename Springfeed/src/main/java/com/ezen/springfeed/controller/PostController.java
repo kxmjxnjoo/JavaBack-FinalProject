@@ -111,7 +111,7 @@ public class PostController {
 		returnMap.put("userid", result.get(0).get("USERID"));
 		returnMap.put("address", result.get(0).get("ADDRESS"));
 		returnMap.put("post_img", result.get(0).get("POST_IMG"));
-		returnMap.put("likeCount", 0);
+		returnMap.put("likeCount", result.get(0).get("LIKECOUNT"));
 		returnMap.put("isLiked", 0);
 		returnMap.put("isSaved", 0);
 		returnMap.put("content", result.get(0).get("CONTENT"));

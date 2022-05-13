@@ -12,7 +12,7 @@ import {
 // Resources
 import defaultUserIcon from "../../images/tmpUserIcon.png";
 
-const StoryList = ({ loginUser }) => {
+const StoryList = ({ user }) => {
     const [storyList, setStoryList] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -31,10 +31,7 @@ const StoryList = ({ loginUser }) => {
     }, []);
 
     return (
-        <div
-            className="mb-3 border"
-            style={{ height: "130px", overflowY: "hidden" }}
-        >
+        <div className="mb-3 border" style={{ height: "130px" }}>
             {isLoading ? (
                 <Loading message="스토리를 불러오고 있어요" />
             ) : (
@@ -42,9 +39,7 @@ const StoryList = ({ loginUser }) => {
                     {storyList != null && storyList.length != 0 ? (
                         <div className="row ms-md-5 ms-0 mt-3">
                             {storyList
-                                .filter(
-                                    (data) => data.userid != loginUser.userid
-                                )
+                                .filter((data) => data.userid != user.userid)
                                 .map((user, index) => {
                                     return index < 5 ? (
                                         <div className="col-3 col-md-2">

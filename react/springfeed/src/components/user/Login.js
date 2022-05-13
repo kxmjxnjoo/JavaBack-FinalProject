@@ -17,14 +17,6 @@ const Login = ({
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            toast("안녕하세요! Spring Feed를 이용하기 위해 로그인 해 주세요", {
-                icon: "👋",
-            });
-        }
-    }, []);
-
     return (
         <div className="row">
             <div className="col-md-3"></div>

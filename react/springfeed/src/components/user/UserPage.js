@@ -45,6 +45,9 @@ const UserPage = ({
     const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
     const [followingListIndex, setFollowingListIndex] = useState(0);
     const [hasFollowingMore, setHasFollowingMore] = useState(true);
+    const [followerList, setFollowerList] = useState(null);
+    const [isFollowerListOpen, setIsFollowerListOpen] = useState(false);
+    const [isUserExist, setIsUserExist] = useState(true);
 
     const loadFollowingList = () => {
         setFollowingListIndex(followingListIndex + 1);
@@ -65,10 +68,6 @@ const UserPage = ({
                 toast.err("팔로잉 목록을 불러올 수 없어요");
             });
     };
-
-    const [followerList, setFollowerList] = useState(null);
-    const [isFollowerListOpen, setIsFollowerListOpen] = useState(false);
-
     const openFollowingList = () => {
         // Fetch Following List
         fetch("/api/user/following?id=" + id)
@@ -121,8 +120,6 @@ const UserPage = ({
     const closeFollowerList = () => {
         setIsFollowerListOpen(false);
     };
-
-    const [isUserExist, setIsUserExist] = useState(true);
 
     useEffect(() => {
         setSearchKey("");
@@ -196,8 +193,6 @@ const UserPage = ({
                 });
         }
     }, [isPostSelected]);
-
-    // Get saved post only when requested
 
     const handleFollow = () => {
         // POST follow

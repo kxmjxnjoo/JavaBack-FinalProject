@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Bootstrap
 import { Overlay, Modal, Navbar, Dropdown } from "react-bootstrap";
@@ -26,6 +26,7 @@ const Topnav = ({
     searchKey,
     setSearchKey,
     setIsSelectOpen,
+    setUser,
 }) => {
     const logoStyle = {
         width: "30px",
@@ -68,6 +69,21 @@ const Topnav = ({
                 });
         }
     }, []);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        fetch("/api/user/login")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                setUser(data);
+            })
+            .catch((err) => {
+                return err;
+            });
+    }, [location]);
 
     return (
         <Navbar
