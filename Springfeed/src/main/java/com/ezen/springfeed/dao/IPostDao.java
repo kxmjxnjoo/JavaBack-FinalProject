@@ -20,4 +20,5 @@ public interface IPostDao {
     void getReply(HashMap<String, Object> paramMap);
     void addReply(HashMap<String, Object> paramMap);
     void deleteSavePost(HashMap<String, Object> paramMap);
+    void deleteLike(HashMap<String, Object> paramMap);
 }

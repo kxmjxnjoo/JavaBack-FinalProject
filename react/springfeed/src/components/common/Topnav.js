@@ -1,8 +1,9 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { _ } from "lodash";
 
 // Bootstrap
-import { Overlay, Modal, Navbar, Dropdown } from "react-bootstrap";
+import { Navbar, Dropdown } from "react-bootstrap";
 
 // Icons
 import {
@@ -18,16 +19,19 @@ import { MdExplore as ExploreIcon } from "react-icons/md";
 import logo from "../../images/logo.png";
 import defaultProfile from "../../images/tmpUserIcon.png";
 import "../../resources/topnav.css";
+import toast from "react-hot-toast";
 
 const Topnav = ({
     page,
     isLoggedIn,
     user,
-    searchKey,
     setSearchKey,
     setIsSelectOpen,
     setUser,
+    setIsLoggedIn,
 }) => {
+    const [notiCount, setNotiCount] = useState(0);
+
     const logoStyle = {
         width: "30px",
         filter: "opacity(0.5) drop-shadow(0 0 0 blue)",
@@ -54,10 +58,6 @@ const Topnav = ({
         setIsShowSelect(false);
     };
 
-    const ref = useRef(null);
-
-    const [notiCount, setNotiCount] = useState(0);
-
     useEffect(() => {
         if (user != null) {
             fetch("/api/noti/count?userid=" + user.userid)
@@ -73,12 +73,29 @@ const Topnav = ({
     const location = useLocation();
 
     useEffect(() => {
+        setIsSelectOpen(false);
+
         fetch("/api/user/login")
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
-                setUser(data);
+                if (data.length == 0) {
+                    setUser({});
+
+                    setIsLoggedIn(false);
+                    toast(
+                        "안녕하세요! Spring Feed를 이용하기 위해 로그인 해 주세요",
+                        {
+                            icon: "👋",
+                        }
+                    );
+                } else {
+                    setUser(data[0]);
+
+                    setIsLoggedIn(true);
+                    toast.success("안녕하세요 " + data.name + "님!");
+                }
             })
             .catch((err) => {
                 return err;

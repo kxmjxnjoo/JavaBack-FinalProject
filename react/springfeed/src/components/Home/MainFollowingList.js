@@ -40,16 +40,6 @@ const MainFollowingList = ({ user, followingList, isFollowingError }) => {
     //     }
     // };
 
-    const imageStyle = {
-        width: "100px",
-        height: "100px",
-    };
-
-    const imageUserStyle = {
-        width: "75px",
-        height: "75px",
-    };
-
     return (
         <div>
             <div>
@@ -69,7 +59,7 @@ const MainFollowingList = ({ user, followingList, isFollowingError }) => {
                                             : "/images/" + user.img
                                     }
                                     alt=""
-                                    style={imageStyle}
+                                    style={{ width: "100px", height: "100px" }}
                                     className="rounded-circle"
                                 />
                             </div>
@@ -105,7 +95,10 @@ const MainFollowingList = ({ user, followingList, isFollowingError }) => {
                                                     : "/images/" + data.img
                                             }
                                             alt=""
-                                            style={imageUserStyle}
+                                            style={{
+                                                width: "75px",
+                                                height: "75px",
+                                            }}
                                             className="rounded-circle"
                                         />
                                     </div>
@@ -123,7 +116,7 @@ const MainFollowingList = ({ user, followingList, isFollowingError }) => {
                 ) : (
                     <Loading message="로딩중" />
                 )}
-                {followingList.length < 5 ? (
+                {followingList == null || followingList.length < 5 ? (
                     <div className="text-muted mt-3"></div>
                 ) : (
                     <div className="btn btn-success w-100 mt-3">더 보기</div>

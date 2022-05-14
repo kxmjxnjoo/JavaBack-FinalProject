@@ -1,11 +1,7 @@
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { _ } from "lodash";
 
 // Bootstrap
 import { Modal } from "react-bootstrap";
@@ -41,7 +37,7 @@ import Select from "./components/post/Select";
 function App() {
     const [page, setPage] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
+    const [loginUser, setLoginUser] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -54,36 +50,6 @@ function App() {
     const [isReportOpen, setIsReportOpen] = useState(false);
     const [isPostDetailOpen, setIsPostDetailOpen] = useState(false);
 
-    useEffect(() => {
-        fetch("/api/user/login")
-            .then((res) => {
-                return res.json();
-            })
-            .then((result) => {
-                setUser(result);
-
-                if (result !== "" || result == null) {
-                    setIsLoggedIn(true);
-                    toast.success("안녕하세요 " + result.name + "님!");
-                } else {
-                    setIsLoggedIn(false);
-                    toast.promise({
-                        loading: "loading...",
-                        success: <b>Success!</b>,
-                        error: <b>ERROR!</b>,
-                    });
-
-                    toast(
-                        "안녕하세요! Spring Feed를 이용하기 위해 로그인 해 주세요",
-                        {
-                            icon: "👋",
-                        }
-                    );
-                }
-            })
-            .catch((err) => {});
-    }, []);
-
     return (
         <div className="App d-flex flex-column min-vh-100">
             <Router>
@@ -94,14 +60,15 @@ function App() {
                 <Topnav
                     page={page}
                     isLoggedIn={isLoggedIn}
-                    user={user}
+                    user={loginUser}
                     searchKey={searchKey}
                     setSearchKey={setSearchKey}
                     setIsSelectOpen={setIsSelectOpen}
-                    setUser={setUser}
+                    setUser={setLoginUser}
+                    setIsLoggedIn={setIsLoggedIn}
                 />
 
-                {searchKey !== "" ? (
+                {searchKey !== "" && (
                     <div
                         className="card w-50 ms-5 mt-md-5 mt-6 overflow-auto shadow-lg"
                         style={{
@@ -125,8 +92,6 @@ function App() {
                             />
                         </div>
                     </div>
-                ) : (
-                    <></>
                 )}
 
                 <div className="container min-vh-100">
@@ -134,53 +99,38 @@ function App() {
                         <Loading message="로딩중이에요" />
                     ) : isError ? (
                         <Error errorMessage={errorMessage} />
+                    ) : !isLoggedIn ? (
+                        <Login
+                            setIsLoggedIn={setIsLoggedIn}
+                            user={loginUser}
+                            setUser={setLoginUser}
+                            setPage={setPage}
+                            setSelectedPost={setSelectedPost}
+                            setIsPostDetailOpen={setIsPostDetailOpen}
+                        />
                     ) : (
                         <Routes>
                             <Route
                                 path="/"
                                 element={
-                                    !isLoggedIn ? (
-                                        <Login
-                                            isLoggedIn={isLoggedIn}
-                                            setIsLoggedIn={setIsLoggedIn}
-                                        />
-                                    ) : (
-                                        <Home
-                                            user={user}
-                                            setPage={setPage}
-                                            setSelectedPost={setSelectedPost}
-                                            setIsPostDetailOpen={
-                                                setIsPostDetailOpen
-                                            }
-                                            setIsSelectOpen={setIsSelectOpen}
-                                        />
-                                    )
+                                    <Home
+                                        loginUser={loginUser}
+                                        setPage={setPage}
+                                        setSelectedPost={setSelectedPost}
+                                        setIsPostDetailOpen={
+                                            setIsPostDetailOpen
+                                        }
+                                    />
                                 }
                             />
                             <Route path="/search" element={<Search />} />
                             <Route
                                 path="/message"
                                 element={
-                                    !isLoggedIn ? (
-                                        <Login
-                                            isLoggedIn={isLoggedIn}
-                                            setIsLoggedIn={setIsLoggedIn}
-                                            user={user}
-                                            setUser={setUser}
-                                            setPage={setPage}
-                                            setSelectedPost={setSelectedPost}
-                                            setIsPostDetailOpen={
-                                                setIsPostDetailOpen
-                                            }
-                                            setIsSelectOpen={setIsSelectOpen}
-                                        />
-                                    ) : (
-                                        <Message
-                                            setPage={setPage}
-                                            user={user}
-                                            setIsSelectOpen={setIsSelectOpen}
-                                        />
-                                    )
+                                    <Message
+                                        setPage={setPage}
+                                        user={loginUser}
+                                    />
                                 }
                             />
                             <Route
@@ -192,30 +142,17 @@ function App() {
                                             setIsPostDetailOpen
                                         }
                                         setSelectedPost={setSelectedPost}
-                                        setIsSelectOpen={setIsSelectOpen}
                                     />
                                 }
                             />
-                            <Route
-                                path="/noti"
-                                element={
-                                    !isLoggedIn ? (
-                                        <Login isLoggedIn={isLoggedIn} />
-                                    ) : (
-                                        <Noti
-                                            setIsSelectOpen={setIsSelectOpen}
-                                        />
-                                    )
-                                }
-                            />
+                            <Route path="/noti" element={<Noti />} />
                             <Route
                                 path="/user/page/:id"
                                 element={
                                     <UserPage
                                         setSearchKey={setSearchKey}
-                                        setIsSelectOpen={setIsSelectOpen}
                                         isLoggedIn={isLoggedIn}
-                                        loginUser={user}
+                                        loginUser={loginUser}
                                         setIsPostDetailOpen={
                                             setIsPostDetailOpen
                                         }
@@ -256,19 +193,11 @@ function App() {
                             <Route path="/qna" element={<Qna />} />
                             <Route
                                 path="/upload/story"
-                                element={
-                                    <UploadStory
-                                        setIsSelectOpen={setIsSelectOpen}
-                                    />
-                                }
+                                element={<UploadStory />}
                             />
                             <Route
                                 path="/upload/post"
-                                element={
-                                    <UploadPost
-                                        setIsSelectOpen={setIsSelectOpen}
-                                    />
-                                }
+                                element={<UploadPost />}
                             />
                             <Route path="/find/account" element={<Find />} />
                             <Route path="/admin" element={<Admin />} />

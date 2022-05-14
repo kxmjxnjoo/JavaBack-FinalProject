@@ -16,13 +16,7 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import Report from "../admin/Report";
 
-const Home = ({
-    user,
-    setPage,
-    setIsPostDetailOpen,
-    setSelectedPost,
-    setIsSelectOpen,
-}) => {
+const Home = ({ loginUser, setPage, setIsPostDetailOpen, setSelectedPost }) => {
     const [posts, setPosts] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isPostFeedError, setIsPostFeedError] = useState(false);
@@ -68,7 +62,6 @@ const Home = ({
 
     useEffect(() => {
         setPage(0);
-        setIsSelectOpen(false);
 
         Promise.all([
             fetch("/api/post/feed")
@@ -81,14 +74,14 @@ const Home = ({
                 .catch((err) => {
                     toast.error("에러가 났아요 : " + err);
                 }),
-            fetch("/api/user/following?id=" + user.userid)
+            fetch("/api/user/following?id=" + loginUser.userid)
                 .then((res) => {
                     return res.json();
                 })
                 .then((data) => {
                     setFollowingList(
                         data.filter((u) => {
-                            return !(u.userid === user.userid);
+                            return !(u.userid === loginUser.userid);
                         })
                     );
                 })
@@ -110,7 +103,7 @@ const Home = ({
                 <>
                     <div className="col-12 col-md-9">
                         <div>
-                            <StoryList user={user} />
+                            <StoryList user={loginUser} />
                         </div>
 
                         <div>
@@ -157,7 +150,7 @@ const Home = ({
                         style={{ position: "fixed", left: "70%" }}
                     >
                         <FollowingList
-                            user={user}
+                            user={loginUser}
                             followingList={followingList}
                             isFollowingError={isFollowingError}
                         />

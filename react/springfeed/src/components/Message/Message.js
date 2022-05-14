@@ -12,10 +12,9 @@ import MessageList from "./MessageList";
 
 import { BiErrorCircle as ErrorIcon } from "react-icons/bi";
 
-const Message = ({ setPage, user, setIsSelectOpen }) => {
+const Message = ({ setPage, user }) => {
     useEffect(() => {
         setPage(1);
-        setIsSelectOpen(false);
     }, []);
 
     const [isShowingFollowingList, setIsShowingFollowingList] = useState(false);

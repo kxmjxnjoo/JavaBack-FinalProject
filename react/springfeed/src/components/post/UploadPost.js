@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const UploadPost = ({ setIsSelectOpen }) => {
-    useEffect(() => {
-        setIsSelectOpen(false);
-    }, []);
-
+const UploadPost = () => {
     const [image, setImage] = useState(null);
 
     return (

@@ -7,12 +7,7 @@ import "../../resources/explore.css";
 
 import PostThumbnail from "../post/PostThumbnail";
 
-const Explore = ({
-    setPage,
-    setIsPostDetailOpen,
-    setSelectedPost,
-    setIsSelectOpen,
-}) => {
+const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -20,7 +15,6 @@ const Explore = ({
 
     useEffect(() => {
         setPage(3);
-        setIsSelectOpen(false);
 
         fetch("/api/explore/feed")
             .then((res) => {

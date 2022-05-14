@@ -18,6 +18,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
 public class ReactController {
@@ -103,21 +106,23 @@ public class ReactController {
 
     // Get loginUser
     @RequestMapping(value="/api/user/login", produces="application/json")
-    public MemberDto getLoginUser(HttpServletRequest request) {
+    public ArrayList<HashMap<String, Object>> getLoginUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         HashMap<String, Object> mdtoHash = (HashMap<String, Object>) session.getAttribute("loginUser");
+        ArrayList<HashMap<String, Object>> returnArray = new ArrayList<>();
+
 
         if(mdtoHash != null) {
-            MemberDto mdto = new MemberDto();
-            mdto.setUserid((String) mdtoHash.get("USERID"));
-            mdto.setEmail((String) mdtoHash.get("EMAIL"));
-            mdto.setImg((String) mdtoHash.get("IMG"));
-            mdto.setIntroduce((String) mdtoHash.get("INTRODUCE"));
-            mdto.setName((String) mdtoHash.get("NAME"));
-            mdto.setPhone((String) mdtoHash.get("PHONE"));
-            return mdto;
+            HashMap<String, Object> result = new HashMap<>();
+
+            result.put("userid", mdtoHash.get("USERID"));
+            result.put("name", mdtoHash.get("NAME"));
+            result.put("img", mdtoHash.get("IMG"));
+
+            returnArray.add(result);
         }
-        return null;
+        
+        return returnArray;
     }
 
     // Get loginUser from Session
@@ -338,18 +343,34 @@ public class ReactController {
     // -1 : fail
     // 0 : unlike
     // 1 : like
-    @RequestMapping(value="/api/post/like", produces = "application/json")
-    public int likePost(@RequestParam(value="num") int postNum) {
+    @RequestMapping(value="/api/post/like/insert", produces = "application/json", method=POST)
+    public HashMap<String, Object> likePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("postNum", postNum);
+        paramMap.put("userid", getLoginUserid(request));
+        paramMap.put("postNum", postNum.get("postNum"));
         paramMap.put("ref_cursor", null);
 
         ps.insertLike(paramMap);
 
         // Get result
         HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("ref_cursor");
-        return (int) result.get("result");
+        return result;
+    }
+
+    @RequestMapping(value="/api/post/like/delete", produces="application/json", method=DELETE)
+    public HashMap<String, Object> deletePostLike(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
+        // paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", getLoginUserid(request));
+        paramMap.put("postnum", postNum.get("postNum"));
+
+        ps.deleteLike(paramMap);
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("result", 1);
+
+        return result;
     }
 
     // Get Main Storylist
@@ -402,7 +423,7 @@ public class ReactController {
     }
 
     // Insert save post
-    @RequestMapping(value="/api/post/save/insert", produces="application/json", method=RequestMethod.POST)
+    @RequestMapping(value="/api/post/save/insert", produces="application/json", method= POST)
     public ArrayList<Integer> insertSavePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
@@ -418,7 +439,7 @@ public class ReactController {
         return result;
     }
 
-    @RequestMapping(value="/api/post/save/delete", produces="application/json", method=RequestMethod.POST)
+    @RequestMapping(value="/api/post/save/delete", produces="application/json", method= POST)
     public HashMap<String, Object> deleteSavePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // paramMap
         HashMap<String, Object> paramMap = new HashMap<>();

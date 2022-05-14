@@ -3,14 +3,12 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({
-    isLoggedIn,
     setIsLoggedIn,
     user,
     setUser,
     setPage,
     setSelectedPost,
     setIsPostDetailOpen,
-    setIsSelectOpen,
 }) => {
     const [id, setId] = useState(null);
     const [pw, setPw] = useState(null);
@@ -106,8 +104,6 @@ const Login = ({
                                                                 setSelectedPost,
                                                             setIsPostDetailOpen:
                                                                 setIsPostDetailOpen,
-                                                            setIsSelectOpen:
-                                                                setIsSelectOpen,
                                                         },
                                                     }
                                                 );

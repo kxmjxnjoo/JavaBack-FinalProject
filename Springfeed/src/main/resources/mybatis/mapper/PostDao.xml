@@ -134,7 +134,9 @@
 	>
 		{
 			CALL insertLike(
-			    #{postNum}
+			    #{userid},
+			    #{postNum},
+			    #{result, mode=OUT, jdbcType=INTEGER}
 			)
 		}
 
@@ -158,6 +160,19 @@
 			>
 		{
 			CALL deleteSavePost(
+			    #{userid},
+			    #{postnum},
+			    #{result, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</delete>
+
+	<delete id="deleteLike"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL deleteLike(
 			    #{userid},
 			    #{postnum},
 			    #{result, mode=OUT, jdbcType=INTEGER}

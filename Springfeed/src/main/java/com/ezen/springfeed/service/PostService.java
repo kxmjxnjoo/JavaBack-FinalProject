@@ -75,4 +75,8 @@ public class PostService {
     public void deleteSavePost(HashMap<String, Object> paramMap) {
         pdao.deleteSavePost(paramMap);
     }
+
+    public void deleteLike(HashMap<String, Object> paramMap) {
+        pdao.deleteLike(paramMap);
+    }
 }

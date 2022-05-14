@@ -17,7 +17,6 @@ import Report from "../admin/Report";
 
 const UserPage = ({
     setSearchKey,
-    setIsSelectOpen,
     loginUser,
     openPostDetail,
     setIsPostDetailOpen,
@@ -123,7 +122,6 @@ const UserPage = ({
 
     useEffect(() => {
         setSearchKey("");
-        setIsSelectOpen(false);
         setIsPostDetailOpen(false);
 
         // Get user introduction, isFollowing, profile image

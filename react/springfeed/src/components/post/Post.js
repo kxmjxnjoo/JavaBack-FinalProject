@@ -51,37 +51,77 @@ const Post = ({
     const [isSavedData, setIsSavedData] = useState(isSaved);
 
     const handleLike = () => {
-        const postLike = fetch("/api/post/like?num=" + postNum)
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setIsLikedData(!isLikedData);
-            })
-            .catch((err) => {
-                return err;
-            });
-
         if (!isLikedData) {
-            toast.promise(postLike, {
-                loading: "잠시만 기다려 주세요...",
-                success: userid + "님의 포스트를 좋아요 했어요",
-                error: "좋아요 하는데 에러가 났어요 다시 시도해 주세요",
-            });
-        } else {
-            toast.promise(postLike, {
-                loading: "잠시만 기다려 주세요...",
-                success: userid + "님의 포스트의 좋아요를 취소했어요",
-                error: "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요",
-            });
-        }
-    };
+            let noti = toast.loading("잠시만 기다려 주세요...");
 
-    const handleSave = () => {
-        if (isSaved) {
-            unSavePost(postNum);
+            fetch("/api/post/like/insert", {
+                method: "POST",
+                header: {
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                contentType: false,
+                processData: false,
+                body: JSON.stringify({
+                    postNum: postNum,
+                }),
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    if (data.result == 1) {
+                        toast.success(userid + "님의 포스트를 좋아요 했어요", {
+                            id: noti,
+                        });
+                        setIsLikedData(!isLikedData);
+                    } else {
+                        toast.error(
+                            "좋아요 하는데 에러가 났어요 다시 시도해 주세요",
+                            {
+                                id: noti,
+                            }
+                        );
+                    }
+                })
+                .catch((err) => {
+                    return err;
+                });
         } else {
-            savePost(postNum);
+            let noti = toast.loading("잠시만 기다려 주세요...");
+
+            fetch("/api/post/like/delete", {
+                method: "DELETE",
+                header: {
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                body: JSON.stringify({
+                    postNum: postNum,
+                }),
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    if (data.result == 1) {
+                        toast.success(
+                            userid + "님의 포스트의 좋아요를 취소했어요",
+                            {
+                                id: noti,
+                            }
+                        );
+                        setIsLikedData(!isLikedData);
+                    } else {
+                        toast.error(
+                            "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요",
+                            {
+                                id: noti,
+                            }
+                        );
+                    }
+                })
+                .catch((err) => {
+                    return err;
+                });
         }
     };
 
