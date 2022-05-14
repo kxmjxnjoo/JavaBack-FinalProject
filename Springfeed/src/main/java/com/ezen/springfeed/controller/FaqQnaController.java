@@ -194,9 +194,7 @@ public class FaqQnaController {
 		resultMap.put("status", status);
 		return resultMap;
 	}
-	
-	
-	
+
 	@RequestMapping(value="/qna/delete", produces = "application/json")
 	public Map<String, Object> deleteQna(@RequestParam("qna_num") int qna_num, HttpServletRequest request) {
 		
@@ -229,8 +227,7 @@ public class FaqQnaController {
 		resultMap.put("status", status);
 		return resultMap;
 	}
-	
-	
+
 	@RequestMapping(value="/faq", produces="application/json")
 	public Map<String, Object> faqList() {
 		

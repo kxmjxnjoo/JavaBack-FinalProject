@@ -409,14 +409,26 @@ public class ReactController {
         paramMap.put("userid", getLoginUserid(request));
         paramMap.put("postnum", postNum.get("postNum"));
 
-        System.out.println("userid: " + getLoginUserid(request));
-        System.out.println("postnum: " + postNum.get("postNum"));
-
         ps.insertSavePost(paramMap);
 
         ArrayList<Integer> result = new ArrayList<>();
-//        result.add(Integer.parseInt(String.valueOf(paramMap.get("RESULT"))));
+
         result.add(1);
+
+        return result;
+    }
+
+    @RequestMapping(value="/api/post/save/delete", produces="application/json", method=RequestMethod.POST)
+    public HashMap<String, Object> deleteSavePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
+        // paramMap
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userid", getLoginUserid((request)));
+        paramMap.put("postnum", postNum.get("postNum") );
+
+        ps.deleteSavePost(paramMap);
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("result", 1);
 
         return result;
     }

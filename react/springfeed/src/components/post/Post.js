@@ -80,13 +80,12 @@ const Post = ({
     const handleSave = () => {
         if (isSaved) {
             unSavePost(postNum);
-        }
-        {
+        } else {
             savePost(postNum);
         }
     };
 
-    const savePost = (postnum) => {
+    const savePost = () => {
         fetch("/api/post/save/insert", {
             method: "POST",
             headers: {
@@ -105,17 +104,29 @@ const Post = ({
         });
     };
 
-    const unSavePost = (postnum) => {
-        fetch("/api/post/save/delete?num=" + postnum).then((res) => {
-            if (res.text() == 0) {
-                toast.error(
-                    "저장한 포스트를 지우지 못 했어요. 다시 시도해 주세요"
-                );
-            } else {
-                toast.success("포스트를 저장 목록에서 지웠어요");
-                setIsSavedData(false);
-            }
-        });
+    const unSavePost = () => {
+        fetch("/api/post/save/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify({
+                postNum: postNum,
+            }),
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                if (data.result == 0) {
+                    toast.error(
+                        "저장한 포스트를 지우지 못 했어요. 다시 시도해 주세요"
+                    );
+                } else {
+                    toast.success("포스트를 저장 목록에서 지웠어요");
+                    setIsSavedData(false);
+                }
+            });
     };
 
     return (
@@ -202,9 +213,9 @@ const Post = ({
                     </div>
                     <div className="col-1">
                         {isSavedData ? (
-                            <SaveFillIcon onClick={handleSave} />
+                            <SaveFillIcon onClick={unSavePost} />
                         ) : (
-                            <SaveIcon onClick={handleSave} />
+                            <SaveIcon onClick={savePost} />
                         )}
                     </div>
                 </div>

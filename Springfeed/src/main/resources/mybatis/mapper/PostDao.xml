@@ -152,6 +152,19 @@
 		}
 	</insert>
 
+	<delete id="deleteSavePost"
+			statementType="CALLABLE"
+			parameterType="java.util.HashMap"
+			>
+		{
+			CALL deleteSavePost(
+			    #{userid},
+			    #{postnum},
+			    #{result, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</delete>
+
 	<select id="getSavePost" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL getSavePost(

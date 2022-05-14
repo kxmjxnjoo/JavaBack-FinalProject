@@ -19,4 +19,5 @@ public interface IPostDao {
     void getPostDetail(HashMap<String, Object> paramMap);
     void getReply(HashMap<String, Object> paramMap);
     void addReply(HashMap<String, Object> paramMap);
+    void deleteSavePost(HashMap<String, Object> paramMap);
 }

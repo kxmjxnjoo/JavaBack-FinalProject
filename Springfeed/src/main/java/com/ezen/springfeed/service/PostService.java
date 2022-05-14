@@ -71,4 +71,8 @@ public class PostService {
     public void addReply(HashMap<String, Object> paramMap) {
         pdao.addReply(paramMap);
     }
+
+    public void deleteSavePost(HashMap<String, Object> paramMap) {
+        pdao.deleteSavePost(paramMap);
+    }
 }
