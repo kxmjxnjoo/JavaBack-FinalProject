@@ -16,6 +16,8 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import Report from "../admin/Report";
 
+import server from "../common/server";
+
 const Home = ({ loginUser, setPage, setIsPostDetailOpen, setSelectedPost }) => {
     const [posts, setPosts] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +44,7 @@ const Home = ({ loginUser, setPage, setIsPostDetailOpen, setSelectedPost }) => {
 
     const loadFeed = () => {
         setPostPage(postPage + 1);
-        fetch("/api/post/feed?page=" + postPage)
+        fetch(server + "/api/post/feed?page=" + postPage)
             .then((res) => {
                 return res.json();
             })
@@ -64,7 +66,7 @@ const Home = ({ loginUser, setPage, setIsPostDetailOpen, setSelectedPost }) => {
         setPage(0);
 
         Promise.all([
-            fetch("/api/post/feed")
+            fetch(server + "/api/post/feed")
                 .then((res) => {
                     return res.json();
                 })
@@ -74,7 +76,7 @@ const Home = ({ loginUser, setPage, setIsPostDetailOpen, setSelectedPost }) => {
                 .catch((err) => {
                     toast.error("에러가 났아요 : " + err);
                 }),
-            fetch("/api/user/following?id=" + loginUser.userid)
+            fetch(server + "/api/user/following?id=" + loginUser.userid)
                 .then((res) => {
                     return res.json();
                 })

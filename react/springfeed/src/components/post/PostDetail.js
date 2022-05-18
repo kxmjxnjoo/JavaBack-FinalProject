@@ -16,6 +16,8 @@ import NoContent from "../common/NoContent";
 
 import { Link } from "react-router-dom";
 
+import server from "../common/server";
+
 const PostDetail = ({ selectedPost }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [post, setPost] = useState(null);
@@ -23,7 +25,7 @@ const PostDetail = ({ selectedPost }) => {
 
     useEffect(() => {
         Promise.all([
-            fetch("/post/detail/" + selectedPost)
+            fetch(server + "/post/detail/" + selectedPost)
                 .then((res) => {
                     return res.json();
                 })
@@ -33,7 +35,7 @@ const PostDetail = ({ selectedPost }) => {
                 .catch((err) => {
                     return err;
                 }),
-            fetch("/post/detail/reply/" + selectedPost)
+            fetch(server + "/post/detail/reply/" + selectedPost)
                 .then((res) => {
                     return res.json();
                 })
@@ -125,11 +127,11 @@ const PostDetail = ({ selectedPost }) => {
                             className="row h2 justify-content-center w-100 mt-2"
                             style={{ height: "20%" }}
                         >
-                            <div className="col-10">
+                            <div className="col-11">
                                 <LikeFillIcon className="m-2 text-danger" />
                                 <MessageIcon className="m-2" />
                             </div>
-                            <div className="col-2">
+                            <div className="col-1">
                                 <SaveFillIcon />
                             </div>
                             <div className="h4">

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { _ } from "lodash";
 
 // Bootstrap

@@ -12,13 +12,15 @@ import {
 // Resources
 import defaultUserIcon from "../../images/tmpUserIcon.png";
 
+import server from "../common/server";
+
 const StoryList = ({ user }) => {
     const [storyList, setStoryList] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
-        fetch("/api/story/list")
+        fetch(server + "/api/story/list")
             .then((res) => {
                 return res.json();
             })

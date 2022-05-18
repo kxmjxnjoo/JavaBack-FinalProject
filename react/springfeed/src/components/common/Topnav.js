@@ -21,6 +21,8 @@ import defaultProfile from "../../images/tmpUserIcon.png";
 import "../../resources/topnav.css";
 import toast from "react-hot-toast";
 
+import server from "./server";
+
 const Topnav = ({
     page,
     isLoggedIn,
@@ -31,6 +33,8 @@ const Topnav = ({
     setIsLoggedIn,
 }) => {
     const [notiCount, setNotiCount] = useState(0);
+
+    const [profile, setProfile] = useState(defaultProfile);
 
     const logoStyle = {
         width: "30px",
@@ -60,7 +64,7 @@ const Topnav = ({
 
     useEffect(() => {
         if (user != null) {
-            fetch("/api/noti/count?userid=" + user.userid)
+            fetch(server + "/api/noti/count?userid=" + user.userid)
                 .then((res) => {
                     return res.text();
                 })
@@ -74,8 +78,9 @@ const Topnav = ({
 
     useEffect(() => {
         setIsSelectOpen(false);
+        setSearchKey("");
 
-        fetch("/api/user/login")
+        fetch(server + "/api/user/login")
             .then((res) => {
                 return res.json();
             })
@@ -94,7 +99,6 @@ const Topnav = ({
                     setUser(data[0]);
 
                     setIsLoggedIn(true);
-                    toast.success("안녕하세요 " + data.name + "님!");
                 }
             })
             .catch((err) => {
@@ -244,15 +248,7 @@ const Topnav = ({
                                         >
                                             <a className="nav-link">
                                                 <img
-                                                    src={
-                                                        // isLoggedIn
-                                                        //     ? user.img != null
-                                                        //         ? "/images/" +
-                                                        //           user.img
-                                                        //         : defaultProfile
-                                                        //     : defaultProfile
-                                                        defaultProfile
-                                                    }
+                                                    src={profile}
                                                     alt="ERR"
                                                     className="rounded-circle"
                                                     style={profileStyle}

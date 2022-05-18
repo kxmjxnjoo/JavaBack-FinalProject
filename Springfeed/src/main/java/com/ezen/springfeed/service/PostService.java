@@ -9,17 +9,9 @@ import java.util.HashMap;
 
 @Service
 public class PostService {
-    // CRUD
-    // dao      service
-    // select   get
-    // insert   add
-    // update   update
-    // delete   delete
-
     @Autowired
     IPostDao pdao;
 
-// Post
     public void getPostsByUserid(HashMap<String, Object> paramMap) {
         pdao.selectPostsByUserid(paramMap);
     }

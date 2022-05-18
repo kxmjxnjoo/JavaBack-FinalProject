@@ -3,13 +3,15 @@ import toast from "react-hot-toast";
 import Loading from "../common/Loading";
 import { useNavigate } from "react-router-dom";
 
+import server from "../common/server";
+
 const Logout = ({ setIsLoggedIn }) => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const logout = () => {
         setIsLoading(true);
-        fetch("/logout")
+        fetch(server + "/logout")
             .then((res) => {
                 toast.success("로그아웃 했어요");
                 setIsLoggedIn(false);

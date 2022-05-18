@@ -13,6 +13,8 @@ import {
 import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 
+import server from "../common/server";
+
 const Story = () => {
     const { id } = useParams();
 
@@ -28,7 +30,11 @@ const Story = () => {
         setIsLoading(true);
 
         // check if id is num or string
-        fetch("/story?" + (isNaN(val) ? "userid=" + val : "story_num=" + val))
+        fetch(
+            server +
+                "/story?" +
+                (isNaN(val) ? "userid=" + val : "story_num=" + val)
+        )
             .then((res) => {
                 return res.json();
             })

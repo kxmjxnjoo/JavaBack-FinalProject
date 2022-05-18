@@ -10,6 +10,8 @@ import { BiEraser } from "react-icons/bi";
 
 import Loading from "../common/Loading";
 
+import server from "../common/server";
+
 const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
     const [userResult, setUserResult] = useState(null);
     const [postResult, setPostResult] = useState(null);
@@ -21,7 +23,7 @@ const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
         setIsMemberLoading(true);
         setIsPostLoading(true);
 
-        fetch("/api/search/member?key=" + searchKey)
+        fetch(server + "/api/search/member?key=" + searchKey)
             .then((res) => {
                 return res.json();
             })
@@ -35,7 +37,7 @@ const Search = ({ searchKey, setIsPostDetailOpen, setSelectedPost }) => {
                 setIsMemberLoading(false);
             });
 
-        fetch("/api/search/post?key=" + searchKey)
+        fetch(server + "/api/search/post?key=" + searchKey)
             .then((res) => {
                 return res.json();
             })

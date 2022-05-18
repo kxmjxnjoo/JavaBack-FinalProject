@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import Loading from "../common/Loading";
 
+import defaultProfile from "../../images/tmpUserIcon.png";
+
+import server from "../common/server";
+
 const UserEdit = () => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -12,28 +16,29 @@ const UserEdit = () => {
     const [phone, setPhone] = useState(null);
     const [introduction, setIntroduction] = useState(null);
 
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(defaultProfile);
 
     useEffect(() => {
-        fetch("/user/edit/form")
+        fetch(server + "/user/edit/form")
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
                 setUser(data);
+                return data;
             })
-            .then(() => {
-                if (user != null) {
-                    fetch("/images/" + user.img)
-                        .then((res) => {
-                            return res.blob();
-                        })
-                        .then((data) => {
-                            setImage(URL.createObjectURL(data));
-                        });
-                }
+            .then((data) => {
+                fetch(server + "/images/" + data.img)
+                    .then((res) => {
+                        return res.blob();
+                    })
+                    .then((data) => {
+                        setImage(URL.createObjectURL(data));
+                    })
+                    .catch((err) => {
+                        return err;
+                    });
             })
-
             .finally(() => {
                 setIsLoading(false);
             });

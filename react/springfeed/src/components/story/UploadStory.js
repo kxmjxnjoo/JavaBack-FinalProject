@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import server from "../common/server";
+
 const UploadStory = () => {
     const [jspElement, setJspElement] = useState(null);
 
@@ -8,7 +10,7 @@ const UploadStory = () => {
     };
 
     useEffect(() => {
-        fetch("/story/add/form")
+        fetch(server + "/story/add/form")
             .then((res) => {
                 return res.text();
             })

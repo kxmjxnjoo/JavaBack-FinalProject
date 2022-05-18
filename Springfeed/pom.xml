@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	
 	<groupId>com.ezen</groupId>
@@ -29,7 +29,6 @@
 	</repositories>
 	
 	<dependencies>
-	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -78,12 +77,27 @@
 		</dependency>
 
 	<!-- Oracle Cloud DB -->
-		<dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.oracle.database.jdbc</groupId>-->
+<!--			<artifactId>ojdbc8</artifactId>-->
+<!--			<version>19.3.0.0</version>-->
+<!--		</dependency>-->
 
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>19.3.0.0</version>
-		</dependency>
+				<dependency>
+					<groupId>com.oracle.database.jdbc</groupId>
+					<artifactId>ojdbc10</artifactId>
+					<version>19.3.0.0</version>
+					<exclusions>
+						<exclusion>
+							<groupId>com.oracle.database.ha</groupId>
+							<artifactId>simplefan</artifactId>
+						</exclusion>
+						<exclusion>
+							<groupId>com.oracle.database.ha</groupId>
+							<artifactId>ons</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
 
 		<dependency>
 			<groupId>com.oracle.database.security</groupId>
@@ -98,56 +112,46 @@
 		<dependency>
 			<groupId>com.oracle.database.security</groupId>
 			<artifactId>osdt_cert</artifactId>
-			<version>21.3.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/jar/osdt_cert-21.3.0.0.jar</systemPath>
+			<version>21.5.0.0</version>
 		</dependency>
 
-	<!-- 이메일 전송 -->
-	
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-mail</artifactId>
-		    <version>1.4.3.RELEASE</version>
-		</dependency>
-		
-		<dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>        
+<!--		<dependency>-->
+<!--			<groupId>com.oracle.database.security</groupId>-->
+<!--			<artifactId>osdt_cert</artifactId>-->
+<!--			<version>21.3.0.0</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>/var/lib/osdt_cert-21.3.0.0.jar</systemPath>-->
+<!--		</dependency>-->
 
 	<!-- Messaging -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>sockjs-client</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>stomp-websocket</artifactId>
-			<version>2.3.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>3.1.1-1</version>
-		</dependency>
-
-
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-websocket</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.webjars</groupId>-->
+<!--			<artifactId>webjars-locator-core</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.webjars</groupId>-->
+<!--			<artifactId>sockjs-client</artifactId>-->
+<!--			<version>1.0.2</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.webjars</groupId>-->
+<!--			<artifactId>stomp-websocket</artifactId>-->
+<!--			<version>2.3.3</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.webjars</groupId>-->
+<!--			<artifactId>bootstrap</artifactId>-->
+<!--			<version>3.3.7</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.webjars</groupId>-->
+<!--			<artifactId>jquery</artifactId>-->
+<!--			<version>3.1.1-1</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>

@@ -37,7 +37,8 @@
 		{  CALL getMember( 
 			#{userid},
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
-		)  }
+			)
+		}
 	</select>
 	
 	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -170,7 +171,6 @@
 	<select id="findRecentStory" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{  CALL findRecentStory(  #{userid},#{story_num, mode=OUT, jdbcType=INTEGER}  )  }
 	</select>
-
 
 	<select id="getIsFollowing" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{

@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 
 import { Link } from "react-router-dom";
 
+import server from "../common/server";
+
 // Icon
 import {
     BsHeart as LikeIcon,
@@ -50,83 +52,82 @@ const Post = ({
     const [isLikedData, setIsLikedData] = useState(isLiked);
     const [isSavedData, setIsSavedData] = useState(isSaved);
 
-    const handleLike = () => {
-        if (!isLikedData) {
-            let noti = toast.loading("잠시만 기다려 주세요...");
+    const likePost = () => {
+        let noti = toast.loading("잠시만 기다려 주세요...");
 
-            fetch("/api/post/like/insert", {
-                method: "POST",
-                header: {
-                    "Content-Type": "application/json;charset=UTF-8",
-                },
-                contentType: false,
-                processData: false,
-                body: JSON.stringify({
-                    postNum: postNum,
-                }),
+        fetch(server + "/api/post/like/insert", {
+            method: "POST",
+            header: {
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify({
+                postNum: postNum,
+            }),
+        })
+            .then((res) => {
+                return res.json();
             })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    if (data.result == 1) {
-                        toast.success(userid + "님의 포스트를 좋아요 했어요", {
+            .then((data) => {
+                if (data.result == 1) {
+                    toast.success(userid + "님의 포스트를 좋아요 했어요", {
+                        id: noti,
+                    });
+                    setIsLikedData(!isLikedData);
+                } else {
+                    toast.error(
+                        "좋아요 하는데 에러가 났어요 다시 시도해 주세요",
+                        {
                             id: noti,
-                        });
-                        setIsLikedData(!isLikedData);
-                    } else {
-                        toast.error(
-                            "좋아요 하는데 에러가 났어요 다시 시도해 주세요",
-                            {
-                                id: noti,
-                            }
-                        );
-                    }
-                })
-                .catch((err) => {
-                    return err;
-                });
-        } else {
-            let noti = toast.loading("잠시만 기다려 주세요...");
-
-            fetch("/api/post/like/delete", {
-                method: "DELETE",
-                header: {
-                    "Content-Type": "application/json;charset=UTF-8",
-                },
-                body: JSON.stringify({
-                    postNum: postNum,
-                }),
+                        }
+                    );
+                }
             })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    if (data.result == 1) {
-                        toast.success(
-                            userid + "님의 포스트의 좋아요를 취소했어요",
-                            {
-                                id: noti,
-                            }
-                        );
-                        setIsLikedData(!isLikedData);
-                    } else {
-                        toast.error(
-                            "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요",
-                            {
-                                id: noti,
-                            }
-                        );
-                    }
-                })
-                .catch((err) => {
-                    return err;
-                });
-        }
+            .catch((err) => {
+                return err;
+            });
+    };
+
+    const unlikePost = () => {
+        let noti = toast.loading("잠시만 기다려 주세요...");
+
+        fetch(server + "/api/post/like/delete", {
+            method: "POST",
+            header: {
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify({
+                postNum: postNum,
+            }),
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                if (data.result == 1) {
+                    toast.success(
+                        userid + "님의 포스트의 좋아요를 취소했어요",
+                        {
+                            id: noti,
+                        }
+                    );
+                    setIsLikedData(!isLikedData);
+                } else {
+                    toast.error(
+                        "좋아요 취소하는데 에러가 났어요 다시 시도해 주세요: " +
+                            JSON.stringify(data),
+                        {
+                            id: noti,
+                        }
+                    );
+                }
+            })
+            .catch((err) => {
+                return err;
+            });
     };
 
     const savePost = () => {
-        fetch("/api/post/save/insert", {
+        fetch(server + "/api/post/save/insert", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=UTF-8",
@@ -145,7 +146,7 @@ const Post = ({
     };
 
     const unSavePost = () => {
-        fetch("/api/post/save/delete", {
+        fetch(server + "/api/post/save/delete", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=UTF-8",
@@ -238,10 +239,13 @@ const Post = ({
                         {isLikedData ? (
                             <LikeFillIcon
                                 className="m-2 text-danger"
-                                onClick={handleLike}
+                                onClick={() => unlikePost()}
                             />
                         ) : (
-                            <LikeIcon className="m-2" onClick={handleLike} />
+                            <LikeIcon
+                                className="m-2"
+                                onClick={() => likePost()}
+                            />
                         )}
                         <ReplyIcon
                             className="m-2"
@@ -249,7 +253,7 @@ const Post = ({
                                 openPostDetail({ post });
                             }}
                         />
-                        <MessageIcon className="m-2" />
+                        {/* <MessageIcon className="m-2" /> */}
                     </div>
                     <div className="col-1">
                         {isSavedData ? (
@@ -292,7 +296,7 @@ const Post = ({
                                                 "댓글을 추가하고 있어요"
                                             );
 
-                                        fetch("/api/reply/add", {
+                                        fetch(server + "/api/reply/add", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type":

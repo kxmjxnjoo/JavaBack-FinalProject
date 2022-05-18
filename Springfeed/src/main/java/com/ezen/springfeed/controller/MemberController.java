@@ -24,26 +24,27 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @RestController
+@CrossOrigin(origins= "*")
 public class MemberController {
 
 	@Autowired
 	MemberService ms;
 	
-	
     //로그인 액션
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public String login(@RequestBody MemberDto memberdto,
-    		HttpServletRequest request) {
+    public String login(HttpServletRequest request, @RequestBody HashMap<String, Object> memberdto) {
+
+		Object userid = memberdto.get("userid");
+		Object password = memberdto.get("password");
     	
     	String status = "";
-    	if(memberdto.getUserid() == null || memberdto.getUserid().equals("")) {
+    	if(userid == null || userid.equals("")) {
     		status = "emptyId"; //아이디 미입력
-    	} else if(memberdto.getPassword() == null || memberdto.getPassword().equals("")) {
+    	} else if(password == null || password.equals("")) {
     		status = "emptyPassword"; //비밀번호 미입력
     	} else {
     		HashMap<String, Object> paramMap = new HashMap<>();
-    		paramMap.put("userid", memberdto.getUserid());
+    		paramMap.put("userid", (String) userid);
     		paramMap.put("ref_cursor", null);
     		ms.getMember(paramMap); //아이디로 사용자 검색
     		
@@ -51,18 +52,19 @@ public class MemberController {
     			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
     		if(list.size() == 0) {
     			status = "wrongId"; //존재하지 않는 아이디
-    		} 
-    		
-    		else { HashMap<String, Object> mvo = list.get(0);
+    		} else {
+				HashMap<String, Object> mvo = list.get(0);
+
 	    		if(mvo.get("PASSWORD") == null) {
 	    			status = "PasswordError"; //DB password 에러
-	    		}  else if (((String)mvo.get("USEYN")).equals("n") ) {
+	    		}  else if (mvo.get("USEYN").equals("n") ) {
 	    			status = "disableAccount";
 	    			//비활성화 계정 confirm 필요 
-	    		} else if (memberdto.getPassword().equals((String)mvo.get("PASSWORD"))) {
+	    		} else if ( password.equals((String)mvo.get("PASSWORD")) ) {
 	    			status = "loginComplete"; //정상 로그인
-	    			HttpSession session = request.getSession();
-	    			session.setAttribute("loginUser", mvo);
+
+					System.out.println(mvo);
+					request.getSession().setAttribute("loginUser", mvo);
 	    		} else {
 	    			status = "wrongPassword"; //잘못된 비밀번호  
 	    		}
@@ -195,7 +197,6 @@ public class MemberController {
     
     
     // 알림 숫자 체크
-    @ResponseBody
     @RequestMapping("/api/noti/count")
     public int notiCount(HttpServletRequest request) {
     	
@@ -251,7 +252,6 @@ public class MemberController {
     ServletContext context;
     
     @RequestMapping("/uploadImg")
-	@ResponseBody	//ajax를 통해 이미지를 업로드 
 	public Map<String, Object> fileup(Model model, HttpServletRequest request,
 			RedirectAttributes rttr) {
     	

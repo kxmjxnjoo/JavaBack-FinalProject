@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+
+import server from "../common/server";
 
 const Join = () => {
     const [jspElement, setJspElement] = useState(null);
 
     const createMarkup = (data) => {
-        return {__html: data}
-    }
+        return { __html: data };
+    };
 
     useEffect(() => {
-        fetch('/join/form')
+        fetch(server + "/join/form")
             .then((res) => {
-                return res.text()
+                return res.text();
             })
             .then((html) => {
-                setJspElement(html)
-            })
-    }, [])
+                setJspElement(html);
+            });
+    }, []);
 
-  return (
-    <div dangerouslySetInnerHTML={{__html: jspElement}}/>
-  )
-}
+    return <div dangerouslySetInnerHTML={{ __html: jspElement }} />;
+};
 
-export default Join
+export default Join;

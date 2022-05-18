@@ -66,6 +66,7 @@ public class MemberService {
 	public void findId(HashMap<String, Object> paramMap) {
 		mdao.findId(paramMap);
 	}
+
 	public void userEmailCheck(String email, String name, boolean pwFindCheck) {
 		mdao.userEmailCheck(email, name, pwFindCheck);
 	}

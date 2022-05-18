@@ -1,5 +1,4 @@
 package com.ezen.springfeed.controller;
-
 import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.dto.ReplyDto;
@@ -9,20 +8,16 @@ import com.ezen.springfeed.service.StoryService;
 import com.ezen.springfeed.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins= "*")
 public class ReactController {
 
     @Autowired
@@ -95,6 +90,7 @@ public class ReactController {
             pdto.setPostNum( Integer.parseInt(String.valueOf( pvo.get("POST_NUM"))));
             pdto.setLikeCount(Integer.parseInt(String.valueOf(pvo.get("LIKECOUNT"))));
             pdto.setIsSaved(Integer.parseInt(String.valueOf(pvo.get("ISSAVED"))));
+            pdto.setIsLiked(Integer.parseInt(String.valueOf(pvo.get("ISLIKED"))));
 
             //pdto.setReplyCount(pvo.get("REPLYCOUNT");
             postList.add(pdto);
@@ -115,13 +111,13 @@ public class ReactController {
         if(mdtoHash != null) {
             HashMap<String, Object> result = new HashMap<>();
 
-            result.put("userid", mdtoHash.get("USERID"));
-            result.put("name", mdtoHash.get("NAME"));
-            result.put("img", mdtoHash.get("IMG"));
+            result.put("userid", mdtoHash.get("userid"));
+            result.put("name", mdtoHash.get("name"));
+            result.put("img", mdtoHash.get("img"));
 
             returnArray.add(result);
         }
-        
+
         return returnArray;
     }
 
@@ -343,22 +339,22 @@ public class ReactController {
     // -1 : fail
     // 0 : unlike
     // 1 : like
-    @RequestMapping(value="/api/post/like/insert", produces = "application/json", method=POST)
+    @RequestMapping(value="/api/post/like/insert", produces = "application/json", method=RequestMethod.POST)
     public HashMap<String, Object> likePost(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", getLoginUserid(request));
-        paramMap.put("postNum", postNum.get("postNum"));
-        paramMap.put("ref_cursor", null);
+        paramMap.put("postnum", postNum.get("postNum"));
 
         ps.insertLike(paramMap);
 
         // Get result
-        HashMap<String, Object> result = (HashMap<String, Object>) paramMap.get("ref_cursor");
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("result", 1);
         return result;
     }
 
-    @RequestMapping(value="/api/post/like/delete", produces="application/json", method=DELETE)
+    @RequestMapping(value="/api/post/like/delete", produces="application/json", method=RequestMethod.POST)
     public HashMap<String, Object> deletePostLike(HttpServletRequest request, @RequestBody HashMap<String, Object> postNum) {
         // paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
@@ -374,18 +370,19 @@ public class ReactController {
     }
 
     // Get Main Storylist
-    @RequestMapping(value="/api/story/list", produces = "application/json")
+    @RequestMapping(value="/api/story/list", produces = "application/json;charset=UTF-8")
     public ArrayList<MemberDto> getStoryList(HttpServletRequest request) {
         String userid = getLoginUserid(request);
 
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", userid);
+        paramMap.put("ref_cursor", null);
 
         ss.getStoryList(paramMap);
 
         // Get MemberDto from paramMap
-        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
+        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
         ArrayList<MemberDto> result = new ArrayList<MemberDto>();
         for(HashMap<String, Object> mem : list) {
             MemberDto mdto = new MemberDto();

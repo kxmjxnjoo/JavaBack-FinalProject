@@ -49,7 +49,7 @@
 		{
 			CALL getStoryList(
 			    #{userid},
-			    #{p_cur, mode=OUT, jdbcType=CURSOR, javaType=ResultSet ,resultMap=MemberMap}
+			    #{p_cur, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberMap}
 			)
 		}
 	</select>

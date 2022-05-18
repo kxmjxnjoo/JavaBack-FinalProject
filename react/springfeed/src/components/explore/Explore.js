@@ -7,6 +7,8 @@ import "../../resources/explore.css";
 
 import PostThumbnail from "../post/PostThumbnail";
 
+import server from "../common/server";
+
 const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
@@ -16,7 +18,7 @@ const Explore = ({ setPage, setIsPostDetailOpen, setSelectedPost }) => {
     useEffect(() => {
         setPage(3);
 
-        fetch("/api/explore/feed")
+        fetch(server + "/api/explore/feed")
             .then((res) => {
                 return res.json();
             })

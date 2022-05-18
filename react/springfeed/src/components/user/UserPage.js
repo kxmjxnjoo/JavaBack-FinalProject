@@ -15,6 +15,8 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { FaUserSlash as NoUserIcon } from "react-icons/fa";
 import Report from "../admin/Report";
 
+import server from "../common/server";
+
 const UserPage = ({
     setSearchKey,
     loginUser,
@@ -50,7 +52,13 @@ const UserPage = ({
 
     const loadFollowingList = () => {
         setFollowingListIndex(followingListIndex + 1);
-        fetch("/api/user/following?id=" + id + "&page=" + followingListIndex)
+        fetch(
+            server +
+                "/api/user/following?id=" +
+                id +
+                "&page=" +
+                followingListIndex
+        )
             .then((res) => {
                 return res.json();
             })
@@ -69,7 +77,7 @@ const UserPage = ({
     };
     const openFollowingList = () => {
         // Fetch Following List
-        fetch("/api/user/following?id=" + id)
+        fetch(server + "/api/user/following?id=" + id)
             .then((res) => {
                 return res.json();
             })
@@ -92,7 +100,7 @@ const UserPage = ({
     };
     const openFollowerList = () => {
         // Fetch Follower List
-        fetch("/api/user/follower?id=" + id)
+        fetch(server + "/api/user/follower?id=" + id)
             .then((res) => {
                 return res.json();
             })
@@ -125,7 +133,7 @@ const UserPage = ({
         setIsPostDetailOpen(false);
 
         // Get user introduction, isFollowing, profile image
-        fetch("/api/user?id=" + id)
+        fetch(server + "/api/user?id=" + id)
             .then((res) => {
                 return res.json();
             })
@@ -140,7 +148,7 @@ const UserPage = ({
             });
 
         // Get follower count
-        fetch("/api/user/follow/count?id=" + id)
+        fetch(server + "/api/user/follow/count?id=" + id)
             .then((res) => {
                 return res.json();
             })
@@ -154,7 +162,7 @@ const UserPage = ({
 
         // Get posts initially
         setIsLoading(true);
-        fetch("/api/post?userid=" + id)
+        fetch(server + "/api/post?userid=" + id)
             .then((res) => {
                 return res.json();
             })
@@ -176,7 +184,7 @@ const UserPage = ({
         if (savedPosts == null) {
             setIsLoading(true);
             // Fetch saved posts
-            fetch("/api/post/save?id=" + id)
+            fetch(server + "/api/post/save?id=" + id)
                 .then((res) => {
                     return res.json();
                 })
@@ -222,7 +230,9 @@ const UserPage = ({
                                     className="btn btn-primary w-100"
                                     onClick={() => {
                                         onClose();
-                                        fetch("/api/user/follow?id=" + id)
+                                        fetch(
+                                            server + "/api/user/follow?id=" + id
+                                        )
                                             .then((res) => {
                                                 return res;
                                             })
@@ -286,7 +296,11 @@ const UserPage = ({
                                     className="btn btn-danger w-100"
                                     onClick={() => {
                                         onClose();
-                                        fetch("/api/user/unfollow?id=" + id)
+                                        fetch(
+                                            server +
+                                                "/api/user/unfollow?id=" +
+                                                id
+                                        )
                                             .then((res) => {
                                                 return res;
                                             })

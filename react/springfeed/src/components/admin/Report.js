@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import server from "../common/server";
+
 const Report = () => {
     const [jspElement, setJspElement] = useState(null);
 
@@ -8,7 +10,7 @@ const Report = () => {
     };
 
     useEffect(() => {
-        fetch("/report/form")
+        fetch(server + "/report/form")
             .then((res) => {
                 return res.text();
             })

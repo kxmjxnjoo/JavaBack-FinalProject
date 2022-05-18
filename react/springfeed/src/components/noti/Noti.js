@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import Loading from "../common/Loading";
 
+import server from "../common/server";
+
 const Noti = () => {
     const [jspElement, setJspElement] = useState(null);
 
@@ -12,7 +14,7 @@ const Noti = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/user/notification")
+        fetch(server + "/user/notification")
             .then((res) => {
                 return res.text();
             })
