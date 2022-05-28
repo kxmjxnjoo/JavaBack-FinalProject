@@ -13,9 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.springfeed.dto.MemberDto;
 import com.ezen.springfeed.dto.Paging;
-import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.dto.ReportDto;
 import com.ezen.springfeed.service.AdminService;
 import com.ezen.springfeed.service.FaqQnaService;

@@ -1,8 +1,8 @@
 package com.ezen.springfeed.controller;
-import com.ezen.springfeed.dto.MemberDto;
+import com.ezen.springfeed.member.Member;
 import com.ezen.springfeed.dto.PostDto;
 import com.ezen.springfeed.dto.ReplyDto;
-import com.ezen.springfeed.service.MemberService;
+import com.ezen.springfeed.service.TmpMemberService;
 import com.ezen.springfeed.service.PostService;
 import com.ezen.springfeed.service.StoryService;
 import com.ezen.springfeed.service.UtilService;
@@ -24,7 +24,7 @@ public class ReactController {
     PostService ps;
 
     @Autowired
-    MemberService ms;
+    TmpMemberService ms;
 
     @Autowired
     UtilService us;
@@ -133,7 +133,7 @@ public class ReactController {
 
     // Get specific user's info
     @RequestMapping(value="/api/user", produces="application/json")
-    public MemberDto getUser(HttpServletRequest request, @RequestParam("id") String id) {
+    public Member getUser(HttpServletRequest request, @RequestParam("id") String id) {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", id);
         paramMap.put("ref_cursor", null);
@@ -145,7 +145,7 @@ public class ReactController {
             return null;
         }
         HashMap<String, Object> mvo = list.get(0);
-        MemberDto mdto = new MemberDto();
+        Member mdto = new Member();
         mdto.setPhone((String) mvo.get("PHONE"));
         mdto.setIntroduce((String) mvo.get("INTRODUCE"));
         mdto.setName((String) mvo.get("NAME"));
@@ -162,7 +162,7 @@ public class ReactController {
 
             ms.getIsFollowing(paramMap);
 
-            mdto.setIsFollowing(Integer.parseInt(String.valueOf(paramMap.get("isFollowing"))));
+//            mdto.setIsFollowing(Integer.parseInt(String.valueOf(paramMap.get("isFollowing"))));
         }
 
         return mdto;
@@ -196,7 +196,7 @@ public class ReactController {
 
     // Get search result
     @RequestMapping(value="/api/search/member", produces="application/json")
-    public ArrayList<MemberDto> getMemberSearchResult(@RequestParam(value="key") String key, @RequestParam(value="page", required = false) Integer page) {
+    public ArrayList<Member> getMemberSearchResult(@RequestParam(value="key") String key, @RequestParam(value="page", required = false) Integer page) {
 
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("key", key);
@@ -211,9 +211,9 @@ public class ReactController {
             return null;
         }
 
-        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        ArrayList<Member> result = new ArrayList<Member>();
         for(HashMap<String, Object> mem : list) {
-            MemberDto mdto = new MemberDto();
+            Member mdto = new Member();
             mdto.setName((String) mem.get("NAME"));
             mdto.setUserid((String) mem.get("USERID"));
             result.add(mdto);
@@ -253,7 +253,7 @@ public class ReactController {
 
     // Get user's following list (page)
     @RequestMapping(value="/api/user/following", produces="application/json")
-    public ArrayList<MemberDto> getUserFollowingList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
+    public ArrayList<Member> getUserFollowingList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", id);
         paramMap.put("page", page != null ? page : 0);
@@ -266,9 +266,9 @@ public class ReactController {
         if(list.size() == 0) {
             return null;
         }
-        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        ArrayList<Member> result = new ArrayList<Member>();
         for(HashMap<String, Object> mem : list) {
-            MemberDto mdto = new MemberDto();
+            Member mdto = new Member();
             mdto.setImg((String) mem.get("IMG"));
             mdto.setName((String) mem.get("NAME"));
             mdto.setUserid((String) mem.get("USERID"));
@@ -280,7 +280,7 @@ public class ReactController {
 
     // Get user's follower list (page)
     @RequestMapping(value="/api/user/follower", produces = "application/json")
-    public ArrayList<MemberDto> getUserFollowerList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
+    public ArrayList<Member> getUserFollowerList(@RequestParam(value="id") String id, @RequestParam(value="page", required = false) Integer page) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("userid", id);
@@ -295,9 +295,9 @@ public class ReactController {
         if(list.size() == 0) {
             return null;
         }
-        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        ArrayList<Member> result = new ArrayList<Member>();
         for(HashMap<String, Object> mem : list) {
-            MemberDto mdto = new MemberDto();
+            Member mdto = new Member();
             mdto.setUserid((String) mem.get("USERID"));
             mdto.setImg((String) mem.get("IMG"));
             mdto.setName((String) mem.get("NAME"));
@@ -371,7 +371,7 @@ public class ReactController {
 
     // Get Main Storylist
     @RequestMapping(value="/api/story/list", produces = "application/json;charset=UTF-8")
-    public ArrayList<MemberDto> getStoryList(HttpServletRequest request) {
+    public ArrayList<Member> getStoryList(HttpServletRequest request) {
         String userid = getLoginUserid(request);
 
         // Create paramMap
@@ -383,9 +383,9 @@ public class ReactController {
 
         // Get MemberDto from paramMap
         ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
-        ArrayList<MemberDto> result = new ArrayList<MemberDto>();
+        ArrayList<Member> result = new ArrayList<Member>();
         for(HashMap<String, Object> mem : list) {
-            MemberDto mdto = new MemberDto();
+            Member mdto = new Member();
             mdto.setImg((String) mem.get("IMG"));
             mdto.setUserid((String) mem.get("USERID"));
             result.add(mdto);

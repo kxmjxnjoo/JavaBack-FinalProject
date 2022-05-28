@@ -1,0 +1,44 @@
+#addQnaBox {
+    margin-top: 100px;
+    
+    width: 80%;
+
+    position: relative;
+    left: 10%;
+
+    text-align: center;
+}
+
+#addQnaBox input[type=text] {
+    width: 80%;
+    height: 50px;
+
+    font-size: 20px;
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+#addQnaBox textarea {
+    width: 75%;
+    height: 150px;
+
+    font-size: 20px;
+    padding: 2.5%;
+
+    margin-bottom: 30px;
+}
+
+#addQnaBox input[type=submit] {
+    width: 40%;
+    height: 50px;
+
+    font-sizE: 20px;
+
+    background-color: var(--mainColor);
+    border: none;
+}
+
+#addQnaBox input[type=submit]:hover {
+    opacity: 0.5;
+}

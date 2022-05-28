@@ -29,6 +29,14 @@
 	</repositories>
 	
 	<dependencies>
+
+		<!-- JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -46,7 +54,6 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -76,82 +83,45 @@
 			<version>05Nov2002</version>
 		</dependency>
 
-	<!-- Oracle Cloud DB -->
+<!--		postgres-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Oracle Cloud DB -->
 <!--		<dependency>-->
 <!--			<groupId>com.oracle.database.jdbc</groupId>-->
-<!--			<artifactId>ojdbc8</artifactId>-->
+<!--			<artifactId>ojdbc10</artifactId>-->
 <!--			<version>19.3.0.0</version>-->
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>com.oracle.database.ha</groupId>-->
+<!--					<artifactId>simplefan</artifactId>-->
+<!--				</exclusion>-->
+<!--				<exclusion>-->
+<!--					<groupId>com.oracle.database.ha</groupId>-->
+<!--					<artifactId>ons</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 <!--		</dependency>-->
-
-				<dependency>
-					<groupId>com.oracle.database.jdbc</groupId>
-					<artifactId>ojdbc10</artifactId>
-					<version>19.3.0.0</version>
-					<exclusions>
-						<exclusion>
-							<groupId>com.oracle.database.ha</groupId>
-							<artifactId>simplefan</artifactId>
-						</exclusion>
-						<exclusion>
-							<groupId>com.oracle.database.ha</groupId>
-							<artifactId>ons</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-
-		<dependency>
-			<groupId>com.oracle.database.security</groupId>
-			<artifactId>oraclepki</artifactId>
-			<version>21.5.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle.database.security</groupId>
-			<artifactId>osdt_core</artifactId>
-			<version>21.5.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle.database.security</groupId>
-			<artifactId>osdt_cert</artifactId>
-			<version>21.5.0.0</version>
-		</dependency>
-
+<!--		<dependency>-->
+<!--			<groupId>com.oracle.database.security</groupId>-->
+<!--			<artifactId>oraclepki</artifactId>-->
+<!--			<version>21.5.0.0</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.oracle.database.security</groupId>-->
+<!--			<artifactId>osdt_core</artifactId>-->
+<!--			<version>21.5.0.0</version>-->
+<!--		</dependency>-->
 <!--		<dependency>-->
 <!--			<groupId>com.oracle.database.security</groupId>-->
 <!--			<artifactId>osdt_cert</artifactId>-->
-<!--			<version>21.3.0.0</version>-->
-<!--			<scope>system</scope>-->
-<!--			<systemPath>/var/lib/osdt_cert-21.3.0.0.jar</systemPath>-->
+<!--			<version>21.5.0.0</version>-->
 <!--		</dependency>-->
 
-	<!-- Messaging -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-websocket</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.webjars</groupId>-->
-<!--			<artifactId>webjars-locator-core</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.webjars</groupId>-->
-<!--			<artifactId>sockjs-client</artifactId>-->
-<!--			<version>1.0.2</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.webjars</groupId>-->
-<!--			<artifactId>stomp-websocket</artifactId>-->
-<!--			<version>2.3.3</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.webjars</groupId>-->
-<!--			<artifactId>bootstrap</artifactId>-->
-<!--			<version>3.3.7</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.webjars</groupId>-->
-<!--			<artifactId>jquery</artifactId>-->
-<!--			<version>3.1.1-1</version>-->
-<!--		</dependency>-->
 	</dependencies>
 
 	<build>

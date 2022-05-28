@@ -9,13 +9,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.springfeed.dto.StoryDto;
-import com.ezen.springfeed.service.MemberService;
+import com.ezen.springfeed.service.TmpMemberService;
 import com.ezen.springfeed.service.StoryService;
 
 @RestController
@@ -26,7 +23,7 @@ public class StoryController {
 	StoryService ss;
 	
 	@Autowired
-	MemberService ms;
+    TmpMemberService ms;
 
 	//스토리 추가
 	@RequestMapping(value="/story/add", produces="application/json") 

@@ -1,6 +1,5 @@
 package com.ezen.springfeed.controller;
 
-import com.ezen.springfeed.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
