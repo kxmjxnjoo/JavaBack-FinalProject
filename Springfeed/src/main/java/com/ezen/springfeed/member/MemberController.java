@@ -17,6 +17,20 @@ public class MemberController {
         return ms.getMember(userid);
     }
 
+    // Get userid by name and email
+    @RequestMapping("/userid")
+    @GetMapping
+    public Member getUseridByNameAndEmail(@RequestBody Member member) {
+        return ms.getMemberByNameAndEmail(member);
+    }
+
+    // login
+    @RequestMapping("/login")
+    @PostMapping
+    public void login(@RequestBody Member member) {
+
+    }
+
     @PostMapping
     public void addMember(@RequestBody Member member) {
         ms.addMember(member);

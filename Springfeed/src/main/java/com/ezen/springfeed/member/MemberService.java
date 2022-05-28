@@ -14,6 +14,7 @@ public class MemberService {
         this.mr = mr;
     }
 
+    // GET
     public Member getMember(String userid) {
         Optional<Member> memberByUserid = mr.findMemberByUserid(userid);
 
@@ -24,6 +25,16 @@ public class MemberService {
         return null;
     }
 
+    public Member getMemberByNameAndEmail(Member member) {
+        Member userid = mr.findMemberByNameAndEmail(member.getName(), member.getEmail())
+                .orElseThrow(() -> new IllegalStateException(
+                        "일치하는 아이디가 없어요"
+                ));
+
+        return userid;
+    }
+
+    // POST
     public void addMember(Member member) {
         Optional<Member> memberByUserid = mr.findMemberByUserid(member.getUserid());
 
@@ -34,6 +45,7 @@ public class MemberService {
         mr.save(member);
     }
 
+    // PUT
     @Transactional
     public void updateMember(Member updatedMember) {
         Member member = mr.findMemberByUserid(updatedMember.getUserid())
@@ -66,6 +78,7 @@ public class MemberService {
         }
     }
 
+    // DELETE
     public void deleteMember(Member member) {
         Member memberByUserid = mr.findMemberByUserid(member.getUserid())
                 .orElseThrow(() -> new IllegalStateException(
@@ -79,4 +92,5 @@ public class MemberService {
 
         new IllegalStateException("비밀번호를 다시 확인해 주세요");
     }
+
 }
