@@ -10,7 +10,7 @@ create table member(
     introduce varchar(1000),
     indate Date,
 
-    primary key(userid)
+    primary key(id)
 );
 
 create sequence member_seq start with 1 increment by 1;

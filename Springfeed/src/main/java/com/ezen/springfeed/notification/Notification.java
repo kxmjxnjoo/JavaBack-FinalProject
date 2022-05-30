@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -17,15 +14,22 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Notification {
     @Id
-    @Column(name = "num", nullable = false)
+    @Column(name = "num")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "notification_seq")
     private long num;
 
-    private String user_to;
-    private String user_from;
-    private Integer noti_type;
-    private Integer post_num;
-    private Integer reply_num;
-    private Timestamp create_date;
+    @Column(name = "user_to", nullable = false)
+    private String userTo;
+    @Column(name = "user_from", nullable = false)
+    private String userFrom;
+    @Column(name = "noti_type")
+    private Integer notiType;
+    @Column(name = "post_num")
+    private Integer postNum;
+    @Column(name = "reply_num")
+    private Integer replyNum;
+    @Column(name = "create_date")
+    private Timestamp createDate;
     private String content;
     private Integer checked;
 }

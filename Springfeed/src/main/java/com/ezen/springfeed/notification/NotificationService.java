@@ -13,8 +13,8 @@ public class NotificationService {
         this.nr = nr;
     }
 
-    public List<Notification> getNotificationsByUserid(String userid) {
-        return nr.findAllByUser_ToOOrderByCreate_dateDesc(userid);
+    public List<Notification> getNotificationsByUserTo(String userid) {
+        return nr.findAllNotificationByUserToOrderByCreateDateDesc(userid);
     }
 
     public void addNotification(Notification noti) {
