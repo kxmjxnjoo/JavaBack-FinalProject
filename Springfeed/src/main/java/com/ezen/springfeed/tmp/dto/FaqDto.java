@@ -10,6 +10,6 @@ public class FaqDto {
 	private int faq_num;
 	@NotBlank (message="제목을 입력하세요")
 	private String faq_subject;
-	@NotBlank (message="내용을 입력하세요")
+	@NotBlank (message="")
 	private String faq_content;
 }

@@ -1,6 +1,5 @@
 package com.ezen.springfeed.replyLike;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
