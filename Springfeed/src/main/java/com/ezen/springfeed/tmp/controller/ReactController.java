@@ -1,7 +1,7 @@
 package com.ezen.springfeed.tmp.controller;
 import com.ezen.springfeed.member.Member;
 import com.ezen.springfeed.tmp.dto.PostDto;
-import com.ezen.springfeed.tmp.dto.ReplyDto;
+import com.ezen.springfeed.reply.Reply;
 import com.ezen.springfeed.tmp.service.TmpMemberService;
 import com.ezen.springfeed.tmp.service.PostService;
 import com.ezen.springfeed.tmp.service.StoryService;
@@ -523,7 +523,7 @@ public class ReactController {
     }
 
     @RequestMapping(value="/api/post/comment")
-    public ArrayList<ReplyDto> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
+    public ArrayList<Reply> getReplyByPostNum(@RequestParam("postnum") int postNum, @RequestParam(value="page", required = false) Integer page) {
         // Create paramMap
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("postnum", postNum);
@@ -534,10 +534,10 @@ public class ReactController {
 
         // Convert it to ReplyDto
         ArrayList<HashMap<String, Object>> result = (ArrayList<HashMap<String, Object>>) paramMap.get("p_cur");
-        ArrayList<ReplyDto> list = new ArrayList<>();
+        ArrayList<Reply> list = new ArrayList<>();
 
         for(HashMap<String, Object> re : result) {
-            ReplyDto rdto = new ReplyDto();
+            Reply rdto = new Reply();
             rdto.setContent((String) re.get("CONTENT"));
             rdto.setImg((String) re.get("IMG"));
             rdto.setUserid((String) re.get("USERID"));
