@@ -14,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.springfeed.tmp.dto.FaqDto;
+import com.ezen.springfeed.faq.Faq;
 import com.ezen.springfeed.tmp.dto.Paging;
 import com.ezen.springfeed.tmp.dto.QnaDto;
 import com.ezen.springfeed.tmp.service.AdminService;
@@ -301,10 +301,10 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/admin/faqList")
-	public ModelAndView adminFaqList(HttpServletRequest request, Model model,  
-			@ModelAttribute("fdto") @Valid FaqDto faqdto, BindingResult result){
+	public ModelAndView adminFaqList(HttpServletRequest request, Model model,
+									 @ModelAttribute("fdto") @Valid Faq faqdto, BindingResult result){
 		ModelAndView mav = new ModelAndView();
-		FaqDto fdto = new FaqDto();
+		Faq fdto = new Faq();
 		int faq_num = fdto.getFaq_num();
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginAdmin
@@ -427,7 +427,7 @@ public class FaqQnaController {
 	}
 	
 	@RequestMapping(value="/faq/add",  method=RequestMethod.POST)
-	public ModelAndView addFaqForm( @ModelAttribute("fdto") @Valid FaqDto faqdto,
+	public ModelAndView addFaqForm( @ModelAttribute("fdto") @Valid Faq faqdto,
 			BindingResult result, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -450,8 +450,8 @@ public class FaqQnaController {
 	    	
 	    	HashMap<String,Object> paramMap = new HashMap<>();
 	    	paramMap.put("id", loginUser.get("USERID"));
-	    	paramMap.put("faq_subject", faqdto.getFaq_subject());
-	    	paramMap.put("faq_content", faqdto.getFaq_content());
+	    	paramMap.put("faq_subject", faqdto.getSubject());
+	    	paramMap.put("faq_content", faqdto.getContent());
 	    	fqs.addFaq(paramMap);
 	    	mav.setViewName("redirect:/admin/faqList");
 	    }
@@ -486,7 +486,7 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/faq/delete")
-	public String deleteFaq(	@RequestParam("faqnum") FaqDto faq_num) {
+	public String deleteFaq(	@RequestParam("faqnum") Faq faq_num) {
 			
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("faqnum", faq_num);

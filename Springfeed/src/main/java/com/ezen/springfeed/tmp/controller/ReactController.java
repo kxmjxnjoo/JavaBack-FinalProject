@@ -541,7 +541,7 @@ public class ReactController {
             rdto.setContent((String) re.get("CONTENT"));
             rdto.setImg((String) re.get("IMG"));
             rdto.setUserid((String) re.get("USERID"));
-            rdto.setReply_date((Timestamp) re.get("REPLY_DATE"));
+            rdto.setReplyDate((Timestamp) re.get("REPLY_DATE"));
 
             list.add(rdto);
         }
