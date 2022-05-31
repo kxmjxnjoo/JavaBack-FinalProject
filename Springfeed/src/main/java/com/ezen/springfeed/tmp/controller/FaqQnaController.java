@@ -305,7 +305,7 @@ public class FaqQnaController {
 									 @ModelAttribute("fdto") @Valid Faq faqdto, BindingResult result){
 		ModelAndView mav = new ModelAndView();
 		Faq fdto = new Faq();
-		int faq_num = fdto.getFaq_num();
+		Long faq_num = fdto.getNum();
 		HttpSession session = request.getSession();
 		HashMap<String,Object> loginAdmin
 			= (HashMap<String, Object>) session.getAttribute("loginAdmin");

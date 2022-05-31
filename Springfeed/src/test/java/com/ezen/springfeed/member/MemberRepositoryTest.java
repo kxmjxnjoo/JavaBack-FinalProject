@@ -18,7 +18,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void findMemberByUserid() {
+    void itShouldFindMemberByUserid() {
         // given
         Member member = new Member(
                 123456789L,
@@ -38,7 +38,7 @@ class MemberRepositoryTest {
         Optional<Member> expected = underTest.findMemberByUserid(member.getUserid());
 
         // then
-        assertThat(expected).isNotEmpty().isEqualTo(member);
+        assertThat(expected).isPresent();
     }
 
     @Test
