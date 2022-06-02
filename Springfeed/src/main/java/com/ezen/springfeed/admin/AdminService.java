@@ -1,4 +1,4 @@
-package com.ezen.springfeed.tmp.service;
+package com.ezen.springfeed.admin;
 
 import java.util.HashMap;
 

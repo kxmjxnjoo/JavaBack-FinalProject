@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.springfeed.faq.Faq;
 import com.ezen.springfeed.tmp.dto.Paging;
 import com.ezen.springfeed.qna.Qna;
-import com.ezen.springfeed.tmp.service.AdminService;
+import com.ezen.springfeed.admin.AdminService;
 import com.ezen.springfeed.tmp.service.FaqQnaService;
 import com.ezen.springfeed.tmp.service.UtilService;
 

@@ -1,4 +1,4 @@
-package com.ezen.springfeed.tmp.dto;
+package com.ezen.springfeed.message;
 import java.sql.Timestamp;
 
 import lombok.Data;

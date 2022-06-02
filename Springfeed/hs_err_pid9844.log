@@ -89,7 +89,7 @@ C  [ucrtbase.dll+0x21bb2]
 C  [KERNEL32.DLL+0x17034]
 C  [ntdll.dll+0x52651]
 
-VM_Operation (0x000000768b6ff800): RedefineClasses, mode: safepoint, requested by thread 0x00000263a16dd800, redefining class com.ezen.springfeed.tmp.controller.AdminController
+VM_Operation (0x000000768b6ff800): RedefineClasses, mode: safepoint, requested by thread 0x00000263a16dd800, redefining class com.ezen.springfeed.admin.AdminController
 
 
 

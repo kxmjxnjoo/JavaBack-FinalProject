@@ -1,4 +1,4 @@
-package com.ezen.springfeed.tmp.controller;
+package com.ezen.springfeed.admin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.tmp.dto.Paging;
-import com.ezen.springfeed.tmp.dto.ReportDto;
-import com.ezen.springfeed.tmp.service.AdminService;
+import com.ezen.springfeed.report.ReportDto;
+import com.ezen.springfeed.admin.AdminService;
 import com.ezen.springfeed.tmp.service.FaqQnaService;
 import com.ezen.springfeed.tmp.service.PostService;
 import com.ezen.springfeed.tmp.service.StoryService;
