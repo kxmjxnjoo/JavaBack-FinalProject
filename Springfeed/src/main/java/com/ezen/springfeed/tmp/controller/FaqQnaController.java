@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.springfeed.faq.Faq;
 import com.ezen.springfeed.tmp.dto.Paging;
-import com.ezen.springfeed.tmp.dto.QnaDto;
+import com.ezen.springfeed.qna.Qna;
 import com.ezen.springfeed.tmp.service.AdminService;
 import com.ezen.springfeed.tmp.service.FaqQnaService;
 import com.ezen.springfeed.tmp.service.UtilService;
@@ -156,7 +156,7 @@ public class FaqQnaController {
 
 	
 	@RequestMapping(value="/qna/add", method=RequestMethod.POST, produces = "application/json")
-	public Map<String, Object> addQna(@ModelAttribute("qdto") @Valid QnaDto qnadto,
+	public Map<String, Object> addQna(@ModelAttribute("qdto") @Valid Qna qnadto,
 			BindingResult result, HttpServletRequest request) {
 		
 		Map<String, Object> resultMap = new HashMap<>();
@@ -358,11 +358,11 @@ public class FaqQnaController {
 	
 
 	@RequestMapping("/admin/qnaList")
-	public ModelAndView qnaList(HttpServletRequest request, Model model,  
-			@ModelAttribute("qdto") @Valid QnaDto qnadto, BindingResult result) {
+	public ModelAndView qnaList(HttpServletRequest request, Model model,
+								@ModelAttribute("qdto") @Valid Qna qnadto, BindingResult result) {
 		System.out.println(qnadto);
 		ModelAndView mav = new ModelAndView();
-		QnaDto qdto = new QnaDto();
+		Qna qdto = new Qna();
 		int qna_num = qdto.getQna_num();
 		HttpSession session = request.getSession();
 		HashMap<String, Object> loginAdmin 
@@ -497,8 +497,8 @@ public class FaqQnaController {
 	
 	
 	@RequestMapping("/qna/detail")
-	public String qnaView(HttpServletRequest request, Model model, 
-			@ModelAttribute("qdto") @Valid QnaDto qnadto, BindingResult result) {
+	public String qnaView(HttpServletRequest request, Model model,
+						  @ModelAttribute("qdto") @Valid Qna qnadto, BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
 		

@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.ezen.springfeed.tmp.dto.StoryDto;
+import com.ezen.springfeed.story.Story;
 import com.ezen.springfeed.tmp.service.TmpMemberService;
 import com.ezen.springfeed.tmp.service.StoryService;
 
@@ -27,7 +27,7 @@ public class StoryController {
 
 	//스토리 추가
 	@RequestMapping(value="/story/add", produces="application/json") 
-	public Map<String, Object> addStory(@ModelAttribute("dto") StoryDto storydto,
+	public Map<String, Object> addStory(@ModelAttribute("dto") Story storydto,
 			HttpServletRequest request) {
 		
 		Map<String, Object> resultMap = new HashMap<>();
@@ -53,7 +53,7 @@ public class StoryController {
 			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("userid", loginUser.get("USERID"));
 			paramMap.put("story_num", 0);
-			paramMap.put("story_img", storydto.getStory_img());
+			paramMap.put("story_img", storydto.getStoryImg());
 			paramMap.put("status", status);
 			
 			ss.addStory(paramMap);	
@@ -268,7 +268,7 @@ public class StoryController {
 	
 	//스토리 수정
 	@RequestMapping(value="/story/edit", produces="application/json") 
-	public Map<String, Object> editStory(@ModelAttribute("StoryDto") @Valid StoryDto storydto,
+	public Map<String, Object> editStory(@ModelAttribute("StoryDto") @Valid Story storydto,
 			HttpServletRequest request,
 			@RequestParam("story_num") int story_num,
 			@RequestParam(value="oldFontColor", required=false) String oldFontcolor,
@@ -297,10 +297,10 @@ public class StoryController {
 			else
 				paramMap.put("fontcolor", storydto.getFontColor());
 			
-			if(storydto.getStory_img() == null || ((String)storydto.getStory_img()).equals(""))	//이미지를 수정하지 않은 경우
+			if(storydto.getStoryImg() == null || ((String)storydto.getStoryImg()).equals(""))	//이미지를 수정하지 않은 경우
 				paramMap.put("story_img", oldPicture);	//기존 이미지를 유지
 			else 
-				paramMap.put("story_img", storydto.getStory_img());
+				paramMap.put("story_img", storydto.getStoryImg());
 			
 			paramMap.put("story_content", storydto.getStory_content());
 			paramMap.put("story_num", story_num);
