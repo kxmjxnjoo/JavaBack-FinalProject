@@ -1,4 +1,4 @@
-package com.ezen.springfeed.tmp.dto;
+package com.ezen.springfeed.dto;
 
 import lombok.Data;
 
