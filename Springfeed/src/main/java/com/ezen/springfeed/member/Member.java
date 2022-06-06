@@ -1,10 +1,7 @@
 package com.ezen.springfeed.member;
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -22,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 	@Id
 	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@NotBlank(message = "아이디를 입력하세요")
@@ -51,4 +49,9 @@ public class Member {
 	private String introduce;
 	private String img;
 	private Date indate;
+
+	public Member(String userid, String password) {
+		this.userid = userid;
+		this.password = password;
+	}
 }

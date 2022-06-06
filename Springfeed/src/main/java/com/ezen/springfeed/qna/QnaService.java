@@ -1,5 +1,6 @@
 package com.ezen.springfeed.qna;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,19 +10,20 @@ import java.util.List;
 public class QnaService {
     private final QnaRepository qr;
 
+    @Autowired
     public QnaService(QnaRepository qr) {
         this.qr = qr;
     }
 
     public List<Qna> getAllQna() {
-        return qr.findAllOrderByIndate();
+        return qr.findAll();
     }
 
     public List<Qna> getAllQnaByUserid(String userid) {
         return qr.findAllByUserid(userid);
     }
 
-    public void addQna(Qna qna) {
+    public void addQnaService(Qna qna) {
         qr.save(qna);
     }
 

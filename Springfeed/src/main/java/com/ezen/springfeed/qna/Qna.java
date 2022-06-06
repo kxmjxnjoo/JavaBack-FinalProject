@@ -17,7 +17,7 @@ public class Qna {
 
 	@Id
 	@Column(name = "qna_num")
-	private int qnaNum;
+	private Long qnaNum;
 
 	@NotBlank(message = "제목을 입력하세요!")
 	@Column(name = "qna_subject")

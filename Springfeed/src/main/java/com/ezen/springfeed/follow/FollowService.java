@@ -14,15 +14,15 @@ public class FollowService {
     }
 
     public List<Follow> getAllFollowerByUserid(String userid) {
-        return fr.findAllByFollowedOrderByFollowDate(userid);
+        return fr.findAllByFollowerOrderByFollowDate(userid);
     }
 
     public List<Follow> getAllFollowingByUserid(String userid) {
-        return fr.findAllByFollowingOrderByFollowDate(userid);
+        return fr.findAllByFollowerOrderByFollowDate(userid);
     }
 
     public boolean getIsFollowing(String follower, String following) {
-        Optional<Follow> follow = fr.findByFollowerAndFollowing(follower, following);
+        Optional<Follow> follow = fr.findByFollowerAndFollowed(follower, following);
 
         return follow.isPresent();
     }
@@ -32,12 +32,12 @@ public class FollowService {
     }
 
     public void deleteFollow(String follower, String following) {
-        Optional<Follow> follow = fr.findByFollowerAndFollowing(follower, following);
+        Optional<Follow> follow = fr.findByFollowerAndFollowed(follower, following);
 
         if(!follow.isPresent()) {
             throw new IllegalStateException("언팔로우 할 수 없어요");
         }
 
-        fr.deleteByFollowerAndFollowing(follower, following);
+        fr.deleteByFollowerAndFollowed(follower, following);
     }
 }

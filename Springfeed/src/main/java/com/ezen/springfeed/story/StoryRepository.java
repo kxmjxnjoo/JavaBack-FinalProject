@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface StoryRepository extends JpaRepository<Story, Long> {
-    Story findStoryByUseridOrderByCreateDateDesc();
+    Story findStoriesByUseridOrderByCreateDateDesc(String userid);
 
     List<Story> findAllStoryByUseridOrderByCreateDateDesc(String userid);
 }

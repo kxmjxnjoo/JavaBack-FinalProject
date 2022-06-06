@@ -14,8 +14,10 @@ import java.sql.Date;
 public class Follow {
 	@Id
 	private Long followNum;
+
 	private String followed;
 	private String follower;
+
 	@Column(name = "follow_date")
     private Date followDate;
 }

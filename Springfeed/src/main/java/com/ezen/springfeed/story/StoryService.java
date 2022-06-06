@@ -21,7 +21,7 @@ public class StoryService {
     }
 
     public Story getStoryByUserid(String userid) {
-        return sr.findStoryByUseridOrderByCreateDateDesc();
+        return sr.findStoriesByUseridOrderByCreateDateDesc(userid);
     }
 
     public List<Story> getAllStoryByUserid(String userid) {

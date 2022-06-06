@@ -1,10 +1,10 @@
-package com.ezen.springfeed.dto;
+package com.ezen.springfeed.message;
 import java.sql.Timestamp;
 
 import lombok.Data;
 
 @Data
-public class MessageDto {
+public class Message {
 	private int num;
 	private String messageTo;
 	private String messageFrom;

@@ -3,10 +3,7 @@ import java.sql.Timestamp;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -15,6 +12,7 @@ public class Post {
 
 	@Id
 	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long postNum;
 
 	@Column(name = "post_img")

@@ -1,3 +1,4 @@
+/*
 package com.ezen.springfeed.tmp.service;
 
 import com.ezen.springfeed.tmp.dao.IUtilDao;
@@ -35,4 +36,4 @@ public class UtilService {
     public void getExploreFeed(HashMap<String, Object> paramMap) {
         udao.exploreFeed(paramMap);
     }
-}
+}*/

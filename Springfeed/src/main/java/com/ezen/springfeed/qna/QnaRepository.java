@@ -7,7 +7,5 @@ import java.util.List;
 
 @Repository
 public interface QnaRepository extends JpaRepository<Qna, Long> {
-    List<Qna> findAllOrderByIndate();
-
     List<Qna> findAllByUserid(String userid);
 }

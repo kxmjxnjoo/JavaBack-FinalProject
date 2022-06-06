@@ -1,6 +1,9 @@
 package com.ezen.springfeed.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/member")
@@ -8,6 +11,7 @@ public class MemberController {
 
     private final MemberService ms;
 
+    @Autowired
     public MemberController(MemberService ms) {
         this.ms = ms;
     }
@@ -18,15 +22,18 @@ public class MemberController {
     }
 
     // Get userid by name and email
-    @RequestMapping("/userid")
-    @GetMapping
+    @GetMapping("/userid")
     public Member getUseridByNameAndEmail(@RequestBody Member member) {
         return ms.getMemberByNameAndEmail(member);
     }
 
+    @GetMapping
+    public List<Member> getSearchResult(@RequestParam("key") String key) {
+        return ms.getAllMemberBySearchKey(key);
+    }
+
     // login
-    @RequestMapping("/login")
-    @PostMapping
+    @PostMapping("/login")
     public void login(@RequestBody Member member) {
 
     }
