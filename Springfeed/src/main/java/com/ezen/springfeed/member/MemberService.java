@@ -16,14 +16,11 @@ public class MemberService {
     }
 
     // GET
-    public Member getMember(String userid) {
-        Optional<Member> memberByUserid = mr.findMemberByUserid(userid);
-
-        if(memberByUserid.isPresent()) {
-            return memberByUserid.get();
-        }
-
-        return null;
+    public Member getMemberByUserid(String userid) {
+        return mr.findMemberByUserid(userid)
+                .orElseThrow(() -> new IllegalStateException(
+                        "일치하는 유저가 없어요"
+                ));
     }
 
     public Member getMemberByNameAndEmail(Member member) {
@@ -43,7 +40,7 @@ public class MemberService {
     public void addMember(Member member) {
         Optional<Member> memberByUserid = mr.findMemberByUserid(member.getUserid());
 
-        if(memberByUserid.isPresent()) {
+        if (memberByUserid.isPresent()) {
             throw new IllegalStateException("이미 존재하는 아이디에요");
         }
 
@@ -58,27 +55,27 @@ public class MemberService {
                         updatedMember.getUserid() + "라는 아이디가 존재하지 않아요"
                 ));
 
-        if(updatedMember.getPassword() != null) {
+        if (updatedMember.getPassword() != null) {
             member.setPassword(updatedMember.getPassword());
         }
 
-        if(updatedMember.getName() != null) {
+        if (updatedMember.getName() != null) {
             member.setName(updatedMember.getName());
         }
 
-        if(updatedMember.getEmail() != null) {
+        if (updatedMember.getEmail() != null) {
             member.setEmail(updatedMember.getEmail());
         }
 
-        if(updatedMember.getPhone() != null) {
+        if (updatedMember.getPhone() != null) {
             member.setPhone(updatedMember.getPhone());
         }
 
-        if(updatedMember.getImg() != null) {
+        if (updatedMember.getImg() != null) {
             member.setImg(updatedMember.getImg());
         }
 
-        if(updatedMember.getIntroduce() != null) {
+        if (updatedMember.getIntroduce() != null) {
             member.setIntroduce(updatedMember.getIntroduce());
         }
     }
@@ -90,12 +87,11 @@ public class MemberService {
                         "해당 아이디의 유저가 존재하지 않아요"
                 ));
 
-        if(memberByUserid.getPassword().equals(member.getPassword())) {
+        if (memberByUserid.getPassword().equals(member.getPassword())) {
             mr.deleteByUserid(member.getUserid());
             return;
         }
 
         new IllegalStateException("비밀번호를 다시 확인해 주세요");
     }
-
 }

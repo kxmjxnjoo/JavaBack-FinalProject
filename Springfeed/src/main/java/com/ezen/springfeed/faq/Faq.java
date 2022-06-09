@@ -1,9 +1,6 @@
 package com.ezen.springfeed.faq;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
@@ -15,7 +12,8 @@ public class Faq {
 
 	@Id
 	@Column(name = "faq_num")
-	private Long num;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
 	@Column(name = "faq_subject")
 	@NotBlank (message="제목을 입력하세요")

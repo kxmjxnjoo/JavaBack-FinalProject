@@ -18,7 +18,7 @@ public class MemberController {
 
     @GetMapping("/{userid}")
     public Member getMember(@PathVariable String userid) {
-        return ms.getMember(userid);
+        return ms.getMemberByUserid(userid);
     }
 
     // Get userid by name and email

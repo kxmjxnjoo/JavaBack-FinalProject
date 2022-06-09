@@ -18,18 +18,23 @@ public class FaqController {
         return fs.getAllFaq();
     }
 
+    @GetMapping("{id}")
+    public Faq getFaqById(@RequestParam("id") Long id) {
+        return fs.selectFaqById(id);
+    }
+
     @PostMapping
     public void addFaq(@RequestBody Faq faq) {
         fs.addFaq(faq);
     }
 
-    @PutMapping
-    public void updateFaq(@RequestBody Faq faq) {
-        fs.updateFaq(faq);
+    @PutMapping("{id}")
+    public void updateFaq(@RequestBody Faq faq, @RequestParam("id") Long id) {
+        fs.updateFaq(faq, id);
     }
 
-    @DeleteMapping("/{num}")
-    public void deleteFaq(@PathVariable("num") Long num) {
+    @DeleteMapping("/{id}")
+    public void deleteFaq(@PathVariable("id") Long num) {
         fs.deleteFaq(num);
     }
 }

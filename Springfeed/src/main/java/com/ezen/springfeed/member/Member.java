@@ -54,4 +54,11 @@ public class Member {
 		this.userid = userid;
 		this.password = password;
 	}
+
+	public Member(String userid, String password, String name, String email) {
+		this.userid = userid;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+	}
 }
