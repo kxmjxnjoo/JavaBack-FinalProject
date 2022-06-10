@@ -1,5 +1,8 @@
 package com.ezen.springfeed.member;
 
+import com.ezen.springfeed.v2.member.Member;
+import com.ezen.springfeed.v2.member.MemberRepository;
+import com.ezen.springfeed.v2.member.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

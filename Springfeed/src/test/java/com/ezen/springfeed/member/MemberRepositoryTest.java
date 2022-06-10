@@ -1,5 +1,7 @@
 package com.ezen.springfeed.member;
 
+import com.ezen.springfeed.v2.member.Member;
+import com.ezen.springfeed.v2.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
