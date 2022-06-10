@@ -1,7 +1,7 @@
-package com.ezen.springfeed.v2.post;
+package com.ezen.springfeed.model;
 import java.sql.Timestamp;
 
-import com.ezen.springfeed.v2.member.Member;
+import com.ezen.springfeed.model.Member;
 import lombok.Data;
 
 import javax.persistence.*;

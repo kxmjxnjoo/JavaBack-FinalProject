@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.reply;
 
+import com.ezen.springfeed.model.Reply;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

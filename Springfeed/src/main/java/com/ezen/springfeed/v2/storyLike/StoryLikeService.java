@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.storyLike;
 
+import com.ezen.springfeed.model.StoryLike;
 import org.springframework.stereotype.Service;
 
 @Service

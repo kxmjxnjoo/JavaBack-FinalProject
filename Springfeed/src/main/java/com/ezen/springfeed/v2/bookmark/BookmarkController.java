@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.bookmark;
 
+import com.ezen.springfeed.model.Bookmark;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

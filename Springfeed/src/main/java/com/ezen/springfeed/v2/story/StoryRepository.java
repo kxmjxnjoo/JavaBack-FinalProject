@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.story;
 
+import com.ezen.springfeed.model.Story;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

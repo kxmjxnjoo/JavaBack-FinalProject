@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.faq;
+package com.ezen.springfeed.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

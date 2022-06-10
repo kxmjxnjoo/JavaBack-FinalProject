@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.qna;
 
+import com.ezen.springfeed.model.Qna;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

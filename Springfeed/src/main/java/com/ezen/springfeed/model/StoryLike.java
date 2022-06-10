@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.storyLike;
+package com.ezen.springfeed.model;
 
 import lombok.Data;
 

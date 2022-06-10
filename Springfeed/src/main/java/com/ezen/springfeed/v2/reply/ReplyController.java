@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.reply;
 
+import com.ezen.springfeed.model.Reply;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

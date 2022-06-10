@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.notification;
+package com.ezen.springfeed.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

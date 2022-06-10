@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.story;
 
+import com.ezen.springfeed.model.Story;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

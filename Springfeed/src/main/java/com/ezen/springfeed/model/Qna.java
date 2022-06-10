@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.qna;
+package com.ezen.springfeed.model;
 
 import java.sql.Timestamp;
 

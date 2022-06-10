@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.notification;
 
+import com.ezen.springfeed.model.Notification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.bookmark;
+package com.ezen.springfeed.model;
 
 import java.sql.Date;
 import lombok.Data;

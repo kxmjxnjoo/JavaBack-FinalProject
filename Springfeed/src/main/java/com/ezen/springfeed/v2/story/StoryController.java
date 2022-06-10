@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.story;
 
+import com.ezen.springfeed.model.Story;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.post;
 
+import com.ezen.springfeed.model.Post;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

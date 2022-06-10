@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.postLike;
 
+import com.ezen.springfeed.model.PostLike;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

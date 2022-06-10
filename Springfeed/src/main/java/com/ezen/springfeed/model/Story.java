@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.story;
+package com.ezen.springfeed.model;
 
 import java.sql.Timestamp;
 

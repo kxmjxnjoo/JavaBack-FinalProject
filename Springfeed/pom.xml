@@ -90,7 +90,7 @@
 			<version>05Nov2002</version>
 		</dependency>
 
-<!--		postgres-->
+		<!-- postgres -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

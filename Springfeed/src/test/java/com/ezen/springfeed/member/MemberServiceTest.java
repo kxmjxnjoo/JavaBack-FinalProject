@@ -1,6 +1,6 @@
 package com.ezen.springfeed.member;
 
-import com.ezen.springfeed.v2.member.Member;
+import com.ezen.springfeed.model.Member;
 import com.ezen.springfeed.v2.member.MemberRepository;
 import com.ezen.springfeed.v2.member.MemberService;
 import org.junit.jupiter.api.BeforeEach;

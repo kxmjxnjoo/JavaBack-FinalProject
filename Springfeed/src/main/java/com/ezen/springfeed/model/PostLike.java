@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.replyLike;
+package com.ezen.springfeed.model;
 
 import lombok.Data;
 
@@ -10,12 +10,12 @@ import javax.persistence.Table;
 @Entity
 @Table
 @Data
-public class ReplyLike {
-
+public class PostLike {
 	@Id
-	private Long id;
+	@Column(name = "post_like_num")
+	private Long postLikeNum;
 
-	@Column(name = "reply_num")
-	private Integer replyNum;
+	@Column(name = "post_num")
+	private Long postNum;
 	private String userid;
 }

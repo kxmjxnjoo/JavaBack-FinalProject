@@ -1,6 +1,7 @@
 package com.ezen.springfeed.v2.bookmark;
 
 
+import com.ezen.springfeed.model.Bookmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

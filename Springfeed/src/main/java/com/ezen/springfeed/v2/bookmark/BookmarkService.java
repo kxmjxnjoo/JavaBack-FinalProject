@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.bookmark;
 
+import com.ezen.springfeed.model.Bookmark;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

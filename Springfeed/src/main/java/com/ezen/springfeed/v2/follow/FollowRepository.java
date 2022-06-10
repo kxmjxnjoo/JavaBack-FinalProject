@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.follow;
 
+import com.ezen.springfeed.model.Follow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

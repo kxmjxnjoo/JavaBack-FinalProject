@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.notification;
 
+import com.ezen.springfeed.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

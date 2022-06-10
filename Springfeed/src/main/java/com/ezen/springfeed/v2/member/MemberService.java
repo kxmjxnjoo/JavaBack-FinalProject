@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.member;
 
+import com.ezen.springfeed.model.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,15 +10,15 @@ import java.util.Optional;
 @Service
 public class MemberService {
 
-    private final MemberRepository mr;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository mr) {
-        this.mr = mr;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     // GET
     public Member getMemberByUserid(String userid) {
-        Member member = mr.findMemberByUserid(userid)
+        Member member = memberRepository.findMemberByUserid(userid)
                 .orElseThrow(() -> new IllegalStateException(
                         "일치하는 유저가 없어요"
                 ));
@@ -26,7 +27,7 @@ public class MemberService {
     }
 
     public Member getMemberByNameAndEmail(Member member) {
-        Member userid = mr.findMemberByNameAndEmail(member.getName(), member.getEmail())
+        Member userid = memberRepository.findMemberByNameAndEmail(member.getName(), member.getEmail())
                 .orElseThrow(() -> new IllegalStateException(
                         "일치하는 아이디가 없어요"
                 ));
@@ -35,24 +36,24 @@ public class MemberService {
     }
 
     public List<Member> getAllMemberBySearchKey(String key) {
-        return mr.findAllByUseridContaining(key);
+        return memberRepository.findAllByUseridContaining(key);
     }
 
     // POST
     public void addMember(Member member) {
-        Optional<Member> memberByUserid = mr.findMemberByUserid(member.getUserid());
+        Optional<Member> memberByUserid = memberRepository.findMemberByUserid(member.getUserid());
 
         if (memberByUserid.isPresent()) {
             throw new IllegalStateException("이미 존재하는 아이디에요");
         }
 
-        mr.save(member);
+        memberRepository.save(member);
     }
 
     // PUT
     @Transactional
     public void updateMember(Member updatedMember, String userid) {
-        Member member = mr.findMemberByUserid(userid)
+        Member member = memberRepository.findMemberByUserid(userid)
                 .orElseThrow(() -> new IllegalStateException(
                         updatedMember.getUserid() + "라는 아이디가 존재하지 않아요"
                 ));
@@ -84,16 +85,23 @@ public class MemberService {
 
     // DELETE
     public void deleteMember(Member member) {
-        Member memberByUserid = mr.findMemberByUserid(member.getUserid())
+        Member memberByUserid = memberRepository.findMemberByUserid(member.getUserid())
                 .orElseThrow(() -> new IllegalStateException(
                         "해당 아이디의 유저가 존재하지 않아요"
                 ));
 
         if (memberByUserid.getPassword().equals(member.getPassword())) {
-            mr.deleteByUserid(member.getUserid());
+            memberRepository.deleteByUserid(member.getUserid());
             return;
         }
 
         new IllegalStateException("비밀번호를 다시 확인해 주세요");
+    }
+
+    public Member getMemberByUseridAndPassword(String userid, String password) {
+        return memberRepository.findMemberByUseridAndPassword(userid, password)
+                .orElseThrow(() -> new IllegalStateException(
+                        "로그인할 수 없어요. 다시 시도해 주세요"
+                ));
     }
 }

@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.faq;
 
+import com.ezen.springfeed.model.Faq;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ezen.springfeed.v2.member;
+package com.ezen.springfeed.model;
 import java.sql.Date;
 
 import javax.persistence.*;

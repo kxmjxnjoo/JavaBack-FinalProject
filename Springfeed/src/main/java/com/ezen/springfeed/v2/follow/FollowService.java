@@ -1,5 +1,6 @@
 package com.ezen.springfeed.v2.follow;
 
+import com.ezen.springfeed.model.Follow;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
