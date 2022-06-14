@@ -24,6 +24,8 @@
 - ORM을 사용해 DTO 단순화 및 Query 제거
 - RESTful API 디자인 채용
   - Controller의 class 단위로 @RequestMapping을 주고, HTTP method로 동작을 표현
+- 모든 Service 및 Repository class에 Unit Test 작성 (진행중)
+- Spring Security 사용해 보안성 높은 인증/인가 구현
 
 # INFO
 ## DB 관련
