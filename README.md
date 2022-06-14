@@ -6,7 +6,8 @@
 # 사용된 기술
 - Back
   - Servlet / JSP
-  - Spring Framework
+  - Spring
+    - Spring Boot
     - JPA
 
 - Front
