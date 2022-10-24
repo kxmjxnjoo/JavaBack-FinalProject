@@ -1,0 +1,248 @@
+@charset "UTF-8";
+
+body {
+    position: relative;
+    top: 70px;
+}
+
+#messageBox {
+    width: 80%;
+    height: 650px;
+
+    border: 2px solid black;
+
+    position: relative;
+    left: 10%;
+    top: 50px;
+}
+
+#userSelectBox {
+    width: 30%;
+
+    display: inline-block;
+}
+
+#userBox {
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+
+    display: inline-block;
+}
+
+#loginUserInfo h1 {
+    display: inline-block;
+    width: 100%;
+
+    text-align: center;
+}
+
+#loginUserInfo i {
+    font-size: 50px;
+    float: right;
+
+    position: relative;
+    bottom: 65px;
+
+    color: rgb(230, 153, 153);
+}
+
+#loginUserInfo i:hover {
+    opacity: 0.5;
+}
+
+
+.userSelect {
+    border: 1px solid black;
+
+}
+
+
+.userImg {
+    display: inline-block;
+    width: 75px; 
+    height: 75px;
+
+    margin-right: 30px;
+
+    position: relative;
+    top: 10px;
+    left: 10px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userText {
+    display: inline-block;
+}
+
+
+#userMessageBox {
+    width: 65%;
+
+    position: relative;
+    left: 2.5%;
+    bottom: 200px;
+    
+    display: inline-block;
+
+    text-align: center;
+}
+
+#messageNoSelectionMessage i {
+    font-size: 100px;
+
+    color: rgb(230, 153, 153);
+}
+
+
+
+#messageNoSelectionMessage button {
+    width: 300px;
+    height: 50px;
+
+    border: none;
+
+    background-color: rgb(230, 153, 153);
+    color: white;
+
+    margin-top: 20px;
+    
+    font-size: 25px;
+}
+
+#messageNoSelectionMessage button:hover {
+    opacity: 0.5;
+}
+
+#messageTitle {
+    background-color: rgb(230, 153, 153);
+
+    height: 70px;
+
+    position: relative;
+}
+
+#messageTitle img {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    float: left;
+
+    margin-right: 20px;
+
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+
+#messageTitle h1 {
+    float: left;
+
+    font-size: 30px;
+}
+
+#messageTitle i {
+    float: right;
+
+    font-size: 70px;
+
+    position: relative;
+    right: 10px;
+}
+
+#sendMessageBar {
+    background-color: rgb(230, 153, 153);
+
+    height: 70px;
+
+}
+
+#sendMessageBar input[type=text] {
+    width: 80%;
+    height: 40px;
+
+    display: inline-block;
+    
+    float: left;
+
+    position: relative;
+    top: 15px;
+    left: 2.5%;
+}
+
+#sendMessageBar input[type=submit] {
+    display: inline-block;
+
+    float: right;
+
+    width: 10%;
+    height: 40px;
+
+    position: relative;
+    right: 2.5%;
+    top: 17.5px;
+
+    border: none;
+
+    background-color: #f7c4c0;
+
+    font-size: 15px;
+}
+
+#messageHistory {
+    height: 475px;
+    width: 95%;
+
+    position: relative;
+    left: 5%;
+    
+    overflow-y: auto;
+
+    
+}
+
+#messageHistoryBox {
+    position: relative;
+
+    top: 130px;
+}
+
+.messageRight {
+    text-align: right;
+}
+
+.messageLeft {
+    text-align: left;
+}
+
+.messageLeft h3 {
+    width: 90%;
+    display: inline-block;
+
+    position: relative;
+}
+
+.messageLeft img {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.userSelect:hover {
+    opacity: 0.5;
+}
+
+#messageTitle i:hover {
+    opacity: 0.5;
+}
+
+#messageTitleProfile:hover {
+    opacity: 0.5;
+}
