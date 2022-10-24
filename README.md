@@ -47,7 +47,7 @@
 11. Servlet Container에서 HTTP Response로 변환
 
 ## V2 - 22년 3월 28일 ~ 4월 18일 (총 22일)
-- Spring Boot, JSP, 
+- Spring Boot, JSP
 - Oracle DB Procedure 사용
 ### 문제점
 - 전체적인 문제점
@@ -67,16 +67,3 @@
 - Front/Back 분리
 - Back : Spring Boot, JPA 사용 REST API
 - Front : React, Bootstrap 사용
-
-# Development History
-## 22년 3월 ~ 5월 (v1)
-- JSP 기반 SSR 서버로 개발
-- 게시물(포스트, 스토리) CRUD
-- 유저 관련 기능(알림, 팔로우 등)
-
-## 22년 6월 ~ (v3)
-- ORM을 사용해 DTO 단순화 및 Query 제거
-- RESTful API 디자인 채용
-  - Controller의 class 단위로 @RequestMapping을 주고, HTTP method로 동작을 표현
-- 모든 Service 및 Repository class에 Unit Test 작성 (진행중)
-- Spring Security 사용해 보안성 높은 인증/인가 구현
