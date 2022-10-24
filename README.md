@@ -46,7 +46,7 @@
 10. HttpServletResponse로 응답
 11. Servlet Container에서 HTTP Response로 변환
 
-## V2 - 22년 5월
+## V2 - 22년 3월 28일 ~ 4월 18일 (총 22일)
 - Spring Boot, JSP, 
 - Oracle DB Procedure 사용
 ### 문제점
