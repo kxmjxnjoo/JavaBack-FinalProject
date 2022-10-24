@@ -1,1 +1,4 @@
-/.metadata/
+.idea
+.project
+*.log
+.DS_Store
