@@ -23,7 +23,7 @@
 # Version History
 ## V1 - 22년 2월 14일 ~ 2월 27일 (총 14일)
 - Spring 배우지 않은 상태에서 개발
-- 구조
+### 구조
 1. HTTP Request 받음 (URL은 /command=COMMAND_NAME 형태)
 2. Servlet Container가 HTTP Reuqest 받아 HttpServletRequest, HttpServletResponse 생성
 3. HttpServlet 상속한 객체 호출
