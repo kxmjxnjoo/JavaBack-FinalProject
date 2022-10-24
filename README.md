@@ -21,7 +21,7 @@
   - Github Pages
 
 # Version History
-## V1 - 22년 1월
+## V1 - 22년 2월 14일 ~ 2월 27일 (총 14일)
 - Spring 배우지 않은 상태에서 개발
 
 ## V2 - 22년 5월
