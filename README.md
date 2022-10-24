@@ -29,18 +29,18 @@
 3. HttpServlet 상속한 객체 호출
 4. HTTP Request의 Method에 따라 doGet, doPost 호출
 5. doGet
-  1. URL Parsing해 command 찾음
-  2. ActionFactory 패턴으로 된 Action 객체 호출해 Action 객체 생성
-  3. execute method 실행
+    1. URL Parsing해 command 찾음
+    2. ActionFactory 패턴으로 된 Action 객체 호출해 Action 객체 생성
+    3. execute method 실행
 6. execute
-  1. (필요한 경우) Session에 저장되어 있는 로그인 정보 확인
-  2. (필요한 경우) Parameter에서 데이터 가져옴
-  3. 필요한 DAO 호출
-  4. 얻은 DTO로 적절하게 응답
+    1. (필요한 경우) Session에 저장되어 있는 로그인 정보 확인
+    2. (필요한 경우) Parameter에서 데이터 가져옴
+    3. 필요한 DAO 호출
+    4. 얻은 DTO로 적절하게 응답
 7. DAO
-  1. DBman 객체에서 driver, url, id, pw를 사용해 Connection 생성
-  2. Connection 객체 받아와 PreparedStatement에 적절한 데이터 넣어서 실행
-  3. 실행 후 받은 ResultSet을 DTO로 변환
+    1. DBman 객체에서 driver, url, id, pw를 사용해 Connection 생성
+    2. Connection 객체 받아와 PreparedStatement에 적절한 데이터 넣어서 실행
+    3. 실행 후 받은 ResultSet을 DTO로 변환
 8. execute로 적절하게 처리된 HttpServletRequest를 jsp로 보냄
 9. jsp에서 정의된 대로 Servlet 객체 생성
 10. HttpServletResponse로 응답
