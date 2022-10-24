@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+*.setting
+SEMI_PROJECT/.project
+*.classpath
+
 # IntelliJ Project Description File
 .idea
 
