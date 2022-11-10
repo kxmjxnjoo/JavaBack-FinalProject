@@ -23,7 +23,7 @@
 1. HTTP Request 받음 (URL은 /command=COMMAND_NAME 형태)
 2. Servlet Container가 HTTP Reuqest 받아 HttpServletRequest, HttpServletResponse 생성
 3. HttpServlet 상속한 객체 호출
-4. HTTP Request의 Method에 따라 doGet, doPost 호출
+4. HTTP Request의 HTTP Method에 따라 doGet, doPost 호출 (하지만 개발 시간상의 사유로 doGet만 호출하도록 함)
 5. doGet
     1. URL Parsing해 command 찾음
     2. ActionFactory 패턴으로 된 Action 객체 생성
