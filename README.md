@@ -1,14 +1,13 @@
-# Version 2
+# Version 2 목표
 - Version 1에서 진행한 프로젝트를 Spring을 사용해 개선.
 - DB 연결, RDB Schema-자바 객체 Mapping을 MyBatis를 사용해 자동화
 
 # Version 2에서 사용된 기술
 ## Backend
-  - JSP
-  - Spring
-    - Spring Boot
-    - MyBatis
-  - Oracle DB, Procedure
+- JSP
+- Spring Boot
+- MyBatis
+- Oracle DB, Oracle Procedure
   
 ## Frontend
   - HTML
@@ -21,7 +20,6 @@
   - Github Pages
 
 # Version 2에서의 문제점/개선점
-
 - 전체적인 문제점
   - css, js, html, jsp 등 모든 파일이 너무 김
   - 파일이 길어서 dependency 관리가 잘 되고, 유지보수가 힘듦
