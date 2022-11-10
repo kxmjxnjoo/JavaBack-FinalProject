@@ -1,55 +1,25 @@
-# Springfeed : Instagram 기반 SNS 서비스
+# Version 2
+Spring을 사용해 
 
-# 소개
-인스타그램을 참고해 만든 봄 테마의 SNS 서비스입니다.
-
-# 사용된 기술 (Version 2 기준)
+# Version 2에서 사용된 기술
 - Back
   - JSP
   - Spring
     - Spring Boot
     - MyBatis
   - Oracle DB, Procedure
-
+  
 - Front
   - HTML
   - CSS
+    - Bootstrap
   - JS
 
 - DevOps
   - Oracle Cloud
   - Github Pages
 
-# Version History
-## V1 - 22년 2월 14일 ~ 2월 27일 (총 14일)
-- Spring 배우지 않은 상태에서 개발
-### 구조
-1. HTTP Request 받음 (URL은 /command=COMMAND_NAME 형태)
-2. Servlet Container가 HTTP Reuqest 받아 HttpServletRequest, HttpServletResponse 생성
-3. HttpServlet 상속한 객체 호출
-4. HTTP Request의 Method에 따라 doGet, doPost 호출
-5. doGet
-    1. URL Parsing해 command 찾음
-    2. ActionFactory 패턴으로 된 Action 객체 생성
-    3. Action의 execute method 실행
-6. execute
-    1. (필요한 경우) Session에 저장되어 있는 로그인 정보 확인
-    2. (필요한 경우) Parameter에서 데이터 가져옴
-    3. 필요한 DAO 호출
-    4. 얻은 DTO로 적절하게 응답
-7. DAO
-    1. driver, url, id, pw를 사용해 Connection 생성
-    2. Connection 객체 받아와 PreparedStatement에 적절한 데이터 넣어서 실행
-    3. 실행 후 받은 ResultSet을 DTO로 변환
-8. execute로 적절하게 처리된 HttpServletRequest를 jsp로 보냄
-9. jsp에서 정의된 대로 Servlet 객체 생성
-10. HttpServletResponse로 응답
-11. Servlet Container에서 HTTP Response로 변환
-
-## V2 - 22년 5월
-- Spring Boot, JSP, 
-- Oracle DB Procedure 사용
-### 문제점
+# Version 2에서의 문제점/개선점
 - 전체적인 문제점
   - css, js, html, jsp 등 모든 파일이 너무 김
   - 파일이 길어서 dependency 관리가 잘 되고, 유지보수가 힘듦
@@ -62,21 +32,3 @@
   - DB에 Hash 알고리즘으로 Encoding하지 않은 Password를 저장함
   - 모든 로그인 처리에 Session을 사용해 서버에 부담
   - Session에 Password가 포함된 유저 객체를 저장함
-
-## V3 - 22년 6월 ~
-- Front/Back 분리
-- Back : Spring Boot, JPA 사용 REST API
-- Front : React, Bootstrap 사용
-
-# Development History
-## 22년 3월 ~ 5월 (v1)
-- JSP 기반 SSR 서버로 개발
-- 게시물(포스트, 스토리) CRUD
-- 유저 관련 기능(알림, 팔로우 등)
-
-## 22년 6월 ~ (v3)
-- ORM을 사용해 DTO 단순화 및 Query 제거
-- RESTful API 디자인 채용
-  - Controller의 class 단위로 @RequestMapping을 주고, HTTP method로 동작을 표현
-- 모든 Service 및 Repository class에 Unit Test 작성 (진행중)
-- Spring Security 사용해 보안성 높은 인증/인가 구현
