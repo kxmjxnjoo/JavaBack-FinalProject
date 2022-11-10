@@ -3,20 +3,20 @@
 - DB 연결, RDB Schema-자바 객체 Mapping을 MyBatis를 사용해 자동화
 
 # Version 2에서 사용된 기술
-## Back
+### Backend
   - JSP
   - Spring
     - Spring Boot
     - MyBatis
   - Oracle DB, Procedure
   
-## Front
+### Frontend
   - HTML
   - CSS
     - Bootstrap
   - JS
 
-## DevOps
+### DevOps
   - Oracle Cloud
   - Github Pages
 
